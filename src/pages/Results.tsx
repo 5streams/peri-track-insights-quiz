@@ -6,12 +6,13 @@ import { ArrowLeft } from "lucide-react";
 import LoadingSpinner from "@/components/results/LoadingSpinner";
 import { mapSymptomsToPrimaryHormone } from "@/utils/hormoneMapping";
 
-// Import our components
-import PersonalizedHormoneAssessment from "@/components/results/PersonalizedHormoneAssessment";
-import PremiumVisualization from "@/components/results/PremiumVisualization";
-import ConciseSolution from "@/components/results/ConciseSolution";
-import PremiumTestimonial from "@/components/results/PremiumTestimonial";
-import PremiumOffer from "@/components/results/PremiumOffer";
+// Import our components for the results page
+import ScoreMeter from "@/components/results/ScoreMeter";
+import ResultsSummary from "@/components/results/ResultsSummary";
+import InterventionSection from "@/components/results/InterventionSection";
+import OfferSection from "@/components/results/OfferSection";
+import ResultsTestimonial from "@/components/results/ResultsTestimonial";
+import Guarantee from "@/components/results/Guarantee";
 
 interface QuizResults {
   score: number;
@@ -26,6 +27,14 @@ const Results = () => {
   const [primaryHormone, setPrimaryHormone] = useState("estradiol");
   const [secondaryHormones, setSecondaryHormones] = useState<string[]>(["progesterone", "testosterone"]);
   const navigate = useNavigate();
+  
+  // Get score category
+  const getScoreCategory = (score: number) => {
+    if (score <= 20) return "minimal";
+    if (score <= 50) return "early";
+    if (score <= 75) return "moderate";
+    return "significant";
+  };
   
   useEffect(() => {
     // Reveal sections as user scrolls
@@ -78,6 +87,8 @@ const Results = () => {
   if (!results) {
     return <LoadingSpinner />;
   }
+
+  const scoreCategory = getScoreCategory(results.score);
   
   return (
     <div 
@@ -88,41 +99,64 @@ const Results = () => {
       }}
     >
       <div className="w-full max-w-3xl mx-auto">
-        {/* Section 1: Personalized Hormone Assessment */}
-        <PersonalizedHormoneAssessment 
-          firstName={userInfo.firstName}
-          primaryHormone={primaryHormone}
-          symptoms={results.primarySymptoms}
-          score={results.score}
-        />
-        
-        {/* Section 2: Premium Visualization */}
-        <PremiumVisualization
-          primaryHormone={primaryHormone}
-          symptoms={results.primarySymptoms}
-        />
-        
-        {/* Section 3: Concise Solution */}
-        <ConciseSolution primaryHormone={primaryHormone} />
-        
-        {/* Section 4: Premium Testimonial */}
-        <PremiumTestimonial 
-          primaryHormone={primaryHormone}
-          symptoms={results.primarySymptoms}
-        />
-        
-        {/* Section 5: Premium Offer */}
-        <PremiumOffer primaryHormone={primaryHormone} />
-        
-        {/* Back to Quiz Button */}
-        <div className="text-center mb-8">
-          <Button 
-            variant="outline" 
-            onClick={() => navigate("/quiz")}
-            className="flex items-center gap-2 hover:bg-[#5D4154]/5 transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" /> Retake Assessment
-          </Button>
+        <div className="results-container">
+          {/* Results Header with Score Display */}
+          <header className="results-header mb-6 md:mb-8 text-center reveal-section transform opacity-0">
+            <h1 className="text-2xl md:text-3xl font-bold text-[#5D4154] mb-4">
+              {scoreCategory === "significant" ? "YOUR PERSONALIZED HORMONE ASSESSMENT" : "YOUR PERIMENOPAUSE ASSESSMENT"}
+            </h1>
+            
+            <ScoreMeter 
+              score={results.score} 
+              firstName={userInfo.firstName} 
+              scoreCategory={scoreCategory}
+            />
+          </header>
+
+          {/* Dynamic Results Summary Based on Score */}
+          <ResultsSummary 
+            score={results.score}
+            scoreCategory={scoreCategory}
+            primaryHormone={primaryHormone}
+            secondaryHormones={secondaryHormones}
+            symptoms={results.primarySymptoms}
+          />
+          
+          {/* Dynamic Intervention Section Based on Score */}
+          <InterventionSection
+            scoreCategory={scoreCategory}
+            symptoms={results.primarySymptoms}
+          />
+          
+          {/* Offer Section */}
+          <OfferSection 
+            scoreCategory={scoreCategory}
+            primaryHormone={primaryHormone}
+            symptoms={results.primarySymptoms}
+          />
+          
+          {/* Testimonial */}
+          <ResultsTestimonial 
+            scoreCategory={scoreCategory}
+            primaryHormone={primaryHormone}
+            symptoms={results.primarySymptoms}
+          />
+          
+          {/* Guarantee - only shown for significant symptoms */}
+          {scoreCategory === "significant" && (
+            <Guarantee />
+          )}
+          
+          {/* Back to Quiz Button */}
+          <div className="text-center mb-8">
+            <Button 
+              variant="outline" 
+              onClick={() => navigate("/quiz")}
+              className="flex items-center gap-2 hover:bg-[#5D4154]/5 transition-colors"
+            >
+              <ArrowLeft className="h-4 w-4" /> Retake Assessment
+            </Button>
+          </div>
         </div>
       </div>
     </div>
