@@ -41,7 +41,7 @@ const KeyHormoneInsights: React.FC<KeyHormoneInsightsProps> = ({
             "Stress resilience throughout the day",
             "Overall sense of calm and wellbeing"
           ],
-          explanation: "Progesterone is your body's natural "calming" hormone, affecting GABA receptors in your brain similar to anti-anxiety medications, but without side effects when balanced naturally.",
+          explanation: "Progesterone is your body's natural \"calming\" hormone, affecting GABA receptors in your brain similar to anti-anxiety medications, but without side effects when balanced naturally.",
           insight: "This decline often begins 5-10 years before actual menopause, explaining why you're experiencing these symptoms now."
         };
       case "estradiol":
