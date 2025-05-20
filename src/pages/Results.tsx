@@ -8,19 +8,10 @@ import { mapSymptomsToPrimaryHormone } from "@/utils/hormoneMapping";
 
 // Import our components
 import PersonalizedHormoneAssessment from "@/components/results/PersonalizedHormoneAssessment";
-import KeyHormoneInsights from "@/components/results/KeyHormoneInsights";
-import CompleteHormonePicture from "@/components/results/CompleteHormonePicture";
-import ThreeStepSolution from "@/components/results/ThreeStepSolution";
-import FreeTrial from "@/components/results/FreeTrial";
-import SuccessStory from "@/components/results/SuccessStory";
-import FinalCTA from "@/components/results/FinalCTA";
-import ScienceExplanation from "@/components/results/ScienceExplanation";
-import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
-import SymptomValidation from "@/components/results/SymptomValidation";
-import SymptomHormoneVisualization from "@/components/results/SymptomHormoneVisualization";
-import WarningTimeline from "@/components/results/WarningTimeline";
-import TransformationJourney from "@/components/results/TransformationJourney";
-import RiskReversal from "@/components/results/RiskReversal";
+import PremiumVisualization from "@/components/results/PremiumVisualization";
+import ConciseSolution from "@/components/results/ConciseSolution";
+import PremiumTestimonial from "@/components/results/PremiumTestimonial";
+import PremiumOffer from "@/components/results/PremiumOffer";
 
 interface QuizResults {
   score: number;
@@ -96,7 +87,7 @@ const Results = () => {
         backgroundAttachment: "fixed"
       }}
     >
-      <div className="w-full max-w-5xl mx-auto">
+      <div className="w-full max-w-3xl mx-auto">
         {/* Section 1: Personalized Hormone Assessment */}
         <PersonalizedHormoneAssessment 
           firstName={userInfo.firstName}
@@ -105,69 +96,20 @@ const Results = () => {
           score={results.score}
         />
         
-        {/* Section 2: Key Hormone Insights */}
-        <KeyHormoneInsights primaryHormone={primaryHormone} />
-        
-        {/* Symptom Validation Section */}
-        <SymptomValidation symptoms={results.primarySymptoms} />
-        
-        {/* NEW: Warning Timeline Section */}
-        <WarningTimeline />
-        
-        {/* Emotion-Hormone Connection */}
-        <EmotionHormoneConnection />
-        
-        {/* Add Symptom-Specific Hormone Visualizations */}
-        <div className="mb-8 reveal-section transform translate-y-4 opacity-0">
-          <div className="bg-white rounded-lg shadow p-6 border-t-4 border-[#5D4154]">
-            <h3 className="font-playfair text-2xl font-semibold text-[#5D4154] mb-4">
-              YOUR SYMPTOM-HORMONE CONNECTIONS
-            </h3>
-            <p className="mb-6">
-              These visualizations show exactly how your fluctuating hormone levels connect to your specific symptoms:
-            </p>
-            
-            <div className="grid md:grid-cols-2 gap-4">
-              {results.primarySymptoms.map((symptom, index) => (
-                <SymptomHormoneVisualization 
-                  key={index}
-                  symptom={symptom}
-                  primaryHormone={index === 0 ? primaryHormone : secondaryHormones[index % 2]}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-        
-        {/* NEW: Transformation Journey Section */}
-        <TransformationJourney />
-        
-        {/* Science Behind Your Symptoms */}
-        <ScienceExplanation 
+        {/* Section 2: Premium Visualization */}
+        <PremiumVisualization
           primaryHormone={primaryHormone}
           symptoms={results.primarySymptoms}
         />
         
-        {/* Complete Hormone Picture */}
-        <CompleteHormonePicture 
-          primaryHormone={primaryHormone}
-          secondaryHormones={secondaryHormones}
-        />
+        {/* Section 3: Concise Solution */}
+        <ConciseSolution primaryHormone={primaryHormone} />
         
-        {/* 3-Step Solution */}
-        <ThreeStepSolution primaryHormone={primaryHormone} symptoms={results.primarySymptoms} />
+        {/* Section 4: Premium Testimonial */}
+        <PremiumTestimonial primaryHormone={primaryHormone} />
         
-        {/* Free Trial CTA */}
-        <FreeTrial />
-        
-        {/* NEW: Risk Reversal Section */}
-        <RiskReversal />
-        
-        {/* Success Story */}
-        <SuccessStory primaryHormone={primaryHormone} symptoms={results.primarySymptoms} />
-        
-        {/* Final CTA */}
-        <FinalCTA />
+        {/* Section 5: Premium Offer */}
+        <PremiumOffer primaryHormone={primaryHormone} />
         
         {/* Back to Quiz Button */}
         <div className="text-center mb-8">
