@@ -47,17 +47,17 @@ const SuccessStory: React.FC<SuccessStoryProps> = ({
   const testimonial = getTestimonial();
 
   return (
-    <Card className="mb-8 overflow-hidden reveal-section transform hover:shadow-xl transition-all duration-300">
+    <Card className="mb-6 md:mb-8 overflow-hidden reveal-section transform hover:shadow-xl transition-all duration-300">
       <div className="absolute top-0 left-0 w-full h-2 bg-[#A7C4A0]"></div>
-      <CardHeader className="pb-4 border-b">
-        <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] text-center">
+      <CardHeader className="pb-3 md:pb-4 border-b">
+        <CardTitle className="font-playfair text-xl md:text-2xl font-semibold text-[#5D4154] text-center">
           FROM STRUGGLING TO THRIVING
         </CardTitle>
       </CardHeader>
-      <CardContent className="pt-6">
-        <div className="border-l-4 border-[#A7C4A0] pl-4 py-2 italic text-[#5D4154]/90 mb-4">
+      <CardContent className="pt-4 md:pt-6 px-4 md:px-6">
+        <div className="border-l-4 border-[#A7C4A0] pl-3 md:pl-4 py-2 italic text-[#5D4154]/90 mb-3 md:mb-4 text-sm md:text-base">
           "{testimonial.quote}"
-          <div className="text-right font-medium mt-2 text-[#5D4154]">
+          <div className="text-right font-medium mt-2 text-[#5D4154] text-sm md:text-base">
             — {testimonial.name}, {testimonial.age}, experienced similar symptoms to yours
           </div>
         </div>

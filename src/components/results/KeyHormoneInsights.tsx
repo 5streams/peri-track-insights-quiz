@@ -76,43 +76,43 @@ const KeyHormoneInsights: React.FC<KeyHormoneInsightsProps> = ({
   const content = getHormoneInsight();
 
   return (
-    <Card className="mb-8 overflow-hidden reveal-section transform hover:shadow-xl transition-all duration-300">
+    <Card className="mb-6 md:mb-8 overflow-hidden reveal-section transform hover:shadow-xl transition-all duration-300">
       <div className="absolute top-0 left-0 w-full h-2 bg-[#A7C4A0]"></div>
-      <CardHeader className="pb-4 border-b">
-        <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] flex items-center">
-          <div className="h-10 w-10 rounded-full bg-[#A7C4A0]/10 flex items-center justify-center mr-4">
-            <FileText className="h-5 w-5 text-[#5D4154]" />
+      <CardHeader className="pb-3 md:pb-4 border-b">
+        <CardTitle className="font-playfair text-xl md:text-2xl font-semibold text-[#5D4154] flex items-center">
+          <div className="h-8 w-8 md:h-10 md:w-10 rounded-full bg-[#A7C4A0]/10 flex items-center justify-center mr-3 md:mr-4">
+            <FileText className="h-4 w-4 md:h-5 md:w-5 text-[#5D4154]" />
           </div>
-          {content.title}
+          <span className="leading-tight">{content.title}</span>
         </CardTitle>
       </CardHeader>
-      <CardContent className="pt-6">
-        <div className="mb-6">
-          <div className="w-full h-32 bg-[#FFECD6]/20 rounded-lg flex items-center justify-center mb-4">
+      <CardContent className="pt-4 md:pt-6 px-4 md:px-6">
+        <div className="mb-5 md:mb-6">
+          <div className="w-full h-24 md:h-32 bg-[#FFECD6]/20 rounded-lg flex items-center justify-center mb-4">
             <p className="text-[#5D4154] font-medium text-sm">
               [Visualization of {primaryHormone} levels]
             </p>
           </div>
           
-          <p className="text-lg font-medium text-[#5D4154] mb-4">
+          <p className="text-base md:text-lg font-medium text-[#5D4154] mb-3 md:mb-4">
             {content.description}
           </p>
           
-          <ul className="space-y-2 mb-6">
+          <ul className="space-y-2 mb-5 md:mb-6">
             {content.impacts.map((impact, index) => (
               <li key={index} className="flex items-start">
-                <span className="text-[#5D4154] mr-2">•</span>
-                <span>{impact}</span>
+                <span className="text-[#5D4154] mr-2 text-lg">•</span>
+                <span className="text-sm md:text-base">{impact}</span>
               </li>
             ))}
           </ul>
           
-          <p className="mb-4">
+          <p className="mb-4 text-sm md:text-base">
             {content.explanation}
           </p>
           
-          <div className="bg-[#FFECD6]/30 p-4 rounded-lg">
-            <p className="font-medium text-[#5D4154]">
+          <div className="bg-[#FFECD6]/30 p-3 md:p-4 rounded-lg">
+            <p className="font-medium text-[#5D4154] text-sm md:text-base">
               {content.insight}
             </p>
           </div>
