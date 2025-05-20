@@ -100,6 +100,7 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
   return (
     <div className="w-full h-full">
       <ChartContainer className="h-full w-full aspect-[16/9] p-4" config={config}>
+        {/* Wrap LineChart as the single child element for ChartContainer */}
         <LineChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
           <XAxis 

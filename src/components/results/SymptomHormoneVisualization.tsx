@@ -143,6 +143,7 @@ const SymptomHormoneVisualization: React.FC<SymptomHormoneVisualizationProps> = 
       </div>
       
       <ChartContainer className="h-[180px] w-full" config={config}>
+        {/* Wrap LineChart as the single child element */}
         <LineChart data={data} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
           <XAxis 
@@ -178,7 +179,6 @@ const SymptomHormoneVisualization: React.FC<SymptomHormoneVisualizationProps> = 
             dot={{ strokeWidth: 1, r: 2 }}
           />
         </LineChart>
-        <ChartTooltip />
       </ChartContainer>
       
       <div className="text-xs text-gray-500 mt-2">
