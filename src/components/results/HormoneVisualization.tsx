@@ -21,13 +21,15 @@ import {
 interface HormoneVisualizationProps {
   primaryHormone: string;
   secondaryHormones: string[];
+  scoreCategory?: string;
 }
 
 const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({ 
   primaryHormone, 
-  secondaryHormones 
+  secondaryHormones,
+  scoreCategory = "moderate" // Default value to ensure backward compatibility
 }) => {
-  // Generate example data based on the primary hormone
+  // Generate example data based on the primary hormone and score category
   const generateData = () => {
     // Example data showing hormone levels over time (perimenopause period)
     // This could be customized based on the user's specific profile
@@ -38,6 +40,26 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
       estradiol: [85, 72, 88, 65, 78, 60, 72, 55, 65, 45, 60, 40],
       progesterone: [90, 82, 75, 68, 62, 55, 48, 42, 36, 30, 25, 20],
       testosterone: [85, 80, 78, 75, 72, 68, 65, 60, 57, 54, 50, 47]
+    };
+    
+    // Adjust patterns based on score category
+    const adjustPatternForScoreCategory = (basePattern: number[]) => {
+      switch(scoreCategory) {
+        case "minimal":
+          // Minimal symptoms: higher levels, more stable
+          return basePattern.map(val => Math.min(100, val + 15));
+        case "early":
+          // Early symptoms: slightly lower levels
+          return basePattern.map(val => Math.min(100, val + 5));
+        case "moderate":
+          // Moderate symptoms: use base pattern
+          return basePattern;
+        case "significant":
+          // Significant symptoms: lower levels, more dramatic drops
+          return basePattern.map(val => Math.max(0, val - 10));
+        default:
+          return basePattern;
+      }
     };
     
     // Months for better context
@@ -52,6 +74,7 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
       
       allHormones.forEach(hormone => {
         const basePattern = patterns[hormone.toLowerCase() as keyof typeof patterns] || patterns.estradiol;
+        const adjustedPattern = adjustPatternForScoreCategory(basePattern);
         
         // Make primary hormone more pronounced in the visualization
         const multiplier = hormone.toLowerCase() === primaryHormone.toLowerCase() ? 1 : 0.9;
@@ -61,7 +84,7 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
           ? Math.random() * 6 - 3 
           : Math.random() * 4 - 2;
         
-        dataPoint[hormone] = Math.max(0, Math.min(100, basePattern[i] * multiplier + randomFactor));
+        dataPoint[hormone] = Math.max(0, Math.min(100, adjustedPattern[i] * multiplier + randomFactor));
         
         // Add projection data for future months
         if (i >= 9) {
@@ -72,12 +95,17 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
         }
       });
       
-      // Add optimal zone indicators
-      dataPoint.optimalUpper = 85;
-      dataPoint.optimalLower = 65;
+      // Add optimal zone indicators - adjust based on score category
+      const optimalAdjustment = scoreCategory === "minimal" ? 0 :
+                               scoreCategory === "early" ? -5 :
+                               scoreCategory === "moderate" ? -10 :
+                               -15;
+                               
+      dataPoint.optimalUpper = 85 + optimalAdjustment;
+      dataPoint.optimalLower = 65 + optimalAdjustment;
       
-      // Add critical threshold
-      dataPoint.criticalThreshold = 40;
+      // Add critical threshold - adjust based on score category
+      dataPoint.criticalThreshold = 40 + (scoreCategory === "significant" ? -5 : 0);
       
       // Add intervention projections for the primary hormone
       if (i >= 9) {
@@ -145,6 +173,22 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
   // Current position (for annotation)
   const currentPosition = 8; // Example: Month 9
 
+  // Get the phase description based on score category
+  const getPhaseDescription = () => {
+    switch(scoreCategory) {
+      case "minimal": 
+        return "You are currently showing minimal perimenopause symptoms with hormone levels in optimal ranges.";
+      case "early": 
+        return "You are currently in the \"Early Transitional Phase\" with early hormone changes beginning.";
+      case "moderate": 
+        return "You are currently in the \"Mid Transitional Phase\" with notable hormone changes affecting your wellbeing.";
+      case "significant":
+        return "You are currently experiencing significant hormone changes that require prompt attention.";
+      default:
+        return "You are currently in the \"Transitional Phase\" with hormone changes affecting your wellbeing.";
+    }
+  };
+
   return (
     <div className="w-full h-full">
       <ChartContainer className="h-full w-full aspect-[16/9] p-4" config={config}>
@@ -186,9 +230,9 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
             />
             
             {/* Reference lines */}
-            <ReferenceLine y={85} stroke="#A7C4A0" strokeDasharray="3 3" label={{ value: "Optimal Upper", position: "right", fill: "#A7C4A0" }} />
-            <ReferenceLine y={65} stroke="#A7C4A0" strokeDasharray="3 3" label={{ value: "Optimal Lower", position: "right", fill: "#A7C4A0" }} />
-            <ReferenceLine y={40} stroke="#EF4444" strokeDasharray="3 3" label={{ value: "Critical Threshold", position: "right", fill: "#EF4444" }} />
+            <ReferenceLine y={data[0].optimalUpper} stroke="#A7C4A0" strokeDasharray="3 3" label={{ value: "Optimal Upper", position: "right", fill: "#A7C4A0" }} />
+            <ReferenceLine y={data[0].optimalLower} stroke="#A7C4A0" strokeDasharray="3 3" label={{ value: "Optimal Lower", position: "right", fill: "#A7C4A0" }} />
+            <ReferenceLine y={data[0].criticalThreshold} stroke="#EF4444" strokeDasharray="3 3" label={{ value: "Critical Threshold", position: "right", fill: "#EF4444" }} />
             
             {/* Current position */}
             <ReferenceLine x={data[currentPosition].month} stroke="#5D4154" label={{ value: "You Are Here", position: "top", fill: "#5D4154" }} />
@@ -250,7 +294,7 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
       <div className="bg-white p-3 rounded-lg mt-3 border border-gray-200">
         <h4 className="text-sm font-medium text-[#5D4154] mb-1">Key Insight:</h4>
         <p className="text-xs text-gray-600">
-          You are currently in the "Early Transitional Phase" with {primaryHormone.toLowerCase()} showing significant changes.
+          {getPhaseDescription()}
           This specific pattern explains your current symptoms, and the highlighted area shows your optimal intervention window.
         </p>
       </div>
