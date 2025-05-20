@@ -22,7 +22,7 @@
 .reveal-section {
   opacity: 0;
   transform: translateY(15px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .reveal-section.revealed {
@@ -40,6 +40,7 @@
 
 .animate-fade-in {
   animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  opacity: 0;
 }
 
 /* Responsive typography and spacing */
@@ -48,3 +49,52 @@
     transform: translateY(10px);
   }
 }
+
+/* Improve mobile card layouts */
+@media (max-width: 640px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-stack > * + * {
+    margin-top: 1rem;
+  }
+}
+
+/* Better animation timing for mobile */
+@media (max-width: 640px) {
+  .animate-slide-up {
+    animation-duration: 0.5s;
+  }
+  
+  .animate-fade-in {
+    animation-duration: 0.7s;
+  }
+}
+
+/* Smoother transitions for all interactive elements */
+button, a {
+  transition: all 0.2s ease-out;
+}
+
+/* More breathing room on mobile */
+@media (max-width: 640px) {
+  .card-content {
+    padding: 1rem;
+  }
+}
+
+/* Enhance hover effects on desktop only */
+@media (min-width: 768px) {
+  .hover-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* Staggered entrance animations */
+.stagger-item:nth-child(1) { animation-delay: 0s; }
+.stagger-item:nth-child(2) { animation-delay: 0.1s; }
+.stagger-item:nth-child(3) { animation-delay: 0.2s; }
+.stagger-item:nth-child(4) { animation-delay: 0.3s; }
+.stagger-item:nth-child(5) { animation-delay: 0.4s; }

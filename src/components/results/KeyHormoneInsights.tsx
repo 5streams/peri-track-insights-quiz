@@ -20,7 +20,7 @@ const KeyHormoneInsights: React.FC<KeyHormoneInsightsProps> = ({
     switch (primaryHormone.toLowerCase()) {
       case "testosterone":
         return {
-          title: "TESTOSTERONE: YOUR KEY HORMONE INSIGHT",
+          title: "TESTOSTERONE: YOUR PRIMARY HORMONE INSIGHT",
           description: "What's Happening: Your symptoms suggest your testosterone levels have declined below optimal, which directly impacts:",
           impacts: [
             "Sexual desire and responsiveness",
@@ -29,11 +29,12 @@ const KeyHormoneInsights: React.FC<KeyHormoneInsightsProps> = ({
             "Muscle tone and metabolism"
           ],
           explanation: "Contrary to common belief, testosterone is a critical hormone for women, producing about 50% of your libido drive, and maintaining energy, mood stability, and cognitive function.",
-          insight: "Most standard hormone testing overlooks female testosterone levels entirely, leaving this critical imbalance unaddressed."
+          insight: "Most standard hormone testing overlooks female testosterone levels entirely, leaving this critical imbalance unaddressed.",
+          visualization: "Your testosterone appears to be declining more rapidly than expected for your age, which explains why your symptoms may feel more intense than what others describe."
         };
       case "progesterone":
         return {
-          title: "PROGESTERONE: YOUR KEY HORMONE INSIGHT",
+          title: "PROGESTERONE: YOUR PRIMARY HORMONE INSIGHT",
           description: "What's Happening: Your symptoms suggest your progesterone levels have declined, which directly impacts:",
           impacts: [
             "Sleep quality and ability to stay asleep",
@@ -42,11 +43,12 @@ const KeyHormoneInsights: React.FC<KeyHormoneInsightsProps> = ({
             "Overall sense of calm and wellbeing"
           ],
           explanation: "Progesterone is your body's natural \"calming\" hormone, affecting GABA receptors in your brain similar to anti-anxiety medications, but without side effects when balanced naturally.",
-          insight: "This decline often begins 5-10 years before actual menopause, explaining why you're experiencing these symptoms now."
+          insight: "This decline often begins 5-10 years before actual menopause, explaining why you're experiencing these symptoms now.",
+          visualization: "Your progesterone is likely declining while estrogen remains relatively stable, creating an imbalance that explains your specific symptom pattern."
         };
       case "estradiol":
         return {
-          title: "ESTRADIOL: YOUR KEY HORMONE INSIGHT",
+          title: "ESTRADIOL: YOUR PRIMARY HORMONE INSIGHT",
           description: "What's Happening: Your symptoms suggest your estradiol levels are fluctuating significantly, which directly impacts:",
           impacts: [
             "Temperature regulation (hot flashes)",
@@ -55,11 +57,12 @@ const KeyHormoneInsights: React.FC<KeyHormoneInsightsProps> = ({
             "Sleep patterns and quality"
           ],
           explanation: "Estradiol is your primary estrogen with over 400 functions throughout your body. During perimenopause, levels don't just decline - they fluctuate unpredictably, often causing more intense symptoms than constant low levels.",
-          insight: "These fluctuations can occur years before your periods become irregular, which is why many women experience symptoms while still having regular cycles."
+          insight: "These fluctuations can occur years before your periods become irregular, which is why many women experience symptoms while still having regular cycles.",
+          visualization: "Your estradiol appears to be fluctuating in an unpredictable pattern, creating windows of high and low levels that explain why your symptoms come and go."
         };
       default:
         return {
-          title: "YOUR KEY HORMONE INSIGHT",
+          title: "YOUR PRIMARY HORMONE INSIGHT",
           description: "What's Happening: Your symptoms suggest hormone fluctuations typical of perimenopause, which directly impact:",
           impacts: [
             "Physical wellbeing and comfort",
@@ -68,7 +71,8 @@ const KeyHormoneInsights: React.FC<KeyHormoneInsightsProps> = ({
             "Overall sense of wellness"
           ],
           explanation: "Your hormones work together as an intricate system, with changes in one affecting all others. During perimenopause, this delicate balance begins shifting, often years before periods become irregular.",
-          insight: "Understanding your unique hormone pattern is essential for finding effective, personalized solutions to your symptoms."
+          insight: "Understanding your unique hormone pattern is essential for finding effective, personalized solutions to your symptoms.",
+          visualization: "Your hormone patterns suggest changes typical of perimenopause, with specific imbalances that explain your unique symptom profile."
         };
     }
   };
@@ -88,9 +92,9 @@ const KeyHormoneInsights: React.FC<KeyHormoneInsightsProps> = ({
       </CardHeader>
       <CardContent className="pt-4 md:pt-6 px-4 md:px-6">
         <div className="mb-5 md:mb-6">
-          <div className="w-full h-24 md:h-32 bg-[#FFECD6]/20 rounded-lg flex items-center justify-center mb-4">
-            <p className="text-[#5D4154] font-medium text-sm">
-              [Visualization of {primaryHormone} levels]
+          <div className="w-full h-24 md:h-32 bg-[#FFECD6]/20 rounded-lg flex items-center justify-center mb-4 p-3 md:p-4">
+            <p className="text-[#5D4154] font-medium text-sm md:text-base text-center">
+              {content.visualization}
             </p>
           </div>
           

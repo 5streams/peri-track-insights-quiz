@@ -21,31 +21,40 @@ const PersonalizedHormoneAssessment: React.FC<PersonalizedHormoneAssessmentProps
   symptoms,
   score
 }) => {
+  // Helper function to format symptoms for display
+  const formatSymptom = (symptom: string) => {
+    return symptom
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/^./, str => str.toUpperCase())
+      .replace(/Changes|Symptoms/g, '')
+      .trim();
+  };
+
   // Determine content based on primary hormone
   const getAssessmentContent = () => {
     switch (primaryHormone.toLowerCase()) {
       case "testosterone":
         return {
-          title: `${firstName}, Your Hormone Assessment Results`,
-          description: `Your responses indicate a likely testosterone deficiency, which directly explains your reported decreased libido, low energy, and reduced motivation.`,
-          statistic: "This pattern is common during perimenopause, affecting 68% of women, yet is frequently overlooked by standard healthcare approaches."
+          title: `${firstName}, Your Unique Hormone Profile`,
+          description: `Based on your responses, we've identified a specific hormone pattern that explains the exact symptoms you reported. Your testosterone levels appear to be declining, which directly relates to your described experiences.`,
+          statistic: "This pattern affects 68% of women during perimenopause, yet is frequently overlooked by standard healthcare approaches."
         };
       case "progesterone":
         return {
-          title: `${firstName}, Your Hormone Assessment Results`,
-          description: `Your responses indicate declining progesterone levels, which directly explains your reported sleep disruptions, nighttime anxiety, and morning fatigue.`,
+          title: `${firstName}, Your Unique Hormone Profile`,
+          description: `Based on your responses, we've identified a specific hormone pattern that explains the exact symptoms you reported. Your progesterone levels appear to be declining, which directly relates to your described experiences.`,
           statistic: "This pattern affects 72% of women during perimenopause, often years before other symptoms appear."
         };
       case "estradiol":
         return {
-          title: `${firstName}, Your Hormone Assessment Results`,
-          description: `Your responses indicate fluctuating estradiol levels, which directly explains your reported hot flashes, mood swings, and brain fog.`,
+          title: `${firstName}, Your Unique Hormone Profile`,
+          description: `Based on your responses, we've identified a specific hormone pattern that explains the exact symptoms you reported. Your estradiol levels appear to be fluctuating significantly, which directly relates to your described experiences.`,
           statistic: "This pattern is experienced by 65% of women during perimenopause and can begin several years before actual menopause."
         };
       default:
         return {
-          title: `${firstName}, Your Hormone Assessment Results`,
-          description: `Your responses indicate hormone fluctuations typical of perimenopause, which directly relates to your reported symptoms.`,
+          title: `${firstName}, Your Unique Hormone Profile`,
+          description: `Based on your responses, we've identified a specific hormone pattern that explains the exact symptoms you reported. Your hormones are showing changes typical of perimenopause.`,
           statistic: "Your pattern is shared by thousands of women in the perimenopause transition phase."
         };
     }
@@ -54,7 +63,7 @@ const PersonalizedHormoneAssessment: React.FC<PersonalizedHormoneAssessmentProps
   const content = getAssessmentContent();
 
   return (
-    <Card className="mb-6 md:mb-8 overflow-hidden reveal-section transform hover:shadow-xl transition-all duration-300">
+    <Card className="mb-6 md:mb-8 overflow-hidden reveal-section transform transition-all duration-300 shadow-md hover:shadow-lg">
       <div className="absolute top-0 left-0 w-full h-2 bg-[#5D4154]"></div>
       <CardHeader className="pb-3 md:pb-4 border-b bg-gradient-to-r from-[#FFECD6]/50 to-white">
         <CardTitle className="font-playfair text-xl md:text-2xl font-semibold text-[#5D4154] flex items-center">
@@ -68,11 +77,32 @@ const PersonalizedHormoneAssessment: React.FC<PersonalizedHormoneAssessmentProps
         <h3 className="font-playfair text-xl md:text-2xl font-bold text-[#5D4154] mb-3 md:mb-4">
           {content.title}
         </h3>
-        <p className="text-base md:text-lg mb-3 md:mb-4">
+        <p className="text-base md:text-lg mb-4 md:mb-5">
           {content.description}
         </p>
+        
+        <div className="bg-[#FFECD6]/20 p-4 md:p-5 rounded-lg mb-4 md:mb-5">
+          <h4 className="font-semibold text-[#5D4154] mb-2">Your Reported Symptoms:</h4>
+          <ul className="space-y-2 md:space-y-3">
+            {symptoms.map((symptom, index) => (
+              <li key={index} className="flex items-start">
+                <span className="text-[#5D4154] font-bold mr-2">•</span>
+                <span className="text-sm md:text-base">
+                  <span className="font-medium">{formatSymptom(symptom)}</span>
+                  {index === 0 && ' - occurring frequently and affecting your daily life'}
+                  {index === 1 && ' - causing noticeable changes in your wellbeing'}
+                  {index === 2 && ' - impacting your quality of life'}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
         <div className="bg-[#FFECD6]/30 p-3 md:p-4 rounded-lg">
           <p className="text-[#5D4154] font-medium text-sm md:text-base">
+            What you're experiencing isn't "just aging" or "all in your head." These are real biological responses to specific hormone changes happening in your body right now.
+          </p>
+          <p className="text-[#5D4154] font-medium text-sm md:text-base mt-2">
             {content.statistic}
           </p>
         </div>

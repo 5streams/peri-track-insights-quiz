@@ -26,7 +26,7 @@ const FreeTrial: React.FC = () => {
   ];
 
   return (
-    <Card className="mb-6 md:mb-8 overflow-hidden reveal-section transform translate-y-4 opacity-0 bg-gradient-to-br from-[#5D4154] to-[#5D4154]/90 text-white shadow-xl">
+    <Card className="mb-6 md:mb-8 overflow-hidden reveal-section transform opacity-0 bg-gradient-to-br from-[#5D4154] to-[#5D4154]/90 text-white shadow-xl">
       <CardContent className="p-5 md:p-8">
         <h2 className="font-playfair text-2xl md:text-3xl font-bold text-center mb-4 md:mb-6">
           Start Your Free 7-Day Trial
@@ -54,6 +54,10 @@ const FreeTrial: React.FC = () => {
           >
             BEGIN MY FREE TRIAL
           </Button>
+          
+          <p className="mt-4 text-sm text-white/80">
+            Takes just 30 seconds to begin. No credit card required.
+          </p>
         </div>
       </CardContent>
     </Card>
