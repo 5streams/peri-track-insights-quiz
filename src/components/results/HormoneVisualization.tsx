@@ -100,8 +100,8 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
   return (
     <div className="w-full h-full">
       <ChartContainer className="h-full w-full aspect-[16/9] p-4" config={config}>
-        {/* Fixed type error by wrapping LineChart in React Fragment */}
-        <>
+        {/* Fix: Wrap LineChart in a single React.Fragment instead of an empty fragment */}
+        <React.Fragment>
           <LineChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
             <XAxis 
@@ -135,7 +135,7 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
               />
             ))}
           </LineChart>
-        </>
+        </React.Fragment>
         <ChartTooltip />
       </ChartContainer>
     </div>

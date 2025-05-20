@@ -143,7 +143,8 @@ const SymptomHormoneVisualization: React.FC<SymptomHormoneVisualizationProps> = 
       </div>
       
       <ChartContainer className="h-[180px] w-full" config={config}>
-        <>
+        {/* Fix: Wrap LineChart in a single React.Fragment instead of an empty fragment */}
+        <React.Fragment>
           <LineChart data={data} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
             <XAxis 
@@ -179,7 +180,7 @@ const SymptomHormoneVisualization: React.FC<SymptomHormoneVisualizationProps> = 
               dot={{ strokeWidth: 1, r: 2 }}
             />
           </LineChart>
-        </>
+        </React.Fragment>
         <ChartTooltip />
       </ChartContainer>
       
