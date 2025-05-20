@@ -18,6 +18,9 @@ import ScienceExplanation from "@/components/results/ScienceExplanation";
 import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
 import SymptomValidation from "@/components/results/SymptomValidation";
 import SymptomHormoneVisualization from "@/components/results/SymptomHormoneVisualization";
+import WarningTimeline from "@/components/results/WarningTimeline";
+import TransformationJourney from "@/components/results/TransformationJourney";
+import RiskReversal from "@/components/results/RiskReversal";
 
 interface QuizResults {
   score: number;
@@ -108,6 +111,9 @@ const Results = () => {
         {/* Symptom Validation Section */}
         <SymptomValidation symptoms={results.primarySymptoms} />
         
+        {/* NEW: Warning Timeline Section */}
+        <WarningTimeline />
+        
         {/* Emotion-Hormone Connection */}
         <EmotionHormoneConnection />
         
@@ -133,28 +139,34 @@ const Results = () => {
           </div>
         </div>
         
-        {/* New Section: Science Behind Your Symptoms */}
+        {/* NEW: Transformation Journey Section */}
+        <TransformationJourney />
+        
+        {/* Science Behind Your Symptoms */}
         <ScienceExplanation 
           primaryHormone={primaryHormone}
           symptoms={results.primarySymptoms}
         />
         
-        {/* Section 3: Complete Hormone Picture */}
+        {/* Complete Hormone Picture */}
         <CompleteHormonePicture 
           primaryHormone={primaryHormone}
           secondaryHormones={secondaryHormones}
         />
         
-        {/* Section 4: 3-Step Solution */}
+        {/* 3-Step Solution */}
         <ThreeStepSolution primaryHormone={primaryHormone} symptoms={results.primarySymptoms} />
         
-        {/* Section 5: Free Trial CTA */}
+        {/* Free Trial CTA */}
         <FreeTrial />
         
-        {/* Section 6: Success Story */}
+        {/* NEW: Risk Reversal Section */}
+        <RiskReversal />
+        
+        {/* Success Story */}
         <SuccessStory primaryHormone={primaryHormone} symptoms={results.primarySymptoms} />
         
-        {/* Section 7: Final CTA */}
+        {/* Final CTA */}
         <FinalCTA />
         
         {/* Back to Quiz Button */}

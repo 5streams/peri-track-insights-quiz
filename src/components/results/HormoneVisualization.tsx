@@ -8,11 +8,11 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend
+  Legend,
+  ReferenceLine
 } from "recharts";
 import { 
   ChartContainer, 
-  ChartTooltip, 
   ChartTooltipContent 
 } from "@/components/ui/chart";
 
@@ -94,6 +94,10 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
     [secondaryHormones[1]]: { 
       color: getHormoneColor(secondaryHormones[1]),
       label: getHormoneLabel(secondaryHormones[1])
+    },
+    optimalZone: {
+      color: "rgba(167, 196, 160, 0.15)",
+      label: "Optimal Zone"
     }
   };
 
@@ -101,26 +105,48 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
     <div className="w-full h-full">
       <ChartContainer className="h-full w-full aspect-[16/9] p-4" config={config}>
         <ResponsiveContainer>
-          <LineChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+          <LineChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 10 }}>
+            <defs>
+              <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#A7C4A0" stopOpacity={0.2}/>
+                <stop offset="95%" stopColor="#A7C4A0" stopOpacity={0}/>
+              </linearGradient>
+            </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
             <XAxis 
               dataKey="month" 
               label={{ value: 'Perimenopause Timeline', position: 'bottom', offset: -5 }} 
+              tick={{ fill: '#5D4154' }}
             />
             <YAxis 
               label={{ value: 'Hormone Level', angle: -90, position: 'left' }} 
               domain={[0, 100]}
               tickFormatter={(value) => `${value}%`}
+              tick={{ fill: '#5D4154' }}
             />
             <Tooltip content={<ChartTooltipContent />} />
-            <Legend />
+            <Legend verticalAlign="top" height={36} />
+
+            {/* Optimal zone */}
+            <ReferenceLine y={70} label="Optimal" stroke="#A7C4A0" strokeDasharray="3 3" />
+            <ReferenceLine y={40} label="Low" stroke="#FF9B85" strokeDasharray="3 3" />
+            
+            {/* Area indicating optimal zone */}
+            <defs>
+              <linearGradient id="optimalGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#A7C4A0" stopOpacity={0.2}/>
+                <stop offset="100%" stopColor="#A7C4A0" stopOpacity={0}/>
+              </linearGradient>
+            </defs>
+            
             <Line 
               type="monotone" 
               dataKey={primaryHormone} 
               stroke={getHormoneColor(primaryHormone)} 
               strokeWidth={3} 
-              dot={{ strokeWidth: 2 }} 
-              activeDot={{ r: 6 }}
+              dot={{ strokeWidth: 2, r: 5, fill: 'white' }} 
+              activeDot={{ r: 7, stroke: '#5D4154' }}
+              animationDuration={1500}
             />
             {secondaryHormones.map((hormone, idx) => (
               <Line 
@@ -130,7 +156,10 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
                 stroke={getHormoneColor(hormone)}
                 strokeWidth={2}
                 strokeDasharray={idx === 0 ? "" : "5 5"}
-                dot={{ strokeWidth: 1 }}
+                dot={{ strokeWidth: 1, r: 4, fill: 'white' }}
+                activeDot={{ r: 6 }}
+                animationDuration={1500}
+                animationBegin={300 * (idx + 1)}
               />
             ))}
           </LineChart>
