@@ -143,44 +143,41 @@ const SymptomHormoneVisualization: React.FC<SymptomHormoneVisualizationProps> = 
       </div>
       
       <ChartContainer className="h-[180px] w-full" config={config}>
-        {/* Fix: Wrap LineChart in a single React.Fragment instead of an empty fragment */}
-        <React.Fragment>
-          <LineChart data={data} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
-            <XAxis 
-              dataKey="month" 
-              tick={{ fontSize: 10 }}
-            />
-            <YAxis 
-              domain={[0, 100]}
-              tick={{ fontSize: 10 }}
-            />
-            <Tooltip content={<ChartTooltipContent />} />
-            <ReferenceLine y={50} stroke="#CBD5E1" strokeDasharray="3 3" />
-            <Line 
-              type="monotone" 
-              dataKey="baseline"
-              stroke="#94A3B8"
-              strokeWidth={1}
-              strokeDasharray="3 3"
-              dot={false}
-            />
-            <Line 
-              type="monotone" 
-              dataKey={primaryHormone} 
-              stroke={getHormoneColor(primaryHormone)} 
-              strokeWidth={2}
-              dot={{ strokeWidth: 1, r: 2 }}
-            />
-            <Line 
-              type="monotone" 
-              dataKey="impact" 
-              stroke="#EF4444"
-              strokeWidth={2}
-              dot={{ strokeWidth: 1, r: 2 }}
-            />
-          </LineChart>
-        </React.Fragment>
+        <LineChart data={data} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
+          <XAxis 
+            dataKey="month" 
+            tick={{ fontSize: 10 }}
+          />
+          <YAxis 
+            domain={[0, 100]}
+            tick={{ fontSize: 10 }}
+          />
+          <Tooltip content={<ChartTooltipContent />} />
+          <ReferenceLine y={50} stroke="#CBD5E1" strokeDasharray="3 3" />
+          <Line 
+            type="monotone" 
+            dataKey="baseline"
+            stroke="#94A3B8"
+            strokeWidth={1}
+            strokeDasharray="3 3"
+            dot={false}
+          />
+          <Line 
+            type="monotone" 
+            dataKey={primaryHormone} 
+            stroke={getHormoneColor(primaryHormone)} 
+            strokeWidth={2}
+            dot={{ strokeWidth: 1, r: 2 }}
+          />
+          <Line 
+            type="monotone" 
+            dataKey="impact" 
+            stroke="#EF4444"
+            strokeWidth={2}
+            dot={{ strokeWidth: 1, r: 2 }}
+          />
+        </LineChart>
         <ChartTooltip />
       </ChartContainer>
       

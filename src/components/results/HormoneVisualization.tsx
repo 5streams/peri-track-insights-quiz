@@ -100,42 +100,39 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
   return (
     <div className="w-full h-full">
       <ChartContainer className="h-full w-full aspect-[16/9] p-4" config={config}>
-        {/* Fix: Wrap LineChart in a single React.Fragment instead of an empty fragment */}
-        <React.Fragment>
-          <LineChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
-            <XAxis 
-              dataKey="month" 
-              label={{ value: 'Perimenopause Timeline', position: 'bottom', offset: -5 }} 
-            />
-            <YAxis 
-              label={{ value: 'Hormone Level', angle: -90, position: 'left' }} 
-              domain={[0, 100]}
-              tickFormatter={(value) => `${value}%`}
-            />
-            <Tooltip content={<ChartTooltipContent />} />
-            <Legend />
+        <LineChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
+          <XAxis 
+            dataKey="month" 
+            label={{ value: 'Perimenopause Timeline', position: 'bottom', offset: -5 }} 
+          />
+          <YAxis 
+            label={{ value: 'Hormone Level', angle: -90, position: 'left' }} 
+            domain={[0, 100]}
+            tickFormatter={(value) => `${value}%`}
+          />
+          <Tooltip content={<ChartTooltipContent />} />
+          <Legend />
+          <Line 
+            type="monotone" 
+            dataKey={primaryHormone} 
+            stroke={getHormoneColor(primaryHormone)} 
+            strokeWidth={3} 
+            dot={{ strokeWidth: 2 }} 
+            activeDot={{ r: 6 }}
+          />
+          {secondaryHormones.map((hormone, idx) => (
             <Line 
+              key={hormone}
               type="monotone" 
-              dataKey={primaryHormone} 
-              stroke={getHormoneColor(primaryHormone)} 
-              strokeWidth={3} 
-              dot={{ strokeWidth: 2 }} 
-              activeDot={{ r: 6 }}
+              dataKey={hormone} 
+              stroke={getHormoneColor(hormone)}
+              strokeWidth={2}
+              strokeDasharray={idx === 0 ? "" : "5 5"}
+              dot={{ strokeWidth: 1 }}
             />
-            {secondaryHormones.map((hormone, idx) => (
-              <Line 
-                key={hormone}
-                type="monotone" 
-                dataKey={hormone} 
-                stroke={getHormoneColor(hormone)}
-                strokeWidth={2}
-                strokeDasharray={idx === 0 ? "" : "5 5"}
-                dot={{ strokeWidth: 1 }}
-              />
-            ))}
-          </LineChart>
-        </React.Fragment>
+          ))}
+        </LineChart>
         <ChartTooltip />
       </ChartContainer>
     </div>
