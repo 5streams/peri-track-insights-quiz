@@ -106,7 +106,10 @@ const Results = () => {
         <ConciseSolution primaryHormone={primaryHormone} />
         
         {/* Section 4: Premium Testimonial */}
-        <PremiumTestimonial primaryHormone={primaryHormone} />
+        <PremiumTestimonial 
+          primaryHormone={primaryHormone}
+          symptoms={results.primarySymptoms}
+        />
         
         {/* Section 5: Premium Offer */}
         <PremiumOffer primaryHormone={primaryHormone} />
