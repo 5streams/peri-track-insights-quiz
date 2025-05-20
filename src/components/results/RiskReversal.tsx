@@ -15,7 +15,7 @@ const RiskReversal: React.FC = () => {
             <ShieldCheck className="h-7 w-7 text-[#5D4154]" />
           </div>
           <h2 className="font-playfair text-xl md:text-2xl font-bold text-[#5D4154]">
-            OUR GUARANTEE TO YOU
+            OUR PROMISE TO YOU
           </h2>
         </div>
         

@@ -10,9 +10,11 @@ import { mapSymptomsToPrimaryHormone } from "@/utils/hormoneMapping";
 import ScoreMeter from "@/components/results/ScoreMeter";
 import ResultsSummary from "@/components/results/ResultsSummary";
 import InterventionSection from "@/components/results/InterventionSection";
-import OfferSection from "@/components/results/OfferSection";
+import ActionableTips from "@/components/results/ActionableTips";
+import FreeTrial from "@/components/results/FreeTrial";
 import ResultsTestimonial from "@/components/results/ResultsTestimonial";
 import Guarantee from "@/components/results/Guarantee";
+import RiskReversal from "@/components/results/RiskReversal";
 
 interface QuizResults {
   score: number;
@@ -90,6 +92,29 @@ const Results = () => {
 
   const scoreCategory = getScoreCategory(results.score);
   
+  // Get emotional headline based on score category
+  const getEmotionalHeadline = () => {
+    switch(scoreCategory) {
+      case "minimal":
+        return "Your Hormone Balance Is Good Now. Let's Keep It That Way!";
+      case "early":
+        return "Relief Is Closer Than You Think. Your Personalized Plan Is Ready!";
+      case "moderate":
+        return "Struggling with Perimenopause Symptoms? Your Solution Is Here!";
+      case "significant":
+        return "Stop Suffering Through Perimenopause. Your Custom Relief Plan Is Ready!";
+      default:
+        return "Discover Your Personalized Perimenopause Solution!";
+    }
+  };
+  
+  const handleTrialCTA = () => {
+    // Set trial start date
+    localStorage.setItem("trialStartDate", new Date().toString());
+    // Navigate to dashboard
+    navigate("/dashboard");
+  };
+  
   return (
     <div 
       className="min-h-screen bg-gradient-to-b from-[#FFECD6]/30 to-white py-6 md:py-8 px-4 md:px-6 lg:px-8"
@@ -100,11 +125,22 @@ const Results = () => {
     >
       <div className="w-full max-w-3xl mx-auto">
         <div className="results-container">
-          {/* Results Header with Score Display */}
+          {/* Results Header with Emotional Headline and Quick CTA */}
           <header className="results-header mb-6 md:mb-8 text-center reveal-section transform opacity-0">
             <h1 className="text-2xl md:text-3xl font-bold text-[#5D4154] mb-4">
-              {scoreCategory === "significant" ? "YOUR PERSONALIZED HORMONE ASSESSMENT" : "YOUR PERIMENOPAUSE ASSESSMENT"}
+              {getEmotionalHeadline()}
             </h1>
+            
+            {/* Secondary CTA at top of the page for high-intent users */}
+            {scoreCategory !== "minimal" && (
+              <Button 
+                onClick={handleTrialCTA}
+                variant="outline" 
+                className="mb-6 hover:bg-[#A7C4A0]/10 text-[#5D4154] border-[#A7C4A0]"
+              >
+                Get My FREE Personalized Plan
+              </Button>
+            )}
             
             <ScoreMeter 
               score={results.score} 
@@ -128,18 +164,35 @@ const Results = () => {
             symptoms={results.primarySymptoms}
           />
           
-          {/* Offer Section */}
-          <OfferSection 
-            scoreCategory={scoreCategory}
+          {/* New Actionable Tips Section - Immediate Value */}
+          <ActionableTips 
             primaryHormone={primaryHormone}
             symptoms={results.primarySymptoms}
+            scoreCategory={scoreCategory}
           />
           
-          {/* Testimonial */}
+          {/* First Testimonial for more skeptical users */}
           <ResultsTestimonial 
             scoreCategory={scoreCategory}
             primaryHormone={primaryHormone}
             symptoms={results.primarySymptoms}
+            testimonialPosition="top"
+          />
+          
+          {/* Free Trial Offer - Now more visually striking */}
+          <FreeTrial />
+          
+          {/* Risk Reversal for skeptical users */}
+          {(scoreCategory === "moderate" || scoreCategory === "significant") && (
+            <RiskReversal />
+          )}
+          
+          {/* Second Testimonial near CTA */}
+          <ResultsTestimonial 
+            scoreCategory={scoreCategory}
+            primaryHormone={primaryHormone}
+            symptoms={results.primarySymptoms}
+            testimonialPosition="bottom"
           />
           
           {/* Guarantee - only shown for significant symptoms */}
