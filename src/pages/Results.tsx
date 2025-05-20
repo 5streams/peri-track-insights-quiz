@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Clock, CheckCircle, ChevronDown, TestTube, FileText, Microscope } from "lucide-react";
+import { ArrowLeft, Clock, CheckCircle, ChevronDown, TestTube, FileText, Microscope, Heart, BarChart, Brain, Sparkles } from "lucide-react";
 import {
   Card,
   CardHeader,
@@ -30,12 +31,14 @@ const Results = () => {
   const [userInfo, setUserInfo] = useState({ firstName: "", email: "" });
   const [timeLeft, setTimeLeft] = useState(900); // 15 minutes in seconds
   const [visibleSections, setVisibleSections] = useState({
-    symptoms: false,
+    validation: false,
+    hormones: false,
+    emotional: false,
     future: false,
-    hormone: false,
     tracking: false,
     labTesting: false,
   });
+  const mainContentRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -139,80 +142,197 @@ const Results = () => {
         backgroundImage: "url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" fill=\"%235D4154\" fill-opacity=\"0.03\" fill-rule=\"evenodd\"%3E%3C/svg%3E')",
         backgroundAttachment: "fixed"
       }}
+      ref={mainContentRef}
     >
       <div className="max-w-4xl mx-auto">
-        {/* Header Section - Personalized Greeting and Validation */}
+        {/* Emotional Validation Header */}
         <Card className="mb-8 overflow-hidden reveal-section animate-slide-up shadow-lg border-none">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#5D4154] via-[#A7C4A0] to-[#FFECD6]"></div>
-          <CardHeader className="pb-4 bg-gradient-to-r from-[#5D4154]/5 to-white">
+          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#5D4154] via-[#A7C4A0] to-[#FFECD6]"></div>
+          <CardHeader className="pb-6 bg-gradient-to-r from-[#5D4154]/5 to-white">
             <CardTitle className="font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] animate-fade-in">
-              {userInfo.firstName}, Your Perimenopause Assessment Results
+              {userInfo.firstName}, You've Been Heard.
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-6">
-            <p className="text-lg font-medium text-[#5D4154]">
-              Your responses reveal significant hormone changes that explain many of your symptoms.
+            <p className="text-lg font-medium text-[#5D4154] mb-4">
+              What you're experiencing isn't "just aging," "just stress," or "all in your head." The symptoms you've described—both physical and emotional—are real, significant, and have biological causes.
             </p>
-            <p className="text-gray-600 mt-4">
-              Based on your assessment, we've identified several key insights about your hormonal transition that can help you take control of your symptoms.
+            <p className="text-gray-600 mb-4">
+              We hear the frustration in your responses. The confusion about why your body seems suddenly unfamiliar. The worry about what these changes mean. The exhaustion from navigating daily life while managing unpredictable symptoms.
+            </p>
+            <p className="text-gray-600 mb-4">
+              You are not alone in this experience. Your responses match patterns we've seen in thousands of women going through this significant transition.
+            </p>
+            <p className="text-[#5D4154] font-medium">
+              Let's start by understanding exactly what's happening in your body and mind right now.
             </p>
           </CardContent>
         </Card>
         
-        {/* What Your Body Is Trying To Tell You */}
+        {/* "You're Not Alone" Symptom Validation */}
         <Card className="mb-8 overflow-hidden reveal-section transform hover:shadow-xl transition-all duration-300">
-          <div className="absolute top-0 left-0 w-full h-1 bg-[#5D4154]"></div>
+          <div className="absolute top-0 left-0 w-full h-2 bg-[#5D4154]"></div>
           <CardHeader className="pb-4 border-b">
-            <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] flex items-center group">
-              <div className="h-8 w-8 rounded-full bg-[#5D4154]/10 flex items-center justify-center mr-3 group-hover:bg-[#5D4154]/20 transition-colors">
-                <span className="text-[#5D4154]">1</span>
+            <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] flex items-center group cursor-pointer" onClick={() => toggleSection('validation')}>
+              <div className="h-10 w-10 rounded-full bg-[#5D4154]/10 flex items-center justify-center mr-4 group-hover:bg-[#5D4154]/20 transition-colors">
+                <Heart className="h-5 w-5 text-[#5D4154]" />
               </div>
-              What Your Body Is Trying To Tell You
+              THE SYMPTOMS YOU'VE BEEN EXPERIENCING
+              <ChevronDown className={`ml-auto h-5 w-5 transition-transform duration-300 ${visibleSections.validation ? 'rotate-180' : ''}`} />
             </CardTitle>
           </CardHeader>
-          <CardContent className="pt-6">
-            <p className="mb-4">Based on our AI analysis of your responses, we've identified a concerning pattern in your symptoms:</p>
+          <CardContent className={`pt-6 overflow-hidden transition-all duration-500 ${visibleSections.validation ? 'max-h-[2000px]' : 'max-h-32'}`}>
+            <p className="mb-6">You described experiencing {results.primarySymptoms[0].toLowerCase()}, {results.primarySymptoms[1].toLowerCase()}, and {results.primarySymptoms[2].toLowerCase()}. These experiences are shared by thousands of women with your hormone pattern.</p>
             
-            <ul className="space-y-4 mb-6">
-              <li className="flex items-start transform hover:translate-x-1 transition-transform duration-300">
-                <div className="h-6 w-6 rounded-full bg-[#A7C4A0] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">
-                  •
-                </div>
-                <p>Your sleep disruptions aren't just "bad sleep" - they're a direct result of declining progesterone affecting your brain's sleep centers</p>
-              </li>
-              <li className="flex items-start transform hover:translate-x-1 transition-transform duration-300">
-                <div className="h-6 w-6 rounded-full bg-[#A7C4A0] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">
-                  •
-                </div>
-                <p>The brain fog and memory issues you reported aren't "just aging" - they're caused by estrogen fluctuations affecting neurotransmitter function</p>
-              </li>
-              <li className="flex items-start transform hover:translate-x-1 transition-transform duration-300">
-                <div className="h-6 w-6 rounded-full bg-[#A7C4A0] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">
-                  •
-                </div>
-                <p>Your mood changes aren't "all in your head" - they're real biological responses to hormone shifts affecting your brain chemistry</p>
-              </li>
-            </ul>
+            <div className="space-y-8 mb-6">
+              <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-[#FF9B85]">
+                <h3 className="font-playfair text-xl font-semibold text-[#5D4154] mb-3">"I FEEL LIKE I'M LOSING MY MIND"</h3>
+                <p className="mb-3">
+                  Your report of brain fog, forgetfulness, and difficulty concentrating isn't uncommon—78% of women with your hormone pattern report similar cognitive changes. These symptoms often lead to questioning your competence and worrying about your mental health.
+                </p>
+                <p className="font-medium text-[#5D4154]">
+                  This isn't cognitive decline or early dementia. It's a direct result of hormone fluctuations affecting neurotransmitter function in your brain.
+                </p>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-[#FFBF69]">
+                <h3 className="font-playfair text-xl font-semibold text-[#5D4154] mb-3">"I DON'T RECOGNIZE MYSELF ANYMORE"</h3>
+                <p className="mb-3">
+                  The mood changes, emotional sensitivity, and irritability you described are experienced by 82% of women with your hormone pattern. The feeling that your emotions are unpredictable or out of proportion can be deeply unsettling.
+                </p>
+                <p className="font-medium text-[#5D4154]">
+                  These emotional shifts aren't a personality change—they're biological responses to changing hormone levels affecting your brain chemistry.
+                </p>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-[#A7C4A0]">
+                <h3 className="font-playfair text-xl font-semibold text-[#5D4154] mb-3">"I'M EXHAUSTED BUT CAN'T SLEEP"</h3>
+                <p className="mb-3">
+                  Your sleep disruptions and resulting fatigue align exactly with what 76% of women with your hormone pattern experience. Waking up at 3 AM with your mind racing, or lying awake despite physical exhaustion, can feel isolating and frustrating.
+                </p>
+                <p className="font-medium text-[#5D4154]">
+                  This isn't insomnia as most people understand it—it's a specific disruption in sleep architecture caused by changing progesterone levels.
+                </p>
+              </div>
+            </div>
             
-            <div className="text-[#5D4154] font-medium border-l-4 border-[#5D4154] pl-4 py-2 bg-[#FFECD6]/50 rounded-r-md animate-pulse-subtle">
-              <p>What's particularly concerning is seeing <span className="font-bold italic">{results.primarySymptoms[0].toLowerCase()}</span> and <span className="font-bold italic">{results.primarySymptoms[1].toLowerCase()}</span> occurring together. This combination suggests you're experiencing what we call <span className="font-bold">{patternName}</span> - a hormone pattern that typically intensifies over time without proper management.</p>
+            <div className="text-center font-medium text-lg text-[#5D4154] bg-[#FFECD6]/30 p-4 rounded-lg animate-pulse-subtle">
+              You're not imagining these changes. You're not overreacting. And most importantly, you're not alone.
             </div>
           </CardContent>
         </Card>
         
-        {/* Your Hormone Profile & Analysis */}
+        {/* The Emotional Impact of Hormone Changes */}
         <Card className="mb-8 overflow-hidden reveal-section transform translate-y-4 opacity-0">
-          <div className="absolute top-0 left-0 w-full h-1 bg-[#FFECD6]"></div>
-          <CardHeader className="pb-4 border-b bg-gradient-to-r from-[#FFECD6]/50 to-white">
-            <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] flex items-center group cursor-pointer" onClick={() => toggleSection('hormone')}>
-              <div className="h-8 w-8 rounded-full bg-[#5D4154]/10 flex items-center justify-center mr-3 group-hover:bg-[#5D4154]/20 transition-colors">
-                <span className="text-[#5D4154]">2</span>
+          <div className="absolute top-0 left-0 w-full h-2 bg-[#A7C4A0]"></div>
+          <CardHeader className="pb-4 border-b">
+            <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] flex items-center group cursor-pointer" onClick={() => toggleSection('emotional')}>
+              <div className="h-10 w-10 rounded-full bg-[#A7C4A0]/10 flex items-center justify-center mr-4 group-hover:bg-[#A7C4A0]/20 transition-colors">
+                <Brain className="h-5 w-5 text-[#5D4154]" />
               </div>
-              Your Personal Hormone Assessment
-              <ChevronDown className={`ml-auto h-5 w-5 transition-transform duration-300 ${visibleSections.hormone ? 'rotate-180' : ''}`} />
+              UNDERSTANDING THE EMOTION-HORMONE CONNECTION
+              <ChevronDown className={`ml-auto h-5 w-5 transition-transform duration-300 ${visibleSections.emotional ? 'rotate-180' : ''}`} />
             </CardTitle>
           </CardHeader>
-          <CardContent className={`pt-6 overflow-hidden transition-all duration-500 ${visibleSections.hormone ? 'max-h-[1500px]' : 'max-h-24'}`}>
+          <CardContent className={`pt-6 overflow-hidden transition-all duration-500 ${visibleSections.emotional ? 'max-h-[2000px]' : 'max-h-32'}`}>
+            <p className="mb-4 text-lg">
+              Many women describe perimenopause as feeling like an "emotional roller coaster" or say things like "I don't feel like myself anymore." There's a profound reason for this—your hormones don't just affect your body; they fundamentally influence your emotional landscape.
+            </p>
+            
+            <div className="bg-white p-6 rounded-lg shadow-sm mb-6">
+              <h3 className="font-semibold text-xl text-[#5D4154] mb-4">YOUR BRAIN ON CHANGING HORMONES</h3>
+              <p className="mb-4">Your brain contains receptors for estrogen, progesterone, and testosterone in areas that regulate:</p>
+              
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="flex items-start p-3 rounded-md bg-[#FFECD6]/20 hover:bg-[#FFECD6]/30 transition-colors">
+                  <div className="h-6 w-6 rounded-full bg-[#5D4154]/10 flex items-center justify-center mr-3 flex-shrink-0">•</div>
+                  <span>Mood stability and emotional processing</span>
+                </div>
+                <div className="flex items-start p-3 rounded-md bg-[#FFECD6]/20 hover:bg-[#FFECD6]/30 transition-colors">
+                  <div className="h-6 w-6 rounded-full bg-[#5D4154]/10 flex items-center justify-center mr-3 flex-shrink-0">•</div>
+                  <span>Stress response and resilience</span>
+                </div>
+                <div className="flex items-start p-3 rounded-md bg-[#FFECD6]/20 hover:bg-[#FFECD6]/30 transition-colors">
+                  <div className="h-6 w-6 rounded-full bg-[#5D4154]/10 flex items-center justify-center mr-3 flex-shrink-0">•</div>
+                  <span>Sleep architecture and quality</span>
+                </div>
+                <div className="flex items-start p-3 rounded-md bg-[#FFECD6]/20 hover:bg-[#FFECD6]/30 transition-colors">
+                  <div className="h-6 w-6 rounded-full bg-[#5D4154]/10 flex items-center justify-center mr-3 flex-shrink-0">•</div>
+                  <span>Memory formation and retrieval</span>
+                </div>
+                <div className="flex items-start p-3 rounded-md bg-[#FFECD6]/20 hover:bg-[#FFECD6]/30 transition-colors">
+                  <div className="h-6 w-6 rounded-full bg-[#5D4154]/10 flex items-center justify-center mr-3 flex-shrink-0">•</div>
+                  <span>Cognitive function and clarity</span>
+                </div>
+                <div className="flex items-start p-3 rounded-md bg-[#FFECD6]/20 hover:bg-[#FFECD6]/30 transition-colors">
+                  <div className="h-6 w-6 rounded-full bg-[#5D4154]/10 flex items-center justify-center mr-3 flex-shrink-0">•</div>
+                  <span>Motivation and energy</span>
+                </div>
+              </div>
+              
+              <p>When these hormones fluctuate unpredictably—as they do in your specific pattern—it creates a ripple effect through these brain systems.</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-sm mb-6">
+              <h3 className="font-semibold text-xl text-[#5D4154] mb-4">THE EMOTIONAL SYMPTOMS YOU'VE REPORTED</h3>
+              
+              <p className="mb-4">
+                The {results.primarySymptoms[0].toLowerCase()} you described is directly connected to changes in your estrogen levels affecting your brain's emotional regulation centers.
+              </p>
+              
+              <div className="bg-[#5D4154]/5 p-4 rounded-lg font-medium text-[#5D4154] mb-4">
+                This emotional experience isn't a psychological issue—it's a neurobiological response to hormone fluctuations.
+              </div>
+            </div>
+            
+            <div className="bg-gradient-to-r from-[#5D4154]/90 to-[#5D4154] text-white p-6 rounded-lg shadow-md">
+              <h3 className="font-semibold text-xl mb-4">VALIDATION: YOUR FEELINGS ARE REAL</h3>
+              <p className="mb-4">Perhaps the most important thing to understand is that:</p>
+              
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-3 mt-0.5" />
+                  <span>Your emotional experiences are real, valid responses to biological changes</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-3 mt-0.5" />
+                  <span>The intensity of your feelings is proportionate to the hormonal shifts occurring</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-3 mt-0.5" />
+                  <span>Your struggles deserve acknowledgment and support, not dismissal</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-3 mt-0.5" />
+                  <span>You're experiencing a natural transition, not a disorder or deficiency</span>
+                </li>
+              </ul>
+              
+              <div className="border-l-4 border-[#A7C4A0] pl-4 py-2 italic text-white/90">
+                "For years I thought I was developing anxiety disorder or depression. Understanding that my emotional changes were connected to hormone fluctuations was incredibly validating. It wasn't 'all in my head'—it was in my endocrine system."
+                <div className="text-right font-medium mt-2 text-white/80">- Jennifer, 46</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        {/* Comprehensive Hormone Analysis with Emotional Context */}
+        <Card className="mb-8 overflow-hidden reveal-section transform translate-y-4 opacity-0">
+          <div className="absolute top-0 left-0 w-full h-2 bg-[#FFECD6]"></div>
+          <CardHeader className="pb-4 border-b bg-gradient-to-r from-[#FFECD6]/50 to-white">
+            <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] flex items-center group cursor-pointer" onClick={() => toggleSection('hormones')}>
+              <div className="h-10 w-10 rounded-full bg-[#5D4154]/10 flex items-center justify-center mr-4 group-hover:bg-[#5D4154]/20 transition-colors">
+                <BarChart className="h-5 w-5 text-[#5D4154]" />
+              </div>
+              YOUR COMPREHENSIVE HORMONE ANALYSIS
+              <ChevronDown className={`ml-auto h-5 w-5 transition-transform duration-300 ${visibleSections.hormones ? 'rotate-180' : ''}`} />
+            </CardTitle>
+          </CardHeader>
+          <CardContent className={`pt-6 overflow-hidden transition-all duration-500 ${visibleSections.hormones ? 'max-h-[3000px]' : 'max-h-32'}`}>
+            <p className="mb-6 text-lg">
+              Based on your responses, you're experiencing what we call a "{patternName}" hormone pattern. This specific pattern affects both your physical symptoms and your emotional well-being.
+            </p>
+            
             <div className="flex flex-col md:flex-row gap-8 items-center mb-8">
               <div className="relative">
                 <div className="w-36 h-36 rounded-full border-8 border-[#5D4154] flex items-center justify-center animate-pulse-gentle">
@@ -223,22 +343,87 @@ const Results = () => {
                 </div>
               </div>
               
-              <div className="flex-1">
-                <h3 className="font-semibold text-xl mb-2">HORMONE TRANSITION SCORE: {results.score}/100</h3>
-                <p>
-                  Your score places you in the {results.phase.toLowerCase()} perimenopause phase.
-                  This score is calculated based on your symptom patterns, severity, and age.
-                </p>
+              <div className="flex-1 space-y-6">
+                <div>
+                  <h3 className="font-semibold text-xl mb-2">WHAT THIS MEANS FOR YOU PHYSICALLY:</h3>
+                  <p className="mb-3">Your hormone pattern explains:</p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <div className="h-6 w-6 rounded-full bg-[#A7C4A0] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">•</div>
+                      <p>Why your {results.primarySymptoms[0].toLowerCase()} seems to intensify at certain times</p>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="h-6 w-6 rounded-full bg-[#A7C4A0] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">•</div>
+                      <p>How your {results.primarySymptoms[1].toLowerCase()} connects to your hormone fluctuations</p>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="h-6 w-6 rounded-full bg-[#A7C4A0] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">•</div>
+                      <p>When your {results.primarySymptoms[2].toLowerCase()} is most likely to occur</p>
+                    </li>
+                  </ul>
+                </div>
                 
-                <h3 className="font-semibold text-xl mt-4 mb-2">PRIMARY HORMONE PATTERN: <span className="text-[#5D4154]">{patternName}</span></h3>
-                <p>
-                  Your symptoms suggest you're experiencing:
-                </p>
-                <ul className="list-disc pl-5 mt-2 space-y-1">
-                  <li>Fluctuating rather than steadily declining estrogen levels</li>
-                  <li>Early-stage progesterone decline</li>
-                  <li>Potential stress hormone (cortisol) elevation</li>
-                </ul>
+                <div>
+                  <h3 className="font-semibold text-xl mb-2">WHAT THIS MEANS FOR YOU EMOTIONALLY:</h3>
+                  <p className="mb-3">This same pattern explains:</p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <div className="h-6 w-6 rounded-full bg-[#FF9B85] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">•</div>
+                      <p>Why you might feel emotionally vulnerable at specific times</p>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="h-6 w-6 rounded-full bg-[#FF9B85] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">•</div>
+                      <p>How your mood shifts connect to your hormone fluctuations</p>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="h-6 w-6 rounded-full bg-[#FF9B85] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">•</div>
+                      <p>When you might experience heightened anxiety or emotional sensitivity</p>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="h-6 w-6 rounded-full bg-[#FF9B85] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">•</div>
+                      <p>Why you might feel disconnected from yourself during certain phases</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-sm mb-8">
+              <h3 className="font-semibold text-xl text-[#5D4154] mb-4">YOUR HORMONAL JOURNEY:</h3>
+              <p className="mb-6">Women with your specific pattern typically experience:</p>
+              
+              <div className="space-y-6">
+                <div className="flex">
+                  <div className="relative mr-6 flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-[#FFECD6] flex items-center justify-center text-[#5D4154] font-bold text-xl">1</div>
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-1 h-6 md:h-12 bg-[#FFECD6]/70"></div>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-lg text-[#5D4154]">An initial phase of unpredictable fluctuations (where you likely are now)</h4>
+                    <p className="text-gray-600 mt-1">Characterized by more rapid changes in hormone levels and less predictable symptoms</p>
+                  </div>
+                </div>
+                
+                <div className="flex">
+                  <div className="relative mr-6 flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-[#FFBF69] flex items-center justify-center text-[#5D4154] font-bold text-xl">2</div>
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-1 h-6 md:h-12 bg-[#FFBF69]/70"></div>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-lg text-[#5D4154]">A middle phase of increasing stability as patterns become more predictable</h4>
+                    <p className="text-gray-600 mt-1">As you learn your unique patterns, symptoms become more manageable through targeted approaches</p>
+                  </div>
+                </div>
+                
+                <div className="flex">
+                  <div className="relative mr-6 flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-[#A7C4A0] flex items-center justify-center text-[#5D4154] font-bold text-xl">3</div>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-lg text-[#5D4154]">A final phase of adaptation as your body adjusts to new hormone levels</h4>
+                    <p className="text-gray-600 mt-1">Your body finds a new equilibrium, and symptoms generally become less intense</p>
+                  </div>
+                </div>
               </div>
             </div>
             
@@ -275,22 +460,33 @@ const Results = () => {
                 ))}
               </div>
             </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-sm text-center">
+              <p className="text-lg font-medium text-[#5D4154]">
+                With proper tracking and personalized support, the emotional challenges of this transition can be significantly reduced. Many women report not just coping, but actually thriving through this phase when they have the right tools and understanding.
+              </p>
+              
+              <div className="mt-6 border-t border-gray-100 pt-6 italic text-gray-600">
+                "Understanding my hormone pattern changed everything. Instead of feeling at the mercy of unpredictable emotions, I could see the patterns and prepare for more vulnerable times. That knowledge alone reduced my anxiety tremendously."
+                <div className="text-right font-medium mt-2 text-gray-500">- Michelle, 45</div>
+              </div>
+            </div>
           </CardContent>
         </Card>
         
         {/* Lab Testing Section */}
         <Card className="mb-8 overflow-hidden reveal-section transform translate-y-4 opacity-0">
-          <div className="absolute top-0 left-0 w-full h-1 bg-[#A7C4A0]"></div>
+          <div className="absolute top-0 left-0 w-full h-2 bg-[#A7C4A0]"></div>
           <CardHeader className="pb-4 border-b">
             <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] flex items-center group cursor-pointer" onClick={() => toggleSection('labTesting')}>
-              <div className="h-8 w-8 rounded-full bg-[#A7C4A0]/10 flex items-center justify-center mr-3 group-hover:bg-[#A7C4A0]/20 transition-colors">
-                <TestTube className="h-4 w-4 text-[#5D4154]" />
+              <div className="h-10 w-10 rounded-full bg-[#A7C4A0]/10 flex items-center justify-center mr-4 group-hover:bg-[#A7C4A0]/20 transition-colors">
+                <TestTube className="h-5 w-5 text-[#5D4154]" />
               </div>
               Understanding Your Hormones: The Missing Piece
               <ChevronDown className={`ml-auto h-5 w-5 transition-transform duration-300 ${visibleSections.labTesting ? 'rotate-180' : ''}`} />
             </CardTitle>
           </CardHeader>
-          <CardContent className={`pt-6 overflow-hidden transition-all duration-500 ${visibleSections.labTesting ? 'max-h-[3000px]' : 'max-h-24'}`}>
+          <CardContent className={`pt-6 overflow-hidden transition-all duration-500 ${visibleSections.labTesting ? 'max-h-[3000px]' : 'max-h-32'}`}>
             <div className="lab-explanation flex flex-col md:flex-row gap-8">
               <div className="flex-1">
                 <p className="personalized-opener text-lg mb-6">
@@ -514,17 +710,17 @@ const Results = () => {
         
         {/* What Happens Next Without Intervention */}
         <Card className="mb-8 overflow-hidden reveal-section transform translate-y-4 opacity-0">
-          <div className="absolute top-0 left-0 w-full h-1 bg-[#FF9B85]"></div>
+          <div className="absolute top-0 left-0 w-full h-2 bg-[#FF9B85]"></div>
           <CardHeader className="pb-4 border-b">
             <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] flex items-center group cursor-pointer" onClick={() => toggleSection('future')}>
-              <div className="h-8 w-8 rounded-full bg-[#FF9B85]/10 flex items-center justify-center mr-3 group-hover:bg-[#FF9B85]/20 transition-colors">
-                <span className="text-[#5D4154]">3</span>
+              <div className="h-10 w-10 rounded-full bg-[#FF9B85]/10 flex items-center justify-center mr-4 group-hover:bg-[#FF9B85]/20 transition-colors">
+                <span className="text-[#5D4154]">!</span>
               </div>
               What Happens Next Without Intervention
               <ChevronDown className={`ml-auto h-5 w-5 transition-transform duration-300 ${visibleSections.future ? 'rotate-180' : ''}`} />
             </CardTitle>
           </CardHeader>
-          <CardContent className={`pt-6 overflow-hidden transition-all duration-500 ${visibleSections.future ? 'max-h-[1000px]' : 'max-h-24'}`}>
+          <CardContent className={`pt-6 overflow-hidden transition-all duration-500 ${visibleSections.future ? 'max-h-[1000px]' : 'max-h-32'}`}>
             <p className="mb-4">For women with your specific symptom pattern, our medical data shows these changes typically follow a predictable path:</p>
             
             <ul className="space-y-4 mb-6">
@@ -562,21 +758,128 @@ const Results = () => {
           </CardContent>
         </Card>
         
-        {/* Hope/Solution Bridge */}
+        {/* Your Complete Hormone Rebalancing Journey */}
         <Card className="mb-8 overflow-hidden reveal-section transform translate-y-4 opacity-0">
-          <div className="absolute top-0 left-0 w-full h-1 bg-[#A7C4A0]"></div>
+          <div className="absolute top-0 left-0 w-full h-2 bg-[#A7C4A0]"></div>
           <CardHeader className="pb-4 border-b">
-            <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] flex items-center group">
-              <div className="h-8 w-8 rounded-full bg-[#A7C4A0]/10 flex items-center justify-center mr-3 group-hover:bg-[#A7C4A0]/20 transition-colors">
-                <span className="text-[#5D4154]">4</span>
+            <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] flex items-center group cursor-pointer" onClick={() => toggleSection('tracking')}>
+              <div className="h-10 w-10 rounded-full bg-[#A7C4A0]/10 flex items-center justify-center mr-4 group-hover:bg-[#A7C4A0]/20 transition-colors">
+                <Sparkles className="h-5 w-5 text-[#5D4154]" />
               </div>
-              Your Perimenopause Management Path
+              YOUR COMPLETE HORMONE REBALANCING JOURNEY
+              <ChevronDown className={`ml-auto h-5 w-5 transition-transform duration-300 ${visibleSections.tracking ? 'rotate-180' : ''}`} />
             </CardTitle>
           </CardHeader>
-          <CardContent className="pt-6">
-            <p className="mb-4">While these changes are concerning, there's significant reason for optimism. Women with your exact symptom profile who implemented proper tracking and management reported:</p>
+          <CardContent className={`pt-6 overflow-hidden transition-all duration-500 ${visibleSections.tracking ? 'max-h-[2000px]' : 'max-h-32'}`}>
+            <p className="mb-6 text-lg">
+              Based on your specific pattern, we've created a personalized path forward that addresses both your physical symptoms and emotional well-being:
+            </p>
             
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div className="space-y-8 mb-8">
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-[#FFECD6]">
+                <div className="flex items-center mb-3">
+                  <div className="h-10 w-10 rounded-full bg-[#FFECD6] flex items-center justify-center text-[#5D4154] font-bold text-lg mr-3">1</div>
+                  <h3 className="font-playfair text-xl font-semibold text-[#5D4154]">PHASE 1: UNDERSTANDING & VALIDATION (Days 1-21)</h3>
+                </div>
+                
+                <div className="ml-14">
+                  <p className="mb-3">During this foundation-building phase, you'll:</p>
+                  <ul className="space-y-2 mb-4 pl-5">
+                    <li>Begin tracking your specific physical and emotional symptoms</li>
+                    <li>Identify patterns in your hormone fluctuations</li>
+                    <li>Discover connections between triggers and your responses</li>
+                    <li>Gain clarity about what's happening in your body and mind</li>
+                    <li>Start implementing initial relief strategies</li>
+                  </ul>
+                  
+                  <div className="bg-[#FFECD6]/20 p-4 rounded-lg mb-4">
+                    <h4 className="font-medium mb-2">Emotional milestones typically experienced in this phase:</h4>
+                    <ul className="space-y-1 pl-5">
+                      <li>Relief from finally understanding what's happening</li>
+                      <li>Validation that your experiences are real and significant</li>
+                      <li>Reduced anxiety about unpredictable symptoms</li>
+                      <li>Hope as you begin to see patterns emerge</li>
+                      <li>Empowerment through knowledge and awareness</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="border-l-4 border-[#FFECD6] pl-4 py-2 italic text-gray-600">
+                    "Just two weeks of tracking gave me such clarity. Understanding that my emotional sensitivity peaked at specific times helped me plan important conversations and reduce conflicts."
+                    <div className="text-right font-medium mt-2 text-gray-500">- Karen, 44</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-[#FFBF69]">
+                <div className="flex items-center mb-3">
+                  <div className="h-10 w-10 rounded-full bg-[#FFBF69] flex items-center justify-center text-[#5D4154] font-bold text-lg mr-3">2</div>
+                  <h3 className="font-playfair text-xl font-semibold text-[#5D4154]">PHASE 2: CLARITY & INSIGHT (Days 21-35)</h3>
+                </div>
+                
+                <div className="ml-14">
+                  <p className="mb-3">During this illuminating phase, you'll:</p>
+                  <ul className="space-y-2 mb-4 pl-5">
+                    <li>Complete comprehensive hormone testing</li>
+                    <li>Connect your lab results with your tracked symptoms</li>
+                    <li>Gain deeper insight into your unique hormone landscape</li>
+                    <li>Develop a personalized intervention strategy</li>
+                    <li>Build confidence in your understanding</li>
+                  </ul>
+                  
+                  <div className="bg-[#FFBF69]/20 p-4 rounded-lg mb-4">
+                    <h4 className="font-medium mb-2">Emotional milestones typically experienced in this phase:</h4>
+                    <ul className="space-y-1 pl-5">
+                      <li>Confidence from having objective data</li>
+                      <li>Relief from having validation through testing</li>
+                      <li>Clarity about the path forward</li>
+                      <li>Reduced self-criticism as you understand biological factors</li>
+                      <li>Increased sense of control and agency</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="border-l-4 border-[#FFBF69] pl-4 py-2 italic text-gray-600">
+                    "Getting my test results and seeing how they perfectly explained my symptoms was incredibly validating. After years of feeling dismissed, I finally had proof that what I was experiencing was real."
+                    <div className="text-right font-medium mt-2 text-gray-500">- Patricia, 47</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-[#A7C4A0]">
+                <div className="flex items-center mb-3">
+                  <div className="h-10 w-10 rounded-full bg-[#A7C4A0] flex items-center justify-center text-[#5D4154] font-bold text-lg mr-3">3</div>
+                  <h3 className="font-playfair text-xl font-semibold text-[#5D4154]">PHASE 3: BALANCE & RENEWAL (Days 35+)</h3>
+                </div>
+                
+                <div className="ml-14">
+                  <p className="mb-3">During this transformative phase, you'll:</p>
+                  <ul className="space-y-2 mb-4 pl-5">
+                    <li>Implement your personalized rebalancing protocol</li>
+                    <li>Apply targeted strategies during vulnerable times</li>
+                    <li>Refine your approach based on your unique responses</li>
+                    <li>Experience progressive symptom improvement</li>
+                    <li>Develop long-term hormone harmony strategies</li>
+                  </ul>
+                  
+                  <div className="bg-[#A7C4A0]/20 p-4 rounded-lg mb-4">
+                    <h4 className="font-medium mb-2">Emotional milestones typically experienced in this phase:</h4>
+                    <ul className="space-y-1 pl-5">
+                      <li>Increased emotional stability and resilience</li>
+                      <li>Return of joy and pleasure in daily activities</li>
+                      <li>Renewed confidence in your body and mind</li>
+                      <li>Improved relationships as emotional fluctuations stabilize</li>
+                      <li>Sense of mastery over your perimenopause journey</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="border-l-4 border-[#A7C4A0] pl-4 py-2 italic text-gray-600">
+                    "Six weeks in, I had my first week without tears or anxiety in over a year. By three months, friends were commenting on how much more like 'myself' I seemed. I wasn't just managing symptoms—I was thriving again."
+                    <div className="text-right font-medium mt-2 text-gray-500">- Michelle, 48</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="grid md:grid-cols-4 gap-4 mb-8">
               <div className="bg-[#A7C4A0]/10 p-4 rounded-lg hover:bg-[#A7C4A0]/20 transition-colors duration-300 transform hover:-translate-y-1">
                 <div className="font-bold text-3xl text-[#5D4154] mb-1">62%</div>
                 <p>reduction in sleep disturbances within 60 days</p>
@@ -598,304 +901,89 @@ const Results = () => {
               </div>
             </div>
             
-            <p>The key difference? Having precise data about their unique hormone patterns that allowed for targeted, personalized approaches rather than generic solutions.</p>
+            <p className="font-medium text-center mt-6 bg-[#FFECD6]/30 p-4 rounded-lg border border-[#FFECD6] animate-pulse-subtle">
+              The key difference? Having precise data about their unique hormone patterns that allowed for targeted, personalized approaches rather than generic solutions.
+            </p>
           </CardContent>
         </Card>
         
-        {/* Why Tracking Is Essential */}
-        <Card className="mb-8 overflow-hidden reveal-section transform translate-y-4 opacity-0">
-          <div className="absolute top-0 left-0 w-full h-1 bg-[#5D4154]"></div>
-          <CardHeader className="pb-4 border-b">
-            <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] flex items-center group cursor-pointer" onClick={() => toggleSection('tracking')}>
-              <div className="h-8 w-8 rounded-full bg-[#5D4154]/10 flex items-center justify-center mr-3 group-hover:bg-[#5D4154]/20 transition-colors">
-                <span className="text-[#5D4154]">5</span>
-              </div>
-              Why Your Symptoms Require Precision Tracking
-              <ChevronDown className={`ml-auto h-5 w-5 transition-transform duration-300 ${visibleSections.tracking ? 'rotate-180' : ''}`} />
-            </CardTitle>
-          </CardHeader>
-          <CardContent className={`pt-6 overflow-hidden transition-all duration-500 ${visibleSections.tracking ? 'max-h-[1000px]' : 'max-h-24'}`}>
-            <p className="mb-4">Your specific hormone pattern makes standard approaches insufficient for three critical reasons:</p>
-            
-            <div className="space-y-6 mb-6">
-              <div className="border-l-4 border-[#5D4154] pl-4 py-3 bg-gradient-to-r from-white to-gray-50 rounded-r shadow-sm transform hover:translate-x-1 transition-transform duration-300">
-                <h3 className="font-semibold mb-1 text-[#5D4154]">1. FLUCTUATING HORMONES</h3>
-                <p>Your responses suggest your hormones aren't simply declining - they're fluctuating unpredictably. Without day-to-day tracking, it's impossible to identify your unique patterns and intervention windows.</p>
-              </div>
-              
-              <div className="border-l-4 border-[#5D4154] pl-4 py-3 bg-gradient-to-r from-white to-gray-50 rounded-r shadow-sm transform hover:translate-x-1 transition-transform duration-300">
-                <h3 className="font-semibold mb-1 text-[#5D4154]">2. COMPLEX SYMPTOM INTERACTIONS</h3>
-                <p>The way your {results.primarySymptoms[0].toLowerCase()}, {results.primarySymptoms[1].toLowerCase()}, and {results.primarySymptoms[2].toLowerCase()} interact creates feedback loops that can either improve or worsen your experience. Only consistent tracking can untangle these relationships.</p>
-              </div>
-              
-              <div className="border-l-4 border-[#5D4154] pl-4 py-3 bg-gradient-to-r from-white to-gray-50 rounded-r shadow-sm transform hover:translate-x-1 transition-transform duration-300">
-                <h3 className="font-semibold mb-1 text-[#5D4154]">3. RAPIDLY EVOLVING PATTERN</h3>
-                <p>Your hormone pattern typically changes significantly over 3-6 month periods. What works today may need adjustment in just weeks. Without ongoing data, you'll constantly be playing catch-up with your symptoms.</p>
-              </div>
-            </div>
-            
-            <p className="font-medium text-center mt-6 bg-[#FFECD6]/30 p-4 rounded-lg border border-[#FFECD6] animate-pulse-subtle">Women with your exact profile who implemented precision tracking reported feeling "back in control" within just 2-3 weeks of beginning their tracking journey.</p>
-          </CardContent>
-        </Card>
-        
-        {/* Peritrack Solution Presentation */}
+        {/* Begin Your Healing Journey */}
         <Card className="bg-gradient-to-br from-[#5D4154] to-[#5D4154]/90 text-white mb-8 reveal-section transform translate-y-4 opacity-0 shadow-xl">
           <CardHeader className="pb-4 border-b border-white/20">
-            <CardTitle className="font-playfair text-2xl font-semibold">
-              Introducing Your Personalized Perimenopause Solution
+            <CardTitle className="font-playfair text-2xl font-semibold text-center">
+              BEGIN YOUR JOURNEY TO BALANCE AND RENEWAL
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-6">
-            <p className="mb-6">Based on your assessment results, I've created a customized tracking and management system designed specifically for your {patternName} hormone profile.</p>
-            
-            <div className="bg-white/10 p-6 rounded-lg mb-6 backdrop-blur-sm">
-              <h3 className="font-semibold text-xl mb-4 flex items-center">
-                <span className="h-8 w-8 rounded-full bg-[#A7C4A0] text-white flex items-center justify-center mr-2 text-sm">
-                  ✓
-                </span>
-                PERITRACK PREMIUM gives you:
-              </h3>
-              
-              <div className="space-y-6">
-                <div className="flex gap-4 group hover:bg-white/5 p-3 rounded-lg transition-colors">
-                  <div className="h-10 w-10 rounded-full bg-[#A7C4A0] text-white flex items-center justify-center text-lg flex-shrink-0">
-                    <CheckCircle className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-1 group-hover:text-[#A7C4A0] transition-colors">AI-POWERED HORMONE PATTERN RECOGNITION</h4>
-                    <p className="text-white/80">Our system detects subtle hormone patterns that even doctors might miss, giving you unprecedented insight into your changing body.</p>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4 group hover:bg-white/5 p-3 rounded-lg transition-colors">
-                  <div className="h-10 w-10 rounded-full bg-[#A7C4A0] text-white flex items-center justify-center text-lg flex-shrink-0">
-                    <CheckCircle className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-1 group-hover:text-[#A7C4A0] transition-colors">PERSONALIZED SYMPTOM-TRIGGER IDENTIFICATION</h4>
-                    <p className="text-white/80">Discover exactly which foods, activities, and stressors are amplifying your symptoms during hormonal fluctuations.</p>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4 group hover:bg-white/5 p-3 rounded-lg transition-colors">
-                  <div className="h-10 w-10 rounded-full bg-[#A7C4A0] text-white flex items-center justify-center text-lg flex-shrink-0">
-                    <CheckCircle className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-1 group-hover:text-[#A7C4A0] transition-colors">PRECISION INTERVENTION TIMING</h4>
-                    <p className="text-white/80">Receive alerts for the optimal times to implement specific interventions based on your unique hormone patterns.</p>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4 group hover:bg-white/5 p-3 rounded-lg transition-colors">
-                  <div className="h-10 w-10 rounded-full bg-[#A7C4A0] text-white flex items-center justify-center text-lg flex-shrink-0">
-                    <CheckCircle className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-1 group-hover:text-[#A7C4A0] transition-colors">SYMPTOM PREDICTION & PREPARATION</h4>
-                    <p className="text-white/80">Get advance notice of likely symptom intensification days, allowing you to prepare and adapt.</p>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4 group hover:bg-white/5 p-3 rounded-lg transition-colors">
-                  <div className="h-10 w-10 rounded-full bg-[#A7C4A0] text-white flex items-center justify-center text-lg flex-shrink-0">
-                    <CheckCircle className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-1 group-hover:text-[#A7C4A0] transition-colors">LAB RESULT INTERPRETATION</h4>
-                    <p className="text-white/80">Upload hormone test results for clear, plain-language explanations of what they mean for your specific symptoms.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <p className="font-medium text-center text-lg animate-pulse-gentle p-3 border border-white/20 rounded-lg">This isn't a generic approach to perimenopause - it's a precision-targeted system designed specifically for your {patternName} hormone profile.</p>
-          </CardContent>
-        </Card>
-        
-        {/* Testimonials */}
-        <Card className="mb-8 reveal-section transform translate-y-4 opacity-0">
-          <div className="absolute top-0 left-0 w-full h-1 bg-[#FFECD6]"></div>
-          <CardHeader className="pb-4 border-b">
-            <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154] text-center">
-              Women Like You Who Found Relief
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="pt-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="border border-[#FFECD6]/50 rounded-lg p-5 bg-gradient-to-br from-white to-[#FFECD6]/10 hover:shadow-md transition-all transform hover:-translate-y-1">
-                <div className="relative mb-4">
-                  <div className="absolute -top-2 -left-2 text-4xl text-[#FFECD6]">"</div>
-                  <p className="italic text-gray-600 pt-4 pl-4">
-                    For two years, doctors told me my symptoms were 'just stress' or 'part of getting older.' Within three weeks of using Peritrack, I identified clear patterns between my diet and sleep disruptions. I'm finally sleeping through the night again, and my energy has returned.
-                  </p>
-                  <div className="absolute -bottom-2 -right-2 text-4xl text-[#FFECD6]">"</div>
-                </div>
-                <div className="flex items-center pt-2">
-                  <div className="w-10 h-10 rounded-full bg-[#FFECD6] flex items-center justify-center text-[#5D4154] font-semibold">
-                    JM
-                  </div>
-                  <div className="ml-3">
-                    <p className="font-semibold text-[#5D4154]">Jennifer M.</p>
-                    <p className="text-sm text-gray-500">46, {patternName} profile</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="border border-[#FFECD6]/50 rounded-lg p-5 bg-gradient-to-br from-white to-[#FFECD6]/10 hover:shadow-md transition-all transform hover:-translate-y-1">
-                <div className="relative mb-4">
-                  <div className="absolute -top-2 -left-2 text-4xl text-[#FFECD6]">"</div>
-                  <p className="italic text-gray-600 pt-4 pl-4">
-                    The brain fog was affecting my career. I was forgetting important details and losing confidence. Peritrack helped me identify exactly when my cognitive symptoms peak, and now I schedule my most demanding work around my hormone patterns. My last performance review was the best in years.
-                  </p>
-                  <div className="absolute -bottom-2 -right-2 text-4xl text-[#FFECD6]">"</div>
-                </div>
-                <div className="flex items-center pt-2">
-                  <div className="w-10 h-10 rounded-full bg-[#FFECD6] flex items-center justify-center text-[#5D4154] font-semibold">
-                    KL
-                  </div>
-                  <div className="ml-3">
-                    <p className="font-semibold text-[#5D4154]">Karen L.</p>
-                    <p className="text-sm text-gray-500">44, {patternName} profile</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        {/* Limited-Time Offer & Guarantee */}
-        <Card className="mb-8 reveal-section transform translate-y-4 opacity-0">
-          <CardHeader className="bg-gradient-to-r from-[#FFECD6] to-[#FFECD6]/30 pb-4">
-            <CardTitle className="font-playfair text-2xl font-semibold text-[#5D4154]">
-              Your Path Forward Begins Today
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="pt-6">
-            <p className="mb-6">Because you've completed our comprehensive assessment, I'd like to extend a special offer:</p>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center space-x-2 animate-fade-in" style={{animationDelay: "0.1s"}}>
-                    <div className="h-5 w-5 rounded-full bg-[#A7C4A0] flex items-center justify-center text-white text-xs">✓</div>
-                    <span className="font-medium">7-DAY FREE TRIAL of Peritrack Premium</span>
-                  </li>
-                  <li className="flex items-center space-x-2 animate-fade-in" style={{animationDelay: "0.2s"}}>
-                    <div className="h-5 w-5 rounded-full bg-[#A7C4A0] flex items-center justify-center text-white text-xs">✓</div>
-                    <span>Full access to all features during your trial</span>
-                  </li>
-                  <li className="flex items-center space-x-2 animate-fade-in" style={{animationDelay: "0.3s"}}>
-                    <div className="h-5 w-5 rounded-full bg-[#A7C4A0] flex items-center justify-center text-white text-xs">✓</div>
-                    <span>No credit card required to start</span>
-                  </li>
-                  <li className="flex items-center space-x-2 animate-fade-in" style={{animationDelay: "0.4s"}}>
-                    <div className="h-5 w-5 rounded-full bg-[#A7C4A0] flex items-center justify-center text-white text-xs">✓</div>
-                    <span>Then just $14/month to continue if you love it</span>
-                  </li>
-                  <li className="flex items-center space-x-2 animate-fade-in" style={{animationDelay: "0.5s"}}>
-                    <div className="h-5 w-5 rounded-full bg-[#A7C4A0] flex items-center justify-center text-white text-xs">✓</div>
-                    <span>30-day money-back guarantee after billing begins</span>
-                  </li>
-                </ul>
-                
-                <p className="text-gray-700 text-sm">
-                  This offer is specifically for women with your hormone pattern, as our data shows you're likely to experience significant benefits from our tracking system.
-                </p>
-                
-                <div className="mt-4 p-4 bg-[#FFECD6]/50 rounded-lg border border-[#FFECD6]">
-                  <p className="font-medium">Our Guarantee:</p>
-                  <p>If you don't gain meaningful insights about your hormone patterns within 30 days after your trial, we'll refund your subscription – no questions asked.</p>
-                </div>
-              </div>
-              
-              <div className="bg-gradient-to-br from-[#5D4154] to-[#5D4154]/90 text-white p-6 rounded-lg shadow-lg">
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="font-playfair text-xl font-semibold">Limited-Time Offer</h3>
-                  <div className="flex items-center space-x-2 animate-pulse">
-                    <Clock className="h-5 w-5" />
-                    <span className="font-mono text-lg">{formatTime(timeLeft)}</span>
-                  </div>
-                </div>
-                
-                <div className="flex justify-between mb-2">
-                  <span>Monthly Plan:</span>
-                  <span className="font-semibold">$14/month</span>
-                </div>
-                <div className="flex justify-between mb-4">
-                  <span>Annual Plan:</span>
-                  <span className="font-semibold">$59/year (Save 30%)</span>
-                </div>
-                
-                <Button className="w-full bg-[#A7C4A0] hover:bg-[#A7C4A0]/90 text-white py-6 text-lg shadow-lg transform hover:scale-105 transition-all">
-                  Start My Free 7-Day Trial
-                </Button>
-                
-                <p className="text-center text-sm mt-4">No credit card required</p>
-                <p className="text-center text-xs mt-2">100% satisfaction guaranteed</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        {/* Why This Matters Now */}
-        <Card className="mb-8 reveal-section transform translate-y-4 opacity-0">
-          <CardHeader className="bg-gradient-to-r from-[#5D4154] to-[#5D4154]/90 text-white">
-            <CardTitle className="font-playfair text-2xl font-semibold">
-              Why This Matters Now
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="pt-6">
-            <p className="mb-4">{userInfo.firstName}, the symptom pattern I've identified suggests you're in an optimal window for intervention. Based on our database of thousands of women with similar profiles:</p>
-            
-            <ul className="space-y-3 mb-6">
-              <li className="flex items-start">
-                <div className="h-6 w-6 rounded-full bg-[#5D4154] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">
-                  •
-                </div>
-                <p>Those who began tracking in this phase reported 58% better outcomes than those who waited</p>
-              </li>
-              <li className="flex items-start">
-                <div className="h-6 w-6 rounded-full bg-[#5D4154] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">
-                  •
-                </div>
-                <p>Your symptoms are likely to increase in both frequency and intensity within 60-90 days</p>
-              </li>
-              <li className="flex items-start">
-                <div className="h-6 w-6 rounded-full bg-[#5D4154] text-white flex items-center justify-center text-sm flex-shrink-0 mt-1 mr-3">
-                  •
-                </div>
-                <p>The connections between triggers and symptoms are clearest during your current phase</p>
-              </li>
-            </ul>
-            
-            <p className="text-lg font-medium text-center mb-8 p-3 bg-[#FFECD6]/20 rounded-lg border border-[#FFECD6]/30">
-              Your perimenopause journey may last 4-7 years. The approach you choose now will significantly impact your day-to-day quality of life throughout this transition.
+            <p className="mb-6 text-lg text-center">
+              {userInfo.firstName}, you've already taken the most important step—seeking to understand what's happening in your body and mind.
             </p>
             
-            <div className="text-center">
-              <Button className="bg-[#5D4154] hover:bg-[#5D4154]/90 text-white px-8 py-6 text-lg mx-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
-                Start My Free Trial Now
-              </Button>
-              
-              <p className="mt-3">Your personalized dashboard is waiting for you.</p>
+            <p className="mb-6 text-center">
+              Your personalized dashboard is ready to guide you through every step of your hormone rebalancing journey. Your free 7-day trial gives you complete access to:
+            </p>
+            
+            <div className="bg-white/10 p-6 rounded-lg mb-8 backdrop-blur-sm">
+              <ul className="space-y-4">
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-3 mt-1 flex-shrink-0" />
+                  <span>Daily tracking tools designed for your specific symptoms</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-3 mt-1 flex-shrink-0" />
+                  <span>AI-powered pattern recognition to identify your unique fluctuations</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-3 mt-1 flex-shrink-0" />
+                  <span>Personalized insights connecting your physical and emotional experiences</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-3 mt-1 flex-shrink-0" />
+                  <span>Supportive guidance for both symptom management and emotional well-being</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-3 mt-1 flex-shrink-0" />
+                  <span>Complete educational resources to deepen your understanding</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-3 mt-1 flex-shrink-0" />
+                  <span>Tools to prepare for productive healthcare conversations</span>
+                </li>
+              </ul>
             </div>
             
-            <div className="mt-8 border-t pt-6">
-              <div className="flex items-center">
-                <div className="w-16 h-16 rounded-full bg-[#5D4154]/10 flex items-center justify-center text-[#5D4154] text-2xl font-semibold mr-4">
-                  JM
-                </div>
-                <div>
-                  <p className="font-semibold">Dr. Jennifer Miller</p>
-                  <p className="text-sm text-gray-600">
-                    Medical Director, Peritrack<br />
-                    Board-Certified OB/GYN specializing in Perimenopause & Menopause
-                  </p>
-                </div>
+            <div className="text-center mb-8">
+              <p className="text-sm mb-4">No credit card required—experience the full platform with our complete support.</p>
+              <Button className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/80 text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
+                START MY FREE 7-DAY TRIAL
+              </Button>
+            </div>
+            
+            <div className="text-center">
+              <p className="font-medium text-lg mb-4">You don't have to navigate this journey alone.</p>
+              <p className="mb-6">
+                Join our community of over 30,000 women who have transformed their perimenopause experience from confusion and frustration to understanding and empowerment.
+              </p>
+              
+              <div className="border-l-4 border-[#A7C4A0] pl-4 py-2 italic text-white/90 text-left max-w-2xl mx-auto">
+                "Starting Peritrack was the moment everything changed for me. For the first time, I felt truly understood and supported. The combination of tracking, insights, and education helped me reclaim not just my physical health, but my emotional well-being."
+                <div className="text-right font-medium mt-2 text-white/80">- Rebecca, 46</div>
               </div>
             </div>
           </CardContent>
+          <CardFooter className="flex justify-center border-t border-white/20 pt-6">
+            <div className="flex flex-wrap justify-center gap-4">
+              <div className="bg-white/20 text-white px-4 py-2 rounded-full text-xs font-medium transition-transform hover:scale-105">
+                HIPAA Compliant
+              </div>
+              <div className="bg-white/20 text-white px-4 py-2 rounded-full text-xs font-medium transition-transform hover:scale-105">
+                256-bit Encryption
+              </div>
+              <div className="bg-white/20 text-white px-4 py-2 rounded-full text-xs font-medium transition-transform hover:scale-105">
+                Medically Reviewed
+              </div>
+            </div>
+          </CardFooter>
         </Card>
         
         {/* Back to Quiz Button */}
@@ -908,22 +996,10 @@ const Results = () => {
             <ArrowLeft className="h-4 w-4" /> Retake Assessment
           </Button>
         </div>
-        
-        {/* Trust Badges */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          <div className="bg-[#FFECD6] text-[#5D4154] px-4 py-2 rounded-full text-xs font-medium transition-transform hover:scale-105">
-            HIPAA Compliant
-          </div>
-          <div className="bg-[#FFECD6] text-[#5D4154] px-4 py-2 rounded-full text-xs font-medium transition-transform hover:scale-105">
-            256-bit Encryption
-          </div>
-          <div className="bg-[#FFECD6] text-[#5D4154] px-4 py-2 rounded-full text-xs font-medium transition-transform hover:scale-105">
-            Medically Reviewed
-          </div>
-        </div>
       </div>
     </div>
   );
 };
 
 export default Results;
+

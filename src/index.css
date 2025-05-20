@@ -134,6 +134,18 @@
   100% { opacity: 1; }
 }
 
+@keyframes breathe {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .animate-slide-up {
   animation: slideUp 0.8s ease forwards;
 }
@@ -150,6 +162,15 @@
   animation: pulseSubtle 2s infinite;
 }
 
+.animate-breathe {
+  animation: breathe 6s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+}
+
 /* Section reveal animations */
 .reveal-section {
   opacity: 0;
@@ -161,3 +182,49 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Emotional design utilities */
+.emotional-card {
+  @apply bg-white rounded-lg p-6 shadow-md border-l-4 transition-all hover:shadow-lg;
+}
+
+.emotional-card-primary {
+  @apply border-[#5D4154];
+}
+
+.emotional-card-secondary {
+  @apply border-[#A7C4A0];
+}
+
+.emotional-card-tertiary {
+  @apply border-[#FFECD6];
+}
+
+.emotional-card-alert {
+  @apply border-[#FF9B85];
+}
+
+.highlight-text {
+  @apply font-medium text-[#5D4154];
+}
+
+.testimonial-quote {
+  @apply italic relative pl-4 border-l-4 py-2;
+}
+
+.testimonial-quote-primary {
+  @apply border-[#5D4154] text-[#5D4154]/90;
+}
+
+.testimonial-quote-secondary {
+  @apply border-[#A7C4A0] text-[#5D4154]/90;
+}
+
+.warm-gradient {
+  @apply bg-gradient-to-r from-[#5D4154] to-[#5D4154]/90 text-white;
+}
+
+.soft-gradient {
+  @apply bg-gradient-to-r from-[#FFECD6]/50 to-white;
+}
+
