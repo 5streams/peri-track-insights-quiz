@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Card,
@@ -7,6 +6,7 @@ import {
   CardContent
 } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import HormoneVisualization from "./HormoneVisualization";
 
 interface CompleteHormonePictureProps {
   primaryHormone: string;
@@ -79,10 +79,11 @@ const CompleteHormonePicture: React.FC<CompleteHormonePictureProps> = ({
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-4 md:pt-6 px-4 md:px-6">
-        <div className="w-full h-24 md:h-32 bg-[#FFECD6]/20 rounded-lg flex items-center justify-center mb-4 p-3 md:p-4">
-          <p className="text-[#5D4154] font-medium text-sm md:text-base text-center">
-            [Visualization showing how your three key hormones interact]
-          </p>
+        <div className="w-full h-48 md:h-64 bg-white rounded-lg mb-4">
+          <HormoneVisualization 
+            primaryHormone={primaryHormone} 
+            secondaryHormones={secondaryHormones} 
+          />
         </div>
         
         <p className="mb-4 md:mb-5 text-base md:text-lg">
