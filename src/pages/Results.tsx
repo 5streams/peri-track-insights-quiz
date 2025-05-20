@@ -15,6 +15,9 @@ import FreeTrial from "@/components/results/FreeTrial";
 import SuccessStory from "@/components/results/SuccessStory";
 import FinalCTA from "@/components/results/FinalCTA";
 import ScienceExplanation from "@/components/results/ScienceExplanation";
+import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
+import SymptomValidation from "@/components/results/SymptomValidation";
+import SymptomHormoneVisualization from "@/components/results/SymptomHormoneVisualization";
 
 interface QuizResults {
   score: number;
@@ -101,6 +104,34 @@ const Results = () => {
         
         {/* Section 2: Key Hormone Insights */}
         <KeyHormoneInsights primaryHormone={primaryHormone} />
+        
+        {/* Symptom Validation Section */}
+        <SymptomValidation symptoms={results.primarySymptoms} />
+        
+        {/* Emotion-Hormone Connection */}
+        <EmotionHormoneConnection />
+        
+        {/* Add Symptom-Specific Hormone Visualizations */}
+        <div className="mb-8 reveal-section transform translate-y-4 opacity-0">
+          <div className="bg-white rounded-lg shadow p-6 border-t-4 border-[#5D4154]">
+            <h3 className="font-playfair text-2xl font-semibold text-[#5D4154] mb-4">
+              YOUR SYMPTOM-HORMONE CONNECTIONS
+            </h3>
+            <p className="mb-6">
+              These visualizations show exactly how your fluctuating hormone levels connect to your specific symptoms:
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-4">
+              {results.primarySymptoms.map((symptom, index) => (
+                <SymptomHormoneVisualization 
+                  key={index}
+                  symptom={symptom}
+                  primaryHormone={index === 0 ? primaryHormone : secondaryHormones[index % 2]}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
         
         {/* New Section: Science Behind Your Symptoms */}
         <ScienceExplanation 
