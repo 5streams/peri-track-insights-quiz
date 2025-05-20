@@ -1,5 +1,6 @@
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -15,6 +16,15 @@ interface BeginJourneyProps {
 }
 
 const BeginJourney = ({ firstName }: BeginJourneyProps) => {
+  const navigate = useNavigate();
+
+  const handleStartTrial = () => {
+    // Set trial start date
+    localStorage.setItem("trialStartDate", new Date().toString());
+    // Navigate to dashboard
+    navigate("/dashboard");
+  };
+
   return (
     <Card className="bg-gradient-to-br from-[#5D4154] to-[#5D4154]/90 text-white mb-8 reveal-section transform translate-y-4 opacity-0 shadow-xl">
       <CardHeader className="pb-4 border-b border-white/20">
@@ -62,7 +72,10 @@ const BeginJourney = ({ firstName }: BeginJourneyProps) => {
         
         <div className="text-center mb-8">
           <p className="text-sm mb-4">No credit card required—experience the full platform with our complete support.</p>
-          <Button className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/80 text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
+          <Button 
+            onClick={handleStartTrial}
+            className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/80 text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg transform transition-transform duration-300 hover:scale-105"
+          >
             START MY FREE 7-DAY TRIAL
           </Button>
         </div>
