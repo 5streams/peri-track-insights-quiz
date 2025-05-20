@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -6,7 +5,7 @@ import {
   CardContent
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShieldCheck, Lock, Award, MessageCircle, Star, Clock } from "lucide-react";
+import { ShieldCheck, Lock, Award, MessageCircle, Star, Clock, Check } from "lucide-react";
 
 const FinalCTA: React.FC = () => {
   const navigate = useNavigate();
