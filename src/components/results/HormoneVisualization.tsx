@@ -245,7 +245,10 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
                 axisLine={{ stroke: '#E5E7EB' }}
                 tickLine={false}
               />
-              <Tooltip content={<ChartTooltipContent />} />
+              <Tooltip 
+                content={<ChartTooltipContent />} 
+                wrapperStyle={{ zIndex: 1000 }} 
+              />
               <Legend 
                 verticalAlign="top" 
                 height={36} 
@@ -376,35 +379,30 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
         </ChartContainer>
       </div>
       
-      {/* Fixed: Hormone Pattern Description Section - Avoid duplicated content */}
+      {/* Hormone Pattern Description Section */}
       <div className="bg-white p-4 rounded-lg mt-2 border border-gray-200 shadow-sm">
         <h4 className="text-sm font-bold text-[#5D4154] mb-3">Your Three-Hormone Pattern:</h4>
         
         <div className="space-y-3">
           {/* Hormone indicators with clear visual separation */}
-          <div className="flex items-start">
-            <div className="w-3 h-3 rounded-full bg-[#60A5FA] mt-1.5 mr-2 flex-shrink-0"></div>
-            <div>
-              <span className="font-medium text-[#5D4154]">Progesterone:</span>{" "}
-              <span className="text-gray-700 text-sm">{formatHormoneDetail("progesterone")}</span>
+          {[
+            { name: "progesterone", color: "#60A5FA" },
+            { name: "estradiol", color: "#F472B6" },
+            { name: "testosterone", color: "#10B981" }
+          ].map(hormone => (
+            <div key={hormone.name} className="flex items-start">
+              <div 
+                className="w-3 h-3 rounded-full mt-1.5 mr-2 flex-shrink-0" 
+                style={{ backgroundColor: hormone.color }}
+              ></div>
+              <div>
+                <span className="font-medium text-[#5D4154]">
+                  {hormone.name.charAt(0).toUpperCase() + hormone.name.slice(1)}:
+                </span>{" "}
+                <span className="text-gray-700 text-sm">{formatHormoneDetail(hormone.name)}</span>
+              </div>
             </div>
-          </div>
-          
-          <div className="flex items-start">
-            <div className="w-3 h-3 rounded-full bg-[#F472B6] mt-1.5 mr-2 flex-shrink-0"></div>
-            <div>
-              <span className="font-medium text-[#5D4154]">Estradiol:</span>{" "}
-              <span className="text-gray-700 text-sm">{formatHormoneDetail("estradiol")}</span>
-            </div>
-          </div>
-          
-          <div className="flex items-start">
-            <div className="w-3 h-3 rounded-full bg-[#10B981] mt-1.5 mr-2 flex-shrink-0"></div>
-            <div>
-              <span className="font-medium text-[#5D4154]">Testosterone:</span>{" "}
-              <span className="text-gray-700 text-sm">{formatHormoneDetail("testosterone")}</span>
-            </div>
-          </div>
+          ))}
         </div>
         
         <div className="mt-4 pt-3 border-t border-gray-100">
