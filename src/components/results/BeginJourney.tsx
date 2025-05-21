@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Card,
@@ -10,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
 
 interface BeginJourneyProps {
   firstName: string;
@@ -17,8 +17,14 @@ interface BeginJourneyProps {
 
 const BeginJourney = ({ firstName }: BeginJourneyProps) => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleStartTrial = () => {
+    setIsModalOpen(true);
+  };
+  
+  const handleModalClose = () => {
+    setIsModalOpen(false);
     // Set trial start date
     localStorage.setItem("trialStartDate", new Date().toString());
     // Navigate to dashboard
@@ -32,6 +38,7 @@ const BeginJourney = ({ firstName }: BeginJourneyProps) => {
           BEGIN YOUR JOURNEY TO BALANCE AND RENEWAL
         </CardTitle>
       </CardHeader>
+      
       <CardContent className="pt-6">
         <p className="mb-6 text-lg text-center">
           {firstName}, you've already taken the most important step—seeking to understand what's happening in your body and mind.
@@ -92,6 +99,7 @@ const BeginJourney = ({ firstName }: BeginJourneyProps) => {
           </div>
         </div>
       </CardContent>
+      
       <CardFooter className="flex justify-center border-t border-white/20 pt-6">
         <div className="flex flex-wrap justify-center gap-4">
           <div className="bg-white/20 text-white px-4 py-2 rounded-full text-xs font-medium transition-transform hover:scale-105">
@@ -105,6 +113,15 @@ const BeginJourney = ({ firstName }: BeginJourneyProps) => {
           </div>
         </div>
       </CardFooter>
+      
+      {/* Lead Capture Modal */}
+      <LeadCaptureModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        pricingPlan="monthly"
+        source="free_trial"
+        quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
+      />
     </Card>
   );
 };

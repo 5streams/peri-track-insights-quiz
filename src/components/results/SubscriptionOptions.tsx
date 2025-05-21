@@ -1,14 +1,31 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
+import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
 
 interface SubscriptionOptionsProps {
   onStartTrial: () => void;
 }
 
 const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial }) => {
+  const [isMonthlyModalOpen, setIsMonthlyModalOpen] = useState(false);
+  const [isAnnualModalOpen, setIsAnnualModalOpen] = useState(false);
+  
+  const handleMonthlyClick = () => {
+    setIsMonthlyModalOpen(true);
+  };
+  
+  const handleAnnualClick = () => {
+    setIsAnnualModalOpen(true);
+  };
+  
+  const handleModalClose = () => {
+    setIsMonthlyModalOpen(false);
+    setIsAnnualModalOpen(false);
+    onStartTrial();
+  };
+
   return (
     <Card className="mb-8 reveal-section transform opacity-0">
       <CardContent className="p-6 md:p-8">
@@ -48,7 +65,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
               </ul>
               
               <Button 
-                onClick={onStartTrial}
+                onClick={handleMonthlyClick}
                 variant="outline" 
                 className="w-full border-[#9b87f5] text-[#5D4154] hover:bg-[#9b87f5]/5"
               >
@@ -93,7 +110,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
               </ul>
               
               <Button 
-                onClick={onStartTrial}
+                onClick={handleAnnualClick}
                 className="w-full bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white"
               >
                 Start 7-Day Free Trial
@@ -108,6 +125,23 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
           <footer className="mt-2 text-right text-sm font-medium text-[#5D4154]">— Jennifer, 48</footer>
         </blockquote>
       </CardContent>
+      
+      {/* Lead Capture Modals */}
+      <LeadCaptureModal
+        isOpen={isMonthlyModalOpen}
+        onClose={handleModalClose}
+        pricingPlan="monthly"
+        source="free_trial"
+        quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
+      />
+      
+      <LeadCaptureModal
+        isOpen={isAnnualModalOpen}
+        onClose={handleModalClose}
+        pricingPlan="annual"
+        source="free_trial"
+        quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
+      />
     </Card>
   );
 };

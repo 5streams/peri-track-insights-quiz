@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
+import { saveLead } from "@/utils/leadTracking";
 
 interface EmailCollectionProps {
   onSubmit: (firstName: string, email: string) => void;
@@ -14,6 +15,7 @@ interface EmailCollectionProps {
 const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }) => {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
+  const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,6 +39,26 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       return;
     }
     
+    // Track lead before submitting
+    try {
+      // Get quiz results from localStorage
+      const quizResults = localStorage.getItem("quizAnswers") 
+        ? JSON.parse(localStorage.getItem("quizAnswers") || "{}") 
+        : {};
+      
+      // Save lead data
+      saveLead(
+        firstName.trim(),
+        email.trim(),
+        'quiz_results',
+        null,
+        quizResults
+      );
+    } catch (error) {
+      console.error("Error tracking quiz lead:", error);
+    }
+    
+    // Continue with original submission
     onSubmit(firstName.trim(), email.trim());
   };
 

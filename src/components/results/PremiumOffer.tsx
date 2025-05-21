@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Card,
@@ -7,6 +6,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, CheckCircle } from "lucide-react";
+import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
 
 interface PremiumOfferProps {
   primaryHormone: string;
@@ -14,6 +14,7 @@ interface PremiumOfferProps {
 
 const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   // Get hormone-specific timeframe
   const getTimeframe = () => {
@@ -26,6 +27,17 @@ const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
   };
   
   const handleStartTrial = () => {
+    // Open lead capture modal instead of directly navigating
+    setIsModalOpen(true);
+  };
+  
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    // Get quiz results for tracking
+    const results = localStorage.getItem("quizResults") 
+      ? JSON.parse(localStorage.getItem("quizResults") || "{}") 
+      : {};
+      
     // Set trial start date
     localStorage.setItem("trialStartDate", new Date().toString());
     // Navigate to dashboard
@@ -105,6 +117,15 @@ const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
           </p>
         </div>
       </CardContent>
+      
+      {/* Lead Capture Modal */}
+      <LeadCaptureModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        pricingPlan="monthly"
+        source="free_trial"
+        quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
+      />
     </Card>
   );
 };

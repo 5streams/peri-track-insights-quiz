@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Clock, CheckCircle } from "lucide-react";
 import { getDynamicContent } from "@/utils/scoreCalculation";
+import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
 
 interface FreeTrialProps {
   onStartTrial: () => void;
@@ -13,6 +13,8 @@ interface FreeTrialProps {
 
 const FreeTrial: React.FC<FreeTrialProps> = ({ onStartTrial, primaryHormone, scoreCategory }) => {
   const [timeRemaining, setTimeRemaining] = useState({ hours: 24, minutes: 0, seconds: 0 });
+  const [isMonthlyModalOpen, setIsMonthlyModalOpen] = useState(false);
+  const [isAnnualModalOpen, setIsAnnualModalOpen] = useState(false);
   
   useEffect(() => {
     // Create a countdown timer for urgency
@@ -51,6 +53,20 @@ const FreeTrial: React.FC<FreeTrialProps> = ({ onStartTrial, primaryHormone, sco
   
   // Get dynamic content based on score category
   const { ctaText } = getDynamicContent(scoreCategory);
+  
+  const handleMonthlyClick = () => {
+    setIsMonthlyModalOpen(true);
+  };
+  
+  const handleAnnualClick = () => {
+    setIsAnnualModalOpen(true);
+  };
+  
+  const handleModalClose = () => {
+    setIsMonthlyModalOpen(false);
+    setIsAnnualModalOpen(false);
+    onStartTrial();
+  };
 
   return (
     <Card className="mb-8 reveal-section transform opacity-0 border-none overflow-hidden bg-gradient-to-br from-[#5D4154] to-[#7E69AB] text-white shadow-xl">
@@ -148,31 +164,51 @@ const FreeTrial: React.FC<FreeTrialProps> = ({ onStartTrial, primaryHormone, sco
         <div className="mt-8 text-center">
           <h3 className="text-xl font-bold mb-6">START YOUR FREE 7-DAY TRIAL TODAY</h3>
           
-          <div className="mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-xl mx-auto">
             <Button 
-              onClick={onStartTrial}
-              className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/80 text-white font-semibold py-3 px-10 rounded-full text-lg shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105"
+              onClick={handleMonthlyClick}
+              className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/80 text-white font-semibold py-3 px-6 rounded-full text-lg shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105"
             >
-              START MY FREE TRIAL NOW
+              MONTHLY PLAN ($9.99/mo)
             </Button>
             
-            <p className="mt-3 text-white/80">
-              {ctaText} No credit card required.
-            </p>
+            <Button 
+              onClick={handleAnnualClick}
+              className="bg-white hover:bg-white/90 text-[#5D4154] font-semibold py-3 px-6 rounded-full text-lg shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105"
+            >
+              ANNUAL PLAN ($99/year)
+            </Button>
           </div>
           
-          <p className="text-center text-sm md:text-base max-w-xl mx-auto">
-            Women with your hormone pattern who begin tracking now typically see initial improvement within {getTimeframe()} days.
+          <p className="mt-3 text-white/80">
+            {ctaText} No credit card required.
           </p>
-          
-          <div className="mt-6 pt-6 border-t border-white/20 text-center">
-            <p className="text-sm">
-              <strong>BONUS RESOURCES INCLUDED:</strong> "Perimenopause Information Guide", "Symptom Management Information", 
-              and "Lab Testing Information"
-            </p>
-          </div>
+        </div>
+        
+        <div className="mt-6 pt-6 border-t border-white/20 text-center">
+          <p className="text-sm">
+            <strong>BONUS RESOURCES INCLUDED:</strong> "Perimenopause Information Guide", "Symptom Management Information", 
+            and "Lab Testing Information"
+          </p>
         </div>
       </CardContent>
+      
+      {/* Lead Capture Modals */}
+      <LeadCaptureModal
+        isOpen={isMonthlyModalOpen}
+        onClose={handleModalClose}
+        pricingPlan="monthly"
+        source="free_trial"
+        quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
+      />
+      
+      <LeadCaptureModal
+        isOpen={isAnnualModalOpen}
+        onClose={handleModalClose}
+        pricingPlan="annual"
+        source="free_trial"
+        quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
+      />
     </Card>
   );
 };
