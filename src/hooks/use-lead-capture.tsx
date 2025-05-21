@@ -13,6 +13,7 @@ export function useLeadCapture() {
     plan?: 'monthly' | 'annual',
     data?: any
   ) => {
+    console.log("Opening lead modal with:", { source, plan, data });
     setCaptureSource(source);
     setSelectedPlan(plan || null);
     setQuizData(data);
@@ -20,6 +21,7 @@ export function useLeadCapture() {
   };
   
   const closeLeadModal = () => {
+    console.log("Closing lead modal");
     setIsModalOpen(false);
   };
   

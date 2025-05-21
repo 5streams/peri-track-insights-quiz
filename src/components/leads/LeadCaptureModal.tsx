@@ -66,6 +66,15 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
     
     // Save lead data with additional fields if available
     try {
+      console.log("Saving lead with data:", {
+        firstName: firstName.trim(),
+        email: email.trim(),
+        source,
+        pricingPlan,
+        quizResults,
+        additionalInfo: `Phone: ${phoneNumber}, Address: ${address}`
+      });
+      
       const additionalNotes = source === 'free_trial' 
         ? `Phone: ${phoneNumber}, Address: ${address}` 
         : undefined;
@@ -86,7 +95,9 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
       
       toast({
         title: "Successfully Added",
-        description: "You've been added to our waitlist. We'll notify you when we launch!",
+        description: source === 'free_trial' 
+          ? "Your free trial has been activated!"
+          : "Your information has been saved.",
         action: <Check className="h-4 w-4 text-green-500" />
       });
       
@@ -219,13 +230,17 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
             
             <div className="mb-6">
               <p className="text-[#5D4154]">
-                We're excited to have you begin your perimenopause wellness journey with Peritrack.
+                {source === 'free_trial' 
+                  ? "We're excited to have you begin your perimenopause wellness journey with Peritrack."
+                  : "We've saved your information and your results are ready to view."}
               </p>
               
-              <div className="mt-4 bg-[#F9F5FF]/50 p-4 rounded-lg border border-[#9b87f5]/20">
-                <p className="text-sm text-[#5D4154]">Your 7-day free trial has been activated.</p>
-                <p className="text-sm font-medium text-[#5D4154] mt-2">We'll send your login details to your email shortly.</p>
-              </div>
+              {source === 'free_trial' && (
+                <div className="mt-4 bg-[#F9F5FF]/50 p-4 rounded-lg border border-[#9b87f5]/20">
+                  <p className="text-sm text-[#5D4154]">Your 7-day free trial has been activated.</p>
+                  <p className="text-sm font-medium text-[#5D4154] mt-2">We'll send your login details to your email shortly.</p>
+                </div>
+              )}
             </div>
             
             <Button

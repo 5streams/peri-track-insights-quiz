@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
+import { useLeadCapture } from "@/hooks/use-lead-capture"; // Add this import
 import { CheckCircle } from "lucide-react";
 
 interface FreeTrialProps {
@@ -13,29 +14,23 @@ interface FreeTrialProps {
 }
 
 const FreeTrial: React.FC<FreeTrialProps> = ({ onStartTrial, primaryHormone, scoreCategory }) => {
-  const [isMonthlyModalOpen, setIsMonthlyModalOpen] = useState(false);
-  const [isAnnualModalOpen, setIsAnnualModalOpen] = useState(false);
+  const { openLeadModal } = useLeadCapture(); // Use the hook instead of local state
   const navigate = useNavigate();
   
   const handleMonthlyTrial = () => {
-    setIsMonthlyModalOpen(true);
+    // Open lead capture modal with monthly plan
+    console.log("Starting monthly trial");
+    openLeadModal('free_trial', 'monthly', localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {});
   };
   
   const handleAnnualTrial = () => {
-    setIsAnnualModalOpen(true);
-  };
-  
-  const handleModalClose = (pricingPlan: "monthly" | "annual") => {
-    setIsMonthlyModalOpen(false);
-    setIsAnnualModalOpen(false);
-    // Store the selected pricing plan
-    localStorage.setItem("selectedPricingPlan", pricingPlan);
-    // Continue with the onStartTrial callback
-    onStartTrial();
+    // Open lead capture modal with annual plan
+    console.log("Starting annual trial");
+    openLeadModal('free_trial', 'annual', localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {});
   };
   
   return (
-    <Card className="mb-8 bg-gradient-to-r from-[#F9F5FF] to-white reveal-section transform opacity-0">
+    <Card className="mb-8 bg-gradient-to-r from-[#F9F5FF] to-white">
       <CardContent className="p-6 md:p-8">
         <div className="text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-[#5D4154] mb-4">
@@ -113,25 +108,6 @@ const FreeTrial: React.FC<FreeTrialProps> = ({ onStartTrial, primaryHormone, sco
           </div>
         </div>
       </CardContent>
-      
-      {/* Lead Capture Modals */}
-      <LeadCaptureModal
-        isOpen={isMonthlyModalOpen}
-        onClose={() => handleModalClose("monthly")}
-        pricingPlan="monthly"
-        source="free_trial"
-        quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
-        navigateToDashboard={true}
-      />
-      
-      <LeadCaptureModal
-        isOpen={isAnnualModalOpen}
-        onClose={() => handleModalClose("annual")}
-        pricingPlan="annual"
-        source="free_trial"
-        quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
-        navigateToDashboard={true}
-      />
     </Card>
   );
 };

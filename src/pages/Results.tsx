@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import LoadingSpinner from "@/components/results/LoadingSpinner";
 import { calculateHormoneScores } from "@/utils/scoreCalculation";
+import { useLeadCapture } from "@/hooks/use-lead-capture"; // Add this import
 
 // Import our components for the results page
 import ResultsHeader from "@/components/results/ResultsHeader";
@@ -13,6 +14,7 @@ import HormoneInsights from "@/components/results/HormoneInsights";
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
 import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
+import LeadCaptureModal from "@/components/leads/LeadCaptureModal"; // Add this import
 
 interface QuizResults {
   score: number;
@@ -33,6 +35,7 @@ const Results = () => {
     primarySymptoms: [] as string[]
   });
   const navigate = useNavigate();
+  const { openLeadModal } = useLeadCapture(); // Use the lead capture hook
   
   // Get score category
   const getScoreCategory = (score: number) => {
@@ -42,19 +45,6 @@ const Results = () => {
   };
   
   useEffect(() => {
-    // Reveal sections as user scrolls
-    const revealSections = () => {
-      const windowHeight = window.innerHeight;
-      const sections = document.querySelectorAll('.reveal-section');
-      
-      sections.forEach(section => {
-        const sectionTop = (section as HTMLElement).getBoundingClientRect().top;
-        if (sectionTop < windowHeight * 0.85) {
-          section.classList.add('revealed');
-        }
-      });
-    };
-
     // Retrieve results and user info from localStorage
     const storedResults = localStorage.getItem("quizResults");
     const storedUserInfo = localStorage.getItem("userInfo");
@@ -74,15 +64,6 @@ const Results = () => {
     if (storedUserInfo) {
       setUserInfo(JSON.parse(storedUserInfo));
     }
-
-    // Add scroll event listener for animations
-    window.addEventListener('scroll', revealSections);
-    // Trigger once on load
-    setTimeout(revealSections, 300);
-
-    return () => {
-      window.removeEventListener('scroll', revealSections);
-    };
   }, [navigate]);
   
   if (!results) {
@@ -91,11 +72,10 @@ const Results = () => {
 
   const scoreCategory = getScoreCategory(hormoneScores.overall);
   
-  // Start trial function - modified to not navigate automatically
+  // Start trial function - modified to use the lead capture modal
   const handleTrialCTA = () => {
-    // Set trial start date
-    localStorage.setItem("trialStartDate", new Date().toString());
-    // We'll handle navigation in the LeadCaptureModal if needed
+    // Open lead capture modal with quiz results
+    openLeadModal('free_trial', undefined, results);
   };
   
   // Ensure firstName is capitalized

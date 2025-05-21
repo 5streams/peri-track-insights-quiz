@@ -8,12 +8,23 @@ import Dashboard from "./pages/Dashboard";
 import Tracking from "./pages/Tracking";
 import Insights from "./pages/Insights";
 import NotFound from "./pages/NotFound";
-import AdminLeads from "./pages/AdminLeads"; // Add this new import
+import AdminLeads from "./pages/AdminLeads";
+import LeadCaptureModal from "./components/leads/LeadCaptureModal";
+import { useLeadCapture } from "./hooks/use-lead-capture";
 import "./App.css";
 
-function App() {
+// Wrap the app with LeadCaptureProvider
+const AppWithLeadCapture = () => {
+  const { 
+    isModalOpen, 
+    closeLeadModal, 
+    selectedPlan, 
+    captureSource, 
+    quizData
+  } = useLeadCapture();
+
   return (
-    <Router>
+    <>
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/quiz" element={<Quiz />} />
@@ -21,10 +32,27 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/tracking" element={<Tracking />} />
         <Route path="/insights" element={<Insights />} />
-        <Route path="/admin/leads" element={<AdminLeads />} /> {/* Add this new route */}
+        <Route path="/admin/leads" element={<AdminLeads />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
+      
+      {/* Global Lead Capture Modal */}
+      <LeadCaptureModal
+        isOpen={isModalOpen}
+        onClose={closeLeadModal}
+        pricingPlan={selectedPlan}
+        source={captureSource}
+        quizResults={quizData}
+      />
+    </>
+  );
+};
+
+function App() {
+  return (
+    <Router>
+      <AppWithLeadCapture />
     </Router>
   );
 }
