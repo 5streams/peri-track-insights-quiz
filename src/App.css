@@ -1,65 +1,5 @@
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulseSubtle {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-/* Animation classes */
-.animate-pulse-subtle {
-  animation: pulseSubtle 3s infinite ease-in-out;
-}
-
-.animate-slide-up {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-/* Responsive typography and spacing */
-@media (max-width: 640px) {
-  .card-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .card-stack > * + * {
-    margin-top: 1rem;
-  }
-}
-
 /* Better animation timing for mobile */
-@media (max-width: 640px) {
-  .animate-slide-up {
-    animation-duration: 0.5s;
-  }
-  
-  .animate-fade-in {
-    animation-duration: 0.7s;
-  }
-}
-
-/* Smoother transitions for all interactive elements */
-button, a {
-  transition: all 0.2s ease-out;
-}
-
-/* More breathing room on mobile */
 @media (max-width: 640px) {
   .card-content {
     padding: 1rem;
@@ -81,49 +21,18 @@ button, a {
   }
 }
 
-/* Enhance hover effects on desktop only */
-@media (min-width: 768px) {
-  .hover-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+/* Smoother transitions for all interactive elements */
+button, a {
+  transition: all 0.2s ease-out;
+}
+
+/* Responsive typography and spacing */
+@media (max-width: 640px) {
+  .card-grid {
+    grid-template-columns: 1fr;
   }
-}
-
-/* Staggered entrance animations */
-.stagger-item:nth-child(1) { animation-delay: 0s; }
-.stagger-item:nth-child(2) { animation-delay: 0.1s; }
-.stagger-item:nth-child(3) { animation-delay: 0.2s; }
-.stagger-item:nth-child(4) { animation-delay: 0.3s; }
-.stagger-item:nth-child(5) { animation-delay: 0.4s; }
-
-/* Enhanced testimonial styles */
-.testimonial {
-  position: relative;
-}
-
-.testimonial::before {
-  content: '"';
-  position: absolute;
-  top: -0.5rem;
-  left: 0.5rem;
-  font-size: 2rem;
-  font-family: serif;
-  color: rgba(93, 65, 84, 0.2);
-}
-
-/* Improved CTA button pulse */
-.cta-pulse {
-  animation: ctaPulse 2s infinite;
-}
-
-@keyframes ctaPulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(167, 196, 160, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(167, 196, 160, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(167, 196, 160, 0);
+  
+  .card-stack > * + * {
+    margin-top: 1rem;
   }
 }

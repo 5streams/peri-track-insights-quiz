@@ -140,7 +140,7 @@ const Results = () => {
             />
           </div>
           
-          {/* Use the subscription options component instead of ValuePropositionNew */}
+          {/* Use the subscription options component */}
           <div className="mb-8">
             <SubscriptionOptions
               onStartTrial={handleTrialCTA}
