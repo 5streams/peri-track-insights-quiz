@@ -13,8 +13,8 @@ import HormoneInsights from "@/components/results/HormoneInsights";
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
 import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
-import LunaAIFeature from "@/components/results/LunaAIFeature";
 import PeritrackIntro from "@/components/results/PeritrackIntro";
+import LunaAIFeature from "@/components/results/LunaAIFeature";
 
 interface QuizResults {
   score: number;
@@ -145,27 +145,20 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Peritrack Intro - MOVED TO APPEAR FIRST */}
+          {/* Peritrack Intro - Main call to action */}
           <PeritrackIntro
             onStartTrial={handleTrialCTA}
+            firstName={capitalizedFirstName}
           />
           
-          {/* Luna AI Feature - MOVED TO APPEAR SECOND */}
-          <LunaAIFeature
-            onStartTrial={handleTrialCTA}
-          />
-          
-          {/* Use the subscription options component */}
-          <SubscriptionOptions
-            onStartTrial={handleTrialCTA}
-          />
+          {/* Luna AI Feature - Only showing once as part of PeritrackIntro */}
           
           {/* Back to Quiz Button */}
-          <div className="text-center mb-8 mt-10">
+          <div className="text-center mb-12 mt-10">
             <Button 
               variant="outline" 
               onClick={() => navigate("/quiz")}
-              className="flex items-center gap-2 hover:bg-[#5D4154]/5 transition-colors"
+              className="flex items-center gap-2 hover:bg-slate-100 transition-colors"
             >
               <ArrowLeft className="h-4 w-4" /> Retake Assessment
             </Button>
