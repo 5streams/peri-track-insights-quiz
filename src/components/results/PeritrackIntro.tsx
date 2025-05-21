@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -62,7 +61,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial }) => {
   };
 
   return (
-    <Card className="mb-8 reveal-section transform opacity-0 bg-[#5D4154] text-white overflow-hidden">
+    <Card className="mb-8 reveal-section transform opacity-0 bg-[#334155] text-white overflow-hidden">
       <CardContent className="p-6 md:p-8">
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           You've Taken the First Step… Now It's Time to Take Control
@@ -474,64 +473,63 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial }) => {
           {/* Trial Options */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto mb-6">
             {/* Monthly Option */}
-            <div className="bg-white/10 rounded-lg p-5 hover:bg-white/20 transition-all">
+            <div className="bg-[#1E293B] rounded-lg p-5 hover:bg-[#1E293B]/80 transition-all">
               <h3 className="font-semibold text-lg mb-2">Monthly Plan</h3>
               <div className="text-2xl font-bold mb-3">$9.99<span className="text-sm font-normal opacity-80">/month</span></div>
               
               <ul className="mb-5 text-left">
                 <li className="flex items-center gap-2 mb-2">
-                  <Check className="h-4 w-4 text-[#A7C4A0] flex-shrink-0" />
+                  <Check className="h-4 w-4 text-[#60A5FA] flex-shrink-0" />
                   <span className="text-sm">Full access to all features</span>
                 </li>
                 <li className="flex items-center gap-2 mb-2">
-                  <Check className="h-4 w-4 text-[#A7C4A0] flex-shrink-0" />
+                  <Check className="h-4 w-4 text-[#60A5FA] flex-shrink-0" />
                   <span className="text-sm">Unlimited symptom tracking</span>
                 </li>
                 <li className="flex items-center gap-2 mb-2">
-                  <Check className="h-4 w-4 text-[#A7C4A0] flex-shrink-0" />
+                  <Check className="h-4 w-4 text-[#60A5FA] flex-shrink-0" />
                   <span className="text-sm">Luna AI Perimenopause Companion support</span>
                 </li>
               </ul>
               
               <Button 
                 onClick={handleMonthlyTrial}
-                variant="outline"
-                className="w-full border-[#A7C4A0] text-white hover:bg-[#A7C4A0] hover:text-[#5D4154] transition-colors"
+                className="w-full bg-[#60A5FA] hover:bg-[#3B82F6] text-[#1E293B] font-medium transition-colors"
               >
                 START MY FREE TRIAL NOW
               </Button>
             </div>
             
             {/* Annual Option */}
-            <div className="bg-white/10 rounded-lg p-5 border-2 border-[#A7C4A0] hover:bg-white/20 transition-all relative">
-              <div className="absolute top-0 right-0 bg-[#A7C4A0] text-[#5D4154] text-xs px-2 py-1 rounded-bl-lg font-bold">
+            <div className="bg-[#1E293B] rounded-lg p-5 border-2 border-[#60A5FA] hover:bg-[#1E293B]/80 transition-all relative">
+              <div className="absolute top-0 right-0 bg-[#60A5FA] text-[#1E293B] text-xs px-2 py-1 rounded-bl-lg font-bold">
                 BEST VALUE
               </div>
               
               <h3 className="font-semibold text-lg mb-2">Annual Plan</h3>
               <div className="text-2xl font-bold mb-3">
                 $99<span className="text-sm font-normal opacity-80">/year</span>
-                <span className="text-sm text-[#A7C4A0] font-semibold ml-2">Save $20.88</span>
+                <span className="text-sm text-[#60A5FA] font-semibold ml-2">Save $20.88</span>
               </div>
               
               <ul className="mb-5 text-left">
                 <li className="flex items-center gap-2 mb-2">
-                  <Check className="h-4 w-4 text-[#A7C4A0] flex-shrink-0" />
+                  <Check className="h-4 w-4 text-[#60A5FA] flex-shrink-0" />
                   <span className="text-sm">All features in monthly plan</span>
                 </li>
                 <li className="flex items-center gap-2 mb-2">
-                  <Check className="h-4 w-4 text-[#A7C4A0] flex-shrink-0" />
+                  <Check className="h-4 w-4 text-[#60A5FA] flex-shrink-0" />
                   <span className="text-sm">Save $20.88 compared to monthly</span>
                 </li>
                 <li className="flex items-center gap-2 mb-2">
-                  <Check className="h-4 w-4 text-[#A7C4A0] flex-shrink-0" />
+                  <Check className="h-4 w-4 text-[#60A5FA] flex-shrink-0" />
                   <span className="text-sm">Priority customer support</span>
                 </li>
               </ul>
               
               <Button 
                 onClick={handleAnnualTrial}
-                className="w-full bg-[#A7C4A0] hover:bg-[#A7C4A0]/80 text-[#5D4154]"
+                className="w-full bg-[#60A5FA] hover:bg-[#3B82F6] text-[#1E293B] font-medium"
               >
                 START MY FREE TRIAL NOW
               </Button>
