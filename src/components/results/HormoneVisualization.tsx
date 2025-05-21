@@ -27,7 +27,7 @@ interface HormoneVisualizationProps {
 const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({ 
   primaryHormone, 
   secondaryHormones,
-  scoreCategory = "moderate" // Default value to ensure backward compatibility
+  scoreCategory = "moderate" 
 }) => {
   // Generate example data based on the primary hormone and score category
   const generateData = () => {
@@ -37,7 +37,7 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
     
     // Base patterns for different hormones - making them more distinct
     const patterns = {
-      estradiol: [85, 72, 88, 65, 78, 60, 72, 55, 65, 45, 60, 40],
+      estrogen: [85, 72, 88, 65, 78, 60, 72, 55, 65, 45, 60, 40],
       progesterone: [90, 82, 75, 68, 62, 55, 48, 42, 36, 30, 25, 20],
       testosterone: [85, 80, 78, 75, 72, 68, 65, 60, 57, 54, 50, 47]
     };
@@ -45,16 +45,14 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
     // Adjust patterns based on score category
     const adjustPatternForScoreCategory = (basePattern: number[]) => {
       switch(scoreCategory) {
-        case "minimal":
+        case "mild":
           // Minimal symptoms: higher levels, more stable
           return basePattern.map(val => Math.min(100, val + 15));
         case "early":
-          // Early symptoms: slightly lower levels
-          return basePattern.map(val => Math.min(100, val + 5));
         case "moderate":
           // Moderate symptoms: use base pattern
           return basePattern;
-        case "significant":
+        case "severe":
           // Significant symptoms: lower levels, more dramatic drops
           return basePattern.map(val => Math.max(0, val - 10));
         default:
@@ -73,7 +71,7 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
       };
       
       allHormones.forEach(hormone => {
-        const basePattern = patterns[hormone.toLowerCase() as keyof typeof patterns] || patterns.estradiol;
+        const basePattern = patterns[hormone.toLowerCase() as keyof typeof patterns] || patterns.estrogen;
         const adjustedPattern = adjustPatternForScoreCategory(basePattern);
         
         // Make primary hormone more pronounced in the visualization
@@ -89,14 +87,14 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
         // Add projection data for future months
         if (i >= 9) {
           const projectionFactor = hormone.toLowerCase() === "progesterone" ? 0.85 : 
-                                   hormone.toLowerCase() === "estradiol" ? (1 + (Math.random() * 0.4) - 0.2) : 0.92;
+                                   hormone.toLowerCase() === "estrogen" ? (1 + (Math.random() * 0.4) - 0.2) : 0.92;
           
           dataPoint[`${hormone}Projection`] = dataPoint[hormone] * projectionFactor;
         }
       });
       
       // Add optimal zone indicators - adjust based on score category
-      const optimalAdjustment = scoreCategory === "minimal" ? 0 :
+      const optimalAdjustment = scoreCategory === "mild" ? 0 :
                                scoreCategory === "early" ? -5 :
                                scoreCategory === "moderate" ? -10 :
                                -15;
@@ -105,7 +103,7 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
       dataPoint.optimalLower = 65 + optimalAdjustment;
       
       // Add critical threshold - adjust based on score category
-      dataPoint.criticalThreshold = 40 + (scoreCategory === "significant" ? -5 : 0);
+      dataPoint.criticalThreshold = 40 + (scoreCategory === "severe" ? -5 : 0);
       
       // Add intervention projections for the primary hormone
       if (i >= 9) {
@@ -122,7 +120,7 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
   // Define colors for each hormone
   const getHormoneColor = (hormone: string) => {
     switch (hormone.toLowerCase()) {
-      case "estradiol": return "#F472B6"; // Pink
+      case "estrogen": return "#F472B6"; // Pink
       case "progesterone": return "#60A5FA"; // Blue
       case "testosterone": return "#10B981"; // Green
       default: return "#94A3B8"; // Gray
@@ -132,13 +130,14 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
   // Label formatting
   const getHormoneLabel = (hormone: string) => {
     switch (hormone.toLowerCase()) {
-      case "estradiol": return "Estradiol";
+      case "estrogen": return "Estrogen";
       case "progesterone": return "Progesterone";
       case "testosterone": return "Testosterone";
       default: return hormone;
     }
   };
 
+  // Create config for chart
   const config = {
     [primaryHormone]: { 
       color: getHormoneColor(primaryHormone),
@@ -176,13 +175,13 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
   // Get the phase description based on score category
   const getPhaseDescription = () => {
     switch(scoreCategory) {
-      case "minimal": 
+      case "mild": 
         return "You are showing minimal perimenopause symptoms with hormone levels in optimal ranges.";
       case "early": 
         return "This early-stage pattern is why you're noticing subtle changes while still feeling generally well most days.";
       case "moderate": 
         return "This specific pattern explains why you're experiencing your particular symptom cluster.";
-      case "significant":
+      case "severe":
         return "This pattern explains why your symptoms feel so intense and why generic approaches may not work.";
       default:
         return "You are in the perimenopause \"Transitional Phase\" with hormone changes affecting your wellbeing.";
@@ -192,23 +191,23 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
   // Format hormone details for display in the insight panel
   const formatHormoneDetail = (hormone: string) => {
     const status = {
-      estradiol: {
+      estrogen: {
         early: "mild fluctuations affecting temperature regulation and mood stability",
         moderate: "notable fluctuations affecting temperature regulation and mood stability",
-        significant: "pronounced fluctuations affecting temperature regulation and mood stability",
-        minimal: "within optimal range with normal fluctuations"
+        severe: "pronounced fluctuations affecting temperature regulation and mood stability",
+        mild: "within optimal range with normal fluctuations"
       },
       progesterone: {
         early: "Early decline (15-20%) affecting sleep and mood",
         moderate: "Moderate decline (30-40%) affecting sleep and mood",
-        significant: "Significant decline (45-55%) affecting sleep and mood",
-        minimal: "Healthy levels supporting sleep and mood"
+        severe: "Significant decline (45-55%) affecting sleep and mood",
+        mild: "Healthy levels supporting sleep and mood"
       },
       testosterone: {
         early: "Slight decrease (10-15%) affecting energy and motivation",
         moderate: "Notable decrease (25-35%) affecting energy and motivation",
-        significant: "Substantial decrease (40-50%) affecting energy and motivation",
-        minimal: "Balanced levels supporting energy and vitality"
+        severe: "Substantial decrease (40-50%) affecting energy and motivation",
+        mild: "Balanced levels supporting energy and vitality"
       }
     };
 
@@ -387,7 +386,7 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
           {/* Hormone indicators with clear visual separation */}
           {[
             { name: "progesterone", color: "#60A5FA" },
-            { name: "estradiol", color: "#F472B6" },
+            { name: "estrogen", color: "#F472B6" },
             { name: "testosterone", color: "#10B981" }
           ].map(hormone => (
             <div key={hormone.name} className="flex items-start">

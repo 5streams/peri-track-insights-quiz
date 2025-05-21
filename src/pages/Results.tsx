@@ -4,18 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import LoadingSpinner from "@/components/results/LoadingSpinner";
-import { mapSymptomsToPrimaryHormone } from "@/utils/hormoneMapping";
+import { calculateHormoneScores } from "@/utils/scoreCalculation";
 
 // Import our components for the results page
-import ScoreMeter from "@/components/results/ScoreMeter";
-import ResultsSummary from "@/components/results/ResultsSummary";
-import InterventionSection from "@/components/results/InterventionSection";
-import ActionableTips from "@/components/results/ActionableTips";
-import ResultsTestimonial from "@/components/results/ResultsTestimonial";
-import ConciseSolution from "@/components/results/ConciseSolution";
-import Guarantee from "@/components/results/Guarantee";
-import RiskReversal from "@/components/results/RiskReversal";
-import ValueProposition from "@/components/results/ValueProposition";
+import ResultsHeader from "@/components/results/ResultsHeader";
+import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
+import HormoneInsights from "@/components/results/HormoneInsights";
+import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
+import EmotionalSupport from "@/components/results/EmotionalSupport";
+import SubscriptionOptions from "@/components/results/SubscriptionOptions";
+import FreeTrial from "@/components/results/FreeTrial";
+import ComparisonTable from "@/components/results/ComparisonTable";
+import Testimonials from "@/components/results/Testimonials";
+import Security from "@/components/results/Security";
 
 interface QuizResults {
   score: number;
@@ -27,16 +28,21 @@ interface QuizResults {
 const Results = () => {
   const [results, setResults] = useState<QuizResults | null>(null);
   const [userInfo, setUserInfo] = useState({ firstName: "", email: "" });
-  const [primaryHormone, setPrimaryHormone] = useState("estradiol");
-  const [secondaryHormones, setSecondaryHormones] = useState<string[]>(["progesterone", "testosterone"]);
+  const [hormoneScores, setHormoneScores] = useState({
+    overall: 0,
+    estrogen: 0,
+    progesterone: 0,
+    testosterone: 0,
+    primaryHormone: "estrogen",
+    primarySymptoms: [] as string[]
+  });
   const navigate = useNavigate();
   
   // Get score category
   const getScoreCategory = (score: number) => {
-    if (score <= 20) return "minimal";
-    if (score <= 50) return "early";
-    if (score <= 75) return "moderate";
-    return "significant";
+    if (score <= 40) return "mild";
+    if (score <= 70) return "moderate";
+    return "severe";
   };
   
   useEffect(() => {
@@ -61,13 +67,9 @@ const Results = () => {
       const parsedResults = JSON.parse(storedResults);
       setResults(parsedResults);
       
-      // Determine primary hormone based on symptoms
-      const hormone = mapSymptomsToPrimaryHormone(parsedResults.primarySymptoms);
-      setPrimaryHormone(hormone);
-      
-      // Set secondary hormones (all except primary)
-      const allHormones = ["estradiol", "progesterone", "testosterone"];
-      setSecondaryHormones(allHormones.filter(h => h !== hormone));
+      // Calculate hormone scores based on quiz responses
+      const scores = calculateHormoneScores(parsedResults);
+      setHormoneScores(scores);
     } else {
       // If no results, redirect to quiz
       navigate("/quiz");
@@ -91,24 +93,9 @@ const Results = () => {
     return <LoadingSpinner />;
   }
 
-  const scoreCategory = getScoreCategory(results.score);
+  const scoreCategory = getScoreCategory(hormoneScores.overall);
   
-  // Get emotional headline based on score category
-  const getEmotionalHeadline = () => {
-    switch(scoreCategory) {
-      case "minimal":
-        return "Your Hormone Balance Is Good Now. Let's Keep It That Way!";
-      case "early":
-        return "Relief Is Closer Than You Think. Your Personalized Plan Is Ready!";
-      case "moderate":
-        return "Struggling with Perimenopause Symptoms? Your Solution Is Here!";
-      case "significant":
-        return "Stop Suffering Through Perimenopause. Your Custom Relief Plan Is Ready!";
-      default:
-        return "Discover Your Personalized Perimenopause Solution!";
-    }
-  };
-  
+  // Start trial function
   const handleTrialCTA = () => {
     // Set trial start date
     localStorage.setItem("trialStartDate", new Date().toString());
@@ -118,97 +105,68 @@ const Results = () => {
   
   return (
     <div 
-      className="min-h-screen bg-gradient-to-b from-[#FFECD6]/30 to-white py-6 md:py-8 px-4 md:px-6 lg:px-8"
+      className="min-h-screen bg-gradient-to-b from-[#F9F5FF]/20 to-white py-6 md:py-8 px-4 md:px-6 lg:px-8"
       style={{
         backgroundImage: "url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" fill=\"%235D4154\" fill-opacity=\"0.03\" fill-rule=\"evenodd\"%3E%3C/svg%3E')",
         backgroundAttachment: "fixed"
       }}
     >
-      <div className="w-full max-w-3xl mx-auto">
+      <div className="w-full max-w-4xl mx-auto">
         <div className="results-container">
-          {/* Results Header with Emotional Headline and Quick CTA */}
-          <header className="results-header mb-6 md:mb-8 text-center reveal-section transform opacity-0">
-            <h1 className="text-2xl md:text-3xl font-bold text-[#5D4154] mb-4">
-              {getEmotionalHeadline()}
-            </h1>
-            
-            {/* Secondary CTA at top of the page for high-intent users */}
-            {scoreCategory !== "minimal" && (
-              <Button 
-                onClick={handleTrialCTA}
-                variant="outline" 
-                className="mb-6 hover:bg-[#A7C4A0]/10 text-[#5D4154] border-[#A7C4A0]"
-              >
-                Get My FREE Personalized Plan
-              </Button>
-            )}
-            
-            <ScoreMeter 
-              score={results.score} 
-              firstName={userInfo.firstName} 
-              scoreCategory={scoreCategory}
-            />
-          </header>
-
-          {/* Dynamic Results Summary Based on Score */}
-          <ResultsSummary 
-            score={results.score}
+          {/* Results Header with Score and User Name */}
+          <ResultsHeader 
+            score={hormoneScores.overall} 
+            firstName={userInfo.firstName} 
             scoreCategory={scoreCategory}
-            primaryHormone={primaryHormone}
-            secondaryHormones={secondaryHormones}
-            symptoms={results.primarySymptoms}
+            onStartTrial={handleTrialCTA}
           />
           
-          {/* Dynamic Intervention Section Based on Score */}
-          <InterventionSection
+          {/* Personalized Assessment */}
+          <PersonalizedAssessment
             scoreCategory={scoreCategory}
-            symptoms={results.primarySymptoms}
+            firstName={userInfo.firstName}
+            primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* New Actionable Tips Section - Immediate Value */}
-          <ActionableTips 
-            primaryHormone={primaryHormone}
-            symptoms={results.primarySymptoms}
+          {/* Perimenopause Explanation */}
+          <PerimenopauseExplanation scoreCategory={scoreCategory} />
+          
+          {/* Hormone Insights */}
+          <HormoneInsights 
+            scores={hormoneScores}
             scoreCategory={scoreCategory}
           />
           
-          {/* First Testimonial for more skeptical users */}
-          <ResultsTestimonial 
+          {/* Emotional Support */}
+          <EmotionalSupport
             scoreCategory={scoreCategory}
-            primaryHormone={primaryHormone}
-            symptoms={results.primarySymptoms}
-            testimonialPosition="top"
+            primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Concise Solution with clear steps */}
-          <ConciseSolution primaryHormone={primaryHormone} />
-          
-          {/* Enhanced Value Proposition */}
-          <ValueProposition 
-            primarySymptom={results.primarySymptoms[0] || ""}
-            secondarySymptoms={results.primarySymptoms.slice(1)}
-          />
-          
-          {/* Risk Reversal for skeptical users */}
-          {(scoreCategory === "moderate" || scoreCategory === "significant") && (
-            <RiskReversal />
-          )}
-          
-          {/* Second Testimonial near CTA */}
-          <ResultsTestimonial 
+          {/* Free Trial CTA */}
+          <FreeTrial 
+            onStartTrial={handleTrialCTA}
+            primaryHormone={hormoneScores.primaryHormone}
             scoreCategory={scoreCategory}
-            primaryHormone={primaryHormone}
-            symptoms={results.primarySymptoms}
-            testimonialPosition="bottom"
           />
           
-          {/* Guarantee - only shown for significant symptoms */}
-          {scoreCategory === "significant" && (
-            <Guarantee />
-          )}
+          {/* Subscription Options */}
+          <SubscriptionOptions onStartTrial={handleTrialCTA} />
+          
+          {/* Comparison Table */}
+          <ComparisonTable />
+          
+          {/* Testimonials */}
+          <Testimonials 
+            scoreCategory={scoreCategory}
+            primarySymptom={hormoneScores.primarySymptoms[0] || ""}
+          />
+          
+          {/* Security Badges */}
+          <Security />
           
           {/* Back to Quiz Button */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 mt-10">
             <Button 
               variant="outline" 
               onClick={() => navigate("/quiz")}

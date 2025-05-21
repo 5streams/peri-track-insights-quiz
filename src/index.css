@@ -2,7 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+ 
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -10,221 +10,129 @@
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
+ 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
+ 
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-
+ 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-
+ 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
+ 
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
+ 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-
+ 
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
-
+ 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
+ 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
+ 
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
+ 
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
+ 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
+ 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
+ 
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
+ 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
+ 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
-
+ 
 @layer base {
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
   }
 }
 
-/* Animation utilities */
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes pulseGentle {
-  0% { opacity: 1; }
-  50% { opacity: 0.7; }
-  100% { opacity: 1; }
-}
-
-@keyframes pulseSubtle {
-  0% { opacity: 1; }
-  50% { opacity: 0.9; }
-  100% { opacity: 1; }
-}
-
-@keyframes breathe {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.03); }
-  100% { transform: scale(1); }
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.animate-slide-up {
-  animation: slideUp 0.8s ease forwards;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease forwards;
-}
-
-.animate-pulse-gentle {
-  animation: pulseGentle 3s infinite;
-}
-
-.animate-pulse-subtle {
-  animation: pulseSubtle 2s infinite;
-}
-
-.animate-breathe {
-  animation: breathe 6s ease-in-out infinite;
-}
-
-.animate-gradient-shift {
-  background-size: 200% 200%;
-  animation: gradientShift 5s ease infinite;
-}
-
-/* Section reveal animations */
+/* Animation styles for the results page */
 .reveal-section {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition: all 0.8s ease-out;
 }
 
-.revealed {
+.reveal-section.revealed {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Emotional design utilities */
-.emotional-card {
-  @apply bg-white rounded-lg p-6 shadow-md border-l-4 transition-all hover:shadow-lg;
+/* Custom animations */
+@keyframes pulse-gentle {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-.emotional-card-primary {
-  @apply border-[#5D4154];
+.animate-pulse-gentle {
+  animation: pulse-gentle 3s infinite ease-in-out;
 }
 
-.emotional-card-secondary {
-  @apply border-[#A7C4A0];
+/* Results page specific styles */
+.score-meter .score-fill {
+  transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-.emotional-card-tertiary {
-  @apply border-[#FFECD6];
+.results-testimonial blockquote::before {
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+  opacity: 0.3;
 }
 
-.emotional-card-alert {
-  @apply border-[#FF9B85];
+/* Hormone visualization enhancements */
+.chart-container {
+  position: relative;
+  overflow: hidden;
 }
 
-.highlight-text {
-  @apply font-medium text-[#5D4154];
+.chart-tooltip {
+  background: white;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 10;
 }
-
-.testimonial-quote {
-  @apply italic relative pl-4 border-l-4 py-2;
-}
-
-.testimonial-quote-primary {
-  @apply border-[#5D4154] text-[#5D4154]/90;
-}
-
-.testimonial-quote-secondary {
-  @apply border-[#A7C4A0] text-[#5D4154]/90;
-}
-
-.warm-gradient {
-  @apply bg-gradient-to-r from-[#5D4154] to-[#5D4154]/90 text-white;
-}
-
-.soft-gradient {
-  @apply bg-gradient-to-r from-[#FFECD6]/50 to-white;
-}
-

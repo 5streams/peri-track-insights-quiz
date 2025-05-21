@@ -1,15 +1,17 @@
 
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import {
-  Card,
-  CardContent
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Clock } from "lucide-react";
+import { Clock, CheckCircle } from "lucide-react";
+import { getDynamicContent } from "@/utils/scoreCalculation";
 
-const FreeTrial: React.FC = () => {
-  const navigate = useNavigate();
+interface FreeTrialProps {
+  onStartTrial: () => void;
+  primaryHormone: string;
+  scoreCategory: string;
+}
+
+const FreeTrial: React.FC<FreeTrialProps> = ({ onStartTrial, primaryHormone, scoreCategory }) => {
   const [timeRemaining, setTimeRemaining] = useState({ hours: 24, minutes: 0, seconds: 0 });
   
   useEffect(() => {
@@ -36,46 +38,31 @@ const FreeTrial: React.FC = () => {
     const { hours, minutes, seconds } = timeRemaining;
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
-  
-  const handleStartTrial = () => {
-    // Set trial start date
-    localStorage.setItem("trialStartDate", new Date().toString());
-    // Navigate to dashboard
-    navigate("/dashboard");
-  };
 
-  const benefits = [
-    {
-      title: "Complete Hormone Pattern Analysis",
-      description: "Understand your unique hormone balance and how it affects your symptoms",
-      value: 97
-    },
-    {
-      title: "Personalized Symptom-Relief Protocol",
-      description: "Specific recommendations tailored to your most bothersome symptoms",
-      value: 89
-    },
-    {
-      title: "Luna AI 24/7 Support",
-      description: "Your personal hormone coach to answer questions anytime, day or night",
-      value: 79
-    },
-    {
-      title: "Rapid Relief Protocol",
-      description: "Immediate action steps for your most pressing symptoms",
-      value: 47
+  // Get timeframe based on primary hormone
+  const getTimeframe = () => {
+    switch (primaryHormone) {
+      case "progesterone": return "14-21";
+      case "estrogen": return "16-24";
+      case "testosterone": return "12-18";
+      default: return "14-21";
     }
-  ];
+  };
   
-  // Calculate total value
-  const totalValue = benefits.reduce((sum, item) => sum + item.value, 0);
+  // Get dynamic content based on score category
+  const { ctaText } = getDynamicContent(scoreCategory);
 
   return (
-    <Card className="mb-6 md:mb-8 overflow-hidden reveal-section transform opacity-0 bg-gradient-to-br from-[#5D4154] to-[#5D4154]/90 text-white shadow-xl border-none">
-      <CardContent className="p-5 md:p-8">
-        <h2 className="font-playfair text-2xl md:text-3xl font-bold text-center mb-2 md:mb-3">
-          Your Personalized Relief Plan Is Ready
+    <Card className="mb-8 reveal-section transform opacity-0 border-none overflow-hidden bg-gradient-to-br from-[#5D4154] to-[#7E69AB] text-white shadow-xl">
+      <CardContent className="p-6 md:p-8">
+        <h2 className="font-playfair text-xl md:text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">
+          INTRODUCING PERITRACK: PERIMENOPAUSE SUPPORT SYSTEM
         </h2>
+        
+        <p className="text-center text-base md:text-lg mb-4 max-w-3xl mx-auto">
+          Based on feedback from thousands of women in perimenopause support communities, 
+          we've created a platform designed to help you navigate this transition with confidence.
+        </p>
         
         <div className="bg-white/10 rounded-lg p-3 mb-5 text-center">
           <p className="font-medium flex items-center justify-center">
@@ -84,45 +71,104 @@ const FreeTrial: React.FC = () => {
           </p>
         </div>
         
-        <p className="text-center text-base md:text-lg mb-5 md:mb-6">
-          Start your <strong>7-Day FREE Trial</strong> and unlock your complete hormone solution:
-        </p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 md:mb-7">
-          {benefits.map((benefit, index) => (
-            <div key={index} className="flex items-start bg-white/10 rounded-lg p-4 hover:bg-white/20 transition-colors border border-white/5">
-              <CheckCircle className="h-5 w-5 md:h-6 md:w-6 text-[#A7C4A0] mr-3 flex-shrink-0 mt-0.5" />
-              <div>
-                <h3 className="font-medium text-sm md:text-base">{benefit.title}</h3>
-                <p className="text-white/80 text-xs md:text-sm mt-1">{benefit.description}</p>
-                <p className="text-[#A7C4A0] text-xs md:text-sm mt-1">${benefit.value} value</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="bg-white/20 p-4 rounded-lg text-center mb-6">
-          <p className="font-medium">
-            Total Value: <span className="line-through opacity-70">${totalValue}</span>
-            <span className="text-xl md:text-2xl font-bold ml-2">FREE</span>
-          </p>
-          <p className="text-sm text-white/80 mt-1">Then just $14/month if you choose to continue</p>
-        </div>
-        
-        <div className="text-center">
-          <Button 
-            onClick={handleStartTrial}
-            className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/80 text-white font-semibold py-3 px-6 md:px-8 rounded-full text-base md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105 w-full md:w-auto"
-          >
-            START MY FREE TRIAL NOW
-          </Button>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div className="bg-white/10 p-4 rounded-lg border border-white/20 hover:bg-white/15 transition-colors">
+            <h3 className="font-semibold text-lg mb-3">Personalized Tracking & Insights</h3>
+            <ul className="space-y-2">
+              <li className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-sm">Track numerous perimenopause symptoms</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-sm">Identify patterns in your symptoms</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-sm">Understand your personal health trends</span>
+              </li>
+            </ul>
+          </div>
           
-          <div className="mt-4 text-center">
-            <p className="text-xs md:text-sm text-white/80 font-bold">
-              Just 30 seconds to begin. No credit card required.
+          <div className="bg-white/10 p-4 rounded-lg border border-white/20 hover:bg-white/15 transition-colors">
+            <h3 className="font-semibold text-lg mb-3">Lab Results Organization</h3>
+            <ul className="space-y-2">
+              <li className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-sm">Upload bloodwork results for easy storage</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-sm">Learn about hormone tests & ranges</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-sm">Store your complete lab history</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div className="bg-white/10 p-4 rounded-lg border border-white/20 hover:bg-white/15 transition-colors">
+            <h3 className="font-semibold text-lg mb-3">Luna AI Support</h3>
+            <ul className="space-y-2">
+              <li className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-sm">AI companion with perimenopause info</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-sm">Guidance related to your symptoms</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-sm">Help preparing for healthcare visits</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div className="bg-white/10 p-4 rounded-lg border border-white/20 hover:bg-white/15 transition-colors">
+            <h3 className="font-semibold text-lg mb-3">Complete Support System</h3>
+            <ul className="space-y-2">
+              <li className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-sm">Educational content about hormones</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-sm">Evidence-based symptom management</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-[#A7C4A0] mr-2 flex-shrink-0 mt-0.5" />
+                <span className="text-sm">Connect with women having similar experiences</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div className="mt-8 text-center">
+          <h3 className="text-xl font-bold mb-6">START YOUR FREE 7-DAY TRIAL TODAY</h3>
+          
+          <div className="mb-8">
+            <Button 
+              onClick={onStartTrial}
+              className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/80 text-white font-semibold py-3 px-10 rounded-full text-lg shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105"
+            >
+              START MY FREE TRIAL NOW
+            </Button>
+            
+            <p className="mt-3 text-white/80">
+              {ctaText} No credit card required.
             </p>
-            <p className="mt-2 text-xs text-white/60">
-              79% of women see noticeable improvement within 16-24 days
+          </div>
+          
+          <p className="text-center text-sm md:text-base max-w-xl mx-auto">
+            Women with your hormone pattern who begin tracking now typically see initial improvement within {getTimeframe()} days.
+          </p>
+          
+          <div className="mt-6 pt-6 border-t border-white/20 text-center">
+            <p className="text-sm">
+              <strong>BONUS RESOURCES INCLUDED:</strong> "Perimenopause Information Guide", "Symptom Management Information", 
+              and "Lab Testing Information"
             </p>
           </div>
         </div>

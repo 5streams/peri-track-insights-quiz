@@ -1,40 +1,77 @@
 
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { getDynamicContent } from "@/utils/scoreCalculation";
 
 interface ResultsHeaderProps {
+  score: number;
   firstName: string;
+  scoreCategory: string;
+  onStartTrial: () => void;
 }
 
-const ResultsHeader = ({ firstName }: ResultsHeaderProps) => {
+const ResultsHeader: React.FC<ResultsHeaderProps> = ({ 
+  score, 
+  firstName, 
+  scoreCategory,
+  onStartTrial 
+}) => {
+  // Get color based on score category
+  const getScoreColor = () => {
+    switch (scoreCategory) {
+      case "mild": return "text-green-600";
+      case "moderate": return "text-amber-600";
+      case "severe": return "text-rose-600";
+      default: return "text-[#5D4154]";
+    }
+  };
+  
+  // Get meter fill color
+  const getMeterFillColor = () => {
+    switch (scoreCategory) {
+      case "mild": return "bg-green-500";
+      case "moderate": return "bg-amber-500";
+      case "severe": return "bg-rose-500";
+      default: return "bg-[#5D4154]";
+    }
+  };
+
   return (
-    <Card className="mb-8 overflow-hidden reveal-section animate-slide-up shadow-lg border-none">
-      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#5D4154] via-[#A7C4A0] to-[#FFECD6]"></div>
-      <CardHeader className="pb-6 bg-gradient-to-r from-[#5D4154]/5 to-white">
-        <CardTitle className="font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] animate-fade-in">
-          {firstName}, You've Been Heard.
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="pt-6">
-        <p className="text-lg font-medium text-[#5D4154] mb-4">
-          What you're experiencing isn't "just aging," "just stress," or "all in your head." The symptoms you've described—both physical and emotional—are real, significant, and have biological causes.
-        </p>
-        <p className="text-gray-600 mb-4">
-          We hear the frustration in your responses. The confusion about why your body seems suddenly unfamiliar. The worry about what these changes mean. The exhaustion from navigating daily life while managing unpredictable symptoms.
-        </p>
-        <p className="text-gray-600 mb-4">
-          You are not alone in this experience. Your responses match patterns we've seen in thousands of women going through this significant transition.
-        </p>
-        <p className="text-[#5D4154] font-medium">
-          Let's start by understanding exactly what's happening in your body and mind right now.
-        </p>
-      </CardContent>
-    </Card>
+    <header className="text-center pt-4 pb-10 reveal-section transform opacity-0">
+      <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#5D4154] mb-6">
+        YOUR PERSONALIZED PERIMENOPAUSE ASSESSMENT
+      </h1>
+      
+      <div className="relative max-w-2xl mx-auto mb-8">
+        <h2 className="text-xl md:text-2xl font-medium text-[#5D4154] mb-3">
+          PERIMENOPAUSE SCORE: 
+          <span className={`${getScoreColor()} font-bold ml-2`}>{score}/100</span>
+        </h2>
+        
+        <div className="score-meter relative h-10 bg-gray-100 border border-gray-200 rounded-full w-full mb-5">
+          <div 
+            className={`score-fill absolute left-0 top-0 h-full rounded-full transition-all duration-1000 ${getMeterFillColor()}`} 
+            style={{ width: `${Math.max(5, score)}%` }} 
+          />
+          
+          <div className="score-labels absolute w-full flex justify-between px-3 text-xs font-medium text-white top-1/2 transform -translate-y-1/2">
+            <div className="absolute left-[20%] bg-green-500 px-2 py-0.5 rounded-md opacity-90">Mild</div>
+            <div className="absolute left-[55%] bg-amber-500 px-2 py-0.5 rounded-md opacity-90">Moderate</div>
+            <div className="absolute left-[85%] bg-rose-500 px-2 py-0.5 rounded-md opacity-90">Severe</div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Immediate CTA for high-intent users */}
+      {scoreCategory === "severe" && (
+        <Button 
+          onClick={onStartTrial}
+          className="bg-[#5D4154] hover:bg-[#5D4154]/90 text-white font-semibold px-8 py-6 rounded-lg shadow-lg mb-8 text-lg"
+        >
+          Take Action Now - Start Free Trial
+        </Button>
+      )}
+    </header>
   );
 };
 
