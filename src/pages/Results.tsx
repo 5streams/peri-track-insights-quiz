@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -167,17 +166,6 @@ const Results = () => {
           
           {/* Our Guarantee Section */}
           <Guarantee />
-          
-          {/* Back to Quiz Button */}
-          <div className="text-center mb-12 mt-10">
-            <Button 
-              variant="outline" 
-              onClick={() => navigate("/quiz")}
-              className="flex items-center gap-2 hover:bg-slate-100 transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4" /> Retake Assessment
-            </Button>
-          </div>
           
           {/* Simple Pricing Section at the very bottom */}
           <SimplePricingSection onStartTrial={handleTrialCTA} />
