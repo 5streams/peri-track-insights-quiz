@@ -38,9 +38,9 @@ export const calculateHormoneScores = (results: any) => {
     
     if (normalizedSymptom && hormoneSymptomMap[normalizedSymptom]) {
       const weights = hormoneSymptomMap[normalizedSymptom];
-      if (weights.estrogen) estrogenScore += overallScore * weights.estrogen;
-      if (weights.progesterone) progesteroneScore += overallScore * weights.progesterone;
-      if (weights.testosterone) testosteroneScore += overallScore * weights.testosterone;
+      if (weights?.estrogen) estrogenScore += overallScore * weights.estrogen;
+      if (weights?.progesterone) progesteroneScore += overallScore * weights.progesterone;
+      if (weights?.testosterone) testosteroneScore += overallScore * weights.testosterone;
     }
   });
   
