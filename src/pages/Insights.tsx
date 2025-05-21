@@ -1,17 +1,35 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, Download, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ChartContainer } from "@/components/ui/chart";
 import PatternVisualization from "@/components/insights/PatternVisualization";
 import RecommendationsList from "@/components/insights/RecommendationsList";
 import { Toaster } from "@/components/ui/toaster";
+import { useToast } from "@/hooks/use-toast";
 
 const Insights = () => {
   const navigate = useNavigate();
+  const [timeWindow, setTimeWindow] = useState(30); // Default to 30 days
+  const { toast } = useToast();
+
+  const handleTimeWindowChange = (days: number) => {
+    setTimeWindow(days);
+    toast({
+      title: "Time window updated",
+      description: `Showing data for the last ${days} days`,
+      duration: 2000,
+    });
+  };
+
+  // Determine which time window button should be active
+  const getTimeWindowButtonClass = (days: number) => {
+    return timeWindow === days 
+      ? "h-8 bg-[#5D4154]/5 border-[#5D4154]/20" 
+      : "h-8";
+  };
 
   return (
     <div className="min-h-screen bg-[#F9F7F5] flex">
@@ -44,14 +62,50 @@ const Insights = () => {
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-[#5D4154]" />
-                <h2 className="font-medium text-[#5D4154]">Last 30 days</h2>
+                <h2 className="font-medium text-[#5D4154]">
+                  Last {timeWindow} days
+                </h2>
               </div>
               
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" className="h-8">Last 7 days</Button>
-                <Button variant="outline" size="sm" className="h-8 bg-[#5D4154]/5 border-[#5D4154]/20">Last 30 days</Button>
-                <Button variant="outline" size="sm" className="h-8">Last 90 days</Button>
-                <Button variant="outline" size="sm" className="h-8">Custom</Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className={getTimeWindowButtonClass(7)}
+                  onClick={() => handleTimeWindowChange(7)}
+                >
+                  Last 7 days
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className={getTimeWindowButtonClass(30)}
+                  onClick={() => handleTimeWindowChange(30)}
+                >
+                  Last 30 days
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className={getTimeWindowButtonClass(90)}
+                  onClick={() => handleTimeWindowChange(90)}
+                >
+                  Last 90 days
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="h-8"
+                  onClick={() => {
+                    toast({
+                      title: "Custom range",
+                      description: "Custom date range selection coming soon!",
+                      duration: 2000,
+                    });
+                  }}
+                >
+                  Custom
+                </Button>
               </div>
             </div>
           </div>
@@ -80,7 +134,7 @@ const Insights = () => {
                 </CardHeader>
                 <CardContent className="p-4">
                   <div className="h-[350px]">
-                    <PatternVisualization />
+                    <PatternVisualization timeWindow={timeWindow} />
                   </div>
                   
                   <div className="mt-4 bg-[#5D4154]/5 p-4 rounded-lg">

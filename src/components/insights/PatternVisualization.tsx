@@ -2,20 +2,24 @@
 import React, { useState, useEffect } from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
-const PatternVisualization = () => {
+interface PatternVisualizationProps {
+  timeWindow?: number; // Days to display (7, 30, 90)
+}
+
+const PatternVisualization: React.FC<PatternVisualizationProps> = ({ timeWindow = 30 }) => {
   const [chartData, setChartData] = useState([]);
   
   useEffect(() => {
     // Load tracking data from localStorage
     loadChartData();
-  }, []);
+  }, [timeWindow]); // Re-load data when timeWindow changes
   
   const loadChartData = () => {
     try {
       const trackingData = localStorage.getItem("trackingData");
       if (!trackingData) {
         // Use sample data if no tracking data exists
-        setChartData(generateSampleData());
+        setChartData(generateSampleData(timeWindow));
         return;
       }
       
@@ -23,8 +27,11 @@ const PatternVisualization = () => {
       // Sort by date
       parsedData.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
       
+      // Filter data based on timeWindow
+      const filteredData = filterDataByTimeWindow(parsedData, timeWindow);
+      
       // Transform into chart data format
-      const processedData = parsedData.map((entry: any) => {
+      const processedData = filteredData.map((entry: any) => {
         const date = new Date(entry.date);
         const formattedDate = `${(date.getMonth() + 1)}/${date.getDate()}`;
         
@@ -44,29 +51,48 @@ const PatternVisualization = () => {
       if (processedData.length > 0) {
         setChartData(processedData);
       } else {
-        setChartData(generateSampleData());
+        setChartData(generateSampleData(timeWindow));
       }
     } catch (error) {
       console.error("Error loading chart data:", error);
-      setChartData(generateSampleData());
+      setChartData(generateSampleData(timeWindow));
     }
   };
   
-  const generateSampleData = () => {
+  const filterDataByTimeWindow = (data: any[], days: number) => {
+    if (!days) return data;
+    
+    const now = new Date();
+    const cutoffDate = new Date(now);
+    cutoffDate.setDate(cutoffDate.getDate() - days);
+    
+    return data.filter((entry: any) => {
+      const entryDate = new Date(entry.date);
+      return entryDate >= cutoffDate && entryDate <= now;
+    });
+  };
+  
+  const generateSampleData = (days: number = 30) => {
     // Sample data in case there's no tracking data
-    const sampleData = [
-      { name: '5/1', 'Hot Flashes': 3, 'Sleep Disruptions': 2, 'Mood Changes': 1 },
-      { name: '5/4', 'Hot Flashes': 4, 'Sleep Disruptions': 4, 'Mood Changes': 2 },
-      { name: '5/7', 'Hot Flashes': 2, 'Sleep Disruptions': 3, 'Mood Changes': 4 },
-      { name: '5/10', 'Hot Flashes': 1, 'Sleep Disruptions': 1, 'Mood Changes': 3 },
-      { name: '5/13', 'Hot Flashes': 2, 'Sleep Disruptions': 2, 'Mood Changes': 2 },
-      { name: '5/16', 'Hot Flashes': 5, 'Sleep Disruptions': 4, 'Mood Changes': 2 },
-      { name: '5/19', 'Hot Flashes': 4, 'Sleep Disruptions': 5, 'Mood Changes': 3 },
-      { name: '5/22', 'Hot Flashes': 2, 'Sleep Disruptions': 3, 'Mood Changes': 5 },
-      { name: '5/25', 'Hot Flashes': 1, 'Sleep Disruptions': 2, 'Mood Changes': 4 },
-      { name: '5/28', 'Hot Flashes': 3, 'Sleep Disruptions': 2, 'Mood Changes': 2 },
-      { name: '5/31', 'Hot Flashes': 4, 'Sleep Disruptions': 3, 'Mood Changes': 1 },
-    ];
+    const today = new Date();
+    const sampleData = [];
+    
+    // Determine how many data points to generate based on the time window
+    const dataPointCount = days === 7 ? 7 : days === 30 ? 11 : 12;
+    const dayStep = days === 7 ? 1 : days === 30 ? 3 : 8;
+    
+    for (let i = 0; i < dataPointCount; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - (dataPointCount - 1 - i) * dayStep);
+      
+      sampleData.push({
+        name: `${(date.getMonth() + 1)}/${date.getDate()}`,
+        'Hot Flashes': Math.floor(Math.random() * 5) + 1,
+        'Sleep Disruptions': Math.floor(Math.random() * 5) + 1,
+        'Mood Changes': Math.floor(Math.random() * 5) + 1,
+      });
+    }
+    
     return sampleData;
   };
 
