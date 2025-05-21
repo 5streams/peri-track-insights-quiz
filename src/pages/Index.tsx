@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -372,11 +373,76 @@ export default function Index() {
             </div>
           </div>
           
-          <div className="pt-6 border-t border-white/10 text-center">
-            <p className="text-sm text-white/70 max-w-3xl mx-auto mb-3">
-              This perimenopause symptoms quiz is designed for educational purposes. It is not intended to replace professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider about your health concerns.
-            </p>
-            <p className="text-sm">© 2025 Peritrack | Privacy Policy | Terms of Service</p>
+          {/* Extended Legal Section for Google Ads Compliance */}
+          <div className="pt-6 border-t border-white/10">
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <h4 className="font-semibold text-[#FFECD6] mb-2">Terms of Service</h4>
+                <p className="text-xs text-white/70 mb-2">
+                  By using Peritrack, you agree to our Terms of Service. We provide this service to help identify possible perimenopause symptoms, but it should not be considered medical advice. Our subscription plans auto-renew unless canceled before the billing period ends. You may cancel your subscription at any time through your account settings.
+                </p>
+                <p className="text-xs text-white/70">
+                  Your use of our services implies acceptance of our data collection practices as described in our Privacy Policy. We use industry-standard security measures to protect your personal information.
+                </p>
+                <p className="mt-2">
+                  <a href="#" className="text-xs underline hover:text-[#FFECD6] transition">View Full Terms of Service</a>
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-[#FFECD6] mb-2">Privacy & Data Policy</h4>
+                <p className="text-xs text-white/70 mb-2">
+                  We collect personal information when you create an account, complete the assessment, or use our tracking features. This data is used to provide personalized recommendations and improve our services. We may share anonymized, aggregated data for research purposes but never sell your identifiable information to third parties.
+                </p>
+                <p className="text-xs text-white/70">
+                  We use cookies and similar technologies to enhance your experience, analyze usage patterns, and personalize content. By using Peritrack, you consent to our use of these technologies.
+                </p>
+                <p className="mt-2">
+                  <a href="#" className="text-xs underline hover:text-[#FFECD6] transition">View Full Privacy Policy</a>
+                </p>
+              </div>
+            </div>
+            
+            <div className="space-y-3 mb-6">
+              <h4 className="font-semibold text-[#FFECD6] mb-2">Important Disclaimers</h4>
+              <div className="text-xs text-white/70 p-3 bg-white/5 rounded-md">
+                <p className="font-semibold text-[#FFECD6] mb-1">Medical Disclaimer</p>
+                <p>
+                  The Peritrack app, including the symptom assessment quiz and all related content, is for informational and educational purposes only. It is not intended to replace professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read on this website or received through the app.
+                </p>
+              </div>
+              
+              <div className="text-xs text-white/70 p-3 bg-white/5 rounded-md">
+                <p className="font-semibold text-[#FFECD6] mb-1">Results & Testimonials Disclaimer</p>
+                <p>
+                  Testimonials and examples on this website are exceptional results and do not apply to the average purchaser. They are not intended to represent or guarantee that anyone will achieve the same or similar results. Individual results may vary based on numerous factors, including but not limited to health condition, age, lifestyle factors, and adherence to recommended practices.
+                </p>
+              </div>
+              
+              <div className="text-xs text-white/70 p-3 bg-white/5 rounded-md">
+                <p className="font-semibold text-[#FFECD6] mb-1">Subscription & Billing Information</p>
+                <p>
+                  By subscribing to Peritrack, you authorize us to charge your payment method on a recurring basis according to your selected plan. The subscription will automatically renew at the end of each billing period until canceled. Free trials convert to paid subscriptions unless canceled before the trial period ends. For complete billing details, please review our Terms of Service.
+                </p>
+              </div>
+            </div>
+            
+            <div className="pt-4 border-t border-white/10 text-center">
+              <div className="flex flex-wrap justify-center gap-4 mb-4">
+                <a href="#" className="text-xs text-white/70 hover:text-white">Terms of Service</a>
+                <a href="#" className="text-xs text-white/70 hover:text-white">Privacy Policy</a>
+                <a href="#" className="text-xs text-white/70 hover:text-white">Cookie Policy</a>
+                <a href="#" className="text-xs text-white/70 hover:text-white">Accessibility Statement</a>
+                <a href="#" className="text-xs text-white/70 hover:text-white">Refund Policy</a>
+                <a href="#" className="text-xs text-white/70 hover:text-white">Contact Us</a>
+              </div>
+              
+              <p className="text-xs text-white/70 max-w-3xl mx-auto mb-3">
+                This perimenopause symptoms quiz is designed for educational purposes. It is not intended to replace professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider about your health concerns.
+              </p>
+              <p className="text-xs text-white/70">
+                © 2025 Peritrack, Inc. All rights reserved. Peritrack™ and Luna AI™ are trademarks of Peritrack, Inc.
+              </p>
+            </div>
           </div>
         </div>
       </footer>
