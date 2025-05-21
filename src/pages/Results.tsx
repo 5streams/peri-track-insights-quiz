@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -145,13 +144,14 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
+          {/* Luna AI Feature */}
+          <LunaAIFeature onStartTrial={handleTrialCTA} />
+          
           {/* Peritrack Intro - Main call to action */}
           <PeritrackIntro
             onStartTrial={handleTrialCTA}
             firstName={capitalizedFirstName}
           />
-          
-          {/* Luna AI Feature - Only showing once as part of PeritrackIntro */}
           
           {/* Back to Quiz Button */}
           <div className="text-center mb-12 mt-10">
