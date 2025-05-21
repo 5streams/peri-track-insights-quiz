@@ -53,7 +53,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
   };
 
   return (
-    <header className="text-center pt-6 pb-12 reveal-section transform opacity-0 heading-container">
+    <header className="text-center pt-6 pb-12">
       <div className="decorative-backdrop"></div>
       
       <h1 className="assessment-heading text-2xl md:text-3xl lg:text-4xl font-playfair font-bold text-[#5D4154] mb-8">
@@ -108,7 +108,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
       {scoreCategory === "severe" && (
         <Button 
           onClick={onStartTrial}
-          className="cta-button bg-gradient-to-r from-[#9b87f5] to-[#8B5CF6] hover:from-[#8B5CF6]/95 hover:to-[#8B5CF6] text-white font-semibold px-8 py-6 rounded-lg shadow-lg mb-8 text-lg transition-all duration-300 animate-pulse-subtle"
+          className="cta-button bg-gradient-to-r from-[#9b87f5] to-[#8B5CF6] hover:from-[#8B5CF6]/95 hover:to-[#8B5CF6] text-white font-semibold px-8 py-6 rounded-lg shadow-lg mb-8 text-lg transition-all duration-300"
         >
           Take Action Now - Start Free Trial
         </Button>

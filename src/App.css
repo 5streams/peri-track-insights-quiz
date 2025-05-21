@@ -19,23 +19,7 @@
   }
 }
 
-/* Modify the reveal animation to use opacity only, not affecting layout */
-.reveal-section {
-  opacity: 0;
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.reveal-section.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Make sure results container is always visible */
-.results-container {
-  opacity: 1;
-  min-height: 50vh;
-}
-
+/* Animation classes */
 .animate-pulse-subtle {
   animation: pulseSubtle 3s infinite ease-in-out;
 }
@@ -45,17 +29,10 @@
 }
 
 .animate-fade-in {
-  animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
 /* Responsive typography and spacing */
-@media (max-width: 640px) {
-  .reveal-section {
-    transform: translateY(10px);
-  }
-}
-
-/* Improve mobile card layouts */
 @media (max-width: 640px) {
   .card-grid {
     grid-template-columns: 1fr;
