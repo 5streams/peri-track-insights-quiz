@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,8 @@ import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
 import PeritrackIntro from "@/components/results/PeritrackIntro";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
+import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
+import TransformationJourney from "@/components/results/TransformationJourney";
 
 interface QuizResults {
   score: number;
@@ -144,7 +147,13 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Luna AI Feature */}
+          {/* Emotion-Hormone Connection - New transitional component */}
+          <EmotionHormoneConnection />
+          
+          {/* Transformation Journey - Another new transitional component */}
+          <TransformationJourney />
+          
+          {/* Luna AI Feature with smoother transition */}
           <LunaAIFeature onStartTrial={handleTrialCTA} />
           
           {/* Peritrack Intro - Main call to action */}

@@ -14,6 +14,20 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
   return (
     <Card className="mb-10 md:mb-12 overflow-hidden border-none rounded-2xl shadow-xl reveal-section transform opacity-0">
       <CardContent className="p-0">
+        {/* Transition Section */}
+        <div className="bg-gradient-to-b from-white to-[#F9F5FF]/60 p-6 md:p-8 text-center">
+          <p className="text-lg md:text-xl text-[#5D4154] mb-4">
+            Now that you understand your hormone patterns...
+          </p>
+          <h3 className="text-xl md:text-2xl font-medium mb-6 text-[#5D4154]">
+            What if you had a personal guide to help you navigate these changes every day?
+          </h3>
+          <p className="max-w-3xl mx-auto text-lg">
+            Many women tell us that knowing their patterns is helpful, 
+            but having ongoing support makes all the difference in managing symptoms effectively.
+          </p>
+        </div>
+      
         {/* Header Section with Gradient Background */}
         <div 
           className="bg-gradient-to-r from-[#7E69AB] to-[#9b87f5] text-white p-6 md:p-8"
@@ -132,7 +146,30 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
               <div className="bg-white p-4 rounded-lg shadow-sm border border-[#9b87f5]/10">
                 <p className="text-[#5D4154] font-medium">"I'm just not feeling like myself… what can I do?"</p>
               </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-[#9b87f5]/10">
+                <p className="text-[#5D4154] font-medium">"Why am I waking up at 3 AM every night?"</p>
+              </div>
             </div>
+          </div>
+          
+          {/* Sleep Disruption Explanation - New Section with Image Content */}
+          <div className="mb-12 bg-white p-6 rounded-xl border border-[#9b87f5]/20 shadow-md">
+            <h3 className="text-xl font-bold text-center mb-6 text-[#5D4154]">
+              💤 UNDERSTANDING YOUR HORMONE-RELATED SLEEP ISSUES
+            </h3>
+            
+            <div className="bg-[#F9F5FF]/30 p-5 rounded-lg mb-6">
+              <p className="text-gray-700 mb-3">
+                Progesterone helps your brain produce GABA—a calming neurotransmitter that promotes deep sleep. As levels decline, your sleep architecture changes, making it harder to stay asleep, especially between 2-4 AM when your body's natural cortisol begins rising.
+              </p>
+              <p className="text-gray-700 font-medium">
+                This isn't "just insomnia"—it's a specific hormone-related sleep disruption that requires targeted approaches.
+              </p>
+            </div>
+            
+            <p className="text-center italic">
+              This is just one example of the detailed explanations Luna provides for your symptoms.
+            </p>
           </div>
           
           {/* Backed by Research Section */}
@@ -177,7 +214,7 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
           {/* Final CTA Section - REMOVED */}
           
           {/* Sample Conversation Examples */}
-          <div className="mb-12">
+          <div>
             <h3 className="text-xl font-bold text-center mb-6 text-[#5D4154]">
               SEE HOW LUNA HELPS WOMEN LIKE YOU
             </h3>
