@@ -90,17 +90,20 @@ const CycleTracker: React.FC<CycleTrackerProps> = ({ selectedDate }) => {
         JSON.stringify([...filteredHistory, cycleData])
       );
       
+      // Show a more visible toast notification
       toast({
         title: "Cycle data saved",
         description: "Your cycle information has been updated.",
-        action: <Check className="h-4 w-4 text-green-500" />
+        action: <Check className="h-4 w-4 text-green-500" />,
+        duration: 3000, // Show for 3 seconds to ensure visibility on mobile
       });
     } catch (error) {
       console.error("Error saving cycle data:", error);
       toast({
         title: "Error saving data",
         description: "There was a problem saving your cycle data.",
-        variant: "destructive"
+        variant: "destructive",
+        duration: 3000,
       });
     }
   };
