@@ -47,13 +47,27 @@ const Dashboard = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#6D6875] hover:bg-[#FFECD6]/20 transition-colors">
+              <a 
+                href="#" 
+                className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#6D6875] hover:bg-[#FFECD6]/20 transition-colors"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/tracking");
+                }}
+              >
                 <Calendar className="h-5 w-5" />
                 Track
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#6D6875] hover:bg-[#FFECD6]/20 transition-colors">
+              <a 
+                href="#" 
+                className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#6D6875] hover:bg-[#FFECD6]/20 transition-colors"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/insights");
+                }}
+              >
                 <BarChart className="h-5 w-5" />
                 Insights
               </a>
@@ -126,11 +140,25 @@ const Dashboard = () => {
             <BarChart className="h-6 w-6" />
             <span className="text-xs mt-1">Home</span>
           </a>
-          <a href="#" className="flex-1 flex flex-col items-center py-3 text-[#6D6875]">
+          <a 
+            href="#" 
+            className="flex-1 flex flex-col items-center py-3 text-[#6D6875]"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/tracking");
+            }}
+          >
             <Calendar className="h-6 w-6" />
             <span className="text-xs mt-1">Track</span>
           </a>
-          <a href="#" className="flex-1 flex flex-col items-center py-3 text-[#6D6875]">
+          <a 
+            href="#" 
+            className="flex-1 flex flex-col items-center py-3 text-[#6D6875]"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/insights");
+            }}
+          >
             <BarChart className="h-6 w-6" />
             <span className="text-xs mt-1">Insights</span>
           </a>
@@ -173,6 +201,20 @@ const Dashboard = () => {
           {/* AI Assistant Preview */}
           <div className="mt-6">
             <AiAssistantPreview firstName={userInfo.firstName} />
+          </div>
+          
+          {/* New Tracking CTA */}
+          <div className="mt-6 text-center">
+            <Button 
+              onClick={() => navigate("/tracking")}
+              className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/90 gap-2"
+            >
+              <Calendar className="h-4 w-4" />
+              Go to Full Tracking
+            </Button>
+            <p className="mt-2 text-sm text-gray-500">
+              Track your symptoms, cycle, and more in detail
+            </p>
           </div>
         </main>
       </div>

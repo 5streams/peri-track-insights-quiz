@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Calendar, Check, Plus, Smile, Frown, Meh, Calendar as CalendarIcon, Clock, Info } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ const DailyCheckInCard = () => {
   const [notes, setNotes] = useState("");
   const [isFullEntryOpen, setIsFullEntryOpen] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   // Format current date
   const today = new Date();
@@ -56,7 +58,8 @@ const DailyCheckInCard = () => {
   };
 
   const handleOpenFullEntry = () => {
-    setIsFullEntryOpen(true);
+    // Instead of opening the dialog, navigate to the tracking page
+    navigate("/tracking");
   };
 
   const handleFullEntrySubmit = () => {
@@ -70,7 +73,8 @@ const DailyCheckInCard = () => {
   };
 
   const handleUpdateEntry = () => {
-    setCheckInDone(false);
+    // Navigate to the tracking page for updates
+    navigate("/tracking");
   };
 
   return (
@@ -164,79 +168,6 @@ const DailyCheckInCard = () => {
           </>
         )}
       </CardContent>
-
-      <Dialog open={isFullEntryOpen} onOpenChange={setIsFullEntryOpen}>
-        <DialogContent className="sm:max-w-[600px] max-h-[85vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-[#5D4154]">Comprehensive Check-In</DialogTitle>
-          </DialogHeader>
-          
-          <div className="py-4">
-            <div className="flex items-center justify-between mb-4">
-              <p className="font-medium text-[#5D4154]">{formattedDate}</p>
-              <div className="flex items-center text-sm text-[#5D4154]/70">
-                <Clock className="h-4 w-4 mr-1" />
-                <span>Track for {today.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <h3 className="text-sm font-medium text-[#5D4154] mb-2">How are you feeling?</h3>
-              <MoodSelector selectedMood={selectedMood} setSelectedMood={setSelectedMood} />
-            </div>
-
-            <div className="border-t border-gray-100 pt-5 mb-5">
-              <h3 className="text-sm font-medium text-[#5D4154] mb-3">Physical Symptoms</h3>
-              <SymptomSelector 
-                category="physical"
-                selectedSymptoms={selectedSymptoms} 
-                setSelectedSymptoms={setSelectedSymptoms} 
-                expanded={true}
-              />
-            </div>
-
-            <div className="border-t border-gray-100 pt-5 mb-5">
-              <h3 className="text-sm font-medium text-[#5D4154] mb-3">Emotional & Cognitive Symptoms</h3>
-              <SymptomSelector 
-                category="emotional"
-                selectedSymptoms={selectedSymptoms} 
-                setSelectedSymptoms={setSelectedSymptoms} 
-                expanded={true}
-              />
-            </div>
-
-            <div className="border-t border-gray-100 pt-5 mb-5">
-              <h3 className="text-sm font-medium text-[#5D4154] mb-3">Sleep & Energy</h3>
-              <SymptomSelector 
-                category="sleep"
-                selectedSymptoms={selectedSymptoms} 
-                setSelectedSymptoms={setSelectedSymptoms} 
-                expanded={true}
-              />
-            </div>
-
-            <div className="border-t border-gray-100 pt-5 mb-5">
-              <h3 className="text-sm font-medium text-[#5D4154] mb-3">Additional Notes</h3>
-              <Textarea 
-                placeholder="Include any other details about how you're feeling today..." 
-                className="resize-none border-gray-200"
-                rows={3}
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-              />
-            </div>
-
-            <div className="flex gap-2 mt-6">
-              <Button 
-                className="flex-1 bg-[#A7C4A0] hover:bg-[#A7C4A0]/90"
-                onClick={handleFullEntrySubmit}
-              >
-                Save Complete Check-In
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </Card>
   );
 };
