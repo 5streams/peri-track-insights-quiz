@@ -34,6 +34,7 @@ const Results = () => {
     primaryHormone: "estrogen",
     primarySymptoms: [] as string[]
   });
+  const [isInitialized, setIsInitialized] = useState(false);
   const navigate = useNavigate();
   
   // Get score category
@@ -44,20 +45,7 @@ const Results = () => {
   };
   
   useEffect(() => {
-    // Reveal sections as user scrolls
-    const revealSections = () => {
-      const windowHeight = window.innerHeight;
-      const sections = document.querySelectorAll('.reveal-section');
-      
-      sections.forEach(section => {
-        const sectionTop = (section as HTMLElement).getBoundingClientRect().top;
-        if (sectionTop < windowHeight * 0.85) {
-          section.classList.add('revealed');
-        }
-      });
-    };
-
-    // Retrieve results and user info from localStorage
+    // Retrieve results and user info from localStorage first
     const storedResults = localStorage.getItem("quizResults");
     const storedUserInfo = localStorage.getItem("userInfo");
     
@@ -71,31 +59,53 @@ const Results = () => {
     } else {
       // If no results, redirect to quiz
       navigate("/quiz");
+      return;
     }
     
     if (storedUserInfo) {
       setUserInfo(JSON.parse(storedUserInfo));
     }
 
-    // Add scroll event listener for animations
-    window.addEventListener('scroll', revealSections);
-    // Trigger once on load
-    setTimeout(revealSections, 300);
-
-    // Immediately reveal the first section to prevent blank screen
+    // Mark as initialized
+    setIsInitialized(true);
+    
+    // AFTER data is loaded, setup reveal section animations
     setTimeout(() => {
+      // Reveal sections as user scrolls
+      const revealSections = () => {
+        const windowHeight = window.innerHeight;
+        const sections = document.querySelectorAll('.reveal-section');
+        
+        sections.forEach(section => {
+          const sectionTop = (section as HTMLElement).getBoundingClientRect().top;
+          if (sectionTop < windowHeight * 0.85) {
+            section.classList.add('revealed');
+          }
+        });
+      };
+
+      // Force reveal the first section immediately
       const firstSection = document.querySelector('.reveal-section');
       if (firstSection) {
         firstSection.classList.add('revealed');
       }
-    }, 100);
 
-    return () => {
-      window.removeEventListener('scroll', revealSections);
-    };
+      // Add scroll event listener for other animations
+      window.addEventListener('scroll', revealSections);
+      // Trigger once on load
+      revealSections();
+
+      return () => {
+        window.removeEventListener('scroll', revealSections);
+      };
+    }, 100);
   }, [navigate]);
   
   if (!results) {
+    return <LoadingSpinner />;
+  }
+
+  if (!isInitialized) {
     return <LoadingSpinner />;
   }
 
@@ -123,8 +133,8 @@ const Results = () => {
     >
       <div className="w-full max-w-4xl mx-auto">
         <div className="results-container">
-          {/* Force first section to be visible immediately to prevent blank screen */}
-          <div className="reveal-section revealed">
+          {/* Remove all animation classes from the main content to ensure it's always visible */}
+          <div className="mb-8">
             {/* Results Header with Score and User Name */}
             <ResultsHeader 
               score={hormoneScores.overall} 
