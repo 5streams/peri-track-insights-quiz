@@ -4,7 +4,6 @@ import {
   Card,
   CardContent
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { MessageCircle, Star, Info, Check, User } from "lucide-react";
 
 interface LunaAIFeatureProps {
@@ -175,46 +174,7 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
             </div>
           </div>
           
-          {/* Final CTA Section */}
-          <div className="mb-8">
-            <h3 className="text-xl font-bold text-center mb-4 text-[#5D4154]">
-              🌟 WITH LUNA, YOU'LL NEVER BE ALONE AGAIN
-            </h3>
-            
-            <div className="text-center mb-8">
-              <p className="mb-4">
-                This isn't just about tracking your symptoms. It's about feeling heard, guided, and cared for every step of the way.
-              </p>
-              <p className="mb-4">
-                Luna gives you real-time insight. Real emotional support. And real tools to start feeling like you again.
-              </p>
-            </div>
-            
-            <div className="text-center p-6 bg-gradient-to-r from-[#7E69AB] to-[#9b87f5] rounded-xl shadow-lg">
-              <p className="text-white mb-6">
-                👉 Included with every Peritrack membership — at no extra cost.
-              </p>
-              
-              {/* Updated to show both monthly and annual options */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto">
-                <Button 
-                  onClick={onStartTrial}
-                  className="bg-white text-[#5D4154] hover:bg-gray-100 font-semibold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105"
-                >
-                  Start Monthly Trial
-                </Button>
-                <Button 
-                  onClick={onStartTrial}
-                  className="bg-[#FFECD6] text-[#5D4154] hover:bg-[#FFECD6]/90 font-semibold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105"
-                >
-                  Start Annual Trial
-                </Button>
-              </div>
-              <p className="mt-3 text-white/80 text-sm">
-                7-day free trial • Cancel anytime • No credit card required
-              </p>
-            </div>
-          </div>
+          {/* Final CTA Section - REMOVED */}
           
           {/* Sample Conversation Examples */}
           <div className="mb-12">
