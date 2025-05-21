@@ -71,7 +71,7 @@ const SymptomSelector: React.FC<SymptomSelectorProps> = ({
     "Irregular Periods",
     "Brain Fog/Cognitive Changes", 
     "Fatigue/Energy Fluctuations", 
-    "Vaginal Dryness/Discomfort",
+    "Vaginal Dryness/Discomfort", 
     "Joint/Muscle Pain", 
     "Weight Changes", 
     "Headaches/Migraines"
