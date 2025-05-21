@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { saveLead } from "@/utils/leadTracking";
 import { useToast } from "@/hooks/use-toast";
 import { Check } from "lucide-react";
@@ -32,6 +33,8 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
 }) => {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -48,16 +51,30 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
       return;
     }
     
+    if (source === 'free_trial' && !phoneNumber) {
+      toast({
+        title: "Missing information",
+        description: "Please provide your phone number for the free trial.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     setIsLoading(true);
     
-    // Save lead data
+    // Save lead data with additional fields if available
     try {
+      const additionalNotes = source === 'free_trial' 
+        ? `Phone: ${phoneNumber}, Address: ${address}` 
+        : undefined;
+        
       const lead = saveLead(
         firstName.trim(), 
         email.trim(), 
         source, 
         pricingPlan, 
-        quizResults
+        quizResults,
+        additionalNotes
       );
       
       console.log("Lead successfully saved:", lead);
@@ -86,6 +103,8 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
   const resetForm = () => {
     setFirstName("");
     setEmail("");
+    setPhoneNumber("");
+    setAddress("");
     setIsSubmitted(false);
   };
   
@@ -136,6 +155,33 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
                   required
                 />
               </div>
+              
+              {source === 'free_trial' && (
+                <>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      placeholder="Your phone number"
+                      required
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="address">Address</Label>
+                    <Textarea
+                      id="address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      placeholder="Your address"
+                      rows={3}
+                    />
+                  </div>
+                </>
+              )}
               
               {source === 'free_trial' && pricingPlan && (
                 <div className="bg-[#FFECD6]/30 p-3 rounded-lg text-sm text-[#5D4154] flex items-center justify-between">
