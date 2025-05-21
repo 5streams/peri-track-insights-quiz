@@ -1,498 +1,548 @@
 
 import React, { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, CheckCircle, Star } from "lucide-react";
+import { Check } from "lucide-react";
+import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
+import PatternVisualization from "@/components/insights/PatternVisualization";
 
 interface SubscriptionOptionsProps {
   onStartTrial: () => void;
 }
 
 const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial }) => {
-  const [isMonthlyModalOpen, setIsMonthlyModalOpen] = useState(false);
-  const [isAnnualModalOpen, setIsAnnualModalOpen] = useState(false);
-  
-  const handleMonthlyClick = () => {
-    setIsMonthlyModalOpen(true);
-  };
-  
-  const handleAnnualClick = () => {
-    setIsAnnualModalOpen(true);
-  };
-  
-  const handleModalClose = (pricingPlan: "monthly" | "annual") => {
-    setIsMonthlyModalOpen(false);
-    setIsAnnualModalOpen(false);
-    // Store the selected pricing plan
-    localStorage.setItem("selectedPricingPlan", pricingPlan);
-    // Don't navigate automatically
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'annual'>('annual');
+
+  const handleStartTrial = (plan: 'monthly' | 'annual') => {
+    setSelectedPlan(plan);
+    onStartTrial();
+    setIsModalOpen(true);
   };
 
   return (
-    <Card className="mb-8 reveal-section transform opacity-0 border-none shadow-lg overflow-hidden">
-      <CardContent className="p-0">
-        {/* Hero Section with Intro */}
-        <div className="bg-gradient-to-r from-[#F9F5FF] to-white p-8 md:p-12 border-b border-purple-100">
-          <div className="max-w-3xl mx-auto">
-            <div className="flex items-center justify-center mb-3">
-              <div className="bg-[#9b87f5]/10 p-2 rounded-full">
-                <CheckCircle className="h-6 w-6 text-[#9b87f5]" />
-              </div>
-            </div>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#5D4154] text-center mb-4">
-              ✅ Julie, You've Taken the First Step… <br className="hidden md:inline" />
-              <span className="text-[#9b87f5]">Now It's Time to Take Control</span>
-            </h2>
-            
-            <h3 className="text-xl md:text-2xl font-semibold text-center text-[#5D4154] mb-3">
+    <section className="py-8 md:py-12 reveal-section transform opacity-0 transition-all duration-500">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#5D4154] mb-4">
+            ✅ Julie, You've Taken the First Step… Now It's Time to Take Control
+          </h2>
+          <div className="space-y-4">
+            <h3 className="text-xl md:text-2xl font-semibold text-[#5D4154]">
               Introducing Peritrack™
             </h3>
-            <p className="text-lg text-center text-gray-700 mb-6">
+            <p className="text-lg text-[#5D4154]/80 mb-3">
               Your All-in-One Perimenopause Health Companion
             </p>
-            
-            <div className="text-center italic text-[#5D4154] font-medium mb-8 max-w-2xl mx-auto">
+            <p className="text-[#5D4154]/90 max-w-2xl mx-auto">
               Track your symptoms. Understand your hormones. Prepare for the week ahead — with confidence.
-            </div>
+            </p>
           </div>
         </div>
-        
-        {/* Critical Crossroad Section */}
-        <div className="p-8 md:p-12">
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-[#F9F5FF]/50 p-6 rounded-lg border border-[#9b87f5]/20 mb-10 shadow-sm">
-              <h3 className="flex items-center text-xl font-bold text-[#5D4154] mb-3">
-                <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2">🚨</span>
-                You're At a Critical Crossroad
-              </h3>
-              <p className="mb-4 text-gray-700">
-                You've just uncovered key patterns in your body.
-                <span className="block font-medium mt-1">Now what?</span>
-              </p>
-              <p className="mb-4 text-gray-700">
-                Without the right tools, symptoms escalate. Doctors shrug. You're left piecing together your health like a jigsaw puzzle — in the dark.
-              </p>
-              <p className="text-[#5D4154] font-medium">
-                Peritrack gives you the clarity, structure, and support you need.
-              </p>
-            </div>
 
-            {/* Why Peritrack Exists */}
-            <div className="mb-10">
-              <h3 className="flex items-center text-xl font-bold text-[#5D4154] mb-3">
-                <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2">🌿</span>
-                Why Peritrack Exists
-              </h3>
-              <p className="mb-4 text-gray-700">
-                Perimenopause is a deeply misunderstood stage of life. It can affect your mind, your mood, your sleep, your energy — and make you feel like a stranger in your own skin.
-              </p>
-              <p className="mb-4 text-gray-700">
-                Most apps don't support this transition. Most doctors don't explain it fully.
-                <br />Peritrack changes that. It's your daily guide, your insight engine, and your trusted health companion built specifically for this chapter of your life.
-              </p>
-            </div>
-            
-            {/* What Peritrack Helps You Do */}
-            <div className="mb-12">
-              <h3 className="flex justify-center items-center text-xl font-bold text-[#5D4154] mb-6">
-                <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2">🔍</span>
-                Here's What Peritrack Helps You Do
-              </h3>
-              
-              {/* Feature Cards */}
-              <div className="space-y-6">
-                {/* Feature 1 */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-                  <div className="bg-gradient-to-r from-[#F9F5FF] to-white p-4 border-b border-gray-100">
-                    <h4 className="flex items-center text-lg font-semibold text-[#5D4154]">
-                      <span className="mr-2">✅</span>
-                      1. Track the Right Symptoms — Daily, Easily, and Accurately
-                    </h4>
+        <div className="mt-12 md:mt-16">
+          <div className="bg-[#5D4154]/5 p-5 md:p-8 rounded-lg mb-12">
+            <h3 className="text-lg md:text-xl font-semibold text-[#5D4154] mb-3">
+              🚨 You're At a Critical Crossroad
+            </h3>
+            <p className="text-[#5D4154]/80">
+              You've just uncovered key patterns in your body.
+              Now what?
+            </p>
+            <p className="text-[#5D4154]/80 mt-4">
+              Without the right tools, symptoms escalate. Doctors shrug. You're left piecing together your health like a jigsaw puzzle — in the dark.
+            </p>
+            <p className="text-[#5D4154]/90 font-medium mt-4">
+              Peritrack gives you the clarity, structure, and support you need.
+            </p>
+          </div>
+
+          <div className="mb-12">
+            <h3 className="text-lg md:text-xl font-semibold text-[#5D4154] mb-6">
+              🌿 Why Peritrack Exists
+            </h3>
+            <p className="text-[#5D4154]/80 mb-4">
+              Perimenopause is a deeply misunderstood stage of life. It can affect your mind, your mood, your sleep, your energy — and make you feel like a stranger in your own skin.
+            </p>
+            <p className="text-[#5D4154]/80 mb-4">
+              Most apps don't support this transition. Most doctors don't explain it fully.
+              Peritrack changes that. It's your daily guide, your insight engine, and your trusted health companion built specifically for this chapter of your life.
+            </p>
+          </div>
+
+          <div className="mb-16">
+            <h3 className="text-lg md:text-xl font-semibold text-[#5D4154] mb-6">
+              🔍 Here's What Peritrack Helps You Do
+            </h3>
+
+            {/* Feature 1: Track Symptoms */}
+            <Card className="mb-10 overflow-hidden hover:shadow-lg transition-all duration-300">
+              <CardHeader className="bg-gradient-to-r from-[#5D4154]/5 to-[#9b87f5]/10 p-6">
+                <h4 className="text-lg font-semibold text-[#5D4154]">
+                  ✅ 1. Track the Right Symptoms — Daily, Easily, and Accurately
+                </h4>
+              </CardHeader>
+              <CardContent className="p-6">
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-start">
+                    <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Log over 30+ symptoms (hot flashes, brain fog, libido, night sweats, mood swings, anxiety, more)</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Track intensity, timing, and possible triggers</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>See how symptoms shift week-by-week and across your cycle</span>
+                  </li>
+                </ul>
+                
+                {/* Visualization Chart */}
+                <div className="mt-6 bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                  <h5 className="text-base font-medium text-[#5D4154] mb-3">
+                    Get insights on when symptoms occur during your cycle
+                  </h5>
+                  <div className="h-64 mb-3">
+                    <PatternVisualization timeWindow={30} />
                   </div>
-                  <div className="p-5">
-                    <ul className="space-y-2 mb-4">
-                      <li className="flex items-start">
-                        <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Log over 30+ symptoms (hot flashes, brain fog, libido, night sweats, mood swings, anxiety, more)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Track intensity, timing, and possible triggers</span>
-                      </li>
-                      <li className="flex items-start">
-                        <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>See how symptoms shift week-by-week and across your cycle</span>
-                      </li>
-                    </ul>
-                    <p className="font-medium text-[#5D4154] italic">
-                      Benefit: You stop guessing and start seeing real, measurable patterns.
-                    </p>
-                  </div>
+                  <p className="text-sm text-[#5D4154]/80 text-center">
+                    Visualize patterns and connections between symptoms over time
+                  </p>
                 </div>
                 
-                {/* Feature 2 */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-                  <div className="bg-gradient-to-r from-[#F9F5FF] to-white p-4 border-b border-gray-100">
-                    <h4 className="flex items-center text-lg font-semibold text-[#5D4154]">
-                      <span className="mr-2">🔮</span>
-                      2. Know What's Coming — Before It Hits You
-                    </h4>
-                  </div>
-                  <div className="p-5">
-                    <p className="mb-3">
-                      Perimenopause symptoms can feel random — but they rarely are.
-                    </p>
-                    <p className="mb-3">
-                      Peritrack's system doesn't just track — it anticipates.
-                    </p>
-                    <p className="mb-3 font-medium">
-                      Using your personal data, the app shows you:
-                    </p>
-                    <ul className="space-y-2 mb-4">
-                      <li className="flex items-start">
-                        <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>How you're likely to feel in the coming week based on hormone trends</span>
-                      </li>
-                      <li className="flex items-start">
-                        <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>When to expect dips in energy or spikes in irritability</span>
-                      </li>
-                      <li className="flex items-start">
-                        <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>When your sleep is most likely to be disrupted</span>
-                      </li>
-                      <li className="flex items-start">
-                        <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>When you'll feel most grounded — so you can plan social, work, and self-care accordingly</span>
-                      </li>
-                    </ul>
-                    <p className="font-medium text-[#5D4154] italic">
-                      Benefit: You're not blindsided anymore. You're prepared.
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Additional features would go here but listing just these two for brevity */}
-                {/* We can continue with the other features in a similar pattern */}
-              </div>
-              
-              {/* Here's a summary card for the other features */}
-              <div className="mt-6 bg-[#F9F5FF]/40 rounded-lg p-5 shadow-sm border border-[#9b87f5]/20">
-                <p className="font-medium text-center text-[#5D4154] mb-3">
-                  And much more to help you take control of your perimenopause journey:
+                <p className="mt-6 font-medium text-[#5D4154]">
+                  Benefit: You stop guessing and start seeing real, measurable patterns.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="flex items-start">
-                    <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2 text-sm flex-shrink-0">🧘‍♀️</span>
-                    <span className="text-sm">Daily science-backed lifestyle recommendations</span>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2 text-sm flex-shrink-0">🤖</span>
-                    <span className="text-sm">Luna AI: your 24/7 hormone companion</span>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2 text-sm flex-shrink-0">📊</span>
-                    <span className="text-sm">Organized lab results & hormone tracking</span>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2 text-sm flex-shrink-0">🩺</span>
-                    <span className="text-sm">Doctor visit prep & symptom reports</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
 
-            {/* Transformation Table */}
-            <div className="mb-10">
-              <h3 className="flex justify-center items-center text-xl font-bold text-[#5D4154] mb-6">
-                <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2">💡</span>
-                The Real Transformation
-              </h3>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 shadow-md rounded-lg overflow-hidden">
-                <div className="bg-white p-5">
-                  <h4 className="font-semibold text-[#5D4154] mb-4 text-center">
-                    Without Peritrack
+            {/* Feature 2: Know What's Coming */}
+            <Card className="mb-10 overflow-hidden hover:shadow-lg transition-all duration-300">
+              <CardHeader className="bg-gradient-to-r from-[#9b87f5]/10 to-[#5D4154]/5 p-6">
+                <h4 className="text-lg font-semibold text-[#5D4154]">
+                  🔮 2. Know What's Coming — Before It Hits You
+                </h4>
+              </CardHeader>
+              <CardContent className="p-6">
+                <p className="mb-4 text-[#5D4154]/80">
+                  Perimenopause symptoms can feel random — but they rarely are.
+                </p>
+                <p className="mb-4 text-[#5D4154]/80">
+                  Peritrack's system doesn't just track — it anticipates.
+                </p>
+                <p className="mb-4 text-[#5D4154]/80">
+                  Using your personal data, the app shows you:
+                </p>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-start">
+                    <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>How you're likely to feel in the coming week based on hormone trends</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>When to expect dips in energy or spikes in irritability</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>When your sleep is most likely to be disrupted</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>When you'll feel most grounded — so you can plan social, work, and self-care accordingly</span>
+                  </li>
+                </ul>
+                <p className="font-medium text-[#5D4154]">
+                  Benefit: You're not blindsided anymore. You're prepared.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Remaining features (3-7) */}
+            {/* Feature 3: Daily Lifestyle Recommendations */}
+            <Card className="mb-10 overflow-hidden hover:shadow-lg transition-all duration-300">
+              <CardHeader className="bg-gradient-to-r from-[#5D4154]/5 to-[#9b87f5]/10 p-6">
+                <h4 className="text-lg font-semibold text-[#5D4154]">
+                  🧘‍♀️ 3. Get Daily Lifestyle Recommendations — Backed by Real Hormone Science
+                </h4>
+              </CardHeader>
+              <CardContent className="p-6">
+                <p className="mb-4 text-[#5D4154]/80">
+                  Stop scrolling forums. Start getting guidance that's personal, evidence-based, and action-ready.
+                </p>
+                <p className="mb-4 text-[#5D4154]/80">
+                  Every week, Peritrack recommends:
+                </p>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-start">
+                    <span className="mr-2">🥗</span>
+                    <span>Foods that help balance your hormones (e.g., phytoestrogens, magnesium-rich foods)</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2">🏃‍♀️</span>
+                    <span>Exercise types based on your hormone profile (e.g., strength vs. low-impact)</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2">💊</span>
+                    <span>Supplement guidance with references and educational insights</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2">🧘</span>
+                    <span>Meditation and stress tools to help regulate cortisol</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2">💉</span>
+                    <span>Hormone Replacement Therapy (HRT) guidance based on your pattern — so you know what to ask if you're considering it</span>
+                  </li>
+                </ul>
+                <p className="font-medium text-[#5D4154]">
+                  Benefit: You stop relying on trial-and-error and start feeling better with a clear plan.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Condensing remaining features for brevity - you can expand these in a similar fashion */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+              {/* Feature 4: Luna AI */}
+              <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 h-full">
+                <CardHeader className="bg-gradient-to-r from-[#9b87f5]/10 to-[#5D4154]/5 p-5">
+                  <h4 className="text-lg font-semibold text-[#5D4154]">
+                    🤖 4. Access Luna — Your 24/7 AI Hormone Companion
                   </h4>
-                  <ul className="space-y-4">
+                </CardHeader>
+                <CardContent className="p-5">
+                  <p className="mb-3 text-[#5D4154]/80">
+                    Luna is your private support system for when you're overwhelmed, curious, or just need fast answers.
+                  </p>
+                  <ul className="space-y-2">
                     <li className="flex items-start">
-                      <Check className="h-4 w-4 text-red-500 mr-2 mt-1 flex-shrink-0" />
-                      <span>Waking up anxious and exhausted</span>
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Ask anything about your symptoms</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="h-4 w-4 text-red-500 mr-2 mt-1 flex-shrink-0" />
-                      <span>Tracking symptoms on sticky notes</span>
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Learn what labs mean</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="h-4 w-4 text-red-500 mr-2 mt-1 flex-shrink-0" />
-                      <span>Trying random supplements</span>
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Get personalized coaching</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="h-4 w-4 text-red-500 mr-2 mt-1 flex-shrink-0" />
-                      <span>Crying after doctor visits</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Check className="h-4 w-4 text-red-500 mr-2 mt-1 flex-shrink-0" />
-                      <span>Feeling alone</span>
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Feel heard and understood</span>
                     </li>
                   </ul>
-                </div>
-                
-                <div className="bg-[#F9F5FF] p-5">
-                  <h4 className="font-semibold text-[#5D4154] mb-4 text-center">
-                    With Peritrack
+                </CardContent>
+              </Card>
+
+              {/* Feature 5: Lab Results */}
+              <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 h-full">
+                <CardHeader className="bg-gradient-to-r from-[#5D4154]/5 to-[#9b87f5]/10 p-5">
+                  <h4 className="text-lg font-semibold text-[#5D4154]">
+                    📊 5. Organize Your Hormones and Lab Results
                   </h4>
-                  <ul className="space-y-4">
+                </CardHeader>
+                <CardContent className="p-5">
+                  <ul className="space-y-2">
                     <li className="flex items-start">
-                      <Check className="h-4 w-4 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
-                      <span>Knowing it's progesterone — and how to fix it</span>
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Upload your test results</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="h-4 w-4 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
-                      <span>Digital dashboard with trends and predictions</span>
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Categorize by hormone and date</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="h-4 w-4 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
-                      <span>Clear, customized guidance that works</span>
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Get simple explanations</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="h-4 w-4 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
-                      <span>Walking in prepared and empowered</span>
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Track changes over time</span>
+                    </li>
+                  </ul>
+                  <p className="mt-3 text-sm font-medium text-[#5D4154]">
+                    Benefit: No more wondering what "low estrogen" means
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Feature 6: Doctor Visit Prep */}
+              <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 h-full">
+                <CardHeader className="bg-gradient-to-r from-[#9b87f5]/10 to-[#5D4154]/5 p-5">
+                  <h4 className="text-lg font-semibold text-[#5D4154]">
+                    🩺 6. Walk Into Every Doctor Visit Prepared
+                  </h4>
+                </CardHeader>
+                <CardContent className="p-5">
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Print-friendly reports for doctors</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="h-4 w-4 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
-                      <span>Being part of a hormone-savvy support circle</span>
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Full symptom + hormone summary</span>
                     </li>
+                    <li className="flex items-start">
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Suggested questions to ask</span>
+                    </li>
+                  </ul>
+                  <p className="mt-3 text-sm font-medium text-[#5D4154]">
+                    Benefit: Become the most informed patient
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Feature 7: Support */}
+              <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 h-full">
+                <CardHeader className="bg-gradient-to-r from-[#5D4154]/5 to-[#9b87f5]/10 p-5">
+                  <h4 className="text-lg font-semibold text-[#5D4154]">
+                    🤝 7. You're Not Just Using an App — You're Getting Real Support
+                  </h4>
+                </CardHeader>
+                <CardContent className="p-5">
+                  <p className="mb-3 text-[#5D4154]/80">
+                    This is more than a tracker. It's a system for getting your life back.
+                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Educational guides</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Bonus sessions on hormonal balance</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Advanced hormone testing partnerships</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* The Real Transformation */}
+          <div className="mb-16">
+            <h3 className="text-lg md:text-xl font-semibold text-[#5D4154] mb-6">
+              💡 The Real Transformation
+            </h3>
+            <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+              <div className="grid grid-cols-2 divide-x divide-gray-200">
+                <div className="p-5">
+                  <h4 className="text-base font-medium text-[#5D4154] mb-4">Without Peritrack</h4>
+                  <ul className="space-y-3">
+                    <li className="text-[#5D4154]/80">Waking up anxious and exhausted</li>
+                    <li className="text-[#5D4154]/80">Tracking symptoms on sticky notes</li>
+                    <li className="text-[#5D4154]/80">Trying random supplements</li>
+                    <li className="text-[#5D4154]/80">Crying after doctor visits</li>
+                    <li className="text-[#5D4154]/80">Feeling alone</li>
+                  </ul>
+                </div>
+                <div className="p-5 bg-[#F9F5FF]/30">
+                  <h4 className="text-base font-medium text-[#5D4154] mb-4">With Peritrack</h4>
+                  <ul className="space-y-3">
+                    <li className="text-[#5D4154]/90 font-medium">Knowing it's progesterone — and how to fix it</li>
+                    <li className="text-[#5D4154]/90 font-medium">Digital dashboard with trends and predictions</li>
+                    <li className="text-[#5D4154]/90 font-medium">Clear, customized guidance that works</li>
+                    <li className="text-[#5D4154]/90 font-medium">Walking in prepared and empowered</li>
+                    <li className="text-[#5D4154]/90 font-medium">Being part of a hormone-savvy support circle</li>
                   </ul>
                 </div>
               </div>
             </div>
-            
-            {/* Membership Section */}
-            <div className="mb-12">
-              <h3 className="flex justify-center items-center text-xl font-bold text-[#5D4154] mb-6">
-                <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2">🎁</span>
-                Your Membership Includes:
-              </h3>
-              
-              <div className="overflow-x-auto mb-8">
-                <table className="w-full mb-6 shadow-sm">
-                  <thead>
-                    <tr className="bg-[#5D4154] text-white">
-                      <th className="p-3 text-left">Feature</th>
-                      <th className="p-3 text-center">Monthly</th>
-                      <th className="p-3 text-center">Annual (Best Value)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="border-b border-gray-200">
-                      <td className="p-3 bg-white">Full symptom tracker</td>
-                      <td className="p-3 text-center bg-white">✅</td>
-                      <td className="p-3 text-center bg-[#F9F5FF]/30">✅</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="p-3 bg-white">Future prediction engine</td>
-                      <td className="p-3 text-center bg-white">✅</td>
-                      <td className="p-3 text-center bg-[#F9F5FF]/30">✅</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="p-3 bg-white">Lab result analyzer</td>
-                      <td className="p-3 text-center bg-white">✅</td>
-                      <td className="p-3 text-center bg-[#F9F5FF]/30">✅</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="p-3 bg-white">Luna AI hormone coach</td>
-                      <td className="p-3 text-center bg-white">✅</td>
-                      <td className="p-3 text-center bg-[#F9F5FF]/30">✅</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="p-3 bg-white">Personalized lifestyle recommendations</td>
-                      <td className="p-3 text-center bg-white">✅</td>
-                      <td className="p-3 text-center bg-[#F9F5FF]/30">✅</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="p-3 bg-white">HRT education & support</td>
-                      <td className="p-3 text-center bg-white">✅</td>
-                      <td className="p-3 text-center bg-[#F9F5FF]/30">✅</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="p-3 bg-white">Doctor visit prep tools</td>
-                      <td className="p-3 text-center bg-white">✅</td>
-                      <td className="p-3 text-center bg-[#F9F5FF]/30">✅</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="p-3 bg-white">Quarterly hormone Q&A sessions</td>
-                      <td className="p-3 text-center bg-white">❌</td>
-                      <td className="p-3 text-center bg-[#F9F5FF]/30">✅</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="p-3 bg-white">Bonus educational guides</td>
-                      <td className="p-3 text-center bg-white">✅</td>
-                      <td className="p-3 text-center bg-[#F9F5FF]/30">✅</td>
-                    </tr>
-                    <tr className="bg-[#F9F5FF]/30">
-                      <td className="p-3 font-semibold">Cost</td>
-                      <td className="p-3 text-center font-semibold">$9.99/month</td>
-                      <td className="p-3 text-center font-semibold">$99/year (Save $20.88)</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                {/* Monthly Option */}
-                <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all">
-                  <div className="bg-gradient-to-r from-[#F9F5FF]/50 to-white p-6 border-b border-gray-100">
-                    <h4 className="text-lg font-semibold text-[#5D4154]">Monthly Plan</h4>
-                    <div className="flex items-end mt-1">
-                      <span className="text-3xl font-bold text-[#5D4154]">$9.99</span>
-                      <span className="text-gray-600 ml-1">/month</span>
+          </div>
+
+          {/* Pricing Section */}
+          <div className="mb-10">
+            <h3 className="text-lg md:text-xl font-semibold text-[#5D4154] mb-6 text-center">
+              🎁 Your Membership Includes:
+            </h3>
+
+            <Tabs defaultValue="annual" className="w-full max-w-3xl mx-auto">
+              <TabsList className="grid grid-cols-2 w-full max-w-md mx-auto mb-8">
+                <TabsTrigger value="monthly">Monthly</TabsTrigger>
+                <TabsTrigger value="annual">Annual (Best Value)</TabsTrigger>
+              </TabsList>
+
+              <div className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-200">
+                <div className="p-6 border-b border-gray-200 bg-[#F9F5FF]/20">
+                  <div className="grid grid-cols-8 gap-2">
+                    <div className="col-span-4">
+                      <h4 className="font-medium text-[#5D4154]">Feature</h4>
+                    </div>
+                    <div className="col-span-2 text-center">
+                      <h4 className="font-medium text-[#5D4154]">Monthly</h4>
+                    </div>
+                    <div className="col-span-2 text-center">
+                      <h4 className="font-medium text-[#5D4154]">Annual (Best Value)</h4>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="divide-y divide-gray-200">
+                  {[
+                    "Full symptom tracker",
+                    "Future prediction engine",
+                    "Lab result analyzer",
+                    "Luna AI hormone coach",
+                    "Personalized lifestyle recommendations",
+                    "HRT education & support",
+                    "Doctor visit prep tools"
+                  ].map((feature, index) => (
+                    <div key={index} className="p-4">
+                      <div className="grid grid-cols-8 gap-2 items-center">
+                        <div className="col-span-4">
+                          <span className="text-[#5D4154]/90">{feature}</span>
+                        </div>
+                        <div className="col-span-2 text-center">
+                          <Check className="h-5 w-5 text-green-500 mx-auto" />
+                        </div>
+                        <div className="col-span-2 text-center">
+                          <Check className="h-5 w-5 text-green-500 mx-auto" />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {/* Special feature for annual only */}
+                  <div className="p-4 bg-[#F9F5FF]/20">
+                    <div className="grid grid-cols-8 gap-2 items-center">
+                      <div className="col-span-4">
+                        <span className="text-[#5D4154]/90 font-medium">Quarterly hormone Q&A sessions</span>
+                      </div>
+                      <div className="col-span-2 text-center">
+                        <span className="inline-block w-5 h-px bg-gray-300"></span>
+                      </div>
+                      <div className="col-span-2 text-center">
+                        <Check className="h-5 w-5 text-green-500 mx-auto" />
+                      </div>
                     </div>
                   </div>
                   
-                  <div className="p-6">
-                    <ul className="space-y-3 mb-6">
-                      <li className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-[#9b87f5] mr-2 flex-shrink-0" />
-                        <span>Full access to all features</span>
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-[#9b87f5] mr-2 flex-shrink-0" />
-                        <span>Luna AI hormone coach</span>
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-[#9b87f5] mr-2 flex-shrink-0" />
-                        <span>7-day free trial</span>
-                      </li>
-                    </ul>
-                    
-                    <Button 
-                      onClick={handleMonthlyClick}
-                      variant="outline"
-                      className="w-full h-12 border-[#9b87f5] text-[#5D4154] hover:bg-[#9b87f5]/10"
-                    >
-                      Start 7-Day Free Trial
-                    </Button>
-                  </div>
-                </div>
-                
-                {/* Annual Option */}
-                <div className="bg-white rounded-xl shadow-md overflow-hidden border-2 border-[#9b87f5] hover:shadow-lg transition-all relative">
-                  <div className="absolute top-0 right-0 bg-[#9b87f5] text-white px-3 py-1 text-sm font-bold rounded-bl-lg flex items-center">
-                    <Star className="h-3 w-3 mr-1" />
-                    BEST VALUE
-                  </div>
-                  
-                  <div className="bg-gradient-to-r from-[#F9F5FF]/80 to-white p-6 border-b border-gray-100">
-                    <h4 className="text-lg font-semibold text-[#5D4154]">Annual Plan</h4>
-                    <div className="flex items-end mt-1">
-                      <span className="text-3xl font-bold text-[#5D4154]">$99</span>
-                      <span className="text-gray-600 ml-1">/year</span>
-                      <span className="ml-2 text-sm text-green-600 font-semibold">Save $20.88</span>
+                  <div className="p-4">
+                    <div className="grid grid-cols-8 gap-2 items-center">
+                      <div className="col-span-4">
+                        <span className="text-[#5D4154]/90">Bonus educational guides</span>
+                      </div>
+                      <div className="col-span-2 text-center">
+                        <Check className="h-5 w-5 text-green-500 mx-auto" />
+                      </div>
+                      <div className="col-span-2 text-center">
+                        <Check className="h-5 w-5 text-green-500 mx-auto" />
+                      </div>
                     </div>
                   </div>
                   
-                  <div className="p-6">
-                    <ul className="space-y-3 mb-6">
-                      <li className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-[#9b87f5] mr-2 flex-shrink-0" />
-                        <span>All features in monthly plan</span>
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-[#9b87f5] mr-2 flex-shrink-0" />
-                        <span>Quarterly hormone Q&A sessions</span>
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-[#9b87f5] mr-2 flex-shrink-0" />
-                        <span>7-day free trial</span>
-                      </li>
-                    </ul>
-                    
-                    <Button 
-                      onClick={handleAnnualClick}
-                      className="w-full h-12 bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white"
-                    >
-                      Start 7-Day Free Trial
-                    </Button>
+                  {/* Cost row */}
+                  <div className="p-5 bg-[#F9F5FF]/30">
+                    <div className="grid grid-cols-8 gap-2 items-center">
+                      <div className="col-span-4">
+                        <span className="text-[#5D4154] font-semibold">Cost</span>
+                      </div>
+                      <div className="col-span-2 text-center">
+                        <span className="font-bold text-[#5D4154]">$9.99/month</span>
+                      </div>
+                      <div className="col-span-2 text-center">
+                        <span className="font-bold text-[#5D4154]">$99/year</span>
+                        <div className="text-xs text-green-600 mt-1">Save $20.88</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Why Start Today */}
-            <div className="mb-12 bg-[#F9F5FF]/50 p-6 rounded-lg border border-[#9b87f5]/20 shadow-sm">
-              <h3 className="flex items-center text-xl font-bold text-[#5D4154] mb-4">
-                <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2">🕒</span>
-                Why You Need to Start Today
+
+              {/* Call to action buttons */}
+              <TabsContent value="monthly" className="mt-8">
+                <Button 
+                  onClick={() => handleStartTrial('monthly')} 
+                  className="w-full max-w-sm mx-auto flex items-center justify-center py-6 text-lg bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white"
+                >
+                  Start 7-Day Free Trial
+                </Button>
+                <p className="text-center text-sm text-[#5D4154]/70 mt-3">
+                  No credit card required to start your trial
+                </p>
+              </TabsContent>
+              
+              <TabsContent value="annual" className="mt-8">
+                <Button 
+                  onClick={() => handleStartTrial('annual')} 
+                  className="w-full max-w-sm mx-auto flex items-center justify-center py-6 text-lg bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white"
+                >
+                  Start 7-Day Free Trial
+                </Button>
+                <p className="text-center text-sm text-[#5D4154]/70 mt-3">
+                  No credit card required to start your trial
+                </p>
+              </TabsContent>
+            </Tabs>
+          </div>
+
+          {/* Final sections */}
+          <div className="mb-10">
+            <div className="bg-[#5D4154]/5 p-5 md:p-8 rounded-lg mb-8">
+              <h3 className="text-lg md:text-xl font-semibold text-[#5D4154] mb-3">
+                🕒 Why You Need to Start Today
               </h3>
-              <p className="mb-4 text-gray-700">
-                Waiting for clarity often means waiting in suffering.<br />
+              <p className="text-[#5D4154]/80 mb-4">
+                Waiting for clarity often means waiting in suffering.
                 But you don't need to suffer to be taken seriously.
               </p>
-              <p className="mb-3 text-gray-700">
+              <p className="text-[#5D4154]/80">
                 With Peritrack:
               </p>
-              <ul className="space-y-2 mb-0 pl-6 list-disc text-gray-700">
-                <li>79% of users report better sleep in 2–3 weeks</li>
-                <li>68% feel more emotionally stable within 30 days</li>
-                <li>84% report feeling more confident at their next medical appointment</li>
+              <ul className="space-y-2 mt-3">
+                <li className="flex items-start">
+                  <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                  <span>79% of users report better sleep in 2–3 weeks</span>
+                </li>
+                <li className="flex items-start">
+                  <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                  <span>68% feel more emotionally stable within 30 days</span>
+                </li>
+                <li className="flex items-start">
+                  <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                  <span>84% report feeling more confident at their next medical appointment</span>
+                </li>
               </ul>
             </div>
             
-            {/* Final CTA */}
-            <div className="text-center mb-6">
-              <h3 className="text-xl font-bold text-[#5D4154] mb-4">
+            <div className="text-center mb-8">
+              <h3 className="text-lg md:text-xl font-semibold text-[#5D4154] mb-3">
                 🛑 Stop Wondering. Start Understanding.
               </h3>
-              <p className="mb-6 text-gray-700">
-                You're not losing your mind. You're losing progesterone.<br />
-                And with Peritrack, you can start balancing your hormones today — naturally, personally, and powerfully.
+              <p className="text-[#5D4154]/80 mb-5">
+                You're not losing your mind. You're losing progesterone.
+                <br />And with Peritrack, you can start balancing your hormones today — naturally, personally, and powerfully.
               </p>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto">
-                <Button 
-                  onClick={handleMonthlyClick}
-                  variant="outline" 
-                  className="h-12 border-[#9b87f5] text-[#5D4154] hover:bg-[#9b87f5]/10"
-                >
-                  Start Monthly Trial
-                </Button>
-                <Button 
-                  onClick={handleAnnualClick}
-                  className="h-12 bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white"
-                >
-                  Start Annual Trial
-                </Button>
-              </div>
-              
-              <p className="mt-3 text-sm text-gray-600">
-                Start today and take control of your perimenopause journey.
+              <Button 
+                onClick={() => handleStartTrial('annual')}
+                className="bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white py-4 px-6 text-lg"
+              >
+                👉 Start Your Free 7-Day Trial Now
+              </Button>
+              <p className="text-center text-sm text-[#5D4154]/70 mt-3">
+                No credit card. No risk.
+                <br />Just results, relief, and the roadmap you deserve.
               </p>
             </div>
           </div>
         </div>
-      </CardContent>
-      
-      {/* Lead Capture Modals */}
-      <LeadCaptureModal
-        isOpen={isMonthlyModalOpen}
-        onClose={() => handleModalClose("monthly")}
-        pricingPlan="monthly"
-        source="free_trial"
-        quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
-        navigateToDashboard={false}
-      />
-      
-      <LeadCaptureModal
-        isOpen={isAnnualModalOpen}
-        onClose={() => handleModalClose("annual")}
-        pricingPlan="annual"
-        source="free_trial"
-        quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
-        navigateToDashboard={false}
-      />
-    </Card>
+
+        <LeadCaptureModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          pricingPlan={selectedPlan}
+          source="free_trial"
+        />
+      </div>
+    </section>
   );
 };
 

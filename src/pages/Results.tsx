@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import LoadingSpinner from "@/components/results/LoadingSpinner";
 import { calculateHormoneScores } from "@/utils/scoreCalculation";
+import PatternVisualization from "@/components/insights/PatternVisualization";
 
 // Import our components for the results page
 import ResultsHeader from "@/components/results/ResultsHeader";
@@ -13,6 +14,7 @@ import HormoneInsights from "@/components/results/HormoneInsights";
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
 import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
+import ResultsSummary from "@/components/results/ResultsSummary";
 
 interface QuizResults {
   score: number;
@@ -119,6 +121,15 @@ const Results = () => {
             firstName={capitalizedFirstName} 
             scoreCategory={scoreCategory}
             onStartTrial={handleTrialCTA}
+          />
+          
+          {/* Results Summary Component with Hormone Visualization */}
+          <ResultsSummary
+            score={hormoneScores.overall}
+            scoreCategory={scoreCategory}
+            primaryHormone={hormoneScores.primaryHormone}
+            secondaryHormones={["estrogen", "testosterone"].filter(h => h !== hormoneScores.primaryHormone)}
+            symptoms={hormoneScores.primarySymptoms}
           />
           
           {/* Personalized Assessment */}
