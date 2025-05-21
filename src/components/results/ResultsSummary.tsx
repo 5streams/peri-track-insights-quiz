@@ -1,7 +1,7 @@
-
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import HormoneVisualization from "./HormoneVisualization";
+import { Progress } from "@/components/ui/progress";
 
 interface ResultsSummaryProps {
   score: number;
@@ -65,6 +65,23 @@ const ResultsSummary: React.FC<ResultsSummaryProps> = ({
       default:
         return `Based on your responses, we've analyzed your hormone pattern in relation to your reported symptoms of ${symptomsText}.`;
     }
+  };
+  
+  // Get symptom severity data
+  const getSymptomSeverity = (index: number) => {
+    const baseScores = {
+      minimal: [20, 15, 10],
+      early: [45, 40, 30],
+      moderate: [65, 60, 50],
+      significant: [85, 75, 70]
+    };
+    
+    const category = scoreCategory as keyof typeof baseScores;
+    const baseScore = baseScores[category]?.[index] || 50;
+    
+    // Add some randomization but keep within reasonable range
+    const variance = Math.floor(Math.random() * 11) - 5; // -5 to +5
+    return Math.min(95, Math.max(15, baseScore + variance));
   };
   
   // Get hormone explanation texts based on score category and primary hormone
@@ -137,6 +154,33 @@ const ResultsSummary: React.FC<ResultsSummaryProps> = ({
         </p>
         
         {validationMessage}
+        
+        {/* Symptom Severity Section */}
+        {scoreCategory !== "minimal" && (
+          <div className="mb-6">
+            <h4 className="font-semibold text-[#5D4154] mb-3">YOUR PRIMARY CONCERNS:</h4>
+            <div className="space-y-4">
+              {formattedSymptoms.slice(0, 3).map((symptom, index) => (
+                <div key={index} className="bg-white p-3 rounded-lg border border-gray-200">
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="font-medium text-[#5D4154]">{symptom}</span>
+                    <span className="text-sm font-medium text-gray-500">
+                      {getSymptomSeverity(index)}/100
+                    </span>
+                  </div>
+                  <Progress 
+                    value={getSymptomSeverity(index)} 
+                    className="h-2" 
+                    style={{
+                      background: "#e5e7eb", 
+                      "--tw-progress-primary": `${index === 0 ? "#FF9B85" : index === 1 ? "#F9C784" : "#A7C4A0"}`
+                    } as any}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         
         <div className="hormone-status">
           <div className="w-full h-48 md:h-64 bg-white rounded-lg mb-4">

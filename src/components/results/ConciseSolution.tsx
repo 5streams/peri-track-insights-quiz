@@ -4,13 +4,17 @@ import {
   Card,
   CardContent
 } from "@/components/ui/card";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface ConciseSolutionProps {
   primaryHormone: string;
 }
 
 const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => {
+  const navigate = useNavigate();
+
   // Get hormone-specific improvement stats
   const getImprovementData = () => {
     switch (primaryHormone.toLowerCase()) {
@@ -21,7 +25,9 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
           wellbeing: "64%",
           sleepWeeks: "4-8",
           anxietyWeeks: "5-7",
-          wellbeingWeeks: "6-10"
+          wellbeingWeeks: "6-10",
+          primaryBenefit: "sleep quality",
+          secondaryBenefit: "anxiety reduction"
         };
       case "estradiol":
         return {
@@ -30,7 +36,9 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
           wellbeing: "68%",
           sleepWeeks: "5-9",
           anxietyWeeks: "4-8",
-          wellbeingWeeks: "6-9"
+          wellbeingWeeks: "6-9",
+          primaryBenefit: "mood stability",
+          secondaryBenefit: "temperature regulation"
         };
       case "testosterone":
         return {
@@ -39,7 +47,9 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
           wellbeing: "70%",
           sleepWeeks: "6-10",
           anxietyWeeks: "5-9",
-          wellbeingWeeks: "4-8"
+          wellbeingWeeks: "4-8",
+          primaryBenefit: "energy levels",
+          secondaryBenefit: "mental clarity"
         };
       default:
         return {
@@ -48,12 +58,22 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
           wellbeing: "67%",
           sleepWeeks: "5-9",
           anxietyWeeks: "5-8",
-          wellbeingWeeks: "6-9"
+          wellbeingWeeks: "6-9",
+          primaryBenefit: "overall wellbeing",
+          secondaryBenefit: "symptom management"
         };
     }
   };
   
   const improvementData = getImprovementData();
+  
+  // Handle trial CTA
+  const handleTrialCTA = () => {
+    // Set trial start date
+    localStorage.setItem("trialStartDate", new Date().toString());
+    // Navigate to dashboard
+    navigate("/dashboard");
+  };
 
   return (
     <Card className="mb-6 md:mb-8 overflow-hidden reveal-section transform opacity-0 hover:shadow-lg transition-all duration-300 border-t-4 border-[#A7C4A0]">
@@ -67,25 +87,47 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
         </p>
         
         <div className="bg-[#FDFCFB] border-2 border-[#E2D1C3]/30 rounded-lg p-4 mb-6">
-          <div className="flex flex-col md:flex-row justify-between gap-4 text-center">
+          <div className="flex flex-col md:flex-row justify-between gap-4 mb-4 text-center">
             <div className="flex-1 p-3 bg-[#5D4154]/5 rounded-lg">
               <div className="text-[#5D4154] font-bold mb-1">TRACK</div>
               <div className="text-sm text-gray-600">Identify your unique patterns</div>
             </div>
-            <div className="hidden md:block text-[#5D4154] self-center">→</div>
+            <div className="hidden md:flex items-center justify-center text-[#5D4154]">
+              <ArrowRight className="h-5 w-5" />
+            </div>
             <div className="flex-1 p-3 bg-[#5D4154]/5 rounded-lg">
               <div className="text-[#5D4154] font-bold mb-1">TEST</div>
               <div className="text-sm text-gray-600">Confirm your exact hormone levels</div>
             </div>
-            <div className="hidden md:block text-[#5D4154] self-center">→</div>
+            <div className="hidden md:flex items-center justify-center text-[#5D4154]">
+              <ArrowRight className="h-5 w-5" />
+            </div>
             <div className="flex-1 p-3 bg-[#5D4154]/5 rounded-lg">
               <div className="text-[#5D4154] font-bold mb-1">REBALANCE</div>
               <div className="text-sm text-gray-600">Implement your personalized protocol</div>
             </div>
           </div>
-          <p className="mt-4 text-sm text-gray-600 text-center">
-            Our 3-step system designed specifically for your {primaryHormone.toLowerCase()} imbalance
-          </p>
+          
+          <div className="text-center">
+            <p className="mt-2 text-sm text-gray-600">
+              Our 3-step system designed specifically for your {primaryHormone.toLowerCase()} imbalance
+            </p>
+            
+            <div className="mt-4 pt-4 border-t border-dashed border-[#E2D1C3]">
+              <p className="text-[#5D4154] font-medium mb-3">
+                Your dashboard is <span className="font-bold">ready</span> with specific insights for your hormone pattern
+              </p>
+              
+              <Button
+                onClick={handleTrialCTA}
+                className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/90 text-white font-medium py-2 px-6 rounded-full"
+              >
+                Start My Free Trial
+              </Button>
+              
+              <p className="mt-2 text-xs text-gray-500">No credit card required. Cancel anytime.</p>
+            </div>
+          </div>
         </div>
         
         <p className="font-medium text-[#5D4154] mb-3">
@@ -122,6 +164,15 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
             <div className="ml-2">
               <p className="text-base text-gray-700">
                 <span className="font-semibold">{improvementData.wellbeing}</span> improvement in overall wellbeing within <span className="font-semibold">{improvementData.wellbeingWeeks} weeks</span>
+              </p>
+            </div>
+          </div>
+          
+          <div className="mt-5 pt-4 border-t border-gray-100">
+            <div className="bg-[#FFECD6]/30 p-3 rounded-lg">
+              <p className="text-[#5D4154] font-medium text-sm">
+                <span className="font-bold">SPECIAL BONUS:</span> Start today and receive our "{primaryHormone === "progesterone" ? "Sleep Rescue" : primaryHormone === "estradiol" ? "Mood Balance" : "Energy Boost"} Protocol" - 
+                custom-designed for your specific {improvementData.primaryBenefit} and {improvementData.secondaryBenefit} needs ($47 value - FREE)
               </p>
             </div>
           </div>
