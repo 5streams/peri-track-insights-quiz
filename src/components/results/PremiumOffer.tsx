@@ -6,7 +6,7 @@ import {
   CardContent
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, CheckCircle } from "lucide-react";
+import { Check, CheckCircle, DollarSign } from "lucide-react";
 import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
 
 interface PremiumOfferProps {
@@ -17,6 +17,7 @@ const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [quizResults, setQuizResults] = useState<any>(null);
+  const [pricingPlan, setPricingPlan] = useState<"monthly" | "annual">("monthly");
   
   // Get hormone-specific timeframe
   const getTimeframe = () => {
@@ -38,6 +39,12 @@ const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
         console.error("Error parsing stored quiz results:", error);
       }
     }
+    
+    // Check if a pricing plan is stored
+    const storedPlan = localStorage.getItem("selectedPricingPlan");
+    if (storedPlan && (storedPlan === "monthly" || storedPlan === "annual")) {
+      setPricingPlan(storedPlan);
+    }
   }, []);
   
   const handleStartTrial = () => {
@@ -51,6 +58,11 @@ const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
     localStorage.setItem("trialStartDate", new Date().toString());
     // Navigate to dashboard
     navigate("/dashboard");
+  };
+
+  // Get price display text based on selected plan
+  const getPriceDisplay = () => {
+    return pricingPlan === "monthly" ? "$9.99" : "$99";
   };
 
   return (
@@ -115,9 +127,10 @@ const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
           <div className="text-center mb-5">
             <Button 
               onClick={handleStartTrial}
-              className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/90 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 w-full md:w-auto text-base md:text-lg"
+              className="bg-[#F97316] hover:bg-[#F97316]/90 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 w-full md:w-auto text-base md:text-lg"
             >
-              START MY FREE TRIAL NOW
+              <DollarSign className="h-5 w-5 mr-1" />
+              START MY FREE TRIAL ({getPriceDisplay()})
             </Button>
           </div>
           
@@ -131,7 +144,7 @@ const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
       <LeadCaptureModal
         isOpen={isModalOpen}
         onClose={handleModalClose}
-        pricingPlan="monthly"
+        pricingPlan={pricingPlan}
         source="free_trial"
         quizResults={quizResults}
       />

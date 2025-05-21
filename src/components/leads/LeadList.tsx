@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -41,6 +40,20 @@ const LeadList: React.FC = () => {
     
     return () => clearInterval(interval);
   }, []);
+  
+  // Format pricing plan for display
+  const formatPricingPlan = (plan: string | null | undefined) => {
+    if (!plan) return '-';
+    
+    switch(plan) {
+      case 'monthly':
+        return '$9.99 (Monthly)';
+      case 'annual':
+        return '$99 (Annual)';
+      default:
+        return plan;
+    }
+  };
   
   // Filter leads based on search term and source filter
   const filteredLeads = leads.filter(lead => {
@@ -204,7 +217,17 @@ const LeadList: React.FC = () => {
                       {lead.source === 'quiz_results' ? 'Quiz Results' : 'Free Trial'}
                     </span>
                   </TableCell>
-                  <TableCell>{lead.pricingPlan || '-'}</TableCell>
+                  <TableCell>
+                    {lead.pricingPlan ? (
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        lead.pricingPlan === 'monthly' 
+                          ? 'bg-orange-100 text-orange-800' 
+                          : 'bg-purple-100 text-purple-800'
+                      }`}>
+                        {formatPricingPlan(lead.pricingPlan)}
+                      </span>
+                    ) : '-'}
+                  </TableCell>
                   <TableCell className="text-right">{formatDate(lead.timestamp)}</TableCell>
                 </TableRow>
               ))}
