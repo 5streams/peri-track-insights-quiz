@@ -10,16 +10,9 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
-import LunaAIFeature from "@/components/results/LunaAIFeature";
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
 import EmotionalSupport from "@/components/results/EmotionalSupport";
-import SubscriptionOptions from "@/components/results/SubscriptionOptions";
-import FreeTrial from "@/components/results/FreeTrial";
-import ComparisonTable from "@/components/results/ComparisonTable";
-import Testimonials from "@/components/results/Testimonials";
-import Security from "@/components/results/Security";
-import FutureWithoutIntervention from "@/components/results/FutureWithoutIntervention";
-import PeritrackIntro from "@/components/results/PeritrackIntro";
+import ValuePropositionNew from "@/components/results/ValuePropositionNew";
 
 interface QuizResults {
   score: number;
@@ -151,36 +144,11 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Future Without Intervention */}
-          <FutureWithoutIntervention firstName={capitalizedFirstName} />
-          
-          {/* PeritrackIntro with trial options */}
-          <PeritrackIntro onStartTrial={handleTrialCTA} />
-          
-          {/* Free Trial CTA */}
-          <FreeTrial 
+          {/* New Value Proposition with sales copy */}
+          <ValuePropositionNew
+            firstName={capitalizedFirstName}
             onStartTrial={handleTrialCTA}
-            primaryHormone={hormoneScores.primaryHormone}
-            scoreCategory={scoreCategory}
           />
-          
-          {/* Luna AI Perimenopause Companion Feature */}
-          <LunaAIFeature onStartTrial={handleTrialCTA} />
-          
-          {/* Subscription Options */}
-          <SubscriptionOptions onStartTrial={handleTrialCTA} />
-          
-          {/* Comparison Table */}
-          <ComparisonTable />
-          
-          {/* Testimonials */}
-          <Testimonials 
-            scoreCategory={scoreCategory}
-            primarySymptom={hormoneScores.primarySymptoms[0] || ""}
-          />
-          
-          {/* Security Badges */}
-          <Security />
           
           {/* Back to Quiz Button */}
           <div className="text-center mb-8 mt-10">
