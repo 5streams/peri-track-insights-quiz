@@ -31,7 +31,7 @@ const SymptomSelector: React.FC<SymptomSelectorProps> = ({
     physical: [
       "Hot Flashes", 
       "Night Sweats", 
-      "Vaginal Dryness/Discomfort", 
+      "Vaginal Dryness", 
       "Joint Pain", 
       "Muscle Pain", 
       "Weight Changes", 
@@ -71,7 +71,7 @@ const SymptomSelector: React.FC<SymptomSelectorProps> = ({
     "Irregular Periods",
     "Brain Fog/Cognitive Changes", 
     "Fatigue/Energy Fluctuations", 
-    "Vaginal Dryness/Discomfort", 
+    "Vaginal Dryness", 
     "Joint/Muscle Pain", 
     "Weight Changes", 
     "Headaches/Migraines"
@@ -144,11 +144,11 @@ const SymptomSelector: React.FC<SymptomSelectorProps> = ({
               }`}
               onClick={() => toggleSymptom(symptom)}
             >
-              <span className="text-sm">{symptom}</span>
+              <span className="text-sm truncate mr-2">{symptom}</span>
               {isSelected ? (
-                <Check className="h-4 w-4 text-[#A7C4A0]" />
+                <Check className="h-4 w-4 text-[#A7C4A0] flex-shrink-0" />
               ) : (
-                <Plus className="h-4 w-4 text-gray-400" />
+                <Plus className="h-4 w-4 text-gray-400 flex-shrink-0" />
               )}
             </button>
           );
