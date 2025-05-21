@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -21,42 +21,82 @@ const DailySymptomTracker: React.FC<DailySymptomTrackerProps> = ({ selectedDate 
   const [notes, setNotes] = useState("");
   const { toast } = useToast();
 
+  // Load existing data when the selected date changes
+  useEffect(() => {
+    loadTrackingData();
+  }, [selectedDate]);
+
+  const loadTrackingData = () => {
+    try {
+      const existingData = localStorage.getItem("trackingData");
+      if (!existingData) return;
+      
+      const trackingHistory = JSON.parse(existingData);
+      const dateData = trackingHistory.find(
+        (item: any) => new Date(item.date).toDateString() === selectedDate.toDateString()
+      );
+      
+      if (dateData) {
+        setSelectedMood(dateData.mood);
+        setPhysicalSymptoms(dateData.symptoms.physical || []);
+        setEmotionalSymptoms(dateData.symptoms.emotional || []);
+        setSleepSymptoms(dateData.symptoms.sleep || []);
+        setNotes(dateData.notes || "");
+      } else {
+        // Reset form if no data exists for this date
+        setSelectedMood(null);
+        setPhysicalSymptoms([]);
+        setEmotionalSymptoms([]);
+        setSleepSymptoms([]);
+        setNotes("");
+      }
+    } catch (error) {
+      console.error("Error loading tracking data:", error);
+    }
+  };
+
   const handleSaveTracking = () => {
-    // In a real app, this would save to a database
-    // Could use localStorage for a demo version
-    
-    // Create a tracking object
-    const trackingData = {
-      date: selectedDate.toISOString(),
-      mood: selectedMood,
-      symptoms: {
-        physical: physicalSymptoms,
-        emotional: emotionalSymptoms,
-        sleep: sleepSymptoms
-      },
-      notes
-    };
-    
-    // Save to localStorage as demonstration
-    const existingData = localStorage.getItem("trackingData");
-    const trackingHistory = existingData ? JSON.parse(existingData) : [];
-    
-    // Remove any existing entry for this date
-    const filteredHistory = trackingHistory.filter(
-      (item: any) => new Date(item.date).toDateString() !== selectedDate.toDateString()
-    );
-    
-    // Add the new entry
-    localStorage.setItem(
-      "trackingData", 
-      JSON.stringify([...filteredHistory, trackingData])
-    );
-    
-    toast({
-      title: "Tracking saved",
-      description: "Your symptom data has been saved successfully.",
-      action: <Check className="h-4 w-4 text-green-500" />
-    });
+    try {
+      // Create a tracking object
+      const trackingData = {
+        date: selectedDate.toISOString(),
+        mood: selectedMood,
+        symptoms: {
+          physical: physicalSymptoms,
+          emotional: emotionalSymptoms,
+          sleep: sleepSymptoms
+        },
+        notes
+      };
+      
+      // Save to localStorage
+      const existingData = localStorage.getItem("trackingData");
+      const trackingHistory = existingData ? JSON.parse(existingData) : [];
+      
+      // Remove any existing entry for this date
+      const filteredHistory = trackingHistory.filter(
+        (item: any) => new Date(item.date).toDateString() !== selectedDate.toDateString()
+      );
+      
+      // Add the new entry
+      localStorage.setItem(
+        "trackingData", 
+        JSON.stringify([...filteredHistory, trackingData])
+      );
+      
+      toast({
+        title: "Tracking saved",
+        description: "Your symptom data has been saved successfully.",
+        action: <Check className="h-4 w-4 text-green-500" />
+      });
+    } catch (error) {
+      console.error("Error saving tracking data:", error);
+      toast({
+        title: "Error saving data",
+        description: "There was a problem saving your tracking data.",
+        variant: "destructive"
+      });
+    }
   };
 
   return (

@@ -14,6 +14,11 @@ const Tracking = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const navigate = useNavigate();
 
+  // Format for consistent date comparison
+  const formatDateForComparison = (date: Date) => {
+    return date.toISOString().split('T')[0];
+  };
+
   const goToPreviousDay = () => {
     setSelectedDate(prev => subDays(prev, 1));
   };
@@ -21,29 +26,25 @@ const Tracking = () => {
   const goToNextDay = () => {
     const tomorrow = addDays(new Date(), 1);
     // Don't allow selecting future dates
-    if (selectedDate < tomorrow) {
+    if (formatDateForComparison(selectedDate) < formatDateForComparison(tomorrow)) {
       setSelectedDate(prev => addDays(prev, 1));
     }
   };
 
   const isToday = (date: Date) => {
     const today = new Date();
-    return date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear();
+    return formatDateForComparison(date) === formatDateForComparison(today);
   };
   
   const isFutureDate = (date: Date) => {
     const tomorrow = addDays(new Date(), 1);
-    return date >= tomorrow;
+    return formatDateForComparison(date) >= formatDateForComparison(tomorrow);
   };
 
   const formattedDate = format(selectedDate, "EEEE, MMMM d, yyyy");
   
   return (
     <div className="min-h-screen bg-[#F9F7F5] flex">
-      {/* Sidebar (reused from Dashboard) would be here */}
-      
       {/* Main Content */}
       <div className="flex-1 overflow-auto">
         {/* Header */}

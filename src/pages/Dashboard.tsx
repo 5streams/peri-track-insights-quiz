@@ -16,16 +16,33 @@ const Dashboard = () => {
   const [trialDaysLeft, setTrialDaysLeft] = useState(7);
   const navigate = useNavigate();
 
+  // Initialize app data
+  useEffect(() => {
+    // Initialize user data if not present
+    if (!localStorage.getItem("userInfo")) {
+      localStorage.setItem("userInfo", JSON.stringify({
+        firstName: "Sarah",
+        email: "sarah@example.com",
+        dateJoined: new Date().toISOString()
+      }));
+    }
+    
+    // Initialize trial start date if not present
+    if (!localStorage.getItem("trialStartDate")) {
+      localStorage.setItem("trialStartDate", Date.now().toString());
+    }
+  }, []);
+
   // This would fetch user data in a real application
   useEffect(() => {
-    // Simulated user data fetch
+    // Load user data
     const storedUserInfo = localStorage.getItem("userInfo");
     if (storedUserInfo) {
       setUserInfo(JSON.parse(storedUserInfo));
     }
     
     // Calculate trial days remaining
-    const startDate = new Date(localStorage.getItem("trialStartDate") || Date.now());
+    const startDate = new Date(parseInt(localStorage.getItem("trialStartDate") || Date.now().toString()));
     const today = new Date();
     const daysPassed = Math.floor((today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
     setTrialDaysLeft(Math.max(0, 7 - daysPassed));
@@ -180,30 +197,23 @@ const Dashboard = () => {
             trialDaysLeft={trialDaysLeft} 
           />
 
-          {/* Personalized Recommendations - Added after Welcome Module */}
           <div className="mt-6">
             <PersonalizedRecommendations firstName={userInfo.firstName} />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            {/* Daily Check-in Card */}
             <DailyCheckInCard />
-            
-            {/* Recent Symptoms Summary */}
             <RecentSymptomsSummary />
           </div>
 
-          {/* Hormone Pattern Insights */}
           <div className="mt-6">
             <HormonePatternInsights />
           </div>
 
-          {/* AI Assistant Preview */}
           <div className="mt-6">
             <AiAssistantPreview firstName={userInfo.firstName} />
           </div>
           
-          {/* New Tracking CTA */}
           <div className="mt-6 text-center">
             <Button 
               onClick={() => navigate("/tracking")}

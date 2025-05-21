@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,34 @@ const CycleTracker: React.FC<CycleTrackerProps> = ({ selectedDate }) => {
   const [cycleDayType, setCycleDayType] = useState<string | null>(null);
   const { toast } = useToast();
 
+  // Load existing data when the selected date changes
+  useEffect(() => {
+    loadCycleData();
+  }, [selectedDate]);
+
+  const loadCycleData = () => {
+    try {
+      const existingData = localStorage.getItem("cycleData");
+      if (!existingData) return;
+      
+      const cycleHistory = JSON.parse(existingData);
+      const dateData = cycleHistory.find(
+        (item: any) => new Date(item.date).toDateString() === selectedDate.toDateString()
+      );
+      
+      if (dateData) {
+        setCycleDayType(dateData.cycleDayType);
+        setFlowIntensity([dateData.flowIntensity || 0]);
+      } else {
+        // Reset form if no data exists for this date
+        setCycleDayType(null);
+        setFlowIntensity([0]);
+      }
+    } catch (error) {
+      console.error("Error loading cycle data:", error);
+    }
+  };
+
   const cycleOptions = [
     { value: "period", label: "Period", color: "bg-[#FF9B85]" },
     { value: "spotting", label: "Spotting", color: "bg-[#FF9B85]/30" },
@@ -40,32 +68,41 @@ const CycleTracker: React.FC<CycleTrackerProps> = ({ selectedDate }) => {
   };
 
   const handleSaveCycleData = () => {
-    // In a real app, this would save to a database
-    const cycleData = {
-      date: selectedDate.toISOString(),
-      cycleDayType: cycleDayType,
-      flowIntensity: flowIntensity[0]
-    };
-    
-    // Save to localStorage as demonstration
-    const existingData = localStorage.getItem("cycleData");
-    const cycleHistory = existingData ? JSON.parse(existingData) : [];
-    
-    // Remove any existing entry for this date
-    const filteredHistory = cycleHistory.filter(
-      (item: any) => new Date(item.date).toDateString() !== selectedDate.toDateString()
-    );
-    
-    localStorage.setItem(
-      "cycleData", 
-      JSON.stringify([...filteredHistory, cycleData])
-    );
-    
-    toast({
-      title: "Cycle data saved",
-      description: "Your cycle information has been updated.",
-      action: <Check className="h-4 w-4 text-green-500" />
-    });
+    try {
+      // Create a cycle data object
+      const cycleData = {
+        date: selectedDate.toISOString(),
+        cycleDayType: cycleDayType,
+        flowIntensity: flowIntensity[0]
+      };
+      
+      // Save to localStorage
+      const existingData = localStorage.getItem("cycleData");
+      const cycleHistory = existingData ? JSON.parse(existingData) : [];
+      
+      // Remove any existing entry for this date
+      const filteredHistory = cycleHistory.filter(
+        (item: any) => new Date(item.date).toDateString() !== selectedDate.toDateString()
+      );
+      
+      localStorage.setItem(
+        "cycleData", 
+        JSON.stringify([...filteredHistory, cycleData])
+      );
+      
+      toast({
+        title: "Cycle data saved",
+        description: "Your cycle information has been updated.",
+        action: <Check className="h-4 w-4 text-green-500" />
+      });
+    } catch (error) {
+      console.error("Error saving cycle data:", error);
+      toast({
+        title: "Error saving data",
+        description: "There was a problem saving your cycle data.",
+        variant: "destructive"
+      });
+    }
   };
 
   return (
