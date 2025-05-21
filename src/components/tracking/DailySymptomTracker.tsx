@@ -1,13 +1,13 @@
 
 import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Check, Save } from "lucide-react";
+import { Check, Save, Brain, Activity, Moon } from "lucide-react";
 import MoodSelector from "@/components/tracking/MoodSelector";
 import SymptomSelector from "@/components/tracking/SymptomSelector";
 import { useToast } from "@/hooks/use-toast";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface DailySymptomTrackerProps {
   selectedDate: Date;
@@ -19,7 +19,9 @@ const DailySymptomTracker: React.FC<DailySymptomTrackerProps> = ({ selectedDate 
   const [emotionalSymptoms, setEmotionalSymptoms] = useState<string[]>([]);
   const [sleepSymptoms, setSleepSymptoms] = useState<string[]>([]);
   const [notes, setNotes] = useState("");
+  const [activeTab, setActiveTab] = useState("physical");
   const { toast } = useToast();
+  const isMobile = useIsMobile();
 
   // Load existing data when the selected date changes
   useEffect(() => {
@@ -112,40 +114,74 @@ const DailySymptomTracker: React.FC<DailySymptomTrackerProps> = ({ selectedDate 
           <MoodSelector selectedMood={selectedMood} setSelectedMood={setSelectedMood} />
         </div>
         
-        <Tabs defaultValue="physical" className="w-full">
-          <TabsList className="grid grid-cols-3 mb-6">
-            <TabsTrigger value="physical" className="text-xs sm:text-sm">Physical Symptoms</TabsTrigger>
-            <TabsTrigger value="emotional" className="text-xs sm:text-sm">Emotional & Cognitive</TabsTrigger>
-            <TabsTrigger value="sleep" className="text-xs sm:text-sm">Sleep & Energy</TabsTrigger>
-          </TabsList>
+        {/* Simplified Mobile-Friendly Tab Navigation */}
+        <div className="mb-6">
+          <div className={`grid ${isMobile ? 'grid-cols-3 gap-1' : 'grid-cols-3 gap-2'} mb-4`}>
+            <Button
+              variant={activeTab === "physical" ? "default" : "outline"}
+              className={`${activeTab === "physical" ? "bg-[#5D4154] text-white" : "text-[#5D4154] border-[#5D4154]/20"} flex items-center justify-center gap-1 h-auto py-2 transition-colors`}
+              onClick={() => setActiveTab("physical")}
+            >
+              <Activity className="h-4 w-4" />
+              {isMobile ? "" : "Physical"}
+            </Button>
+            
+            <Button
+              variant={activeTab === "emotional" ? "default" : "outline"}
+              className={`${activeTab === "emotional" ? "bg-[#5D4154] text-white" : "text-[#5D4154] border-[#5D4154]/20"} flex items-center justify-center gap-1 h-auto py-2 transition-colors`}
+              onClick={() => setActiveTab("emotional")}
+            >
+              <Brain className="h-4 w-4" />
+              {isMobile ? "" : "Emotional"}
+            </Button>
+            
+            <Button
+              variant={activeTab === "sleep" ? "default" : "outline"}
+              className={`${activeTab === "sleep" ? "bg-[#5D4154] text-white" : "text-[#5D4154] border-[#5D4154]/20"} flex items-center justify-center gap-1 h-auto py-2 transition-colors`}
+              onClick={() => setActiveTab("sleep")}
+            >
+              <Moon className="h-4 w-4" />
+              {isMobile ? "" : "Sleep"}
+            </Button>
+          </div>
           
-          <TabsContent value="physical" className="mt-0">
+          {/* Tab Labels (Mobile Only) */}
+          {isMobile && (
+            <div className="text-center text-sm font-medium text-[#5D4154] mb-3">
+              {activeTab === "physical" && "Physical Symptoms"}
+              {activeTab === "emotional" && "Emotional & Cognitive"}
+              {activeTab === "sleep" && "Sleep & Energy"}
+            </div>
+          )}
+
+          {/* Tab Content */}
+          {activeTab === "physical" && (
             <SymptomSelector 
               category="physical"
               selectedSymptoms={physicalSymptoms} 
               setSelectedSymptoms={setPhysicalSymptoms} 
               expanded={true} 
             />
-          </TabsContent>
+          )}
           
-          <TabsContent value="emotional" className="mt-0">
+          {activeTab === "emotional" && (
             <SymptomSelector 
               category="emotional"
               selectedSymptoms={emotionalSymptoms} 
               setSelectedSymptoms={setEmotionalSymptoms} 
               expanded={true} 
             />
-          </TabsContent>
+          )}
           
-          <TabsContent value="sleep" className="mt-0">
+          {activeTab === "sleep" && (
             <SymptomSelector 
               category="sleep"
               selectedSymptoms={sleepSymptoms} 
               setSelectedSymptoms={setSleepSymptoms} 
               expanded={true} 
             />
-          </TabsContent>
-        </Tabs>
+          )}
+        </div>
         
         <div className="mt-6">
           <h3 className="text-[#5D4154] font-medium mb-3">Journal Notes</h3>
