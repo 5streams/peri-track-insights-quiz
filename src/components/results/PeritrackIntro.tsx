@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -479,7 +478,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial }) => {
             </table>
           </div>
           
-          <p className="text-center text-sm mb-4">Both plans include a 7-Day Free Trial — no credit card required.</p>
+          <p className="text-center text-sm mb-4">Both plans include a 7-Day Free Trial.</p>
         </div>
         
         {/* Why Start Today Section */}
@@ -590,7 +589,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial }) => {
           
           <p className="text-lg font-semibold mb-2">👉 Start Your Free 7-Day Trial Now</p>
           <p className="text-sm opacity-80">
-            No credit card. No risk. Just results, relief, and the roadmap you deserve.
+            Just results, relief, and the roadmap you deserve.
           </p>
         </div>
       </CardContent>
