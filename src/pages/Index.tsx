@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -36,11 +35,11 @@ export default function Index() {
               asChild
               className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
             >
-              <Link to="/quiz">IDENTIFY MY PERIMENOPAUSE SYMPTOMS</Link>
+              <Link to="/quiz">Take The FREE Perimenopause Quiz</Link>
             </Button>
             
             <div className="mt-3 text-sm text-[#7D6174]">
-              Free 2-minute assessment • No registration required • Results immediately
+              Free 2 Minute Perimenopause Assessment • Results Immediately
             </div>
           </div>
         </section>
@@ -96,8 +95,12 @@ export default function Index() {
                 asChild
                 className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
               >
-                <Link to="/quiz">IDENTIFY MY PERIMENOPAUSE SYMPTOMS</Link>
+                <Link to="/quiz">Take The FREE Perimenopause Quiz</Link>
               </Button>
+              
+              <div className="mt-3 text-sm text-[#7D6174]">
+                Free 2 Minute Perimenopause Assessment • Results Immediately
+              </div>
             </div>
           </div>
         </section>
@@ -149,8 +152,12 @@ export default function Index() {
                 asChild
                 className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
               >
-                <Link to="/quiz">IDENTIFY MY PERIMENOPAUSE SYMPTOMS</Link>
+                <Link to="/quiz">Take The FREE Perimenopause Quiz</Link>
               </Button>
+              
+              <div className="mt-3 text-sm text-[#7D6174]">
+                Free 2 Minute Perimenopause Assessment • Results Immediately
+              </div>
             </div>
           </div>
         </section>
@@ -213,8 +220,12 @@ export default function Index() {
                 asChild
                 className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
               >
-                <Link to="/quiz">IDENTIFY MY PERIMENOPAUSE SYMPTOMS</Link>
+                <Link to="/quiz">Take The FREE Perimenopause Quiz</Link>
               </Button>
+              
+              <div className="mt-3 text-sm text-[#7D6174]">
+                Free 2 Minute Perimenopause Assessment • Results Immediately
+              </div>
             </div>
           </div>
         </section>
@@ -348,8 +359,12 @@ export default function Index() {
               asChild
               className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
             >
-              <Link to="/quiz">TAKE THE FREE PERIMENOPAUSE SYMPTOMS QUIZ</Link>
+              <Link to="/quiz">Take The FREE Perimenopause Quiz</Link>
             </Button>
+            
+            <div className="mt-3 text-sm text-[#7D6174]">
+              Free 2 Minute Perimenopause Assessment • Results Immediately
+            </div>
             
             <div className="flex flex-wrap justify-center gap-3 mt-6 text-sm text-gray-600">
               {["Private & Secure", "HIPAA Compliant", "Medically Reviewed"].map((badge, index) => (
