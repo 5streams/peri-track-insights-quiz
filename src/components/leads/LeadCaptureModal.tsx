@@ -214,17 +214,18 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
             </div>
             
             <DialogTitle className="text-xl font-bold text-[#5D4154] mb-4">
-              Thank You For Joining!
+              Thank You For Requesting Your Trial
             </DialogTitle>
             
             <div className="mb-6">
-              <p className="text-[#5D4154]">
-                We're excited to have you begin your perimenopause wellness journey with Peritrack.
+              <p className="text-[#5D4154] mb-4">
+                We Are Currently In Beta And Will Email You As Soon As We Open
               </p>
               
               <div className="mt-4 bg-[#F9F5FF]/50 p-4 rounded-lg border border-[#9b87f5]/20">
-                <p className="text-sm text-[#5D4154]">Your 7-day free trial has been activated.</p>
-                <p className="text-sm font-medium text-[#5D4154] mt-2">We'll send your login details to your email shortly.</p>
+                <p className="text-sm font-medium text-[#5D4154] mt-2">
+                  <span className="font-bold">*1 - 2 weeks*</span>
+                </p>
               </div>
             </div>
             
