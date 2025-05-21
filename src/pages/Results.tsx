@@ -153,14 +153,15 @@ const Results = () => {
           {/* Transformation Journey - Another new transitional component */}
           <TransformationJourney />
           
-          {/* Luna AI Feature with smoother transition */}
-          <LunaAIFeature onStartTrial={handleTrialCTA} />
-          
+          {/* SWAPPED COMPONENTS - PeritrackIntro before LunaAIFeature */}
           {/* Peritrack Intro - Main call to action */}
           <PeritrackIntro
             onStartTrial={handleTrialCTA}
             firstName={capitalizedFirstName}
           />
+          
+          {/* Luna AI Feature with smoother transition */}
+          <LunaAIFeature onStartTrial={handleTrialCTA} />
           
           {/* Back to Quiz Button */}
           <div className="text-center mb-12 mt-10">
