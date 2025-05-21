@@ -9,6 +9,7 @@ import HormonePatternInsights from "@/components/dashboard/HormonePatternInsight
 import RecentSymptomsSummary from "@/components/dashboard/RecentSymptomsSummary";
 import AiAssistantPreview from "@/components/dashboard/AiAssistantPreview";
 import PersonalizedRecommendations from "@/components/dashboard/PersonalizedRecommendations";
+import { Toaster } from "@/components/ui/toaster";
 
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useState({ firstName: "Sarah", email: "" });
@@ -175,6 +176,7 @@ const Dashboard = () => {
           </div>
         </main>
       </div>
+      <Toaster />
     </div>
   );
 };
