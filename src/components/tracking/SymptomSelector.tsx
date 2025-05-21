@@ -67,16 +67,17 @@ const SymptomSelector: React.FC<SymptomSelectorProps> = ({
   // Default to showing a mix of common symptoms if no category is specified
   const defaultSymptoms = [
     "Poor Sleep",
-    "Hot Flashes/Night Sweats", 
+    "Hot Flashes", 
+    "Night Sweats", 
     "Sleep Disruptions", 
     "Mood Changes", 
     "Irregular Periods",
-    "Brain Fog/Cognitive Changes", 
-    "Fatigue/Energy Fluctuations", 
+    "Brain Fog", 
+    "Fatigue", 
     "Vaginal Dryness", 
-    "Joint/Muscle Pain", 
+    "Joint Pain", 
     "Weight Changes", 
-    "Headaches/Migraines"
+    "Headaches"
   ];
   
   // Determine which symptoms to display based on category
