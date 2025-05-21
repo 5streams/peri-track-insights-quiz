@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -20,9 +21,11 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
     setIsAnnualModalOpen(true);
   };
   
-  const handleModalClose = () => {
+  const handleModalClose = (pricingPlan: "monthly" | "annual") => {
     setIsMonthlyModalOpen(false);
     setIsAnnualModalOpen(false);
+    // Store the selected pricing plan
+    localStorage.setItem("selectedPricingPlan", pricingPlan);
     onStartTrial();
   };
 
@@ -60,7 +63,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="h-5 w-5 text-[#9b87f5] mr-2 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Luna AI companion access</span>
+                  <span className="text-gray-700">Luna AI Perimenopause Companion access</span>
                 </li>
               </ul>
               
@@ -129,7 +132,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
       {/* Lead Capture Modals */}
       <LeadCaptureModal
         isOpen={isMonthlyModalOpen}
-        onClose={handleModalClose}
+        onClose={() => handleModalClose("monthly")}
         pricingPlan="monthly"
         source="free_trial"
         quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
@@ -138,7 +141,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
       
       <LeadCaptureModal
         isOpen={isAnnualModalOpen}
-        onClose={handleModalClose}
+        onClose={() => handleModalClose("annual")}
         pricingPlan="annual"
         source="free_trial"
         quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}

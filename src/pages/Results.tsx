@@ -19,7 +19,7 @@ import ComparisonTable from "@/components/results/ComparisonTable";
 import Testimonials from "@/components/results/Testimonials";
 import Security from "@/components/results/Security";
 import FutureWithoutIntervention from "@/components/results/FutureWithoutIntervention";
-import PeritrackIntro from "@/components/results/PeritrackIntro"; // Add import for new component
+import PeritrackIntro from "@/components/results/PeritrackIntro";
 
 interface QuizResults {
   score: number;
@@ -154,7 +154,7 @@ const Results = () => {
           {/* Future Without Intervention */}
           <FutureWithoutIntervention firstName={capitalizedFirstName} />
           
-          {/* Add PeritrackIntro component - INSERT HERE */}
+          {/* PeritrackIntro with trial options */}
           <PeritrackIntro onStartTrial={handleTrialCTA} />
           
           {/* Free Trial CTA */}
@@ -164,7 +164,7 @@ const Results = () => {
             scoreCategory={scoreCategory}
           />
           
-          {/* Luna AI Feature */}
+          {/* Luna AI Perimenopause Companion Feature */}
           <LunaAIFeature onStartTrial={handleTrialCTA} />
           
           {/* Subscription Options */}
