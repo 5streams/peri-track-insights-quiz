@@ -39,7 +39,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
   return (
     <header className="text-center pt-4 pb-10 reveal-section transform opacity-0">
       <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#5D4154] mb-6">
-        {firstName ? `${firstName} ` : ""}WE'VE ANALYZED YOUR ANSWERS<br />HERE IS YOUR PERSONAL PERIMENOPAUSE ASSESSMENT
+        {firstName ? `${firstName} ` : ""}We've Analyzed Your Answers<br />Here Is Your Personal Perimenopause Assessment
       </h1>
       
       <div className="relative max-w-2xl mx-auto mb-8">
