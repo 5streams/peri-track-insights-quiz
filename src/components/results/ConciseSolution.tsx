@@ -15,57 +15,33 @@ interface ConciseSolutionProps {
 const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => {
   const navigate = useNavigate();
 
-  // Get hormone-specific improvement stats
-  const getImprovementData = () => {
+  // Get hormone-specific information
+  const getHormoneInfo = () => {
     switch (primaryHormone.toLowerCase()) {
       case "progesterone":
         return {
-          sleep: "68%",
-          anxiety: "72%",
-          wellbeing: "64%",
-          sleepWeeks: "4-8",
-          anxietyWeeks: "5-7",
-          wellbeingWeeks: "6-10",
           primaryBenefit: "sleep quality",
-          secondaryBenefit: "anxiety reduction"
+          secondaryBenefit: "anxiety management"
         };
       case "estradiol":
         return {
-          sleep: "65%",
-          anxiety: "70%",
-          wellbeing: "68%",
-          sleepWeeks: "5-9",
-          anxietyWeeks: "4-8",
-          wellbeingWeeks: "6-9",
           primaryBenefit: "mood stability",
           secondaryBenefit: "temperature regulation"
         };
       case "testosterone":
         return {
-          sleep: "62%",
-          anxiety: "66%",
-          wellbeing: "70%",
-          sleepWeeks: "6-10",
-          anxietyWeeks: "5-9",
-          wellbeingWeeks: "4-8",
           primaryBenefit: "energy levels",
           secondaryBenefit: "mental clarity"
         };
       default:
         return {
-          sleep: "65%",
-          anxiety: "70%",
-          wellbeing: "67%",
-          sleepWeeks: "5-9",
-          anxietyWeeks: "5-8",
-          wellbeingWeeks: "6-9",
           primaryBenefit: "overall wellbeing",
           secondaryBenefit: "symptom management"
         };
     }
   };
   
-  const improvementData = getImprovementData();
+  const hormoneInfo = getHormoneInfo();
   
   // Handle trial CTA
   const handleTrialCTA = () => {
@@ -79,11 +55,11 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
     <Card className="mb-6 md:mb-8 overflow-hidden reveal-section transform opacity-0 hover:shadow-lg transition-all duration-300 border-t-4 border-[#A7C4A0]">
       <CardContent className="p-5 md:p-8">
         <h2 className="text-xl md:text-2xl font-bold text-[#5D4154] mb-5">
-          YOUR PERSONALIZED SOLUTION PATH
+          YOUR PERSONALIZED APPROACH
         </h2>
         
         <p className="text-base md:text-lg text-[#5D4154]/80 mb-4">
-          Based on data from thousands of women with your exact hormone pattern:
+          Based on what we've learned about hormone patterns similar to yours:
         </p>
         
         <div className="bg-[#FDFCFB] border-2 border-[#E2D1C3]/30 rounded-lg p-4 mb-6">
@@ -96,26 +72,26 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
               <ArrowRight className="h-5 w-5" />
             </div>
             <div className="flex-1 p-3 bg-[#5D4154]/5 rounded-lg">
-              <div className="text-[#5D4154] font-bold mb-1">TEST</div>
-              <div className="text-sm text-gray-600">Confirm your exact hormone levels</div>
+              <div className="text-[#5D4154] font-bold mb-1">UNDERSTAND</div>
+              <div className="text-sm text-gray-600">Learn about your hormone patterns</div>
             </div>
             <div className="hidden md:flex items-center justify-center text-[#5D4154]">
               <ArrowRight className="h-5 w-5" />
             </div>
             <div className="flex-1 p-3 bg-[#5D4154]/5 rounded-lg">
-              <div className="text-[#5D4154] font-bold mb-1">REBALANCE</div>
-              <div className="text-sm text-gray-600">Implement your personalized protocol</div>
+              <div className="text-[#5D4154] font-bold mb-1">ADAPT</div>
+              <div className="text-sm text-gray-600">Develop personalized strategies</div>
             </div>
           </div>
           
           <div className="text-center">
             <p className="mt-2 text-sm text-gray-600">
-              Our 3-step system designed specifically for your {primaryHormone.toLowerCase()} imbalance
+              Our 3-step approach designed to help you understand and address your symptoms
             </p>
             
             <div className="mt-4 pt-4 border-t border-dashed border-[#E2D1C3]">
               <p className="text-[#5D4154] font-medium mb-3">
-                Your dashboard is <span className="font-bold">ready</span> with specific insights for your hormone pattern
+                Your dashboard is <span className="font-bold">ready</span> with insights for your hormone pattern
               </p>
               
               <Button
@@ -131,7 +107,7 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
         </div>
         
         <p className="font-medium text-[#5D4154] mb-3">
-          Women with your pattern typically experience:
+          Our approach may help you with:
         </p>
         
         <div className="space-y-3 mb-5">
@@ -141,7 +117,7 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
             </div>
             <div className="ml-2">
               <p className="text-base text-gray-700">
-                <span className="font-semibold">{improvementData.sleep}</span> improvement in sleep quality within <span className="font-semibold">{improvementData.sleepWeeks} weeks</span>
+                Understanding potential factors affecting your sleep quality
               </p>
             </div>
           </div>
@@ -152,7 +128,7 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
             </div>
             <div className="ml-2">
               <p className="text-base text-gray-700">
-                <span className="font-semibold">{improvementData.anxiety}</span> reduction in anxiety within <span className="font-semibold">{improvementData.anxietyWeeks} weeks</span>
+                Developing strategies for managing mood changes and anxiety
               </p>
             </div>
           </div>
@@ -163,7 +139,7 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
             </div>
             <div className="ml-2">
               <p className="text-base text-gray-700">
-                <span className="font-semibold">{improvementData.wellbeing}</span> improvement in overall wellbeing within <span className="font-semibold">{improvementData.wellbeingWeeks} weeks</span>
+                Planning activities around your natural energy patterns
               </p>
             </div>
           </div>
@@ -171,8 +147,8 @@ const ConciseSolution: React.FC<ConciseSolutionProps> = ({ primaryHormone }) => 
           <div className="mt-5 pt-4 border-t border-gray-100">
             <div className="bg-[#FFECD6]/30 p-3 rounded-lg">
               <p className="text-[#5D4154] font-medium text-sm">
-                <span className="font-bold">SPECIAL BONUS:</span> Start today and receive our "{primaryHormone === "progesterone" ? "Sleep Rescue" : primaryHormone === "estradiol" ? "Mood Balance" : "Energy Boost"} Protocol" - 
-                custom-designed for your specific {improvementData.primaryBenefit} and {improvementData.secondaryBenefit} needs ($47 value - FREE)
+                <span className="font-bold">INCLUDED WITH TRIAL:</span> Access to our "{primaryHormone === "progesterone" ? "Sleep Support" : primaryHormone === "estradiol" ? "Mood Support" : "Energy Support"} Guide" - 
+                with information about {hormoneInfo.primaryBenefit} and {hormoneInfo.secondaryBenefit}
               </p>
             </div>
           </div>

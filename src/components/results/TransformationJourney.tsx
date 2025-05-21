@@ -13,67 +13,82 @@ const TransformationJourney: React.FC = () => {
         <div className="flex items-center space-x-3 mb-4">
           <Award className="h-7 w-7 text-[#A7C4A0]" />
           <h2 className="font-playfair text-xl md:text-2xl font-bold text-[#5D4154]">
-            YOUR TRANSFORMATION JOURNEY
+            YOUR POTENTIAL JOURNEY
           </h2>
         </div>
         
         <p className="mb-6 text-[#5D4154] font-medium text-base md:text-lg">
-          The Peritrack Promise: What Women With Your Pattern Experience
+          What Women Using Our System Have Reported
         </p>
         
         <p className="mb-6 text-gray-600">
-          Based on data from women with your exact hormone pattern using our system:
+          Based on feedback from women using our tracking system:
         </p>
         
         <div className="space-y-6 mb-6">
           <div className="bg-[#A7C4A0]/10 p-4 rounded-lg border border-[#A7C4A0]/30">
-            <h3 className="text-[#5D4154] font-bold mb-2">SLEEP TRANSFORMATION: 68% improvement in sleep quality within 4-8 weeks</h3>
+            <h3 className="text-[#5D4154] font-bold mb-2">SLEEP IMPROVEMENTS</h3>
+            <p className="text-gray-600">
+              Many women report gradual improvements in their sleep patterns when they understand their hormone fluctuations and make appropriate adjustments to their routines.
+            </p>
             <p className="italic text-gray-600 border-l-4 border-[#A7C4A0]/30 pl-3 mt-2">
-              "I went from waking 4-5 times a night to sleeping 7+ hours uninterrupted" —Michelle, 46
+              "I've noticed improvements in my sleep quality since learning about my hormone patterns" —Michelle
             </p>
           </div>
           
           <div className="bg-[#A7C4A0]/10 p-4 rounded-lg border border-[#A7C4A0]/30">
-            <h3 className="text-[#5D4154] font-bold mb-2">ANXIETY RELIEF: 72% reduction in anxiety episodes within 5-7 weeks</h3>
+            <h3 className="text-[#5D4154] font-bold mb-2">ANXIETY MANAGEMENT</h3>
+            <p className="text-gray-600">
+              Understanding the connection between hormones and anxiety helps many women develop more effective coping strategies during challenging days.
+            </p>
             <p className="italic text-gray-600 border-l-4 border-[#A7C4A0]/30 pl-3 mt-2">
-              "The constant worry and racing thoughts that plagued me for months just...faded" —Jennifer, 44
+              "Learning about the hormone-anxiety connection has helped me develop better strategies" —Jennifer
             </p>
           </div>
           
           <div className="bg-[#A7C4A0]/10 p-4 rounded-lg border border-[#A7C4A0]/30">
-            <h3 className="text-[#5D4154] font-bold mb-2">EMOTIONAL STABILITY: 64% improvement in mood regulation within 6-9 weeks</h3>
+            <h3 className="text-[#5D4154] font-bold mb-2">EMOTIONAL AWARENESS</h3>
+            <p className="text-gray-600">
+              Tracking symptoms and understanding their connection to hormonal changes can provide valuable context for emotional experiences.
+            </p>
             <p className="italic text-gray-600 border-l-4 border-[#A7C4A0]/30 pl-3 mt-2">
-              "My husband said it was like having the old me back" —Catherine, 45
+              "Understanding the 'why' behind my mood changes has been helpful" —Catherine
             </p>
           </div>
           
           <div className="bg-[#A7C4A0]/10 p-4 rounded-lg border border-[#A7C4A0]/30">
-            <h3 className="text-[#5D4154] font-bold mb-2">ENERGY RESTORATION: 70% improvement in daily energy levels within 4-6 weeks</h3>
+            <h3 className="text-[#5D4154] font-bold mb-2">ENERGY MANAGEMENT</h3>
+            <p className="text-gray-600">
+              Recognizing patterns in energy levels helps women plan activities around their natural hormonal rhythms, potentially leading to better energy management.
+            </p>
             <p className="italic text-gray-600 border-l-4 border-[#A7C4A0]/30 pl-3 mt-2">
-              "I can make it through the entire day without that crushing fatigue" —Sarah, 48
+              "I've learned to adjust my schedule based on my energy patterns" —Sarah
             </p>
           </div>
           
           <div className="bg-[#A7C4A0]/10 p-4 rounded-lg border border-[#A7C4A0]/30">
-            <h3 className="text-[#5D4154] font-bold mb-2">COGNITIVE CLARITY: 61% reduction in brain fog incidents within 5-8 weeks</h3>
+            <h3 className="text-[#5D4154] font-bold mb-2">COGNITIVE CLARITY</h3>
+            <p className="text-gray-600">
+              Women often report that understanding the hormonal influences on cognition helps them adjust expectations and implement supportive strategies when needed.
+            </p>
             <p className="italic text-gray-600 border-l-4 border-[#A7C4A0]/30 pl-3 mt-2">
-              "I can finally trust my brain again at work" —Lisa, 47
+              "I've developed strategies for the days when brain fog is more likely" —Lisa
             </p>
           </div>
         </div>
         
         <div className="bg-[#FFECD6]/30 p-4 rounded-lg">
           <p className="text-[#5D4154] text-lg font-medium mb-2">
-            Imagine waking up feeling truly rested...
+            Imagine having a better understanding of your body's patterns...
           </p>
           <p className="text-[#5D4154] text-lg font-medium mb-2">
-            Imagine getting through your day without anxiety overwhelming you...
+            Imagine having tools and insights to help manage your symptoms...
           </p>
           <p className="text-[#5D4154] text-lg font-medium mb-2">
-            Imagine having the energy to enjoy your life again...
+            Imagine feeling more prepared for hormonal fluctuations...
           </p>
           <p className="text-[#5D4154] text-lg font-medium mt-4">
-            This isn't just possible - it's the expected outcome when you understand and address your unique hormone pattern.
+            With knowledge and the right tools, you can work toward better managing perimenopause symptoms and improving your quality of life.
           </p>
         </div>
       </CardContent>
