@@ -108,11 +108,105 @@
   animation: pulse-gentle 3s infinite ease-in-out;
 }
 
+/* Enhanced Headings */
+.assessment-heading {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #5D4154;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.75rem;
+}
+
+.assessment-heading::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, #5D4154, #A7C4A0);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.score-indicator {
+  background: linear-gradient(45deg, #5D4154, #9b87f5);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Heading container with decorative elements */
+.heading-container {
+  position: relative;
+  padding: 2rem 1rem;
+  overflow: hidden;
+}
+
+.decorative-backdrop {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(155,135,245,0.1) 0%, rgba(155,135,245,0) 70%);
+  top: -40px;
+  right: -40px;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+.heading-container::before {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(167,196,160,0.1) 0%, rgba(167,196,160,0) 70%);
+  bottom: -20px;
+  left: -20px;
+  z-index: -1;
+  border-radius: 50%;
+}
+
 /* Results page specific styles */
-.score-meter .score-fill {
+.score-meter {
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.score-fill {
   transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
+/* CTA Button styling */
+.cta-button {
+  box-shadow: 0 4px 14px rgba(155,135,245,0.5);
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(155,135,245,0.6);
+}
+
+/* Animation for pulse subtle */
+@keyframes pulse-subtle {
+  0% {
+    box-shadow: 0 4px 14px rgba(155,135,245,0.5);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(155,135,245,0.7);
+  }
+  100% {
+    box-shadow: 0 4px 14px rgba(155,135,245,0.5);
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s infinite ease-in-out;
+}
+
+/* Existing testimonial styles */
 .results-testimonial blockquote::before {
   content: open-quote;
   font-size: 4em;
