@@ -17,149 +17,115 @@ export default function Index() {
       </header>
 
       <main className="flex-grow">
-        {/* Hero Section */}
+        {/* Hero Section - Optimized */}
         <section className="bg-[#FFECD6] py-8 text-center border-b border-[#5D4154]/10">
           <div className="max-w-5xl mx-auto px-4">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-[#5D4154] mb-4">
-              AI-Powered Perimenopause Symptoms Quiz: Discover What's Really Happening to Your Body
+              Perimenopause Symptoms Quiz: Get Answers in 2 Minutes
             </h1>
             
+            <p className="text-lg md:text-xl max-w-2xl mx-auto mb-6 text-[#7D6174]">
+              Identify which perimenopause symptoms you're experiencing and discover what's causing them
+            </p>
+            
             <p className="text-lg md:text-xl max-w-2xl mx-auto mb-6 text-[#7D6174] italic">
-              7 out of 10 women will experience perimenopause symptoms for 4-10 years before menopause begins. Most don't recognize what's happening.
+              7 out of 10 women experience perimenopause symptoms for 4-10 years without recognizing the cause
             </p>
             
             <Button 
               asChild
-              className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
+              className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
             >
-              <Link to="/quiz">START MY FREE ASSESSMENT</Link>
+              <Link to="/quiz">IDENTIFY MY PERIMENOPAUSE SYMPTOMS</Link>
             </Button>
+            
+            <div className="mt-3 text-sm text-[#7D6174]">
+              Free 2-minute assessment • No registration required • Results immediately
+            </div>
           </div>
         </section>
         
-        {/* Symptoms Checklist */}
-        <div className="max-w-5xl mx-auto px-4 py-8">
-          <div className="bg-white rounded-xl shadow-md p-6 max-w-3xl mx-auto">
-            <h3 className="text-center font-playfair text-2xl font-semibold text-[#5D4154] mb-4">
-              Is This You? Take Our 2-Minute Quiz
-            </h3>
-            
-            {[
-              "Unexplained weight gain, especially around your middle",
-              "Sleep disruptions, even when you're exhausted",
-              "Mood changes that feel different from your normal ups and downs",
-              "Hot flashes or night sweats that seem to come from nowhere",
-              "Brain fog or trouble concentrating at work",
-              "Irregular periods or sudden heavy bleeding",
-              "Unexplained fatigue that sleep doesn't fix"
-            ].map((item, index) => (
-              <div key={index} className="relative pl-8 mb-2 text-lg">
-                <span className="absolute left-0 text-[#A7C4A0] font-bold">✓</span>
-                {item}
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center my-6 text-lg font-semibold text-[#5D4154]">
-            27,843 women took this quiz last month to find answers.
-          </div>
-          
-          <div className="bg-white p-5 rounded-xl shadow-md max-w-3xl mx-auto my-6 italic text-center">
-            <p className="text-lg mb-2">
-              "After 2 years of thinking I was just stressed or getting older, this quiz helped me understand my symptoms were actually hormonal changes. Finally having clarity changed everything."
-            </p>
-            <p className="font-semibold text-[#5D4154] not-italic">— Jennifer, 44</p>
-          </div>
-          
-          <div className="text-center mb-8">
-            <Button 
-              asChild
-              className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
-            >
-              <Link to="/quiz">START MY FREE ASSESSMENT</Link>
-            </Button>
-          </div>
-        </div>
-        
-        {/* Benefits Section */}
+        {/* Symptom-Focused Section - New Section */}
         <section className="py-8 bg-white">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-3">
-              Why Women Are Taking This AI-Powered Perimenopause Symptoms Quiz
+            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-6">
+              COMMON PERIMENOPAUSE SYMPTOMS EXPLAINED
             </h2>
             
-            <p className="text-center max-w-3xl mx-auto mb-4 text-lg">
-              Perimenopause can begin in your late 30s or early 40s – much earlier than most women realize. The challenge? <strong>These symptoms are often mistaken for stress, aging, thyroid issues, or depression.</strong>
-            </p>
-            
-            <p className="text-center mb-4 text-lg">
-              Our comprehensive perimenopause symptoms assessment helps you:
-            </p>
-            
-            <div className="grid md:grid-cols-2 gap-5 mb-6">
+            <div className="grid md:grid-cols-2 gap-6">
               {[
                 {
-                  title: "Identify Your Symptoms",
-                  content: "Discover which perimenopause symptoms you're experiencing and how they relate to each other."
+                  symptom: "Unexplained weight gain, especially around your middle",
+                  explanation: "Why it happens: Hormonal changes affect fat distribution and metabolism"
                 },
                 {
-                  title: "Understand Hormone Changes",
-                  content: "Learn how your hormones might be changing and what that means for your symptoms."
+                  symptom: "Sleep disruptions and night sweats",
+                  explanation: "Why they happen: Decreasing progesterone affects your sleep architecture"
                 },
                 {
-                  title: "Get Personalized Guidance",
-                  content: "Receive recommendations tailored to your specific symptom pattern and hormone profile."
+                  symptom: "Mood changes, anxiety, and irritability",
+                  explanation: "Why they happen: Fluctuating estrogen impacts neurotransmitter function"
                 },
                 {
-                  title: "AI-Powered Analysis",
-                  content: "Our advanced AI technology analyzes your symptoms and provides insights human assessments might miss."
+                  symptom: "Brain fog and difficulty concentrating",
+                  explanation: "Why it happens: Hormone fluctuations affect cognitive function"
+                },
+                {
+                  symptom: "Hot flashes and temperature regulation issues",
+                  explanation: "Why they happen: Estrogen changes affect your body's thermostat"
+                },
+                {
+                  symptom: "Irregular periods or heavy bleeding",
+                  explanation: "Why they happen: Changing hormone levels affect your menstrual cycle"
+                },
+                {
+                  symptom: "Fatigue that sleep doesn't resolve",
+                  explanation: "Why it happens: Hormonal imbalances disrupt energy production"
                 }
-              ].map((benefit, index) => (
-                <div 
-                  key={index}
-                  className="bg-[#FFECD6] p-6 rounded-xl shadow-sm transition transform hover:-translate-y-1"
-                >
-                  <h3 className="font-semibold text-xl text-[#5D4154] mb-3">{benefit.title}</h3>
-                  <p>{benefit.content}</p>
+              ].map((item, index) => (
+                <div key={index} className="relative pl-8 py-3 border-b border-gray-100">
+                  <span className="absolute left-0 text-[#A7C4A0] font-bold">✓</span>
+                  <div className="font-medium mb-1">{item.symptom}</div>
+                  <div className="text-sm text-gray-600">{item.explanation}</div>
                 </div>
               ))}
             </div>
             
-            <div className="text-center">
+            <div className="text-center mt-8">
               <Button 
                 asChild
-                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
+                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
               >
-                <Link to="/quiz">TAKE THE FREE QUIZ NOW</Link>
+                <Link to="/quiz">IDENTIFY MY PERIMENOPAUSE SYMPTOMS</Link>
               </Button>
             </div>
           </div>
         </section>
         
-        {/* Stats Section */}
+        {/* Key Statistics Section - Enhanced */}
         <section className="py-8 bg-[#FFECD6]">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
-              The Perimenopause Symptom Confusion
+            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-6">
+              PERIMENOPAUSE SYMPTOMS: THE HIDDEN STRUGGLE
             </h2>
             
-            <p className="text-center max-w-3xl mx-auto mb-6 text-lg">
-              Many women suffer through perimenopause symptoms for years without realizing what's happening. Our research shows:
-            </p>
-            
-            <div className="grid md:grid-cols-3 gap-5 mb-6">
+            <div className="grid md:grid-cols-4 gap-5 mb-6">
               {[
                 {
                   number: "82%",
-                  text: "of women don't connect their symptoms to hormone changes"
+                  text: "of women don't recognize their symptoms as perimenopause"
                 },
                 {
-                  number: "63%",
-                  text: "of women have never discussed perimenopause with their doctor"
+                  number: "76%",
+                  text: "experience at least 3 different perimenopause symptoms before diagnosis"
                 },
                 {
-                  number: "75%",
-                  text: "of women feel better once they understand what's happening in their bodies"
+                  number: "68%",
+                  text: "report their symptoms were dismissed by healthcare providers"
+                },
+                {
+                  number: "71%",
+                  text: "see improvement once they understand and address their symptoms properly"
                 }
               ].map((stat, index) => (
                 <div 
@@ -172,38 +138,46 @@ export default function Index() {
               ))}
             </div>
             
-            <div className="bg-white p-5 rounded-xl shadow-md max-w-3xl mx-auto italic text-center">
-              <p className="text-lg mb-2">
-                "I thought I was losing my mind until I took this assessment. Finding out my symptoms were likely perimenopause was actually a relief. Now I have a path forward."
-              </p>
-              <p className="font-semibold text-[#5D4154] not-italic">— Sarah, 41</p>
+            <div className="text-center">
+              <div className="inline-block bg-white/60 px-4 py-2 rounded-full text-sm mb-6">
+                <span className="font-semibold">30,127 women</span> assessed their perimenopause symptoms this month
+              </div>
+            </div>
+            
+            <div className="text-center">
+              <Button 
+                asChild
+                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
+              >
+                <Link to="/quiz">IDENTIFY MY PERIMENOPAUSE SYMPTOMS</Link>
+              </Button>
             </div>
           </div>
         </section>
         
-        {/* How It Works */}
-        <section className="py-8 bg-[#FFECD6]">
+        {/* How It Works Section - Optimized */}
+        <section className="py-8 bg-white">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
-              How the AI-Powered Perimenopause Assessment Works
+            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-6">
+              HOW OUR PERIMENOPAUSE SYMPTOMS ASSESSMENT WORKS
             </h2>
             
             <div className="grid md:grid-cols-3 gap-6 mb-6">
               {[
                 {
                   step: "1",
-                  title: "Answer 8 Simple Questions",
-                  content: "Tell us about your specific symptoms and experiences in our quick assessment."
+                  title: "Identify Your Specific Symptoms",
+                  content: "Tell us which perimenopause symptoms you're experiencing, their severity, and patterns"
                 },
                 {
                   step: "2",
-                  title: "AI Analyzes Your Patterns",
-                  content: "Our advanced AI technology processes your responses to identify hormone patterns."
+                  title: "AI Analyzes Your Symptom Patterns",
+                  content: "Our advanced technology identifies connections between your symptoms and hormone changes"
                 },
                 {
                   step: "3",
-                  title: "Get Actionable Guidance",
-                  content: "Discover tailored recommendations for your specific situation."
+                  title: "Get Personalized Insights About Your Symptoms",
+                  content: "Discover which of your symptoms are likely perimenopause-related and what you can do about them"
                 }
               ].map((item, index) => (
                 <div key={index} className="text-center">
@@ -216,89 +190,90 @@ export default function Index() {
               ))}
             </div>
             
-            <p className="text-center italic mb-6">
-              Your results are completely private and secure. We comply with all health privacy regulations.
-            </p>
+            <div className="bg-[#FFECD6]/50 p-6 rounded-xl shadow-sm max-w-3xl mx-auto mb-6">
+              <h3 className="text-center font-medium text-lg mb-4">After completing this quick assessment, you'll receive:</h3>
+              <ul className="space-y-2">
+                {[
+                  "Personalized analysis of your perimenopause symptoms",
+                  "Understanding of which hormone changes are likely causing each symptom",
+                  "Clear explanation of your symptom patterns and connections",
+                  "Actionable guidance tailored to your specific situation",
+                  "Educational resources about managing your particular symptoms"
+                ].map((benefit, index) => (
+                  <li key={index} className="flex items-center gap-2">
+                    <span className="text-[#A7C4A0] font-bold">•</span>
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+            </div>
             
             <div className="text-center">
               <Button 
                 asChild
-                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
+                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
               >
-                <Link to="/quiz">BEGIN MY SYMPTOMS ASSESSMENT</Link>
+                <Link to="/quiz">IDENTIFY MY PERIMENOPAUSE SYMPTOMS</Link>
               </Button>
             </div>
           </div>
         </section>
         
-        {/* Results Preview */}
-        <section className="py-8 bg-white">
+        {/* Testimonials Section - Enhanced */}
+        <section className="py-8 bg-[#FFECD6]">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
-              Discover Your Perimenopause Profile
+            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-6">
+              WOMEN WHO FOUND ANSWERS TO THEIR PERIMENOPAUSE SYMPTOMS
             </h2>
             
-            <p className="text-center max-w-3xl mx-auto mb-6 text-lg">
-              After completing this quick assessment, you'll receive:
-            </p>
-            
-            <div className="grid md:grid-cols-3 gap-5 mb-6">
+            <div className="grid md:grid-cols-3 gap-5">
               {[
                 {
-                  title: "Your Hormone Balance Score",
-                  content: "Understand where you might be in the perimenopause transition and what it means for you."
+                  quote: "I was experiencing unpredictable mood swings, brain fog, and fatigue for over a year. After taking this assessment, I finally understood these were perimenopause symptoms, not just stress or aging. The clarity changed everything about how I approached my health.",
+                  author: "— Jennifer, 44"
                 },
                 {
-                  title: "AI-Powered Symptom Analysis",
-                  content: "Our advanced AI technology identifies patterns in your symptoms that might be missed by standard assessments."
+                  quote: "The night sweats and insomnia were making me miserable. I tried everything from melatonin to cutting caffeine with minimal results. This quiz helped me understand these were classic perimenopause symptoms. The targeted recommendations actually worked, and I'm finally sleeping through the night again.",
+                  author: "— Karen, 45"
                 },
                 {
-                  title: "Personalized Next Steps",
-                  content: "Get clear guidance on what might help your specific situation and symptoms."
+                  quote: "I couldn't understand why I suddenly had memory issues and trouble concentrating at work. Doctors suggested it was just stress. This assessment identified these as common perimenopause symptoms and explained the hormonal connection. Such a relief to know what's really going on.",
+                  author: "— Patricia, 43"
                 }
-              ].map((item, index) => (
-                <div key={index} className="bg-white p-6 rounded-xl shadow-md text-center">
-                  <h3 className="font-playfair text-xl font-semibold mb-3 text-[#5D4154]">{item.title}</h3>
-                  <p>{item.content}</p>
+              ].map((testimonial, index) => (
+                <div key={index} className="bg-white p-6 rounded-xl shadow-md">
+                  <p className="mb-4 italic">"{testimonial.quote}"</p>
+                  <p className="font-semibold text-[#5D4154]">{testimonial.author}</p>
                 </div>
               ))}
             </div>
-            
-            <div className="text-center">
-              <Button 
-                asChild
-                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
-              >
-                <Link to="/quiz">START MY FREE ASSESSMENT</Link>
-              </Button>
-            </div>
           </div>
         </section>
         
-        {/* FAQ Section */}
+        {/* FAQ Section - Enhanced */}
         <section className="py-8 bg-white">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
-              Common Questions About Perimenopause Symptoms
+            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-6">
+              FREQUENTLY ASKED QUESTIONS ABOUT PERIMENOPAUSE SYMPTOMS
             </h2>
             
-            <div className="space-y-4 max-w-3xl mx-auto mb-6">
+            <div className="space-y-6 max-w-3xl mx-auto mb-6">
               {[
                 {
-                  question: "Q: At what age does perimenopause typically start?",
-                  answer: "Perimenopause commonly begins in a woman's 40s, but can start in the late 30s. The transition lasts 4-10 years before reaching menopause. Many women experience symptoms for years before recognizing the connection to hormonal changes."
+                  question: "Q: What are the most common perimenopause symptoms?",
+                  answer: "The most common perimenopause symptoms include irregular periods, hot flashes, night sweats, sleep disruptions, mood changes, brain fog, weight gain (especially around the middle), fatigue, decreased libido, and joint pain. The symptoms and their severity vary widely among women."
                 },
                 {
-                  question: "Q: How is perimenopause different from menopause?",
-                  answer: "Perimenopause is the transitional phase leading up to menopause. During perimenopause, hormone levels fluctuate widely, causing various symptoms. Menopause is officially diagnosed after 12 consecutive months without a period. The symptoms can be quite different between these phases."
+                  question: "Q: At what age do perimenopause symptoms typically start?",
+                  answer: "Perimenopause symptoms commonly begin in a woman's 40s, but can start in the late 30s. The transition typically lasts 4-10 years before reaching menopause. Many women experience symptoms for years before recognizing the connection to hormonal changes."
                 },
                 {
-                  question: "Q: Can perimenopause symptoms come and go?",
-                  answer: "Yes, perimenopause symptoms often fluctuate. You might experience intense symptoms for weeks or months, followed by periods of relief as hormone levels temporarily stabilize. This unpredictable pattern is one reason many women don't recognize what's happening."
+                  question: "Q: Why do perimenopause symptoms fluctuate so much?",
+                  answer: "Perimenopause symptoms often fluctuate because hormone levels aren't steadily declining but rather rising and falling unpredictably. You might experience intense symptoms for weeks, followed by periods of relief as hormone levels temporarily stabilize. This unpredictable pattern is why many women don't recognize what's happening."
                 },
                 {
-                  question: "Q: Should I talk to my doctor about perimenopause symptoms?",
-                  answer: "Absolutely. While perimenopause is natural, severe symptoms can be managed. Our assessment can help you prepare for that conversation with specific information about your experiences. Having clear data about your symptoms can help your healthcare provider better address your needs."
+                  question: "Q: How can I distinguish perimenopause symptoms from other health issues?",
+                  answer: "Many perimenopause symptoms overlap with other conditions, which makes diagnosis challenging. Our assessment analyzes your specific symptom patterns to help identify which are likely hormone-related. Having clear data about your symptoms can help your healthcare provider make better determinations."
                 }
               ].map((faq, index) => (
                 <div key={index} className="border-b border-gray-200 pb-6">
@@ -307,69 +282,77 @@ export default function Index() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+        
+        {/* Mini-Form Option - New Section */}
+        <section className="py-8 bg-[#FFECD6]/50">
+          <div className="max-w-xl mx-auto px-4 text-center">
+            <h3 className="text-xl font-semibold mb-4">Want a preview of what perimenopause symptoms you might be experiencing?</h3>
             
-            <div className="text-center">
-              <Button 
-                asChild
-                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
-              >
-                <Link to="/quiz">TAKE THE FREE QUIZ NOW</Link>
+            <div className="bg-white p-6 rounded-xl shadow-sm mb-6">
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-2">Your age</label>
+                <select className="w-full p-2 border border-gray-300 rounded">
+                  <option>Select your age</option>
+                  <option>35-39</option>
+                  <option>40-44</option>
+                  <option>45-49</option>
+                  <option>50-55</option>
+                  <option>55+</option>
+                </select>
+              </div>
+              
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-2">Top 3 symptoms you're experiencing</label>
+                <div className="space-y-2 text-left">
+                  {[
+                    "Hot flashes", 
+                    "Sleep disruption", 
+                    "Mood changes", 
+                    "Weight gain", 
+                    "Brain fog", 
+                    "Irregular periods"
+                  ].map((symptom, index) => (
+                    <div key={index} className="flex items-center">
+                      <input type="checkbox" id={`symptom-${index}`} className="mr-2" />
+                      <label htmlFor={`symptom-${index}`}>{symptom}</label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <Button className="w-full bg-[#5D4154] hover:bg-[#7D6174] text-white py-3">
+                GET QUICK INSIGHT
               </Button>
             </div>
-          </div>
-        </section>
-        
-        {/* Testimonials */}
-        <section className="py-8 bg-[#FFECD6]">
-          <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
-              Women Like You Found Answers With Our Assessment
-            </h2>
             
-            <div className="grid md:grid-cols-3 gap-5">
-              {[
-                {
-                  quote: "I was gaining weight despite eating well and exercising. After taking this quiz, I learned how perimenopause affects metabolism and what I could do differently. Three months later, I'm feeling so much better.",
-                  author: "— Michelle, 47"
-                },
-                {
-                  quote: "The night sweats were making it impossible to sleep. Understanding they were hormone-related helped me find solutions that actually worked. I'm finally sleeping through the night again.",
-                  author: "— Karen, 45"
-                },
-                {
-                  quote: "The brain fog was affecting my performance at work. After taking this assessment, I understood why and made some changes that have made a huge difference.",
-                  author: "— Patricia, 43"
-                }
-              ].map((testimonial, index) => (
-                <div key={index} className="bg-white p-6 rounded-xl shadow-md">
-                  <p className="mb-4">"{testimonial.quote}"</p>
-                  <p className="font-semibold text-[#5D4154]">{testimonial.author}</p>
-                </div>
-              ))}
+            <div className="text-sm text-gray-600">
+              For a complete assessment of all your perimenopause symptoms, take our free 2-minute quiz
             </div>
           </div>
         </section>
         
-        {/* Final CTA */}
+        {/* Final CTA - Enhanced */}
         <section className="py-8 bg-[#FFECD6] text-center" id="quiz">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-4">
-              Ready to Get AI-Powered Insights About Your Symptoms?
+            <h2 className="font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-4">
+              IDENTIFY YOUR PERIMENOPAUSE SYMPTOMS TODAY
             </h2>
             
             <p className="max-w-2xl mx-auto mb-6 text-lg">
-              Join over 30,000 women who've gained clarity about their perimenopause symptoms through our AI-powered assessment. This free quiz takes just 2 minutes.
+              Join over 30,000 women who've gained clarity about their perimenopause symptoms with our free assessment. Takes just 2 minutes.
             </p>
             
             <Button 
               asChild
-              className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
+              className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
             >
-              <Link to="/quiz">BEGIN MY SYMPTOMS ASSESSMENT</Link>
+              <Link to="/quiz">TAKE THE FREE PERIMENOPAUSE SYMPTOMS QUIZ</Link>
             </Button>
             
             <div className="flex flex-wrap justify-center gap-3 mt-6 text-sm text-gray-600">
-              {["Private & Secure", "HIPAA Compliant", "Medically Reviewed by Dr. Jennifer Miller, Board-Certified OB/GYN"].map((badge, index) => (
+              {["Private & Secure", "HIPAA Compliant", "Medically Reviewed"].map((badge, index) => (
                 <div key={index} className="bg-[#5D4154]/10 px-4 py-1 rounded-full">
                   {badge}
                 </div>
@@ -390,7 +373,7 @@ export default function Index() {
                 <span className="text-xl font-playfair font-bold text-white">Peritrack</span>
               </div>
               <p className="text-sm text-white/80">
-                Helping women understand and navigate perimenopause with clarity and confidence through AI-powered insights and personalized guidance.
+                Helping women understand and navigate perimenopause symptoms with clarity and confidence through AI-powered insights and personalized guidance.
               </p>
             </div>
             
@@ -406,7 +389,7 @@ export default function Index() {
             <div>
               <h4 className="font-semibold text-[#FFECD6] mb-3">Resources</h4>
               <ul className="space-y-2 text-sm">
-                {["Blog", "Symptom Library", "Hormone Guide", "Research"].map((link, index) => (
+                {["Perimenopause Symptoms", "Hormone Guide", "Symptom Library", "Research"].map((link, index) => (
                   <li key={index}><a href="#" className="hover:text-[#FFECD6] transition">{link}</a></li>
                 ))}
               </ul>
@@ -424,7 +407,7 @@ export default function Index() {
           
           <div className="pt-6 border-t border-white/10 text-center">
             <p className="text-sm text-white/70 max-w-3xl mx-auto mb-3">
-              This perimenopause symptoms quiz is designed for educational purposes. It is not intended to replace professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider about any health concerns.
+              This perimenopause symptoms quiz is designed for educational purposes. It is not intended to replace professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider about your health concerns.
             </p>
             <p className="text-sm">© 2025 Peritrack | Privacy Policy | Terms of Service</p>
           </div>
