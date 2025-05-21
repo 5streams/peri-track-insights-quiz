@@ -82,6 +82,14 @@ const Results = () => {
     // Trigger once on load
     setTimeout(revealSections, 300);
 
+    // Immediately reveal the first section to prevent blank screen
+    setTimeout(() => {
+      const firstSection = document.querySelector('.reveal-section');
+      if (firstSection) {
+        firstSection.classList.add('revealed');
+      }
+    }, 100);
+
     return () => {
       window.removeEventListener('scroll', revealSections);
     };
@@ -103,7 +111,7 @@ const Results = () => {
   // Ensure firstName is capitalized
   const capitalizedFirstName = userInfo.firstName 
     ? userInfo.firstName.charAt(0).toUpperCase() + userInfo.firstName.slice(1)
-    : "";
+    : "Julie"; // Default name if none found
   
   return (
     <div 
@@ -115,22 +123,25 @@ const Results = () => {
     >
       <div className="w-full max-w-4xl mx-auto">
         <div className="results-container">
-          {/* Results Header with Score and User Name */}
-          <ResultsHeader 
-            score={hormoneScores.overall} 
-            firstName={capitalizedFirstName} 
-            scoreCategory={scoreCategory}
-            onStartTrial={handleTrialCTA}
-          />
-          
-          {/* Results Summary Component with Hormone Visualization */}
-          <ResultsSummary
-            score={hormoneScores.overall}
-            scoreCategory={scoreCategory}
-            primaryHormone={hormoneScores.primaryHormone}
-            secondaryHormones={["estrogen", "testosterone"].filter(h => h !== hormoneScores.primaryHormone)}
-            symptoms={hormoneScores.primarySymptoms}
-          />
+          {/* Force first section to be visible immediately to prevent blank screen */}
+          <div className="reveal-section revealed">
+            {/* Results Header with Score and User Name */}
+            <ResultsHeader 
+              score={hormoneScores.overall} 
+              firstName={capitalizedFirstName} 
+              scoreCategory={scoreCategory}
+              onStartTrial={handleTrialCTA}
+            />
+            
+            {/* Results Summary Component with Hormone Visualization */}
+            <ResultsSummary
+              score={hormoneScores.overall}
+              scoreCategory={scoreCategory}
+              primaryHormone={hormoneScores.primaryHormone}
+              secondaryHormones={["estrogen", "testosterone"].filter(h => h !== hormoneScores.primaryHormone)}
+              symptoms={hormoneScores.primarySymptoms}
+            />
+          </div>
           
           {/* Personalized Assessment */}
           <PersonalizedAssessment

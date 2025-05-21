@@ -30,6 +30,12 @@
   transform: translateY(0);
 }
 
+/* Ensure the initial content is visible */
+.results-container > .reveal-section:first-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .animate-pulse-subtle {
   animation: pulseSubtle 3s infinite ease-in-out;
 }
