@@ -67,7 +67,7 @@ const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
   };
 
   return (
-    <>
+    <div className="app-premium-and-showcase">
       <Card className="mb-6 md:mb-8 overflow-hidden reveal-section transform opacity-0 border-t-4 border-[#A7C4A0] bg-gradient-to-br from-[#FFECD6]/60 to-white hover:shadow-xl transition-all duration-300">
         <CardContent className="p-5 md:p-8">
           <h2 className="text-xl md:text-2xl font-bold text-center text-[#5D4154] mb-5">
@@ -154,7 +154,7 @@ const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
       
       {/* App Showcase Section */}
       <AppShowcase onStartTrial={handleStartTrial} />
-    </>
+    </div>
   );
 };
 
