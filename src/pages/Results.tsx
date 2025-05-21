@@ -144,15 +144,7 @@ const Results = () => {
             scoreCategory={scoreCategory}
           />
           
-          {/* Bonus Resources Section - Purple Section */}
-          <div className="mb-6 md:mb-8 bg-[#5D4154] text-white p-6 rounded-lg reveal-section transform opacity-0">
-            <h2 className="text-xl md:text-2xl font-bold text-center mb-4">
-              BONUS RESOURCES INCLUDED
-            </h2>
-            <p className="text-center mb-6">
-              "Perimenopause Information Guide", "Symptom Management Information", and "Lab Testing Information"
-            </p>
-          </div>
+          {/* Removed the Bonus Resources Section */}
           
           {/* Emotional Support */}
           <EmotionalSupport
@@ -205,3 +197,4 @@ const Results = () => {
 };
 
 export default Results;
+
