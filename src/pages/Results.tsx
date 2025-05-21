@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,7 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
-import LunaAIFeature from "@/components/results/LunaAIFeature"; // Keep this import
+import LunaAIFeature from "@/components/results/LunaAIFeature";
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
 import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
@@ -18,6 +19,7 @@ import ComparisonTable from "@/components/results/ComparisonTable";
 import Testimonials from "@/components/results/Testimonials";
 import Security from "@/components/results/Security";
 import FutureWithoutIntervention from "@/components/results/FutureWithoutIntervention";
+import PeritrackIntro from "@/components/results/PeritrackIntro"; // Add import for new component
 
 interface QuizResults {
   score: number;
@@ -143,8 +145,6 @@ const Results = () => {
             scoreCategory={scoreCategory}
           />
           
-          {/* Removed the Bonus Resources Section */}
-          
           {/* Emotional Support */}
           <EmotionalSupport
             scoreCategory={scoreCategory}
@@ -154,6 +154,9 @@ const Results = () => {
           {/* Future Without Intervention */}
           <FutureWithoutIntervention firstName={capitalizedFirstName} />
           
+          {/* Add PeritrackIntro component - INSERT HERE */}
+          <PeritrackIntro onStartTrial={handleTrialCTA} />
+          
           {/* Free Trial CTA */}
           <FreeTrial 
             onStartTrial={handleTrialCTA}
@@ -161,7 +164,7 @@ const Results = () => {
             scoreCategory={scoreCategory}
           />
           
-          {/* Luna AI Feature - Moved here before SubscriptionOptions */}
+          {/* Luna AI Feature */}
           <LunaAIFeature onStartTrial={handleTrialCTA} />
           
           {/* Subscription Options */}
