@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { Check, Award, Clock, Star, ArrowRight } from "lucide-react";
+import { Check, Award, Clock, Star, ArrowRight, LockKeyhole } from "lucide-react";
 
 interface ValuePropositionProps {
   primarySymptom: string;
@@ -566,19 +566,19 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
           
           <div className="space-y-3 mb-5">
             <div className="flex items-start">
-              <Lock className="h-5 w-5 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
+              <LockKeyhole className="h-5 w-5 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
               <p className="text-left">
                 <span className="font-medium">LIFETIME ACCESS</span> to our "Perimenopause Survival Blueprint" library ($67 value)
               </p>
             </div>
             <div className="flex items-start">
-              <Lock className="h-5 w-5 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
+              <LockKeyhole className="h-5 w-5 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
               <p className="text-left">
                 <span className="font-medium">PREMIUM ACCESS</span> to our monthly expert Q&A sessions ($19/month value)
               </p>
             </div>
             <div className="flex items-start">
-              <Lock className="h-5 w-5 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
+              <LockKeyhole className="h-5 w-5 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
               <p className="text-left">
                 <span className="font-medium">PRIORITY ONBOARDING</span> with a personalized welcome session ($45 value)
               </p>
@@ -615,3 +615,4 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
 };
 
 export default ValueProposition;
+
