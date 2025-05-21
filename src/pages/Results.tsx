@@ -12,7 +12,7 @@ import PersonalizedAssessment from "@/components/results/PersonalizedAssessment"
 import HormoneInsights from "@/components/results/HormoneInsights";
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
 import EmotionalSupport from "@/components/results/EmotionalSupport";
-import ValuePropositionNew from "@/components/results/ValuePropositionNew";
+import SubscriptionOptions from "@/components/results/SubscriptionOptions";
 
 interface QuizResults {
   score: number;
@@ -91,12 +91,11 @@ const Results = () => {
 
   const scoreCategory = getScoreCategory(hormoneScores.overall);
   
-  // Start trial function
+  // Start trial function - modified to not navigate automatically
   const handleTrialCTA = () => {
     // Set trial start date
     localStorage.setItem("trialStartDate", new Date().toString());
-    // Navigate to dashboard
-    navigate("/dashboard");
+    // We'll handle navigation in the LeadCaptureModal if needed
   };
   
   // Ensure firstName is capitalized
@@ -144,9 +143,8 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* New Value Proposition with sales copy */}
-          <ValuePropositionNew
-            firstName={capitalizedFirstName}
+          {/* Use the subscription options component instead of ValuePropositionNew */}
+          <SubscriptionOptions
             onStartTrial={handleTrialCTA}
           />
           

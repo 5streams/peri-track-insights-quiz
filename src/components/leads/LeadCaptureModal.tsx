@@ -111,6 +111,7 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
   };
   
   const handleClose = () => {
+    // Simply close the modal without navigation
     onClose();
     // Reset the form after a delay to avoid visual transition issues
     setTimeout(resetForm, 300);
@@ -194,10 +195,10 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
               <div className="mt-6">
                 <Button 
                   type="submit" 
-                  className="w-full bg-[#A7C4A0] hover:bg-[#A7C4A0]/90 text-white"
+                  className="w-full bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Processing..." : source === 'free_trial' ? "Continue to Payment" : "Show My Results"}
+                  {isLoading ? "Processing..." : source === 'free_trial' ? "Start 7-Day Free Trial" : "Show My Results"}
                 </Button>
               </div>
               
@@ -208,8 +209,8 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
           </>
         ) : (
           <div className="py-6 text-center">
-            <div className="bg-[#A7C4A0]/20 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Check className="h-8 w-8 text-[#A7C4A0]" />
+            <div className="bg-[#9b87f5]/20 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Check className="h-8 w-8 text-[#9b87f5]" />
             </div>
             
             <DialogTitle className="text-xl font-bold text-[#5D4154] mb-4">
@@ -218,14 +219,12 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
             
             <div className="mb-6">
               <p className="text-[#5D4154]">
-                We're currently in beta testing and will notify you when Peritrack officially launches.
+                We're excited to have you begin your perimenopause wellness journey with Peritrack.
               </p>
               
-              <div className="mt-4 bg-[#FFECD6]/30 p-4 rounded-lg">
-                <div className="w-full bg-gray-200 rounded-full h-2.5 mb-2">
-                  <div className="bg-[#A7C4A0] h-2.5 rounded-full" style={{ width: "85%" }}></div>
-                </div>
-                <p className="text-sm text-[#5D4154]">Development progress: <strong>85% complete</strong></p>
+              <div className="mt-4 bg-[#F9F5FF]/50 p-4 rounded-lg border border-[#9b87f5]/20">
+                <p className="text-sm text-[#5D4154]">Your 7-day free trial has been activated.</p>
+                <p className="text-sm font-medium text-[#5D4154] mt-2">We'll send your login details to your email shortly.</p>
               </div>
             </div>
             
