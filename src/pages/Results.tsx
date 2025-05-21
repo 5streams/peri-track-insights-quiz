@@ -18,6 +18,7 @@ import LunaAIFeature from "@/components/results/LunaAIFeature";
 import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
 import TransformationJourney from "@/components/results/TransformationJourney";
 import SimplePricingSection from "@/components/results/SimplePricingSection";
+import Guarantee from "@/components/results/Guarantee";
 
 interface QuizResults {
   score: number;
@@ -163,6 +164,9 @@ const Results = () => {
           
           {/* Luna AI Feature with smoother transition */}
           <LunaAIFeature onStartTrial={handleTrialCTA} />
+          
+          {/* Our Guarantee Section */}
+          <Guarantee />
           
           {/* Back to Quiz Button */}
           <div className="text-center mb-12 mt-10">
