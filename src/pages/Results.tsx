@@ -17,6 +17,7 @@ import PeritrackIntro from "@/components/results/PeritrackIntro";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
 import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
 import TransformationJourney from "@/components/results/TransformationJourney";
+import SimplePricingSection from "@/components/results/SimplePricingSection";
 
 interface QuizResults {
   score: number;
@@ -173,6 +174,9 @@ const Results = () => {
               <ArrowLeft className="h-4 w-4" /> Retake Assessment
             </Button>
           </div>
+          
+          {/* Simple Pricing Section at the very bottom */}
+          <SimplePricingSection onStartTrial={handleTrialCTA} />
         </div>
       </div>
     </div>
