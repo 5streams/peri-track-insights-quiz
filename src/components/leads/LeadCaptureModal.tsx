@@ -22,6 +22,7 @@ interface LeadCaptureModalProps {
   pricingPlan?: 'monthly' | 'annual';
   source: 'quiz_results' | 'free_trial';
   quizResults?: any;
+  navigateToDashboard?: boolean;
 }
 
 const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
@@ -29,7 +30,8 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
   onClose,
   pricingPlan,
   source,
-  quizResults
+  quizResults,
+  navigateToDashboard = false
 }) => {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");

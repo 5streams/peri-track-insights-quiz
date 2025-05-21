@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -121,6 +122,7 @@ const BeginJourney = ({ firstName }: BeginJourneyProps) => {
         pricingPlan="monthly"
         source="free_trial"
         quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
+        navigateToDashboard={true}
       />
     </Card>
   );

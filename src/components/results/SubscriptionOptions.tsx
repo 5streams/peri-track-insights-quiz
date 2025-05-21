@@ -133,6 +133,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
         pricingPlan="monthly"
         source="free_trial"
         quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
+        navigateToDashboard={true}
       />
       
       <LeadCaptureModal
@@ -141,6 +142,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
         pricingPlan="annual"
         source="free_trial"
         quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
+        navigateToDashboard={true}
       />
     </Card>
   );
