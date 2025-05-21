@@ -296,54 +296,6 @@ export default function Index() {
           </div>
         </section>
         
-        {/* Mini-Form Option - New Section */}
-        <section className="py-8 bg-[#FFECD6]/50">
-          <div className="max-w-xl mx-auto px-4 text-center">
-            <h3 className="text-xl font-semibold mb-4">Want a preview of what perimenopause symptoms you might be experiencing?</h3>
-            
-            <div className="bg-white p-6 rounded-xl shadow-sm mb-6">
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">Your age</label>
-                <select className="w-full p-2 border border-gray-300 rounded">
-                  <option>Select your age</option>
-                  <option>35-39</option>
-                  <option>40-44</option>
-                  <option>45-49</option>
-                  <option>50-55</option>
-                  <option>55+</option>
-                </select>
-              </div>
-              
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">Top 3 symptoms you're experiencing</label>
-                <div className="space-y-2 text-left">
-                  {[
-                    "Hot flashes", 
-                    "Sleep disruption", 
-                    "Mood changes", 
-                    "Weight gain", 
-                    "Brain fog", 
-                    "Irregular periods"
-                  ].map((symptom, index) => (
-                    <div key={index} className="flex items-center">
-                      <input type="checkbox" id={`symptom-${index}`} className="mr-2" />
-                      <label htmlFor={`symptom-${index}`}>{symptom}</label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              <Button className="w-full bg-[#5D4154] hover:bg-[#7D6174] text-white py-3">
-                GET QUICK INSIGHT
-              </Button>
-            </div>
-            
-            <div className="text-sm text-gray-600">
-              For a complete assessment of all your perimenopause symptoms, take our free 2-minute quiz
-            </div>
-          </div>
-        </section>
-        
         {/* Final CTA - Enhanced */}
         <section className="py-8 bg-[#FFECD6] text-center" id="quiz">
           <div className="max-w-5xl mx-auto px-4">
