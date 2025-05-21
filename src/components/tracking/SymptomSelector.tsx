@@ -53,6 +53,7 @@ const SymptomSelector: React.FC<SymptomSelectorProps> = ({
       "Emotional Sensitivity"
     ],
     sleep: [
+      "Poor Sleep",
       "Sleep Disruptions", 
       "Fatigue", 
       "Energy Fluctuations", 
@@ -65,6 +66,7 @@ const SymptomSelector: React.FC<SymptomSelectorProps> = ({
   
   // Default to showing a mix of common symptoms if no category is specified
   const defaultSymptoms = [
+    "Poor Sleep",
     "Hot Flashes/Night Sweats", 
     "Sleep Disruptions", 
     "Mood Changes", 

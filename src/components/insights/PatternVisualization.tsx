@@ -40,11 +40,15 @@ const PatternVisualization: React.FC<PatternVisualizationProps> = ({ timeWindow 
         const emotionalCount = entry.symptoms?.emotional?.length || 0;
         const sleepCount = entry.symptoms?.sleep?.length || 0;
         
+        // Check if "Poor Sleep" is in the sleep symptoms
+        const hasPoorSleep = entry.symptoms?.sleep?.includes("Poor Sleep") || false;
+        
         return {
           name: formattedDate,
           'Hot Flashes': physicalCount > 0 ? Math.floor(Math.random() * 4) + 1 : 0, // Sample data for now
           'Sleep Disruptions': sleepCount > 0 ? Math.floor(Math.random() * 5) + 1 : 0,
           'Mood Changes': emotionalCount > 0 ? Math.floor(Math.random() * 5) + 1 : 0,
+          'Poor Sleep': hasPoorSleep ? Math.floor(Math.random() * 5) + 2 : 0, // Higher intensity for Poor Sleep
         };
       });
       
@@ -90,6 +94,7 @@ const PatternVisualization: React.FC<PatternVisualizationProps> = ({ timeWindow 
         'Hot Flashes': Math.floor(Math.random() * 5) + 1,
         'Sleep Disruptions': Math.floor(Math.random() * 5) + 1,
         'Mood Changes': Math.floor(Math.random() * 5) + 1,
+        'Poor Sleep': Math.floor(Math.random() * 5) + 1,
       });
     }
     
@@ -141,6 +146,14 @@ const PatternVisualization: React.FC<PatternVisualizationProps> = ({ timeWindow 
           stackId="3" 
           stroke="#A7C4A0" 
           fill="#A7C4A0" 
+          fillOpacity={0.6}
+        />
+        <Area 
+          type="monotone" 
+          dataKey="Poor Sleep" 
+          stackId="4" 
+          stroke="#6D6875" 
+          fill="#6D6875" 
           fillOpacity={0.6}
         />
       </AreaChart>
