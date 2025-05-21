@@ -2,7 +2,6 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { getHormoneExplanation, getSymptomExplanation, symptomCategories } from "@/utils/scoreCalculation";
-import HormoneVisualization from "./HormoneVisualization";
 
 interface HormoneInsightsProps {
   scores: {
@@ -61,14 +60,56 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
           YOUR HORMONE ASSESSMENT
         </h2>
         
-        <div className="mb-8">
-          <HormoneVisualization 
-            primaryHormone={scores.primaryHormone}
-            secondaryHormones={[
-              ...["estrogen", "progesterone", "testosterone"].filter(h => h !== scores.primaryHormone)
-            ]}
-            scoreCategory={scoreCategory}
-          />
+        {/* Hormone patterns description */}
+        <div className="bg-white p-4 rounded-lg mb-8 border border-gray-200 shadow-sm">
+          <h4 className="text-sm font-bold text-[#5D4154] mb-3">Your Three-Hormone Pattern:</h4>
+          
+          <div className="space-y-3">
+            {/* Hormone indicators with clear visual separation */}
+            <div className="flex items-start">
+              <div className="w-3 h-3 rounded-full mt-1.5 mr-2 flex-shrink-0 bg-[#F472B6]"></div>
+              <div>
+                <span className="font-medium text-[#5D4154]">Estrogen:</span>{" "}
+                <span className="text-gray-700 text-sm">
+                  {getHormoneScoreCategory(estrogen) === "mild" ? "Within optimal range with normal fluctuations" : 
+                   getHormoneScoreCategory(estrogen) === "moderate" ? "Notable fluctuations affecting temperature regulation and mood stability" : 
+                   "Pronounced fluctuations affecting temperature regulation and mood stability"}
+                </span>
+              </div>
+            </div>
+            
+            <div className="flex items-start">
+              <div className="w-3 h-3 rounded-full mt-1.5 mr-2 flex-shrink-0 bg-[#60A5FA]"></div>
+              <div>
+                <span className="font-medium text-[#5D4154]">Progesterone:</span>{" "}
+                <span className="text-gray-700 text-sm">
+                  {getHormoneScoreCategory(progesterone) === "mild" ? "Healthy levels supporting sleep and mood" : 
+                   getHormoneScoreCategory(progesterone) === "moderate" ? "Moderate decline (30-40%) affecting sleep and mood" : 
+                   "Significant decline (45-55%) affecting sleep and mood"}
+                </span>
+              </div>
+            </div>
+            
+            <div className="flex items-start">
+              <div className="w-3 h-3 rounded-full mt-1.5 mr-2 flex-shrink-0 bg-[#10B981]"></div>
+              <div>
+                <span className="font-medium text-[#5D4154]">Testosterone:</span>{" "}
+                <span className="text-gray-700 text-sm">
+                  {getHormoneScoreCategory(testosterone) === "mild" ? "Balanced levels supporting energy and vitality" : 
+                   getHormoneScoreCategory(testosterone) === "moderate" ? "Notable decrease (25-35%) affecting energy and motivation" : 
+                   "Substantial decrease (40-50%) affecting energy and motivation"}
+                </span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-4 pt-3 border-t border-gray-100">
+            <p className="text-sm text-[#5D4154] font-medium">
+              {scoreCategory === "mild" ? "You are showing minimal perimenopause symptoms with hormone levels in optimal ranges." :
+               scoreCategory === "moderate" ? "This specific pattern explains why you're experiencing your particular symptom cluster." :
+               "This pattern explains why your symptoms feel so intense and why generic approaches may not work."}
+            </p>
+          </div>
         </div>
         
         {/* Estrogen Section */}
