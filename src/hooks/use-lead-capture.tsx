@@ -25,12 +25,32 @@ export function useLeadCapture() {
     setIsModalOpen(false);
   };
   
+  const submitLeadData = (firstName: string, email: string, additionalNotes?: string) => {
+    console.log("Submitting lead data:", { firstName, email, captureSource, selectedPlan, quizData });
+    try {
+      const lead = saveLead(
+        firstName,
+        email,
+        captureSource,
+        selectedPlan,
+        quizData,
+        additionalNotes
+      );
+      console.log("Lead saved successfully:", lead);
+      return lead;
+    } catch (error) {
+      console.error("Failed to save lead:", error);
+      throw error;
+    }
+  };
+  
   return {
     isModalOpen,
     selectedPlan,
     captureSource,
     quizData,
     openLeadModal,
-    closeLeadModal
+    closeLeadModal,
+    submitLeadData
   };
 }

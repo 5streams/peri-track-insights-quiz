@@ -85,6 +85,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
           <div 
             ref={scoreRef}
             className={`score-fill absolute left-0 top-0 h-full rounded-full transition-all duration-1500 ease-out w-0 ${getMeterFillColor()}`}
+            style={{ width: '0%' }}
           />
           
           <div className="score-labels absolute w-full top-0 h-full flex items-center">

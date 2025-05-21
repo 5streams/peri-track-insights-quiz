@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import LoadingSpinner from "@/components/results/LoadingSpinner";
 import { calculateHormoneScores } from "@/utils/scoreCalculation";
-import { useLeadCapture } from "@/hooks/use-lead-capture"; // Add this import
+import { useLeadCapture } from "@/hooks/use-lead-capture";
 
 // Import our components for the results page
 import ResultsHeader from "@/components/results/ResultsHeader";
@@ -14,7 +14,6 @@ import HormoneInsights from "@/components/results/HormoneInsights";
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
 import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
-import LeadCaptureModal from "@/components/leads/LeadCaptureModal"; // Add this import
 
 interface QuizResults {
   score: number;
@@ -35,7 +34,7 @@ const Results = () => {
     primarySymptoms: [] as string[]
   });
   const navigate = useNavigate();
-  const { openLeadModal } = useLeadCapture(); // Use the lead capture hook
+  const { openLeadModal } = useLeadCapture();
   
   // Get score category
   const getScoreCategory = (score: number) => {
@@ -123,7 +122,7 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Use the subscription options component instead of ValuePropositionNew */}
+          {/* Use the subscription options component */}
           <SubscriptionOptions
             onStartTrial={handleTrialCTA}
           />
