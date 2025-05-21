@@ -13,6 +13,7 @@ import HormoneInsights from "@/components/results/HormoneInsights";
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
 import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
+import LunaAIFeature from "@/components/results/LunaAIFeature";
 
 interface QuizResults {
   score: number;
@@ -141,6 +142,11 @@ const Results = () => {
           <EmotionalSupport
             scoreCategory={scoreCategory}
             primarySymptoms={hormoneScores.primarySymptoms}
+          />
+          
+          {/* Luna AI Feature */}
+          <LunaAIFeature
+            onStartTrial={handleTrialCTA}
           />
           
           {/* Use the subscription options component instead of ValuePropositionNew */}

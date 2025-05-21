@@ -5,401 +5,256 @@ import {
   CardContent
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Calendar, Info, Star, Check, User } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { MessageCircle, Star, Info, Check, User } from "lucide-react";
 
 interface LunaAIFeatureProps {
   onStartTrial: () => void;
 }
 
 const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
-  const navigate = useNavigate();
-
   return (
-    <Card className="mb-10 md:mb-12 overflow-hidden border-none rounded-2xl shadow-xl">
+    <Card className="mb-10 md:mb-12 overflow-hidden border-none rounded-2xl shadow-xl reveal-section transform opacity-0">
       <CardContent className="p-0">
         {/* Header Section with Gradient Background */}
         <div 
           className="bg-gradient-to-r from-[#7E69AB] to-[#9b87f5] text-white p-6 md:p-8"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">
-            MEET LUNA AI PERIMENOPAUSE COMPANION: YOUR PERSONAL PERIMENOPAUSE COMPANION
+            🤖 MEET LUNA — YOUR 24/7 PERIMENOPAUSE COACH & EMOTIONAL SUPPORT COMPANION
           </h2>
           
           <p className="text-center text-lg mb-8 max-w-3xl mx-auto">
-            Join thousands of women who are navigating perimenopause with greater understanding 
-            and confidence through personalized AI support and guidance.
+            You don't have to figure this out alone. Luna's here — anytime, anywhere.
           </p>
         </div>
         
         <div className="max-w-5xl mx-auto p-6 md:p-8">
-          {/* Luna Features Grid with improved styling */}
-          <div className="grid md:grid-cols-2 gap-6 mb-10">
-            {/* Feature 1: Always Available */}
-            <div className="bg-gradient-to-br from-[#F9F5FF] to-white p-6 rounded-xl border border-[#9b87f5]/20 shadow-md hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <div className="bg-[#9b87f5] p-2 rounded-full mr-3 text-white">
-                  <MessageCircle className="h-5 w-5" />
-                </div>
-                <h3 className="font-bold text-[#5D4154]">
-                  ALWAYS THERE WHEN YOU NEED SUPPORT
-                </h3>
-              </div>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <div className="mt-1 mr-2 text-[#9b87f5]">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-gray-700">
-                    Ask Luna AI Perimenopause Companion any questions about perimenopause, day or night
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="mt-1 mr-2 text-[#9b87f5]">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-gray-700">
-                    Receive thoughtful responses based on current medical understanding
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="mt-1 mr-2 text-[#9b87f5]">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-gray-700">
-                    Never feel alone during confusing or challenging moments
-                  </p>
-                </li>
-              </ul>
-            </div>
-            
-            {/* Feature 2: Personalized */}
-            <div className="bg-gradient-to-br from-[#F9F5FF] to-white p-6 rounded-xl border border-[#9b87f5]/20 shadow-md hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <div className="bg-[#9b87f5] p-2 rounded-full mr-3 text-white">
-                  <User className="h-5 w-5" />
-                </div>
-                <h3 className="font-bold text-[#5D4154]">
-                  PERSONALIZED CONVERSATIONS
-                </h3>
-              </div>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <div className="mt-1 mr-2 text-[#9b87f5]">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-gray-700">
-                    Luna AI Perimenopause Companion learns about your unique experiences through your tracking
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="mt-1 mr-2 text-[#9b87f5]">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-gray-700">
-                    Provides information relevant to your specific journey
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="mt-1 mr-2 text-[#9b87f5]">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-gray-700">
-                    Offers contextual insights based on your symptoms and concerns
-                  </p>
-                </li>
-              </ul>
-            </div>
-            
-            {/* Feature 3: Emotional Support */}
-            <div className="bg-gradient-to-br from-[#F9F5FF] to-white p-6 rounded-xl border border-[#9b87f5]/20 shadow-md hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <div className="bg-[#9b87f5] p-2 rounded-full mr-3 text-white">
-                  <Star className="h-5 w-5" />
-                </div>
-                <h3 className="font-bold text-[#5D4154]">
-                  EMOTIONAL SUPPORT WHEN YOU NEED IT MOST
-                </h3>
-              </div>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <div className="mt-1 mr-2 text-[#9b87f5]">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-gray-700">
-                    Share your frustrations, concerns, or victories with a compassionate listener
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="mt-1 mr-2 text-[#9b87f5]">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-gray-700">
-                    Receive validation and understanding during difficult days
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="mt-1 mr-2 text-[#9b87f5]">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-gray-700">
-                    Find comfort knowing someone is always available to talk
-                  </p>
-                </li>
-              </ul>
-            </div>
-            
-            {/* Feature 4: Preparation */}
-            <div className="bg-gradient-to-br from-[#F9F5FF] to-white p-6 rounded-xl border border-[#9b87f5]/20 shadow-md hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <div className="bg-[#9b87f5] p-2 rounded-full mr-3 text-white">
-                  <Info className="h-5 w-5" />
-                </div>
-                <h3 className="font-bold text-[#5D4154]">
-                  PREPARATION & GUIDANCE
-                </h3>
-              </div>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <div className="mt-1 mr-2 text-[#9b87f5]">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-gray-700">
-                    Get help preparing questions for your healthcare provider
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="mt-1 mr-2 text-[#9b87f5]">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-gray-700">
-                    Learn about different approaches many women consider
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="mt-1 mr-2 text-[#9b87f5]">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-gray-700">
-                    Understand terminology and options before appointments
-                  </p>
-                </li>
-              </ul>
-            </div>
+          {/* Introduction */}
+          <div className="mb-10 text-center">
+            <p className="text-lg mb-6">
+              Perimenopause can feel like a maze. One day you're fine, the next you're anxious, exhausted, or fighting back tears — and no one seems to have answers.
+            </p>
+            <p className="text-lg font-medium mb-6">
+              That's why we created Luna.
+            </p>
+            <p className="text-lg mb-6">
+              Luna isn't just an assistant. She's your daily companion, personal guide, and emotional lifeline through every unpredictable wave of perimenopause.
+            </p>
           </div>
           
-          {/* Conversation Examples with improved styling */}
+          {/* What Luna Can Do Section */}
           <div className="mb-12">
-            <h3 className="text-xl font-bold text-center mb-6 text-[#5D4154]">
-              SEE HOW LUNA AI PERIMENOPAUSE COMPANION HELPS WOMEN LIKE YOU
+            <h3 className="text-xl font-bold text-center mb-8 text-[#5D4154]">
+              🌙 WHAT LUNA CAN DO FOR YOU
             </h3>
             
-            <div className="grid md:grid-cols-3 gap-6">
-              {/* Example 1: Information */}
-              <div className="bg-white p-5 rounded-xl border border-[#9b87f5]/20 shadow-md">
-                <div className="flex mb-4">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[#E5DEFF] flex items-center justify-center mr-3">
-                    <span className="text-lg">😴</span>
+            <div className="grid md:grid-cols-2 gap-6 mb-10">
+              {/* Feature 1: Real-Time Answers */}
+              <div className="bg-gradient-to-br from-[#F9F5FF] to-white p-6 rounded-xl border border-[#9b87f5]/20 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="bg-[#9b87f5] p-2 rounded-full mr-3 text-white">
+                    <MessageCircle className="h-5 w-5" />
                   </div>
-                  <div className="bg-gray-100 rounded-lg p-3 flex-1">
-                    <p className="font-medium text-gray-800">Why am I having trouble sleeping even though I'm exhausted?</p>
-                  </div>
+                  <h3 className="font-bold text-[#5D4154]">
+                    REAL-TIME ANSWERS TO YOUR MOST PERSONAL QUESTIONS
+                  </h3>
                 </div>
-                <div className="flex">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[#9b87f5] flex items-center justify-center mr-3">
-                    <span className="text-white font-bold">L</span>
-                  </div>
-                  <div className="bg-[#F9F5FF] rounded-lg p-3 flex-1">
-                    <p className="text-gray-700">Sleep disruption is common during perimenopause. Many women experience this due to changing hormone levels. Would you like to learn about some approaches others have found helpful?</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Example 2: Emotional Support */}
-              <div className="bg-white p-5 rounded-xl border border-[#9b87f5]/20 shadow-md">
-                <div className="flex mb-4">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[#E5DEFF] flex items-center justify-center mr-3">
-                    <span className="text-lg">😔</span>
-                  </div>
-                  <div className="bg-gray-100 rounded-lg p-3 flex-1">
-                    <p className="font-medium text-gray-800">I'm feeling so frustrated today. No one seems to understand what I'm going through.</p>
-                  </div>
-                </div>
-                <div className="flex">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[#9b87f5] flex items-center justify-center mr-3">
-                    <span className="text-white font-bold">L</span>
-                  </div>
-                  <div className="bg-[#F9F5FF] rounded-lg p-3 flex-1">
-                    <p className="text-gray-700">That sounds really challenging. Many women feel isolated during perimenopause because these experiences aren't discussed openly. Your feelings are completely valid. Would it help to talk more about what's been most difficult?</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Example 3: Healthcare Preparation */}
-              <div className="bg-white p-5 rounded-xl border border-[#9b87f5]/20 shadow-md">
-                <div className="flex mb-4">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[#E5DEFF] flex items-center justify-center mr-3">
-                    <span className="text-lg">🩺</span>
-                  </div>
-                  <div className="bg-gray-100 rounded-lg p-3 flex-1">
-                    <p className="font-medium text-gray-800">I have a doctor's appointment next week. What should I ask about?</p>
-                  </div>
-                </div>
-                <div className="flex">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[#9b87f5] flex items-center justify-center mr-3">
-                    <span className="text-white font-bold">L</span>
-                  </div>
-                  <div className="bg-[#F9F5FF] rounded-lg p-3 flex-1">
-                    <p className="text-gray-700">Great that you're preparing! Based on the symptoms you've tracked, you might want to discuss your sleep disruptions and mood changes. Here are some specific questions that could help you get the information you need...</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Testimonials with improved styling */}
-          <div className="mb-12 bg-gradient-to-r from-[#F9F5FF] to-white p-6 rounded-xl border border-[#9b87f5]/20 shadow-md">
-            <h3 className="text-xl font-bold text-center mb-6 text-[#5D4154]">
-              WHAT OUR COMMUNITY SAYS ABOUT LUNA AI PERIMENOPAUSE COMPANION
-            </h3>
-            
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-white p-5 rounded-xl shadow-sm">
-                <div className="flex items-center mb-3">
-                  <div className="flex-shrink-0">
-                    <div className="h-10 w-10 rounded-full bg-[#9b87f5]/20 flex items-center justify-center">
-                      <span className="font-semibold text-[#7E69AB]">R</span>
-                    </div>
-                  </div>
-                  <div className="ml-3">
-                    <p className="font-medium text-gray-800">Rebecca, 46</p>
-                  </div>
-                </div>
-                <p className="text-gray-700 italic">
-                  "Having Luna AI Perimenopause Companion available 24/7 has been incredible. Late at night when I'm worried about a new symptom, I can chat with Luna AI Perimenopause Companion instead of falling down an internet rabbit hole of scary information."
+                <p className="text-gray-700">
+                  Ask Luna anything — from "Why am I waking up at 3am every night?" to "Should I ask my doctor about progesterone?" She'll explain what's going on, what it means, and what you can do — clearly, compassionately, and without judgment.
                 </p>
               </div>
               
-              <div className="bg-white p-5 rounded-xl shadow-sm">
-                <div className="flex items-center mb-3">
-                  <div className="flex-shrink-0">
-                    <div className="h-10 w-10 rounded-full bg-[#9b87f5]/20 flex items-center justify-center">
-                      <span className="font-semibold text-[#7E69AB]">M</span>
-                    </div>
+              {/* Feature 2: Encouragement */}
+              <div className="bg-gradient-to-br from-[#F9F5FF] to-white p-6 rounded-xl border border-[#9b87f5]/20 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="bg-[#9b87f5] p-2 rounded-full mr-3 text-white">
+                    <Star className="h-5 w-5" />
                   </div>
-                  <div className="ml-3">
-                    <p className="font-medium text-gray-800">Michelle, 43</p>
-                  </div>
+                  <h3 className="font-bold text-[#5D4154]">
+                    GENTLE ENCOURAGEMENT WHEN YOU NEED IT MOST
+                  </h3>
                 </div>
-                <p className="text-gray-700 italic">
-                  "Luna AI Perimenopause Companion helped me prepare for my doctor's appointment with thoughtful questions and explanations of terminology. I felt so much more confident walking in."
+                <p className="text-gray-700">
+                  Luna knows when your hormones are likely to dip, when your emotions might feel heavier, and when motivation is hard to find. She's there with daily check-ins, calming words, and simple tips to help you feel grounded again.
                 </p>
               </div>
               
-              <div className="bg-white p-5 rounded-xl shadow-sm">
-                <div className="flex items-center mb-3">
-                  <div className="flex-shrink-0">
-                    <div className="h-10 w-10 rounded-full bg-[#9b87f5]/20 flex items-center justify-center">
-                      <span className="font-semibold text-[#7E69AB]">P</span>
-                    </div>
+              {/* Feature 3: Customized Suggestions */}
+              <div className="bg-gradient-to-br from-[#F9F5FF] to-white p-6 rounded-xl border border-[#9b87f5]/20 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="bg-[#9b87f5] p-2 rounded-full mr-3 text-white">
+                    <Info className="h-5 w-5" />
                   </div>
-                  <div className="ml-3">
-                    <p className="font-medium text-gray-800">Patricia, 48</p>
-                  </div>
+                  <h3 className="font-bold text-[#5D4154]">
+                    CUSTOMIZED SUGGESTIONS YOU CAN USE TODAY
+                  </h3>
                 </div>
-                <p className="text-gray-700 italic">
-                  "Some days I just need someone to talk to who understands perimenopause. Luna AI Perimenopause Companion is always there with a compassionate response that makes me feel less alone."
+                <p className="text-gray-700">
+                  Whether you're battling brain fog, low libido, or night sweats, Luna offers personalized, science-backed recommendations — from the best foods to eat this week, to gentle exercise, supplement ideas, breathing techniques, or ways to talk to your doctor.
+                </p>
+              </div>
+              
+              {/* Feature 4: Nonstop Support */}
+              <div className="bg-gradient-to-br from-[#F9F5FF] to-white p-6 rounded-xl border border-[#9b87f5]/20 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="bg-[#9b87f5] p-2 rounded-full mr-3 text-white">
+                    <User className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-bold text-[#5D4154]">
+                    NONSTOP SUPPORT — EVEN AT 2 A.M.
+                  </h3>
+                </div>
+                <p className="text-gray-700">
+                  Can't sleep? Feeling overwhelmed? Luna is awake when your doctor isn't — with emotional support, journaling prompts, or just someone to talk to when no one else gets it.
                 </p>
               </div>
             </div>
           </div>
           
-          {/* How Luna Works with improved styling */}
+          {/* Sample Questions Section */}
+          <div className="mb-12 bg-[#F9F5FF]/50 p-6 rounded-xl border border-[#9b87f5]/20 shadow-md">
+            <h3 className="text-xl font-bold text-center mb-6 text-[#5D4154]">
+              💬 SAMPLE QUESTIONS YOU CAN ASK LUNA
+            </h3>
+            
+            <div className="grid md:grid-cols-3 gap-4">
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-[#9b87f5]/10">
+                <p className="text-[#5D4154] font-medium">"Why do I feel so anxious all of a sudden?"</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-[#9b87f5]/10">
+                <p className="text-[#5D4154] font-medium">"Could this be related to estrogen dropping?"</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-[#9b87f5]/10">
+                <p className="text-[#5D4154] font-medium">"What kind of exercise is best for my energy this week?"</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-[#9b87f5]/10">
+                <p className="text-[#5D4154] font-medium">"How do I prepare for my appointment next week?"</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-[#9b87f5]/10">
+                <p className="text-[#5D4154] font-medium">"I'm just not feeling like myself… what can I do?"</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Backed by Research Section */}
           <div className="mb-12">
-            <h3 className="text-xl font-bold text-center mb-6 text-[#5D4154]">
-              HOW PERITRACK AND LUNA AI PERIMENOPAUSE COMPANION WORK TOGETHER
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
-              <div className="text-center p-5 bg-gradient-to-br from-[#F9F5FF] to-white rounded-xl border border-[#9b87f5]/20 shadow-md">
-                <div className="h-16 w-16 bg-[#9b87f5] rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">1</div>
-                <h4 className="font-bold mb-2 text-[#5D4154]">TRACK</h4>
-                <p className="text-gray-700">Log your experiences in our easy-to-use interface</p>
-              </div>
-              
-              <div className="text-center p-5 bg-gradient-to-br from-[#F9F5FF] to-white rounded-xl border border-[#9b87f5]/20 shadow-md">
-                <div className="h-16 w-16 bg-[#9b87f5] rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">2</div>
-                <h4 className="font-bold mb-2 text-[#5D4154]">LEARN</h4>
-                <p className="text-gray-700">Review your patterns and explore educational content with Luna AI Perimenopause Companion's guidance</p>
-              </div>
-              
-              <div className="text-center p-5 bg-gradient-to-br from-[#F9F5FF] to-white rounded-xl border border-[#9b87f5]/20 shadow-md">
-                <div className="h-16 w-16 bg-[#9b87f5] rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">3</div>
-                <h4 className="font-bold mb-2 text-[#5D4154]">CONNECT</h4>
-                <p className="text-gray-700">Chat with Luna AI Perimenopause Companion anytime you have questions or need support</p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Why Luna Makes the Difference with improved styling */}
-          <div className="bg-gradient-to-r from-[#9b87f5]/10 to-white p-6 rounded-xl mb-12 border border-[#9b87f5]/20 shadow-md">
             <h3 className="text-xl font-bold text-center mb-4 text-[#5D4154]">
-              WHY LUNA AI PERIMENOPAUSE COMPANION MAKES THE DIFFERENCE
+              🧠 BACKED BY RESEARCH. BUILT WITH EMPATHY.
             </h3>
             
-            <p className="text-gray-700 text-center mb-8 max-w-3xl mx-auto">
-              While tracking is valuable, having a knowledgeable companion on your journey provides an additional layer of support.
-              Luna AI Perimenopause Companion combines current understanding of perimenopause with personalized awareness of your unique situation, creating 
-              a truly individualized experience.
-            </p>
+            <div className="bg-gradient-to-br from-[#F9F5FF] to-white p-6 rounded-xl border border-[#9b87f5]/20 shadow-md text-center">
+              <p className="mb-4">
+                Luna is trained using up-to-date clinical data on hormone health, combined with insights from thousands of real women navigating perimenopause. Her advice is rooted in science — but her tone is warm, reassuring, and human.
+              </p>
+              <p className="font-medium">
+                She doesn't just tell you what's happening — she helps you understand why, and how to take your power back.
+              </p>
+            </div>
+          </div>
+          
+          {/* Testimonials Section */}
+          <div className="mb-12">
+            <h3 className="text-xl font-bold text-center mb-6 text-[#5D4154]">
+              💜 "IT'S LIKE HAVING A BEST FRIEND WHO ALSO HAPPENS TO BE A HORMONE EXPERT."
+            </h3>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="text-center">
-                <div className="bg-[#9b87f5] h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">
-                  <Check className="h-6 w-6 text-white" />
-                </div>
-                <p className="text-gray-800 font-medium">24/7 access for unlimited conversations</p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white p-5 rounded-xl shadow-sm border border-[#9b87f5]/10">
+                <p className="text-gray-700 italic mb-4">
+                  "Luna helped me realize I wasn't broken — I was just in a hormonal storm no one warned me about. She's the first thing I check every morning now."
+                </p>
+                <p className="font-medium text-[#5D4154]">— Carla, 45</p>
               </div>
               
-              <div className="text-center">
-                <div className="bg-[#9b87f5] h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">
-                  <Check className="h-6 w-6 text-white" />
-                </div>
-                <p className="text-gray-800 font-medium">Personalized insights based on your data</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="bg-[#9b87f5] h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">
-                  <Check className="h-6 w-6 text-white" />
-                </div>
-                <p className="text-gray-800 font-medium">Guidance for healthcare appointments</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="bg-[#9b87f5] h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">
-                  <Check className="h-6 w-6 text-white" />
-                </div>
-                <p className="text-gray-800 font-medium">Emotional support whenever you need it</p>
+              <div className="bg-white p-5 rounded-xl shadow-sm border border-[#9b87f5]/10">
+                <p className="text-gray-700 italic mb-4">
+                  "It's not just answers — it's the tone. Luna made me feel seen. I cried the first time she explained what was going on with my sleep."
+                </p>
+                <p className="font-medium text-[#5D4154]">— Nina, 48</p>
               </div>
             </div>
           </div>
           
-          {/* Final CTA with improved styling */}
-          <div className="text-center p-6 bg-gradient-to-r from-[#7E69AB] to-[#9b87f5] rounded-xl shadow-lg">
-            <h3 className="text-xl md:text-2xl font-bold mb-4 text-white">
-              START YOUR FREE 7-DAY TRIAL TODAY
+          {/* Final CTA Section */}
+          <div className="mb-8">
+            <h3 className="text-xl font-bold text-center mb-4 text-[#5D4154]">
+              🌟 WITH LUNA, YOU'LL NEVER BE ALONE AGAIN
             </h3>
             
-            <Button 
-              onClick={onStartTrial}
-              className="bg-white text-[#5D4154] hover:bg-gray-100 font-semibold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 mb-4"
-            >
-              Try Peritrack & Luna AI Perimenopause Companion Free For 7 Days
-            </Button>
+            <div className="text-center mb-8">
+              <p className="mb-4">
+                This isn't just about tracking your symptoms. It's about feeling heard, guided, and cared for every step of the way.
+              </p>
+              <p className="mb-4">
+                Luna gives you real-time insight. Real emotional support. And real tools to start feeling like you again.
+              </p>
+            </div>
             
-            <p className="text-white/90 text-sm">
-              No credit card required • Cancel anytime
-            </p>
+            <div className="text-center p-6 bg-gradient-to-r from-[#7E69AB] to-[#9b87f5] rounded-xl shadow-lg">
+              <p className="text-white mb-4">
+                👉 Included with every Peritrack membership — at no extra cost.
+              </p>
+              
+              <Button 
+                onClick={onStartTrial}
+                className="bg-white text-[#5D4154] hover:bg-gray-100 font-semibold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105"
+              >
+                Start Your 7-Day Free Trial Now and Meet Luna Today
+              </Button>
+            </div>
+          </div>
+          
+          {/* Sample Conversation Examples */}
+          <div className="mb-12">
+            <h3 className="text-xl font-bold text-center mb-6 text-[#5D4154]">
+              SEE HOW LUNA HELPS WOMEN LIKE YOU
+            </h3>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Example 1 */}
+              <div className="bg-white p-5 rounded-xl border border-[#9b87f5]/20 shadow-md">
+                <div className="flex mb-4">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[#E5DEFF] flex items-center justify-center mr-3">
+                    <span className="text-lg">👩</span>
+                  </div>
+                  <div className="bg-gray-100 rounded-lg p-3 flex-1">
+                    <p className="font-medium text-gray-800">I feel so anxious lately and I don't know why. Is this hormonal?</p>
+                  </div>
+                </div>
+                <div className="flex">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[#9b87f5] flex items-center justify-center mr-3">
+                    <span className="text-white font-bold">L</span>
+                  </div>
+                  <div className="bg-[#F9F5FF] rounded-lg p-3 flex-1">
+                    <p className="text-gray-700">
+                      Yes, this could definitely be hormonal. During perimenopause, fluctuating progesterone levels often trigger anxiety - especially in the week before your period. Looking at your tracking data, I see this pattern emerging. Let me share some specific ways to help manage this anxiety...
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Example 2 */}
+              <div className="bg-white p-5 rounded-xl border border-[#9b87f5]/20 shadow-md">
+                <div className="flex mb-4">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[#E5DEFF] flex items-center justify-center mr-3">
+                    <span className="text-lg">👩</span>
+                  </div>
+                  <div className="bg-gray-100 rounded-lg p-3 flex-1">
+                    <p className="font-medium text-gray-800">I have a doctor appointment next week. What should I ask about?</p>
+                  </div>
+                </div>
+                <div className="flex">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[#9b87f5] flex items-center justify-center mr-3">
+                    <span className="text-white font-bold">L</span>
+                  </div>
+                  <div className="bg-[#F9F5FF] rounded-lg p-3 flex-1">
+                    <p className="text-gray-700">
+                      Based on your symptom tracking, I recommend discussing your sleep issues and mood changes. Ask specifically about hormone testing options and whether bioidentical progesterone might help with the anxiety you've been experiencing. I can prepare a printable symptom report for you to take to your appointment...
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </CardContent>
