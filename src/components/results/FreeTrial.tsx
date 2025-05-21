@@ -63,7 +63,7 @@ const FreeTrial: React.FC<FreeTrialProps> = ({ onStartTrial, primaryHormone, sco
                 </li>
                 <li className="flex items-center gap-2 mb-2">
                   <CheckCircle className="h-4 w-4 text-[#9b87f5] flex-shrink-0" />
-                  <span className="text-sm">Luna AI support</span>
+                  <span className="text-sm">Luna AI Perimenopause Companion support</span>
                 </li>
               </ul>
               

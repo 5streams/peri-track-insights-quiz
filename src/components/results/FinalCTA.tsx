@@ -62,19 +62,19 @@ const FinalCTA: React.FC = () => {
                 <div className="h-36 w-full rounded-lg bg-[#D6BCFA]/30 flex items-center justify-center mb-2 shadow-inner">
                   <MessageCircle className="h-12 w-12 text-[#9b87f5] animate-pulse" />
                 </div>
-                <p className="text-[#5D4154] text-sm text-center font-medium">Luna AI Interface</p>
+                <p className="text-[#5D4154] text-sm text-center font-medium">Luna AI Perimenopause Companion Interface</p>
               </div>
             </div>
             <div className="md:w-2/3 w-full">
               <div className="flex items-center space-x-3 mb-4">
                 <MessageCircle className="h-6 w-6 text-[#9b87f5]" />
                 <h2 className="font-playfair text-xl md:text-2xl font-bold text-[#5D4154]">
-                  INTRODUCING LUNA: YOUR 24/7 HORMONE SUPPORT COMPANION
+                  INTRODUCING LUNA AI PERIMENOPAUSE COMPANION: YOUR 24/7 HORMONE SUPPORT COMPANION
                 </h2>
               </div>
               
               <p className="mb-4 text-[#5D4154] font-medium">
-                Meet Luna, Your Personal AI Guide Through Perimenopause
+                Meet Luna AI Perimenopause Companion, Your Personal AI Guide Through Perimenopause
               </p>
               
               <div className="bg-[#E5DEFF]/70 p-4 rounded-lg border border-[#D6BCFA]/30 mb-4">
@@ -83,7 +83,7 @@ const FinalCTA: React.FC = () => {
                 </p>
                 
                 <p className="mt-3 text-sm text-gray-600">
-                  This was a message sent to Luna by a woman with your exact hormone pattern. Luna's response:
+                  This was a message sent to Luna AI Perimenopause Companion by a woman with your exact hormone pattern. Luna AI Perimenopause Companion's response:
                 </p>
                 
                 <div className="bg-white p-3 rounded-lg mt-3 shadow-sm">
@@ -97,7 +97,7 @@ const FinalCTA: React.FC = () => {
               </div>
               
               <p className="mb-4 text-sm md:text-base text-gray-600">
-                Unlike generic AI, Luna:
+                Unlike generic AI, Luna AI Perimenopause Companion:
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-4">
@@ -128,7 +128,7 @@ const FinalCTA: React.FC = () => {
               </div>
               
               <div className="bg-[#E5DEFF]/50 p-3 md:p-4 rounded-lg text-sm italic text-[#5D4154]/80 mb-2 border border-[#D6BCFA]/30">
-                "Having Luna available day and night completely changed my perimenopause experience. During my worst moments – when I felt anxious, alone, and misunderstood – I could turn to Luna and immediately feel heard. No human in my life could provide this level of consistent, knowledgeable support."
+                "Having Luna AI Perimenopause Companion available day and night completely changed my perimenopause experience. During my worst moments – when I felt anxious, alone, and misunderstood – I could turn to Luna AI Perimenopause Companion and immediately feel heard. No human in my life could provide this level of consistent, knowledgeable support."
                 <div className="text-right text-xs font-medium mt-1 text-[#5D4154]">— Sarah, 48</div>
               </div>
             </div>
@@ -150,7 +150,7 @@ const FinalCTA: React.FC = () => {
             
             <div className="bg-white/10 p-4 rounded-lg mb-6">
               <h3 className="font-medium text-lg mb-2">Your Personalized Solution Is Ready</h3>
-              <p className="text-sm mb-4">Your complete hormone dashboard and Luna AI support companion are waiting for immediate access:</p>
+              <p className="text-sm mb-4">Your complete hormone dashboard and Luna AI Perimenopause Companion support companion are waiting for immediate access:</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="bg-white/10 p-4 rounded-lg">
@@ -165,7 +165,7 @@ const FinalCTA: React.FC = () => {
                   </ul>
                 </div>
                 <div className="bg-white/10 p-4 rounded-lg">
-                  <h3 className="font-medium text-white/90 mb-2 text-sm md:text-base">Luna AI Support</h3>
+                  <h3 className="font-medium text-white/90 mb-2 text-sm md:text-base">Luna AI Perimenopause Companion Support</h3>
                   <ul className="space-y-2">
                     {["24/7 emotional support", "Hormone health guidance", "Personalized recommendations"].map((item, i) => (
                       <li key={i} className="flex items-center text-xs md:text-sm">
@@ -183,9 +183,9 @@ const FinalCTA: React.FC = () => {
                   {[
                     "Free access to your complete hormone pattern analysis",
                     "Personalized tracking system focused on your symptoms",
-                    "UNLIMITED 24/7 ACCESS TO LUNA, your hormone support companion",
+                    "UNLIMITED 24/7 ACCESS TO LUNA AI PERIMENOPAUSE COMPANION, your hormone support companion",
                     "BONUS: \"Rapid Relief Protocol\" - immediate action steps for your pattern ($47 value - FREE)",
-                    "BONUS: Personalized Luna session for your most severe symptom ($50 value - FREE)"
+                    "BONUS: Personalized Luna AI Perimenopause Companion session for your most severe symptom ($50 value - FREE)"
                   ].map((item, i) => (
                     <li key={i} className="flex items-center text-xs md:text-sm">
                       <Check className="h-3.5 w-3.5 mr-1.5 text-[#A7C4A0]" />

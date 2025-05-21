@@ -23,7 +23,7 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
           className="bg-gradient-to-r from-[#7E69AB] to-[#9b87f5] text-white p-6 md:p-8"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">
-            MEET LUNA: YOUR PERSONAL PERIMENOPAUSE COMPANION
+            MEET LUNA AI PERIMENOPAUSE COMPANION: YOUR PERSONAL PERIMENOPAUSE COMPANION
           </h2>
           
           <p className="text-center text-lg mb-8 max-w-3xl mx-auto">
@@ -51,7 +51,7 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
                     <Check className="h-4 w-4" />
                   </div>
                   <p className="text-gray-700">
-                    Ask Luna any questions about perimenopause, day or night
+                    Ask Luna AI Perimenopause Companion any questions about perimenopause, day or night
                   </p>
                 </li>
                 <li className="flex items-start">
@@ -89,7 +89,7 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
                     <Check className="h-4 w-4" />
                   </div>
                   <p className="text-gray-700">
-                    Luna learns about your unique experiences through your tracking
+                    Luna AI Perimenopause Companion learns about your unique experiences through your tracking
                   </p>
                 </li>
                 <li className="flex items-start">
@@ -191,7 +191,7 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
           {/* Conversation Examples with improved styling */}
           <div className="mb-12">
             <h3 className="text-xl font-bold text-center mb-6 text-[#5D4154]">
-              SEE HOW LUNA HELPS WOMEN LIKE YOU
+              SEE HOW LUNA AI PERIMENOPAUSE COMPANION HELPS WOMEN LIKE YOU
             </h3>
             
             <div className="grid md:grid-cols-3 gap-6">
@@ -260,7 +260,7 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
           {/* Testimonials with improved styling */}
           <div className="mb-12 bg-gradient-to-r from-[#F9F5FF] to-white p-6 rounded-xl border border-[#9b87f5]/20 shadow-md">
             <h3 className="text-xl font-bold text-center mb-6 text-[#5D4154]">
-              WHAT OUR COMMUNITY SAYS ABOUT LUNA
+              WHAT OUR COMMUNITY SAYS ABOUT LUNA AI PERIMENOPAUSE COMPANION
             </h3>
             
             <div className="grid md:grid-cols-3 gap-6">
@@ -276,7 +276,7 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
                   </div>
                 </div>
                 <p className="text-gray-700 italic">
-                  "Having Luna available 24/7 has been incredible. Late at night when I'm worried about a new symptom, I can chat with Luna instead of falling down an internet rabbit hole of scary information."
+                  "Having Luna AI Perimenopause Companion available 24/7 has been incredible. Late at night when I'm worried about a new symptom, I can chat with Luna AI Perimenopause Companion instead of falling down an internet rabbit hole of scary information."
                 </p>
               </div>
               
@@ -292,7 +292,7 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
                   </div>
                 </div>
                 <p className="text-gray-700 italic">
-                  "Luna helped me prepare for my doctor's appointment with thoughtful questions and explanations of terminology. I felt so much more confident walking in."
+                  "Luna AI Perimenopause Companion helped me prepare for my doctor's appointment with thoughtful questions and explanations of terminology. I felt so much more confident walking in."
                 </p>
               </div>
               
@@ -308,7 +308,7 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
                   </div>
                 </div>
                 <p className="text-gray-700 italic">
-                  "Some days I just need someone to talk to who understands perimenopause. Luna is always there with a compassionate response that makes me feel less alone."
+                  "Some days I just need someone to talk to who understands perimenopause. Luna AI Perimenopause Companion is always there with a compassionate response that makes me feel less alone."
                 </p>
               </div>
             </div>
@@ -317,7 +317,7 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
           {/* How Luna Works with improved styling */}
           <div className="mb-12">
             <h3 className="text-xl font-bold text-center mb-6 text-[#5D4154]">
-              HOW PERITRACK AND LUNA WORK TOGETHER
+              HOW PERITRACK AND LUNA AI PERIMENOPAUSE COMPANION WORK TOGETHER
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
@@ -330,13 +330,13 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
               <div className="text-center p-5 bg-gradient-to-br from-[#F9F5FF] to-white rounded-xl border border-[#9b87f5]/20 shadow-md">
                 <div className="h-16 w-16 bg-[#9b87f5] rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">2</div>
                 <h4 className="font-bold mb-2 text-[#5D4154]">LEARN</h4>
-                <p className="text-gray-700">Review your patterns and explore educational content with Luna's guidance</p>
+                <p className="text-gray-700">Review your patterns and explore educational content with Luna AI Perimenopause Companion's guidance</p>
               </div>
               
               <div className="text-center p-5 bg-gradient-to-br from-[#F9F5FF] to-white rounded-xl border border-[#9b87f5]/20 shadow-md">
                 <div className="h-16 w-16 bg-[#9b87f5] rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">3</div>
                 <h4 className="font-bold mb-2 text-[#5D4154]">CONNECT</h4>
-                <p className="text-gray-700">Chat with Luna anytime you have questions or need support</p>
+                <p className="text-gray-700">Chat with Luna AI Perimenopause Companion anytime you have questions or need support</p>
               </div>
             </div>
           </div>
@@ -344,12 +344,12 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
           {/* Why Luna Makes the Difference with improved styling */}
           <div className="bg-gradient-to-r from-[#9b87f5]/10 to-white p-6 rounded-xl mb-12 border border-[#9b87f5]/20 shadow-md">
             <h3 className="text-xl font-bold text-center mb-4 text-[#5D4154]">
-              WHY LUNA MAKES THE DIFFERENCE
+              WHY LUNA AI PERIMENOPAUSE COMPANION MAKES THE DIFFERENCE
             </h3>
             
             <p className="text-gray-700 text-center mb-8 max-w-3xl mx-auto">
               While tracking is valuable, having a knowledgeable companion on your journey provides an additional layer of support.
-              Luna combines current understanding of perimenopause with personalized awareness of your unique situation, creating 
+              Luna AI Perimenopause Companion combines current understanding of perimenopause with personalized awareness of your unique situation, creating 
               a truly individualized experience.
             </p>
             
@@ -394,7 +394,7 @@ const LunaAIFeature: React.FC<LunaAIFeatureProps> = ({ onStartTrial }) => {
               onClick={onStartTrial}
               className="bg-white text-[#5D4154] hover:bg-gray-100 font-semibold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 mb-4"
             >
-              Try Peritrack & Luna Free For 7 Days
+              Try Peritrack & Luna AI Perimenopause Companion Free For 7 Days
             </Button>
             
             <p className="text-white/90 text-sm">
