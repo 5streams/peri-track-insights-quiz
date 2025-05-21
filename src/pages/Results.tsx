@@ -11,10 +11,11 @@ import ScoreMeter from "@/components/results/ScoreMeter";
 import ResultsSummary from "@/components/results/ResultsSummary";
 import InterventionSection from "@/components/results/InterventionSection";
 import ActionableTips from "@/components/results/ActionableTips";
-import FreeTrial from "@/components/results/FreeTrial";
 import ResultsTestimonial from "@/components/results/ResultsTestimonial";
+import ConciseSolution from "@/components/results/ConciseSolution";
 import Guarantee from "@/components/results/Guarantee";
 import RiskReversal from "@/components/results/RiskReversal";
+import ValueProposition from "@/components/results/ValueProposition";
 
 interface QuizResults {
   score: number;
@@ -179,8 +180,14 @@ const Results = () => {
             testimonialPosition="top"
           />
           
-          {/* Free Trial Offer - Now more visually striking */}
-          <FreeTrial />
+          {/* Concise Solution with clear steps */}
+          <ConciseSolution primaryHormone={primaryHormone} />
+          
+          {/* Enhanced Value Proposition */}
+          <ValueProposition 
+            primarySymptom={results.primarySymptoms[0] || ""}
+            secondarySymptoms={results.primarySymptoms.slice(1)}
+          />
           
           {/* Risk Reversal for skeptical users */}
           {(scoreCategory === "moderate" || scoreCategory === "significant") && (
