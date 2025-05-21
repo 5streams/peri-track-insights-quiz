@@ -398,57 +398,57 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
             
             <ul className="mb-5 space-y-2">
               <li className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-indigo-500 flex-shrink-0" />
+                <Check className="h-4 w-4 text-[#9b87f5] flex-shrink-0" />
                 <span className="text-sm">Full access to all features</span>
               </li>
               <li className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-indigo-500 flex-shrink-0" />
+                <Check className="h-4 w-4 text-[#9b87f5] flex-shrink-0" />
                 <span className="text-sm">Unlimited symptom tracking</span>
               </li>
               <li className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-indigo-500 flex-shrink-0" />
+                <Check className="h-4 w-4 text-[#9b87f5] flex-shrink-0" />
                 <span className="text-sm">7-day free trial included</span>
               </li>
             </ul>
             
             <Button 
               onClick={handleMonthlyTrial}
-              className="w-full bg-slate-700 hover:bg-slate-800 text-white font-medium transition-colors"
+              className="w-full bg-[#9b87f5] hover:bg-[#7E69AB] text-white font-medium transition-colors"
             >
               START MY FREE TRIAL
             </Button>
           </div>
           
           {/* Annual Option */}
-          <div className="bg-white rounded-lg p-6 border-2 border-indigo-400 hover:shadow-md transition-all relative">
-            <div className="absolute top-0 right-0 bg-indigo-600 text-white text-xs px-2 py-1 rounded-bl-lg font-bold">
+          <div className="bg-white rounded-lg p-6 border-2 border-[#9b87f5] hover:shadow-md transition-all relative">
+            <div className="absolute top-0 right-0 bg-[#9b87f5] text-white text-xs px-2 py-1 rounded-bl-lg font-bold">
               BEST VALUE
             </div>
             
             <h3 className="font-semibold text-lg mb-2 text-slate-700">Annual Plan</h3>
             <div className="text-2xl font-bold mb-3 text-slate-700">
               $99<span className="text-sm font-normal opacity-80">/year</span>
-              <span className="text-sm text-indigo-500 font-semibold ml-2">Save $20.88</span>
+              <span className="text-sm text-[#9b87f5] font-semibold ml-2">Save $20.88</span>
             </div>
             
             <ul className="mb-5 space-y-2">
               <li className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-indigo-500 flex-shrink-0" />
+                <Check className="h-4 w-4 text-[#9b87f5] flex-shrink-0" />
                 <span className="text-sm">All features in monthly plan</span>
               </li>
               <li className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-indigo-500 flex-shrink-0" />
+                <Check className="h-4 w-4 text-[#9b87f5] flex-shrink-0" />
                 <span className="text-sm">Save $20.88 compared to monthly</span>
               </li>
               <li className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-indigo-500 flex-shrink-0" />
+                <Check className="h-4 w-4 text-[#9b87f5] flex-shrink-0" />
                 <span className="text-sm">7-day free trial included</span>
               </li>
             </ul>
             
             <Button 
               onClick={handleAnnualTrial}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium"
+              className="w-full bg-[#9b87f5] hover:bg-[#7E69AB] text-white font-medium"
             >
               START MY FREE TRIAL
             </Button>
