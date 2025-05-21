@@ -10,7 +10,7 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
-import LunaAIFeature from "@/components/results/LunaAIFeature"; // Add this new import
+import LunaAIFeature from "@/components/results/LunaAIFeature"; // Keep this import
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
 import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
@@ -144,8 +144,18 @@ const Results = () => {
             scoreCategory={scoreCategory}
           />
           
-          {/* NEW: Luna AI Feature Section */}
-          <LunaAIFeature onStartTrial={handleTrialCTA} />
+          {/* Bonus Resources Section - Purple Section */}
+          <div className="mb-6 md:mb-8 bg-[#5D4154] text-white p-6 rounded-lg reveal-section transform opacity-0">
+            <h2 className="text-xl md:text-2xl font-bold text-center mb-4">
+              BONUS RESOURCES INCLUDED
+            </h2>
+            <p className="text-center mb-6">
+              "Perimenopause Information Guide", "Symptom Management Information", and "Lab Testing Information"
+            </p>
+            
+            {/* MOVED: Luna AI Feature Section */}
+            <LunaAIFeature onStartTrial={handleTrialCTA} />
+          </div>
           
           {/* Emotional Support */}
           <EmotionalSupport
