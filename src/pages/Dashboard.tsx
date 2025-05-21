@@ -8,6 +8,7 @@ import WelcomeModule from "@/components/dashboard/WelcomeModule";
 import HormonePatternInsights from "@/components/dashboard/HormonePatternInsights";
 import RecentSymptomsSummary from "@/components/dashboard/RecentSymptomsSummary";
 import AiAssistantPreview from "@/components/dashboard/AiAssistantPreview";
+import PersonalizedRecommendations from "@/components/dashboard/PersonalizedRecommendations";
 
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useState({ firstName: "Sarah", email: "" });
@@ -149,6 +150,11 @@ const Dashboard = () => {
             firstName={userInfo.firstName} 
             trialDaysLeft={trialDaysLeft} 
           />
+
+          {/* Personalized Recommendations - Added after Welcome Module */}
+          <div className="mt-6">
+            <PersonalizedRecommendations firstName={userInfo.firstName} />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             {/* Daily Check-in Card */}
