@@ -13,7 +13,6 @@ export function useLeadCapture() {
     plan?: 'monthly' | 'annual',
     data?: any
   ) => {
-    console.log("Opening lead modal with:", { source, plan, data });
     setCaptureSource(source);
     setSelectedPlan(plan || null);
     setQuizData(data);
@@ -21,27 +20,7 @@ export function useLeadCapture() {
   };
   
   const closeLeadModal = () => {
-    console.log("Closing lead modal");
     setIsModalOpen(false);
-  };
-  
-  const submitLeadData = (firstName: string, email: string, additionalNotes?: string) => {
-    console.log("Submitting lead data:", { firstName, email, captureSource, selectedPlan, quizData });
-    try {
-      const lead = saveLead(
-        firstName,
-        email,
-        captureSource,
-        selectedPlan,
-        quizData,
-        additionalNotes
-      );
-      console.log("Lead saved successfully:", lead);
-      return lead;
-    } catch (error) {
-      console.error("Failed to save lead:", error);
-      throw error;
-    }
   };
   
   return {
@@ -50,7 +29,6 @@ export function useLeadCapture() {
     captureSource,
     quizData,
     openLeadModal,
-    closeLeadModal,
-    submitLeadData
+    closeLeadModal
   };
 }

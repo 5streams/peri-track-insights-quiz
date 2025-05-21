@@ -52,16 +52,11 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
     }
   };
 
-  const handleStartTrialClick = () => {
-    console.log("Start trial button clicked in header");
-    onStartTrial();
-  };
-
   return (
-    <header className="text-center pt-6 pb-12">
+    <header className="text-center pt-6 pb-12 reveal-section transform opacity-0 heading-container">
       <div className="decorative-backdrop"></div>
       
-      <h1 className="text-2xl md:text-3xl lg:text-4xl font-playfair font-bold text-[#5D4154] mb-8">
+      <h1 className="assessment-heading text-2xl md:text-3xl lg:text-4xl font-playfair font-bold text-[#5D4154] mb-8">
         {capitalizedFirstName ? `${capitalizedFirstName}, ` : ""}We've Analyzed Your Answers
         <span className="block mt-2 font-raleway font-medium text-xl md:text-2xl text-[#5D4154]/90">
           Your Personal Perimenopause Assessment
@@ -85,7 +80,6 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
           <div 
             ref={scoreRef}
             className={`score-fill absolute left-0 top-0 h-full rounded-full transition-all duration-1500 ease-out w-0 ${getMeterFillColor()}`}
-            style={{ width: '0%' }}
           />
           
           <div className="score-labels absolute w-full top-0 h-full flex items-center">
@@ -113,8 +107,8 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
       {/* Immediate CTA for high-intent users */}
       {scoreCategory === "severe" && (
         <Button 
-          onClick={handleStartTrialClick}
-          className="cta-button bg-gradient-to-r from-[#9b87f5] to-[#8B5CF6] hover:from-[#8B5CF6]/95 hover:to-[#8B5CF6] text-white font-semibold px-8 py-6 rounded-lg shadow-lg mb-8 text-lg transition-all duration-300"
+          onClick={onStartTrial}
+          className="cta-button bg-gradient-to-r from-[#9b87f5] to-[#8B5CF6] hover:from-[#8B5CF6]/95 hover:to-[#8B5CF6] text-white font-semibold px-8 py-6 rounded-lg shadow-lg mb-8 text-lg transition-all duration-300 animate-pulse-subtle"
         >
           Take Action Now - Start Free Trial
         </Button>

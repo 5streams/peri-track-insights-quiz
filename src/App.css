@@ -1,15 +1,89 @@
 
-/* Basic transitions for interactive elements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.reveal-section {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-section.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 3s infinite ease-in-out;
+}
+
+.animate-slide-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+/* Responsive typography and spacing */
+@media (max-width: 640px) {
+  .reveal-section {
+    transform: translateY(10px);
+  }
+}
+
+/* Improve mobile card layouts */
+@media (max-width: 640px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-stack > * + * {
+    margin-top: 1rem;
+  }
+}
+
+/* Better animation timing for mobile */
+@media (max-width: 640px) {
+  .animate-slide-up {
+    animation-duration: 0.5s;
+  }
+  
+  .animate-fade-in {
+    animation-duration: 0.7s;
+  }
+}
+
+/* Smoother transitions for all interactive elements */
 button, a {
   transition: all 0.2s ease-out;
 }
 
-/* Better spacing on mobile */
+/* More breathing room on mobile */
 @media (max-width: 640px) {
   .card-content {
     padding: 1rem;
   }
   
+  /* Add these new styles for better mobile layout */
   .grid {
     row-gap: 0.75rem;
   }
@@ -33,6 +107,13 @@ button, a {
   }
 }
 
+/* Staggered entrance animations */
+.stagger-item:nth-child(1) { animation-delay: 0s; }
+.stagger-item:nth-child(2) { animation-delay: 0.1s; }
+.stagger-item:nth-child(3) { animation-delay: 0.2s; }
+.stagger-item:nth-child(4) { animation-delay: 0.3s; }
+.stagger-item:nth-child(5) { animation-delay: 0.4s; }
+
 /* Enhanced testimonial styles */
 .testimonial {
   position: relative;
@@ -48,29 +129,19 @@ button, a {
   color: rgba(93, 65, 84, 0.2);
 }
 
-/* Improved CTA button styles */
-.cta-button {
-  transition: all 0.3s ease;
+/* Improved CTA button pulse */
+.cta-pulse {
+  animation: ctaPulse 2s infinite;
 }
 
-.cta-button:hover {
-  transform: translateY(-2px);
-}
-
-/* Score meter styles */
-.score-fill {
-  transition: width 1s ease-out;
-}
-
-/* Specific mobile adjustments */
-@media (max-width: 640px) {
-  .score-indicator {
-    font-size: 1rem;
-    padding: 0.25rem 0.5rem;
+@keyframes ctaPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(167, 196, 160, 0.7);
   }
-  
-  .score-labels div {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
+  70% {
+    box-shadow: 0 0 0 10px rgba(167, 196, 160, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(167, 196, 160, 0);
   }
 }

@@ -42,15 +42,9 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
     // Track lead before submitting
     try {
       // Get quiz results from localStorage
-      const quizAnswers = localStorage.getItem("quizAnswers") 
+      const quizResults = localStorage.getItem("quizAnswers") 
         ? JSON.parse(localStorage.getItem("quizAnswers") || "{}") 
         : {};
-      
-      console.log("Saving quiz lead with data:", {
-        firstName: firstName.trim(),
-        email: email.trim(),
-        quizAnswers
-      });
       
       // Save lead data
       const lead = saveLead(
@@ -58,8 +52,7 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
         email.trim(),
         'quiz_results',
         null,
-        quizAnswers,
-        "Submitted via quiz email collection"
+        quizResults
       );
       
       console.log("Quiz lead saved successfully:", lead);
