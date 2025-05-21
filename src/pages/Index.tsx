@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -83,19 +84,19 @@ export default function Index() {
         {/* Benefits Section */}
         <section className="py-8 bg-white">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
+            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-3">
               Why Women Are Taking This AI-Powered Perimenopause Symptoms Quiz
             </h2>
             
-            <p className="text-center max-w-3xl mx-auto mb-6 text-lg">
+            <p className="text-center max-w-3xl mx-auto mb-4 text-lg">
               Perimenopause can begin in your late 30s or early 40s – much earlier than most women realize. The challenge? <strong>These symptoms are often mistaken for stress, aging, thyroid issues, or depression.</strong>
             </p>
             
-            <p className="text-center mb-6 text-lg">
+            <p className="text-center mb-4 text-lg">
               Our comprehensive perimenopause symptoms assessment helps you:
             </p>
             
-            <div className="grid md:grid-cols-2 gap-5 mb-8">
+            <div className="grid md:grid-cols-2 gap-5 mb-6">
               {[
                 {
                   title: "Identify Your Symptoms",
