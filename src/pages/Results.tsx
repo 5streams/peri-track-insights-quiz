@@ -152,9 +152,6 @@ const Results = () => {
             <p className="text-center mb-6">
               "Perimenopause Information Guide", "Symptom Management Information", and "Lab Testing Information"
             </p>
-            
-            {/* MOVED: Luna AI Feature Section */}
-            <LunaAIFeature onStartTrial={handleTrialCTA} />
           </div>
           
           {/* Emotional Support */}
@@ -172,6 +169,9 @@ const Results = () => {
             primaryHormone={hormoneScores.primaryHormone}
             scoreCategory={scoreCategory}
           />
+          
+          {/* Luna AI Feature - Moved here before SubscriptionOptions */}
+          <LunaAIFeature onStartTrial={handleTrialCTA} />
           
           {/* Subscription Options */}
           <SubscriptionOptions onStartTrial={handleTrialCTA} />
