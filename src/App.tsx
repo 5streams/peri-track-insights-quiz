@@ -1,13 +1,13 @@
 
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import { Index } from "./pages/Index";
-import { Quiz } from "./pages/Quiz";
-import { Results } from "./pages/Results";
+import Index from "./pages/Index";
+import Quiz from "./pages/Quiz";
+import Results from "./pages/Results";
 import Dashboard from "./pages/Dashboard";
 import Tracking from "./pages/Tracking";
 import Insights from "./pages/Insights";
-import { NotFound } from "./pages/NotFound";
+import NotFound from "./pages/NotFound";
 import "./App.css";
 
 function App() {
