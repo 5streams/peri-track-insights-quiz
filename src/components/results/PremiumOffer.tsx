@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Card,
@@ -15,6 +16,7 @@ interface PremiumOfferProps {
 const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [quizResults, setQuizResults] = useState<any>(null);
   
   // Get hormone-specific timeframe
   const getTimeframe = () => {
@@ -26,6 +28,18 @@ const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
     }
   };
   
+  useEffect(() => {
+    // Get stored quiz results when component mounts
+    const storedResults = localStorage.getItem("quizResults");
+    if (storedResults) {
+      try {
+        setQuizResults(JSON.parse(storedResults));
+      } catch (error) {
+        console.error("Error parsing stored quiz results:", error);
+      }
+    }
+  }, []);
+  
   const handleStartTrial = () => {
     // Open lead capture modal instead of directly navigating
     setIsModalOpen(true);
@@ -33,11 +47,6 @@ const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
   
   const handleModalClose = () => {
     setIsModalOpen(false);
-    // Get quiz results for tracking
-    const results = localStorage.getItem("quizResults") 
-      ? JSON.parse(localStorage.getItem("quizResults") || "{}") 
-      : {};
-      
     // Set trial start date
     localStorage.setItem("trialStartDate", new Date().toString());
     // Navigate to dashboard
@@ -124,7 +133,7 @@ const PremiumOffer: React.FC<PremiumOfferProps> = ({ primaryHormone }) => {
         onClose={handleModalClose}
         pricingPlan="monthly"
         source="free_trial"
-        quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
+        quizResults={quizResults}
       />
     </Card>
   );

@@ -63,6 +63,10 @@ export const saveLead = (
   // Track the event
   trackLeadEvent(lead);
   
+  // Log to help with debugging
+  console.log('Lead saved:', lead);
+  console.log('Total leads:', updatedLeads.length);
+  
   return lead;
 };
 
@@ -70,6 +74,24 @@ export const saveLead = (
 export const getLeads = (): Lead[] => {
   const leadsData = localStorage.getItem('peritrack_leads');
   return leadsData ? JSON.parse(leadsData) : [];
+};
+
+// Delete a lead by ID
+export const deleteLead = (id: string): boolean => {
+  const leads = getLeads();
+  const filteredLeads = leads.filter(lead => lead.id !== id);
+  
+  if (filteredLeads.length < leads.length) {
+    localStorage.setItem('peritrack_leads', JSON.stringify(filteredLeads));
+    return true;
+  }
+  
+  return false;
+};
+
+// Clear all leads (for testing purposes)
+export const clearLeads = (): void => {
+  localStorage.removeItem('peritrack_leads');
 };
 
 // Track lead capture events (can be expanded to send to analytics service)

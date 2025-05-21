@@ -47,15 +47,28 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
         : {};
       
       // Save lead data
-      saveLead(
+      const lead = saveLead(
         firstName.trim(),
         email.trim(),
         'quiz_results',
         null,
         quizResults
       );
+      
+      console.log("Quiz lead saved successfully:", lead);
+      
+      // Show toast notification for successful lead capture
+      toast({
+        title: "Information Saved",
+        description: "Your information has been saved. Preparing your results...",
+      });
     } catch (error) {
       console.error("Error tracking quiz lead:", error);
+      toast({
+        title: "Error saving information",
+        description: "Please try again.",
+        variant: "destructive",
+      });
     }
     
     // Continue with original submission

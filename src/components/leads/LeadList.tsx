@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getLeads, Lead } from "@/utils/leadTracking";
+import { getLeads, Lead, clearLeads } from "@/utils/leadTracking";
 import { 
   Table, 
   TableBody, 
@@ -14,20 +14,29 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
+import { useToast } from "@/hooks/use-toast";
+import { RefreshCw, Trash2 } from "lucide-react";
 
 const LeadList: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterSource, setFilterSource] = useState<string>('all');
+  const { toast } = useToast();
   
-  useEffect(() => {
+  const loadLeads = () => {
     // Load leads from localStorage
     const allLeads = getLeads();
+    console.log("Loaded leads:", allLeads);
     setLeads(allLeads);
+  };
+  
+  useEffect(() => {
+    // Load leads initially
+    loadLeads();
     
     // Set up a refresh interval
     const interval = setInterval(() => {
-      setLeads(getLeads());
+      loadLeads();
     }, 5000); // Check for new leads every 5 seconds
     
     return () => clearInterval(interval);
@@ -76,6 +85,33 @@ const LeadList: React.FC = () => {
     link.setAttribute('href', url);
     link.setAttribute('download', `peritrack_leads_${new Date().toISOString().split('T')[0]}.csv`);
     link.click();
+    
+    toast({
+      title: "Export Complete",
+      description: `${filteredLeads.length} leads exported successfully.`
+    });
+  };
+  
+  // Handle manual refresh
+  const handleRefresh = () => {
+    loadLeads();
+    toast({
+      title: "Leads Refreshed",
+      description: `${leads.length} leads loaded from storage.`
+    });
+  };
+  
+  // Clear all leads (for testing)
+  const handleClearLeads = () => {
+    if (window.confirm('Are you sure you want to delete ALL leads? This cannot be undone.')) {
+      clearLeads();
+      setLeads([]);
+      toast({
+        title: "Leads Cleared",
+        description: "All leads have been removed from storage.",
+        variant: "destructive"
+      });
+    }
   };
 
   return (
@@ -115,12 +151,29 @@ const LeadList: React.FC = () => {
             </select>
           </div>
           
-          <div className="w-full sm:w-auto flex items-end">
+          <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-2 items-end">
             <Button 
               onClick={exportLeads}
               className="w-full sm:w-auto bg-[#5D4154] hover:bg-[#5D4154]/90 text-white"
+              disabled={filteredLeads.length === 0}
             >
               Export to CSV
+            </Button>
+            <Button 
+              onClick={handleRefresh}
+              variant="outline"
+              className="w-full sm:w-auto"
+              title="Refresh leads"
+            >
+              <RefreshCw className="h-4 w-4 mr-1" /> Refresh
+            </Button>
+            <Button 
+              onClick={handleClearLeads}
+              variant="outline"
+              className="w-full sm:w-auto text-red-500 hover:text-red-700"
+              title="Clear all leads (for testing only)"
+            >
+              <Trash2 className="h-4 w-4 mr-1" /> Clear All
             </Button>
           </div>
         </div>
@@ -160,6 +213,14 @@ const LeadList: React.FC = () => {
         ) : (
           <div className="text-center py-8">
             <p className="text-gray-500">No leads found. Try adjusting your search or filters.</p>
+          </div>
+        )}
+        
+        {leads.length === 0 && (
+          <div className="bg-blue-50 border border-blue-200 p-4 rounded-md mt-4">
+            <p className="text-blue-700">
+              No leads have been captured yet. When users fill out the quiz results form or start a free trial, their information will appear here.
+            </p>
           </div>
         )}
       </CardContent>

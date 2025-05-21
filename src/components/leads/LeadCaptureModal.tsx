@@ -52,13 +52,15 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
     
     // Save lead data
     try {
-      saveLead(
+      const lead = saveLead(
         firstName.trim(), 
         email.trim(), 
         source, 
         pricingPlan, 
         quizResults
       );
+      
+      console.log("Lead successfully saved:", lead);
       
       // Show success state
       setIsSubmitted(true);
