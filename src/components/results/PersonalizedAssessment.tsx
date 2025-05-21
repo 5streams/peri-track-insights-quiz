@@ -14,13 +14,16 @@ const PersonalizedAssessment: React.FC<PersonalizedAssessmentProps> = ({
   firstName,
   primarySymptoms
 }) => {
-  const { greeting, validation } = getDynamicContent(scoreCategory, firstName);
+  // Capitalize first letter of firstName
+  const capitalizedFirstName = firstName ? firstName.charAt(0).toUpperCase() + firstName.slice(1) : "";
+  
+  const { greeting, validation } = getDynamicContent(scoreCategory, capitalizedFirstName);
   
   return (
     <Card className="mb-8 reveal-section transform opacity-0 border-t-4 border-[#9b87f5]">
       <CardContent className="p-6 md:p-8">
         <h3 className="text-lg md:text-xl font-semibold text-[#5D4154] mb-4">
-          {firstName ? `${firstName}, your assessment suggests you may be experiencing perimenopause.` : 
+          {capitalizedFirstName ? `${capitalizedFirstName}, your assessment suggests you may be experiencing perimenopause.` : 
           "Your assessment suggests you may be experiencing perimenopause."}
         </h3>
         

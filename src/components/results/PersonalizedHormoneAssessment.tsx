@@ -17,6 +17,9 @@ const PersonalizedHormoneAssessment: React.FC<PersonalizedHormoneAssessmentProps
   primaryHormone,
   symptoms 
 }) => {
+  // Capitalize first letter of firstName
+  const capitalizedFirstName = firstName ? firstName.charAt(0).toUpperCase() + firstName.slice(1) : "";
+  
   // Get percentage based on primary hormone
   const getPercentage = () => {
     switch(primaryHormone.toLowerCase()) {
@@ -35,7 +38,7 @@ const PersonalizedHormoneAssessment: React.FC<PersonalizedHormoneAssessmentProps
         </h1>
         
         <h2 className="text-xl md:text-2xl font-bold text-[#5D4154]/90 mb-3">
-          {firstName}, We've Identified Your Hormone Pattern
+          {capitalizedFirstName}, We've Identified Your Hormone Pattern
         </h2>
         
         <p className="text-lg text-gray-700 mb-4">

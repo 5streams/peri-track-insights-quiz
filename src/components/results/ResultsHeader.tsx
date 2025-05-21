@@ -16,6 +16,9 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
   scoreCategory,
   onStartTrial 
 }) => {
+  // Capitalize first letter of firstName
+  const capitalizedFirstName = firstName ? firstName.charAt(0).toUpperCase() + firstName.slice(1) : "";
+  
   // Get color based on score category
   const getScoreColor = () => {
     switch (scoreCategory) {
@@ -39,7 +42,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
   return (
     <header className="text-center pt-4 pb-10 reveal-section transform opacity-0">
       <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#5D4154] mb-6">
-        {firstName ? `${firstName} ` : ""}We've Analyzed Your Answers<br />Here Is Your Personal Perimenopause Assessment
+        {capitalizedFirstName ? `${capitalizedFirstName} ` : ""}We've Analyzed Your Answers<br />Here Is Your Personal Perimenopause Assessment
       </h1>
       
       <div className="relative max-w-2xl mx-auto mb-8">
