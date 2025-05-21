@@ -39,7 +39,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
   return (
     <header className="text-center pt-4 pb-10 reveal-section transform opacity-0">
       <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#5D4154] mb-6">
-        YOUR PERSONALIZED PERIMENOPAUSE ASSESSMENT
+        {firstName ? `${firstName} ` : ""}WE'VE ANALYZED YOUR ANSWERS<br />HERE IS YOUR PERSONAL PERIMENOPAUSE ASSESSMENT
       </h1>
       
       <div className="relative max-w-2xl mx-auto mb-8">
@@ -66,7 +66,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
       {scoreCategory === "severe" && (
         <Button 
           onClick={onStartTrial}
-          className="bg-[#5D4154] hover:bg-[#5D4154]/90 text-white font-semibold px-8 py-6 rounded-lg shadow-lg mb-8 text-lg"
+          className="bg-[#9b87f5] hover:bg-[#8B5CF6]/90 text-white font-semibold px-8 py-6 rounded-lg shadow-lg mb-8 text-lg"
         >
           Take Action Now - Start Free Trial
         </Button>
