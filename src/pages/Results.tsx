@@ -14,6 +14,7 @@ import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanat
 import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
+import PeritrackIntro from "@/components/results/PeritrackIntro";
 
 interface QuizResults {
   score: number;
@@ -144,12 +145,17 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Luna AI Feature */}
+          {/* Peritrack Intro - MOVED TO APPEAR FIRST */}
+          <PeritrackIntro
+            onStartTrial={handleTrialCTA}
+          />
+          
+          {/* Luna AI Feature - MOVED TO APPEAR SECOND */}
           <LunaAIFeature
             onStartTrial={handleTrialCTA}
           />
           
-          {/* Use the subscription options component instead of ValuePropositionNew */}
+          {/* Use the subscription options component */}
           <SubscriptionOptions
             onStartTrial={handleTrialCTA}
           />
