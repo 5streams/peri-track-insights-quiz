@@ -1,6 +1,6 @@
 
 // Mapping of symptoms to hormones
-const hormoneSymptomMap = {
+const hormoneSymptomMap: Record<string, Record<string, number>> = {
   menstrualCycle: { estrogen: 0.8, progesterone: 0.7 },
   hotFlashes: { estrogen: 0.9, progesterone: 0.3 },
   sleepQuality: { progesterone: 0.9, estrogen: 0.4 },
@@ -36,8 +36,8 @@ export const calculateHormoneScores = (results: any) => {
       ([_, value]) => value === symptom
     )?.[0];
     
-    if (normalizedSymptom && hormoneSymptomMap[normalizedSymptom as keyof typeof hormoneSymptomMap]) {
-      const weights = hormoneSymptomMap[normalizedSymptom as keyof typeof hormoneSymptomMap];
+    if (normalizedSymptom && hormoneSymptomMap[normalizedSymptom]) {
+      const weights = hormoneSymptomMap[normalizedSymptom];
       if (weights.estrogen) estrogenScore += overallScore * weights.estrogen;
       if (weights.progesterone) progesteroneScore += overallScore * weights.progesterone;
       if (weights.testosterone) testosteroneScore += overallScore * weights.testosterone;
