@@ -177,125 +177,240 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
   const getPhaseDescription = () => {
     switch(scoreCategory) {
       case "minimal": 
-        return "You are currently showing minimal perimenopause symptoms with hormone levels in optimal ranges.";
+        return "You are showing minimal perimenopause symptoms with hormone levels in optimal ranges.";
       case "early": 
-        return "You are currently in the \"Early Transitional Phase\" with early hormone changes beginning.";
+        return "You are in the \"Early Transitional Phase\" with early hormone changes beginning.";
       case "moderate": 
-        return "You are currently in the \"Mid Transitional Phase\" with notable hormone changes affecting your wellbeing.";
+        return "You are in the \"Mid Transitional Phase\" with notable hormone changes affecting your wellbeing.";
       case "significant":
-        return "You are currently experiencing significant hormone changes that require prompt attention.";
+        return "You are experiencing significant hormone changes that require prompt attention.";
       default:
-        return "You are currently in the \"Transitional Phase\" with hormone changes affecting your wellbeing.";
+        return "You are in the perimenopause \"Transitional Phase\" with hormone changes affecting your wellbeing.";
     }
   };
 
+  // Format hormone details for display in the insight panel
+  const formatHormoneDetail = (hormone: string) => {
+    const status = {
+      estradiol: {
+        early: "mild fluctuations affecting temperature regulation and mood stability",
+        moderate: "notable fluctuations affecting temperature regulation and mood stability",
+        significant: "pronounced fluctuations affecting temperature regulation and mood stability",
+        minimal: "within optimal range with normal fluctuations"
+      },
+      progesterone: {
+        early: "Early decline (15-20%) affecting sleep and mood",
+        moderate: "Moderate decline (30-40%) affecting sleep and mood",
+        significant: "Significant decline (45-55%) affecting sleep and mood",
+        minimal: "Healthy levels supporting sleep and mood"
+      },
+      testosterone: {
+        early: "Slight decrease (10-15%) affecting energy and motivation",
+        moderate: "Notable decrease (25-35%) affecting energy and motivation",
+        significant: "Substantial decrease (40-50%) affecting energy and motivation",
+        minimal: "Balanced levels supporting energy and vitality"
+      }
+    };
+
+    const hormoneKey = hormone.toLowerCase() as keyof typeof status;
+    const categoryKey = scoreCategory as keyof (typeof status)[typeof hormoneKey];
+    
+    return status[hormoneKey]?.[categoryKey] || `Changes affecting your wellbeing`;
+  };
+
   return (
-    <div className="w-full h-full">
-      <ChartContainer className="h-full w-full aspect-[16/9] p-4" config={config}>
-        <ResponsiveContainer>
-          <ComposedChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 10 }}>
-            <defs>
-              <linearGradient id="optimalGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#A7C4A0" stopOpacity={0.2}/>
-                <stop offset="100%" stopColor="#A7C4A0" stopOpacity={0}/>
-              </linearGradient>
-            </defs>
-            
-            <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
-            <XAxis 
-              dataKey="month" 
-              label={{ value: 'Perimenopause Timeline', position: 'bottom', offset: -5 }} 
-              tick={{ fill: '#5D4154' }}
-            />
-            <YAxis 
-              label={{ value: 'Hormone Level', angle: -90, position: 'left' }} 
-              domain={[0, 100]}
-              tickFormatter={(value) => `${value}%`}
-              tick={{ fill: '#5D4154' }}
-            />
-            <Tooltip content={<ChartTooltipContent />} />
-            <Legend verticalAlign="top" height={36} />
-
-            {/* Optimal zone */}
-            <Area 
-              type="monotone"
-              dataKey="optimalUpper"
-              stroke="none"
-              fill="url(#optimalGradient)"
-              fillOpacity={0.8}
-              activeDot={false}
-              isAnimationActive={false}
-              stackId="2"
-              baseValue={65}
-            />
-            
-            {/* Reference lines */}
-            <ReferenceLine y={data[0].optimalUpper} stroke="#A7C4A0" strokeDasharray="3 3" label={{ value: "Optimal Upper", position: "right", fill: "#A7C4A0" }} />
-            <ReferenceLine y={data[0].optimalLower} stroke="#A7C4A0" strokeDasharray="3 3" label={{ value: "Optimal Lower", position: "right", fill: "#A7C4A0" }} />
-            <ReferenceLine y={data[0].criticalThreshold} stroke="#EF4444" strokeDasharray="3 3" label={{ value: "Critical Threshold", position: "right", fill: "#EF4444" }} />
-            
-            {/* Current position */}
-            <ReferenceLine x={data[currentPosition].month} stroke="#5D4154" label={{ value: "You Are Here", position: "top", fill: "#5D4154" }} />
-
-            {/* Main hormone lines */}
-            <Line 
-              type="monotone" 
-              dataKey={primaryHormone} 
-              stroke={getHormoneColor(primaryHormone)} 
-              strokeWidth={3} 
-              dot={{ strokeWidth: 2, r: 5, fill: 'white' }} 
-              activeDot={{ r: 7, stroke: '#5D4154' }}
-              animationDuration={1500}
-            />
-            
-            {/* Projection lines */}
-            <Line 
-              type="monotone" 
-              dataKey={`${primaryHormone}Projection`} 
-              stroke={`${getHormoneColor(primaryHormone)}80`}
-              strokeWidth={2} 
-              strokeDasharray="5 5"
-              dot={false}
-              animationDuration={1500}
-              animationBegin={500}
-            />
-            
-            {/* Intervention projection */}
-            <Line 
-              type="monotone" 
-              dataKey={`${primaryHormone}Intervention`} 
-              stroke={`${getHormoneColor(primaryHormone)}50`}
-              strokeWidth={2} 
-              strokeDasharray="3 3"
-              dot={false}
-              animationDuration={1500}
-              animationBegin={1000}
-            />
-            
-            {/* Secondary hormones */}
-            {secondaryHormones.map((hormone, idx) => (
-              <Line 
-                key={hormone}
-                type="monotone" 
-                dataKey={hormone} 
-                stroke={getHormoneColor(hormone)}
-                strokeWidth={2}
-                strokeDasharray={idx === 0 ? "" : "5 5"}
-                dot={{ strokeWidth: 1, r: 3, fill: 'white' }}
-                activeDot={{ r: 5 }}
-                animationDuration={1500}
-                animationBegin={300 * (idx + 1)}
+    <div className="w-full h-full flex flex-col">
+      <div className="flex-grow">
+        <ChartContainer className="h-full w-full aspect-[16/9] p-2" config={config}>
+          <ResponsiveContainer>
+            <ComposedChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 10 }}>
+              <defs>
+                <linearGradient id="optimalGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#A7C4A0" stopOpacity={0.2}/>
+                  <stop offset="100%" stopColor="#A7C4A0" stopOpacity={0}/>
+                </linearGradient>
+              </defs>
+              
+              <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
+              <XAxis 
+                dataKey="month" 
+                tickLine={false}
+                axisLine={{ stroke: '#E5E7EB' }}
+                tick={{ fill: '#5D4154', fontSize: 12 }}
               />
-            ))}
-          </ComposedChart>
-        </ResponsiveContainer>
-      </ChartContainer>
+              <YAxis 
+                domain={[0, 100]}
+                tickFormatter={(value) => `${value}%`}
+                tick={{ fill: '#5D4154', fontSize: 12 }}
+                axisLine={{ stroke: '#E5E7EB' }}
+                tickLine={false}
+              />
+              <Tooltip content={<ChartTooltipContent />} />
+              <Legend 
+                verticalAlign="top" 
+                height={36} 
+                iconType="circle"
+                iconSize={8}
+                wrapperStyle={{ fontSize: '12px' }}
+              />
+
+              {/* Optimal zone */}
+              <Area 
+                type="monotone"
+                dataKey="optimalUpper"
+                stroke="none"
+                fill="url(#optimalGradient)"
+                fillOpacity={0.8}
+                activeDot={false}
+                isAnimationActive={false}
+                stackId="2"
+                baseValue={65}
+              />
+              
+              {/* Reference lines */}
+              <ReferenceLine 
+                y={data[0].optimalUpper} 
+                stroke="#A7C4A0" 
+                strokeDasharray="3 3" 
+                isFront={false}
+                label={{ 
+                  value: "Optimal Upper", 
+                  position: "right", 
+                  fill: "#A7C4A0",
+                  fontSize: 10,
+                  dy: -5
+                }} 
+              />
+              <ReferenceLine 
+                y={data[0].optimalLower} 
+                stroke="#A7C4A0" 
+                strokeDasharray="3 3"
+                isFront={false} 
+                label={{ 
+                  value: "Optimal Lower", 
+                  position: "right", 
+                  fill: "#A7C4A0",
+                  fontSize: 10,
+                  dy: -5
+                }} 
+              />
+              <ReferenceLine 
+                y={data[0].criticalThreshold} 
+                stroke="#EF4444" 
+                strokeDasharray="3 3"
+                isFront={false} 
+                label={{ 
+                  value: "Critical Threshold", 
+                  position: "right", 
+                  fill: "#EF4444",
+                  fontSize: 10,
+                  dy: -5
+                }} 
+              />
+              
+              {/* Current position */}
+              <ReferenceLine 
+                x={data[currentPosition].month} 
+                stroke="#5D4154" 
+                label={{ 
+                  value: "You Are Here", 
+                  position: "top", 
+                  fill: "#5D4154",
+                  fontSize: 12,
+                  dy: -10
+                }} 
+              />
+
+              {/* Main hormone lines */}
+              <Line 
+                type="monotone" 
+                dataKey={primaryHormone} 
+                stroke={getHormoneColor(primaryHormone)} 
+                strokeWidth={3} 
+                dot={{ strokeWidth: 2, r: 4, fill: 'white' }} 
+                activeDot={{ r: 6, stroke: '#5D4154' }}
+                animationDuration={1500}
+              />
+              
+              {/* Projection lines */}
+              <Line 
+                type="monotone" 
+                dataKey={`${primaryHormone}Projection`} 
+                stroke={`${getHormoneColor(primaryHormone)}80`}
+                strokeWidth={2} 
+                strokeDasharray="5 5"
+                dot={false}
+                animationDuration={1500}
+                animationBegin={500}
+              />
+              
+              {/* Intervention projection */}
+              <Line 
+                type="monotone" 
+                dataKey={`${primaryHormone}Intervention`} 
+                stroke={`${getHormoneColor(primaryHormone)}50`}
+                strokeWidth={2} 
+                strokeDasharray="3 3"
+                dot={false}
+                animationDuration={1500}
+                animationBegin={1000}
+              />
+              
+              {/* Secondary hormones */}
+              {secondaryHormones.map((hormone, idx) => (
+                <Line 
+                  key={hormone}
+                  type="monotone" 
+                  dataKey={hormone} 
+                  stroke={getHormoneColor(hormone)}
+                  strokeWidth={2}
+                  strokeDasharray={idx === 0 ? "" : "5 5"}
+                  dot={{ strokeWidth: 1, r: 3, fill: 'white' }}
+                  activeDot={{ r: 5 }}
+                  animationDuration={1500}
+                  animationBegin={300 * (idx + 1)}
+                />
+              ))}
+            </ComposedChart>
+          </ResponsiveContainer>
+        </ChartContainer>
+      </div>
       
-      <div className="bg-white p-3 rounded-lg mt-3 border border-gray-200">
-        <h4 className="text-sm font-medium text-[#5D4154] mb-1">Key Insight:</h4>
-        <p className="text-xs text-gray-600">
-          {getPhaseDescription()}
-          This specific pattern explains your current symptoms, and the highlighted area shows your optimal intervention window.
+      <div className="bg-white p-4 rounded-lg mt-2 border border-gray-200 shadow-sm">
+        <h4 className="text-sm font-medium text-[#5D4154] mb-3">Your Three-Hormone Pattern:</h4>
+        <div className="space-y-2">
+          <div className="flex items-center">
+            <div className="w-3 h-3 rounded-full bg-[#60A5FA] mr-2"></div>
+            <div>
+              <span className="font-medium text-[#5D4154]">Progesterone:</span>
+              <span className="text-gray-700 text-sm ml-1">{formatHormoneDetail("progesterone")}</span>
+            </div>
+          </div>
+          <div className="flex items-center">
+            <div className="w-3 h-3 rounded-full bg-[#F472B6] mr-2"></div>
+            <div>
+              <span className="font-medium text-[#5D4154]">Estradiol:</span>
+              <span className="text-gray-700 text-sm ml-1">{formatHormoneDetail("estradiol")}</span>
+            </div>
+          </div>
+          <div className="flex items-center">
+            <div className="w-3 h-3 rounded-full bg-[#10B981] mr-2"></div>
+            <div>
+              <span className="font-medium text-[#5D4154]">Testosterone:</span>
+              <span className="text-gray-700 text-sm ml-1">{formatHormoneDetail("testosterone")}</span>
+            </div>
+          </div>
+        </div>
+        
+        <p className="text-sm text-[#5D4154] mt-3 font-medium">
+          {scoreCategory === "early" ? 
+            "This early-stage pattern is why you're noticing subtle changes while still feeling generally well most days." :
+            scoreCategory === "moderate" ? 
+            "This specific pattern explains why you're experiencing your particular symptom cluster." :
+            scoreCategory === "significant" ?
+            "This pattern explains why your symptoms feel so intense and why generic approaches may not work." :
+            "This balanced pattern explains your current wellbeing."
+          }
         </p>
       </div>
     </div>
