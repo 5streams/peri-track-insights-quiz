@@ -29,42 +29,53 @@ const SymptomSelector: React.FC<SymptomSelectorProps> = ({
   // Common symptoms by category
   const symptomCategories: SymptomCategory = {
     physical: [
-      "Hot flashes", 
-      "Night sweats", 
-      "Headache", 
-      "Breast tenderness", 
-      "Joint pain", 
-      "Pelvic pain", 
-      "Bloating", 
-      "Digestive issues",
-      "Heart palpitations",
+      "Hot Flashes", 
+      "Night Sweats", 
+      "Vaginal Dryness/Discomfort", 
+      "Joint Pain", 
+      "Muscle Pain", 
+      "Weight Changes", 
+      "Headaches", 
+      "Migraines",
+      "Heart Palpitations",
       "Dizziness",
-      "Tingling sensations"
+      "Irregular Periods"
     ],
     emotional: [
-      "Mood swings", 
+      "Mood Swings", 
       "Anxiety", 
       "Irritability", 
       "Depression", 
-      "Brain fog", 
-      "Memory issues",
-      "Difficulty concentrating", 
+      "Brain Fog", 
+      "Memory Issues",
+      "Difficulty Concentrating", 
       "Overwhelm",
-      "Emotional sensitivity"
+      "Emotional Sensitivity"
     ],
     sleep: [
-      "Sleep issues", 
+      "Sleep Disruptions", 
       "Fatigue", 
-      "Low energy", 
+      "Energy Fluctuations", 
       "Insomnia", 
-      "Early waking",
-      "Night sweats", 
-      "Restless sleep"
+      "Early Waking",
+      "Night Sweats", 
+      "Restless Sleep"
     ]
   };
   
   // Default to showing a mix of common symptoms if no category is specified
-  const defaultSymptoms = ["Sleep issues", "Mood changes", "Brain fog", "Low energy", "Hot flashes", "Headache", "Anxiety"];
+  const defaultSymptoms = [
+    "Hot Flashes/Night Sweats", 
+    "Sleep Disruptions", 
+    "Mood Changes", 
+    "Irregular Periods",
+    "Brain Fog/Cognitive Changes", 
+    "Fatigue/Energy Fluctuations", 
+    "Vaginal Dryness/Discomfort",
+    "Joint/Muscle Pain", 
+    "Weight Changes", 
+    "Headaches/Migraines"
+  ];
   
   // Determine which symptoms to display based on category
   const getDisplaySymptoms = () => {
