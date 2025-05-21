@@ -1,11 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 export default function Index() {
   return (
     <div className="flex flex-col min-h-screen bg-[#FBF9F6]">
-      <header className="bg-white py-4 px-6 shadow-md sticky top-0 z-50">
+      <header className="bg-white py-3 px-4 shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 bg-[#5D4154] rounded-full flex items-center justify-center">
@@ -18,19 +17,19 @@ export default function Index() {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-[#FFECD6] py-16 text-center border-b border-[#5D4154]/10">
+        <section className="bg-[#FFECD6] py-8 text-center border-b border-[#5D4154]/10">
           <div className="max-w-5xl mx-auto px-4">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-[#5D4154] mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-[#5D4154] mb-4">
               AI-Powered Perimenopause Symptoms Quiz: Discover What's Really Happening to Your Body
             </h1>
             
-            <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-[#7D6174] italic">
+            <p className="text-lg md:text-xl max-w-2xl mx-auto mb-6 text-[#7D6174] italic">
               7 out of 10 women will experience perimenopause symptoms for 4-10 years before menopause begins. Most don't recognize what's happening.
             </p>
             
             <Button 
               asChild
-              className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-6 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
+              className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
             >
               <Link to="/quiz">START MY FREE ASSESSMENT</Link>
             </Button>
@@ -38,9 +37,9 @@ export default function Index() {
         </section>
         
         {/* Symptoms Checklist */}
-        <div className="max-w-5xl mx-auto px-4 py-12">
-          <div className="bg-white rounded-xl shadow-md p-8 max-w-3xl mx-auto">
-            <h3 className="text-center font-playfair text-2xl font-semibold text-[#5D4154] mb-6">
+        <div className="max-w-5xl mx-auto px-4 py-8">
+          <div className="bg-white rounded-xl shadow-md p-6 max-w-3xl mx-auto">
+            <h3 className="text-center font-playfair text-2xl font-semibold text-[#5D4154] mb-4">
               Is This You? Take Our 2-Minute Quiz
             </h3>
             
@@ -53,28 +52,28 @@ export default function Index() {
               "Irregular periods or sudden heavy bleeding",
               "Unexplained fatigue that sleep doesn't fix"
             ].map((item, index) => (
-              <div key={index} className="relative pl-8 mb-3 text-lg">
+              <div key={index} className="relative pl-8 mb-2 text-lg">
                 <span className="absolute left-0 text-[#A7C4A0] font-bold">✓</span>
                 {item}
               </div>
             ))}
           </div>
           
-          <div className="text-center my-8 text-lg font-semibold text-[#5D4154]">
+          <div className="text-center my-6 text-lg font-semibold text-[#5D4154]">
             27,843 women took this quiz last month to find answers.
           </div>
           
-          <div className="bg-white p-6 rounded-xl shadow-md max-w-3xl mx-auto my-8 italic text-center">
-            <p className="text-lg mb-3">
+          <div className="bg-white p-5 rounded-xl shadow-md max-w-3xl mx-auto my-6 italic text-center">
+            <p className="text-lg mb-2">
               "After 2 years of thinking I was just stressed or getting older, this quiz helped me understand my symptoms were actually hormonal changes. Finally having clarity changed everything."
             </p>
             <p className="font-semibold text-[#5D4154] not-italic">— Jennifer, 44</p>
           </div>
           
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <Button 
               asChild
-              className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-6 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
+              className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
             >
               <Link to="/quiz">START MY FREE ASSESSMENT</Link>
             </Button>
@@ -82,21 +81,21 @@ export default function Index() {
         </div>
         
         {/* Benefits Section */}
-        <section className="py-16 bg-white">
+        <section className="py-8 bg-white">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-8">
+            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
               Why Women Are Taking This AI-Powered Perimenopause Symptoms Quiz
             </h2>
             
-            <p className="text-center max-w-3xl mx-auto mb-8 text-lg">
+            <p className="text-center max-w-3xl mx-auto mb-6 text-lg">
               Perimenopause can begin in your late 30s or early 40s – much earlier than most women realize. The challenge? <strong>These symptoms are often mistaken for stress, aging, thyroid issues, or depression.</strong>
             </p>
             
-            <p className="text-center mb-10 text-lg">
+            <p className="text-center mb-6 text-lg">
               Our comprehensive perimenopause symptoms assessment helps you:
             </p>
             
-            <div className="grid md:grid-cols-2 gap-6 mb-12">
+            <div className="grid md:grid-cols-2 gap-5 mb-8">
               {[
                 {
                   title: "Identify Your Symptoms",
@@ -128,7 +127,7 @@ export default function Index() {
             <div className="text-center">
               <Button 
                 asChild
-                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-6 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
+                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
               >
                 <Link to="/quiz">TAKE THE FREE QUIZ NOW</Link>
               </Button>
@@ -137,17 +136,17 @@ export default function Index() {
         </section>
         
         {/* Stats Section */}
-        <section className="py-16 bg-[#FFECD6]">
+        <section className="py-8 bg-[#FFECD6]">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-8">
+            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
               The Perimenopause Symptom Confusion
             </h2>
             
-            <p className="text-center max-w-3xl mx-auto mb-10 text-lg">
+            <p className="text-center max-w-3xl mx-auto mb-6 text-lg">
               Many women suffer through perimenopause symptoms for years without realizing what's happening. Our research shows:
             </p>
             
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
+            <div className="grid md:grid-cols-3 gap-5 mb-6">
               {[
                 {
                   number: "82%",
@@ -172,8 +171,8 @@ export default function Index() {
               ))}
             </div>
             
-            <div className="bg-white p-6 rounded-xl shadow-md max-w-3xl mx-auto italic text-center">
-              <p className="text-lg mb-3">
+            <div className="bg-white p-5 rounded-xl shadow-md max-w-3xl mx-auto italic text-center">
+              <p className="text-lg mb-2">
                 "I thought I was losing my mind until I took this assessment. Finding out my symptoms were likely perimenopause was actually a relief. Now I have a path forward."
               </p>
               <p className="font-semibold text-[#5D4154] not-italic">— Sarah, 41</p>
@@ -182,13 +181,13 @@ export default function Index() {
         </section>
         
         {/* How It Works */}
-        <section className="py-16 bg-[#FFECD6]">
+        <section className="py-8 bg-[#FFECD6]">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-10">
+            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
               How the AI-Powered Perimenopause Assessment Works
             </h2>
             
-            <div className="grid md:grid-cols-3 gap-8 mb-10">
+            <div className="grid md:grid-cols-3 gap-6 mb-6">
               {[
                 {
                   step: "1",
@@ -216,14 +215,14 @@ export default function Index() {
               ))}
             </div>
             
-            <p className="text-center italic mb-8">
+            <p className="text-center italic mb-6">
               Your results are completely private and secure. We comply with all health privacy regulations.
             </p>
             
             <div className="text-center">
               <Button 
                 asChild
-                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-6 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
+                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
               >
                 <Link to="/quiz">BEGIN MY SYMPTOMS ASSESSMENT</Link>
               </Button>
@@ -232,17 +231,17 @@ export default function Index() {
         </section>
         
         {/* Results Preview */}
-        <section className="py-16 bg-white">
+        <section className="py-8 bg-white">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-8">
+            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
               Discover Your Perimenopause Profile
             </h2>
             
-            <p className="text-center max-w-3xl mx-auto mb-10 text-lg">
+            <p className="text-center max-w-3xl mx-auto mb-6 text-lg">
               After completing this quick assessment, you'll receive:
             </p>
             
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
+            <div className="grid md:grid-cols-3 gap-5 mb-6">
               {[
                 {
                   title: "Your Hormone Balance Score",
@@ -267,7 +266,7 @@ export default function Index() {
             <div className="text-center">
               <Button 
                 asChild
-                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-6 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
+                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
               >
                 <Link to="/quiz">START MY FREE ASSESSMENT</Link>
               </Button>
@@ -276,13 +275,13 @@ export default function Index() {
         </section>
         
         {/* FAQ Section */}
-        <section className="py-16 bg-white">
+        <section className="py-8 bg-white">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-10">
+            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
               Common Questions About Perimenopause Symptoms
             </h2>
             
-            <div className="space-y-6 max-w-3xl mx-auto mb-10">
+            <div className="space-y-4 max-w-3xl mx-auto mb-6">
               {[
                 {
                   question: "Q: At what age does perimenopause typically start?",
@@ -311,7 +310,7 @@ export default function Index() {
             <div className="text-center">
               <Button 
                 asChild
-                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-6 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
+                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
               >
                 <Link to="/quiz">TAKE THE FREE QUIZ NOW</Link>
               </Button>
@@ -320,13 +319,13 @@ export default function Index() {
         </section>
         
         {/* Testimonials */}
-        <section className="py-16 bg-[#FFECD6]">
+        <section className="py-8 bg-[#FFECD6]">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-10">
+            <h2 className="text-center font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
               Women Like You Found Answers With Our Assessment
             </h2>
             
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-5">
               {[
                 {
                   quote: "I was gaining weight despite eating well and exercising. After taking this quiz, I learned how perimenopause affects metabolism and what I could do differently. Three months later, I'm feeling so much better.",
@@ -351,24 +350,24 @@ export default function Index() {
         </section>
         
         {/* Final CTA */}
-        <section className="py-16 bg-[#FFECD6] text-center" id="quiz">
+        <section className="py-8 bg-[#FFECD6] text-center" id="quiz">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-6">
+            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-[#5D4154] mb-4">
               Ready to Get AI-Powered Insights About Your Symptoms?
             </h2>
             
-            <p className="max-w-2xl mx-auto mb-8 text-lg">
+            <p className="max-w-2xl mx-auto mb-6 text-lg">
               Join over 30,000 women who've gained clarity about their perimenopause symptoms through our AI-powered assessment. This free quiz takes just 2 minutes.
             </p>
             
             <Button 
               asChild
-              className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-6 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
+              className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl after:content-[' →']"
             >
               <Link to="/quiz">BEGIN MY SYMPTOMS ASSESSMENT</Link>
             </Button>
             
-            <div className="flex flex-wrap justify-center gap-4 mt-8 text-sm text-gray-600">
+            <div className="flex flex-wrap justify-center gap-3 mt-6 text-sm text-gray-600">
               {["Private & Secure", "HIPAA Compliant", "Medically Reviewed by Dr. Jennifer Miller, Board-Certified OB/GYN"].map((badge, index) => (
                 <div key={index} className="bg-[#5D4154]/10 px-4 py-1 rounded-full">
                   {badge}
@@ -379,11 +378,11 @@ export default function Index() {
         </section>
       </main>
 
-      <footer className="bg-[#5D4154] text-white py-12 px-4">
+      <footer className="bg-[#5D4154] text-white py-8 px-4">
         <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
+          <div className="grid md:grid-cols-4 gap-6 mb-8">
             <div className="md:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center gap-2 mb-3">
                 <div className="h-8 w-8 bg-white/20 rounded-full flex items-center justify-center">
                   <div className="h-5 w-5 bg-[#FFECD6] rounded-full" />
                 </div>
@@ -395,7 +394,7 @@ export default function Index() {
             </div>
             
             <div>
-              <h4 className="font-semibold text-[#FFECD6] mb-4">Company</h4>
+              <h4 className="font-semibold text-[#FFECD6] mb-3">Company</h4>
               <ul className="space-y-2 text-sm">
                 {["About Us", "Our Team", "Medical Review Board", "Careers"].map((link, index) => (
                   <li key={index}><a href="#" className="hover:text-[#FFECD6] transition">{link}</a></li>
@@ -404,7 +403,7 @@ export default function Index() {
             </div>
             
             <div>
-              <h4 className="font-semibold text-[#FFECD6] mb-4">Resources</h4>
+              <h4 className="font-semibold text-[#FFECD6] mb-3">Resources</h4>
               <ul className="space-y-2 text-sm">
                 {["Blog", "Symptom Library", "Hormone Guide", "Research"].map((link, index) => (
                   <li key={index}><a href="#" className="hover:text-[#FFECD6] transition">{link}</a></li>
@@ -413,7 +412,7 @@ export default function Index() {
             </div>
             
             <div>
-              <h4 className="font-semibold text-[#FFECD6] mb-4">Support</h4>
+              <h4 className="font-semibold text-[#FFECD6] mb-3">Support</h4>
               <ul className="space-y-2 text-sm">
                 {["Help Center", "Contact Us", "Privacy Policy", "Terms of Service"].map((link, index) => (
                   <li key={index}><a href="#" className="hover:text-[#FFECD6] transition">{link}</a></li>
@@ -422,8 +421,8 @@ export default function Index() {
             </div>
           </div>
           
-          <div className="pt-8 border-t border-white/10 text-center">
-            <p className="text-sm text-white/70 max-w-3xl mx-auto mb-4">
+          <div className="pt-6 border-t border-white/10 text-center">
+            <p className="text-sm text-white/70 max-w-3xl mx-auto mb-3">
               This perimenopause symptoms quiz is designed for educational purposes. It is not intended to replace professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider about any health concerns.
             </p>
             <p className="text-sm">© 2025 Peritrack | Privacy Policy | Terms of Service</p>
