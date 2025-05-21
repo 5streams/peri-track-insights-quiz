@@ -179,11 +179,11 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
       case "minimal": 
         return "You are showing minimal perimenopause symptoms with hormone levels in optimal ranges.";
       case "early": 
-        return "You are in the \"Early Transitional Phase\" with early hormone changes beginning.";
+        return "This early-stage pattern is why you're noticing subtle changes while still feeling generally well most days.";
       case "moderate": 
-        return "You are in the \"Mid Transitional Phase\" with notable hormone changes affecting your wellbeing.";
+        return "This specific pattern explains why you're experiencing your particular symptom cluster.";
       case "significant":
-        return "You are experiencing significant hormone changes that require prompt attention.";
+        return "This pattern explains why your symptoms feel so intense and why generic approaches may not work.";
       default:
         return "You are in the perimenopause \"Transitional Phase\" with hormone changes affecting your wellbeing.";
     }
@@ -376,42 +376,42 @@ const HormoneVisualization: React.FC<HormoneVisualizationProps> = ({
         </ChartContainer>
       </div>
       
+      {/* Fixed: Hormone Pattern Description Section - Avoid duplicated content */}
       <div className="bg-white p-4 rounded-lg mt-2 border border-gray-200 shadow-sm">
-        <h4 className="text-sm font-medium text-[#5D4154] mb-3">Your Three-Hormone Pattern:</h4>
-        <div className="space-y-2">
-          <div className="flex items-center">
-            <div className="w-3 h-3 rounded-full bg-[#60A5FA] mr-2"></div>
+        <h4 className="text-sm font-bold text-[#5D4154] mb-3">Your Three-Hormone Pattern:</h4>
+        
+        <div className="space-y-3">
+          {/* Hormone indicators with clear visual separation */}
+          <div className="flex items-start">
+            <div className="w-3 h-3 rounded-full bg-[#60A5FA] mt-1.5 mr-2 flex-shrink-0"></div>
             <div>
-              <span className="font-medium text-[#5D4154]">Progesterone:</span>
-              <span className="text-gray-700 text-sm ml-1">{formatHormoneDetail("progesterone")}</span>
+              <span className="font-medium text-[#5D4154]">Progesterone:</span>{" "}
+              <span className="text-gray-700 text-sm">{formatHormoneDetail("progesterone")}</span>
             </div>
           </div>
-          <div className="flex items-center">
-            <div className="w-3 h-3 rounded-full bg-[#F472B6] mr-2"></div>
+          
+          <div className="flex items-start">
+            <div className="w-3 h-3 rounded-full bg-[#F472B6] mt-1.5 mr-2 flex-shrink-0"></div>
             <div>
-              <span className="font-medium text-[#5D4154]">Estradiol:</span>
-              <span className="text-gray-700 text-sm ml-1">{formatHormoneDetail("estradiol")}</span>
+              <span className="font-medium text-[#5D4154]">Estradiol:</span>{" "}
+              <span className="text-gray-700 text-sm">{formatHormoneDetail("estradiol")}</span>
             </div>
           </div>
-          <div className="flex items-center">
-            <div className="w-3 h-3 rounded-full bg-[#10B981] mr-2"></div>
+          
+          <div className="flex items-start">
+            <div className="w-3 h-3 rounded-full bg-[#10B981] mt-1.5 mr-2 flex-shrink-0"></div>
             <div>
-              <span className="font-medium text-[#5D4154]">Testosterone:</span>
-              <span className="text-gray-700 text-sm ml-1">{formatHormoneDetail("testosterone")}</span>
+              <span className="font-medium text-[#5D4154]">Testosterone:</span>{" "}
+              <span className="text-gray-700 text-sm">{formatHormoneDetail("testosterone")}</span>
             </div>
           </div>
         </div>
         
-        <p className="text-sm text-[#5D4154] mt-3 font-medium">
-          {scoreCategory === "early" ? 
-            "This early-stage pattern is why you're noticing subtle changes while still feeling generally well most days." :
-            scoreCategory === "moderate" ? 
-            "This specific pattern explains why you're experiencing your particular symptom cluster." :
-            scoreCategory === "significant" ?
-            "This pattern explains why your symptoms feel so intense and why generic approaches may not work." :
-            "This balanced pattern explains your current wellbeing."
-          }
-        </p>
+        <div className="mt-4 pt-3 border-t border-gray-100">
+          <p className="text-sm text-[#5D4154] font-medium">
+            {getPhaseDescription()}
+          </p>
+        </div>
       </div>
     </div>
   );
