@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { saveLead, getLeads, initializeLeadStorage } from "@/utils/leadTracking";
+import { saveLead, getLeads, initializeLeadStorage, validateLeadStorage } from "@/utils/leadTracking";
 
 interface EmailCollectionProps {
   onSubmit: (firstName: string, email: string) => void;
@@ -23,6 +23,10 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       initializeLeadStorage();
       console.log("EmailCollection: Lead storage initialized");
       
+      // Validate storage is working properly
+      const isValid = validateLeadStorage();
+      console.log(`EmailCollection: Lead storage validation ${isValid ? 'PASSED' : 'FAILED'}`);
+      
       // Debug: Check if storage is working
       const testItem = "test-" + Date.now();
       localStorage.setItem("test_storage", testItem);
@@ -32,6 +36,9 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       // Check existing leads for debugging
       const currentLeads = getLeads();
       console.log("EmailCollection: Current leads on load:", currentLeads);
+      
+      // Force a ping to refresh LeadList component
+      localStorage.setItem("leads_updated", Date.now().toString());
     } catch (error) {
       console.error("Error initializing lead storage:", error);
     }
@@ -98,6 +105,13 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       
       // Force leads to be visible in admin immediately
       localStorage.setItem("leads_updated", Date.now().toString());
+      
+      // Adding a safety delay to ensure localStorage updates are processed
+      setTimeout(() => {
+        const verificationLeads = getLeads();
+        console.log("EmailCollection: Verification check - leads after delay:", verificationLeads);
+        localStorage.setItem("leads_updated", Date.now().toString());
+      }, 500);
     } catch (error) {
       console.error("Error tracking quiz lead:", error);
       toast({

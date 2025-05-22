@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getLeads, Lead, clearLeads, initializeLeadStorage, saveLead } from "@/utils/leadTracking";
+import { getLeads, Lead, clearLeads, initializeLeadStorage, saveLead, validateLeadStorage } from "@/utils/leadTracking";
 import { 
   Table, 
   TableBody, 
@@ -14,18 +14,20 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
-import { RefreshCw, Trash2, AlertCircle } from "lucide-react";
+import { RefreshCw, Trash2, AlertCircle, Bug } from "lucide-react";
 
 const LeadList: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterSource, setFilterSource] = useState<string>('all');
   const [isLoading, setIsLoading] = useState(true);
+  const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   const { toast } = useToast();
   
   // Load leads with better error handling and feedback
   const loadLeads = () => {
     setIsLoading(true);
+    setLastRefresh(new Date());
     
     // Make sure storage is initialized
     try {
@@ -66,6 +68,10 @@ const LeadList: React.FC = () => {
       // Check localStorage status
       const storageKeys = Object.keys(localStorage);
       console.log("LeadList: All localStorage keys:", storageKeys);
+      
+      // Check if storage validation passes
+      const isValid = validateLeadStorage();
+      console.log(`LeadList: Lead storage validation ${isValid ? 'PASSED' : 'FAILED'}`);
       
     } catch (error) {
       console.error("LeadList: Error loading leads:", error);
@@ -154,7 +160,7 @@ const LeadList: React.FC = () => {
         testEmail, 
         Math.random() > 0.5 ? 'quiz_results' : 'free_trial',
         Math.random() > 0.5 ? (Math.random() > 0.5 ? 'monthly' : 'annual') : null,
-        { test: "data" },
+        { test: "data", timestamp: new Date().toISOString() },
         `Test lead created at ${new Date().toISOString()}`
       );
       
@@ -175,6 +181,41 @@ const LeadList: React.FC = () => {
         variant: "destructive"
       });
     }
+  };
+  
+  // Debug localStorage content
+  const debugStorage = () => {
+    const leadsData = localStorage.getItem('peritrack_leads');
+    console.log('===== STORAGE DEBUG =====');
+    console.log('Raw storage data:', leadsData);
+    
+    try {
+      if (leadsData) {
+        const parsed = JSON.parse(leadsData);
+        console.log('Parsed leads:', parsed);
+        console.log('Is array:', Array.isArray(parsed));
+        console.log('Length:', Array.isArray(parsed) ? parsed.length : 'N/A');
+      } else {
+        console.log('No leads data in localStorage');
+      }
+    } catch (error) {
+      console.error('Parse error:', error);
+    }
+    
+    console.log('All localStorage keys:', Object.keys(localStorage));
+    console.log('========================');
+    
+    toast({
+      title: "Debug Info",
+      description: "Check console for detailed lead storage information.",
+    });
+    
+    // Validate storage
+    const isValid = validateLeadStorage();
+    toast({
+      title: `Storage Validation: ${isValid ? 'PASSED' : 'FAILED'}`,
+      variant: isValid ? 'default' : 'destructive',
+    });
   };
   
   // Export leads to CSV
@@ -238,9 +279,14 @@ const LeadList: React.FC = () => {
       <CardHeader className="bg-[#FFECD6]/30 pb-4">
         <CardTitle className="font-playfair text-xl text-[#5D4154] flex items-center justify-between">
           <span>Lead Management Dashboard</span>
-          <span className="text-sm font-normal bg-[#5D4154] text-white px-3 py-1 rounded-full">
-            {leads.length} Total Leads
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-normal bg-[#5D4154] text-white px-3 py-1 rounded-full">
+              {leads.length} Total Leads
+            </span>
+            <span className="text-xs text-gray-500">
+              Last updated: {lastRefresh.toLocaleTimeString()}
+            </span>
+          </div>
         </CardTitle>
       </CardHeader>
       
@@ -274,7 +320,7 @@ const LeadList: React.FC = () => {
             <Button 
               onClick={exportLeads}
               className="w-full sm:w-auto bg-[#5D4154] hover:bg-[#5D4154]/90 text-white"
-              disabled={filteredLeads.length === 0}
+              disabled={leads.length === 0}
             >
               Export to CSV
             </Button>
@@ -297,6 +343,14 @@ const LeadList: React.FC = () => {
               + Test Lead
             </Button>
             <Button 
+              onClick={debugStorage}
+              variant="outline"
+              className="w-full sm:w-auto text-amber-500 hover:text-amber-700"
+              title="Debug storage"
+            >
+              <Bug className="h-4 w-4 mr-1" /> Debug
+            </Button>
+            <Button 
               onClick={handleClearLeads}
               variant="outline"
               className="w-full sm:w-auto text-red-500 hover:text-red-700"
@@ -307,9 +361,9 @@ const LeadList: React.FC = () => {
           </div>
         </div>
         
-        {filteredLeads.length > 0 ? (
+        {leads.length > 0 ? (
           <Table>
-            <TableCaption>Showing {filteredLeads.length} of {leads.length} leads</TableCaption>
+            <TableCaption>Showing {leads.length} leads</TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[150px]">Name</TableHead>
@@ -320,7 +374,7 @@ const LeadList: React.FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredLeads.map((lead) => (
+              {leads.map((lead) => (
                 <TableRow key={lead.id}>
                   <TableCell className="font-medium">{lead.firstName}</TableCell>
                   <TableCell>{lead.email}</TableCell>
@@ -340,11 +394,11 @@ const LeadList: React.FC = () => {
                           ? 'bg-orange-100 text-orange-800' 
                           : 'bg-purple-100 text-purple-800'
                       }`}>
-                        {formatPricingPlan(lead.pricingPlan)}
+                        {lead.pricingPlan === 'monthly' ? '$9.99 (Monthly)' : '$99 (Annual)'}
                       </span>
                     ) : '-'}
                   </TableCell>
-                  <TableCell className="text-right">{formatDate(lead.timestamp)}</TableCell>
+                  <TableCell className="text-right">{new Date(lead.timestamp).toLocaleString()}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -361,7 +415,7 @@ const LeadList: React.FC = () => {
                   <AlertCircle className="h-5 w-5 text-amber-500" />
                   No leads found. Try adjusting your search or filters.
                 </p>
-                <div className="flex justify-center">
+                <div className="flex justify-center gap-2">
                   <Button 
                     onClick={createTestLead}
                     variant="secondary"
@@ -369,39 +423,16 @@ const LeadList: React.FC = () => {
                   >
                     Create Test Lead
                   </Button>
+                  <Button 
+                    onClick={debugStorage}
+                    variant="secondary"
+                    className="text-sm"
+                  >
+                    Debug Storage
+                  </Button>
                 </div>
               </div>
             )}
-          </div>
-        )}
-        
-        {leads.length === 0 && !isLoading && (
-          <div className="bg-blue-50 border border-blue-200 p-4 rounded-md mt-4">
-            <p className="text-blue-700 mb-2 font-medium">
-              No leads have been captured yet
-            </p>
-            <p className="text-blue-600 text-sm mb-3">
-              When users fill out the quiz results form or start a free trial, their information will appear here.
-              Try taking the quiz or signing up for a free trial to generate your first lead.
-            </p>
-            <div className="flex gap-2">
-              <Button 
-                onClick={createTestLead}
-                size="sm"
-                variant="outline"
-                className="text-xs text-blue-700 border-blue-300"
-              >
-                Create Test Lead
-              </Button>
-              <Button
-                onClick={handleRefresh} 
-                size="sm"
-                variant="outline"
-                className="text-xs text-blue-700 border-blue-300"
-              >
-                <RefreshCw className="h-3 w-3 mr-1" /> Refresh
-              </Button>
-            </div>
           </div>
         )}
       </CardContent>
