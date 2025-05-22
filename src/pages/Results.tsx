@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import LoadingSpinner from "@/components/results/LoadingSpinner";
 import { calculateHormoneScores } from "@/utils/scoreCalculation";
+import { isGtagLoaded } from "@/utils/googleAdsTracking";
 
 // Import our components for the results page
 import ResultsHeader from "@/components/results/ResultsHeader";
@@ -89,6 +90,30 @@ const Results = () => {
       window.removeEventListener('scroll', revealSections);
     };
   }, [navigate]);
+
+  // Check if Google Tag is loaded
+  useEffect(() => {
+    // Check if Google Ads script is loaded
+    if (!isGtagLoaded() && typeof window !== 'undefined') {
+      console.log('Google Ads tag not detected on Results page, attempting to load');
+      
+      // Attempt to load the gtag script
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=AW-828832872`;
+      document.head.appendChild(script);
+      
+      // Initialize gtag
+      const initScript = document.createElement('script');
+      initScript.textContent = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-828832872');
+      `;
+      document.head.appendChild(initScript);
+    }
+  }, []);
   
   if (!results) {
     return <LoadingSpinner />;
