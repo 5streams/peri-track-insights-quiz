@@ -54,9 +54,9 @@ const TryPeriTrack = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       {/* Navigation Bar with Logo */}
-      <nav className="bg-white border-b border-gray-200 shadow-sm py-3 px-4 md:px-6">
+      <nav className="bg-white border-b border-gray-200 shadow-sm py-3 px-4 md:px-6 sticky top-0 z-50">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
@@ -78,16 +78,18 @@ const TryPeriTrack = () => {
         </div>
       </nav>
 
-      <HeroSection />
-      <ProblemSection />
-      <SolutionSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <LunaSection />
-      <SocialProofSection />
-      <PricingSection />
-      <FAQSection />
-      <FinalCTASection />
+      <div className="flex-grow">
+        <HeroSection />
+        <ProblemSection />
+        <SolutionSection />
+        <FeaturesSection />
+        <HowItWorksSection />
+        <LunaSection />
+        <SocialProofSection />
+        <PricingSection />
+        <FAQSection />
+        <FinalCTASection />
+      </div>
       <TrustFooter />
     </div>
   );
