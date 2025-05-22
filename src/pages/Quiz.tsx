@@ -9,10 +9,11 @@ import { quizQuestions } from "@/data/quizQuestions";
 import { calculateResults } from "@/utils/quizUtils";
 import ProgressBar from "@/components/quiz/ProgressBar";
 import { isGtagLoaded } from "@/utils/googleAdsTracking";
+import WelcomeScreen from "@/components/quiz/WelcomeScreen";
 
 const Quiz = () => {
-  // Starting with 1 instead of 0 to skip welcome screen
-  const [currentStep, setCurrentStep] = useState(1);
+  // Starting with 0 to show welcome screen
+  const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -67,6 +68,10 @@ const Quiz = () => {
       [questionId]: answer,
     }));
   };
+
+  const startQuiz = () => {
+    setCurrentStep(1);
+  };
   
   const handleNext = () => {
     const currentQuestion = quizQuestions[currentStep - 1];
@@ -91,7 +96,7 @@ const Quiz = () => {
   };
   
   const handleBack = () => {
-    setCurrentStep((prev) => Math.max(prev - 1, 1)); // Minimum is now 1, not 0
+    setCurrentStep((prev) => Math.max(prev - 1, 0));
   };
   
   const handleSubmit = (firstName: string, email: string) => {
@@ -122,16 +127,18 @@ const Quiz = () => {
   };
   
   // Calculate progress percentage for the progress bar
-  const totalSteps = quizQuestions.length + 1; // questions + email (no welcome)
+  const totalSteps = quizQuestions.length + 1; // questions + email
   const progressPercentage = Math.round((currentStep / totalSteps) * 100);
   
   return (
     <div className="min-h-screen bg-[#FFECD6]/30 py-8 px-4 md:px-8 lg:px-0">
       <div className="max-w-2xl mx-auto">
-        <ProgressBar progress={progressPercentage} />
+        {currentStep > 0 && <ProgressBar progress={progressPercentage} />}
         
         <div className="bg-white rounded-2xl shadow-md p-6 md:p-8 mt-4">
-          {currentStep <= quizQuestions.length ? (
+          {currentStep === 0 ? (
+            <WelcomeScreen onStart={startQuiz} />
+          ) : currentStep <= quizQuestions.length ? (
             <QuizQuestion
               question={quizQuestions[currentStep - 1]}
               answer={answers[quizQuestions[currentStep - 1].id]}
@@ -145,7 +152,7 @@ const Quiz = () => {
           )}
         </div>
         
-        {currentStep <= quizQuestions.length && (
+        {currentStep > 0 && currentStep <= quizQuestions.length && (
           <div className="mt-4 text-center text-sm text-muted-foreground">
             Question {currentStep} of {quizQuestions.length}
           </div>
