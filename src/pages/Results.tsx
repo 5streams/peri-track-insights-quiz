@@ -47,21 +47,6 @@ const Results = () => {
   };
   
   useEffect(() => {
-    // Improved reveal sections function to fix glitching
-    const revealSections = () => {
-      const windowHeight = window.innerHeight;
-      const sections = document.querySelectorAll('.reveal-section');
-      
-      sections.forEach(section => {
-        const sectionTop = (section as HTMLElement).getBoundingClientRect().top;
-        // More generous threshold to prevent glitching
-        if (sectionTop < windowHeight * 0.9) {
-          // Only add the class, never remove it (prevents flickering)
-          section.classList.add('revealed');
-        }
-      });
-    };
-
     // Retrieve results and user info from localStorage
     const storedResults = localStorage.getItem("quizResults");
     const storedUserInfo = localStorage.getItem("userInfo");
@@ -82,45 +67,7 @@ const Results = () => {
       setUserInfo(JSON.parse(storedUserInfo));
     }
 
-    // Add scroll event listener for animations with debounce for better performance
-    let scrollTimeout: number | null = null;
-    const handleScroll = () => {
-      if (scrollTimeout) {
-        window.clearTimeout(scrollTimeout);
-      }
-      scrollTimeout = window.setTimeout(revealSections, 50);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    // Add resize event listener to recalculate positions on window resize
-    window.addEventListener('resize', revealSections);
-    
-    // Trigger once on load with a slight delay to ensure DOM is ready
-    setTimeout(revealSections, 300);
-
-    // Add CSS for reveal animations
-    const style = document.createElement('style');
-    style.innerHTML = `
-      .reveal-section {
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      .reveal-section.revealed {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    `;
-    document.head.appendChild(style);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', revealSections);
-      if (scrollTimeout) {
-        window.clearTimeout(scrollTimeout);
-      }
-      document.head.removeChild(style);
-    };
+    // No longer need to add custom animation logic as we're using the RevealSection component
   }, [navigate]);
   
   if (!results) {

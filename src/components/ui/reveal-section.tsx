@@ -18,9 +18,11 @@ const RevealSection: React.FC<RevealSectionProps> = ({
     const section = sectionRef.current;
     if (!section) return;
     
+    // Create a more reliable intersection observer
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        // Only add the revealed class if not already revealed
+        if (entry.isIntersecting && !section.classList.contains('revealed')) {
           // Apply delay if specified
           if (delay) {
             setTimeout(() => {
@@ -29,13 +31,13 @@ const RevealSection: React.FC<RevealSectionProps> = ({
           } else {
             section.classList.add('revealed');
           }
-          // Once revealed, stop observing
+          // Once revealed, stop observing to prevent potential glitches
           observer.unobserve(section);
         }
       },
       { 
         threshold: 0.1,
-        rootMargin: "0px 0px -100px 0px" // Trigger animation before element fully enters viewport
+        rootMargin: "0px 0px -50px 0px" // Trigger earlier for smoother experience
       }
     );
     
@@ -52,6 +54,12 @@ const RevealSection: React.FC<RevealSectionProps> = ({
     <div 
       ref={sectionRef} 
       className={`reveal-section ${className}`}
+      style={{
+        // Apply these styles directly to ensure they take precedence
+        opacity: 0,
+        transform: 'translateY(15px)',
+        transition: 'opacity 0.6s ease-out, transform 0.6s ease-out'
+      }}
     >
       {children}
     </div>
