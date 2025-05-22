@@ -17,7 +17,8 @@ import {
   saveLead,
   Lead,
   UserActivity,
-  getUserCentricActivity
+  getUserCentricActivity,
+  deleteUser
 } from "@/utils/leadTracking";
 import { RefreshCw, FileText, Plus, Trash2, Eye } from "lucide-react";
 
@@ -29,6 +30,7 @@ const AdminLeadList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
+  const [deletingUsers, setDeletingUsers] = useState<{[key: string]: boolean}>({});
   const { toast } = useToast();
   
   // State for the detail modal
@@ -138,6 +140,42 @@ const AdminLeadList = () => {
     }
   };
   
+  const handleDeleteUser = async (userId: string, userName: string, userEmail: string) => {
+    const displayName = userName || userEmail;
+    
+    if (window.confirm(`Are you sure you want to delete ${displayName} and all their data? This action cannot be undone.`)) {
+      setDeletingUsers(prev => ({ ...prev, [userId]: true }));
+      
+      try {
+        const success = await deleteUser(userId);
+        
+        if (success) {
+          toast({
+            title: "User Deleted",
+            description: `${displayName} and all associated data have been deleted.`,
+          });
+          // Refresh the list after deletion
+          await loadUserActivities();
+        } else {
+          toast({
+            title: "Error",
+            description: "Failed to delete the user. Please try again.",
+            variant: "destructive"
+          });
+        }
+      } catch (error) {
+        console.error("Error deleting user:", error);
+        toast({
+          title: "Error",
+          description: (error as Error).message || "Failed to delete the user.",
+          variant: "destructive"
+        });
+      } finally {
+        setDeletingUsers(prev => ({ ...prev, [userId]: false }));
+      }
+    }
+  };
+
   const handleClearLeads = async () => {
     // This function needs to be re-evaluated. Clearing by user_id might be an option
     // but a global clear is very dangerous via client-side and not directly supported by current leadTracking utils.
@@ -235,9 +273,20 @@ const AdminLeadList = () => {
                   <TableCell>{activity.leads_data?.length || 0}</TableCell>
                   <TableCell>{activity.latest_lead_timestamp ? new Date(activity.latest_lead_timestamp).toLocaleDateString() : 'N/A'}</TableCell>
                   <TableCell>
-                    <Button variant="outline" size="sm" onClick={() => handleViewDetails(activity)}>
-                      <Eye className="h-4 w-4 mr-1" /> View Details
-                    </Button>
+                    <div className="flex items-center gap-2">
+                      <Button variant="outline" size="sm" onClick={() => handleViewDetails(activity)}>
+                        <Eye className="h-4 w-4 mr-1" /> View
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="text-red-500 hover:text-red-700 hover:bg-red-50 border-red-200"
+                        onClick={() => handleDeleteUser(activity.user_id, activity.user_name || '', activity.user_email)}
+                        disabled={deletingUsers[activity.user_id]}
+                      >
+                        <Trash2 className="h-4 w-4 mr-1" /> Delete
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
@@ -261,6 +310,7 @@ const AdminLeadList = () => {
           isOpen={isDetailModalOpen} 
           onClose={() => setIsDetailModalOpen(false)} 
           userActivity={selectedUserActivity} 
+          onUserDataChanged={loadUserActivities}
         />
       )}
     </Card>

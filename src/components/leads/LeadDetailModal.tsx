@@ -7,19 +7,25 @@ import {
   DialogDescription,
   DialogClose
 } from "@/components/ui/dialog";
-import { UserActivity, Lead, QuizSubmission, QuizAnswer, getQuizAnswersForUser } from '@/utils/leadTracking';
+import { UserActivity, Lead, QuizSubmission, QuizAnswer, getQuizAnswersForUser, deleteLead } from '@/utils/leadTracking';
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+import { Trash2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface LeadDetailModalProps {
   isOpen: boolean;
   onClose: () => void;
   userActivity: UserActivity | null;
+  onUserDataChanged?: () => void;
 }
 
-const LeadDetailModal: React.FC<LeadDetailModalProps> = ({ isOpen, onClose, userActivity }) => {
+const LeadDetailModal: React.FC<LeadDetailModalProps> = ({ isOpen, onClose, userActivity, onUserDataChanged }) => {
   const [quizAnswers, setQuizAnswers] = useState<QuizAnswer[]>([]);
   const [isLoadingAnswers, setIsLoadingAnswers] = useState(false);
+  const [isDeleting, setIsDeleting] = useState<{[key: string]: boolean}>({});
+  const { toast } = useToast();
 
   useEffect(() => {
     if (isOpen && userActivity?.user_id) {
@@ -32,6 +38,42 @@ const LeadDetailModal: React.FC<LeadDetailModalProps> = ({ isOpen, onClose, user
   }, [isOpen, userActivity]);
 
   if (!userActivity) return null;
+
+  const handleDeleteLead = async (leadId: string) => {
+    if (window.confirm("Are you sure you want to delete this lead? This action cannot be undone.")) {
+      setIsDeleting(prev => ({ ...prev, [leadId]: true }));
+      
+      try {
+        const success = await deleteLead(leadId);
+        if (success) {
+          toast({
+            title: "Lead Deleted",
+            description: "The lead has been successfully deleted.",
+          });
+          
+          // Refresh user data after deletion
+          if (onUserDataChanged) {
+            onUserDataChanged();
+          }
+        } else {
+          toast({
+            title: "Error",
+            description: "Failed to delete the lead. Please try again.",
+            variant: "destructive"
+          });
+        }
+      } catch (error) {
+        console.error("Error deleting lead:", error);
+        toast({
+          title: "Error",
+          description: (error as Error).message || "Failed to delete the lead.",
+          variant: "destructive"
+        });
+      } finally {
+        setIsDeleting(prev => ({ ...prev, [leadId]: false }));
+      }
+    }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -64,7 +106,18 @@ const LeadDetailModal: React.FC<LeadDetailModalProps> = ({ isOpen, onClose, user
                     <div key={lead.id} className="p-3 border rounded-md bg-slate-50 text-sm">
                       <div className="flex justify-between items-center mb-1">
                         <p className="font-semibold text-gray-800">Source: <Badge variant={lead.source === 'quiz_results' ? 'default' : 'secondary'}>{lead.source}</Badge></p>
-                        <p className="text-xs text-gray-500">{new Date(lead.created_at!).toLocaleString()}</p>
+                        <div className="flex items-center gap-2">
+                          <p className="text-xs text-gray-500">{new Date(lead.created_at!).toLocaleString()}</p>
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            className="text-red-500 hover:text-red-700 hover:bg-red-50 p-1 h-auto"
+                            onClick={() => handleDeleteLead(lead.id)}
+                            disabled={isDeleting[lead.id]}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
                       </div>
                       <p><strong>Plan:</strong> {lead.pricing_tier || "N/A"}</p>
                       <p><strong>Status:</strong> {lead.status}</p>
