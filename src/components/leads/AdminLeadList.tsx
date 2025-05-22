@@ -17,23 +17,9 @@ import {
   saveLead,
   Lead,
   UserActivity,
-  getUserCentricActivity,
-  deleteUserAndAllData
+  getUserCentricActivity
 } from "@/utils/leadTracking";
 import { RefreshCw, FileText, Plus, Trash2, Eye } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { 
-  AlertDialog, 
-  AlertDialogAction, 
-  AlertDialogCancel, 
-  AlertDialogContent, 
-  AlertDialogDescription, 
-  AlertDialogFooter, 
-  AlertDialogHeader, 
-  AlertDialogTitle, 
-  AlertDialogTrigger 
-} from "@/components/ui/alert-dialog";
 
 // Placeholder for the new modal - create this file later
 import LeadDetailModal from './LeadDetailModal'; 
@@ -165,33 +151,6 @@ const AdminLeadList = () => {
     setIsDetailModalOpen(true);
   };
 
-  const handleDeleteUser = async (userId: string, userName: string) => {
-    try {
-      const result = await deleteUserAndAllData(userId);
-      if (result.success) {
-        toast({
-          title: "User Deleted",
-          description: `User ${userName} and all their data have been successfully deleted.`,
-        });
-        loadUserActivities(); // Refresh the list
-      } else {
-        console.error("Error deleting user:", result.error);
-        toast({
-          title: "Error",
-          description: "Failed to delete user. Check console for details.",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      console.error("Error in handleDeleteUser:", error);
-      toast({
-        title: "Error",
-        description: "An unexpected error occurred while deleting the user.",
-        variant: "destructive",
-      });
-    }
-  };
-
   // Helper to extract plan types from leads_data
   const getPlanTypes = (leads: Lead[] | null): string => {
     if (!leads || leads.length === 0) return "N/A";
@@ -275,31 +234,10 @@ const AdminLeadList = () => {
                   <TableCell>{getPlanTypes(activity.leads_data)}</TableCell>
                   <TableCell>{activity.leads_data?.length || 0}</TableCell>
                   <TableCell>{activity.latest_lead_timestamp ? new Date(activity.latest_lead_timestamp).toLocaleDateString() : 'N/A'}</TableCell>
-                  <TableCell className="text-right">
-                    <Button variant="outline" size="sm" onClick={() => handleViewDetails(activity)} className="mr-2">
+                  <TableCell>
+                    <Button variant="outline" size="sm" onClick={() => handleViewDetails(activity)}>
                       <Eye className="h-4 w-4 mr-1" /> View Details
                     </Button>
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button variant="destructive" size="sm">
-                          Delete User
-                        </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            This action cannot be undone. This will permanently delete the user "{activity.user_name || activity.user_email}" and all of their associated data, including leads, quiz submissions, and quiz answers.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction onClick={() => handleDeleteUser(activity.user_id, activity.user_name || activity.user_email)} className="bg-red-600 hover:bg-red-700">
-                            Yes, Delete User
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
                   </TableCell>
                 </TableRow>
               ))}

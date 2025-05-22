@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,19 +5,19 @@ import { ArrowLeft } from "lucide-react";
 import LoadingSpinner from "@/components/results/LoadingSpinner";
 import { calculateHormoneScores } from "@/utils/scoreCalculation";
 
-// Import our components for the redesigned results page
+// Import our components for the results page
 import ResultsHeader from "@/components/results/ResultsHeader";
-import TrialOfferHero from "@/components/results/TrialOfferHero";
-import CondensedSocialProof from "@/components/results/CondensedSocialProof";
-import RiskReversal from "@/components/results/RiskReversal";
-import FinalCTASection from "@/components/results/FinalCTASection";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
-import LunaAIDeepDive from "@/components/results/LunaAIDeepDive";
-import AppFeaturesShowcase from "@/components/results/AppFeaturesShowcase";
-import ResultsProof from "@/components/results/ResultsProof";
+import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
+import EmotionalSupport from "@/components/results/EmotionalSupport";
+import SubscriptionOptions from "@/components/results/SubscriptionOptions";
+import PeritrackIntro from "@/components/results/PeritrackIntro";
+import LunaAIFeature from "@/components/results/LunaAIFeature";
+import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
+import TransformationJourney from "@/components/results/TransformationJourney";
 import SimplePricingSection from "@/components/results/SimplePricingSection";
-import WarningTimeline from "@/components/results/WarningTimeline";
+import Guarantee from "@/components/results/Guarantee";
 
 interface QuizResults {
   score: number;
@@ -38,7 +37,6 @@ const Results = () => {
     primaryHormone: "estrogen",
     primarySymptoms: [] as string[]
   });
-  const [spotNumber] = useState(Math.floor(Math.random() * 50) + 140); // Random number between 140-190
   const navigate = useNavigate();
   
   // Get score category
@@ -120,7 +118,7 @@ const Results = () => {
     >
       <div className="w-full max-w-4xl mx-auto">
         <div className="results-container">
-          {/* SECTION 1: Assessment Results */}
+          {/* Results Header with Score and User Name */}
           <ResultsHeader 
             score={hormoneScores.overall} 
             firstName={capitalizedFirstName} 
@@ -128,55 +126,49 @@ const Results = () => {
             onStartTrial={handleTrialCTA}
           />
           
-          {/* Display hormone insights immediately after header */}
-          <HormoneInsights 
-            scores={hormoneScores}
-            scoreCategory={scoreCategory}
-          />
-          
-          {/* SECTION 2: The Problem - What Happens Without Proper Care */}
+          {/* Personalized Assessment */}
           <PersonalizedAssessment
             scoreCategory={scoreCategory}
             firstName={capitalizedFirstName}
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Add the Warning Timeline component */}
-          <WarningTimeline />
+          {/* Perimenopause Explanation */}
+          <PerimenopauseExplanation scoreCategory={scoreCategory} />
           
-          {/* SECTION 3 & 4: The Solution - Introducing Peritrack with Features */}
-          <AppFeaturesShowcase />
-          
-          {/* SECTION 5: Luna Deep Dive */}
-          <LunaAIDeepDive 
+          {/* Hormone Insights */}
+          <HormoneInsights 
+            scores={hormoneScores}
             scoreCategory={scoreCategory}
-            primaryHormone={hormoneScores.primaryHormone}
           />
           
-          {/* SECTION 6: Transformation Stories (using ResultsProof) */}
-          <ResultsProof scoreCategory={scoreCategory} />
+          {/* Emotional Support */}
+          <EmotionalSupport
+            scoreCategory={scoreCategory}
+            primarySymptoms={hormoneScores.primarySymptoms}
+          />
           
-          {/* Additional social proof */}
-          <CondensedSocialProof scoreCategory={scoreCategory} />
+          {/* Emotion-Hormone Connection - New transitional component */}
+          <EmotionHormoneConnection />
           
-          {/* SECTION 7: Pricing & Free Trial Offer */}
-          <SimplePricingSection onStartTrial={handleTrialCTA} />
+          {/* Transformation Journey - Another new transitional component */}
+          <TransformationJourney />
           
-          {/* Risk Reversal - supports the trial offer */}
-          <RiskReversal />
-          
-          {/* SECTION 8: Final CTA */}
-          <FinalCTASection 
-            spotNumber={spotNumber}
+          {/* SWAPPED COMPONENTS - PeritrackIntro before LunaAIFeature */}
+          {/* Peritrack Intro - Main call to action */}
+          <PeritrackIntro
             onStartTrial={handleTrialCTA}
-          />
-          
-          {/* Trial Offer Hero - moved to bottom as a floating "reminder" */}
-          <TrialOfferHero
             firstName={capitalizedFirstName}
-            scoreCategory={scoreCategory}
-            onStartTrial={handleTrialCTA}
           />
+          
+          {/* Luna AI Feature with smoother transition */}
+          <LunaAIFeature onStartTrial={handleTrialCTA} />
+          
+          {/* Our Guarantee Section */}
+          <Guarantee />
+          
+          {/* Simple Pricing Section at the very bottom */}
+          <SimplePricingSection onStartTrial={handleTrialCTA} />
         </div>
       </div>
     </div>
