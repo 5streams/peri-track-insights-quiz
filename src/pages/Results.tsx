@@ -18,6 +18,7 @@ import LunaAIDeepDive from "@/components/results/LunaAIDeepDive";
 import AppFeaturesShowcase from "@/components/results/AppFeaturesShowcase";
 import ResultsProof from "@/components/results/ResultsProof";
 import SimplePricingSection from "@/components/results/SimplePricingSection";
+import WarningTimeline from "@/components/results/WarningTimeline";
 
 interface QuizResults {
   score: number;
@@ -119,7 +120,7 @@ const Results = () => {
     >
       <div className="w-full max-w-4xl mx-auto">
         <div className="results-container">
-          {/* 1. Results Header with Score and User Name */}
+          {/* SECTION 1: Assessment Results */}
           <ResultsHeader 
             score={hormoneScores.overall} 
             firstName={capitalizedFirstName} 
@@ -127,50 +128,53 @@ const Results = () => {
             onStartTrial={handleTrialCTA}
           />
           
-          {/* 2. MOVED UP: Hormone Insights (simplified) */}
+          {/* Display hormone insights immediately after header */}
           <HormoneInsights 
             scores={hormoneScores}
             scoreCategory={scoreCategory}
           />
           
-          {/* 3. IMMEDIATE TRIAL OFFER (new prominent section) */}
-          <TrialOfferHero
-            firstName={capitalizedFirstName}
-            scoreCategory={scoreCategory}
-            onStartTrial={handleTrialCTA}
-          />
-          
-          {/* 4. Brief symptom validation (condensed) */}
+          {/* SECTION 2: The Problem - What Happens Without Proper Care */}
           <PersonalizedAssessment
             scoreCategory={scoreCategory}
             firstName={capitalizedFirstName}
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* 5. Add Pricing Plans Section */}
-          <SimplePricingSection onStartTrial={handleTrialCTA} />
+          {/* Add the Warning Timeline component */}
+          <WarningTimeline />
           
-          {/* 6. App Features Showcase - MOVED ABOVE Luna AI */}
+          {/* SECTION 3 & 4: The Solution - Introducing Peritrack with Features */}
           <AppFeaturesShowcase />
           
-          {/* 7. Luna AI Deep Dive - MOVED DOWN */}
+          {/* SECTION 5: Luna Deep Dive */}
           <LunaAIDeepDive 
             scoreCategory={scoreCategory}
             primaryHormone={hormoneScores.primaryHormone}
           />
           
-          {/* 8. Results Proof & Social Proof */}
+          {/* SECTION 6: Transformation Stories (using ResultsProof) */}
           <ResultsProof scoreCategory={scoreCategory} />
           
-          {/* 9. Condensed Social Proof with testimonial */}
+          {/* Additional social proof */}
           <CondensedSocialProof scoreCategory={scoreCategory} />
           
-          {/* 10. Risk Reversal */}
+          {/* SECTION 7: Pricing & Free Trial Offer */}
+          <SimplePricingSection onStartTrial={handleTrialCTA} />
+          
+          {/* Risk Reversal - supports the trial offer */}
           <RiskReversal />
           
-          {/* 11. Final CTA (repeat offer) */}
+          {/* SECTION 8: Final CTA */}
           <FinalCTASection 
             spotNumber={spotNumber}
+            onStartTrial={handleTrialCTA}
+          />
+          
+          {/* Trial Offer Hero - moved to bottom as a floating "reminder" */}
+          <TrialOfferHero
+            firstName={capitalizedFirstName}
+            scoreCategory={scoreCategory}
             onStartTrial={handleTrialCTA}
           />
         </div>
