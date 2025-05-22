@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import WelcomeScreen from "../components/quiz/WelcomeScreen";
@@ -6,6 +7,11 @@ const Index = () => {
   const handleStartQuiz = () => {
     // Navigate to the quiz page
     window.location.href = "/quiz";
+  };
+
+  const handleLearnMore = () => {
+    // Navigate to the Peritrack info page
+    window.location.href = "/tryperitracker";
   };
 
   return (
@@ -18,7 +24,7 @@ const Index = () => {
           <nav>
             <ul className="flex space-x-6">
               <li><Link to="/quiz" className="text-[#6b4e82] hover:text-[#8a6eaa] font-medium">Quiz</Link></li>
-              <li><Link to="/tryperitracker" className="text-[#6b4e82] hover:text-[#8a6eaa] font-medium">Try Peritrack</Link></li>
+              <li><Link to="/tryperitracker" className="text-[#6b4e82] hover:text-[#8a6eaa] font-medium bg-purple-100/30 px-3 py-1 rounded-md">Try Peritrack</Link></li>
             </ul>
           </nav>
         </header>
@@ -26,13 +32,17 @@ const Index = () => {
         <main className="mt-16">
           <WelcomeScreen onStart={handleStartQuiz} />
           
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 space-y-6">
             <Link 
               to="/tryperitracker" 
               className="inline-block bg-[#a68bc7] hover:bg-[#8a6eaa] text-white px-8 py-4 text-lg rounded-md shadow-md transition-colors"
             >
               Learn More About Peritrack
             </Link>
+            
+            <p className="text-[#6b4e82] max-w-md mx-auto">
+              Visit our sales page to learn about the full features of Peritrack and how it can help with your perimenopause journey.
+            </p>
           </div>
         </main>
       </div>
