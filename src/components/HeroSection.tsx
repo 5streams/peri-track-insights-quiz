@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import CTAButton from './CTAButton';
 import TrialSignupModal from './TrialSignupModal';
@@ -15,7 +14,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="hero-section bg-hero-gradient py-6 lg:py-8 min-h-[60vh] flex items-center">
+    <section className="hero-section bg-hero-gradient py-12 lg:py-16 min-h-[70vh] flex items-center">
       <div className="container mx-auto px-4 lg:px-6">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="hero-content fade-in-up">

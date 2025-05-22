@@ -1,6 +1,4 @@
-
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
 import ProblemSection from '../components/ProblemSection';
 import SolutionSection from '../components/SolutionSection';
@@ -54,42 +52,17 @@ const TryPeriTrack = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Navigation Bar with Logo */}
-      <nav className="bg-white border-b border-gray-200 shadow-sm py-3 px-4 md:px-6 sticky top-0 z-50">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center">
-              <img src="/images/logo.png" alt="Peritrack Logo" className="h-12 w-auto" />
-              <span className="ml-3 text-xl font-semibold text-primary hidden md:block">PeriTrack</span>
-            </Link>
-          </div>
-          <div className="flex items-center space-x-4">
-            <Link to="/" className="text-primary text-sm md:text-base font-medium hover:text-secondary transition-colors">
-              Home
-            </Link>
-            <Link to="/quiz" className="text-primary text-sm md:text-base font-medium hover:text-secondary transition-colors">
-              Assessment Quiz
-            </Link>
-            <Link to="/tryperitracker" className="bg-primary text-white text-sm md:text-base px-4 py-2 rounded-md font-medium hover:bg-primary/90 transition-colors">
-              Try Free
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      <div className="flex-grow">
-        <HeroSection />
-        <ProblemSection />
-        <SolutionSection />
-        <FeaturesSection />
-        <HowItWorksSection />
-        <LunaSection />
-        <SocialProofSection />
-        <PricingSection />
-        <FAQSection />
-        <FinalCTASection />
-      </div>
+    <div className="min-h-screen">
+      <HeroSection />
+      <ProblemSection />
+      <SolutionSection />
+      <FeaturesSection />
+      <HowItWorksSection />
+      <LunaSection />
+      <SocialProofSection />
+      <PricingSection />
+      <FAQSection />
+      <FinalCTASection />
       <TrustFooter />
     </div>
   );
