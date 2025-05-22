@@ -126,34 +126,34 @@ const Results = () => {
             onStartTrial={handleTrialCTA}
           />
           
-          {/* 2. IMMEDIATE TRIAL OFFER (new prominent section) */}
+          {/* 2. MOVED UP: Hormone Insights (simplified) */}
+          <HormoneInsights 
+            scores={hormoneScores}
+            scoreCategory={scoreCategory}
+          />
+          
+          {/* 3. IMMEDIATE TRIAL OFFER (new prominent section) */}
           <TrialOfferHero
             firstName={capitalizedFirstName}
             scoreCategory={scoreCategory}
             onStartTrial={handleTrialCTA}
           />
           
-          {/* 3. Brief symptom validation (condensed) */}
+          {/* 4. Brief symptom validation (condensed) */}
           <PersonalizedAssessment
             scoreCategory={scoreCategory}
             firstName={capitalizedFirstName}
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* 4. Luna AI Deep Dive */}
+          {/* 5. Luna AI Deep Dive */}
           <LunaAIDeepDive 
             scoreCategory={scoreCategory}
             primaryHormone={hormoneScores.primaryHormone}
           />
           
-          {/* 5. App Features Showcase */}
+          {/* 6. App Features Showcase */}
           <AppFeaturesShowcase />
-          
-          {/* 6. Hormone Insights (simplified) */}
-          <HormoneInsights 
-            scores={hormoneScores}
-            scoreCategory={scoreCategory}
-          />
           
           {/* 7. Results Proof & Social Proof */}
           <ResultsProof scoreCategory={scoreCategory} />
