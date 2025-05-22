@@ -15,7 +15,6 @@ import SubscriptionOptions from "@/components/results/SubscriptionOptions";
 import PeritrackIntro from "@/components/results/PeritrackIntro";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
 import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
-import TransformationJourney from "@/components/results/TransformationJourney";
 import SimplePricingSection from "@/components/results/SimplePricingSection";
 import Guarantee from "@/components/results/Guarantee";
 import RiskReversal from "@/components/results/RiskReversal";
@@ -149,9 +148,6 @@ const Results = () => {
           
           {/* Emotion-Hormone Connection - New transitional component */}
           <EmotionHormoneConnection />
-          
-          {/* Transformation Journey - Another new transitional component */}
-          <TransformationJourney />
           
           {/* SWAPPED COMPONENTS - PeritrackIntro before LunaAIFeature */}
           {/* Peritrack Intro - Main call to action */}
