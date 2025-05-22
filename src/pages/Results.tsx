@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -9,13 +10,13 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
-import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
 import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
 import PeritrackIntro from "@/components/results/PeritrackIntro";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
 // Removed EmotionHormoneConnection import
 // Removed TransformationJourney import
+// Removed PerimenopauseExplanation import
 import SimplePricingSection from "@/components/results/SimplePricingSection";
 import Guarantee from "@/components/results/Guarantee";
 import RiskReversal from "@/components/results/RiskReversal";
@@ -173,8 +174,7 @@ const Results = () => {
           {/* Simple Pricing Section */}
           <SimplePricingSection onStartTrial={handleTrialCTA} />
           
-          {/* Moved Perimenopause Explanation to the very bottom of the page */}
-          <PerimenopauseExplanation scoreCategory={scoreCategory} />
+          {/* Removed Perimenopause Explanation section completely */}
         </div>
       </div>
     </div>
