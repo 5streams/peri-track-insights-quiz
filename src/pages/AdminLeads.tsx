@@ -12,43 +12,57 @@ const AdminLeads = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [pageError, setPageError] = useState<string | null>(null);
   const [authAttempted, setAuthAttempted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
   
-  // Add no-cache meta tags to ensure fresh data
+  // Add error boundary to catch and display rendering errors
   useEffect(() => {
-    // Add meta tags to prevent caching
-    const metaTags = [
-      { name: "Cache-Control", content: "no-cache, no-store, must-revalidate" },
-      { name: "Pragma", content: "no-cache" },
-      { name: "Expires", content: "0" }
-    ];
+    console.log("AdminLeads: Component mounted");
     
-    // Add each meta tag to the head
-    metaTags.forEach(tagData => {
-      const existingTag = document.querySelector(`meta[name="${tagData.name}"]`);
-      if (existingTag) {
-        existingTag.setAttribute("content", tagData.content);
-      } else {
-        const metaTag = document.createElement("meta");
-        metaTag.setAttribute("name", tagData.name);
-        metaTag.setAttribute("content", tagData.content);
-        document.head.appendChild(metaTag);
-      }
-    });
-    
-    // Clean up function to remove meta tags
-    return () => {
+    try {
+      // Add no-cache meta tags to ensure fresh data
+      const metaTags = [
+        { name: "Cache-Control", content: "no-cache, no-store, must-revalidate" },
+        { name: "Pragma", content: "no-cache" },
+        { name: "Expires", content: "0" }
+      ];
+      
+      // Add each meta tag to the head
       metaTags.forEach(tagData => {
-        const tag = document.querySelector(`meta[name="${tagData.name}"]`);
-        if (tag && tag.parentNode) {
-          document.head.removeChild(tag);
+        const existingTag = document.querySelector(`meta[name="${tagData.name}"]`);
+        if (existingTag) {
+          existingTag.setAttribute("content", tagData.content);
+        } else {
+          const metaTag = document.createElement("meta");
+          metaTag.setAttribute("name", tagData.name);
+          metaTag.setAttribute("content", tagData.content);
+          document.head.appendChild(metaTag);
         }
       });
-    };
+      
+      // Clean up function to remove meta tags
+      return () => {
+        console.log("AdminLeads: Cleaning up meta tags");
+        try {
+          metaTags.forEach(tagData => {
+            const tag = document.querySelector(`meta[name="${tagData.name}"]`);
+            if (tag && tag.parentNode) {
+              document.head.removeChild(tag);
+            }
+          });
+        } catch (cleanupError) {
+          console.error("AdminLeads: Error during meta tag cleanup", cleanupError);
+        }
+      };
+    } catch (metaError) {
+      console.error("AdminLeads: Error setting meta tags", metaError);
+      setPageError("Error initializing page metadata");
+    }
   }, []);
 
-  // Check if there is a stored admin session in sessionStorage
+  // Check authentication with better error handling
   useEffect(() => {
     console.log("AdminLeads: Checking authentication");
     
@@ -64,7 +78,10 @@ const AdminLeads = () => {
         console.log("AdminLeads: No admin session found, user needs to log in");
       }
     } catch (error) {
-      console.error("AdminLeads: Error during initialization", error);
+      console.error("AdminLeads: Error during authentication check", error);
+      setPageError("Error checking authentication status");
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -110,15 +127,25 @@ const AdminLeads = () => {
   // Handle logout - clear session
   const handleLogout = () => {
     console.log("AdminLeads: Logging out");
-    sessionStorage.removeItem("admin_authenticated");
-    setIsAuthenticated(false);
-    setPassword("");
-    setError("");
     
-    toast({
-      title: "Logged Out",
-      description: "You have been successfully logged out."
-    });
+    try {
+      sessionStorage.removeItem("admin_authenticated");
+      setIsAuthenticated(false);
+      setPassword("");
+      setError("");
+      
+      toast({
+        title: "Logged Out",
+        description: "You have been successfully logged out."
+      });
+    } catch (error) {
+      console.error("AdminLeads: Error during logout", error);
+      toast({
+        title: "Logout Error",
+        description: "There was a problem logging out.",
+        variant: "destructive"
+      });
+    }
   };
 
   // Force page reload with cache busting
@@ -126,6 +153,41 @@ const AdminLeads = () => {
     const cacheBuster = `?cache=${Date.now()}`;
     window.location.href = window.location.pathname + cacheBuster;
   };
+
+  // Display loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#f4edfd] flex items-center justify-center">
+        <div className="bg-white p-8 rounded-lg shadow-md text-center">
+          <h2 className="text-xl font-semibold text-[#6b4e82] mb-4">Loading Admin Dashboard...</h2>
+          <div className="animate-spin w-8 h-8 border-4 border-[#6b4e82] border-t-transparent rounded-full mx-auto"></div>
+        </div>
+      </div>
+    );
+  }
+  
+  // Display any page errors
+  if (pageError) {
+    return (
+      <div className="min-h-screen bg-[#f4edfd] flex items-center justify-center p-4">
+        <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+          <h2 className="text-xl font-semibold text-red-600 mb-4">Dashboard Error</h2>
+          <p className="mb-4 text-gray-700">{pageError}</p>
+          <p className="mb-6 text-sm text-gray-500">
+            Try refreshing the page or clearing your browser cache.
+          </p>
+          <Button onClick={forceRefresh} className="w-full bg-[#6b4e82]">
+            <RefreshCw className="h-4 w-4 mr-2" /> Refresh Page
+          </Button>
+          <div className="mt-4 text-center">
+            <Link to="/" className="text-[#6b4e82] hover:underline text-sm">
+              <ArrowLeft className="h-4 w-4 inline mr-1" /> Return to Home
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
@@ -181,6 +243,7 @@ const AdminLeads = () => {
     );
   }
   
+  // If we reach here, we're authenticated and should show the dashboard
   return (
     <div className="min-h-screen bg-[#f4edfd] py-8 px-4 md:px-8 lg:px-0">
       <div className="max-w-6xl mx-auto">
@@ -220,7 +283,17 @@ const AdminLeads = () => {
           </div>
         </div>
         
-        <LeadList />
+        {/* Wrap the LeadList component in an error boundary */}
+        <div className="dashboard-content">
+          <React.Suspense fallback={
+            <div className="p-8 bg-white rounded-lg shadow text-center">
+              <div className="animate-spin w-8 h-8 border-4 border-[#6b4e82] border-t-transparent rounded-full mx-auto mb-4"></div>
+              <p className="text-[#6b4e82]">Loading leads...</p>
+            </div>
+          }>
+            <LeadList />
+          </React.Suspense>
+        </div>
         
         <div className="mt-6 text-sm text-[#a68bc7] text-center">
           <p>Experiencing issues? Try using the Debug button or creating a test lead.</p>
