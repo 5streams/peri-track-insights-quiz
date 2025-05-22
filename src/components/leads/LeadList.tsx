@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -84,35 +85,48 @@ const LeadList: React.FC = () => {
       setIsLoading(false);
     }
   };
-  
-  // Check for updates from other components
+
+  // Listen for custom events from other browser windows/tabs
   useEffect(() => {
-    const checkForUpdates = () => {
-      const updated = localStorage.getItem("leads_updated");
-      if (updated) {
-        console.log("LeadList: Detected leads update, reloading");
+    // Listen for lead updates from other sources
+    const handleLeadsUpdated = (event: any) => {
+      console.log("LeadList: Received leadsUpdated event", event.detail);
+      if (event.detail) {
+        setLeads(event.detail);
+      } else {
+        loadLeads(); // Fallback to loading if no detail provided
+      }
+      setLastRefresh(new Date());
+    };
+
+    // Listen for storage events from other tabs/windows
+    const handleStorageEvent = (event: StorageEvent) => {
+      console.log("LeadList: Storage event received", event);
+      if (event.key === 'peritrack_leads' || event.key === 'leads_updated') {
+        console.log("LeadList: Leads updated in another tab, reloading");
         loadLeads();
-        localStorage.removeItem("leads_updated"); // Clear the flag
       }
     };
+
+    // Setup event listeners
+    window.addEventListener('leadsUpdated', handleLeadsUpdated as EventListener);
+    window.addEventListener('storage', handleStorageEvent);
+
+    // Setup polling interval as a fallback
+    const interval = setInterval(() => {
+      console.log("LeadList: Polling for lead updates");
+      loadLeads();
+    }, 10000); // Check every 10 seconds
     
-    // Set up interval to check for updates
-    const updateInterval = setInterval(checkForUpdates, 1000);
-    return () => clearInterval(updateInterval);
-  }, []);
-  
-  useEffect(() => {
-    // Initialize storage and load leads on component mount
-    console.log("LeadList: Component mounted, loading leads");
+    // Initial load
     loadLeads();
     
-    // Set up an interval to automatically refresh leads
-    const interval = setInterval(() => {
-      console.log("LeadList: Auto refreshing leads");
-      loadLeads();
-    }, 10000); // Check for new leads every 10 seconds
-    
-    return () => clearInterval(interval);
+    // Cleanup event listeners
+    return () => {
+      window.removeEventListener('leadsUpdated', handleLeadsUpdated as EventListener);
+      window.removeEventListener('storage', handleStorageEvent);
+      clearInterval(interval);
+    };
   }, []);
   
   // Format pricing plan for display
@@ -277,10 +291,10 @@ const LeadList: React.FC = () => {
   return (
     <Card className="bg-white shadow-sm border">
       <CardHeader className="bg-[#FFECD6]/30 pb-4">
-        <CardTitle className="font-playfair text-xl text-[#5D4154] flex items-center justify-between">
+        <CardTitle className="font-playfair text-xl text-[#6b4e82] flex items-center justify-between">
           <span>Lead Management Dashboard</span>
           <div className="flex items-center gap-2">
-            <span className="text-sm font-normal bg-[#5D4154] text-white px-3 py-1 rounded-full">
+            <span className="text-sm font-normal bg-[#6b4e82] text-white px-3 py-1 rounded-full">
               {leads.length} Total Leads
             </span>
             <span className="text-xs text-gray-500">
@@ -319,7 +333,7 @@ const LeadList: React.FC = () => {
           <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-2 items-end">
             <Button 
               onClick={exportLeads}
-              className="w-full sm:w-auto bg-[#5D4154] hover:bg-[#5D4154]/90 text-white"
+              className="w-full sm:w-auto bg-[#6b4e82] hover:bg-[#8a6eaa] text-white"
               disabled={leads.length === 0}
             >
               Export to CSV
@@ -363,7 +377,7 @@ const LeadList: React.FC = () => {
         
         {leads.length > 0 ? (
           <Table>
-            <TableCaption>Showing {leads.length} leads</TableCaption>
+            <TableCaption>Showing {filteredLeads.length} leads</TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[150px]">Name</TableHead>
@@ -374,7 +388,7 @@ const LeadList: React.FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {leads.map((lead) => (
+              {filteredLeads.map((lead) => (
                 <TableRow key={lead.id}>
                   <TableCell className="font-medium">{lead.firstName}</TableCell>
                   <TableCell>{lead.email}</TableCell>

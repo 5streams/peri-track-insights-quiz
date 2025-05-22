@@ -58,6 +58,8 @@ export const initializeLeadStorage = (): void => {
         console.log(`initializeLeadStorage: Found existing lead storage with ${parsed.length} leads`);
         // Force the correct json format
         localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(parsed));
+        // Broadcast that leads are available
+        window.dispatchEvent(new CustomEvent('leadsAvailable', { detail: parsed }));
       }
     } catch (error) {
       console.error("initializeLeadStorage: Error parsing leads, recreating", error);
@@ -149,6 +151,13 @@ export const saveLead = (
     // Save to localStorage
     const dataToSave = JSON.stringify(updatedLeads);
     localStorage.setItem(LEADS_STORAGE_KEY, dataToSave);
+    
+    // Dispatch a storage event for other tabs to detect
+    try {
+      window.dispatchEvent(new CustomEvent('leadsUpdated', { detail: updatedLeads }));
+    } catch (eventError) {
+      console.error("saveLead: Error dispatching leadsUpdated event", eventError);
+    }
     
     // Verify the save was successful
     const savedData = localStorage.getItem(LEADS_STORAGE_KEY);
@@ -248,6 +257,8 @@ export const deleteLead = (id: string): boolean => {
   
   if (filteredLeads.length < leads.length) {
     localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(filteredLeads));
+    // Notify other tabs/browsers
+    window.dispatchEvent(new CustomEvent('leadsUpdated', { detail: filteredLeads }));
     return true;
   }
   
@@ -258,6 +269,8 @@ export const deleteLead = (id: string): boolean => {
 export const clearLeads = (): void => {
   localStorage.removeItem(LEADS_STORAGE_KEY);
   initializeLeadStorage();
+  // Notify other tabs/browsers
+  window.dispatchEvent(new CustomEvent('leadsUpdated', { detail: [] }));
   console.log('clearLeads: All leads cleared from localStorage');
 };
 
