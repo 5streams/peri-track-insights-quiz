@@ -8,6 +8,7 @@ export interface Lead {
   user_id?: string;
   name: string;
   email: string;
+  address?: string;
   source: 'quiz_results' | 'free_trial' | string;
   pricing_tier?: 'monthly' | 'annual' | 'free_trial' | null;
   quiz_results?: any;
@@ -35,7 +36,8 @@ export const saveLead = async (
   source: 'quiz_results' | 'free_trial' | string,
   pricingTier?: 'monthly' | 'annual' | 'free_trial' | null,
   quizResults?: any,
-  notes?: string
+  notes?: string,
+  address?: string
 ): Promise<Lead> => {
   if (!name || !email) {
     throw new Error("Name and email are required");
@@ -60,6 +62,7 @@ export const saveLead = async (
       user_id: userId,
       name,
       email,
+      address,
       source,
       pricing_tier: pricingTier === undefined ? null : pricingTier,
       status: 'new' as Lead['status'],
@@ -104,6 +107,7 @@ export const saveLead = async (
         user_id: userId,
         name: leadData.name,
         email: leadData.email,
+        address: leadData.address,
         source: leadData.source,
         pricing_tier: leadData.pricing_tier,
         created_at: leadData.created_at,

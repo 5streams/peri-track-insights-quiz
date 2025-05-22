@@ -121,6 +121,7 @@ const LeadDetailModal: React.FC<LeadDetailModalProps> = ({ isOpen, onClose, user
                       </div>
                       <p><strong>Plan:</strong> {lead.pricing_tier || "N/A"}</p>
                       <p><strong>Status:</strong> {lead.status}</p>
+                      {lead.address && <p><strong>Address:</strong> {lead.address}</p>}
                       {lead.notes && <p className="mt-1 text-xs text-gray-600"><strong>Notes:</strong> {lead.notes}</p>}
                       {lead.device_info && (
                         <p className="mt-1 text-xs text-gray-500">

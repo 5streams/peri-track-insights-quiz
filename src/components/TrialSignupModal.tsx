@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { saveLead } from "@/utils/leadTracking";
 import { useToast } from "@/hooks/use-toast";
 import { Check, ArrowRight } from "lucide-react";
@@ -25,6 +26,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
 }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [step, setStep] = useState<'form' | 'beta-message'>('form');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -62,6 +64,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
       console.log("TrialSignupModal: About to save lead with data:", {
         name: name.trim(),
         email: email.trim(),
+        address: address.trim(),
         source: 'TRIAL',
         quizResults: trialQuizResults,
         additionalNotes
@@ -74,7 +77,8 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
         'TRIAL', 
         'free_trial', // Set pricing tier to "free_trial" instead of null
         trialQuizResults, // Pass formatted results to maintain consistency
-        additionalNotes
+        additionalNotes,
+        address.trim() // Pass the address
       );
       
       setStep('beta-message');
@@ -94,6 +98,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
   const resetForm = () => {
     setName("");
     setEmail("");
+    setAddress("");
     setStep('form');
   };
   
@@ -140,6 +145,17 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
                   required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="address">Address</Label>
+                <Textarea
+                  id="address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Your address (optional)"
+                  rows={3}
                 />
               </div>
               
