@@ -1,10 +1,10 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { saveLead } from "@/utils/leadTracking";
+import { saveLead, getLeads, initializeLeadStorage } from "@/utils/leadTracking";
 
 interface EmailCollectionProps {
   onSubmit: (firstName: string, email: string) => void;
@@ -15,6 +15,11 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const { toast } = useToast();
+
+  // Ensure lead storage is initialized
+  useEffect(() => {
+    initializeLeadStorage();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,7 +69,7 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       console.log("Quiz lead saved successfully:", lead);
       
       // Double check that leads are being stored correctly
-      const currentLeads = JSON.parse(localStorage.getItem('peritrack_leads') || '[]');
+      const currentLeads = getLeads();
       console.log("Current leads in storage:", currentLeads);
       
       // Show toast notification for successful lead capture

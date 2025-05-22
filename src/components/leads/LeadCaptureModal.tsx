@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Dialog,
   DialogContent,
@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { saveLead, getLeads } from "@/utils/leadTracking";
+import { saveLead, getLeads, initializeLeadStorage } from "@/utils/leadTracking";
 import { useToast } from "@/hooks/use-toast";
 import { Check } from "lucide-react";
 
@@ -40,6 +40,11 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+
+  // Ensure lead storage is initialized
+  useEffect(() => {
+    initializeLeadStorage();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,6 +98,7 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
       // Double check that leads are being stored correctly
       const currentLeads = getLeads();
       console.log("Current leads in storage after saving:", currentLeads);
+      console.log("Storage key used:", 'peritrack_leads');
       
       // Show success state
       setIsSubmitted(true);

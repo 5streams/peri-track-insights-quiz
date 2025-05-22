@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getLeads, Lead, clearLeads } from "@/utils/leadTracking";
+import { getLeads, Lead, clearLeads, initializeLeadStorage } from "@/utils/leadTracking";
 import { 
   Table, 
   TableBody, 
@@ -14,21 +14,39 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
-import { RefreshCw, Trash2 } from "lucide-react";
+import { RefreshCw, Trash2, AlertCircle } from "lucide-react";
 
 const LeadList: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterSource, setFilterSource] = useState<string>('all');
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   
+  // Load leads with better error handling and feedback
   const loadLeads = () => {
+    setIsLoading(true);
+    // Make sure storage is initialized
+    initializeLeadStorage();
+    
     // Load leads from localStorage - add debugging
     try {
+      console.log("Checking raw leads data from localStorage...");
+      const rawData = localStorage.getItem('peritrack_leads');
+      console.log("Raw leads data from localStorage:", rawData);
+      
       const allLeads = getLeads();
-      console.log("Raw leads data from localStorage:", localStorage.getItem('peritrack_leads'));
       console.log("Parsed leads loaded in admin:", allLeads);
+      
       setLeads(allLeads);
+      
+      if (allLeads.length === 0) {
+        console.log("No leads found. Storage might be empty or corrupted.");
+        
+        // Additional debugging for localStorage
+        const storageKeys = Object.keys(localStorage);
+        console.log("All localStorage keys:", storageKeys);
+      }
     } catch (error) {
       console.error("Error loading leads:", error);
       toast({
@@ -36,11 +54,14 @@ const LeadList: React.FC = () => {
         description: "There was a problem loading lead data.",
         variant: "destructive"
       });
+    } finally {
+      setIsLoading(false);
     }
   };
   
   useEffect(() => {
-    // Load leads initially
+    // Initialize storage and load leads on component mount
+    initializeLeadStorage();
     loadLeads();
     
     // Set up a refresh interval
@@ -84,6 +105,38 @@ const LeadList: React.FC = () => {
     return date.toLocaleString();
   };
   
+  // Create a test lead for debugging
+  const createTestLead = () => {
+    try {
+      const testLead = {
+        firstName: `Test User ${Math.floor(Math.random() * 1000)}`,
+        email: `test${Date.now()}@example.com`,
+        source: 'quiz_results' as const
+      };
+      
+      // Import the saveLead function
+      const { saveLead } = require('@/utils/leadTracking');
+      
+      // Save the test lead
+      saveLead(testLead.firstName, testLead.email, testLead.source);
+      
+      toast({
+        title: "Test Lead Created",
+        description: "A test lead has been added successfully."
+      });
+      
+      // Reload leads immediately
+      loadLeads();
+    } catch (error) {
+      console.error("Error creating test lead:", error);
+      toast({
+        title: "Error Creating Test Lead",
+        description: "There was a problem creating the test lead.",
+        variant: "destructive"
+      });
+    }
+  };
+  
   // Export leads to CSV
   const exportLeads = () => {
     const headers = ["ID", "First Name", "Email", "Source", "Pricing Plan", "Timestamp"];
@@ -118,11 +171,11 @@ const LeadList: React.FC = () => {
   // Handle manual refresh with more feedback
   const handleRefresh = () => {
     console.log("Manual refresh triggered");
-    loadLeads();
     toast({
-      title: "Leads Refreshed",
-      description: `${leads.length} leads loaded from storage.`
+      title: "Refreshing Leads",
+      description: "Loading latest leads data..."
     });
+    loadLeads();
   };
   
   // Clear all leads (for testing)
@@ -188,8 +241,18 @@ const LeadList: React.FC = () => {
               variant="outline"
               className="w-full sm:w-auto"
               title="Refresh leads"
+              disabled={isLoading}
             >
-              <RefreshCw className="h-4 w-4 mr-1" /> Refresh
+              <RefreshCw className={`h-4 w-4 mr-1 ${isLoading ? 'animate-spin' : ''}`} /> 
+              {isLoading ? "Loading..." : "Refresh"}
+            </Button>
+            <Button 
+              onClick={createTestLead}
+              variant="outline"
+              className="w-full sm:w-auto text-blue-500 hover:text-blue-700"
+              title="Add test lead"
+            >
+              + Test Lead
             </Button>
             <Button 
               onClick={handleClearLeads}
@@ -245,16 +308,58 @@ const LeadList: React.FC = () => {
             </TableBody>
           </Table>
         ) : (
-          <div className="text-center py-8">
-            <p className="text-gray-500">No leads found. Try adjusting your search or filters.</p>
+          <div className="text-center py-8 border rounded-md bg-gray-50">
+            {isLoading ? (
+              <p className="text-gray-600 flex items-center justify-center gap-2">
+                <RefreshCw className="animate-spin h-4 w-4" /> Loading leads...
+              </p>
+            ) : (
+              <div className="space-y-4">
+                <p className="text-gray-500 flex items-center justify-center gap-2">
+                  <AlertCircle className="h-5 w-5 text-amber-500" />
+                  No leads found. Try adjusting your search or filters.
+                </p>
+                <div className="flex justify-center">
+                  <Button 
+                    onClick={createTestLead}
+                    variant="secondary"
+                    className="text-sm"
+                  >
+                    Create Test Lead
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
         )}
         
-        {leads.length === 0 && (
+        {leads.length === 0 && !isLoading && (
           <div className="bg-blue-50 border border-blue-200 p-4 rounded-md mt-4">
-            <p className="text-blue-700">
-              No leads have been captured yet. When users fill out the quiz results form or start a free trial, their information will appear here.
+            <p className="text-blue-700 mb-2 font-medium">
+              No leads have been captured yet
             </p>
+            <p className="text-blue-600 text-sm mb-3">
+              When users fill out the quiz results form or start a free trial, their information will appear here.
+              Try taking the quiz or signing up for a free trial to generate your first lead.
+            </p>
+            <div className="flex gap-2">
+              <Button 
+                onClick={createTestLead}
+                size="sm"
+                variant="outline"
+                className="text-xs text-blue-700 border-blue-300"
+              >
+                Create Test Lead
+              </Button>
+              <Button
+                onClick={handleRefresh} 
+                size="sm"
+                variant="outline"
+                className="text-xs text-blue-700 border-blue-300"
+              >
+                <RefreshCw className="h-3 w-3 mr-1" /> Refresh
+              </Button>
+            </div>
           </div>
         )}
       </CardContent>
