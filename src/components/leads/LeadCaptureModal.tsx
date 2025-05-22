@@ -15,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { saveLead } from "@/utils/leadTracking";
 import { useToast } from "@/hooks/use-toast";
 import { Check } from "lucide-react";
+import { trackTrialRegistration } from "@/utils/googleAdsTracking";
 
 interface LeadCaptureModalProps {
   isOpen: boolean;
@@ -80,6 +81,11 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
       );
       
       console.log("Lead successfully saved:", lead);
+      
+      // Track conversion for Google Ads
+      if (source === 'free_trial') {
+        trackTrialRegistration(email.trim(), pricingPlan);
+      }
       
       // Show success state
       setIsSubmitted(true);
@@ -243,3 +249,4 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
 };
 
 export default LeadCaptureModal;
+
