@@ -18,19 +18,25 @@ const HowItWorksSection = () => {
       number: '01',
       title: 'Track Your Symptoms',
       description: 'Log your symptoms in seconds with our intuitive interface. Track hot flashes, sleep, mood, energy, and more.',
-      time: '2 minutes daily'
+      time: '2 minutes daily',
+      image: '/images/Per1.jpg',
+      alt: 'Woman using the Peritrack app to log symptoms on a smartphone'
     },
     {
       number: '02',
       title: 'Discover Your Patterns',
       description: 'Our AI analyzes your data to identify triggers, predict symptoms, and understand your unique cycles.',
-      time: 'Insights in 24 hours'
+      time: 'Insights in 24 hours',
+      image: '/images/peri2.jpg',
+      alt: 'Data visualization showing symptom patterns and insights'
     },
     {
       number: '03',
       title: 'Get Personalized Relief',
       description: 'Receive customized strategies, tips, and support from Luna, your AI perimenopause coach.',
-      time: 'Ongoing support'
+      time: 'Ongoing support',
+      image: '/images/per3.jpg',
+      alt: 'Woman feeling relieved after following personalized recommendations'
     }
   ];
 
@@ -61,9 +67,17 @@ const HowItWorksSection = () => {
                   <p className="text-warm-gray mb-3 leading-relaxed">
                     {step.description}
                   </p>
-                  <span className="inline-block bg-secondary text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="inline-block bg-secondary text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
                     {step.time}
                   </span>
+                  
+                  <div className="mt-4 rounded-lg overflow-hidden">
+                    <img 
+                      src={step.image} 
+                      alt={step.alt}
+                      className="w-full h-auto"
+                    />
+                  </div>
                 </div>
               </div>
               

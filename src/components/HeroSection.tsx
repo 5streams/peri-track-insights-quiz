@@ -53,38 +53,11 @@ const HeroSection = () => {
           
           <div className="hero-visual fade-in-up lg:order-last order-first text-center">
             <div className="relative inline-block animate-float">
-              <div className="w-80 h-96 lg:w-96 lg:h-[480px] bg-gradient-to-br from-primary to-secondary rounded-[3rem] shadow-2xl mx-auto relative overflow-hidden">
-                <div className="absolute inset-4 bg-white rounded-[2.5rem] flex flex-col">
-                  <div className="bg-primary text-white p-4 rounded-t-[2.5rem] text-center">
-                    <h3 className="font-semibold text-lg">Peritrack</h3>
-                  </div>
-                  <div className="p-6 flex-1">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
-                        <span className="text-sm font-medium">🔥 Hot Flash</span>
-                        <span className="text-xs bg-alert text-white px-2 py-1 rounded">Severe</span>
-                      </div>
-                      <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <span className="text-sm font-medium">😴 Sleep Quality</span>
-                        <span className="text-xs bg-secondary text-white px-2 py-1 rounded">Poor</span>
-                      </div>
-                      <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <span className="text-sm font-medium">😢 Mood</span>
-                        <span className="text-xs bg-warm-gray text-white px-2 py-1 rounded">Low</span>
-                      </div>
-                      <div className="mt-6 p-4 bg-secondary/10 rounded-lg">
-                        <div className="flex items-start space-x-2">
-                          <div className="w-6 h-6 bg-secondary rounded-full flex items-center justify-center text-white text-xs font-bold">L</div>
-                          <div>
-                            <p className="text-xs text-primary font-medium">Luna suggests:</p>
-                            <p className="text-xs text-warm-gray mt-1">"Try cooling breathing for hot flashes - breathe in for 4, hold for 4, out for 6."</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <img 
+                src="/images/daily-check-in.png" 
+                alt="PeriTrack Daily Check-In Interface" 
+                className="w-auto h-auto max-w-full max-h-[600px] rounded-[3rem] shadow-2xl mx-auto"
+              />
             </div>
           </div>
         </div>
