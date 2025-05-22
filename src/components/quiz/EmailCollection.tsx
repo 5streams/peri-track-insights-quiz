@@ -127,17 +127,17 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
 
   return (
     <div className="text-center">
-      <h2 className="font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-4">
+      <h2 className="font-playfair text-2xl md:text-3xl font-bold text-gray-800 mb-4">
         Your Results Are Ready
       </h2>
       
-      <p className="mb-6 text-gray-600">
+      <p className="mb-6 text-gray-700">
         Enter your email to view your personalized perimenopause assessment
       </p>
       
       <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto text-left">
         <div className="space-y-2">
-          <Label htmlFor="firstName">First Name</Label>
+          <Label htmlFor="firstName" className="text-gray-700">First Name</Label>
           <Input
             id="firstName"
             value={firstName}
@@ -145,11 +145,12 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
             placeholder="Your first name"
             disabled={isLoading}
             required
+            className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
           />
         </div>
         
         <div className="space-y-2">
-          <Label htmlFor="email">Email Address</Label>
+          <Label htmlFor="email" className="text-gray-700">Email Address</Label>
           <Input
             id="email"
             type="email"
@@ -158,19 +159,20 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
             placeholder="Your email address"
             disabled={isLoading}
             required
+            className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
           />
         </div>
         
         <Button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-[#5D4154] hover:bg-[#5D4154]/90 py-6 text-lg"
+          className="w-full bg-indigo-600 hover:bg-indigo-700 py-6 text-lg text-white"
         >
           {isLoading ? "Processing..." : "Show My Results Now"}
         </Button>
       </form>
       
-      <p className="mt-4 text-xs text-gray-500">
+      <p className="mt-4 text-xs text-gray-600">
         We respect your privacy. Your information is never shared or sold.
       </p>
     </div>

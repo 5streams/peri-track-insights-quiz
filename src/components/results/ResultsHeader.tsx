@@ -35,20 +35,20 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
   // Get color based on score category
   const getScoreColor = () => {
     switch (scoreCategory) {
-      case "mild": return "text-green-600";
-      case "moderate": return "text-amber-600";
-      case "severe": return "text-rose-600";
-      default: return "text-[#5D4154]";
+      case "mild": return "text-green-700";
+      case "moderate": return "text-amber-700";
+      case "severe": return "text-rose-700";
+      default: return "text-gray-800";
     }
   };
   
   // Get meter fill color
   const getMeterFillColor = () => {
     switch (scoreCategory) {
-      case "mild": return "bg-green-500";
-      case "moderate": return "bg-amber-500";
-      case "severe": return "bg-rose-500";
-      default: return "bg-[#5D4154]";
+      case "mild": return "bg-green-600";
+      case "moderate": return "bg-amber-600";
+      case "severe": return "bg-rose-600";
+      default: return "bg-indigo-600";
     }
   };
 
@@ -56,16 +56,16 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
     <header className="text-center pt-6 pb-12 reveal-section transform opacity-0 heading-container">
       <div className="decorative-backdrop"></div>
       
-      <h1 className="assessment-heading text-2xl md:text-3xl lg:text-4xl font-playfair font-bold text-[#5D4154] mb-8">
+      <h1 className="assessment-heading text-2xl md:text-3xl lg:text-4xl font-playfair font-bold text-gray-800 mb-8">
         {capitalizedFirstName ? `${capitalizedFirstName}, ` : ""}We've Analyzed Your Answers
-        <span className="block mt-2 font-raleway font-medium text-xl md:text-2xl text-[#5D4154]/90">
+        <span className="block mt-2 font-raleway font-medium text-xl md:text-2xl text-gray-700">
           Your Personal Perimenopause Assessment
         </span>
       </h1>
       
       <div className="relative max-w-2xl mx-auto mb-10">
         <div className="score-label-container mb-3 flex items-center justify-center">
-          <h2 className="text-xl md:text-2xl font-medium text-[#5D4154] inline-block relative">
+          <h2 className="text-xl md:text-2xl font-medium text-gray-800 inline-block relative">
             PERIMENOPAUSE SCORE:
             <Badge 
               variant="outline" 
@@ -84,9 +84,9 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
           
           <div className="score-labels absolute w-full top-0 h-full flex items-center">
             <div className="relative w-full px-6">
-              <div className="absolute left-[20%] top-1/2 -translate-y-1/2 bg-green-500 px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Mild</div>
-              <div className="absolute left-[55%] top-1/2 -translate-y-1/2 bg-amber-500 px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Moderate</div>
-              <div className="absolute left-[85%] top-1/2 -translate-y-1/2 bg-rose-500 px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Severe</div>
+              <div className="absolute left-[20%] top-1/2 -translate-y-1/2 bg-green-600 px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Mild</div>
+              <div className="absolute left-[55%] top-1/2 -translate-y-1/2 bg-amber-600 px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Moderate</div>
+              <div className="absolute left-[85%] top-1/2 -translate-y-1/2 bg-rose-600 px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Severe</div>
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
       {scoreCategory === "severe" && (
         <Button 
           onClick={onStartTrial}
-          className="cta-button bg-gradient-to-r from-[#9b87f5] to-[#8B5CF6] hover:from-[#8B5CF6]/95 hover:to-[#8B5CF6] text-white font-semibold px-8 py-6 rounded-lg shadow-lg mb-8 text-lg transition-all duration-300 animate-pulse-subtle"
+          className="cta-button bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-6 rounded-lg shadow-lg mb-8 text-lg transition-all duration-300 animate-pulse-subtle"
         >
           Take Action Now - Start Free Trial
         </Button>
