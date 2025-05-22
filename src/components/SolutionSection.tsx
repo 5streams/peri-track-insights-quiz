@@ -15,10 +15,10 @@ const SolutionSection = () => {
   };
   
   return (
-    <section className="solution-section py-8 lg:py-10 bg-gray-50">
+    <section className="solution-section py-6 lg:py-8 bg-gray-50">
       <div className="container mx-auto px-4 lg:px-6">
-        <div className="text-center mb-6">
-          <h2 className="font-headline font-bold text-h2 text-primary mb-3 fade-in-up">
+        <div className="text-center mb-4">
+          <h2 className="font-headline font-bold text-h2 text-primary mb-2 fade-in-up">
             What if you could predict and prevent your worst symptoms?
           </h2>
           <p className="text-body-large text-warm-gray max-w-3xl mx-auto fade-in-up">
@@ -26,43 +26,43 @@ const SolutionSection = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-5 mb-8">
-          <div className="solution-card bg-white p-5 rounded-2xl shadow-lg text-center hover:shadow-xl transition-all duration-300 fade-in-up">
-            <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-3">
+        <div className="grid lg:grid-cols-3 gap-4 mb-6">
+          <div className="solution-card bg-white p-4 rounded-2xl shadow-lg text-center hover:shadow-xl transition-all duration-300 fade-in-up">
+            <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-xl text-white">📊</span>
             </div>
-            <h3 className="font-headline text-xl text-primary mb-2">Smart Pattern Recognition</h3>
+            <h3 className="font-headline text-xl text-primary mb-1">Smart Pattern Recognition</h3>
             <p className="text-warm-gray">
               Our AI identifies your unique symptom patterns, triggers, and cycles so you know what to expect and when.
             </p>
           </div>
 
-          <div className="solution-card bg-white p-5 rounded-2xl shadow-lg text-center hover:shadow-xl transition-all duration-300 fade-in-up">
-            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+          <div className="solution-card bg-white p-4 rounded-2xl shadow-lg text-center hover:shadow-xl transition-all duration-300 fade-in-up">
+            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-xl text-white">🎯</span>
             </div>
-            <h3 className="font-headline text-xl text-primary mb-2">Personalized Relief Strategies</h3>
+            <h3 className="font-headline text-xl text-primary mb-1">Personalized Relief Strategies</h3>
             <p className="text-warm-gray">
               Get targeted recommendations based on YOUR data - not generic advice that might not work for you.
             </p>
           </div>
 
-          <div className="solution-card bg-white p-5 rounded-2xl shadow-lg text-center hover:shadow-xl transition-all duration-300 fade-in-up">
-            <div className="w-12 h-12 bg-alert rounded-full flex items-center justify-center mx-auto mb-3">
+          <div className="solution-card bg-white p-4 rounded-2xl shadow-lg text-center hover:shadow-xl transition-all duration-300 fade-in-up">
+            <div className="w-12 h-12 bg-alert rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-xl text-white">🤖</span>
             </div>
-            <h3 className="font-headline text-xl text-primary mb-2">24/7 AI Coach Luna</h3>
+            <h3 className="font-headline text-xl text-primary mb-1">24/7 AI Coach Luna</h3>
             <p className="text-warm-gray">
               Your personal perimenopause coach available anytime to answer questions and provide support.
             </p>
           </div>
         </div>
 
-        <div className="text-center fade-in-up mt-4">
+        <div className="text-center fade-in-up">
           <CTAButton 
             size="large" 
             variant="primary" 
-            className="mb-2"
+            className="mb-1"
             onClick={handleOpenSignupModal}
           >
             DISCOVER YOUR PATTERNS TODAY

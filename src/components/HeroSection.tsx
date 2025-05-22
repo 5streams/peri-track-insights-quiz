@@ -15,23 +15,23 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="hero-section bg-hero-gradient py-6 lg:py-8 min-h-[60vh] flex items-center">
+    <section className="hero-section bg-hero-gradient py-5 lg:py-6 min-h-[60vh] flex items-center">
       <div className="container mx-auto px-4 lg:px-6">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           <div className="hero-content fade-in-up">
-            <h1 className="font-headline font-bold text-h1 text-primary mb-4 leading-tight">
+            <h1 className="font-headline font-bold text-h1 text-primary mb-3 leading-tight">
               The Perimenopause Tracker That Actually Helps You Feel Better
             </h1>
             
-            <p className="text-body-large text-warm-gray font-medium mb-4 leading-relaxed">
+            <p className="text-body-large text-warm-gray font-medium mb-3 leading-relaxed">
               Track your symptoms, get personalized relief strategies, and receive daily coaching tips based on YOUR unique patterns. Finally, a system that helps you manage perimenopause instead of just tracking it.
             </p>
             
-            <p className="text-body-regular text-warm-gray mb-6 leading-relaxed">
+            <p className="text-body-regular text-warm-gray mb-4 leading-relaxed">
               Stop suffering through unpredictable symptoms. Peritrack combines intelligent tracking with personalized coaching to help you find real relief from hot flashes, mood swings, sleep issues, and PMS.
             </p>
             
-            <div className="social-proof-mini bg-white p-3 lg:p-4 rounded-xl mb-6 shadow-lg border border-gray-100">
+            <div className="social-proof-mini bg-white p-3 rounded-xl mb-4 shadow-lg border border-gray-100">
               <span className="font-semibold text-primary text-body-regular block">
                 Join 15,000+ women who've found symptom relief through smart tracking and personalized coaching.
               </span>
@@ -41,13 +41,13 @@ const HeroSection = () => {
               <CTAButton 
                 size="large" 
                 variant="primary"
-                className="w-full lg:w-auto mb-2"
+                className="w-full lg:w-auto mb-1"
                 onClick={handleOpenSignupModal}
               >
-                START YOUR FREE 7-DAY TRIAL
+                DISCOVER YOUR PATTERNS TODAY
               </CTAButton>
               <p className="text-sm text-warm-gray text-center lg:text-left">
-                7-day trial then only $12.95/month • Get relief strategies in 24 hours • Works on all devices
+                7-day trial then only $12.95/month • Join thousands of women who've transformed their perimenopause experience
               </p>
             </div>
           </div>
