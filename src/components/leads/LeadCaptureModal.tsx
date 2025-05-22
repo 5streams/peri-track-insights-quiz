@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { 
   Dialog,
   DialogContent,
@@ -12,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { saveLead, getLeads, initializeLeadStorage } from "@/utils/leadTracking";
+import { saveLead } from "@/utils/leadTracking";
 import { useToast } from "@/hooks/use-toast";
 import { Check } from "lucide-react";
 
@@ -41,21 +40,7 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  // Ensure lead storage is initialized
-  useEffect(() => {
-    try {
-      initializeLeadStorage();
-      console.log("LeadCaptureModal: Lead storage initialized");
-      
-      // Debug: Check existing leads
-      const currentLeads = getLeads();
-      console.log("LeadCaptureModal: Current leads on load:", currentLeads);
-    } catch (error) {
-      console.error("Error initializing lead storage:", error);
-    }
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!firstName.trim() || !email.trim() || !email.includes('@')) {
@@ -78,7 +63,6 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
     
     setIsLoading(true);
     
-    // Save lead data with additional fields if available
     try {
       const additionalNotes = source === 'free_trial' 
         ? `Phone: ${phoneNumber}, Address: ${address}, Captured at: ${new Date().toISOString()}` 
@@ -93,7 +77,7 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
         additionalNotes
       });
       
-      const lead = saveLead(
+      const lead = await saveLead(
         firstName.trim(), 
         email.trim(), 
         source, 
@@ -104,15 +88,6 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
       
       console.log("LeadCaptureModal: Lead successfully saved:", lead);
       
-      // Double check that leads are being stored correctly
-      const currentLeads = getLeads();
-      console.log("LeadCaptureModal: Current leads after saving:", currentLeads);
-      console.log("LeadCaptureModal: Storage key used:", 'peritrack_leads');
-      
-      // Force leads to be visible in admin immediately
-      localStorage.setItem("leads_updated", Date.now().toString());
-      
-      // Show success state
       setIsSubmitted(true);
       
       toast({
