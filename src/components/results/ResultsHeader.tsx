@@ -35,37 +35,37 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
   // Get color based on score category
   const getScoreColor = () => {
     switch (scoreCategory) {
-      case "mild": return "text-green-700";
-      case "moderate": return "text-amber-700";
-      case "severe": return "text-rose-700";
-      default: return "text-gray-800";
+      case "mild": return "text-[#9b87f5]";
+      case "moderate": return "text-[#7E69AB]";
+      case "severe": return "text-[#5D4154]";
+      default: return "text-[#6E59A5]";
     }
   };
   
   // Get meter fill color
   const getMeterFillColor = () => {
     switch (scoreCategory) {
-      case "mild": return "bg-green-600";
-      case "moderate": return "bg-amber-600";
-      case "severe": return "bg-rose-600";
-      default: return "bg-indigo-600";
+      case "mild": return "bg-[#D6BCFA]";
+      case "moderate": return "bg-[#9b87f5]";
+      case "severe": return "bg-[#7E69AB]";
+      default: return "bg-[#9b87f5]";
     }
   };
 
   return (
-    <header className="text-center pt-6 pb-12 reveal-section transform opacity-0 heading-container">
+    <header className="text-center pt-4 pb-6 reveal-section transform opacity-0 heading-container">
       <div className="decorative-backdrop"></div>
       
-      <h1 className="assessment-heading text-2xl md:text-3xl lg:text-4xl font-playfair font-bold text-gray-800 mb-8">
+      <h1 className="assessment-heading text-2xl md:text-3xl lg:text-4xl font-playfair font-bold text-[#5D4154] mb-6">
         {capitalizedFirstName ? `${capitalizedFirstName}, ` : ""}We've Analyzed Your Answers
-        <span className="block mt-2 font-raleway font-medium text-xl md:text-2xl text-gray-700">
+        <span className="block mt-2 font-raleway font-medium text-xl md:text-2xl text-[#6E59A5]">
           Your Personal Perimenopause Assessment
         </span>
       </h1>
       
-      <div className="relative max-w-2xl mx-auto mb-10">
+      <div className="relative max-w-2xl mx-auto mb-6">
         <div className="score-label-container mb-3 flex items-center justify-center">
-          <h2 className="text-xl md:text-2xl font-medium text-gray-800 inline-block relative">
+          <h2 className="text-xl md:text-2xl font-medium text-[#5D4154] inline-block relative">
             PERIMENOPAUSE SCORE:
             <Badge 
               variant="outline" 
@@ -76,7 +76,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
           </h2>
         </div>
         
-        <div className="score-meter relative h-12 bg-gray-100 border border-gray-200 rounded-full w-full mb-7 shadow-inner overflow-hidden">
+        <div className="score-meter relative h-12 bg-[#E5DEFF] border border-[#D6BCFA] rounded-full w-full mb-5 shadow-inner overflow-hidden">
           <div 
             ref={scoreRef}
             className={`score-fill absolute left-0 top-0 h-full rounded-full transition-all duration-1500 ease-out w-0 ${getMeterFillColor()}`}
@@ -84,18 +84,18 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
           
           <div className="score-labels absolute w-full top-0 h-full flex items-center">
             <div className="relative w-full px-6">
-              <div className="absolute left-[20%] top-1/2 -translate-y-1/2 bg-green-600 px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Mild</div>
-              <div className="absolute left-[55%] top-1/2 -translate-y-1/2 bg-amber-600 px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Moderate</div>
-              <div className="absolute left-[85%] top-1/2 -translate-y-1/2 bg-rose-600 px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Severe</div>
+              <div className="absolute left-[20%] top-1/2 -translate-y-1/2 bg-[#D6BCFA] px-3 py-1 rounded-md text-[#5D4154] font-medium shadow-md transform -translate-x-1/2">Mild</div>
+              <div className="absolute left-[55%] top-1/2 -translate-y-1/2 bg-[#9b87f5] px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Moderate</div>
+              <div className="absolute left-[85%] top-1/2 -translate-y-1/2 bg-[#7E69AB] px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Severe</div>
             </div>
           </div>
         </div>
         
-        <div className="score-description text-center mb-6">
+        <div className="score-description text-center mb-4">
           <p className={`inline-block py-1.5 px-4 rounded-lg shadow-sm font-medium ${
-            scoreCategory === "mild" ? "bg-green-50 text-green-700 border border-green-200" :
-            scoreCategory === "moderate" ? "bg-amber-50 text-amber-700 border border-amber-200" :
-            "bg-rose-50 text-rose-700 border border-rose-200"
+            scoreCategory === "mild" ? "bg-[#E5DEFF] text-[#7E69AB] border border-[#D6BCFA]" :
+            scoreCategory === "moderate" ? "bg-[#9b87f5]/10 text-[#6E59A5] border border-[#9b87f5]" :
+            "bg-[#7E69AB]/10 text-[#5D4154] border border-[#7E69AB]"
           }`}>
             {scoreCategory === "mild" ? "Early Stage Symptoms" :
             scoreCategory === "moderate" ? "Moderate Perimenopause Signs" :
@@ -108,7 +108,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
       {scoreCategory === "severe" && (
         <Button 
           onClick={onStartTrial}
-          className="cta-button bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-6 rounded-lg shadow-lg mb-8 text-lg transition-all duration-300 animate-pulse-subtle"
+          className="cta-button bg-[#9b87f5] hover:bg-[#7E69AB] text-white font-semibold px-8 py-5 rounded-lg shadow-lg mb-6 text-lg transition-all duration-300 animate-pulse-subtle"
         >
           Take Action Now - Start Free Trial
         </Button>

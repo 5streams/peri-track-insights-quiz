@@ -126,18 +126,18 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
   };
 
   return (
-    <div className="text-center">
-      <h2 className="font-playfair text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+    <div className="text-center max-w-2xl mx-auto py-6">
+      <h2 className="font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-4">
         Your Results Are Ready
       </h2>
       
-      <p className="mb-6 text-gray-700">
+      <p className="mb-5 text-[#6E59A5]">
         Enter your email to view your personalized perimenopause assessment
       </p>
       
-      <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto text-left">
-        <div className="space-y-2">
-          <Label htmlFor="firstName" className="text-gray-700">First Name</Label>
+      <form onSubmit={handleSubmit} className="space-y-5 max-w-md mx-auto text-left">
+        <div className="space-y-1.5">
+          <Label htmlFor="firstName" className="text-[#5D4154]">First Name</Label>
           <Input
             id="firstName"
             value={firstName}
@@ -145,12 +145,12 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
             placeholder="Your first name"
             disabled={isLoading}
             required
-            className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+            className="border-[#D6BCFA] focus:border-[#9b87f5] focus:ring-[#9b87f5]"
           />
         </div>
         
-        <div className="space-y-2">
-          <Label htmlFor="email" className="text-gray-700">Email Address</Label>
+        <div className="space-y-1.5">
+          <Label htmlFor="email" className="text-[#5D4154]">Email Address</Label>
           <Input
             id="email"
             type="email"
@@ -159,20 +159,20 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
             placeholder="Your email address"
             disabled={isLoading}
             required
-            className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+            className="border-[#D6BCFA] focus:border-[#9b87f5] focus:ring-[#9b87f5]"
           />
         </div>
         
         <Button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-indigo-600 hover:bg-indigo-700 py-6 text-lg text-white"
+          className="w-full bg-[#9b87f5] hover:bg-[#7E69AB] py-5 text-lg text-white mt-2"
         >
           {isLoading ? "Processing..." : "Show My Results Now"}
         </Button>
       </form>
       
-      <p className="mt-4 text-xs text-gray-600">
+      <p className="mt-3 text-xs text-[#6E59A5]">
         We respect your privacy. Your information is never shared or sold.
       </p>
     </div>
