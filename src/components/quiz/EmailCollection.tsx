@@ -16,9 +16,25 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
   const [email, setEmail] = useState("");
   const { toast } = useToast();
 
-  // Ensure lead storage is initialized
+  // Ensure lead storage is initialized when the component mounts
   useEffect(() => {
-    initializeLeadStorage();
+    // Force initialization of storage
+    try {
+      initializeLeadStorage();
+      console.log("EmailCollection: Lead storage initialized");
+      
+      // Debug: Check if storage is working
+      const testItem = "test-" + Date.now();
+      localStorage.setItem("test_storage", testItem);
+      const retrieved = localStorage.getItem("test_storage");
+      console.log("Storage test result:", retrieved === testItem ? "PASSED" : "FAILED");
+      
+      // Check existing leads for debugging
+      const currentLeads = getLeads();
+      console.log("EmailCollection: Current leads on load:", currentLeads);
+    } catch (error) {
+      console.error("Error initializing lead storage:", error);
+    }
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -50,33 +66,38 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
         ? JSON.parse(localStorage.getItem("quizAnswers") || "{}") 
         : {};
       
-      // Save lead data - adding debug log to verify data
-      console.log("About to save lead with data:", {
+      console.log("EmailCollection: About to save lead with data:", {
         firstName: firstName.trim(),
         email: email.trim(),
         source: 'quiz_results',
         quizResults
       });
       
+      // Save lead with a unique timestamp to prevent duplicates
       const lead = saveLead(
         firstName.trim(),
         email.trim(),
         'quiz_results',
         null,
-        quizResults
+        quizResults,
+        `Quiz completed at ${new Date().toISOString()}`
       );
       
-      console.log("Quiz lead saved successfully:", lead);
+      console.log("EmailCollection: Lead saved successfully:", lead);
       
       // Double check that leads are being stored correctly
       const currentLeads = getLeads();
-      console.log("Current leads in storage:", currentLeads);
+      console.log("EmailCollection: Current leads after saving:", currentLeads);
+      console.log("EmailCollection: Storage key used:", 'peritrack_leads');
       
       // Show toast notification for successful lead capture
       toast({
         title: "Information Saved",
         description: "Your information has been saved. Preparing your results...",
       });
+      
+      // Force leads to be visible in admin immediately
+      localStorage.setItem("leads_updated", Date.now().toString());
     } catch (error) {
       console.error("Error tracking quiz lead:", error);
       toast({

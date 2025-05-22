@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getLeads, Lead, clearLeads, initializeLeadStorage } from "@/utils/leadTracking";
+import { getLeads, Lead, clearLeads, initializeLeadStorage, saveLead } from "@/utils/leadTracking";
 import { 
   Table, 
   TableBody, 
@@ -20,35 +20,55 @@ const LeadList: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterSource, setFilterSource] = useState<string>('all');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
   
   // Load leads with better error handling and feedback
   const loadLeads = () => {
     setIsLoading(true);
-    // Make sure storage is initialized
-    initializeLeadStorage();
     
-    // Load leads from localStorage - add debugging
+    // Make sure storage is initialized
     try {
-      console.log("Checking raw leads data from localStorage...");
+      initializeLeadStorage();
+      
+      // Direct localStorage access for debugging
+      console.log("LeadList: Checking direct localStorage access");
       const rawData = localStorage.getItem('peritrack_leads');
-      console.log("Raw leads data from localStorage:", rawData);
+      console.log("LeadList: Raw leads data from localStorage:", rawData);
       
-      const allLeads = getLeads();
-      console.log("Parsed leads loaded in admin:", allLeads);
-      
-      setLeads(allLeads);
-      
-      if (allLeads.length === 0) {
-        console.log("No leads found. Storage might be empty or corrupted.");
-        
-        // Additional debugging for localStorage
-        const storageKeys = Object.keys(localStorage);
-        console.log("All localStorage keys:", storageKeys);
+      // Manual parsing as a fallback
+      let parsedLeads: Lead[] = [];
+      if (rawData) {
+        try {
+          const parsed = JSON.parse(rawData);
+          parsedLeads = Array.isArray(parsed) ? parsed : [];
+          console.log("LeadList: Manually parsed leads:", parsedLeads);
+        } catch (parseError) {
+          console.error("LeadList: Error parsing leads manually:", parseError);
+        }
       }
+      
+      // Get leads through the utility function
+      const allLeads = getLeads();
+      console.log("LeadList: Leads loaded via getLeads():", allLeads);
+      
+      // Use whichever source has leads
+      const leadsToUse = allLeads.length > 0 ? allLeads : parsedLeads;
+      setLeads(leadsToUse);
+      
+      // Provide user feedback
+      if (leadsToUse.length === 0) {
+        console.log("LeadList: No leads found through any method");
+      } else {
+        console.log(`LeadList: Loaded ${leadsToUse.length} leads successfully`);
+      }
+      
+      // Check localStorage status
+      const storageKeys = Object.keys(localStorage);
+      console.log("LeadList: All localStorage keys:", storageKeys);
+      
     } catch (error) {
-      console.error("Error loading leads:", error);
+      console.error("LeadList: Error loading leads:", error);
       toast({
         title: "Error loading leads",
         description: "There was a problem loading lead data.",
@@ -59,15 +79,32 @@ const LeadList: React.FC = () => {
     }
   };
   
+  // Check for updates from other components
+  useEffect(() => {
+    const checkForUpdates = () => {
+      const updated = localStorage.getItem("leads_updated");
+      if (updated) {
+        console.log("LeadList: Detected leads update, reloading");
+        loadLeads();
+        localStorage.removeItem("leads_updated"); // Clear the flag
+      }
+    };
+    
+    // Set up interval to check for updates
+    const updateInterval = setInterval(checkForUpdates, 1000);
+    return () => clearInterval(updateInterval);
+  }, []);
+  
   useEffect(() => {
     // Initialize storage and load leads on component mount
-    initializeLeadStorage();
+    console.log("LeadList: Component mounted, loading leads");
     loadLeads();
     
-    // Set up a refresh interval
+    // Set up an interval to automatically refresh leads
     const interval = setInterval(() => {
+      console.log("LeadList: Auto refreshing leads");
       loadLeads();
-    }, 5000); // Check for new leads every 5 seconds
+    }, 10000); // Check for new leads every 10 seconds
     
     return () => clearInterval(interval);
   }, []);
@@ -105,30 +142,33 @@ const LeadList: React.FC = () => {
     return date.toLocaleString();
   };
   
-  // Create a test lead for debugging
+  // Create a test lead for debugging - improved version
   const createTestLead = () => {
     try {
-      const testLead = {
-        firstName: `Test User ${Math.floor(Math.random() * 1000)}`,
-        email: `test${Date.now()}@example.com`,
-        source: 'quiz_results' as const
-      };
+      const testName = `Test User ${Math.floor(Math.random() * 1000)}`;
+      const testEmail = `test${Date.now()}@example.com`;
+      console.log("LeadList: Creating test lead with", testName, testEmail);
       
-      // Import the saveLead function
-      const { saveLead } = require('@/utils/leadTracking');
+      const lead = saveLead(
+        testName, 
+        testEmail, 
+        Math.random() > 0.5 ? 'quiz_results' : 'free_trial',
+        Math.random() > 0.5 ? (Math.random() > 0.5 ? 'monthly' : 'annual') : null,
+        { test: "data" },
+        `Test lead created at ${new Date().toISOString()}`
+      );
       
-      // Save the test lead
-      saveLead(testLead.firstName, testLead.email, testLead.source);
+      console.log("LeadList: Test lead created:", lead);
+      
+      // Force reload leads
+      loadLeads();
       
       toast({
         title: "Test Lead Created",
         description: "A test lead has been added successfully."
       });
-      
-      // Reload leads immediately
-      loadLeads();
     } catch (error) {
-      console.error("Error creating test lead:", error);
+      console.error("LeadList: Error creating test lead:", error);
       toast({
         title: "Error Creating Test Lead",
         description: "There was a problem creating the test lead.",
@@ -170,7 +210,7 @@ const LeadList: React.FC = () => {
   
   // Handle manual refresh with more feedback
   const handleRefresh = () => {
-    console.log("Manual refresh triggered");
+    console.log("LeadList: Manual refresh triggered");
     toast({
       title: "Refreshing Leads",
       description: "Loading latest leads data..."
@@ -178,11 +218,13 @@ const LeadList: React.FC = () => {
     loadLeads();
   };
   
-  // Clear all leads (for testing)
+  // Clear all leads and recreate storage
   const handleClearLeads = () => {
     if (window.confirm('Are you sure you want to delete ALL leads? This cannot be undone.')) {
+      console.log("LeadList: Clearing all leads");
       clearLeads();
       setLeads([]);
+      initializeLeadStorage(); // Re-initialize empty storage
       toast({
         title: "Leads Cleared",
         description: "All leads have been removed from storage.",

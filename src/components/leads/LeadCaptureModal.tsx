@@ -43,7 +43,16 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
 
   // Ensure lead storage is initialized
   useEffect(() => {
-    initializeLeadStorage();
+    try {
+      initializeLeadStorage();
+      console.log("LeadCaptureModal: Lead storage initialized");
+      
+      // Debug: Check existing leads
+      const currentLeads = getLeads();
+      console.log("LeadCaptureModal: Current leads on load:", currentLeads);
+    } catch (error) {
+      console.error("Error initializing lead storage:", error);
+    }
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -72,10 +81,10 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
     // Save lead data with additional fields if available
     try {
       const additionalNotes = source === 'free_trial' 
-        ? `Phone: ${phoneNumber}, Address: ${address}` 
-        : undefined;
+        ? `Phone: ${phoneNumber}, Address: ${address}, Captured at: ${new Date().toISOString()}` 
+        : `Captured at: ${new Date().toISOString()}`;
         
-      console.log("Modal about to save lead with data:", {
+      console.log("LeadCaptureModal: About to save lead with data:", {
         firstName: firstName.trim(),
         email: email.trim(),
         source,
@@ -93,12 +102,15 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
         additionalNotes
       );
       
-      console.log("Lead successfully saved:", lead);
+      console.log("LeadCaptureModal: Lead successfully saved:", lead);
       
       // Double check that leads are being stored correctly
       const currentLeads = getLeads();
-      console.log("Current leads in storage after saving:", currentLeads);
-      console.log("Storage key used:", 'peritrack_leads');
+      console.log("LeadCaptureModal: Current leads after saving:", currentLeads);
+      console.log("LeadCaptureModal: Storage key used:", 'peritrack_leads');
+      
+      // Force leads to be visible in admin immediately
+      localStorage.setItem("leads_updated", Date.now().toString());
       
       // Show success state
       setIsSubmitted(true);

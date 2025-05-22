@@ -33,6 +33,52 @@ const getDeviceInfo = () => {
 // Local storage key for leads
 const LEADS_STORAGE_KEY = 'peritrack_leads';
 
+// Initialize or validate lead storage
+export const initializeLeadStorage = (): void => {
+  console.log("initializeLeadStorage: Starting lead storage initialization");
+  
+  // Check if storage exists
+  const existingData = localStorage.getItem(LEADS_STORAGE_KEY);
+  
+  if (!existingData) {
+    // Create new empty storage
+    console.log("initializeLeadStorage: No leads storage found, creating empty array");
+    localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
+    return;
+  }
+  
+  // Validate existing data
+  try {
+    const parsed = JSON.parse(existingData);
+    if (!Array.isArray(parsed)) {
+      console.error("initializeLeadStorage: Stored data is not an array, recreating", parsed);
+      localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
+    } else {
+      console.log(`initializeLeadStorage: Found existing lead storage with ${parsed.length} leads`);
+    }
+  } catch (error) {
+    console.error("initializeLeadStorage: Error parsing leads, recreating", error);
+    localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
+  }
+  
+  // Test storage is working
+  try {
+    const testKey = `test_${Date.now()}`;
+    const testValue = `value_${Date.now()}`;
+    localStorage.setItem(testKey, testValue);
+    const retrieved = localStorage.getItem(testKey);
+    localStorage.removeItem(testKey);
+    
+    if (retrieved !== testValue) {
+      console.error("initializeLeadStorage: localStorage test failed", { set: testValue, got: retrieved });
+    } else {
+      console.log("initializeLeadStorage: localStorage test passed");
+    }
+  } catch (error) {
+    console.error("initializeLeadStorage: localStorage test failed with error", error);
+  }
+};
+
 // Save a lead to localStorage with improved error handling and validation
 export const saveLead = (
   firstName: string, 
@@ -42,12 +88,19 @@ export const saveLead = (
   quizResults?: any,
   additionalNotes?: string
 ): Lead => {
+  console.log("saveLead: Starting to save lead", { firstName, email, source });
+  
   // Validate inputs
   if (!firstName || !email) {
-    console.error("Cannot save lead: firstName and email are required");
-    throw new Error("FirstName and email are required");
+    const error = new Error("FirstName and email are required");
+    console.error("saveLead: Cannot save lead, missing required fields", error);
+    throw error;
   }
   
+  // Ensure storage is initialized
+  initializeLeadStorage();
+  
+  // Create lead object
   const lead: Lead = {
     id: generateLeadId(),
     firstName,
@@ -62,88 +115,74 @@ export const saveLead = (
   
   try {
     // Get existing leads
-    const existingLeadsString = localStorage.getItem(LEADS_STORAGE_KEY);
-    console.log(`Raw leads data before update: ${existingLeadsString}`);
-    
-    // Parse existing leads, ensuring we have an array
-    let existingLeads: Lead[] = [];
-    if (existingLeadsString) {
-      try {
-        const parsed = JSON.parse(existingLeadsString);
-        existingLeads = Array.isArray(parsed) ? parsed : [];
-      } catch (parseError) {
-        console.error("Failed to parse leads, starting with empty array", parseError);
-        existingLeads = [];
-      }
-    }
+    const existingLeads = getLeads();
+    console.log(`saveLead: Retrieved ${existingLeads.length} existing leads`);
     
     // Add new lead
     const updatedLeads = [...existingLeads, lead];
     
-    console.log(`Saving lead to localStorage. Total leads: ${updatedLeads.length}`);
-    console.log("Lead being saved:", lead);
+    console.log(`saveLead: Saving lead to localStorage. Total leads: ${updatedLeads.length}`);
     
     // Save to localStorage
     localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(updatedLeads));
     
-    // Double-check that lead was actually saved properly
-    const savedLeadsData = localStorage.getItem(LEADS_STORAGE_KEY);
-    const savedLeads = savedLeadsData ? JSON.parse(savedLeadsData) : [];
-    console.log(`After saving, localStorage has ${savedLeads.length} leads`);
-    
     // Verify the save was successful
     const savedData = localStorage.getItem(LEADS_STORAGE_KEY);
     if (!savedData) {
-      console.error('Failed to save leads to localStorage - data is empty after save');
+      throw new Error('Failed to save leads to localStorage - data is empty after save');
     }
+    
+    const savedLeads = JSON.parse(savedData);
+    console.log(`saveLead: Lead saved successfully. Storage now has ${savedLeads.length} leads`);
     
     // Track the event
     trackLeadEvent(lead);
     
-    // Validate storage for debugging
-    validateLeadStorage();
-    
+    return lead;
   } catch (error) {
-    console.error('Error saving lead to localStorage:', error);
-    // Try one more time with a clean approach
+    console.error('saveLead: Error saving lead to localStorage:', error);
+    
+    // Emergency save as a fallback
     try {
+      console.log("saveLead: Attempting emergency single-lead save");
       const singleLeadArray = [lead];
       localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(singleLeadArray));
-      console.log("Attempted emergency save of single lead");
+      return lead;
     } catch (retryError) {
-      console.error("Even emergency save failed:", retryError);
+      console.error("saveLead: Emergency save failed:", retryError);
+      throw retryError;
     }
   }
-  
-  return lead;
 };
 
 // Get all saved leads with additional validation
 export const getLeads = (): Lead[] => {
+  console.log("getLeads: Retrieving leads from localStorage");
+  
   try {
     const leadsData = localStorage.getItem(LEADS_STORAGE_KEY);
-    console.log("Raw leads data retrieved:", leadsData);
     
     if (!leadsData) {
-      console.log('No leads found in localStorage');
+      console.log('getLeads: No leads found in localStorage');
       return [];
     }
     
     try {
       const parsedLeads = JSON.parse(leadsData);
+      
       if (!Array.isArray(parsedLeads)) {
-        console.error('Leads data is not an array:', parsedLeads);
+        console.error('getLeads: Leads data is not an array:', parsedLeads);
         return [];
       }
       
-      console.log(`Successfully retrieved ${parsedLeads.length} leads`);
+      console.log(`getLeads: Successfully retrieved ${parsedLeads.length} leads`);
       return parsedLeads;
     } catch (parseError) {
-      console.error('Error parsing leads JSON:', parseError);
+      console.error('getLeads: Error parsing leads JSON:', parseError);
       return [];
     }
   } catch (error) {
-    console.error('Error reading leads from localStorage:', error);
+    console.error('getLeads: Error reading leads from localStorage:', error);
     return [];
   }
 };
@@ -161,42 +200,44 @@ export const deleteLead = (id: string): boolean => {
   return false;
 };
 
-// Clear all leads (for testing purposes)
+// Clear all leads and reinitialize storage
 export const clearLeads = (): void => {
   localStorage.removeItem(LEADS_STORAGE_KEY);
-  console.log('All leads cleared from localStorage');
+  initializeLeadStorage();
+  console.log('clearLeads: All leads cleared from localStorage');
 };
 
 // Track lead capture events (can be expanded to send to analytics service)
 const trackLeadEvent = (lead: Lead) => {
-  console.log('Lead captured:', lead);
-  
-  // This is where you would integrate with an analytics service
-  // For now, we're just tracking in localStorage
+  console.log('trackLeadEvent: Lead captured:', lead);
   
   // Track page events
-  const events = JSON.parse(localStorage.getItem('peritrack_events') || '[]');
-  events.push({
-    type: lead.source === 'quiz_results' ? 'quiz_results_submitted' : 'free_trial_signup',
-    leadId: lead.id,
-    timestamp: lead.timestamp,
-    pricingPlan: lead.pricingPlan,
-    path: window.location.pathname
-  });
-  
-  localStorage.setItem('peritrack_events', JSON.stringify(events));
+  try {
+    const eventsKey = 'peritrack_events';
+    const events = JSON.parse(localStorage.getItem(eventsKey) || '[]');
+    events.push({
+      type: lead.source === 'quiz_results' ? 'quiz_results_submitted' : 'free_trial_signup',
+      leadId: lead.id,
+      timestamp: lead.timestamp,
+      pricingPlan: lead.pricingPlan,
+      path: window.location.pathname
+    });
+    
+    localStorage.setItem(eventsKey, JSON.stringify(events));
+  } catch (error) {
+    console.error("trackLeadEvent: Error tracking event", error);
+  }
 };
 
 // Method to check if leads are properly being stored
 export const validateLeadStorage = (): boolean => {
-  console.log("Validating lead storage...");
-  const existingLeadCount = getLeads().length;
+  console.log("validateLeadStorage: Validating lead storage");
   
   // Create a test lead and then immediately remove it
   const testId = "test-" + Date.now();
   const testLead: Lead = {
     id: testId,
-    firstName: "TestUser",
+    firstName: "TestValidation",
     email: "test@validation.com",
     source: 'quiz_results',
     timestamp: new Date().toISOString(),
@@ -204,8 +245,10 @@ export const validateLeadStorage = (): boolean => {
   };
   
   try {
-    // Manually add the test lead
+    // Get the current leads
     const currentLeads = getLeads();
+    
+    // Add the test lead
     const updatedLeads = [...currentLeads, testLead];
     localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(updatedLeads));
     
@@ -214,34 +257,18 @@ export const validateLeadStorage = (): boolean => {
     const found = leadsAfterAdd.some(lead => lead.id === testId);
     
     // Remove the test lead
-    const cleanedLeads = leadsAfterAdd.filter(lead => lead.id !== testId);
-    localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(cleanedLeads));
+    if (found) {
+      const cleanedLeads = leadsAfterAdd.filter(lead => lead.id !== testId);
+      localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(cleanedLeads));
+      console.log("validateLeadStorage: Validation SUCCESS");
+    } else {
+      console.error("validateLeadStorage: Validation FAILED - test lead not found after save");
+    }
     
-    console.log(`Storage validation result: ${found ? "SUCCESS" : "FAILED"} (found: ${found})`);
     return found;
   } catch (error) {
-    console.error("Lead storage validation failed:", error);
+    console.error("validateLeadStorage: Lead storage validation failed:", error);
     return false;
-  }
-};
-
-// Force re-initialize the storage if needed
-export const initializeLeadStorage = (): void => {
-  if (!localStorage.getItem(LEADS_STORAGE_KEY)) {
-    localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
-    console.log("Initialized empty leads array in storage");
-  }
-  
-  // Validate that we can read from storage properly
-  try {
-    const testData = { test: "value" };
-    localStorage.setItem('peritrack_test', JSON.stringify(testData));
-    const retrieved = localStorage.getItem('peritrack_test');
-    const parsedTest = retrieved ? JSON.parse(retrieved) : null;
-    console.log("LocalStorage test:", parsedTest && parsedTest.test === "value" ? "PASSED" : "FAILED");
-    localStorage.removeItem('peritrack_test');
-  } catch (error) {
-    console.error("LocalStorage test failed:", error);
   }
 };
 
