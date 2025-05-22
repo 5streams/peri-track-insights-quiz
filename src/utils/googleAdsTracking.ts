@@ -36,8 +36,8 @@ export const trackGoogleAdsConversion = (
  * @param email - User's email address
  */
 export const trackQuizResultsRegistration = (email: string) => {
-  // Replace these with your actual Google Ads conversion ID and label
-  const conversionId = 'AW-CONVERSION_ID';
+  // Your specific Google Ads conversion ID
+  const conversionId = 'AW-828832872';
   const conversionLabel = 'QUIZ_RESULTS_LABEL';
   
   trackGoogleAdsConversion(conversionId, conversionLabel, {
@@ -53,8 +53,8 @@ export const trackQuizResultsRegistration = (email: string) => {
  * @param pricingPlan - Selected pricing plan ('monthly' or 'annual')
  */
 export const trackTrialRegistration = (email: string, pricingPlan?: 'monthly' | 'annual') => {
-  // Replace these with your actual Google Ads conversion ID and label
-  const conversionId = 'AW-CONVERSION_ID';
+  // Your specific Google Ads conversion ID
+  const conversionId = 'AW-828832872';
   const conversionLabel = 'TRIAL_SIGNUP_LABEL';
   
   // Different values for different pricing plans
@@ -74,4 +74,3 @@ export const trackTrialRegistration = (email: string, pricingPlan?: 'monthly' | 
     pricingPlan
   });
 };
-
