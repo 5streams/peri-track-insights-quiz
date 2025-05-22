@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { saveLead } from "@/utils/leadTracking";
+import { saveLead, getLeads } from "@/utils/leadTracking";
 import { useToast } from "@/hooks/use-toast";
 import { Check } from "lucide-react";
 
@@ -70,6 +70,15 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
         ? `Phone: ${phoneNumber}, Address: ${address}` 
         : undefined;
         
+      console.log("Modal about to save lead with data:", {
+        firstName: firstName.trim(),
+        email: email.trim(),
+        source,
+        pricingPlan,
+        quizResults,
+        additionalNotes
+      });
+      
       const lead = saveLead(
         firstName.trim(), 
         email.trim(), 
@@ -80,6 +89,10 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
       );
       
       console.log("Lead successfully saved:", lead);
+      
+      // Double check that leads are being stored correctly
+      const currentLeads = getLeads();
+      console.log("Current leads in storage after saving:", currentLeads);
       
       // Show success state
       setIsSubmitted(true);

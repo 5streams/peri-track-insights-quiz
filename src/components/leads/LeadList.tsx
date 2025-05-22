@@ -23,10 +23,20 @@ const LeadList: React.FC = () => {
   const { toast } = useToast();
   
   const loadLeads = () => {
-    // Load leads from localStorage
-    const allLeads = getLeads();
-    console.log("Loaded leads:", allLeads);
-    setLeads(allLeads);
+    // Load leads from localStorage - add debugging
+    try {
+      const allLeads = getLeads();
+      console.log("Raw leads data from localStorage:", localStorage.getItem('peritrack_leads'));
+      console.log("Parsed leads loaded in admin:", allLeads);
+      setLeads(allLeads);
+    } catch (error) {
+      console.error("Error loading leads:", error);
+      toast({
+        title: "Error loading leads",
+        description: "There was a problem loading lead data.",
+        variant: "destructive"
+      });
+    }
   };
   
   useEffect(() => {
@@ -105,8 +115,9 @@ const LeadList: React.FC = () => {
     });
   };
   
-  // Handle manual refresh
+  // Handle manual refresh with more feedback
   const handleRefresh = () => {
+    console.log("Manual refresh triggered");
     loadLeads();
     toast({
       title: "Leads Refreshed",

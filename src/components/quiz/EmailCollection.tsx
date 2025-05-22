@@ -46,7 +46,14 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
         ? JSON.parse(localStorage.getItem("quizAnswers") || "{}") 
         : {};
       
-      // Save lead data
+      // Save lead data - adding debug log to verify data
+      console.log("About to save lead with data:", {
+        firstName: firstName.trim(),
+        email: email.trim(),
+        source: 'quiz_results',
+        quizResults
+      });
+      
       const lead = saveLead(
         firstName.trim(),
         email.trim(),
@@ -56,6 +63,10 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       );
       
       console.log("Quiz lead saved successfully:", lead);
+      
+      // Double check that leads are being stored correctly
+      const currentLeads = JSON.parse(localStorage.getItem('peritrack_leads') || '[]');
+      console.log("Current leads in storage:", currentLeads);
       
       // Show toast notification for successful lead capture
       toast({

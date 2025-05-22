@@ -30,6 +30,9 @@ const getDeviceInfo = () => {
   };
 };
 
+// Local storage key for leads
+const LEADS_STORAGE_KEY = 'peritrack_leads';
+
 // Save a lead to localStorage
 export const saveLead = (
   firstName: string, 
@@ -51,29 +54,54 @@ export const saveLead = (
     additionalNotes
   };
   
-  // Get existing leads
-  const existingLeads = getLeads();
-  
-  // Add new lead
-  const updatedLeads = [...existingLeads, lead];
-  
-  // Save to localStorage
-  localStorage.setItem('peritrack_leads', JSON.stringify(updatedLeads));
-  
-  // Track the event
-  trackLeadEvent(lead);
-  
-  // Log to help with debugging
-  console.log('Lead saved:', lead);
-  console.log('Total leads:', updatedLeads.length);
+  try {
+    // Get existing leads
+    const existingLeads = getLeads();
+    
+    // Add new lead
+    const updatedLeads = [...existingLeads, lead];
+    
+    console.log(`Saving lead to localStorage. Total leads: ${updatedLeads.length}`);
+    
+    // Save to localStorage
+    localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(updatedLeads));
+    
+    // Verify the save was successful
+    const savedData = localStorage.getItem(LEADS_STORAGE_KEY);
+    if (!savedData) {
+      console.error('Failed to save leads to localStorage - data is empty after save');
+    }
+    
+    // Track the event
+    trackLeadEvent(lead);
+    
+  } catch (error) {
+    console.error('Error saving lead to localStorage:', error);
+  }
   
   return lead;
 };
 
 // Get all saved leads
 export const getLeads = (): Lead[] => {
-  const leadsData = localStorage.getItem('peritrack_leads');
-  return leadsData ? JSON.parse(leadsData) : [];
+  try {
+    const leadsData = localStorage.getItem(LEADS_STORAGE_KEY);
+    if (!leadsData) {
+      console.log('No leads found in localStorage');
+      return [];
+    }
+    
+    const parsedLeads = JSON.parse(leadsData);
+    if (!Array.isArray(parsedLeads)) {
+      console.error('Leads data is not an array:', parsedLeads);
+      return [];
+    }
+    
+    return parsedLeads;
+  } catch (error) {
+    console.error('Error parsing leads from localStorage:', error);
+    return [];
+  }
 };
 
 // Delete a lead by ID
@@ -82,7 +110,7 @@ export const deleteLead = (id: string): boolean => {
   const filteredLeads = leads.filter(lead => lead.id !== id);
   
   if (filteredLeads.length < leads.length) {
-    localStorage.setItem('peritrack_leads', JSON.stringify(filteredLeads));
+    localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(filteredLeads));
     return true;
   }
   
@@ -91,7 +119,8 @@ export const deleteLead = (id: string): boolean => {
 
 // Clear all leads (for testing purposes)
 export const clearLeads = (): void => {
-  localStorage.removeItem('peritrack_leads');
+  localStorage.removeItem(LEADS_STORAGE_KEY);
+  console.log('All leads cleared from localStorage');
 };
 
 // Track lead capture events (can be expanded to send to analytics service)
