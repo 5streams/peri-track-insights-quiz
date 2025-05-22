@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -133,9 +134,6 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Perimenopause Explanation */}
-          <PerimenopauseExplanation scoreCategory={scoreCategory} />
-          
           {/* Hormone Insights */}
           <HormoneInsights 
             scores={hormoneScores}
@@ -167,8 +165,11 @@ const Results = () => {
           {/* Our Guarantee Section */}
           <Guarantee />
           
-          {/* Simple Pricing Section at the very bottom */}
+          {/* Simple Pricing Section */}
           <SimplePricingSection onStartTrial={handleTrialCTA} />
+          
+          {/* Moved Perimenopause Explanation to the very bottom of the page */}
+          <PerimenopauseExplanation scoreCategory={scoreCategory} />
         </div>
       </div>
     </div>
