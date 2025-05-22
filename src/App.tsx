@@ -8,7 +8,8 @@ import Dashboard from "./pages/Dashboard";
 import Tracking from "./pages/Tracking";
 import Insights from "./pages/Insights";
 import NotFound from "./pages/NotFound";
-import AdminLeads from "./pages/AdminLeads"; // Add this new import
+import AdminLeads from "./pages/AdminLeads"; 
+import TryPeritracker from "./pages/TryPeritracker"; // Add import for new page
 import "./App.css";
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/tracking" element={<Tracking />} />
         <Route path="/insights" element={<Insights />} />
-        <Route path="/admin/leads" element={<AdminLeads />} /> {/* Add this new route */}
+        <Route path="/admin/leads" element={<AdminLeads />} />
+        <Route path="/tryperitracker" element={<TryPeritracker />} /> {/* Add new route */}
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
