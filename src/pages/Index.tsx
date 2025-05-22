@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -20,11 +21,11 @@ export default function Index() {
         <section className="bg-[#FFECD6] py-10 md:py-16 text-center border-b border-[#5D4154]/10">
           <div className="max-w-4xl mx-auto px-4">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-[#5D4154] mb-4">
-              Perimenopause Symptoms Quiz
+              Is It Perimenopause? Find Out In 2 Minutes
             </h1>
             
             <p className="text-lg max-w-2xl mx-auto mb-6 text-[#7D6174]">
-              Identify your perimenopause symptoms and discover what's causing them in just 2 minutes
+              Unsure if your symptoms are perimenopause or something else? Take our free quiz to discover what's really happening with your body.
             </p>
             
             <Button 
@@ -40,8 +41,46 @@ export default function Index() {
           </div>
         </section>
         
-        {/* How It Works */}
+        {/* Common Questions Section */}
         <section className="py-10 bg-[#FFECD6]/50">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-6">
+              ARE THESE YOUR SYMPTOMS?
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
+              {[
+                "Having trouble sleeping even when you're exhausted?",
+                "Experiencing mood swings that seem to come out of nowhere?",
+                "Noticing weight changes despite no changes to diet or exercise?",
+                "Feeling foggy-headed or having trouble concentrating?",
+                "Experiencing hot flashes or night sweats?",
+                "Noticing changes in your menstrual cycle?"
+              ].map((question, index) => (
+                <div key={index} className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-[#5D4154]">
+                  <p className="text-[#5D4154] font-medium">{question}</p>
+                </div>
+              ))}
+            </div>
+            
+            <div className="text-center bg-white p-5 rounded-lg shadow-sm mb-6">
+              <p className="font-medium text-lg mb-2">You're not alone. 90% of women don't recognize perimenopause symptoms when they start.</p>
+              <p className="text-sm text-gray-600">Our assessment has helped over 30,000 women identify if their symptoms are perimenopause-related.</p>
+            </div>
+            
+            <div className="text-center">
+              <Button 
+                asChild
+                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg"
+              >
+                <Link to="/quiz">Find Out If It's Perimenopause</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+        
+        {/* How It Works */}
+        <section className="py-10 bg-white">
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-6">
               HOW OUR ASSESSMENT WORKS
@@ -74,20 +113,11 @@ export default function Index() {
                 </div>
               ))}
             </div>
-            
-            <div className="text-center">
-              <Button 
-                asChild
-                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg"
-              >
-                <Link to="/quiz">Take The FREE Quiz</Link>
-              </Button>
-            </div>
           </div>
         </section>
         
         {/* Testimonials - Condensed */}
-        <section className="py-10 bg-white">
+        <section className="py-10 bg-[#FFECD6]/30">
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-6">
               WOMEN WHO FOUND ANSWERS
@@ -96,15 +126,15 @@ export default function Index() {
             <div className="grid md:grid-cols-3 gap-5">
               {[
                 {
-                  quote: "After taking this assessment, I finally understood my symptoms were perimenopause, not just stress.",
+                  quote: "I thought I was just stressed, but the assessment showed my symptoms were classic perimenopause. What a relief to finally know!",
                   author: "— Jennifer, 44"
                 },
                 {
-                  quote: "This quiz helped me understand my night sweats were classic perimenopause symptoms. The recommendations actually worked.",
+                  quote: "For months I wondered if something was wrong with me. This quiz confirmed my symptoms were perimenopause and helped me talk to my doctor.",
                   author: "— Karen, 45"
                 },
                 {
-                  quote: "I couldn't understand my sudden memory issues. This assessment identified them as perimenopause symptoms.",
+                  quote: "I couldn't understand my sudden memory issues and mood changes. This assessment identified them as perimenopause, not just 'getting older'.",
                   author: "— Patricia, 43"
                 }
               ].map((testimonial, index) => (
@@ -121,11 +151,11 @@ export default function Index() {
         <section className="py-10 bg-[#5D4154] text-center text-white" id="quiz">
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="font-playfair text-2xl md:text-3xl font-bold mb-4">
-              IDENTIFY YOUR PERIMENOPAUSE SYMPTOMS TODAY
+              STOP WONDERING AND START KNOWING
             </h2>
             
             <p className="max-w-2xl mx-auto mb-6">
-              Join over 30,000 women who've gained clarity with our free 2-minute assessment.
+              In just 2 minutes, get clarity on whether your symptoms are perimenopause-related or something else entirely.
             </p>
             
             <Button 
