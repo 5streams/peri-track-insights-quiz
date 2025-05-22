@@ -41,7 +41,9 @@ const AdminLeads = () => {
     return () => {
       metaTags.forEach(tagData => {
         const tag = document.querySelector(`meta[name="${tagData.name}"]`);
-        if (tag) document.head.removeChild(tag);
+        if (tag && tag.parentNode) {
+          document.head.removeChild(tag);
+        }
       });
     };
   }, []);
@@ -50,15 +52,19 @@ const AdminLeads = () => {
   useEffect(() => {
     console.log("AdminLeads: Checking authentication");
     
-    // Initialize lead storage
-    initializeLeadStorage();
-    
-    const adminSession = sessionStorage.getItem("admin_authenticated");
-    if (adminSession === "true") {
-      console.log("AdminLeads: Admin session found");
-      setIsAuthenticated(true);
-    } else {
-      console.log("AdminLeads: No admin session found, user needs to log in");
+    try {
+      // Initialize lead storage
+      initializeLeadStorage();
+      
+      const adminSession = sessionStorage.getItem("admin_authenticated");
+      if (adminSession === "true") {
+        console.log("AdminLeads: Admin session found");
+        setIsAuthenticated(true);
+      } else {
+        console.log("AdminLeads: No admin session found, user needs to log in");
+      }
+    } catch (error) {
+      console.error("AdminLeads: Error during initialization", error);
     }
   }, []);
 
