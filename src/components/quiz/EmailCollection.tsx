@@ -93,21 +93,38 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       
       console.log("EmailCollection: Lead saved successfully:", lead);
       
-      // Double check that leads are being stored correctly
-      const currentLeads = getLeads();
-      console.log("EmailCollection: Current leads after saving:", currentLeads);
+      // Force immediate synchronization with other tabs/browsers
+      localStorage.setItem("leads_updated_timestamp", Date.now().toString());
+      
+      // Try to broadcast the change event more aggressively
+      try {
+        // Use both localStorage and sessionStorage for redundancy
+        sessionStorage.setItem("latest_lead", JSON.stringify({
+          firstName: firstName.trim(),
+          email: email.trim(),
+          timestamp: new Date().toISOString()
+        }));
+        
+        // Force a storage event by updating a tracking key
+        localStorage.setItem("lead_tracker", Date.now().toString());
+        
+        // Dispatch custom events
+        window.dispatchEvent(new Event('storage'));
+        window.dispatchEvent(new CustomEvent('leadsUpdated'));
+        
+        // Double check storage after save
+        const currentLeads = getLeads();
+        console.log("EmailCollection: Current leads after saving:", currentLeads, 
+                    "Latest lead should be:", firstName.trim(), email.trim());
+      } catch (broadcastError) {
+        console.error("Error broadcasting lead update:", broadcastError);
+      }
       
       // Show toast notification for successful lead capture
       toast({
         title: "Information Saved",
         description: "Your information has been saved. Preparing your results...",
       });
-      
-      // Force a broadcast to other tabs/windows that leads have been updated
-      window.dispatchEvent(new Event('storage'));
-      
-      // Force leads to be visible in admin immediately
-      localStorage.setItem("leads_updated", Date.now().toString());
     } catch (error) {
       console.error("Error tracking quiz lead:", error);
       toast({

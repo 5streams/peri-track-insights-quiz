@@ -33,11 +33,15 @@ const getDeviceInfo = () => {
 // Local storage key for leads
 const LEADS_STORAGE_KEY = 'peritrack_leads';
 
-// Initialize or validate lead storage
+// Initialize or validate lead storage with improved error handling
 export const initializeLeadStorage = (): void => {
   console.log("initializeLeadStorage: Starting lead storage initialization");
   
   try {
+    // Store initialization timestamp for debugging
+    localStorage.setItem('peritrack_last_init', new Date().toISOString());
+    sessionStorage.setItem('peritrack_session_init', new Date().toISOString());
+    
     // Check if storage exists
     const existingData = localStorage.getItem(LEADS_STORAGE_KEY);
     
@@ -45,6 +49,9 @@ export const initializeLeadStorage = (): void => {
       // Create new empty storage
       console.log("initializeLeadStorage: No leads storage found, creating empty array");
       localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
+      
+      // Force broadcast of change
+      window.dispatchEvent(new Event('storage'));
       return;
     }
     
@@ -93,7 +100,7 @@ export const initializeLeadStorage = (): void => {
   }
 };
 
-// Save a lead to localStorage with improved error handling and validation
+// Enhanced save lead function with additional synchronization mechanisms
 export const saveLead = (
   firstName: string, 
   email: string, 
@@ -114,9 +121,12 @@ export const saveLead = (
   // Ensure storage is initialized
   initializeLeadStorage();
   
-  // Create lead object
+  // Create lead object with a unique timestamp-based ID
+  const leadId = generateLeadId();
+  console.log("saveLead: Generated lead ID:", leadId);
+  
   const lead: Lead = {
-    id: generateLeadId(),
+    id: leadId,
     firstName,
     email,
     source,
@@ -143,6 +153,19 @@ export const saveLead = (
     
     console.log(`saveLead: Retrieved ${existingLeads.length} existing leads`);
     
+    // Check for potential duplicates (same name + email within last minute)
+    const potentialDuplicates = existingLeads.filter(l => 
+      l.firstName.toLowerCase() === firstName.toLowerCase() &&
+      l.email.toLowerCase() === email.toLowerCase() &&
+      // Check if timestamp is within the last minute
+      (new Date().getTime() - new Date(l.timestamp).getTime()) < 60000
+    );
+    
+    if (potentialDuplicates.length > 0) {
+      console.warn("saveLead: Potential duplicate detected", potentialDuplicates);
+      // We'll save it anyway but log the warning
+    }
+    
     // Add new lead
     const updatedLeads = [...existingLeads, lead];
     
@@ -152,11 +175,23 @@ export const saveLead = (
     const dataToSave = JSON.stringify(updatedLeads);
     localStorage.setItem(LEADS_STORAGE_KEY, dataToSave);
     
+    // Also save a temporary copy to sessionStorage as backup
+    try {
+      sessionStorage.setItem('peritrack_latest_lead', JSON.stringify(lead));
+      sessionStorage.setItem('peritrack_leads_count', updatedLeads.length.toString());
+    } catch (sessionError) {
+      console.warn("saveLead: Could not save to sessionStorage:", sessionError);
+    }
+    
+    // Store a timestamp of the last update for synchronization
+    localStorage.setItem('leads_updated_timestamp', Date.now().toString());
+    
     // Dispatch a storage event for other tabs to detect
     try {
+      window.dispatchEvent(new Event('storage'));
       window.dispatchEvent(new CustomEvent('leadsUpdated', { detail: updatedLeads }));
     } catch (eventError) {
-      console.error("saveLead: Error dispatching leadsUpdated event", eventError);
+      console.error("saveLead: Error dispatching update events", eventError);
     }
     
     // Verify the save was successful
@@ -186,11 +221,19 @@ export const saveLead = (
   } catch (error) {
     console.error('saveLead: Error saving lead to localStorage:', error);
     
-    // Emergency save as a fallback
+    // Emergency save as a fallback - store just this lead if regular save fails
     try {
       console.log("saveLead: Attempting emergency single-lead save");
-      const singleLeadArray = [lead];
-      localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(singleLeadArray));
+      
+      // Try storing individual lead in a different key
+      localStorage.setItem(`peritrack_emergency_lead_${leadId}`, JSON.stringify(lead));
+      
+      // Also try to save to sessionStorage as a last resort
+      sessionStorage.setItem(`peritrack_emergency_lead_${leadId}`, JSON.stringify(lead));
+      
+      // Flag that emergency save was needed
+      localStorage.setItem('peritrack_emergency_save', Date.now().toString());
+      
       return lead;
     } catch (retryError) {
       console.error("saveLead: Emergency save failed:", retryError);
@@ -199,22 +242,25 @@ export const saveLead = (
   }
 };
 
-// Get all saved leads with additional validation
+// Enhanced getLeads with emergency lead recovery
 export const getLeads = (): Lead[] => {
   console.log("getLeads: Retrieving leads from localStorage");
   
   try {
+    // Ensure storage is initialized
+    initializeLeadStorage();
+    
     const leadsData = localStorage.getItem(LEADS_STORAGE_KEY);
     
     if (!leadsData) {
       console.log('getLeads: No leads found in localStorage');
-      return [];
+      return recoverEmergencyLeads(); // Try to recover any emergency leads
     }
     
     // Check if the data is not empty or corrupt
     if (leadsData === "null" || leadsData === "undefined" || leadsData === "") {
       console.error('getLeads: Invalid leads data in localStorage:', leadsData);
-      return [];
+      return recoverEmergencyLeads(); // Try to recover any emergency leads
     }
     
     try {
@@ -222,7 +268,7 @@ export const getLeads = (): Lead[] => {
       
       if (!Array.isArray(parsedLeads)) {
         console.error('getLeads: Leads data is not an array:', parsedLeads);
-        return [];
+        return recoverEmergencyLeads(); // Try to recover any emergency leads
       }
       
       // Basic validation of lead objects
@@ -238,14 +284,149 @@ export const getLeads = (): Lead[] => {
       }
       
       console.log(`getLeads: Successfully retrieved ${validLeads.length} valid leads`);
+      
+      // Also check for emergency leads and merge them
+      const emergencyLeads = recoverEmergencyLeads();
+      
+      if (emergencyLeads.length > 0) {
+        console.log(`getLeads: Found ${emergencyLeads.length} emergency leads to merge`);
+        
+        // Merge and remove duplicates based on ID
+        const mergedLeads = [...validLeads];
+        
+        emergencyLeads.forEach(emergencyLead => {
+          if (!mergedLeads.some(lead => lead.id === emergencyLead.id)) {
+            mergedLeads.push(emergencyLead);
+          }
+        });
+        
+        console.log(`getLeads: Returning ${mergedLeads.length} leads after merging`);
+        return mergedLeads;
+      }
+      
       return validLeads;
     } catch (parseError) {
       console.error('getLeads: Error parsing leads JSON:', parseError);
       console.error('getLeads: Raw data that failed to parse:', leadsData);
-      return [];
+      return recoverEmergencyLeads(); // Try to recover any emergency leads
     }
   } catch (error) {
     console.error('getLeads: Error reading leads from localStorage:', error);
+    return recoverEmergencyLeads(); // Try to recover any emergency leads
+  }
+};
+
+// Helper function to find emergency saved leads
+const recoverEmergencyLeads = (): Lead[] => {
+  try {
+    console.log("recoverEmergencyLeads: Looking for emergency leads");
+    
+    // Get all localStorage keys
+    const allKeys = Object.keys(localStorage);
+    
+    // Filter for emergency lead keys
+    const emergencyLeadKeys = allKeys.filter(key => 
+      key.startsWith('peritrack_emergency_lead_')
+    );
+    
+    if (emergencyLeadKeys.length === 0) {
+      // Try sessionStorage as last resort
+      const sessionKeys = Object.keys(sessionStorage);
+      const sessionEmergencyKeys = sessionKeys.filter(key => 
+        key.startsWith('peritrack_emergency_lead_')
+      );
+      
+      if (sessionEmergencyKeys.length === 0) {
+        return [];
+      }
+      
+      // Try to recover from sessionStorage
+      console.log(`recoverEmergencyLeads: Found ${sessionEmergencyKeys.length} emergency leads in sessionStorage`);
+      
+      const sessionEmergencyLeads: Lead[] = [];
+      
+      sessionEmergencyKeys.forEach(key => {
+        try {
+          const leadData = sessionStorage.getItem(key);
+          if (leadData) {
+            const lead = JSON.parse(leadData);
+            if (lead && lead.id && lead.firstName && lead.email) {
+              sessionEmergencyLeads.push(lead);
+            }
+          }
+        } catch (e) {
+          console.error(`recoverEmergencyLeads: Error recovering lead from key ${key}:`, e);
+        }
+      });
+      
+      return sessionEmergencyLeads;
+    }
+    
+    console.log(`recoverEmergencyLeads: Found ${emergencyLeadKeys.length} emergency leads`);
+    
+    // Recover each emergency lead
+    const emergencyLeads: Lead[] = [];
+    
+    emergencyLeadKeys.forEach(key => {
+      try {
+        const leadData = localStorage.getItem(key);
+        if (leadData) {
+          const lead = JSON.parse(leadData);
+          if (lead && lead.id && lead.firstName && lead.email) {
+            emergencyLeads.push(lead);
+            
+            // Remove the emergency key after recovery
+            localStorage.removeItem(key);
+          }
+        }
+      } catch (e) {
+        console.error(`recoverEmergencyLeads: Error recovering lead from key ${key}:`, e);
+      }
+    });
+    
+    // If we found emergency leads, restore them to main storage
+    if (emergencyLeads.length > 0) {
+      try {
+        console.log(`recoverEmergencyLeads: Restoring ${emergencyLeads.length} emergency leads to main storage`);
+        
+        // Get current leads or empty array
+        const currentLeadsData = localStorage.getItem(LEADS_STORAGE_KEY);
+        let currentLeads: Lead[] = [];
+        
+        if (currentLeadsData) {
+          try {
+            const parsed = JSON.parse(currentLeadsData);
+            if (Array.isArray(parsed)) {
+              currentLeads = parsed;
+            }
+          } catch (e) {
+            console.error("recoverEmergencyLeads: Error parsing current leads:", e);
+          }
+        }
+        
+        // Merge current leads with emergency leads
+        const mergedLeads = [...currentLeads];
+        
+        emergencyLeads.forEach(emergencyLead => {
+          if (!mergedLeads.some(lead => lead.id === emergencyLead.id)) {
+            mergedLeads.push(emergencyLead);
+          }
+        });
+        
+        // Save the merged leads back
+        localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(mergedLeads));
+        localStorage.setItem('leads_updated_timestamp', Date.now().toString());
+        
+        // Clear emergency flag
+        localStorage.removeItem('peritrack_emergency_save');
+      } catch (e) {
+        console.error("recoverEmergencyLeads: Error restoring emergency leads:", e);
+      }
+    }
+    
+    return emergencyLeads;
+  } catch (error) {
+    console.error("recoverEmergencyLeads: Error recovering emergency leads:", error);
     return [];
   }
 };
@@ -257,7 +438,10 @@ export const deleteLead = (id: string): boolean => {
   
   if (filteredLeads.length < leads.length) {
     localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(filteredLeads));
+    localStorage.setItem('leads_updated_timestamp', Date.now().toString());
+    
     // Notify other tabs/browsers
+    window.dispatchEvent(new Event('storage'));
     window.dispatchEvent(new CustomEvent('leadsUpdated', { detail: filteredLeads }));
     return true;
   }
@@ -268,8 +452,19 @@ export const deleteLead = (id: string): boolean => {
 // Clear all leads and reinitialize storage
 export const clearLeads = (): void => {
   localStorage.removeItem(LEADS_STORAGE_KEY);
+  
+  // Also clear any emergency leads
+  const allKeys = Object.keys(localStorage);
+  allKeys.forEach(key => {
+    if (key.startsWith('peritrack_emergency_lead_')) {
+      localStorage.removeItem(key);
+    }
+  });
+  
   initializeLeadStorage();
+  
   // Notify other tabs/browsers
+  window.dispatchEvent(new Event('storage'));
   window.dispatchEvent(new CustomEvent('leadsUpdated', { detail: [] }));
   console.log('clearLeads: All leads cleared from localStorage');
 };
