@@ -4,47 +4,47 @@ import { Link } from "react-router-dom";
 
 export default function Index() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#FBF9F6]">
+    <div className="flex flex-col min-h-screen bg-purple-50">
       <header className="bg-white py-3 px-4 shadow-md sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 bg-[#5D4154] rounded-full flex items-center justify-center">
-              <div className="h-5 w-5 bg-[#FFECD6] rounded-full" />
+            <div className="h-8 w-8 bg-purple-800 rounded-full flex items-center justify-center">
+              <div className="h-5 w-5 bg-purple-200 rounded-full" />
             </div>
-            <span className="text-xl font-playfair font-bold text-[#5D4154]">Peritrack</span>
+            <span className="text-xl font-playfair font-bold text-purple-800">Peritrack</span>
           </div>
         </div>
       </header>
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-[#FFECD6] py-10 md:py-16 text-center border-b border-[#5D4154]/10">
+        <section className="bg-purple-100 py-10 md:py-16 text-center border-b border-purple-200">
           <div className="max-w-4xl mx-auto px-4">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-[#5D4154] mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-purple-800 mb-4">
               Is It Perimenopause? Find Out In 2 Minutes
             </h1>
             
-            <p className="text-lg max-w-2xl mx-auto mb-6 text-[#7D6174]">
+            <p className="text-lg max-w-2xl mx-auto mb-6 text-purple-700">
               Unsure if your symptoms are perimenopause or something else? Take our free quiz to discover what's really happening with your body.
             </p>
             
             <Button 
               asChild
-              className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
+              className="bg-purple-800 hover:bg-purple-700 text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
             >
               <Link to="/quiz">Take The FREE Perimenopause Quiz</Link>
             </Button>
             
-            <div className="mt-3 text-sm text-[#7D6174]">
+            <div className="mt-3 text-sm text-purple-700">
               Free 2 Minute Assessment • Get Results Immediately
             </div>
           </div>
         </section>
         
         {/* Common Questions Section */}
-        <section className="py-10 bg-[#FFECD6]/50">
+        <section className="py-10 bg-purple-50">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-6">
+            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-purple-800 mb-6">
               ARE THESE YOUR SYMPTOMS?
             </h2>
             
@@ -57,21 +57,21 @@ export default function Index() {
                 "Experiencing hot flashes or night sweats?",
                 "Noticing changes in your menstrual cycle?"
               ].map((question, index) => (
-                <div key={index} className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-[#5D4154]">
-                  <p className="text-[#5D4154] font-medium">{question}</p>
+                <div key={index} className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-purple-600">
+                  <p className="text-purple-800 font-medium">{question}</p>
                 </div>
               ))}
             </div>
             
             <div className="text-center bg-white p-5 rounded-lg shadow-sm mb-6">
-              <p className="font-medium text-lg mb-2">You're not alone. 90% of women don't recognize perimenopause symptoms when they start.</p>
-              <p className="text-sm text-gray-600">Our assessment has helped over 30,000 women identify if their symptoms are perimenopause-related.</p>
+              <p className="font-medium text-lg mb-2 text-purple-900">You're not alone. 90% of women don't recognize perimenopause symptoms when they start.</p>
+              <p className="text-sm text-purple-700">Our assessment has helped over 30,000 women identify if their symptoms are perimenopause-related.</p>
             </div>
             
             <div className="text-center">
               <Button 
                 asChild
-                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg"
+                className="bg-purple-800 hover:bg-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg"
               >
                 <Link to="/quiz">Find Out If It's Perimenopause</Link>
               </Button>
@@ -82,7 +82,7 @@ export default function Index() {
         {/* How It Works */}
         <section className="py-10 bg-white">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-6">
+            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-purple-800 mb-6">
               HOW OUR ASSESSMENT WORKS
             </h2>
             
@@ -105,11 +105,11 @@ export default function Index() {
                 }
               ].map((item, index) => (
                 <div key={index} className="text-center bg-white p-5 rounded-lg shadow-sm">
-                  <div className="w-10 h-10 bg-[#5D4154] text-white rounded-full flex items-center justify-center text-lg font-bold mx-auto mb-3">
+                  <div className="w-10 h-10 bg-purple-800 text-white rounded-full flex items-center justify-center text-lg font-bold mx-auto mb-3">
                     {item.step}
                   </div>
-                  <h3 className="font-semibold mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600">{item.content}</p>
+                  <h3 className="font-semibold mb-2 text-purple-900">{item.title}</h3>
+                  <p className="text-sm text-purple-700">{item.content}</p>
                 </div>
               ))}
             </div>
@@ -117,9 +117,9 @@ export default function Index() {
         </section>
         
         {/* Testimonials - Condensed */}
-        <section className="py-10 bg-[#FFECD6]/30">
+        <section className="py-10 bg-purple-50">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-6">
+            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-purple-800 mb-6">
               WOMEN WHO FOUND ANSWERS
             </h2>
             
@@ -138,9 +138,9 @@ export default function Index() {
                   author: "— Patricia, 43"
                 }
               ].map((testimonial, index) => (
-                <div key={index} className="bg-[#FFECD6]/30 p-5 rounded-xl shadow-sm">
-                  <p className="mb-3 text-sm italic">"{testimonial.quote}"</p>
-                  <p className="font-semibold text-[#5D4154] text-sm">{testimonial.author}</p>
+                <div key={index} className="bg-white p-5 rounded-xl shadow-sm">
+                  <p className="mb-3 text-sm italic text-purple-700">"{testimonial.quote}"</p>
+                  <p className="font-semibold text-purple-800 text-sm">{testimonial.author}</p>
                 </div>
               ))}
             </div>
@@ -148,7 +148,7 @@ export default function Index() {
         </section>
         
         {/* Final CTA */}
-        <section className="py-10 bg-[#5D4154] text-center text-white" id="quiz">
+        <section className="py-10 bg-purple-800 text-center text-white" id="quiz">
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="font-playfair text-2xl md:text-3xl font-bold mb-4">
               STOP WONDERING AND START KNOWING
@@ -160,14 +160,14 @@ export default function Index() {
             
             <Button 
               asChild
-              className="bg-white hover:bg-gray-100 text-[#5D4154] px-8 py-4 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
+              className="bg-white hover:bg-purple-100 text-purple-800 px-8 py-4 text-lg font-semibold rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
             >
               <Link to="/quiz">Take The FREE Quiz Now</Link>
             </Button>
             
             <div className="flex flex-wrap justify-center gap-3 mt-6 text-sm">
               {["Private & Secure", "HIPAA Compliant", "Medically Reviewed"].map((badge, index) => (
-                <div key={index} className="bg-white/10 px-4 py-1 rounded-full">
+                <div key={index} className="bg-purple-700/40 px-4 py-1 rounded-full">
                   {badge}
                 </div>
               ))}
@@ -176,13 +176,13 @@ export default function Index() {
         </section>
       </main>
 
-      <footer className="bg-[#5D4154] text-white py-6 px-4 text-sm">
+      <footer className="bg-purple-900 text-white py-6 px-4 text-sm">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-4 gap-6 mb-6">
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-3">
                 <div className="h-6 w-6 bg-white/20 rounded-full flex items-center justify-center">
-                  <div className="h-4 w-4 bg-[#FFECD6] rounded-full" />
+                  <div className="h-4 w-4 bg-purple-200 rounded-full" />
                 </div>
                 <span className="text-lg font-playfair font-bold">Peritrack</span>
               </div>
@@ -192,28 +192,28 @@ export default function Index() {
             </div>
             
             <div>
-              <h4 className="font-semibold text-[#FFECD6] mb-2">Company</h4>
+              <h4 className="font-semibold text-purple-200 mb-2">Company</h4>
               <ul className="space-y-1 text-xs">
                 {["About Us", "Medical Review", "Careers"].map((link, index) => (
-                  <li key={index}><a href="#" className="hover:text-[#FFECD6] transition">{link}</a></li>
+                  <li key={index}><a href="#" className="hover:text-purple-200 transition">{link}</a></li>
                 ))}
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold text-[#FFECD6] mb-2">Resources</h4>
+              <h4 className="font-semibold text-purple-200 mb-2">Resources</h4>
               <ul className="space-y-1 text-xs">
                 {["Perimenopause Symptoms", "Hormone Guide", "Research"].map((link, index) => (
-                  <li key={index}><a href="#" className="hover:text-[#FFECD6] transition">{link}</a></li>
+                  <li key={index}><a href="#" className="hover:text-purple-200 transition">{link}</a></li>
                 ))}
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold text-[#FFECD6] mb-2">Legal</h4>
+              <h4 className="font-semibold text-purple-200 mb-2">Legal</h4>
               <ul className="space-y-1 text-xs">
                 {["Terms", "Privacy", "Contact"].map((link, index) => (
-                  <li key={index}><a href="#" className="hover:text-[#FFECD6] transition">{link}</a></li>
+                  <li key={index}><a href="#" className="hover:text-purple-200 transition">{link}</a></li>
                 ))}
               </ul>
             </div>
