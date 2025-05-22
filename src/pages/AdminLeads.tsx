@@ -7,7 +7,6 @@ import { useToast } from "@/hooks/use-toast";
 import { initializeLeadStorage } from "@/utils/leadTracking";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { Helmet } from "react-helmet";
 
 const AdminLeads = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -21,12 +20,7 @@ const AdminLeads = () => {
     console.log("AdminLeads: Checking authentication");
     
     // Initialize lead storage
-    try {
-      initializeLeadStorage();
-      console.log("AdminLeads: Lead storage initialized");
-    } catch (e) {
-      console.error("AdminLeads: Error initializing lead storage", e);
-    }
+    initializeLeadStorage();
     
     const adminSession = sessionStorage.getItem("admin_authenticated");
     if (adminSession === "true") {
@@ -35,20 +29,6 @@ const AdminLeads = () => {
     } else {
       console.log("AdminLeads: No admin session found, user needs to log in");
     }
-    
-    // Set up storage event listener for cross-tab authentication
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "admin_authenticated" && e.newValue === "true") {
-        setIsAuthenticated(true);
-        console.log("AdminLeads: Authentication detected from another tab");
-      }
-    };
-    
-    window.addEventListener('storage', handleStorageChange);
-    
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
   }, []);
 
   // Enhanced authentication with error handling
@@ -66,7 +46,6 @@ const AdminLeads = () => {
         
         // Store the authentication status in sessionStorage for persistence
         sessionStorage.setItem("admin_authenticated", "true");
-        localStorage.setItem("admin_login_timestamp", Date.now().toString());
         
         // Initialize storage after successful login
         initializeLeadStorage();
@@ -108,11 +87,6 @@ const AdminLeads = () => {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-[#f4edfd] flex items-center justify-center px-4">
-        <Helmet>
-          <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-          <meta http-equiv="Pragma" content="no-cache" />
-          <meta http-equiv="Expires" content="0" />
-        </Helmet>
         <div className="bg-white rounded-lg shadow-md p-8 max-w-md w-full">
           <h1 className="text-2xl font-bold text-[#6b4e82] mb-6 text-center">Admin Login</h1>
           
@@ -166,11 +140,6 @@ const AdminLeads = () => {
   
   return (
     <div className="min-h-screen bg-[#f4edfd] py-8 px-4 md:px-8 lg:px-0">
-      <Helmet>
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-        <meta http-equiv="Pragma" content="no-cache" />
-        <meta http-equiv="Expires" content="0" />
-      </Helmet>
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <div>

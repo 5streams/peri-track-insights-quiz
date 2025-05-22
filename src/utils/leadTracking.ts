@@ -17,11 +17,6 @@ export interface Lead {
   additionalNotes?: string;
 }
 
-// Local storage constants
-const LEADS_STORAGE_KEY = 'peritrack_leads';
-const BACKUP_STORAGE_KEY = 'peritrack_leads_backup';
-const LAST_UPDATED_KEY = 'leads_updated_timestamp';
-
 // Generate a unique ID for leads
 const generateLeadId = (): string => {
   return Date.now().toString(36) + Math.random().toString(36).substring(2, 9);
@@ -34,6 +29,9 @@ const getDeviceInfo = () => {
     screenSize: `${window.innerWidth}x${window.innerHeight}`,
   };
 };
+
+// Local storage key for leads
+const LEADS_STORAGE_KEY = 'peritrack_leads';
 
 // Initialize or validate lead storage with improved error handling
 export const initializeLeadStorage = (): void => {
@@ -50,30 +48,12 @@ export const initializeLeadStorage = (): void => {
         const data = JSON.parse(localStorage.getItem(LEADS_STORAGE_KEY) || '[]');
         if (!Array.isArray(data)) {
           console.error("initializeLeadStorage: Stored data is not an array, recreating");
-          
-          // Try to backup malformed data before overwriting
-          localStorage.setItem('peritrack_leads_malformed_backup', localStorage.getItem(LEADS_STORAGE_KEY) || '');
-          
           localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
         }
       } catch (parseError) {
         console.error("initializeLeadStorage: Error parsing leads, recreating", parseError);
-        
-        // Try to backup malformed data before overwriting
-        localStorage.setItem('peritrack_leads_malformed_backup', localStorage.getItem(LEADS_STORAGE_KEY) || '');
-        
         localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
       }
-    }
-    
-    // Create a backup of the current state
-    try {
-      const currentData = localStorage.getItem(LEADS_STORAGE_KEY);
-      if (currentData) {
-        localStorage.setItem(BACKUP_STORAGE_KEY, currentData);
-      }
-    } catch (backupError) {
-      console.error("Error creating backup:", backupError);
     }
     
     // Set initialization flags
@@ -81,17 +61,6 @@ export const initializeLeadStorage = (): void => {
     localStorage.setItem('peritrack_last_init', new Date().toISOString());
   } catch (error) {
     console.error("initializeLeadStorage: Critical error during initialization:", error);
-    
-    // Try to use backup if main storage fails
-    try {
-      const backup = localStorage.getItem(BACKUP_STORAGE_KEY);
-      if (backup) {
-        localStorage.setItem(LEADS_STORAGE_KEY, backup);
-        console.log("Restored leads from backup");
-      }
-    } catch (restoreError) {
-      console.error("Failed to restore from backup:", restoreError);
-    }
   }
 };
 
@@ -126,8 +95,6 @@ export const saveLead = (
     additionalNotes
   };
   
-  console.log("saveLead: Creating new lead:", lead);
-  
   try {
     // Get current leads safely
     const existingLeadsData = localStorage.getItem(LEADS_STORAGE_KEY) || '[]';
@@ -135,12 +102,8 @@ export const saveLead = (
     
     try {
       existingLeads = JSON.parse(existingLeadsData);
-      if (!Array.isArray(existingLeads)) {
-        console.error("saveLead: Existing leads is not an array, resetting");
-        existingLeads = [];
-      }
-    } catch (parseError) {
-      console.error("saveLead: Error parsing existing leads:", parseError);
+      if (!Array.isArray(existingLeads)) existingLeads = [];
+    } catch {
       existingLeads = [];
     }
     
@@ -149,41 +112,21 @@ export const saveLead = (
     
     // Save to localStorage
     localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(updatedLeads));
-    console.log(`saveLead: Saved lead. Total leads count: ${updatedLeads.length}`);
     
-    // Create a backup of the current state
-    try {
-      localStorage.setItem(BACKUP_STORAGE_KEY, JSON.stringify(updatedLeads));
-    } catch (backupError) {
-      console.error("Error creating backup:", backupError);
-    }
-    
-    // Save most recent lead to sessionStorage as a backup
+    // Save a backup copy to sessionStorage
     try {
       sessionStorage.setItem('latest_lead', JSON.stringify(lead));
-      sessionStorage.setItem('latest_lead_timestamp', new Date().toISOString());
-    } catch (sessionError) {
-      console.warn("Session storage backup failed:", sessionError);
+    } catch (e) {
+      console.warn("Session storage backup failed:", e);
     }
     
     // Update timestamp for synchronization
     const timestamp = Date.now().toString();
-    localStorage.setItem(LAST_UPDATED_KEY, timestamp);
+    localStorage.setItem('leads_updated_timestamp', timestamp);
     
     return lead;
   } catch (error) {
     console.error('Error saving lead:', error);
-    
-    // Try to save to sessionStorage as a fallback
-    try {
-      const sessionLeads = JSON.parse(sessionStorage.getItem('backup_leads') || '[]');
-      sessionLeads.push(lead);
-      sessionStorage.setItem('backup_leads', JSON.stringify(sessionLeads));
-      console.log("Lead saved to session storage as fallback");
-    } catch (sessionError) {
-      console.error("Failed to save to session storage:", sessionError);
-    }
-    
     throw error;
   }
 };
@@ -201,35 +144,12 @@ export const getLeads = (): Lead[] => {
     try {
       leads = JSON.parse(leadsData);
       if (!Array.isArray(leads)) {
-        console.error('getLeads: Leads data is not an array, returning empty array');
-        return [];
+        console.error('Leads data is not an array');
+        leads = [];
       }
-      
-      // Sort leads by timestamp, newest first
-      leads.sort((a, b) => {
-        return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
-      });
-      
     } catch (error) {
       console.error('Error parsing leads:', error);
-      
-      // Try to recover from backup
-      try {
-        const backupData = localStorage.getItem(BACKUP_STORAGE_KEY);
-        if (backupData) {
-          leads = JSON.parse(backupData);
-          if (Array.isArray(leads)) {
-            console.log("Recovered leads from backup");
-            // Restore main storage
-            localStorage.setItem(LEADS_STORAGE_KEY, backupData);
-            return leads;
-          }
-        }
-      } catch (backupError) {
-        console.error("Failed to recover from backup:", backupError);
-      }
-      
-      return [];
+      leads = [];
     }
     
     return leads;
@@ -241,23 +161,8 @@ export const getLeads = (): Lead[] => {
 
 // Clear all leads
 export const clearLeads = (): void => {
-  try {
-    // Create backup before clearing
-    const currentLeads = localStorage.getItem(LEADS_STORAGE_KEY);
-    if (currentLeads) {
-      localStorage.setItem('peritrack_leads_before_clear', currentLeads);
-    }
-    
-    // Clear leads
-    localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
-    console.log('All leads cleared from localStorage');
-    
-    // Update timestamp
-    localStorage.setItem(LAST_UPDATED_KEY, Date.now().toString());
-  } catch (error) {
-    console.error("Error clearing leads:", error);
-    throw error;
-  }
+  localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
+  console.log('All leads cleared from localStorage');
 };
 
 // Simple validation function
@@ -283,10 +188,9 @@ export const validateLeadStorage = (): boolean => {
     
     if (found) {
       localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(before));
-      return true;
     }
     
-    return false;
+    return found;
   } catch (error) {
     console.error("Validation failed:", error);
     return false;

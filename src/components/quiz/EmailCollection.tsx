@@ -52,7 +52,7 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       });
       
       // Save lead
-      const savedLead = saveLead(
+      saveLead(
         firstName.trim(),
         email.trim(),
         'quiz_results',
@@ -60,15 +60,6 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
         quizResults,
         `Quiz completed at ${new Date().toISOString()}`
       );
-      
-      // Dispatch a custom event to notify other components/tabs
-      const event = new CustomEvent('leadSaved', { 
-        detail: { lead: savedLead, timestamp: new Date().getTime() } 
-      });
-      window.dispatchEvent(event);
-      
-      // Set a timestamp in localStorage to trigger storage events in other tabs
-      localStorage.setItem('last_lead_saved', new Date().getTime().toString());
       
       // Show success message
       toast({

@@ -25,15 +25,12 @@ const LeadList: React.FC = () => {
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   const { toast } = useToast();
   
-  // Load leads function with enhanced error handling
+  // Load leads function
   const loadLeads = () => {
     setIsLoading(true);
     setLastRefresh(new Date());
     
     try {
-      // Force re-initialization of storage
-      initializeLeadStorage();
-      
       // Get all leads
       const allLeads = getLeads();
       console.log("LeadList: Loaded leads count:", allLeads.length);
@@ -47,8 +44,7 @@ const LeadList: React.FC = () => {
       );
       
       if (julieFound) {
-        console.log("LeadList: Found Julie in the leads!", 
-          allLeads.filter(lead => lead.firstName.toLowerCase().includes('julie')));
+        console.log("LeadList: Found Julie in the leads!");
       }
     } catch (error) {
       console.error("Error loading leads:", error);
@@ -62,59 +58,34 @@ const LeadList: React.FC = () => {
     }
   };
 
-  // Set up auto-refresh and polling with multiple triggers
+  // Set up auto-refresh and polling
   useEffect(() => {
     // Initial load
     loadLeads();
     
-    // Setup polling interval (every 1 second for more frequent updates)
+    // Setup polling interval (every 2 seconds)
     const interval = setInterval(() => {
       loadLeads();
-    }, 1000); // Faster polling for better real-time feel
-    
-    // Listen for storage changes from other tabs/windows
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'peritrack_leads' || e.key === 'leads_updated_timestamp' || e.key === 'last_lead_saved') {
-        console.log("LeadList: Storage change detected, reloading leads");
-        loadLeads();
-      }
-    };
-    
-    // Listen for custom leadSaved event
-    const handleLeadSaved = () => {
-      console.log("LeadList: leadSaved event detected, reloading leads");
-      loadLeads();
-    };
+    }, 2000);
     
     // Check for updates on window focus
     const handleFocus = () => {
       loadLeads();
     };
     
-    // Set up all event listeners
-    window.addEventListener('storage', handleStorageChange);
-    window.addEventListener('leadSaved', handleLeadSaved as EventListener);
     window.addEventListener('focus', handleFocus);
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') {
-        loadLeads();
-      }
-    });
     
     return () => {
       clearInterval(interval);
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('leadSaved', handleLeadSaved as EventListener);
       window.removeEventListener('focus', handleFocus);
-      document.removeEventListener('visibilitychange', () => {});
     };
   }, []);
   
   // Filter leads based on search term and source filter
   const filteredLeads = leads.filter(lead => {
     const matchesSearch = 
-      (lead.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) || '') ||
-      (lead.email?.toLowerCase().includes(searchTerm.toLowerCase()) || '');
+      lead.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      lead.email.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesFilter = 
       filterSource === 'all' || 
@@ -143,10 +114,6 @@ const LeadList: React.FC = () => {
         description: "Lead has been created. Refreshing list...",
       });
       
-      // Set storage event trigger for other tabs
-      localStorage.setItem('last_lead_saved', new Date().getTime().toString());
-      
-      // Force immediate refresh
       loadLeads();
     } catch (error) {
       console.error("Error creating test lead:", error);
@@ -161,7 +128,7 @@ const LeadList: React.FC = () => {
   // Create a "Julie" test lead specifically
   const createJulieLead = () => {
     try {
-      const julie = saveLead(
+      saveLead(
         "Julie", 
         `julie.test${Date.now()}@example.com`, 
         'quiz_results',
@@ -170,17 +137,11 @@ const LeadList: React.FC = () => {
         `Julie test lead created at ${new Date().toISOString()}`
       );
       
-      console.log("Created Julie lead:", julie);
-      
       toast({
         title: "Julie Test Lead Created",
         description: "Julie lead created. Refreshing list...",
       });
       
-      // Set storage event trigger for other tabs
-      localStorage.setItem('last_lead_saved', new Date().getTime().toString());
-      
-      // Force immediate refresh
       loadLeads();
     } catch (error) {
       console.error("Error creating Julie lead:", error);
@@ -192,31 +153,12 @@ const LeadList: React.FC = () => {
     }
   };
   
-  // Debug storage with enhanced visibility
+  // Debug storage
   const debugStorage = () => {
     try {
       console.log('===== STORAGE DEBUG =====');
       console.log('Raw storage data:', localStorage.getItem('peritrack_leads'));
       console.log('All localStorage keys:', Object.keys(localStorage));
-      
-      // Parse and show leads data for debugging
-      try {
-        const rawData = localStorage.getItem('peritrack_leads');
-        if (rawData) {
-          const parsedData = JSON.parse(rawData);
-          console.log('Parsed leads count:', parsedData.length);
-          console.log('First few leads:', parsedData.slice(0, 3));
-          
-          // Look for Julie specifically
-          const julieLeads = parsedData.filter((lead: any) => 
-            lead.firstName?.toLowerCase().includes('julie'));
-          console.log('Julie leads found:', julieLeads.length, julieLeads);
-        } else {
-          console.log('No leads data found in storage');
-        }
-      } catch (e) {
-        console.error('Error parsing leads data:', e);
-      }
       
       // Validate storage
       const isValid = validateLeadStorage();
@@ -236,10 +178,8 @@ const LeadList: React.FC = () => {
     }
   };
   
-  // Force page reload with cache clearing
+  // Force page reload
   const forcePageReload = () => {
-    // Clear any cached data
-    sessionStorage.removeItem('cached_leads');
     window.location.reload();
   };
   
@@ -262,9 +202,6 @@ const LeadList: React.FC = () => {
         description: "All leads have been removed.",
         variant: "destructive"
       });
-      
-      // Set storage event trigger for other tabs
-      localStorage.setItem('leads_updated_timestamp', Date.now().toString());
     }
   };
 
@@ -323,7 +260,7 @@ const LeadList: React.FC = () => {
             <Button 
               onClick={createJulieLead}
               variant="outline"
-              className="w-full sm:w-auto text-purple-500 hover:text-purple-700 bg-purple-50 border-purple-200"
+              className="w-full sm:w-auto text-purple-500 hover:text-purple-700"
             >
               + Julie Test
             </Button>
@@ -419,7 +356,7 @@ const LeadList: React.FC = () => {
                   <Button 
                     onClick={createJulieLead}
                     variant="secondary"
-                    className="text-sm bg-purple-50 text-purple-600"
+                    className="text-sm"
                   >
                     Create Julie Test Lead
                   </Button>
