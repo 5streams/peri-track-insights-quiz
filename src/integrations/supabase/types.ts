@@ -9,13 +9,162 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          created_at: string | null
+          device_info: Json | null
+          email: string | null
+          id: string
+          name: string | null
+          notes: string | null
+          pricing_tier: string | null
+          source: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          device_info?: Json | null
+          email?: string | null
+          id?: string
+          name?: string | null
+          notes?: string | null
+          pricing_tier?: string | null
+          source?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          device_info?: Json | null
+          email?: string | null
+          id?: string
+          name?: string | null
+          notes?: string | null
+          pricing_tier?: string | null
+          source?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quiz_answers: {
+        Row: {
+          answer: string[] | null
+          created_at: string | null
+          id: string
+          question_id: string
+          user_id: string | null
+        }
+        Insert: {
+          answer?: string[] | null
+          created_at?: string | null
+          id?: string
+          question_id: string
+          user_id?: string | null
+        }
+        Update: {
+          answer?: string[] | null
+          created_at?: string | null
+          id?: string
+          question_id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_answers_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quiz_submissions: {
+        Row: {
+          id: string
+          lead_id: string | null
+          quiz_results: Json | null
+          submitted_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          id?: string
+          lead_id?: string | null
+          quiz_results?: Json | null
+          submitted_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          id?: string
+          lead_id?: string | null
+          quiz_results?: Json | null
+          submitted_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_submissions_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quiz_submissions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          name: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          name?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          name?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_centric_activity: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          user_id: string
+          user_name: string
+          user_email: string
+          user_created_at: string
+          leads_data: Json
+          quiz_submissions_data: Json
+          latest_lead_timestamp: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
