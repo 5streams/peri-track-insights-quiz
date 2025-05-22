@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -139,83 +138,95 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
           {/* Feature Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
             {/* Feature 1 */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100">
-              <h4 className="font-bold mb-3 text-slate-700">
-                1. Track Symptoms, Easily & Accurately
-              </h4>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 mt-1 mr-2 text-indigo-500" />
-                  <span>Log 30+ symptoms (hot flashes, brain fog, mood swings & more)</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 mt-1 mr-2 text-indigo-500" />
-                  <span>See how symptoms shift week-by-week</span>
-                </li>
-              </ul>
-              <p className="italic text-slate-500 mt-2 text-sm">
-                Benefit: Stop guessing, see real patterns.
-              </p>
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100 flex flex-col">
+              <div className="flex-grow">
+                <h4 className="font-bold mb-3 text-slate-700">
+                  1. Track Symptoms, Easily & Accurately
+                </h4>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <Check className="h-4 w-4 mt-1 mr-2 text-indigo-500" />
+                    <span>Log 30+ symptoms (hot flashes, brain fog, mood swings & more)</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-4 w-4 mt-1 mr-2 text-indigo-500" />
+                    <span>See how symptoms shift week-by-week</span>
+                  </li>
+                </ul>
+                <p className="italic text-slate-500 mt-2 text-sm mb-4">
+                  Benefit: Stop guessing, see real patterns.
+                </p>
+              </div>
+              <img src="/images/feature1.png" alt="Track Symptoms Feature Showcase" className="rounded-md w-full h-48 object-cover mt-auto" />
             </div>
             
             {/* Feature 2 */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100">
-              <h4 className="font-bold mb-3 text-slate-700">
-                2. Know What's Coming Before It Hits
-              </h4>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 mt-1 mr-2 text-indigo-500" />
-                  <span>Predict hormone fluctuations</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 mt-1 mr-2 text-indigo-500" />
-                  <span>Plan your week around your hormones</span>
-                </li>
-              </ul>
-              <p className="italic text-slate-500 mt-2 text-sm">
-                Benefit: Be prepared, not blindsided.
-              </p>
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100 flex flex-col">
+              <div className="flex-grow">
+                <h4 className="font-bold mb-3 text-slate-700">
+                  2. Know What's Coming Before It Hits
+                </h4>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <Check className="h-4 w-4 mt-1 mr-2 text-indigo-500" />
+                    <span>Predict hormone fluctuations</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-4 w-4 mt-1 mr-2 text-indigo-500" />
+                    <span>Plan your week around your hormones</span>
+                  </li>
+                </ul>
+                <p className="italic text-slate-500 mt-2 text-sm mb-4">
+                  Benefit: Be prepared, not blindsided.
+                </p>
+              </div>
+              <img src="/images/feature2.png" alt="Know What's Coming Feature Showcase" className="rounded-md w-full h-48 object-cover mt-auto" />
             </div>
             
             {/* Feature 3 */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100">
-              <h4 className="font-bold mb-3 text-slate-700">
-                3. Get Lifestyle Recommendations
-              </h4>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <span className="mr-2">🥗</span>
-                  <span>Foods that balance hormones</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">🏃‍♀️</span>
-                  <span>Exercise types for your hormone profile</span>
-                </li>
-              </ul>
-              <p className="italic text-slate-500 mt-2 text-sm">
-                Benefit: A clear plan based on your needs.
-              </p>
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100 flex flex-col">
+              <div className="flex-grow">
+                <h4 className="font-bold mb-3 text-slate-700">
+                  3. Get Lifestyle Recommendations
+                </h4>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <span className="mr-2">🥗</span>
+                    <span>Foods that balance hormones</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2">🏃‍♀️</span>
+                    <span>Exercise types for your hormone profile</span>
+                  </li>
+                </ul>
+                <p className="italic text-slate-500 mt-2 text-sm mb-4">
+                  Benefit: A clear plan based on your needs.
+                </p>
+              </div>
+              <img src="/images/feature3.png" alt="Lifestyle Recommendations Feature Showcase" className="rounded-md w-full h-48 object-cover mt-auto" />
             </div>
             
             {/* Feature 4 */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100">
-              <h4 className="font-bold mb-3 text-slate-700">
-                4. Access Luna AI Hormone Coach
-              </h4>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 mt-1 mr-2 text-indigo-500" />
-                  <span>24/7 hormone guidance</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 mt-1 mr-2 text-indigo-500" />
-                  <span>Personalized health coaching</span>
-                </li>
-              </ul>
-              <p className="italic text-slate-500 mt-2 text-sm">
-                Benefit: Support whenever you need it.
-              </p>
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100 flex flex-col">
+              <div className="flex-grow">
+                <h4 className="font-bold mb-3 text-slate-700">
+                  4. Access Luna AI Hormone Coach
+                </h4>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <Check className="h-4 w-4 mt-1 mr-2 text-indigo-500" />
+                    <span>24/7 hormone guidance</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-4 w-4 mt-1 mr-2 text-indigo-500" />
+                    <span>Personalized health coaching</span>
+                  </li>
+                </ul>
+                <p className="italic text-slate-500 mt-2 text-sm mb-4">
+                  Benefit: Support whenever you need it.
+                </p>
+              </div>
+              <img src="/images/feature4.png" alt="Luna AI Coach Feature Showcase" className="rounded-md w-full h-48 object-cover mt-auto" />
             </div>
             
             {/* Feature 5 */}
