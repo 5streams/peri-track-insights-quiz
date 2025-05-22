@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -150,11 +149,11 @@ const Quiz = () => {
   const progressPercentage = Math.round((currentStep / totalSteps) * 100);
   
   return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4 md:px-8 lg:px-0">
+    <div className="min-h-screen bg-[#FFECD6]/30 py-8 px-4 md:px-8 lg:px-0">
       <div className="max-w-2xl mx-auto">
         <ProgressBar progress={progressPercentage} />
         
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8 mt-4">
+        <div className="bg-white rounded-2xl shadow-md p-6 md:p-8 mt-4">
           {currentStep <= quizQuestions.length ? (
             <QuizQuestion
               question={quizQuestions[currentStep - 1]}
@@ -170,7 +169,7 @@ const Quiz = () => {
         </div>
         
         {currentStep <= quizQuestions.length && (
-          <div className="mt-4 text-center text-sm text-slate-500">
+          <div className="mt-4 text-center text-sm text-muted-foreground">
             Question {currentStep} of {quizQuestions.length}
           </div>
         )}

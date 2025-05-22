@@ -49,7 +49,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
 
   return (
     <div>
-      <h2 className="font-playfair text-2xl md:text-3xl font-semibold text-slate-800 mb-6">
+      <h2 className="font-playfair text-2xl md:text-3xl font-semibold text-[#5D4154] mb-6">
         {question.text}
       </h2>
       
@@ -61,9 +61,9 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
             className="space-y-3"
           >
             {question.options.map((option) => (
-              <div key={option.id} className="flex items-center space-x-3 border border-slate-200 rounded-md p-3 hover:bg-slate-50 transition-colors">
-                <RadioGroupItem id={option.id} value={option.id} className="text-purple-600 border-slate-300" />
-                <Label htmlFor={option.id} className="flex-1 cursor-pointer text-slate-700">
+              <div key={option.id} className="flex items-center space-x-3 border border-gray-200 rounded-md p-3 hover:bg-gray-50">
+                <RadioGroupItem id={option.id} value={option.id} />
+                <Label htmlFor={option.id} className="flex-1 cursor-pointer">
                   {option.text}
                 </Label>
               </div>
@@ -74,16 +74,15 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
         {question.type === 'multiple' && (
           <div className="space-y-3">
             {question.options.map((option) => (
-              <div key={option.id} className="flex items-center space-x-3 border border-slate-200 rounded-md p-3 hover:bg-slate-50 transition-colors">
+              <div key={option.id} className="flex items-center space-x-3 border border-gray-200 rounded-md p-3 hover:bg-gray-50">
                 <Checkbox
                   id={option.id}
                   checked={Array.isArray(answer) && answer.includes(option.id)}
                   onCheckedChange={(checked) => 
                     handleMultipleOptionChange(option.id, checked === true)
                   }
-                  className="text-purple-600 border-slate-300"
                 />
-                <Label htmlFor={option.id} className="flex-1 cursor-pointer text-slate-700">
+                <Label htmlFor={option.id} className="flex-1 cursor-pointer">
                   {option.text}
                 </Label>
               </div>
@@ -97,14 +96,14 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
           variant="outline"
           onClick={onBack}
           disabled={isLoading}
-          className="flex items-center gap-2 border-slate-200 text-slate-600 hover:text-slate-800 hover:bg-slate-50"
+          className="flex items-center gap-2"
         >
           <ArrowLeft className="h-4 w-4" /> Back
         </Button>
         <Button 
           onClick={onNext}
           disabled={isLoading || (question.type === 'multiple' ? false : !answer)}
-          className="bg-purple-600 hover:bg-purple-700 text-white flex items-center gap-2"
+          className="bg-[#5D4154] hover:bg-[#5D4154]/90 flex items-center gap-2"
         >
           Next <ArrowRight className="h-4 w-4" />
         </Button>
