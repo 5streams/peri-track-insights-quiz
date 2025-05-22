@@ -14,6 +14,9 @@ import RiskReversal from "@/components/results/RiskReversal";
 import FinalCTASection from "@/components/results/FinalCTASection";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
+import LunaAIDeepDive from "@/components/results/LunaAIDeepDive";
+import AppFeaturesShowcase from "@/components/results/AppFeaturesShowcase";
+import ResultsProof from "@/components/results/ResultsProof";
 
 interface QuizResults {
   score: number;
@@ -137,19 +140,31 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* 4. Hormone Insights (simplified) */}
+          {/* 4. Luna AI Deep Dive */}
+          <LunaAIDeepDive 
+            scoreCategory={scoreCategory}
+            primaryHormone={hormoneScores.primaryHormone}
+          />
+          
+          {/* 5. App Features Showcase */}
+          <AppFeaturesShowcase />
+          
+          {/* 6. Hormone Insights (simplified) */}
           <HormoneInsights 
             scores={hormoneScores}
             scoreCategory={scoreCategory}
           />
           
-          {/* 5. Social proof (condensed) */}
+          {/* 7. Results Proof & Social Proof */}
+          <ResultsProof scoreCategory={scoreCategory} />
+          
+          {/* 8. Condensed Social Proof with testimonial */}
           <CondensedSocialProof scoreCategory={scoreCategory} />
           
-          {/* 6. Risk Reversal */}
+          {/* 9. Risk Reversal */}
           <RiskReversal />
           
-          {/* 7. Final CTA (repeat offer) */}
+          {/* 10. Final CTA (repeat offer) */}
           <FinalCTASection 
             spotNumber={spotNumber}
             onStartTrial={handleTrialCTA}
