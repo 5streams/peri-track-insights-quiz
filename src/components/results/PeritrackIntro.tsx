@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -428,6 +429,9 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
             >
               START MY FREE TRIAL
             </Button>
+            <p className="text-xs text-center mt-2 text-slate-500">
+              Then $9.99/month after trial
+            </p>
           </div>
           
           {/* Annual Option */}
@@ -463,6 +467,9 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
             >
               START MY FREE TRIAL
             </Button>
+            <p className="text-xs text-center mt-2 text-white bg-[#9b87f5]/80 py-0.5">
+              Then $99/year after trial
+            </p>
           </div>
         </div>
         

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import CTAButton from './CTAButton';
 import TrialSignupModal from './TrialSignupModal';
@@ -54,7 +55,7 @@ const FinalCTASection = () => {
           </CTAButton>
           
           <p className="text-sm opacity-75 mb-4">
-            No credit card required • Cancel anytime • 30-day money-back guarantee
+            7-day trial then only $12.95/month • 30-day money-back guarantee
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 text-sm opacity-75 fade-in-up">

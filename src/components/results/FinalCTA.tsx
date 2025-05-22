@@ -193,7 +193,7 @@ const FinalCTA: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-                <p className="text-lg font-bold text-white mt-3">$197 TOTAL VALUE - YOURS FREE</p>
+                <p className="text-lg font-bold text-white mt-3">$197 TOTAL VALUE - YOURS FOR JUST $12.95/MONTH</p>
               </div>
             </div>
             
@@ -231,7 +231,7 @@ const FinalCTA: React.FC = () => {
               </div>
               
               <p className="mt-3 md:mt-4 text-xs text-white/70">
-                No credit card required. No commitment. Cancel anytime with one click.
+                7-day free trial then $12.95/month • Cancel anytime with one click
               </p>
             </div>
           </div>

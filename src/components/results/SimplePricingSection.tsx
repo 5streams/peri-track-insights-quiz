@@ -68,6 +68,9 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
               >
                 Start My Free Trial
               </Button>
+              <p className="text-xs text-center mt-2 text-gray-500">
+                Then $9.99/month after trial
+              </p>
             </div>
           </div>
           
@@ -106,6 +109,9 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
               >
                 Start My Free Trial
               </Button>
+              <p className="text-xs text-center mt-2 text-white bg-[#9b87f5]/80 py-0.5">
+                Then $99/year after trial
+              </p>
             </div>
           </div>
         </div>

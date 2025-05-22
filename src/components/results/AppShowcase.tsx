@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 
@@ -211,9 +210,9 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
           >
             Start Your Free Trial Today
           </Button>
-          
+        
           <p className="text-sm text-gray-500 mt-3">
-            No credit card required • Cancel anytime
+            7-day trial then only $12.95/month
           </p>
         </div>
       </div>

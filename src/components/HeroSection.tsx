@@ -47,7 +47,7 @@ const HeroSection = () => {
                 START YOUR FREE 7-DAY TRIAL
               </CTAButton>
               <p className="text-sm text-warm-gray text-center lg:text-left">
-                No credit card required • Get relief strategies in 24 hours • Works on all devices
+                7-day trial then only $12.95/month • Get relief strategies in 24 hours • Works on all devices
               </p>
             </div>
           </div>

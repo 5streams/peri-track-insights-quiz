@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import CTAButton from './CTAButton';
 import TrialSignupModal from './TrialSignupModal';
@@ -67,7 +68,7 @@ const SolutionSection = () => {
             DISCOVER YOUR PATTERNS TODAY
           </CTAButton>
           <p className="text-sm text-warm-gray">
-            Join thousands of women who've transformed their perimenopause experience
+            7-day trial then only $12.95/month • Join thousands of women who've transformed their perimenopause experience
           </p>
         </div>
       </div>
