@@ -18,6 +18,8 @@ import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnect
 import TransformationJourney from "@/components/results/TransformationJourney";
 import SimplePricingSection from "@/components/results/SimplePricingSection";
 import Guarantee from "@/components/results/Guarantee";
+import RiskReversal from "@/components/results/RiskReversal";
+import AppShowcase from "@/components/results/AppShowcase";
 
 interface QuizResults {
   score: number;
@@ -133,9 +135,6 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Perimenopause Explanation */}
-          <PerimenopauseExplanation scoreCategory={scoreCategory} />
-          
           {/* Hormone Insights */}
           <HormoneInsights 
             scores={hormoneScores}
@@ -167,8 +166,17 @@ const Results = () => {
           {/* Our Guarantee Section */}
           <Guarantee />
           
+          {/* Risk Reversal section */}
+          <RiskReversal />
+          
+          {/* App Showcase section */}
+          <AppShowcase onStartTrial={handleTrialCTA} />
+          
           {/* Simple Pricing Section at the very bottom */}
           <SimplePricingSection onStartTrial={handleTrialCTA} />
+          
+          {/* Perimenopause Explanation MOVED TO BOTTOM */}
+          <PerimenopauseExplanation scoreCategory={scoreCategory} />
         </div>
       </div>
     </div>
