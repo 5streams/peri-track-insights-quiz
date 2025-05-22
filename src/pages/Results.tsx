@@ -146,14 +146,14 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* 5. Luna AI Deep Dive */}
+          {/* 5. App Features Showcase - MOVED ABOVE Luna AI */}
+          <AppFeaturesShowcase />
+          
+          {/* 6. Luna AI Deep Dive - MOVED DOWN */}
           <LunaAIDeepDive 
             scoreCategory={scoreCategory}
             primaryHormone={hormoneScores.primaryHormone}
           />
-          
-          {/* 6. App Features Showcase */}
-          <AppFeaturesShowcase />
           
           {/* 7. Results Proof & Social Proof */}
           <ResultsProof scoreCategory={scoreCategory} />
