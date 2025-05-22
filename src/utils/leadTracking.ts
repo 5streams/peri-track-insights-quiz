@@ -66,6 +66,11 @@ export const saveLead = (
     // Save to localStorage
     localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(updatedLeads));
     
+    // Double-check that lead was actually saved properly
+    const savedLeadsData = localStorage.getItem(LEADS_STORAGE_KEY);
+    const savedLeads = savedLeadsData ? JSON.parse(savedLeadsData) : [];
+    console.log(`After saving, localStorage has ${savedLeads.length} leads`);
+    
     // Verify the save was successful
     const savedData = localStorage.getItem(LEADS_STORAGE_KEY);
     if (!savedData) {
@@ -141,4 +146,19 @@ const trackLeadEvent = (lead: Lead) => {
   });
   
   localStorage.setItem('peritrack_events', JSON.stringify(events));
+};
+
+// Method to check if leads are properly being stored
+export const validateLeadStorage = (): boolean => {
+  const testLead = saveLead('Test', 'test@example.com', 'quiz_results');
+  const leads = getLeads();
+  const found = leads.some(lead => lead.id === testLead.id);
+  
+  // Remove the test lead
+  if (found) {
+    deleteLead(testLead.id);
+    return true;
+  }
+  
+  return false;
 };
