@@ -195,7 +195,15 @@ const AdminLeadList = () => {
     const plans = new Set<string>();
     leads.forEach(lead => {
       if (lead.pricing_tier) {
-        plans.add(lead.pricing_tier);
+        // Handle 'free_trial' specially
+        if (lead.pricing_tier === 'free_trial') {
+          plans.add('Free Trial');
+        } else {
+          plans.add(lead.pricing_tier);
+        }
+      } else if (lead.source === 'TRIAL') {
+        // Also show "Free Trial" for legacy leads where source is 'TRIAL'
+        plans.add('Free Trial');
       }
     });
     return plans.size > 0 ? Array.from(plans).join(', ') : "None";

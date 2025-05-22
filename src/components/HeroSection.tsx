@@ -51,7 +51,7 @@ const HeroSection = () => {
             </div>
           </div>
           
-          <div className="hero-visual fade-in-up lg:order-last order-first text-center">
+          <div className="hero-visual fade-in-up text-center">
             <div className="relative inline-block animate-float">
               <img 
                 src="/images/daily-check-in.png" 

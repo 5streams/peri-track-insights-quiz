@@ -72,7 +72,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
         name.trim(), 
         email.trim(), 
         'TRIAL', 
-        null, // No pricing tier needed
+        'free_trial', // Set pricing tier to "free_trial" instead of null
         trialQuizResults, // Pass formatted results to maintain consistency
         additionalNotes
       );
