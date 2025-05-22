@@ -10,7 +10,6 @@ import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
-import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
 import PeritrackIntro from "@/components/results/PeritrackIntro";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
@@ -137,12 +136,6 @@ const Results = () => {
           <HormoneInsights 
             scores={hormoneScores}
             scoreCategory={scoreCategory}
-          />
-          
-          {/* Emotional Support */}
-          <EmotionalSupport
-            scoreCategory={scoreCategory}
-            primarySymptoms={hormoneScores.primarySymptoms}
           />
           
           {/* Peritrack Intro - Main call to action */}
