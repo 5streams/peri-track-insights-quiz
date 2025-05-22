@@ -18,7 +18,6 @@ import SimplePricingSection from "@/components/results/SimplePricingSection";
 import Guarantee from "@/components/results/Guarantee";
 import RiskReversal from "@/components/results/RiskReversal";
 import AppShowcase from "@/components/results/AppShowcase";
-import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
 
 interface QuizResults {
   score: number;
@@ -146,10 +145,6 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Emotion-Hormone Connection - New transitional component */}
-          <EmotionHormoneConnection />
-          
-          {/* SWAPPED COMPONENTS - PeritrackIntro before LunaAIFeature */}
           {/* Peritrack Intro - Main call to action */}
           <PeritrackIntro
             onStartTrial={handleTrialCTA}
