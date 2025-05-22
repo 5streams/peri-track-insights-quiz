@@ -18,32 +18,31 @@ const RevealSection: React.FC<RevealSectionProps> = ({
     const section = sectionRef.current;
     if (!section) return;
     
-    // Create a more reliable intersection observer
+    // Mark as revealed immediately to prevent blank spots
+    const timer = setTimeout(() => {
+      if (section && !section.classList.contains('revealed')) {
+        section.classList.add('revealed');
+      }
+    }, delay);
+    
+    // Create a more reliable intersection observer as backup
     const observer = new IntersectionObserver(
       ([entry]) => {
         // Only add the revealed class if not already revealed
-        if (entry.isIntersecting && !section.classList.contains('revealed')) {
-          // Apply delay if specified
-          if (delay) {
-            setTimeout(() => {
-              section.classList.add('revealed');
-            }, delay);
-          } else {
-            section.classList.add('revealed');
-          }
-          // Once revealed, stop observing to prevent potential glitches
-          observer.unobserve(section);
+        if (entry.isIntersecting && section && !section.classList.contains('revealed')) {
+          section.classList.add('revealed');
         }
       },
       { 
         threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px" // Trigger earlier for smoother experience
+        rootMargin: "0px 0px -10px 0px" // Trigger earlier
       }
     );
     
     observer.observe(section);
     
     return () => {
+      clearTimeout(timer);
       if (section) {
         observer.unobserve(section);
       }
@@ -55,9 +54,8 @@ const RevealSection: React.FC<RevealSectionProps> = ({
       ref={sectionRef} 
       className={`reveal-section ${className}`}
       style={{
-        // Apply these styles directly to ensure they take precedence
         opacity: 0,
-        transform: 'translateY(15px)',
+        transform: 'translateY(10px)',
         transition: 'opacity 0.6s ease-out, transform 0.6s ease-out'
       }}
     >

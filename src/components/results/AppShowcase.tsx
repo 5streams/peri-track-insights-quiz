@@ -1,7 +1,6 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import RevealSection from "@/components/ui/reveal-section";
 
 interface AppShowcaseProps {
   onStartTrial: () => void;
@@ -12,17 +11,17 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
     <div className="py-12 md:py-16 bg-white border-t border-gray-100">
       <div className="max-w-6xl mx-auto px-4">
         {/* Section Header */}
-        <RevealSection className="text-center mb-12">
+        <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-playfair font-bold text-[#5D4154] mb-3">
             Here's Exactly How Peritrack Works
           </h2>
           <p className="text-lg md:text-xl max-w-3xl mx-auto text-[#7D6174]">
             Your simple 3-step path to understanding and managing your perimenopause symptoms
           </p>
-        </RevealSection>
+        </div>
         
         {/* Step 1: Track Your Symptoms */}
-        <RevealSection className="mb-16" delay={100}>
+        <div className="mb-16">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="order-2 md:order-1">
               <div className="flex items-center mb-4">
@@ -63,10 +62,10 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
               </div>
             </div>
           </div>
-        </RevealSection>
+        </div>
         
         {/* Step 2: Discover Your Patterns */}
-        <RevealSection className="mb-16" delay={200}>
+        <div className="mb-16">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <div className="bg-[#F8F9FA] rounded-lg p-2 shadow-md">
@@ -107,10 +106,10 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
               </ul>
             </div>
           </div>
-        </RevealSection>
+        </div>
         
         {/* Step 3: Get Personalized Solutions */}
-        <RevealSection className="mb-16" delay={300}>
+        <div className="mb-16">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="order-2 md:order-1">
               <div className="flex items-center mb-4">
@@ -152,10 +151,10 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
               </div>
             </div>
           </div>
-        </RevealSection>
+        </div>
         
         {/* Results & Benefits Section */}
-        <RevealSection className="mb-12" delay={400}>
+        <div className="mb-12">
           <h3 className="text-center text-xl font-playfair font-semibold text-[#5D4154] mb-8">
             What This Means For You
           </h3>
@@ -195,10 +194,10 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
               </div>
             ))}
           </div>
-        </RevealSection>
+        </div>
         
         {/* Secondary CTA */}
-        <RevealSection className="text-center mt-12 mb-4" delay={500}>
+        <div className="text-center mt-12 mb-4">
           <h3 className="text-xl md:text-2xl font-playfair font-semibold text-[#5D4154] mb-3">
             Ready to Take Control of Your Perimenopause Symptoms?
           </h3>
@@ -216,7 +215,7 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
           <p className="text-sm text-gray-500 mt-3">
             No credit card required • Cancel anytime
           </p>
-        </RevealSection>
+        </div>
       </div>
     </div>
   );

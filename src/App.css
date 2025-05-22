@@ -30,6 +30,18 @@
   transform: translateY(0) !important;
 }
 
+/* Force all sections to be visible in case animations fail */
+.all-visible .reveal-section {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Force immediate visibility for direct children in case of animation issues */
+.revealed {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
 .animate-pulse-subtle {
   animation: pulseSubtle 3s infinite ease-in-out;
 }

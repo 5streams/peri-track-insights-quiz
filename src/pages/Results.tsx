@@ -11,7 +11,6 @@ import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
-import SubscriptionOptions from "@/components/results/SubscriptionOptions";
 import PeritrackIntro from "@/components/results/PeritrackIntro";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
 import SimplePricingSection from "@/components/results/SimplePricingSection";
@@ -37,6 +36,7 @@ const Results = () => {
     primaryHormone: "estrogen",
     primarySymptoms: [] as string[]
   });
+  const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
   
   // Get score category
@@ -67,7 +67,15 @@ const Results = () => {
       setUserInfo(JSON.parse(storedUserInfo));
     }
 
-    // No longer need to add custom animation logic as we're using the RevealSection component
+    // Force all sections to be revealed if they don't animate properly
+    setTimeout(() => {
+      document.querySelectorAll('.reveal-section').forEach((el) => {
+        if (!el.classList.contains('revealed')) {
+          el.classList.add('revealed');
+        }
+      });
+      setIsLoaded(true);
+    }, 300);
   }, [navigate]);
   
   if (!results) {
@@ -88,6 +96,9 @@ const Results = () => {
     ? userInfo.firstName.charAt(0).toUpperCase() + userInfo.firstName.slice(1)
     : "";
   
+  // Add a class to ensure all elements are visible even if animations fail
+  const containerClass = isLoaded ? "results-container all-visible" : "results-container";
+  
   return (
     <div 
       className="min-h-screen bg-gradient-to-b from-[#F9F5FF]/20 to-white py-6 md:py-8 px-4 md:px-6 lg:px-8"
@@ -97,51 +108,71 @@ const Results = () => {
       }}
     >
       <div className="w-full max-w-4xl mx-auto">
-        <div className="results-container">
-          {/* Results Header with Score and User Name */}
-          <ResultsHeader 
-            score={hormoneScores.overall} 
-            firstName={capitalizedFirstName} 
-            scoreCategory={scoreCategory}
-            onStartTrial={handleTrialCTA}
-          />
+        <div className={containerClass}>
+          {/* Results Header with Score and User Name - Force visibility */}
+          <div className="revealed mb-6">
+            <ResultsHeader 
+              score={hormoneScores.overall} 
+              firstName={capitalizedFirstName} 
+              scoreCategory={scoreCategory}
+              onStartTrial={handleTrialCTA}
+            />
+          </div>
           
-          {/* Personalized Assessment */}
-          <PersonalizedAssessment
-            scoreCategory={scoreCategory}
-            firstName={capitalizedFirstName}
-            primarySymptoms={hormoneScores.primarySymptoms}
-          />
+          {/* Personalized Assessment - Force visibility */}
+          <div className="revealed mb-6">
+            <PersonalizedAssessment
+              scoreCategory={scoreCategory}
+              firstName={capitalizedFirstName}
+              primarySymptoms={hormoneScores.primarySymptoms}
+            />
+          </div>
           
-          {/* Hormone Insights */}
-          <HormoneInsights 
-            scores={hormoneScores}
-            scoreCategory={scoreCategory}
-          />
+          {/* Hormone Insights - Force visibility */}
+          <div className="revealed mb-6">
+            <HormoneInsights 
+              scores={hormoneScores}
+              scoreCategory={scoreCategory}
+            />
+          </div>
           
-          {/* Peritrack Intro - Main call to action */}
-          <PeritrackIntro
-            onStartTrial={handleTrialCTA}
-            firstName={capitalizedFirstName}
-          />
+          {/* Peritrack Intro - Main call to action - Force visibility */}
+          <div className="revealed mb-6">
+            <PeritrackIntro
+              onStartTrial={handleTrialCTA}
+              firstName={capitalizedFirstName}
+            />
+          </div>
           
           {/* Luna AI Feature with smoother transition */}
-          <LunaAIFeature onStartTrial={handleTrialCTA} />
+          <div className="revealed mb-6">
+            <LunaAIFeature onStartTrial={handleTrialCTA} />
+          </div>
           
           {/* Our Guarantee Section */}
-          <Guarantee />
+          <div className="revealed mb-6">
+            <Guarantee />
+          </div>
           
           {/* Risk Reversal section */}
-          <RiskReversal />
+          <div className="revealed mb-6">
+            <RiskReversal />
+          </div>
           
           {/* App Showcase section */}
-          <AppShowcase onStartTrial={handleTrialCTA} />
+          <div className="revealed mb-6">
+            <AppShowcase onStartTrial={handleTrialCTA} />
+          </div>
           
           {/* Simple Pricing Section at the very bottom */}
-          <SimplePricingSection onStartTrial={handleTrialCTA} />
+          <div className="revealed mb-6">
+            <SimplePricingSection onStartTrial={handleTrialCTA} />
+          </div>
           
           {/* Perimenopause Explanation MOVED TO BOTTOM */}
-          <PerimenopauseExplanation scoreCategory={scoreCategory} />
+          <div className="revealed mb-6">
+            <PerimenopauseExplanation scoreCategory={scoreCategory} />
+          </div>
         </div>
       </div>
     </div>
