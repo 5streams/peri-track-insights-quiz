@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -37,59 +36,6 @@ export default function Index() {
             
             <div className="mt-3 text-sm text-[#7D6174]">
               Free 2 Minute Assessment • Get Results Immediately
-            </div>
-          </div>
-        </section>
-        
-        {/* Common Symptoms */}
-        <section className="py-10 bg-white">
-          <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-center font-playfair text-2xl md:text-3xl font-bold text-[#5D4154] mb-6">
-              COMMON PERIMENOPAUSE SYMPTOMS
-            </h2>
-            
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                {
-                  symptom: "Weight gain & body changes",
-                  explanation: "Hormonal changes affect metabolism"
-                },
-                {
-                  symptom: "Sleep disruptions & night sweats",
-                  explanation: "Decreasing progesterone affects sleep"
-                },
-                {
-                  symptom: "Mood changes & anxiety",
-                  explanation: "Fluctuating estrogen impacts mood"
-                },
-                {
-                  symptom: "Brain fog & concentration issues",
-                  explanation: "Hormone changes affect cognitive function"
-                },
-                {
-                  symptom: "Hot flashes & temperature issues",
-                  explanation: "Estrogen affects your body's thermostat"
-                },
-                {
-                  symptom: "Irregular periods & fatigue",
-                  explanation: "Hormonal imbalances disrupt energy & cycles"
-                }
-              ].map((item, index) => (
-                <div key={index} className="relative pl-6 py-2">
-                  <span className="absolute left-0 text-[#A7C4A0] font-bold">✓</span>
-                  <div className="font-medium">{item.symptom}</div>
-                  <div className="text-sm text-gray-600">{item.explanation}</div>
-                </div>
-              ))}
-            </div>
-            
-            <div className="text-center mt-8">
-              <Button 
-                asChild
-                className="bg-[#5D4154] hover:bg-[#7D6174] text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg"
-              >
-                <Link to="/quiz">Take The FREE Quiz Now</Link>
-              </Button>
             </div>
           </div>
         </section>
