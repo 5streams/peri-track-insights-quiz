@@ -23,7 +23,7 @@ function App() {
         <Route path="/tracking" element={<Tracking />} />
         <Route path="/insights" element={<Insights />} />
         <Route path="/admin/leads" element={<AdminLeads />} />
-        <Route path="/tryperitracker" element={<TryPeritracker />} /> {/* Add new route */}
+        <Route path="/tryperitracker" element={<TryPeriTrack />} /> {/* Add new route */}
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
         <Route path="/tryperitrack" element={<TryPeriTrack />} />
