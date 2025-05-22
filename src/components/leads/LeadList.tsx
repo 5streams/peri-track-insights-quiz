@@ -15,7 +15,7 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
-import { RefreshCw, Trash2, AlertCircle, Bug } from "lucide-react";
+import { RefreshCw, Trash2, Bug } from "lucide-react";
 
 const LeadList: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -25,44 +25,32 @@ const LeadList: React.FC = () => {
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   const { toast } = useToast();
   
-  // Load leads with improved error handling and feedback
+  // Load leads function
   const loadLeads = () => {
     setIsLoading(true);
     setLastRefresh(new Date());
     
-    console.log("LeadList: Loading leads at", new Date().toISOString());
-    
     try {
-      // Make sure storage is initialized
-      initializeLeadStorage();
-      
-      // Get the raw data for debugging
-      const rawData = localStorage.getItem('peritrack_leads');
-      console.log("LeadList: Raw leads data from localStorage:", rawData);
-      
-      // Get all leads through the utility function
+      // Get all leads
       const allLeads = getLeads();
-      console.log("LeadList: Loaded leads via getLeads():", allLeads);
+      console.log("LeadList: Loaded leads count:", allLeads.length);
       
       // Update state with fetched leads
       setLeads(allLeads);
       
-      // Check for "Julie" in the leads for debugging
+      // Check for any "Julie" leads (for debugging)
       const julieFound = allLeads.some(lead => 
         lead.firstName.toLowerCase().includes('julie')
       );
       
-      console.log(`LeadList: Searching for "Julie" in leads: ${julieFound ? 'FOUND' : 'NOT FOUND'}`);
-      
-      // Get last update time
-      const lastUpdate = localStorage.getItem('leads_updated_timestamp');
-      console.log("LeadList: Last leads update timestamp:", lastUpdate);
-      
+      if (julieFound) {
+        console.log("LeadList: Found Julie in the leads!");
+      }
     } catch (error) {
-      console.error("LeadList: Error loading leads:", error);
+      console.error("Error loading leads:", error);
       toast({
         title: "Error loading leads",
-        description: "There was a problem loading lead data. Check console for details.",
+        description: "There was a problem retrieving leads.",
         variant: "destructive"
       });
     } finally {
@@ -70,54 +58,25 @@ const LeadList: React.FC = () => {
     }
   };
 
-  // Force lead refresh on regular intervals and setup listeners
+  // Set up auto-refresh and polling
   useEffect(() => {
-    console.log("LeadList: Component mounted, setting up listeners");
-    
     // Initial load
     loadLeads();
     
-    // Setup aggressive polling interval (every 3 seconds)
+    // Setup polling interval (every 2 seconds)
     const interval = setInterval(() => {
-      console.log("LeadList: Auto-refreshing leads");
       loadLeads();
-    }, 3000);
+    }, 2000);
     
-    // Listen for storage events from other tabs/windows
-    const handleStorageEvent = (event: StorageEvent) => {
-      console.log("LeadList: Storage event received", event);
-      if (event.key === 'peritrack_leads' || 
-          event.key === 'leads_updated' || 
-          event.key === 'leads_updated_timestamp' || 
-          event.key === 'lead_tracker') {
-        console.log("LeadList: Lead-related storage change detected, reloading");
-        loadLeads();
-      }
-    };
-    
-    // Listen for custom events
-    const handleLeadsUpdated = () => {
-      console.log("LeadList: leadsUpdated custom event received");
-      loadLeads();
-    };
-    
-    // Setup event listeners
-    window.addEventListener('storage', handleStorageEvent);
-    window.addEventListener('leadsUpdated', handleLeadsUpdated);
-    
-    // Check for debug flags and new leads on window focus
+    // Check for updates on window focus
     const handleFocus = () => {
-      console.log("LeadList: Window focus detected, checking for updates");
       loadLeads();
     };
     
     window.addEventListener('focus', handleFocus);
     
-    // Cleanup event listeners
     return () => {
       clearInterval(interval);
-      window.removeEventListener('storage', handleStorageEvent);
-      window.removeEventListener('leadsUpdated', handleLeadsUpdated);
       window.removeEventListener('focus', handleFocus);
     };
   }, []);
@@ -135,49 +94,41 @@ const LeadList: React.FC = () => {
     return matchesSearch && matchesFilter;
   });
   
-  // Create a test lead to verify system is working
+  // Create a test lead
   const createTestLead = () => {
     try {
-      // Generate a random name and email
       const testName = `Test User ${Math.floor(Math.random() * 1000)}`;
       const testEmail = `test${Date.now()}@example.com`;
-      console.log("LeadList: Creating test lead with", testName, testEmail);
       
-      // Save the test lead
-      const lead = saveLead(
+      saveLead(
         testName, 
         testEmail, 
         Math.random() > 0.5 ? 'quiz_results' : 'free_trial',
         Math.random() > 0.5 ? (Math.random() > 0.5 ? 'monthly' : 'annual') : null,
-        { test: "data", timestamp: new Date().toISOString() },
+        { test: "data" },
         `Test lead created at ${new Date().toISOString()}`
       );
       
-      console.log("LeadList: Test lead created:", lead);
-      
-      // Force reload leads
-      loadLeads();
-      
       toast({
         title: "Test Lead Created",
-        description: "A test lead has been added successfully.",
+        description: "Lead has been created. Refreshing list...",
       });
+      
+      loadLeads();
     } catch (error) {
-      console.error("LeadList: Error creating test lead:", error);
+      console.error("Error creating test lead:", error);
       toast({
-        title: "Error Creating Test Lead",
-        description: "There was a problem creating the test lead.",
+        title: "Error Creating Lead",
+        description: "Could not create test lead.",
         variant: "destructive"
       });
     }
   };
   
-  // Create a test "Julie" lead specifically for debugging
+  // Create a "Julie" test lead specifically
   const createJulieLead = () => {
     try {
-      console.log("LeadList: Creating Julie test lead");
-      
-      const lead = saveLead(
+      saveLead(
         "Julie", 
         `julie.test${Date.now()}@example.com`, 
         'quiz_results',
@@ -186,109 +137,69 @@ const LeadList: React.FC = () => {
         `Julie test lead created at ${new Date().toISOString()}`
       );
       
-      console.log("LeadList: Julie test lead created:", lead);
-      loadLeads();
-      
       toast({
         title: "Julie Test Lead Created",
-        description: "A test lead for Julie has been added successfully.",
+        description: "Julie lead created. Refreshing list...",
       });
+      
+      loadLeads();
     } catch (error) {
-      console.error("Error creating Julie test lead:", error);
+      console.error("Error creating Julie lead:", error);
+      toast({
+        title: "Error Creating Lead",
+        description: "Could not create Julie lead.",
+        variant: "destructive"
+      });
     }
   };
   
-  // Debug localStorage content
+  // Debug storage
   const debugStorage = () => {
     try {
-      const leadsData = localStorage.getItem('peritrack_leads');
       console.log('===== STORAGE DEBUG =====');
-      console.log('Raw storage data:', leadsData);
-      
-      // Force a reload before checking the parsed data
-      initializeLeadStorage();
-      
-      if (leadsData) {
-        try {
-          const parsed = JSON.parse(leadsData);
-          console.log('Parsed leads:', parsed);
-          console.log('Is array:', Array.isArray(parsed));
-          console.log('Length:', Array.isArray(parsed) ? parsed.length : 'N/A');
-          
-          // Check for Julie in the parsed data
-          if (Array.isArray(parsed)) {
-            const julieLeads = parsed.filter(lead => 
-              lead && typeof lead.firstName === 'string' && 
-              lead.firstName.toLowerCase().includes('julie')
-            );
-            console.log('Julie leads found in raw data:', julieLeads);
-          }
-        } catch (parseError) {
-          console.error('Parse error:', parseError);
-        }
-      } else {
-        console.log('No leads data in localStorage');
-        
-        // Try to recreate storage
-        initializeLeadStorage();
-      }
-      
+      console.log('Raw storage data:', localStorage.getItem('peritrack_leads'));
       console.log('All localStorage keys:', Object.keys(localStorage));
-      console.log('========================');
-      
-      toast({
-        title: "Debug Info",
-        description: "Check console for detailed lead storage information.",
-      });
       
       // Validate storage
       const isValid = validateLeadStorage();
+      
       toast({
         title: `Storage Validation: ${isValid ? 'PASSED' : 'FAILED'}`,
+        description: "Check console for debug info.",
         variant: isValid ? 'default' : 'destructive',
       });
     } catch (error) {
-      console.error("Error during storage debugging:", error);
+      console.error("Debug error:", error);
       toast({
-        title: "Storage Debug Error",
-        description: "Error accessing storage. Check console.",
+        title: "Debug Error",
+        description: "Error accessing storage.",
         variant: "destructive",
       });
     }
   };
   
-  // Force a full reload of the page to clear any memory issues
+  // Force page reload
   const forcePageReload = () => {
-    toast({
-      title: "Reloading Page",
-      description: "Refreshing the entire admin panel...",
-    });
-    
-    setTimeout(() => {
-      window.location.reload();
-    }, 500);
+    window.location.reload();
   };
   
-  // Handle manual refresh with more feedback
+  // Manual refresh
   const handleRefresh = () => {
-    console.log("LeadList: Manual refresh triggered");
     toast({
       title: "Refreshing Leads",
-      description: "Loading latest leads data..."
+      description: "Loading latest data..."
     });
     loadLeads();
   };
   
-  // Clear all leads and recreate storage
+  // Clear all leads
   const handleClearLeads = () => {
     if (window.confirm('Are you sure you want to delete ALL leads? This cannot be undone.')) {
-      console.log("LeadList: Clearing all leads");
       clearLeads();
       setLeads([]);
-      initializeLeadStorage(); // Re-initialize empty storage
       toast({
         title: "Leads Cleared",
-        description: "All leads have been removed from storage.",
+        description: "All leads have been removed.",
         variant: "destructive"
       });
     }
@@ -341,7 +252,6 @@ const LeadList: React.FC = () => {
               onClick={handleRefresh}
               variant="outline"
               className="w-full sm:w-auto"
-              title="Refresh leads"
               disabled={isLoading}
             >
               <RefreshCw className={`h-4 w-4 mr-1 ${isLoading ? 'animate-spin' : ''}`} /> 
@@ -351,7 +261,6 @@ const LeadList: React.FC = () => {
               onClick={createJulieLead}
               variant="outline"
               className="w-full sm:w-auto text-purple-500 hover:text-purple-700"
-              title="Add Julie test lead"
             >
               + Julie Test
             </Button>
@@ -359,7 +268,6 @@ const LeadList: React.FC = () => {
               onClick={createTestLead}
               variant="outline"
               className="w-full sm:w-auto text-blue-500 hover:text-blue-700"
-              title="Add test lead"
             >
               + Test Lead
             </Button>
@@ -367,7 +275,6 @@ const LeadList: React.FC = () => {
               onClick={forcePageReload}
               variant="outline"
               className="w-full sm:w-auto text-green-500 hover:text-green-700"
-              title="Force page reload"
             >
               ↻ Reload Page
             </Button>
@@ -375,7 +282,6 @@ const LeadList: React.FC = () => {
               onClick={debugStorage}
               variant="outline"
               className="w-full sm:w-auto text-amber-500 hover:text-amber-700"
-              title="Debug storage"
             >
               <Bug className="h-4 w-4 mr-1" /> Debug
             </Button>
@@ -383,7 +289,6 @@ const LeadList: React.FC = () => {
               onClick={handleClearLeads}
               variant="outline"
               className="w-full sm:w-auto text-red-500 hover:text-red-700"
-              title="Clear all leads (for testing only)"
             >
               <Trash2 className="h-4 w-4 mr-1" /> Clear All
             </Button>
@@ -445,7 +350,6 @@ const LeadList: React.FC = () => {
             ) : (
               <div className="space-y-4">
                 <p className="text-gray-500 flex items-center justify-center gap-2">
-                  <AlertCircle className="h-5 w-5 text-amber-500" />
                   No leads found. Try adding a test lead or check storage.
                 </p>
                 <div className="flex flex-wrap justify-center gap-2">
@@ -469,13 +373,6 @@ const LeadList: React.FC = () => {
                     className="text-sm"
                   >
                     Debug Storage
-                  </Button>
-                  <Button 
-                    onClick={forcePageReload}
-                    variant="secondary"
-                    className="text-sm"
-                  >
-                    Reload Page
                   </Button>
                 </div>
               </div>
