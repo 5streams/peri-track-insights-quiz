@@ -67,7 +67,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
     <Card className="mb-12 mt-8 reveal-section transform opacity-0 bg-slate-50 text-slate-800 overflow-hidden border border-slate-200 shadow-md">
       <CardContent className="p-6 md:p-8">
         <div className="text-center mb-8">
-          <Check className="h-10 w-10 mx-auto text-slate-700 bg-slate-100 p-2 rounded-full mb-4" />
+          <img src="/images/logo.png" alt="Peritrack Logo" className="h-36 w-auto mx-auto mb-3" />
           <h2 className="text-2xl md:text-3xl font-bold mb-3">
             <span className="text-slate-700">You've Taken the First Step...</span> <span className="text-indigo-600">Now It's Time to Take Control</span>
           </h2>
