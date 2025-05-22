@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -10,13 +9,13 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
-import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
 import PeritrackIntro from "@/components/results/PeritrackIntro";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
 // Removed EmotionHormoneConnection import
 // Removed TransformationJourney import
 // Removed PerimenopauseExplanation import
+// Removed EmotionalSupport import
 import SimplePricingSection from "@/components/results/SimplePricingSection";
 import Guarantee from "@/components/results/Guarantee";
 import RiskReversal from "@/components/results/RiskReversal";
@@ -149,11 +148,7 @@ const Results = () => {
             onStartTrial={handleTrialCTA}
           />
           
-          {/* Emotional Support */}
-          <EmotionalSupport
-            scoreCategory={scoreCategory}
-            primarySymptoms={hormoneScores.primarySymptoms}
-          />
+          {/* Removed EmotionalSupport component completely */}
           
           {/* NEW: Add AppShowcase component to show how Peritrack works */}
           <AppShowcase onStartTrial={handleTrialCTA} />
