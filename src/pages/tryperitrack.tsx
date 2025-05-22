@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import ProblemSection from '../components/ProblemSection';
 import SolutionSection from '../components/SolutionSection';
@@ -52,18 +53,21 @@ const TryPeriTrack = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
-      <HeroSection />
-      <ProblemSection />
-      <SolutionSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <LunaSection />
-      <SocialProofSection />
-      <PricingSection />
-      <FAQSection />
-      <FinalCTASection />
-      <TrustFooter />
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <div className="flex-grow">
+        <HeroSection />
+        <ProblemSection />
+        <SolutionSection />
+        <FeaturesSection />
+        <HowItWorksSection />
+        <LunaSection />
+        <SocialProofSection />
+        <PricingSection />
+        <FAQSection />
+        <FinalCTASection />
+        <TrustFooter />
+      </div>
     </div>
   );
 };
