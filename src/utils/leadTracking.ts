@@ -58,17 +58,21 @@ export const saveLead = async (
     const userId = userData.id;
 
     // Prepare lead data
-    const leadDataToInsert = {
+    const leadDataToInsert: any = {
       user_id: userId,
       name,
       email,
-      address,
       source,
       pricing_tier: pricingTier === undefined ? null : pricingTier,
       status: 'new' as Lead['status'],
       device_info: getDeviceInfo(),
       notes: notes === undefined ? null : notes,
     };
+
+    // Only add address if it has a value to avoid database errors if column doesn't exist
+    if (address && address.trim() !== '') {
+      leadDataToInsert.address = address.trim();
+    }
 
     const { data: leadData, error: leadError } = await supabase
       .from('leads')

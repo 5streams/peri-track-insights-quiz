@@ -64,7 +64,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
       console.log("TrialSignupModal: About to save lead with data:", {
         name: name.trim(),
         email: email.trim(),
-        address: address.trim(),
+        address: address.trim() + " (NOTE: address not saved until database schema is updated)",
         source: 'TRIAL',
         quizResults: trialQuizResults,
         additionalNotes
@@ -77,8 +77,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
         'TRIAL', 
         'free_trial', // Set pricing tier to "free_trial" instead of null
         trialQuizResults, // Pass formatted results to maintain consistency
-        additionalNotes,
-        address.trim() // Pass the address
+        additionalNotes
       );
       
       setStep('beta-message');
