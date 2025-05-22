@@ -8,39 +8,13 @@ import { toast } from "@/hooks/use-toast";
 import { quizQuestions } from "@/data/quizQuestions";
 import { calculateResults } from "@/utils/quizUtils";
 import ProgressBar from "@/components/quiz/ProgressBar";
-import { isGtagLoaded } from "@/utils/googleAdsTracking";
-import WelcomeScreen from "@/components/quiz/WelcomeScreen";
 
 const Quiz = () => {
-  // Starting with 0 to show welcome screen
-  const [currentStep, setCurrentStep] = useState(0);
+  // Starting with 1 instead of 0 to skip welcome screen
+  const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  
-  // Check if Google Tag is loaded
-  useEffect(() => {
-    // Check if Google Ads script is loaded
-    if (!isGtagLoaded() && typeof window !== 'undefined') {
-      console.log('Google Ads tag not detected on Quiz page, attempting to load');
-      
-      // Attempt to load the gtag script
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=AW-828832872`;
-      document.head.appendChild(script);
-      
-      // Initialize gtag
-      const initScript = document.createElement('script');
-      initScript.textContent = `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'AW-828832872');
-      `;
-      document.head.appendChild(initScript);
-    }
-  }, []);
   
   // Load saved progress from localStorage if available
   useEffect(() => {
@@ -68,10 +42,6 @@ const Quiz = () => {
       [questionId]: answer,
     }));
   };
-
-  const startQuiz = () => {
-    setCurrentStep(1);
-  };
   
   const handleNext = () => {
     const currentQuestion = quizQuestions[currentStep - 1];
@@ -96,7 +66,7 @@ const Quiz = () => {
   };
   
   const handleBack = () => {
-    setCurrentStep((prev) => Math.max(prev - 1, 0));
+    setCurrentStep((prev) => Math.max(prev - 1, 1)); // Minimum is now 1, not 0
   };
   
   const handleSubmit = (firstName: string, email: string) => {
@@ -127,18 +97,16 @@ const Quiz = () => {
   };
   
   // Calculate progress percentage for the progress bar
-  const totalSteps = quizQuestions.length + 1; // questions + email
+  const totalSteps = quizQuestions.length + 1; // questions + email (no welcome)
   const progressPercentage = Math.round((currentStep / totalSteps) * 100);
   
   return (
     <div className="min-h-screen bg-[#FFECD6]/30 py-8 px-4 md:px-8 lg:px-0">
       <div className="max-w-2xl mx-auto">
-        {currentStep > 0 && <ProgressBar progress={progressPercentage} />}
+        <ProgressBar progress={progressPercentage} />
         
         <div className="bg-white rounded-2xl shadow-md p-6 md:p-8 mt-4">
-          {currentStep === 0 ? (
-            <WelcomeScreen onStart={startQuiz} />
-          ) : currentStep <= quizQuestions.length ? (
+          {currentStep <= quizQuestions.length ? (
             <QuizQuestion
               question={quizQuestions[currentStep - 1]}
               answer={answers[quizQuestions[currentStep - 1].id]}
@@ -152,7 +120,7 @@ const Quiz = () => {
           )}
         </div>
         
-        {currentStep > 0 && currentStep <= quizQuestions.length && (
+        {currentStep <= quizQuestions.length && (
           <div className="mt-4 text-center text-sm text-muted-foreground">
             Question {currentStep} of {quizQuestions.length}
           </div>

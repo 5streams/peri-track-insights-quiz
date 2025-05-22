@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { saveLead } from "@/utils/leadTracking";
-import { trackQuizResultsRegistration } from "@/utils/googleAdsTracking";
 
 interface EmailCollectionProps {
   onSubmit: (firstName: string, email: string) => void;
@@ -55,9 +54,6 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
         null,
         quizResults
       );
-      
-      // Track Google Ads conversion for quiz completion
-      trackQuizResultsRegistration(email.trim());
       
       console.log("Quiz lead saved successfully:", lead);
       
@@ -132,4 +128,3 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
 };
 
 export default EmailCollection;
-
