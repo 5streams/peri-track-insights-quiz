@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { saveLead } from "@/utils/leadTracking";
+import { saveLead } from "@/utils/leadStorage";
 
 interface EmailCollectionProps {
   onSubmit: (name: string, email: string) => void;
@@ -38,26 +38,17 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       return;
     }
     
-    // Save lead and show notification
     try {
       // Get quiz results from localStorage if available
       const quizResults = localStorage.getItem("quizAnswers") 
         ? JSON.parse(localStorage.getItem("quizAnswers") || "{}") 
         : {};
       
-      console.log("EmailCollection: Saving lead with data:", {
-        name: name.trim(),
-        email: email.trim(),
-        source: 'quiz_results'
-      });
-      
-      // Save lead
+      // Save lead to localStorage
       saveLead(
         name.trim(),
         email.trim(),
         'quiz_results',
-        null,
-        quizResults,
         `Quiz completed at ${new Date().toISOString()}`
       );
       
@@ -67,7 +58,7 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
         description: "Your information has been saved. Preparing your results...",
       });
     } catch (error) {
-      console.error("Error saving lead:", error);
+      console.error("Error saving information:", error);
       toast({
         title: "Error saving information",
         description: "Please try again.",
