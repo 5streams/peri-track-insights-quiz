@@ -311,3 +311,54 @@ export const getQuizAnswersForUser = async (userId: string): Promise<QuizAnswer[
     return [];
   }
 };
+
+export const deleteUserAndAllData = async (userId: string): Promise<{ success: boolean; error?: any }> => {
+  console.warn(`Attempting to delete user ${userId} and all their associated data.`);
+  try {
+    // 1. Delete quiz answers
+    const { error: quizAnswersError } = await supabase
+      .from('quiz_answers')
+      .delete()
+      .eq('user_id', userId);
+    if (quizAnswersError) {
+      console.error("Error deleting user's quiz_answers:", quizAnswersError);
+      throw quizAnswersError;
+    }
+
+    // 2. Delete quiz submissions
+    const { error: quizSubmissionsError } = await supabase
+      .from('quiz_submissions')
+      .delete()
+      .eq('user_id', userId);
+    if (quizSubmissionsError) {
+      console.error("Error deleting user's quiz_submissions:", quizSubmissionsError);
+      throw quizSubmissionsError;
+    }
+    
+    // 3. Delete leads
+    const { error: leadsError } = await supabase
+      .from('leads')
+      .delete()
+      .eq('user_id', userId);
+    if (leadsError) {
+      console.error("Error deleting user's leads:", leadsError);
+      throw leadsError;
+    }
+
+    // 4. Delete the user from the users table
+    const { error: userError } = await supabase
+      .from('users')
+      .delete()
+      .eq('id', userId);
+    if (userError) {
+      console.error("Error deleting user:", userError);
+      throw userError;
+    }
+
+    console.log(`Successfully deleted user ${userId} and all associated data.`);
+    return { success: true };
+  } catch (error) {
+    console.error(`Failed to delete user ${userId} and their data:`, error);
+    return { success: false, error };
+  }
+};
