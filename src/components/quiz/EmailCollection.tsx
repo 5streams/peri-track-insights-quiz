@@ -81,42 +81,8 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
         Enter your email to unlock your comprehensive hormone assessment and discover exactly what's happening in your body
       </p>
       
-      <div className="bg-slate-50 border border-slate-100 rounded-lg p-4 mb-6 text-left">
-        <p className="font-medium text-slate-700 mb-2">Here's what you'll discover in your personalized results:</p>
-        <ul className="space-y-2">
-          {[
-            "Your specific hormone pattern and what it means for your symptoms",
-            "Why you're experiencing sleep disruptions, brain fog, or mood changes",
-            "The exact connection between your symptoms and hormone fluctuations",
-            "Personalized recommendations to start feeling better immediately",
-            "Whether your symptoms indicate early, mid, or late-stage perimenopause",
-            "What to expect next in your hormone journey"
-          ].map((item, index) => (
-            <li key={index} className="flex items-start gap-2">
-              <Check className="h-4 w-4 text-purple-600 mt-1 shrink-0" />
-              <span className="text-sm text-slate-600">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      
-      <div className="mb-6 italic text-center">
-        <p className="text-slate-600 text-sm mb-2">
-          Join 30,000+ women who've discovered clarity about their perimenopause symptoms
-        </p>
-        <blockquote className="text-slate-700 text-sm">
-          "Finally understanding why I was waking up at 3 AM every night changed everything. 
-          The personalized insights were incredibly helpful."
-          <span className="font-medium"> - Jennifer, 45</span>
-        </blockquote>
-      </div>
-      
-      <p className="text-purple-800 font-medium mb-6">
-        This detailed analysis would cost $200+ at a specialist's office.
-        <br />Get your complete assessment free in the next 60 seconds.
-      </p>
-      
-      <form onSubmit={handleSubmit} className="space-y-5 max-w-md mx-auto text-left">
+      {/* Form moved here, right after the subheadline */}
+      <form onSubmit={handleSubmit} className="space-y-5 max-w-md mx-auto text-left mb-6">
         <div className="space-y-1.5">
           <Label htmlFor="name" className="text-slate-700">First Name</Label>
           <Input
@@ -152,6 +118,41 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
           {isLoading ? "Processing..." : "Get My Personalized Results Now"}
         </Button>
       </form>
+      
+      <div className="bg-slate-50 border border-slate-100 rounded-lg p-4 mb-6 text-left">
+        <p className="font-medium text-slate-700 mb-2">Here's what you'll discover in your personalized results:</p>
+        <ul className="space-y-2">
+          {[
+            "Your specific hormone pattern and what it means for your symptoms",
+            "Why you're experiencing sleep disruptions, brain fog, or mood changes",
+            "The exact connection between your symptoms and hormone fluctuations",
+            "Personalized recommendations to start feeling better immediately",
+            "Whether your symptoms indicate early, mid, or late-stage perimenopause",
+            "What to expect next in your hormone journey"
+          ].map((item, index) => (
+            <li key={index} className="flex items-start gap-2">
+              <Check className="h-4 w-4 text-purple-600 mt-1 shrink-0" />
+              <span className="text-sm text-slate-600">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <div className="mb-6 italic text-center">
+        <p className="text-slate-600 text-sm mb-2">
+          Join 30,000+ women who've discovered clarity about their perimenopause symptoms
+        </p>
+        <blockquote className="text-slate-700 text-sm">
+          "Finally understanding why I was waking up at 3 AM every night changed everything. 
+          The personalized insights were incredibly helpful."
+          <span className="font-medium"> - Jennifer, 45</span>
+        </blockquote>
+      </div>
+      
+      <p className="text-purple-800 font-medium mb-6">
+        This detailed analysis would cost $200+ at a specialist's office.
+        <br />Get your complete assessment free in the next 60 seconds.
+      </p>
       
       <div className="mt-4 space-y-1 text-center">
         {[
