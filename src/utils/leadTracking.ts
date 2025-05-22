@@ -4,21 +4,22 @@
 // Define lead types
 export interface Lead {
   id: string;
-  firstName: string;
+  name: string;
   email: string;
-  source: 'quiz_results' | 'free_trial';
-  pricingPlan?: 'monthly' | 'annual' | null;
+  source: 'quiz_results' | 'free_trial' | string;
+  pricingTier?: 'monthly' | 'annual' | null;
   quizResults?: any;
   timestamp: string;
+  status: 'new' | 'contacted' | 'interested' | 'converted' | 'unqualified';
   deviceInfo: {
     userAgent: string;
     screenSize: string;
   };
-  additionalNotes?: string;
+  notes?: string;
 }
 
 // Generate a unique ID for leads
-const generateLeadId = (): string => {
+const generateId = (): string => {
   return Date.now().toString(36) + Math.random().toString(36).substring(2, 9);
 };
 
@@ -33,25 +34,24 @@ const getDeviceInfo = () => {
 // Local storage key for leads
 const LEADS_STORAGE_KEY = 'peritrack_leads';
 
-// Initialize or validate lead storage with improved error handling
+// Initialize lead storage
 export const initializeLeadStorage = (): void => {
-  console.log("initializeLeadStorage: Starting lead storage initialization");
+  console.log("Initializing lead storage");
   
   try {
     // Create new empty storage if it doesn't exist
     if (!localStorage.getItem(LEADS_STORAGE_KEY)) {
       localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
-      console.log("initializeLeadStorage: Created new empty leads storage");
     } else {
       // Validate existing data is an array
       try {
         const data = JSON.parse(localStorage.getItem(LEADS_STORAGE_KEY) || '[]');
         if (!Array.isArray(data)) {
-          console.error("initializeLeadStorage: Stored data is not an array, recreating");
+          console.error("Stored lead data is not an array, recreating");
           localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
         }
       } catch (parseError) {
-        console.error("initializeLeadStorage: Error parsing leads, recreating", parseError);
+        console.error("Error parsing leads, recreating", parseError);
         localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
       }
     }
@@ -60,39 +60,40 @@ export const initializeLeadStorage = (): void => {
     localStorage.setItem('peritrack_initialized', 'true');
     localStorage.setItem('peritrack_last_init', new Date().toISOString());
   } catch (error) {
-    console.error("initializeLeadStorage: Critical error during initialization:", error);
+    console.error("Critical error during initialization:", error);
   }
 };
 
-// Enhanced save lead function with stronger synchronization
+// Save lead
 export const saveLead = (
-  firstName: string, 
+  name: string, 
   email: string, 
-  source: 'quiz_results' | 'free_trial',
-  pricingPlan?: 'monthly' | 'annual' | null,
+  source: 'quiz_results' | 'free_trial' | string,
+  pricingTier?: 'monthly' | 'annual' | null,
   quizResults?: any,
-  additionalNotes?: string
+  notes?: string
 ): Lead => {
   // Validate inputs
-  if (!firstName || !email) {
-    throw new Error("FirstName and email are required");
+  if (!name || !email) {
+    throw new Error("Name and email are required");
   }
   
   // Ensure storage is initialized
   initializeLeadStorage();
   
   // Create lead object with a unique ID
-  const leadId = generateLeadId();
+  const leadId = generateId();
   const lead: Lead = {
     id: leadId,
-    firstName,
+    name,
     email,
     source,
-    pricingPlan,
+    pricingTier,
     quizResults,
     timestamp: new Date().toISOString(),
+    status: 'new',
     deviceInfo: getDeviceInfo(),
-    additionalNotes
+    notes
   };
   
   try {
@@ -113,16 +114,19 @@ export const saveLead = (
     // Save to localStorage
     localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(updatedLeads));
     
-    // Save a backup copy to sessionStorage
-    try {
-      sessionStorage.setItem('latest_lead', JSON.stringify(lead));
-    } catch (e) {
-      console.warn("Session storage backup failed:", e);
-    }
-    
     // Update timestamp for synchronization
     const timestamp = Date.now().toString();
     localStorage.setItem('leads_updated_timestamp', timestamp);
+    
+    // Dispatch custom event for real-time updates across tabs
+    try {
+      const event = new CustomEvent('peritrack_lead_added', { 
+        detail: { lead, timestamp } 
+      });
+      window.dispatchEvent(event);
+    } catch (e) {
+      console.warn("Could not dispatch lead event:", e);
+    }
     
     return lead;
   } catch (error) {
@@ -131,7 +135,7 @@ export const saveLead = (
   }
 };
 
-// Simplified and reliable getLeads function
+// Get leads
 export const getLeads = (): Lead[] => {
   try {
     // Ensure storage is initialized
@@ -159,42 +163,62 @@ export const getLeads = (): Lead[] => {
   }
 };
 
+// Update lead status
+export const updateLead = (id: string, updates: Partial<Lead>): boolean => {
+  try {
+    const leads = getLeads();
+    
+    const index = leads.findIndex(lead => lead.id === id);
+    if (index === -1) return false;
+    
+    // Apply updates
+    leads[index] = { ...leads[index], ...updates };
+    
+    // Save updated leads
+    localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(leads));
+    
+    // Dispatch update event
+    try {
+      const event = new CustomEvent('peritrack_lead_updated', { 
+        detail: { leadId: id, updates } 
+      });
+      window.dispatchEvent(event);
+    } catch (e) {
+      console.warn("Could not dispatch update event:", e);
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('Error updating lead:', error);
+    return false;
+  }
+};
+
 // Clear all leads
 export const clearLeads = (): void => {
   localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify([]));
   console.log('All leads cleared from localStorage');
 };
 
-// Simple validation function
-export const validateLeadStorage = (): boolean => {
-  try {
-    const testId = "validation-" + Date.now();
-    const testLead = {
-      id: testId,
-      firstName: "ValidationTest",
-      email: "validation@test.com",
-      source: 'quiz_results' as const,
-      timestamp: new Date().toISOString(),
-      deviceInfo: getDeviceInfo()
-    };
-    
-    const before = getLeads();
-    const updatedLeads = [...before, testLead];
-    
-    localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(updatedLeads));
-    
-    const after = getLeads();
-    const found = after.some(lead => lead.id === testId);
-    
-    if (found) {
-      localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(before));
-    }
-    
-    return found;
-  } catch (error) {
-    console.error("Validation failed:", error);
-    return false;
-  }
+// Export leads as CSV
+export const exportLeadsCSV = (): string => {
+  const leads = getLeads();
+  
+  const csvHeader = 'ID,Name,Email,Source,Pricing Tier,Status,Date,Notes\n';
+  const csvContent = leads.map(lead => {
+    return [
+      lead.id,
+      lead.name,
+      lead.email,
+      lead.source,
+      lead.pricingTier || 'N/A',
+      lead.status,
+      new Date(lead.timestamp).toLocaleString(),
+      lead.notes || ''
+    ].join(',');
+  }).join('\n');
+  
+  return csvHeader + csvContent;
 };
 
 // Initialize storage when module loads

@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,12 +7,12 @@ import { useToast } from "@/hooks/use-toast";
 import { saveLead } from "@/utils/leadTracking";
 
 interface EmailCollectionProps {
-  onSubmit: (firstName: string, email: string) => void;
+  onSubmit: (name: string, email: string) => void;
   isLoading: boolean;
 }
 
 const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }) => {
-  const [firstName, setFirstName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const { toast } = useToast();
 
@@ -20,10 +20,10 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
     e.preventDefault();
     
     // Basic validation
-    if (!firstName.trim()) {
+    if (!name.trim()) {
       toast({
-        title: "First name required",
-        description: "Please enter your first name to continue.",
+        title: "Name required",
+        description: "Please enter your name to continue.",
         variant: "destructive",
       });
       return;
@@ -46,14 +46,14 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
         : {};
       
       console.log("EmailCollection: Saving lead with data:", {
-        firstName: firstName.trim(),
+        name: name.trim(),
         email: email.trim(),
         source: 'quiz_results'
       });
       
       // Save lead
       saveLead(
-        firstName.trim(),
+        name.trim(),
         email.trim(),
         'quiz_results',
         null,
@@ -76,7 +76,7 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
     }
     
     // Continue with original submission
-    onSubmit(firstName.trim(), email.trim());
+    onSubmit(name.trim(), email.trim());
   };
 
   return (
@@ -91,11 +91,11 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       
       <form onSubmit={handleSubmit} className="space-y-5 max-w-md mx-auto text-left">
         <div className="space-y-1.5">
-          <Label htmlFor="firstName" className="text-[#6b4e82]">First Name</Label>
+          <Label htmlFor="name" className="text-[#6b4e82]">First Name</Label>
           <Input
-            id="firstName"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Your first name"
             disabled={isLoading}
             required

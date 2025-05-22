@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import LeadList from "@/components/leads/LeadList";
+import { Link } from "react-router-dom";
+import { ArrowLeft, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { initializeLeadStorage } from "@/utils/leadTracking";
-import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import LeadList from "@/components/leads/LeadList";
 
 const AdminLeads = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -14,6 +14,37 @@ const AdminLeads = () => {
   const [error, setError] = useState("");
   const [authAttempted, setAuthAttempted] = useState(false);
   const { toast } = useToast();
+  
+  // Add no-cache meta tags to ensure fresh data
+  useEffect(() => {
+    // Add meta tags to prevent caching
+    const metaTags = [
+      { name: "Cache-Control", content: "no-cache, no-store, must-revalidate" },
+      { name: "Pragma", content: "no-cache" },
+      { name: "Expires", content: "0" }
+    ];
+    
+    // Add each meta tag to the head
+    metaTags.forEach(tagData => {
+      const existingTag = document.querySelector(`meta[name="${tagData.name}"]`);
+      if (existingTag) {
+        existingTag.setAttribute("content", tagData.content);
+      } else {
+        const metaTag = document.createElement("meta");
+        metaTag.setAttribute("name", tagData.name);
+        metaTag.setAttribute("content", tagData.content);
+        document.head.appendChild(metaTag);
+      }
+    });
+    
+    // Clean up function to remove meta tags
+    return () => {
+      metaTags.forEach(tagData => {
+        const tag = document.querySelector(`meta[name="${tagData.name}"]`);
+        if (tag) document.head.removeChild(tag);
+      });
+    };
+  }, []);
 
   // Check if there is a stored admin session in sessionStorage
   useEffect(() => {
@@ -84,6 +115,12 @@ const AdminLeads = () => {
     });
   };
 
+  // Force page reload with cache busting
+  const forceRefresh = () => {
+    const cacheBuster = `?cache=${Date.now()}`;
+    window.location.href = window.location.pathname + cacheBuster;
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-[#f4edfd] flex items-center justify-center px-4">
@@ -150,6 +187,14 @@ const AdminLeads = () => {
           </div>
           
           <div className="flex gap-2 items-center">
+            <Button 
+              onClick={forceRefresh}
+              variant="outline"
+              className="text-[#6b4e82] border-[#6b4e82]/20"
+            >
+              <RefreshCw className="h-4 w-4 mr-2" /> Force Refresh
+            </Button>
+            
             <Link to="/">
               <Button 
                 variant="outline"

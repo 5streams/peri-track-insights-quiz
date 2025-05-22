@@ -4,7 +4,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getLeads, Lead, clearLeads, initializeLeadStorage, saveLead, validateLeadStorage } from "@/utils/leadTracking";
+import { 
+  getLeads, 
+  Lead, 
+  clearLeads, 
+  saveLead, 
+  updateLead, 
+  exportLeadsCSV 
+} from "@/utils/leadTracking";
 import { 
   Table, 
   TableBody, 
@@ -15,7 +22,7 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
-import { RefreshCw, Trash2, Bug } from "lucide-react";
+import { RefreshCw, Trash2, Bug, FileText, Check, X } from "lucide-react";
 
 const LeadList: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -23,6 +30,11 @@ const LeadList: React.FC = () => {
   const [filterSource, setFilterSource] = useState<string>('all');
   const [isLoading, setIsLoading] = useState(true);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
+  const [stats, setStats] = useState({
+    totalLeads: 0,
+    todayLeads: 0,
+    conversionRate: 0
+  });
   const { toast } = useToast();
   
   // Load leads function
@@ -38,14 +50,8 @@ const LeadList: React.FC = () => {
       // Update state with fetched leads
       setLeads(allLeads);
       
-      // Check for any "Julie" leads (for debugging)
-      const julieFound = allLeads.some(lead => 
-        lead.firstName.toLowerCase().includes('julie')
-      );
-      
-      if (julieFound) {
-        console.log("LeadList: Found Julie in the leads!");
-      }
+      // Calculate stats
+      calculateStats(allLeads);
     } catch (error) {
       console.error("Error loading leads:", error);
       toast({
@@ -57,26 +63,69 @@ const LeadList: React.FC = () => {
       setIsLoading(false);
     }
   };
+  
+  // Calculate dashboard stats
+  const calculateStats = (leadsData: Lead[]) => {
+    const today = new Date().toDateString();
+    const todayLeads = leadsData.filter(lead => 
+      new Date(lead.timestamp).toDateString() === today
+    );
+    const converted = leadsData.filter(lead => lead.status === 'converted');
+
+    setStats({
+      totalLeads: leadsData.length,
+      todayLeads: todayLeads.length,
+      conversionRate: leadsData.length > 0 ? 
+        Math.round((converted.length / leadsData.length) * 100) : 0
+    });
+  };
 
   // Set up auto-refresh and polling
   useEffect(() => {
     // Initial load
     loadLeads();
     
-    // Setup polling interval (every 2 seconds)
+    // Setup polling interval (every 10 seconds)
     const interval = setInterval(() => {
       loadLeads();
-    }, 2000);
+    }, 10000);
+    
+    // Set up event listener for new leads
+    const handleNewLead = () => {
+      console.log("LeadList: New lead event detected");
+      loadLeads();
+    };
+    
+    // Set up event listener for lead updates
+    const handleLeadUpdate = () => {
+      console.log("LeadList: Lead update event detected");
+      loadLeads();
+    };
+    
+    // Listen for storage changes in other tabs
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'peritrack_leads' || e.key === 'leads_updated_timestamp') {
+        console.log("LeadList: Storage change detected in another tab");
+        loadLeads();
+      }
+    };
     
     // Check for updates on window focus
     const handleFocus = () => {
       loadLeads();
     };
     
+    // Register event listeners
+    window.addEventListener('peritrack_lead_added', handleNewLead);
+    window.addEventListener('peritrack_lead_updated', handleLeadUpdate);
+    window.addEventListener('storage', handleStorageChange);
     window.addEventListener('focus', handleFocus);
     
     return () => {
       clearInterval(interval);
+      window.removeEventListener('peritrack_lead_added', handleNewLead);
+      window.removeEventListener('peritrack_lead_updated', handleLeadUpdate);
+      window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('focus', handleFocus);
     };
   }, []);
@@ -84,7 +133,7 @@ const LeadList: React.FC = () => {
   // Filter leads based on search term and source filter
   const filteredLeads = leads.filter(lead => {
     const matchesSearch = 
-      lead.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       lead.email.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesFilter = 
@@ -153,6 +202,70 @@ const LeadList: React.FC = () => {
     }
   };
   
+  // Update lead status
+  const handleUpdateStatus = (leadId: string, newStatus: Lead['status']) => {
+    try {
+      const success = updateLead(leadId, { 
+        status: newStatus,
+      });
+      
+      if (success) {
+        toast({
+          title: "Status Updated",
+          description: `Lead status changed to "${newStatus}"`,
+        });
+        loadLeads();
+      } else {
+        toast({
+          title: "Update Failed",
+          description: "Could not update lead status.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      console.error("Error updating lead status:", error);
+      toast({
+        title: "Error",
+        description: "Failed to update status.",
+        variant: "destructive"
+      });
+    }
+  };
+  
+  // Add notes to lead
+  const addNotesToLead = (leadId: string) => {
+    try {
+      const lead = leads.find(l => l.id === leadId);
+      if (!lead) return;
+      
+      const notes = prompt("Add notes for this lead:", lead.notes);
+      if (notes === null) return; // User cancelled
+      
+      const success = updateLead(leadId, { notes });
+      
+      if (success) {
+        toast({
+          title: "Notes Updated",
+          description: "Lead notes have been updated.",
+        });
+        loadLeads();
+      } else {
+        toast({
+          title: "Update Failed",
+          description: "Could not update lead notes.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      console.error("Error updating notes:", error);
+      toast({
+        title: "Error",
+        description: "Failed to update notes.",
+        variant: "destructive"
+      });
+    }
+  };
+  
   // Debug storage
   const debugStorage = () => {
     try {
@@ -160,13 +273,9 @@ const LeadList: React.FC = () => {
       console.log('Raw storage data:', localStorage.getItem('peritrack_leads'));
       console.log('All localStorage keys:', Object.keys(localStorage));
       
-      // Validate storage
-      const isValid = validateLeadStorage();
-      
       toast({
-        title: `Storage Validation: ${isValid ? 'PASSED' : 'FAILED'}`,
-        description: "Check console for debug info.",
-        variant: isValid ? 'default' : 'destructive',
+        title: "Storage Debug Info",
+        description: "Check browser console for details.",
       });
     } catch (error) {
       console.error("Debug error:", error);
@@ -178,9 +287,39 @@ const LeadList: React.FC = () => {
     }
   };
   
+  // Export leads as CSV
+  const handleExportCSV = () => {
+    try {
+      const csvContent = exportLeadsCSV();
+      
+      // Create download
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `peritrack-leads-${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+      
+      toast({
+        title: "Export Successful",
+        description: "Leads exported to CSV file.",
+      });
+    } catch (error) {
+      console.error("Export error:", error);
+      toast({
+        title: "Export Error",
+        description: "Could not export leads.",
+        variant: "destructive",
+      });
+    }
+  };
+  
   // Force page reload
   const forcePageReload = () => {
-    window.location.reload();
+    window.location.href = window.location.pathname + "?cache=" + Date.now();
   };
   
   // Manual refresh
@@ -222,6 +361,24 @@ const LeadList: React.FC = () => {
       </CardHeader>
       
       <CardContent className="p-4 md:p-6">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-[#D6BCFA]/30">
+            <div className="text-sm text-[#6b4e82]/70">Total Leads</div>
+            <div className="text-2xl font-bold text-[#6b4e82]">{stats.totalLeads}</div>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-[#D6BCFA]/30">
+            <div className="text-sm text-[#6b4e82]/70">Today's Leads</div>
+            <div className="text-2xl font-bold text-[#6b4e82]">{stats.todayLeads}</div>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-[#D6BCFA]/30">
+            <div className="text-sm text-[#6b4e82]/70">Conversion Rate</div>
+            <div className="text-2xl font-bold text-[#6b4e82]">{stats.conversionRate}%</div>
+          </div>
+        </div>
+      
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
           <div className="flex-1">
             <Label htmlFor="search">Search Leads</Label>
@@ -258,6 +415,13 @@ const LeadList: React.FC = () => {
               {isLoading ? "Loading..." : "Refresh Now"}
             </Button>
             <Button 
+              onClick={handleExportCSV}
+              variant="outline"
+              className="w-full sm:w-auto text-gray-600"
+            >
+              <FileText className="h-4 w-4 mr-1" /> Export CSV
+            </Button>
+            <Button 
               onClick={createJulieLead}
               variant="outline"
               className="w-full sm:w-auto text-purple-500 hover:text-purple-700"
@@ -270,13 +434,6 @@ const LeadList: React.FC = () => {
               className="w-full sm:w-auto text-blue-500 hover:text-blue-700"
             >
               + Test Lead
-            </Button>
-            <Button 
-              onClick={forcePageReload}
-              variant="outline"
-              className="w-full sm:w-auto text-green-500 hover:text-green-700"
-            >
-              ↻ Reload Page
             </Button>
             <Button 
               onClick={debugStorage}
@@ -308,13 +465,15 @@ const LeadList: React.FC = () => {
                 <TableHead>Email</TableHead>
                 <TableHead>Source</TableHead>
                 <TableHead>Plan</TableHead>
+                <TableHead>Status</TableHead>
                 <TableHead className="text-right">Date</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredLeads.map((lead) => (
                 <TableRow key={lead.id}>
-                  <TableCell className="font-medium">{lead.firstName}</TableCell>
+                  <TableCell className="font-medium">{lead.name}</TableCell>
                   <TableCell>{lead.email}</TableCell>
                   <TableCell>
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -326,17 +485,61 @@ const LeadList: React.FC = () => {
                     </span>
                   </TableCell>
                   <TableCell>
-                    {lead.pricingPlan ? (
+                    {lead.pricingTier ? (
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        lead.pricingPlan === 'monthly' 
+                        lead.pricingTier === 'monthly' 
                           ? 'bg-orange-100 text-orange-800' 
                           : 'bg-purple-100 text-purple-800'
                       }`}>
-                        {lead.pricingPlan === 'monthly' ? '$9.99 (Monthly)' : '$99 (Annual)'}
+                        {lead.pricingTier === 'monthly' ? '$9.99 (Monthly)' : '$99 (Annual)'}
                       </span>
                     ) : '-'}
                   </TableCell>
+                  <TableCell>
+                    <select
+                      value={lead.status}
+                      onChange={(e) => handleUpdateStatus(lead.id, e.target.value as Lead['status'])}
+                      className="text-xs p-1 border rounded bg-gray-50"
+                    >
+                      <option value="new">New</option>
+                      <option value="contacted">Contacted</option>
+                      <option value="interested">Interested</option>
+                      <option value="converted">Converted</option>
+                      <option value="unqualified">Unqualified</option>
+                    </select>
+                  </TableCell>
                   <TableCell className="text-right">{new Date(lead.timestamp).toLocaleString()}</TableCell>
+                  <TableCell>
+                    <div className="flex space-x-1">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-8 w-8 p-0"
+                        onClick={() => addNotesToLead(lead.id)}
+                        title={lead.notes || "Add notes"}
+                      >
+                        <FileText className="h-4 w-4" />
+                      </Button>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-8 w-8 p-0 text-green-500"
+                        onClick={() => handleUpdateStatus(lead.id, 'converted')}
+                        title="Mark as converted"
+                      >
+                        <Check className="h-4 w-4" />
+                      </Button>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-8 w-8 p-0 text-red-500"
+                        onClick={() => handleUpdateStatus(lead.id, 'unqualified')}
+                        title="Mark as unqualified"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
