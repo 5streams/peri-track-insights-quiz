@@ -14,9 +14,6 @@ import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanat
 import PeritrackIntro from "@/components/results/PeritrackIntro";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
 import SimplePricingSection from "@/components/results/SimplePricingSection";
-import Guarantee from "@/components/results/Guarantee";
-import RiskReversal from "@/components/results/RiskReversal";
-import AppShowcase from "@/components/results/AppShowcase";
 
 interface QuizResults {
   score: number;
@@ -149,27 +146,12 @@ const Results = () => {
             <LunaAIFeature onStartTrial={handleTrialCTA} />
           </div>
           
-          {/* Our Guarantee Section */}
-          <div className="revealed mb-6">
-            <Guarantee />
-          </div>
-          
-          {/* Risk Reversal section */}
-          <div className="revealed mb-6">
-            <RiskReversal />
-          </div>
-          
-          {/* App Showcase section */}
-          <div className="revealed mb-6">
-            <AppShowcase onStartTrial={handleTrialCTA} />
-          </div>
-          
           {/* Simple Pricing Section at the very bottom */}
           <div className="revealed mb-6">
             <SimplePricingSection onStartTrial={handleTrialCTA} />
           </div>
           
-          {/* Perimenopause Explanation MOVED TO BOTTOM */}
+          {/* Perimenopause Explanation */}
           <div className="revealed mb-6">
             <PerimenopauseExplanation scoreCategory={scoreCategory} />
           </div>
