@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -46,14 +47,16 @@ const Results = () => {
   };
   
   useEffect(() => {
-    // Reveal sections as user scrolls
+    // Improved reveal sections function to fix glitching
     const revealSections = () => {
       const windowHeight = window.innerHeight;
       const sections = document.querySelectorAll('.reveal-section');
       
       sections.forEach(section => {
         const sectionTop = (section as HTMLElement).getBoundingClientRect().top;
-        if (sectionTop < windowHeight * 0.85) {
+        // More generous threshold to prevent glitching
+        if (sectionTop < windowHeight * 0.9) {
+          // Only add the class, never remove it (prevents flickering)
           section.classList.add('revealed');
         }
       });
@@ -79,13 +82,44 @@ const Results = () => {
       setUserInfo(JSON.parse(storedUserInfo));
     }
 
-    // Add scroll event listener for animations
-    window.addEventListener('scroll', revealSections);
-    // Trigger once on load
+    // Add scroll event listener for animations with debounce for better performance
+    let scrollTimeout: number | null = null;
+    const handleScroll = () => {
+      if (scrollTimeout) {
+        window.clearTimeout(scrollTimeout);
+      }
+      scrollTimeout = window.setTimeout(revealSections, 50);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    // Add resize event listener to recalculate positions on window resize
+    window.addEventListener('resize', revealSections);
+    
+    // Trigger once on load with a slight delay to ensure DOM is ready
     setTimeout(revealSections, 300);
 
+    // Add CSS for reveal animations
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .reveal-section {
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      .reveal-section.revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    `;
+    document.head.appendChild(style);
+
     return () => {
-      window.removeEventListener('scroll', revealSections);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', revealSections);
+      if (scrollTimeout) {
+        window.clearTimeout(scrollTimeout);
+      }
+      document.head.removeChild(style);
     };
   }, [navigate]);
   

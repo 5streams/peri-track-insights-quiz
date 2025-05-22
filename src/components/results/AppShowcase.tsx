@@ -11,24 +11,33 @@ interface AppShowcaseProps {
 const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
   const showcaseRef = useRef<HTMLDivElement>(null);
   
-  // Add animation observer for reveal effect
+  // Simplified animation logic for better stability
   useEffect(() => {
+    // Make sure all sections start as visible to prevent glitching
+    const sections = document.querySelectorAll(".reveal-section");
+    
+    // Create a more reliable intersection observer with higher threshold
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          // Only add the revealed class, never remove it (prevents flickering)
           if (entry.isIntersecting) {
             entry.target.classList.add("revealed");
           }
         });
       },
-      { threshold: 0.1 }
+      { 
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px" // Trigger earlier for smoother animations
+      }
     );
     
-    const sections = document.querySelectorAll(".reveal-section");
+    // Observe all sections
     sections.forEach((section) => {
       observer.observe(section);
     });
     
+    // Clean up
     return () => {
       sections.forEach((section) => {
         observer.unobserve(section);
@@ -43,7 +52,7 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
     >
       <div className="max-w-6xl mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-12 reveal-section transform opacity-0">
+        <div className="text-center mb-12 reveal-section opacity-100">
           <h2 className="text-2xl md:text-3xl font-playfair font-bold text-[#5D4154] mb-3">
             Here's Exactly How Peritrack Works
           </h2>
@@ -53,7 +62,7 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
         </div>
         
         {/* Step 1: Track Your Symptoms */}
-        <div className="mb-16 reveal-section transform opacity-0">
+        <div className="mb-16 reveal-section opacity-100">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="order-2 md:order-1">
               <div className="flex items-center mb-4">
@@ -85,15 +94,9 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
             
             <div className="order-1 md:order-2">
               <div className="bg-[#F8F9FA] rounded-lg p-2 shadow-md">
-                <img 
-                  src="/tracking-interface-mockup.png" 
-                  alt="Peritrack symptom tracking interface" 
-                  className="rounded-md w-full"
-                  onError={(e) => {
-                    // Fallback for missing image
-                    e.currentTarget.src = "https://via.placeholder.com/600x400?text=Daily+Tracking+Interface";
-                  }}
-                />
+                <div className="rounded-md w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
+                  Daily Tracking Interface
+                </div>
                 <p className="text-center text-sm text-gray-500 mt-2 italic">
                   Our simple daily tracking takes just seconds to complete
                 </p>
@@ -103,19 +106,13 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
         </div>
         
         {/* Step 2: Discover Your Patterns */}
-        <div className="mb-16 reveal-section transform opacity-0">
+        <div className="mb-16 reveal-section opacity-100">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <div className="bg-[#F8F9FA] rounded-lg p-2 shadow-md">
-                <img 
-                  src="/pattern-visualization-mockup.png" 
-                  alt="Hormone pattern visualization" 
-                  className="rounded-md w-full"
-                  onError={(e) => {
-                    // Fallback for missing image
-                    e.currentTarget.src = "https://via.placeholder.com/600x400?text=Pattern+Visualization";
-                  }}
-                />
+                <div className="rounded-md w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
+                  Pattern Visualization
+                </div>
                 <p className="text-center text-sm text-gray-500 mt-2 italic">
                   Discover exactly what's happening in your body and why
                 </p>
@@ -153,7 +150,7 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
         </div>
         
         {/* Step 3: Get Personalized Solutions */}
-        <div className="mb-16 reveal-section transform opacity-0">
+        <div className="mb-16 reveal-section opacity-100">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="order-2 md:order-1">
               <div className="flex items-center mb-4">
@@ -186,15 +183,9 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
             
             <div className="order-1 md:order-2">
               <div className="bg-[#F8F9FA] rounded-lg p-2 shadow-md">
-                <img 
-                  src="/recommendations-mockup.png" 
-                  alt="Personalized recommendations screen" 
-                  className="rounded-md w-full"
-                  onError={(e) => {
-                    // Fallback for missing image
-                    e.currentTarget.src = "https://via.placeholder.com/600x400?text=Personalized+Recommendations";
-                  }}
-                />
+                <div className="rounded-md w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
+                  Personalized Recommendations
+                </div>
                 <p className="text-center text-sm text-gray-500 mt-2 italic">
                   Clear, actionable solutions based on your unique patterns
                 </p>
@@ -204,12 +195,12 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
         </div>
         
         {/* Results & Benefits Section */}
-        <div className="mb-12 reveal-section transform opacity-0">
+        <div className="mb-12 reveal-section opacity-100">
           <h3 className="text-center text-xl font-playfair font-semibold text-[#5D4154] mb-8">
             What This Means For You
           </h3>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {[
               {
                 icon: <Moon className="h-8 w-8 text-[#9b87f5]" />,
@@ -247,7 +238,7 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
         </div>
         
         {/* Secondary CTA */}
-        <div className="text-center mt-12 mb-4 reveal-section transform opacity-0">
+        <div className="text-center mt-12 mb-4 reveal-section opacity-100">
           <h3 className="text-xl md:text-2xl font-playfair font-semibold text-[#5D4154] mb-3">
             Ready to Take Control of Your Perimenopause Symptoms?
           </h3>
