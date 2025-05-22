@@ -104,15 +104,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
         </div>
       </div>
       
-      {/* Immediate CTA for high-intent users */}
-      {scoreCategory === "severe" && (
-        <Button 
-          onClick={onStartTrial}
-          className="cta-button bg-[#9b87f5] hover:bg-[#7E69AB] text-white font-semibold px-8 py-5 rounded-lg shadow-lg mb-6 text-lg transition-all duration-300 animate-pulse-subtle"
-        >
-          Take Action Now - Start Free Trial
-        </Button>
-      )}
+      {/* Removed the immediate CTA button that was here for high-intent users */}
     </header>
   );
 };
