@@ -14,11 +14,11 @@ import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
 import PeritrackIntro from "@/components/results/PeritrackIntro";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
-import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
 import SimplePricingSection from "@/components/results/SimplePricingSection";
 import Guarantee from "@/components/results/Guarantee";
 import RiskReversal from "@/components/results/RiskReversal";
 import AppShowcase from "@/components/results/AppShowcase";
+import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
 
 interface QuizResults {
   score: number;
