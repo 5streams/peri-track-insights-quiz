@@ -103,8 +103,6 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
           </p>
         </div>
       </div>
-      
-      {/* Removed the immediate CTA button that was here for high-intent users */}
     </header>
   );
 };

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -5,19 +6,14 @@ import { ArrowLeft } from "lucide-react";
 import LoadingSpinner from "@/components/results/LoadingSpinner";
 import { calculateHormoneScores } from "@/utils/scoreCalculation";
 
-// Import our components for the results page
+// Import our components for the redesigned results page
 import ResultsHeader from "@/components/results/ResultsHeader";
+import TrialOfferHero from "@/components/results/TrialOfferHero";
+import CondensedSocialProof from "@/components/results/CondensedSocialProof";
+import RiskReversal from "@/components/results/RiskReversal";
+import FinalCTASection from "@/components/results/FinalCTASection";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
-import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
-import EmotionalSupport from "@/components/results/EmotionalSupport";
-import SubscriptionOptions from "@/components/results/SubscriptionOptions";
-import PeritrackIntro from "@/components/results/PeritrackIntro";
-import LunaAIFeature from "@/components/results/LunaAIFeature";
-import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
-import TransformationJourney from "@/components/results/TransformationJourney";
-import SimplePricingSection from "@/components/results/SimplePricingSection";
-import Guarantee from "@/components/results/Guarantee";
 
 interface QuizResults {
   score: number;
@@ -37,6 +33,7 @@ const Results = () => {
     primaryHormone: "estrogen",
     primarySymptoms: [] as string[]
   });
+  const [spotNumber] = useState(Math.floor(Math.random() * 50) + 140); // Random number between 140-190
   const navigate = useNavigate();
   
   // Get score category
@@ -118,7 +115,7 @@ const Results = () => {
     >
       <div className="w-full max-w-4xl mx-auto">
         <div className="results-container">
-          {/* Results Header with Score and User Name */}
+          {/* 1. Results Header with Score and User Name */}
           <ResultsHeader 
             score={hormoneScores.overall} 
             firstName={capitalizedFirstName} 
@@ -126,49 +123,37 @@ const Results = () => {
             onStartTrial={handleTrialCTA}
           />
           
-          {/* Personalized Assessment */}
+          {/* 2. IMMEDIATE TRIAL OFFER (new prominent section) */}
+          <TrialOfferHero
+            firstName={capitalizedFirstName}
+            scoreCategory={scoreCategory}
+            onStartTrial={handleTrialCTA}
+          />
+          
+          {/* 3. Brief symptom validation (condensed) */}
           <PersonalizedAssessment
             scoreCategory={scoreCategory}
             firstName={capitalizedFirstName}
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Perimenopause Explanation */}
-          <PerimenopauseExplanation scoreCategory={scoreCategory} />
-          
-          {/* Hormone Insights */}
+          {/* 4. Hormone Insights (simplified) */}
           <HormoneInsights 
             scores={hormoneScores}
             scoreCategory={scoreCategory}
           />
           
-          {/* Emotional Support */}
-          <EmotionalSupport
-            scoreCategory={scoreCategory}
-            primarySymptoms={hormoneScores.primarySymptoms}
-          />
+          {/* 5. Social proof (condensed) */}
+          <CondensedSocialProof scoreCategory={scoreCategory} />
           
-          {/* Emotion-Hormone Connection - New transitional component */}
-          <EmotionHormoneConnection />
+          {/* 6. Risk Reversal */}
+          <RiskReversal />
           
-          {/* Transformation Journey - Another new transitional component */}
-          <TransformationJourney />
-          
-          {/* SWAPPED COMPONENTS - PeritrackIntro before LunaAIFeature */}
-          {/* Peritrack Intro - Main call to action */}
-          <PeritrackIntro
+          {/* 7. Final CTA (repeat offer) */}
+          <FinalCTASection 
+            spotNumber={spotNumber}
             onStartTrial={handleTrialCTA}
-            firstName={capitalizedFirstName}
           />
-          
-          {/* Luna AI Feature with smoother transition */}
-          <LunaAIFeature onStartTrial={handleTrialCTA} />
-          
-          {/* Our Guarantee Section */}
-          <Guarantee />
-          
-          {/* Simple Pricing Section at the very bottom */}
-          <SimplePricingSection onStartTrial={handleTrialCTA} />
         </div>
       </div>
     </div>
