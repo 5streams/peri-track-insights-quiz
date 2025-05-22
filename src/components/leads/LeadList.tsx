@@ -38,13 +38,13 @@ const LeadList: React.FC = () => {
   const { toast } = useToast();
   
   // Load leads function
-  const loadLeads = () => {
+  const loadLeads = async () => {
     setIsLoading(true);
     setLastRefresh(new Date());
     
     try {
       // Get all leads
-      const allLeads = getLeads();
+      const allLeads = await getLeads();
       console.log("LeadList: Loaded leads count:", allLeads.length);
       
       // Update state with fetched leads
@@ -68,7 +68,7 @@ const LeadList: React.FC = () => {
   const calculateStats = (leadsData: Lead[]) => {
     const today = new Date().toDateString();
     const todayLeads = leadsData.filter(lead => 
-      new Date(lead.timestamp).toDateString() === today
+      lead.created_at && new Date(lead.created_at).toDateString() === today
     );
     const converted = leadsData.filter(lead => lead.status === 'converted');
 
@@ -144,12 +144,12 @@ const LeadList: React.FC = () => {
   });
   
   // Create a test lead
-  const createTestLead = () => {
+  const createTestLead = async () => {
     try {
       const testName = `Test User ${Math.floor(Math.random() * 1000)}`;
       const testEmail = `test${Date.now()}@example.com`;
       
-      saveLead(
+      await saveLead(
         testName, 
         testEmail, 
         Math.random() > 0.5 ? 'quiz_results' : 'free_trial',
@@ -175,9 +175,9 @@ const LeadList: React.FC = () => {
   };
   
   // Create a "Julie" test lead specifically
-  const createJulieLead = () => {
+  const createJulieLead = async () => {
     try {
-      saveLead(
+      await saveLead(
         "Julie", 
         `julie.test${Date.now()}@example.com`, 
         'quiz_results',
@@ -203,9 +203,9 @@ const LeadList: React.FC = () => {
   };
   
   // Update lead status
-  const handleUpdateStatus = (leadId: string, newStatus: Lead['status']) => {
+  const handleUpdateStatus = async (leadId: string, newStatus: Lead['status']) => {
     try {
-      const success = updateLead(leadId, { 
+      const success = await updateLead(leadId, { 
         status: newStatus,
       });
       
@@ -233,7 +233,7 @@ const LeadList: React.FC = () => {
   };
   
   // Add notes to lead
-  const addNotesToLead = (leadId: string) => {
+  const addNotesToLead = async (leadId: string) => {
     try {
       const lead = leads.find(l => l.id === leadId);
       if (!lead) return;
@@ -241,7 +241,7 @@ const LeadList: React.FC = () => {
       const notes = prompt("Add notes for this lead:", lead.notes);
       if (notes === null) return; // User cancelled
       
-      const success = updateLead(leadId, { notes });
+      const success = await updateLead(leadId, { notes });
       
       if (success) {
         toast({
@@ -288,9 +288,9 @@ const LeadList: React.FC = () => {
   };
   
   // Export leads as CSV
-  const handleExportCSV = () => {
+  const handleExportCSV = async () => {
     try {
-      const csvContent = exportLeadsCSV();
+      const csvContent = await exportLeadsCSV();
       
       // Create download
       const blob = new Blob([csvContent], { type: 'text/csv' });
@@ -332,9 +332,21 @@ const LeadList: React.FC = () => {
   };
   
   // Clear all leads
-  const handleClearLeads = () => {
+  const handleClearLeads = async () => {
     if (window.confirm('Are you sure you want to delete ALL leads? This cannot be undone.')) {
-      clearLeads();
+      // Find the first user ID in the leads list to use for clearing
+      const userId = leads.length > 0 && leads[0].user_id;
+      
+      if (!userId) {
+        toast({
+          title: "Error",
+          description: "No user ID found to clear leads.",
+          variant: "destructive"
+        });
+        return;
+      }
+      
+      await clearLeads(userId);
       setLeads([]);
       toast({
         title: "Leads Cleared",
@@ -485,13 +497,13 @@ const LeadList: React.FC = () => {
                     </span>
                   </TableCell>
                   <TableCell>
-                    {lead.pricingTier ? (
+                    {lead.pricing_tier ? (
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        lead.pricingTier === 'monthly' 
+                        lead.pricing_tier === 'monthly' 
                           ? 'bg-orange-100 text-orange-800' 
                           : 'bg-purple-100 text-purple-800'
                       }`}>
-                        {lead.pricingTier === 'monthly' ? '$9.99 (Monthly)' : '$99 (Annual)'}
+                        {lead.pricing_tier === 'monthly' ? '$9.99 (Monthly)' : '$99 (Annual)'}
                       </span>
                     ) : '-'}
                   </TableCell>
@@ -508,7 +520,7 @@ const LeadList: React.FC = () => {
                       <option value="unqualified">Unqualified</option>
                     </select>
                   </TableCell>
-                  <TableCell className="text-right">{new Date(lead.timestamp).toLocaleString()}</TableCell>
+                  <TableCell className="text-right">{new Date(lead.created_at || '').toLocaleString()}</TableCell>
                   <TableCell>
                     <div className="flex space-x-1">
                       <Button 

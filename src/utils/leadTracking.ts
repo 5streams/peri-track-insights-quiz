@@ -182,6 +182,15 @@ export const updateLead = async (id: string, updates: Partial<Lead>): Promise<bo
   }
 };
 
+// Clear all leads for testing purposes
+export const clearLeads = async (userId?: string): Promise<void> => {
+  if (!userId) {
+    console.error('User ID is required to clear leads');
+    return;
+  }
+  return clearAllLeadsForUser(userId);
+};
+
 // Clear all leads (USE WITH CAUTION - for testing or admin purposes)
 export const clearAllLeadsForUser = async (userId: string): Promise<void> => {
   console.warn(`Attempting to delete all leads, quiz_answers, and quiz_submissions for user ${userId}`);
