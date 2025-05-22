@@ -1,7 +1,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Shield, Lock } from "lucide-react";
 
 export default function Index() {
   return (
@@ -38,18 +37,6 @@ export default function Index() {
             
             <div className="mt-3 text-sm text-slate-500">
               Free 2 Minute Assessment • Get Results Immediately
-            </div>
-
-            {/* Privacy badges */}
-            <div className="flex items-center justify-center gap-3 mt-4">
-              <div className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full shadow-sm">
-                <Lock className="h-3.5 w-3.5 text-purple-600" />
-                <span className="text-xs font-medium text-slate-700">100% Private</span>
-              </div>
-              <div className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full shadow-sm">
-                <Shield className="h-3.5 w-3.5 text-purple-600" />
-                <span className="text-xs font-medium text-slate-700">Secure & Confidential</span>
-              </div>
             </div>
           </div>
         </section>
@@ -185,12 +172,6 @@ export default function Index() {
                 </div>
               ))}
             </div>
-
-            {/* Added privacy statement */}
-            <p className="mt-5 text-xs text-white/80 max-w-md mx-auto">
-              We value your privacy. All information provided is encrypted and will never be shared with third parties. 
-              Your data is used solely to provide personalized insights about your hormone health.
-            </p>
           </div>
         </section>
       </main>

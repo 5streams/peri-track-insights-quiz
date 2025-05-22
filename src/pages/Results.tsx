@@ -9,17 +9,15 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
+import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
+import EmotionalSupport from "@/components/results/EmotionalSupport";
 import SubscriptionOptions from "@/components/results/SubscriptionOptions";
 import PeritrackIntro from "@/components/results/PeritrackIntro";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
-// Removed EmotionHormoneConnection import
-// Removed TransformationJourney import
-// Removed PerimenopauseExplanation import
-// Removed EmotionalSupport import
+import EmotionHormoneConnection from "@/components/results/EmotionHormoneConnection";
+import TransformationJourney from "@/components/results/TransformationJourney";
 import SimplePricingSection from "@/components/results/SimplePricingSection";
 import Guarantee from "@/components/results/Guarantee";
-import RiskReversal from "@/components/results/RiskReversal";
-import AppShowcase from "@/components/results/AppShowcase";
 
 interface QuizResults {
   score: number;
@@ -135,23 +133,26 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
+          {/* Perimenopause Explanation */}
+          <PerimenopauseExplanation scoreCategory={scoreCategory} />
+          
           {/* Hormone Insights */}
           <HormoneInsights 
             scores={hormoneScores}
             scoreCategory={scoreCategory}
           />
           
-          {/* NEW: Add the RiskReversal component here - this is the section we're replacing */}
-          <RiskReversal
-            firstName={capitalizedFirstName}
+          {/* Emotional Support */}
+          <EmotionalSupport
             scoreCategory={scoreCategory}
-            onStartTrial={handleTrialCTA}
+            primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Removed EmotionalSupport component completely */}
+          {/* Emotion-Hormone Connection - New transitional component */}
+          <EmotionHormoneConnection />
           
-          {/* NEW: Add AppShowcase component to show how Peritrack works */}
-          <AppShowcase onStartTrial={handleTrialCTA} />
+          {/* Transformation Journey - Another new transitional component */}
+          <TransformationJourney />
           
           {/* SWAPPED COMPONENTS - PeritrackIntro before LunaAIFeature */}
           {/* Peritrack Intro - Main call to action */}
@@ -166,10 +167,8 @@ const Results = () => {
           {/* Our Guarantee Section */}
           <Guarantee />
           
-          {/* Simple Pricing Section */}
+          {/* Simple Pricing Section at the very bottom */}
           <SimplePricingSection onStartTrial={handleTrialCTA} />
-          
-          {/* Removed Perimenopause Explanation section completely */}
         </div>
       </div>
     </div>

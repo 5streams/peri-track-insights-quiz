@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { saveLead } from "@/utils/leadStorage";
-import { Check, Shield, Lock } from "lucide-react";
+import { Check } from "lucide-react";
 
 interface EmailCollectionProps {
   onSubmit: (name: string, email: string) => void;
@@ -117,12 +117,6 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
         >
           {isLoading ? "Processing..." : "Get My Personalized Results Now"}
         </Button>
-        
-        {/* Privacy disclaimer */}
-        <div className="flex items-center justify-center gap-2 pt-2">
-          <Lock className="h-4 w-4 text-purple-600" />
-          <p className="text-xs text-slate-500">Your information is secure and will never be shared with third parties.</p>
-        </div>
       </form>
       
       <div className="bg-slate-50 border border-slate-100 rounded-lg p-4 mb-6 text-left">
@@ -168,18 +162,6 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
         ].map((item, index) => (
           <p key={index} className="text-xs text-slate-500">{item}</p>
         ))}
-      </div>
-
-      {/* Security badges */}
-      <div className="flex items-center justify-center gap-4 mt-6 px-4">
-        <div className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">
-          <Shield className="h-3.5 w-3.5 text-purple-600" />
-          <span className="text-xs font-medium text-slate-700">HIPAA Compliant</span>
-        </div>
-        <div className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">
-          <Lock className="h-3.5 w-3.5 text-purple-600" />
-          <span className="text-xs font-medium text-slate-700">256-bit Encryption</span>
-        </div>
       </div>
     </div>
   );

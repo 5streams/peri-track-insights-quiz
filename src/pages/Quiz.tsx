@@ -10,7 +10,6 @@ import { calculateResults } from "@/utils/quizUtils";
 import ProgressBar from "@/components/quiz/ProgressBar";
 import { supabase } from "@/lib/supabaseClient";
 import { saveLead } from "@/utils/leadTracking";
-import LoadingSpinner from "@/components/results/LoadingSpinner";
 
 const Quiz = () => {
   // Starting with 1 instead of 0 to skip welcome screen
@@ -19,7 +18,6 @@ const Quiz = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [userId, setUserId] = useState<string | null>(null); // To store user ID from Supabase
-  const [showLoadingScreen, setShowLoadingScreen] = useState(false);
   
   // Remove localStorage for progress and answers
   useEffect(() => {
@@ -69,8 +67,6 @@ const Quiz = () => {
   
   const handleSubmit = async (firstName: string, email: string) => {
     setIsLoading(true);
-    // Show the loading spinner screen
-    setShowLoadingScreen(true);
 
     try {
       // 1. Save Lead and User information (this also creates/updates the user)
@@ -92,7 +88,6 @@ const Quiz = () => {
           variant: "destructive",
         });
         setIsLoading(false);
-        setShowLoadingScreen(false);
         return;
       }
       const currentUserId = lead.user_id;
@@ -136,10 +131,7 @@ const Quiz = () => {
         description: "Your results are being processed.",
       });
 
-      // Delay navigation to results page to show the loading animation
-      setTimeout(() => {
-        navigate("/results");
-      }, 8000); // Show loading screen for 8 seconds before redirecting
+      navigate("/results");
 
     } catch (error) {
       console.error("Error submitting quiz:", error);
@@ -148,7 +140,6 @@ const Quiz = () => {
         description: (error as Error).message || "An unexpected error occurred. Please try again.",
         variant: "destructive",
       });
-      setShowLoadingScreen(false);
     } finally {
       setIsLoading(false);
     }
@@ -157,11 +148,6 @@ const Quiz = () => {
   // Calculate progress percentage for the progress bar
   const totalSteps = quizQuestions.length + 1; // questions + email (no welcome)
   const progressPercentage = Math.round((currentStep / totalSteps) * 100);
-  
-  // If showing loading screen, return the LoadingSpinner component
-  if (showLoadingScreen) {
-    return <LoadingSpinner />;
-  }
   
   return (
     <div className="min-h-screen bg-slate-50 py-8 px-4 md:px-8 lg:px-0">
