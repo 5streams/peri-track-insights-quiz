@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -19,6 +18,8 @@ import LunaAIFeature from "@/components/results/LunaAIFeature";
 // Removed TransformationJourney import
 import SimplePricingSection from "@/components/results/SimplePricingSection";
 import Guarantee from "@/components/results/Guarantee";
+import RiskReversal from "@/components/results/RiskReversal";
+import AppShowcase from "@/components/results/AppShowcase";
 
 interface QuizResults {
   score: number;
@@ -140,13 +141,21 @@ const Results = () => {
             scoreCategory={scoreCategory}
           />
           
+          {/* NEW: Add the RiskReversal component here - this is the section we're replacing */}
+          <RiskReversal
+            firstName={capitalizedFirstName}
+            scoreCategory={scoreCategory}
+            onStartTrial={handleTrialCTA}
+          />
+          
           {/* Emotional Support */}
           <EmotionalSupport
             scoreCategory={scoreCategory}
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* Removed TransformationJourney component */}
+          {/* NEW: Add AppShowcase component to show how Peritrack works */}
+          <AppShowcase onStartTrial={handleTrialCTA} />
           
           {/* SWAPPED COMPONENTS - PeritrackIntro before LunaAIFeature */}
           {/* Peritrack Intro - Main call to action */}
