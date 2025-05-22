@@ -2,6 +2,14 @@
 // Google Ads conversion tracking utilities
 
 /**
+ * Checks if Google Ads tag is loaded
+ * @returns boolean indicating if gtag is available
+ */
+export const isGtagLoaded = (): boolean => {
+  return typeof window !== 'undefined' && 'gtag' in window;
+};
+
+/**
  * Tracks a Google Ads conversion event
  * @param conversionId - The Google Ads conversion ID
  * @param conversionLabel - The specific conversion label for the event
@@ -13,7 +21,7 @@ export const trackGoogleAdsConversion = (
   options: Record<string, any> = {}
 ) => {
   // Only run if gtag is available
-  if (typeof window !== 'undefined' && 'gtag' in window) {
+  if (isGtagLoaded()) {
     const gtag = (window as any).gtag;
     
     // Send the conversion to Google Ads
@@ -28,6 +36,25 @@ export const trackGoogleAdsConversion = (
     console.log(`Google Ads conversion tracked: ${conversionLabel}`);
   } else {
     console.warn('Google Ads tracking unavailable: gtag not found');
+    
+    // Attempt to load the gtag script if it's missing
+    if (typeof window !== 'undefined' && !document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
+      console.log('Attempting to load Google Ads script dynamically');
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=AW-828832872`;
+      document.head.appendChild(script);
+      
+      // Initialize gtag
+      const initScript = document.createElement('script');
+      initScript.textContent = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-828832872');
+      `;
+      document.head.appendChild(initScript);
+    }
   }
 };
 

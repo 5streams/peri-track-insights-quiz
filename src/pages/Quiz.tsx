@@ -8,6 +8,7 @@ import { toast } from "@/hooks/use-toast";
 import { quizQuestions } from "@/data/quizQuestions";
 import { calculateResults } from "@/utils/quizUtils";
 import ProgressBar from "@/components/quiz/ProgressBar";
+import { isGtagLoaded } from "@/utils/googleAdsTracking";
 
 const Quiz = () => {
   // Starting with 1 instead of 0 to skip welcome screen
@@ -15,6 +16,30 @@ const Quiz = () => {
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  
+  // Check if Google Tag is loaded
+  useEffect(() => {
+    // Check if Google Ads script is loaded
+    if (!isGtagLoaded() && typeof window !== 'undefined') {
+      console.log('Google Ads tag not detected on Quiz page, attempting to load');
+      
+      // Attempt to load the gtag script
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=AW-828832872`;
+      document.head.appendChild(script);
+      
+      // Initialize gtag
+      const initScript = document.createElement('script');
+      initScript.textContent = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-828832872');
+      `;
+      document.head.appendChild(initScript);
+    }
+  }, []);
   
   // Load saved progress from localStorage if available
   useEffect(() => {
