@@ -17,6 +17,7 @@ import HormoneInsights from "@/components/results/HormoneInsights";
 import LunaAIDeepDive from "@/components/results/LunaAIDeepDive";
 import AppFeaturesShowcase from "@/components/results/AppFeaturesShowcase";
 import ResultsProof from "@/components/results/ResultsProof";
+import SimplePricingSection from "@/components/results/SimplePricingSection";
 
 interface QuizResults {
   score: number;
@@ -146,25 +147,28 @@ const Results = () => {
             primarySymptoms={hormoneScores.primarySymptoms}
           />
           
-          {/* 5. App Features Showcase - MOVED ABOVE Luna AI */}
+          {/* 5. Add Pricing Plans Section */}
+          <SimplePricingSection onStartTrial={handleTrialCTA} />
+          
+          {/* 6. App Features Showcase - MOVED ABOVE Luna AI */}
           <AppFeaturesShowcase />
           
-          {/* 6. Luna AI Deep Dive - MOVED DOWN */}
+          {/* 7. Luna AI Deep Dive - MOVED DOWN */}
           <LunaAIDeepDive 
             scoreCategory={scoreCategory}
             primaryHormone={hormoneScores.primaryHormone}
           />
           
-          {/* 7. Results Proof & Social Proof */}
+          {/* 8. Results Proof & Social Proof */}
           <ResultsProof scoreCategory={scoreCategory} />
           
-          {/* 8. Condensed Social Proof with testimonial */}
+          {/* 9. Condensed Social Proof with testimonial */}
           <CondensedSocialProof scoreCategory={scoreCategory} />
           
-          {/* 9. Risk Reversal */}
+          {/* 10. Risk Reversal */}
           <RiskReversal />
           
-          {/* 10. Final CTA (repeat offer) */}
+          {/* 11. Final CTA (repeat offer) */}
           <FinalCTASection 
             spotNumber={spotNumber}
             onStartTrial={handleTrialCTA}
