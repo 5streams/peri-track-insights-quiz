@@ -20,7 +20,12 @@ const AdminLeads = () => {
     console.log("AdminLeads: Checking authentication");
     
     // Initialize lead storage
-    initializeLeadStorage();
+    try {
+      initializeLeadStorage();
+      console.log("AdminLeads: Lead storage initialized");
+    } catch (e) {
+      console.error("AdminLeads: Error initializing lead storage", e);
+    }
     
     const adminSession = sessionStorage.getItem("admin_authenticated");
     if (adminSession === "true") {
@@ -29,6 +34,20 @@ const AdminLeads = () => {
     } else {
       console.log("AdminLeads: No admin session found, user needs to log in");
     }
+    
+    // Set up storage event listener for cross-tab authentication
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "admin_authenticated" && e.newValue === "true") {
+        setIsAuthenticated(true);
+        console.log("AdminLeads: Authentication detected from another tab");
+      }
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   // Enhanced authentication with error handling
@@ -46,6 +65,7 @@ const AdminLeads = () => {
         
         // Store the authentication status in sessionStorage for persistence
         sessionStorage.setItem("admin_authenticated", "true");
+        localStorage.setItem("admin_login_timestamp", Date.now().toString());
         
         // Initialize storage after successful login
         initializeLeadStorage();
