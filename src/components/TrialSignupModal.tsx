@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { 
   Dialog,
@@ -50,7 +49,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
       // Format the notes to be consistent with other lead types
       const additionalNotes = `Captured from TryPeriTrack page at ${new Date().toISOString()}`;
       
-      // Create a quiz-like results object to maintain consistency with other leads
+      // Create a quiz-like results object to maintain consistency with other lead types
       const trialQuizResults = {
         source: "TRIAL_SIGNUP",
         phase: "Trial Interest",
@@ -80,6 +79,12 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
         trialQuizResults, // Pass formatted results to maintain consistency
         additionalNotes
       );
+      
+      // Fire the conversion tracking when signup is successful
+      if (typeof window !== 'undefined' && (window as any).trackTrialConversion) {
+        (window as any).trackTrialConversion();
+        console.log('Trial conversion tracked for Google Ads');
+      }
       
       setStep('beta-message');
       
@@ -213,4 +218,4 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
   );
 };
 
-export default TrialSignupModal; 
+export default TrialSignupModal;
