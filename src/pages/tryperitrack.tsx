@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
@@ -13,6 +12,10 @@ import FAQSection from '../components/FAQSection';
 import FinalCTASection from '../components/FinalCTASection';
 import TrustFooter from '../components/TrustFooter';
 import TrialSignupModal from '../components/TrialSignupModal';
+import StatsSection from '../components/StatsSection';
+import ComparisonSection from '../components/ComparisonSection';
+import WhyChooseUsSection from '../components/WhyChooseUsSection';
+import TestimonialCarousel from '../components/TestimonialCarousel';
 
 const TryPeriTrack = () => {
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
@@ -91,15 +94,19 @@ const TryPeriTrack = () => {
       <Navbar />
       <div className="flex-grow">
         <HeroSection />
+        <StatsSection />
         <ProblemSection />
         <SolutionSection />
+        <WhyChooseUsSection />
         <div id="features">
           <FeaturesSection />
         </div>
+        <ComparisonSection />
         <div id="how-it-works">
           <HowItWorksSection />
         </div>
         <LunaSection />
+        <TestimonialCarousel />
         <SocialProofSection />
         <div id="pricing">
           <PricingSection />
