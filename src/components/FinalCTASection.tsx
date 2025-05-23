@@ -15,18 +15,18 @@ const FinalCTASection = () => {
   };
 
   return (
-    <section className="final-cta-section py-6 bg-primary text-white">
-      <div className="container mx-auto px-4 text-center">
+    <section className="final-cta-section py-4 bg-primary text-white">
+      <div className="container mx-auto px-3 text-center">
         <div className="max-w-3xl mx-auto">
           <h2 className="font-headline font-bold text-h2 mb-2 fade-in-up">
             Take Control of Your Perimenopause Journey
           </h2>
           
-          <p className="text-body-large mb-3 leading-relaxed fade-in-up opacity-90">
+          <p className="text-body-large mb-2 leading-relaxed fade-in-up opacity-90">
             You don't have to navigate perimenopause alone. Join thousands of women who are tracking and understanding their symptoms through our comprehensive platform.
           </p>
           
-          <div className="bg-white/10 p-4 rounded-2xl mb-3 fade-in-up">
+          <div className="bg-white/10 p-3 rounded-2xl mb-3 fade-in-up">
             <h3 className="font-headline text-xl mb-1">Comprehensive Tracking System</h3>
             <p className="text-base mb-2">Everything you need to track, understand, and navigate your perimenopause experience</p>
             <div className="grid md:grid-cols-3 gap-2 text-sm">
@@ -48,7 +48,7 @@ const FinalCTASection = () => {
           <CTAButton 
             size="large" 
             variant="secondary" 
-            className="mb-1 text-lg px-10 py-3"
+            className="mb-1 text-lg px-8 py-2"
             onClick={handleOpenSignupModal}
           >
             START TRACKING TODAY
@@ -58,7 +58,7 @@ const FinalCTASection = () => {
             7-day trial then only $12.95/month • Join thousands of women on their perimenopause journey
           </p>
           
-          <div className="flex flex-wrap justify-center gap-3 text-sm opacity-75 fade-in-up">
+          <div className="flex flex-wrap justify-center gap-2 text-sm opacity-75 fade-in-up">
             <div className="flex items-center">
               <span className="mr-1">🔒</span>
               Privacy Protected
@@ -77,7 +77,7 @@ const FinalCTASection = () => {
             </div>
           </div>
           
-          <div className="mt-4 text-xs opacity-60">
+          <div className="mt-3 text-xs opacity-60">
             <p>*Individual experiences may vary. This app is for educational and tracking purposes. Always consult with healthcare professionals for medical advice.</p>
           </div>
         </div>
