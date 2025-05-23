@@ -37,16 +37,16 @@ const HeroSection = () => {
               </span>
             </div>
             
-            <div className="cta-container">
+            <div className="cta-container flex flex-col items-start">
               <CTAButton 
                 size="medium" 
                 variant="primary"
-                className="w-full lg:w-auto mb-1"
+                className="mb-1"
                 onClick={handleOpenSignupModal}
               >
                 START YOUR FREE TRIAL
               </CTAButton>
-              <p className="text-sm text-warm-gray text-center lg:text-left">
+              <p className="text-sm text-warm-gray">
                 Free 7 day trial then $12.95 a month • Join thousands of women on their perimenopause journey
               </p>
             </div>
