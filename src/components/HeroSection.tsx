@@ -20,20 +20,20 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           <div className="hero-content fade-in-up">
             <h1 className="font-headline font-bold text-h1 text-primary mb-3 leading-tight">
-              The Perimenopause Tracker That Actually Helps You Feel Better
+              Track Your Perimenopause Journey with Confidence
             </h1>
             
             <p className="text-body-large text-warm-gray font-medium mb-3 leading-relaxed">
-              Track your symptoms, get personalized relief strategies, and receive daily coaching tips based on YOUR unique patterns. Finally, a system that helps you manage perimenopause instead of just tracking it.
+              Monitor your symptoms, discover patterns, and get personalized insights based on your unique experience. A comprehensive system designed to help you better understand your perimenopause journey.
             </p>
             
             <p className="text-body-regular text-warm-gray mb-4 leading-relaxed">
-              Stop suffering through unpredictable symptoms. Peritrack combines intelligent tracking with personalized coaching to help you find real relief from hot flashes, mood swings, sleep issues, and PMS.
+              Navigate perimenopause with better understanding. Peritrack combines smart tracking with educational content to help you stay informed about hot flashes, mood changes, sleep patterns, and cycle changes.
             </p>
             
             <div className="social-proof-mini bg-white p-3 rounded-xl mb-4 shadow-lg border border-gray-100">
               <span className="font-semibold text-primary text-body-regular block">
-                Join 15,000+ women who've found symptom relief through smart tracking and personalized coaching.
+                Join thousands of women tracking their perimenopause experience with our comprehensive platform.
               </span>
             </div>
             
@@ -44,10 +44,10 @@ const HeroSection = () => {
                 className="w-full lg:w-auto mb-1"
                 onClick={handleOpenSignupModal}
               >
-                DISCOVER YOUR PATTERNS TODAY
+                START TRACKING TODAY
               </CTAButton>
               <p className="text-sm text-warm-gray text-center lg:text-left">
-                7-day trial then only $12.95/month • Join thousands of women who've transformed their perimenopause experience
+                7-day trial then only $12.95/month • Join thousands of women on their perimenopause journey
               </p>
             </div>
           </div>

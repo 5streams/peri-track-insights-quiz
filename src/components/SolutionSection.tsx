@@ -19,10 +19,10 @@ const SolutionSection = () => {
       <div className="container mx-auto px-4 lg:px-6">
         <div className="text-center mb-4">
           <h2 className="font-headline font-bold text-h2 text-primary mb-2 fade-in-up">
-            What if you could predict and prevent your worst symptoms?
+            Better understand your perimenopause patterns
           </h2>
           <p className="text-body-large text-warm-gray max-w-3xl mx-auto fade-in-up">
-            Peritrack doesn't just track your symptoms - it learns your unique patterns and gives you personalized strategies to feel better before symptoms strike.
+            Peritrack helps you track your symptoms and discover patterns through intelligent monitoring and educational insights tailored to your experience.
           </p>
         </div>
 
@@ -33,7 +33,7 @@ const SolutionSection = () => {
             </div>
             <h3 className="font-headline text-xl text-primary mb-1">Smart Pattern Recognition</h3>
             <p className="text-warm-gray">
-              Our AI identifies your unique symptom patterns, triggers, and cycles so you know what to expect and when.
+              Our system helps identify your unique symptom patterns and cycles so you can better understand what to expect.
             </p>
           </div>
 
@@ -41,9 +41,9 @@ const SolutionSection = () => {
             <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-xl text-white">🎯</span>
             </div>
-            <h3 className="font-headline text-xl text-primary mb-1">Personalized Relief Strategies</h3>
+            <h3 className="font-headline text-xl text-primary mb-1">Personalized Insights</h3>
             <p className="text-warm-gray">
-              Get targeted recommendations based on YOUR data - not generic advice that might not work for you.
+              Get educational content and lifestyle suggestions based on your data - information tailored to your experience.
             </p>
           </div>
 
@@ -51,9 +51,9 @@ const SolutionSection = () => {
             <div className="w-12 h-12 bg-alert rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-xl text-white">🤖</span>
             </div>
-            <h3 className="font-headline text-xl text-primary mb-1">24/7 AI Coach Luna</h3>
+            <h3 className="font-headline text-xl text-primary mb-1">AI Assistant Luna</h3>
             <p className="text-warm-gray">
-              Your personal perimenopause coach available anytime to answer questions and provide support.
+              Your educational perimenopause companion available anytime to provide information and support.
             </p>
           </div>
         </div>
@@ -65,10 +65,10 @@ const SolutionSection = () => {
             className="mb-1"
             onClick={handleOpenSignupModal}
           >
-            DISCOVER YOUR PATTERNS TODAY
+            START TRACKING TODAY
           </CTAButton>
           <p className="text-sm text-warm-gray">
-            7-day trial then only $12.95/month • Join thousands of women who've transformed their perimenopause experience
+            7-day trial then only $12.95/month • Join thousands of women on their perimenopause journey
           </p>
         </div>
       </div>

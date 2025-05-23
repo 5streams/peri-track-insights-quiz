@@ -50,11 +50,11 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
               <ul className="space-y-2 mb-4">
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
-                  <span>Full access to all features</span>
+                  <span>Access to all tracking features</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
-                  <span>Unlimited symptom tracking</span>
+                  <span>Unlimited symptom monitoring</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
@@ -118,7 +118,11 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
         
         <div className="text-center">
           <p className="text-base">👉 Start Your Free 7-Day Trial Now</p>
-          <p className="text-gray-600 mt-1 text-sm">Just results, relief, and the roadmap you deserve.</p>
+          <p className="text-gray-600 mt-1 text-sm">Educational tracking and insights for your perimenopause journey.</p>
+        </div>
+        
+        <div className="mt-4 text-xs text-center text-gray-500">
+          <p>*Individual experiences may vary. This app is for educational and tracking purposes. Always consult with healthcare professionals for medical advice.</p>
         </div>
       </div>
       
