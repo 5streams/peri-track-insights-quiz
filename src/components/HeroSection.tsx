@@ -44,10 +44,10 @@ const HeroSection = () => {
                 className="w-full lg:w-auto mb-1"
                 onClick={handleOpenSignupModal}
               >
-                START TRACKING TODAY
+                START YOUR FREE TRIAL
               </CTAButton>
               <p className="text-sm text-warm-gray text-center lg:text-left">
-                7-day trial then only $12.95/month • Join thousands of women on their perimenopause journey
+                Free 7 day trial then $12.95 a month • Join thousands of women on their perimenopause journey
               </p>
             </div>
           </div>
