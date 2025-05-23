@@ -19,6 +19,24 @@ const Navbar = () => {
     setIsSignupModalOpen(false);
   };
 
+  const handleSectionNavigation = (sectionId: string) => {
+    setIsMenuOpen(false);
+    
+    // If we're not on the tryperitrack page, navigate there first
+    if (window.location.pathname !== '/tryperitrack') {
+      window.location.href = `/tryperitrack#${sectionId}`;
+      return;
+    }
+    
+    // If we're already on the page, scroll to the section
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   return (
     <header className="bg-white shadow-md py-4 px-4 sticky top-0 z-50">
       <div className="container mx-auto">
@@ -36,18 +54,30 @@ const Navbar = () => {
             <Link to="/tryperitrack" className="text-primary font-medium hover:text-primary/80 transition-colors">
               Home
             </Link>
-            <Link to="/tryperitrack#features" className="text-primary font-medium hover:text-primary/80 transition-colors">
+            <button 
+              onClick={() => handleSectionNavigation('features')}
+              className="text-primary font-medium hover:text-primary/80 transition-colors"
+            >
               Features
-            </Link>
-            <Link to="/tryperitrack#how-it-works" className="text-primary font-medium hover:text-primary/80 transition-colors">
+            </button>
+            <button 
+              onClick={() => handleSectionNavigation('how-it-works')}
+              className="text-primary font-medium hover:text-primary/80 transition-colors"
+            >
               How It Works
-            </Link>
-            <Link to="/tryperitrack#pricing" className="text-primary font-medium hover:text-primary/80 transition-colors">
+            </button>
+            <button 
+              onClick={() => handleSectionNavigation('pricing')}
+              className="text-primary font-medium hover:text-primary/80 transition-colors"
+            >
               Pricing
-            </Link>
-            <Link to="/tryperitrack#faq" className="text-primary font-medium hover:text-primary/80 transition-colors">
+            </button>
+            <button 
+              onClick={() => handleSectionNavigation('faq')}
+              className="text-primary font-medium hover:text-primary/80 transition-colors"
+            >
               FAQ
-            </Link>
+            </button>
           </nav>
           
           {/* CTA Button */}
@@ -81,34 +111,30 @@ const Navbar = () => {
               >
                 Home
               </Link>
-              <Link 
-                to="/tryperitrack#features" 
-                className="text-primary font-medium hover:text-primary/80 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+              <button 
+                onClick={() => handleSectionNavigation('features')}
+                className="text-primary font-medium hover:text-primary/80 transition-colors text-left"
               >
                 Features
-              </Link>
-              <Link 
-                to="/tryperitrack#how-it-works" 
-                className="text-primary font-medium hover:text-primary/80 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button 
+                onClick={() => handleSectionNavigation('how-it-works')}
+                className="text-primary font-medium hover:text-primary/80 transition-colors text-left"
               >
                 How It Works
-              </Link>
-              <Link 
-                to="/tryperitrack#pricing" 
-                className="text-primary font-medium hover:text-primary/80 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button 
+                onClick={() => handleSectionNavigation('pricing')}
+                className="text-primary font-medium hover:text-primary/80 transition-colors text-left"
               >
                 Pricing
-              </Link>
-              <Link 
-                to="/tryperitrack#faq" 
-                className="text-primary font-medium hover:text-primary/80 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button 
+                onClick={() => handleSectionNavigation('faq')}
+                className="text-primary font-medium hover:text-primary/80 transition-colors text-left"
               >
                 FAQ
-              </Link>
+              </button>
               <div className="pt-2">
                 <CTAButton 
                   size="small" 
