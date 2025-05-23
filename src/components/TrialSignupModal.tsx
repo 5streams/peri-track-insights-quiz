@@ -10,7 +10,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { saveLead } from "@/utils/leadTracking";
 import { useToast } from "@/hooks/use-toast";
 import { Check, ArrowRight } from "lucide-react";
@@ -26,7 +25,10 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
 }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const [step, setStep] = useState<'form' | 'beta-message'>('form');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -46,8 +48,11 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
     setIsLoading(true);
     
     try {
+      // Format the complete address
+      const fullAddress = [streetAddress, city, state, zipCode].filter(Boolean).join(', ');
+      
       // Format the notes to be consistent with other lead types
-      const additionalNotes = `Captured from TryPeriTrack page at ${new Date().toISOString()}`;
+      const additionalNotes = `Address: ${fullAddress}, Captured from TryPeriTrack page at ${new Date().toISOString()}`;
       
       // Create a quiz-like results object to maintain consistency with other lead types
       const trialQuizResults = {
@@ -64,7 +69,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
       console.log("TrialSignupModal: About to save lead with data:", {
         name: name.trim(),
         email: email.trim(),
-        address: address.trim() + " (NOTE: address not saved until database schema is updated)",
+        address: fullAddress + " (NOTE: address not saved until database schema is updated)",
         source: 'TRIAL',
         quizResults: trialQuizResults,
         additionalNotes
@@ -103,7 +108,10 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
   const resetForm = () => {
     setName("");
     setEmail("");
-    setAddress("");
+    setStreetAddress("");
+    setCity("");
+    setState("");
+    setZipCode("");
     setStep('form');
   };
   
@@ -154,15 +162,45 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="address">Address</Label>
-                <Textarea
-                  id="address"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  placeholder="Your address (optional)"
-                  rows={3}
-                />
+              <div className="space-y-4">
+                <Label className="text-sm font-medium">Billing Address</Label>
+                
+                <div className="space-y-2">
+                  <Input
+                    id="streetAddress"
+                    value={streetAddress}
+                    onChange={(e) => setStreetAddress(e.target.value)}
+                    placeholder="Street address"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="space-y-2">
+                    <Input
+                      id="city"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      placeholder="City"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Input
+                      id="state"
+                      value={state}
+                      onChange={(e) => setState(e.target.value)}
+                      placeholder="State"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Input
+                    id="zipCode"
+                    value={zipCode}
+                    onChange={(e) => setZipCode(e.target.value)}
+                    placeholder="ZIP code"
+                  />
+                </div>
               </div>
               
               <div className="mt-6">
