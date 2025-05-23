@@ -76,11 +76,11 @@ const ProblemSection = () => {
             You've probably tried everything:
           </h3>
           
-          <ul className="tried-list space-y-2 mb-6">
+          <ul className="tried-list space-y-3 mb-6 text-left max-w-lg mx-auto">
             {triedList.map((item, index) => (
-              <li key={index} className="flex items-center justify-center text-warm-gray">
-                <span className="mr-3 text-lg">❌</span>
-                {item}
+              <li key={index} className="flex items-start text-warm-gray text-sm sm:text-base">
+                <span className="mr-3 text-lg text-alert flex-shrink-0 mt-0.5">❌</span>
+                <span className="flex-1">{item}</span>
               </li>
             ))}
           </ul>
