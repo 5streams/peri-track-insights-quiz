@@ -31,23 +31,23 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
   };
   
   return (
-    <Card className="mb-16 p-0 overflow-hidden border-none shadow-lg reveal-section transform opacity-0">
-      <div className="max-w-4xl mx-auto p-6">
-        <h2 className="text-2xl font-bold text-center text-[#5D4154] mb-8">
+    <Card className="mb-10 p-0 overflow-hidden border-none shadow-lg reveal-section transform opacity-0">
+      <div className="max-w-4xl mx-auto p-5">
+        <h2 className="text-2xl font-bold text-center text-[#5D4154] mb-5">
           Start Your Free 7-Day Trial Now
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
           {/* Monthly Plan */}
           <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-[#5D4154] mb-4">Monthly Plan</h3>
-              <div className="flex items-baseline mb-4">
+            <div className="p-4">
+              <h3 className="text-xl font-bold text-[#5D4154] mb-3">Monthly Plan</h3>
+              <div className="flex items-baseline mb-3">
                 <span className="text-3xl font-bold text-[#5D4154]">$12.95</span>
                 <span className="text-gray-600 ml-1">/month</span>
               </div>
               
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-2 mb-4">
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
                   <span>Full access to all features</span>
@@ -68,7 +68,7 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
               >
                 Start My Free Trial
               </Button>
-              <p className="text-xs text-center mt-2 text-gray-500">
+              <p className="text-xs text-center mt-1 text-gray-500">
                 7-day trial then only $12.95/month
               </p>
             </div>
@@ -76,19 +76,19 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
           
           {/* Annual Plan */}
           <div className="bg-white rounded-xl shadow-md overflow-hidden border-2 border-[#9b87f5] relative">
-            <div className="absolute top-0 right-0 bg-[#9b87f5] text-white px-4 py-1 text-sm font-bold">
+            <div className="absolute top-0 right-0 bg-[#9b87f5] text-white px-3 py-1 text-xs font-bold">
               BEST VALUE
             </div>
             
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-[#5D4154] mb-4">Annual Plan</h3>
+            <div className="p-4">
+              <h3 className="text-xl font-bold text-[#5D4154] mb-3">Annual Plan</h3>
               <div className="flex items-baseline mb-1">
                 <span className="text-3xl font-bold text-[#5D4154]">$99</span>
                 <span className="text-gray-600 ml-1">/year</span>
               </div>
-              <p className="text-[#9b87f5] mb-3">Save $56.40</p>
+              <p className="text-[#9b87f5] mb-2">Save $56.40</p>
               
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-2 mb-4">
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
                   <span>All features in monthly plan</span>
@@ -109,7 +109,7 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
               >
                 Start My Free Trial
               </Button>
-              <p className="text-xs text-center mt-2 text-white bg-[#9b87f5]/80 py-0.5">
+              <p className="text-xs text-center mt-1 text-white bg-[#9b87f5]/80 py-0.5">
                 7-day trial then only $99/year
               </p>
             </div>
@@ -117,8 +117,8 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
         </div>
         
         <div className="text-center">
-          <p className="text-lg">👉 Start Your Free 7-Day Trial Now</p>
-          <p className="text-gray-600 mt-2">Just results, relief, and the roadmap you deserve.</p>
+          <p className="text-base">👉 Start Your Free 7-Day Trial Now</p>
+          <p className="text-gray-600 mt-1 text-sm">Just results, relief, and the roadmap you deserve.</p>
         </div>
       </div>
       

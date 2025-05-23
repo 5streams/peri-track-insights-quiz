@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import CTAButton from './CTAButton';
 import TrialSignupModal from './TrialSignupModal';
@@ -37,21 +38,21 @@ const LunaSection = () => {
   ];
 
   return (
-    <section className="luna-section py-20 lg:py-32 bg-gray-50">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className="luna-section py-12 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div className="luna-content fade-in-up">
-            <h2 className="font-headline font-bold text-h2 text-primary mb-6">
+            <h2 className="font-headline font-bold text-h2 text-primary mb-4">
               Meet Luna: Your Personal Perimenopause Coach
             </h2>
             
-            <p className="text-body-large text-warm-gray mb-6 leading-relaxed">
+            <p className="text-body-large text-warm-gray mb-4 leading-relaxed">
               Luna isn't just another chatbot. She's your perimenopause expert who knows your unique patterns, triggers, and what actually works for YOUR body.
             </p>
             
-            <div className="luna-features space-y-4 mb-8">
-              <div className="flex items-start space-x-4">
-                <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
+            <div className="luna-features space-y-3 mb-5">
+              <div className="flex items-start space-x-3">
+                <div className="w-7 h-7 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white text-sm font-bold">✓</span>
                 </div>
                 <div>
@@ -60,8 +61,8 @@ const LunaSection = () => {
                 </div>
               </div>
               
-              <div className="flex items-start space-x-4">
-                <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="flex items-start space-x-3">
+                <div className="w-7 h-7 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white text-sm font-bold">✓</span>
                 </div>
                 <div>
@@ -70,8 +71,8 @@ const LunaSection = () => {
                 </div>
               </div>
               
-              <div className="flex items-start space-x-4">
-                <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="flex items-start space-x-3">
+                <div className="w-7 h-7 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white text-sm font-bold">✓</span>
                 </div>
                 <div>
@@ -88,12 +89,15 @@ const LunaSection = () => {
             >
               CHAT WITH LUNA NOW
             </CTAButton>
+            <p className="text-xs text-center lg:text-left mt-1 text-warm-gray">
+              7-day trial then only $12.95/month
+            </p>
           </div>
           
           <div className="luna-chat fade-in-up">
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-              <div className="bg-primary text-white p-4 flex items-center">
-                <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center mr-3">
+              <div className="bg-primary text-white p-3 flex items-center">
+                <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center mr-2">
                   <span className="text-white font-bold">L</span>
                 </div>
                 <div>
@@ -106,14 +110,14 @@ const LunaSection = () => {
                 </div>
               </div>
               
-              <div className="p-4 max-h-96 overflow-y-auto space-y-4">
+              <div className="p-3 max-h-80 overflow-y-auto space-y-3">
                 {chatMessages.map((msg, index) => (
                   <div 
                     key={index}
                     className={`flex ${msg.user ? 'justify-end' : 'justify-start'}`}
                   >
                     <div 
-                      className={`max-w-xs px-4 py-2 rounded-lg text-sm leading-relaxed ${
+                      className={`max-w-xs px-3 py-2 rounded-lg text-sm leading-relaxed ${
                         msg.user 
                           ? 'bg-primary text-white' 
                           : 'bg-gray-100 text-warm-gray'
@@ -125,7 +129,7 @@ const LunaSection = () => {
                 ))}
               </div>
               
-              <div className="p-4 border-t bg-gray-50">
+              <div className="p-3 border-t bg-gray-50">
                 <div className="flex items-center space-x-2">
                   <input 
                     type="text" 
@@ -133,7 +137,7 @@ const LunaSection = () => {
                     className="flex-1 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-secondary"
                     disabled
                   />
-                  <button className="bg-secondary text-white px-4 py-2 rounded-lg text-sm font-medium">
+                  <button className="bg-secondary text-white px-3 py-2 rounded-lg text-sm font-medium">
                     Send
                   </button>
                 </div>

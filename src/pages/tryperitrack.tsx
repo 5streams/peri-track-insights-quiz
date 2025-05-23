@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import ProblemSection from '../components/ProblemSection';
@@ -10,9 +11,20 @@ import SocialProofSection from '../components/SocialProofSection';
 import PricingSection from '../components/PricingSection';
 import FAQSection from '../components/FAQSection';
 import FinalCTASection from '../components/FinalCTASection';
-import TrustFooter from '../components/TrustFooter'; 
+import TrustFooter from '../components/TrustFooter';
+import TrialSignupModal from '../components/TrialSignupModal';
 
 const TryPeriTrack = () => {
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+
+  const handleOpenSignupModal = () => {
+    setIsSignupModalOpen(true);
+  };
+
+  const handleCloseSignupModal = () => {
+    setIsSignupModalOpen(false);
+  };
+
   useEffect(() => {
     // Intersection Observer for scroll animations
     const observerOptions = {
@@ -67,6 +79,12 @@ const TryPeriTrack = () => {
         <FAQSection />
         <FinalCTASection />
         <TrustFooter />
+        
+        {/* Global Trial Signup Modal that can be triggered from anywhere */}
+        <TrialSignupModal 
+          isOpen={isSignupModalOpen}
+          onClose={handleCloseSignupModal}
+        />
       </div>
     </div>
   );
