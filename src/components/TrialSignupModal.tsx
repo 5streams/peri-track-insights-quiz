@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { 
   Dialog,
@@ -12,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { saveLead } from "@/utils/leadTracking";
 import { useToast } from "@/hooks/use-toast";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Shield, Lock } from "lucide-react";
 
 interface TrialSignupModalProps {
   isOpen: boolean;
@@ -138,6 +139,18 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
               </DialogDescription>
             </DialogHeader>
             
+            {/* Security Trust Indicators */}
+            <div className="flex items-center justify-center gap-3 mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
+              <div className="flex items-center gap-1 text-xs text-green-700">
+                <Shield className="h-3 w-3" />
+                <span className="font-medium">HIPAA Compliant</span>
+              </div>
+              <div className="flex items-center gap-1 text-xs text-green-700">
+                <Lock className="h-3 w-3" />
+                <span className="font-medium">256-bit Encryption</span>
+              </div>
+            </div>
+            
             <form onSubmit={handleSubmit} className="space-y-4 py-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
@@ -163,7 +176,13 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
               </div>
 
               <div className="space-y-4">
-                <Label className="text-sm font-medium">Billing Address</Label>
+                <div className="flex items-center justify-between">
+                  <Label className="text-sm font-medium">Billing Address</Label>
+                  <div className="flex items-center gap-1 text-xs text-gray-500">
+                    <Lock className="h-3 w-3" />
+                    <span>Secure & Encrypted</span>
+                  </div>
+                </div>
                 
                 <div className="space-y-2">
                   <Input
@@ -211,11 +230,35 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
                 >
                   {isLoading ? "Processing..." : "Continue to Payment"} <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
+                
+                {/* Security message under button */}
+                <div className="mt-3 p-2 bg-blue-50 rounded-lg border border-blue-200">
+                  <div className="flex items-center gap-2 text-xs text-blue-700">
+                    <Shield className="h-3 w-3" />
+                    <span className="font-medium">Your information is protected with bank-level security</span>
+                  </div>
+                </div>
               </div>
               
               <p className="text-xs text-center text-warm-gray mt-4">
-                We value your privacy. Your information is secure and will never be shared.
+                🔒 We value your privacy. Your information is secure and will never be shared with third parties.
               </p>
+              
+              {/* Additional trust indicators */}
+              <div className="flex items-center justify-center gap-4 text-xs text-gray-500 mt-3">
+                <div className="flex items-center gap-1">
+                  <span>✓</span>
+                  <span>SSL Secured</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span>✓</span>
+                  <span>No Spam</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span>✓</span>
+                  <span>Cancel Anytime</span>
+                </div>
+              </div>
             </form>
           </>
         ) : (
