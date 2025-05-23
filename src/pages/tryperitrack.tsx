@@ -61,7 +61,29 @@ const TryPeriTrack = () => {
       });
     });
 
-    return () => observer.disconnect();
+    // Handle hash navigation when page loads
+    const handleHashNavigation = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.getElementById(hash.substring(1));
+        if (element) {
+          // Add a small delay to ensure proper scrolling after page load
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      }
+    };
+
+    // Handle hash navigation when URL changes
+    window.addEventListener('hashchange', handleHashNavigation);
+    // Handle hash navigation on initial page load
+    handleHashNavigation();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('hashchange', handleHashNavigation);
+    };
   }, []);
 
   return (
@@ -71,12 +93,20 @@ const TryPeriTrack = () => {
         <HeroSection />
         <ProblemSection />
         <SolutionSection />
-        <FeaturesSection />
-        <HowItWorksSection />
+        <div id="features">
+          <FeaturesSection />
+        </div>
+        <div id="how-it-works">
+          <HowItWorksSection />
+        </div>
         <LunaSection />
         <SocialProofSection />
-        <PricingSection />
-        <FAQSection />
+        <div id="pricing">
+          <PricingSection />
+        </div>
+        <div id="faq">
+          <FAQSection />
+        </div>
         <FinalCTASection />
         <TrustFooter />
         

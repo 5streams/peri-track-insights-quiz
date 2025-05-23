@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { 
   Dialog,
@@ -87,12 +88,6 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
       );
       
       console.log("LeadCaptureModal: Lead successfully saved:", lead);
-      
-      // Fire the conversion tracking when free trial signup is successful
-      if (source === 'free_trial' && typeof window !== 'undefined' && (window as any).trackTrialConversion) {
-        (window as any).trackTrialConversion();
-        console.log('Trial conversion tracked for Google Ads');
-      }
       
       setIsSubmitted(true);
       

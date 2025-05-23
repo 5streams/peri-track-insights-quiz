@@ -15,53 +15,54 @@ const FinalCTASection = () => {
   };
 
   return (
-    <section className="final-cta-section py-3 bg-primary text-white">
-      <div className="container mx-auto px-3 text-center">
+    <section className="final-cta-section py-6 bg-primary text-white">
+      <div className="container mx-auto px-4 text-center">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-headline font-bold text-h2 mb-1.5 fade-in-up">
-            Take Control of Your Perimenopause Journey
+          <h2 className="font-headline font-bold text-h2 mb-2 fade-in-up">
+            Stop Letting Symptoms Control Your Life
           </h2>
           
-          <p className="text-body-large mb-1.5 leading-relaxed fade-in-up opacity-90">
-            You don't have to navigate perimenopause alone. Join thousands of women who are tracking and understanding their symptoms through our comprehensive platform.
+          <p className="text-body-large mb-3 leading-relaxed fade-in-up opacity-90">
+            You don't have to suffer through unpredictable hot flashes, sleepless nights, and mood swings. 
+            Join 15,000+ women who've found relief through smart tracking and personalized coaching.
           </p>
           
-          <div className="bg-white/10 p-2.5 rounded-lg mb-2.5 fade-in-up">
-            <h3 className="font-headline text-lg mb-1">Comprehensive Tracking System</h3>
-            <p className="text-sm mb-1.5">Everything you need to track, understand, and navigate your perimenopause experience</p>
-            <div className="grid md:grid-cols-3 gap-1.5 text-sm">
+          <div className="bg-white/10 p-4 rounded-2xl mb-3 fade-in-up">
+            <h3 className="font-headline text-xl mb-1">Complete Symptom Relief System</h3>
+            <p className="text-base mb-2">Everything you need to understand, predict, and manage your symptoms</p>
+            <div className="grid md:grid-cols-3 gap-2 text-sm">
               <div>
-                <div className="text-secondary font-bold mb-0.5">Day 1-2</div>
+                <div className="text-secondary font-bold mb-1">Day 1-2</div>
                 <div>Start tracking symptoms, meet Luna</div>
               </div>
               <div>
-                <div className="text-secondary font-bold mb-0.5">Day 3-5</div>
-                <div>Discover pattern insights and educational tips</div>
+                <div className="text-secondary font-bold mb-1">Day 3-5</div>
+                <div>First pattern insights and personalized tips</div>
               </div>
               <div>
-                <div className="text-secondary font-bold mb-0.5">Day 6-7</div>
-                <div>Track patterns and explore lifestyle suggestions</div>
+                <div className="text-secondary font-bold mb-1">Day 6-7</div>
+                <div>Symptom predictions and relief strategies</div>
               </div>
             </div>
           </div>
           
           <CTAButton 
-            size="medium" 
+            size="large" 
             variant="secondary" 
-            className="mb-1 text-base px-6 py-2"
+            className="mb-1 text-lg px-10 py-3"
             onClick={handleOpenSignupModal}
           >
-            START TRACKING TODAY
+            DISCOVER YOUR PATTERNS TODAY
           </CTAButton>
           
-          <p className="text-sm opacity-75 mb-1.5">
-            7-day trial then only $12.95/month • Join thousands of women on their perimenopause journey
+          <p className="text-sm opacity-75 mb-2">
+            7-day trial then only $12.95/month • Join thousands of women who've transformed their perimenopause experience
           </p>
           
-          <div className="flex flex-wrap justify-center gap-1.5 text-sm opacity-75 fade-in-up">
+          <div className="flex flex-wrap justify-center gap-3 text-sm opacity-75 fade-in-up">
             <div className="flex items-center">
               <span className="mr-1">🔒</span>
-              Privacy Protected
+              HIPAA Compliant
             </div>
             <div className="flex items-center">
               <span className="mr-1">📱</span>
@@ -73,12 +74,8 @@ const FinalCTASection = () => {
             </div>
             <div className="flex items-center">
               <span className="mr-1">🏆</span>
-              User Recommended
+              Award-Winning
             </div>
-          </div>
-          
-          <div className="mt-2 text-xs opacity-60">
-            <p>*Individual experiences may vary. This app is for educational and tracking purposes. Always consult with healthcare professionals for medical advice.</p>
           </div>
         </div>
       </div>

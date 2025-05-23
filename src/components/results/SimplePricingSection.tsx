@@ -31,40 +31,40 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
   };
   
   return (
-    <Card className="mb-4 p-0 overflow-hidden border-none shadow-lg reveal-section transform opacity-0">
-      <div className="max-w-4xl mx-auto p-2.5">
-        <h2 className="text-xl font-bold text-center text-[#5D4154] mb-2">
+    <Card className="mb-10 p-0 overflow-hidden border-none shadow-lg reveal-section transform opacity-0">
+      <div className="max-w-4xl mx-auto p-5">
+        <h2 className="text-2xl font-bold text-center text-[#5D4154] mb-5">
           Start Your Free 7-Day Trial Now
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
           {/* Monthly Plan */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
-            <div className="p-2.5">
-              <h3 className="text-lg font-bold text-[#5D4154] mb-1.5">Monthly Plan</h3>
-              <div className="flex items-baseline mb-1.5">
-                <span className="text-2xl font-bold text-[#5D4154]">$12.95</span>
+          <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+            <div className="p-4">
+              <h3 className="text-xl font-bold text-[#5D4154] mb-3">Monthly Plan</h3>
+              <div className="flex items-baseline mb-3">
+                <span className="text-3xl font-bold text-[#5D4154]">$12.95</span>
                 <span className="text-gray-600 ml-1">/month</span>
               </div>
               
-              <ul className="space-y-0.5 mb-2.5">
+              <ul className="space-y-2 mb-4">
                 <li className="flex items-start">
-                  <Check className="h-3 w-3 text-[#9b87f5] mr-1.5 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">Access to all tracking features</span>
+                  <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
+                  <span>Full access to all features</span>
                 </li>
                 <li className="flex items-start">
-                  <Check className="h-3 w-3 text-[#9b87f5] mr-1.5 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">Unlimited symptom monitoring</span>
+                  <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
+                  <span>Unlimited symptom tracking</span>
                 </li>
                 <li className="flex items-start">
-                  <Check className="h-3 w-3 text-[#9b87f5] mr-1.5 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">7-day free trial included</span>
+                  <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
+                  <span>7-day free trial included</span>
                 </li>
               </ul>
               
               <Button 
                 onClick={handleMonthlyClick}
-                className="w-full h-9 bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white uppercase text-sm"
+                className="w-full h-12 bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white uppercase"
               >
                 Start My Free Trial
               </Button>
@@ -75,37 +75,37 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
           </div>
           
           {/* Annual Plan */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden border-2 border-[#9b87f5] relative">
-            <div className="absolute top-0 right-0 bg-[#9b87f5] text-white px-2 py-0.5 text-xs font-bold">
+          <div className="bg-white rounded-xl shadow-md overflow-hidden border-2 border-[#9b87f5] relative">
+            <div className="absolute top-0 right-0 bg-[#9b87f5] text-white px-3 py-1 text-xs font-bold">
               BEST VALUE
             </div>
             
-            <div className="p-2.5">
-              <h3 className="text-lg font-bold text-[#5D4154] mb-1.5">Annual Plan</h3>
+            <div className="p-4">
+              <h3 className="text-xl font-bold text-[#5D4154] mb-3">Annual Plan</h3>
               <div className="flex items-baseline mb-1">
-                <span className="text-2xl font-bold text-[#5D4154]">$99</span>
+                <span className="text-3xl font-bold text-[#5D4154]">$99</span>
                 <span className="text-gray-600 ml-1">/year</span>
               </div>
-              <p className="text-[#9b87f5] mb-1.5 text-sm">Save $56.40</p>
+              <p className="text-[#9b87f5] mb-2">Save $56.40</p>
               
-              <ul className="space-y-0.5 mb-2.5">
+              <ul className="space-y-2 mb-4">
                 <li className="flex items-start">
-                  <Check className="h-3 w-3 text-[#9b87f5] mr-1.5 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">All features in monthly plan</span>
+                  <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
+                  <span>All features in monthly plan</span>
                 </li>
                 <li className="flex items-start">
-                  <Check className="h-3 w-3 text-[#9b87f5] mr-1.5 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">Save $56.40 compared to monthly</span>
+                  <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
+                  <span>Save $56.40 compared to monthly</span>
                 </li>
                 <li className="flex items-start">
-                  <Check className="h-3 w-3 text-[#9b87f5] mr-1.5 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">7-day free trial included</span>
+                  <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
+                  <span>7-day free trial included</span>
                 </li>
               </ul>
               
               <Button 
                 onClick={handleAnnualClick}
-                className="w-full h-9 bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white uppercase text-sm"
+                className="w-full h-12 bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white uppercase"
               >
                 Start My Free Trial
               </Button>
@@ -117,12 +117,8 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
         </div>
         
         <div className="text-center">
-          <p className="text-sm">👉 Start Your Free 7-Day Trial Now</p>
-          <p className="text-gray-600 mt-0.5 text-sm">Educational tracking and insights for your perimenopause journey.</p>
-        </div>
-        
-        <div className="mt-2 text-xs text-center text-gray-500">
-          <p>*Individual experiences may vary. This app is for educational and tracking purposes. Always consult with healthcare professionals for medical advice.</p>
+          <p className="text-base">👉 Start Your Free 7-Day Trial Now</p>
+          <p className="text-gray-600 mt-1 text-sm">Just results, relief, and the roadmap you deserve.</p>
         </div>
       </div>
       

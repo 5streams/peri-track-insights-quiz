@@ -11,9 +11,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { saveLead } from "@/utils/leadTracking";
 import { useToast } from "@/hooks/use-toast";
-import { Check, ArrowRight, Shield, Lock } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 
 interface TrialSignupModalProps {
   isOpen: boolean;
@@ -26,10 +27,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
 }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [streetAddress, setStreetAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zipCode, setZipCode] = useState("");
+  const [address, setAddress] = useState("");
   const [step, setStep] = useState<'form' | 'beta-message'>('form');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -49,13 +47,10 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
     setIsLoading(true);
     
     try {
-      // Format the complete address
-      const fullAddress = [streetAddress, city, state, zipCode].filter(Boolean).join(', ');
-      
       // Format the notes to be consistent with other lead types
-      const additionalNotes = `Address: ${fullAddress}, Captured from TryPeriTrack page at ${new Date().toISOString()}`;
+      const additionalNotes = `Captured from TryPeriTrack page at ${new Date().toISOString()}`;
       
-      // Create a quiz-like results object to maintain consistency with other lead types
+      // Create a quiz-like results object to maintain consistency with other leads
       const trialQuizResults = {
         source: "TRIAL_SIGNUP",
         phase: "Trial Interest",
@@ -70,7 +65,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
       console.log("TrialSignupModal: About to save lead with data:", {
         name: name.trim(),
         email: email.trim(),
-        address: fullAddress + " (NOTE: address not saved until database schema is updated)",
+        address: address.trim() + " (NOTE: address not saved until database schema is updated)",
         source: 'TRIAL',
         quizResults: trialQuizResults,
         additionalNotes
@@ -85,12 +80,6 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
         trialQuizResults, // Pass formatted results to maintain consistency
         additionalNotes
       );
-      
-      // Fire the conversion tracking when signup is successful
-      if (typeof window !== 'undefined' && (window as any).trackTrialConversion) {
-        (window as any).trackTrialConversion();
-        console.log('Trial conversion tracked for Google Ads');
-      }
       
       setStep('beta-message');
       
@@ -109,10 +98,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
   const resetForm = () => {
     setName("");
     setEmail("");
-    setStreetAddress("");
-    setCity("");
-    setState("");
-    setZipCode("");
+    setAddress("");
     setStep('form');
   };
   
@@ -139,18 +125,6 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
               </DialogDescription>
             </DialogHeader>
             
-            {/* Security Trust Indicators */}
-            <div className="flex items-center justify-center gap-3 mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
-              <div className="flex items-center gap-1 text-xs text-green-700">
-                <Shield className="h-3 w-3" />
-                <span className="font-medium">HIPAA Compliant</span>
-              </div>
-              <div className="flex items-center gap-1 text-xs text-green-700">
-                <Lock className="h-3 w-3" />
-                <span className="font-medium">256-bit Encryption</span>
-              </div>
-            </div>
-            
             <form onSubmit={handleSubmit} className="space-y-4 py-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
@@ -175,51 +149,15 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
                 />
               </div>
 
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <Label className="text-sm font-medium">Billing Address</Label>
-                  <div className="flex items-center gap-1 text-xs text-gray-500">
-                    <Lock className="h-3 w-3" />
-                    <span>Secure & Encrypted</span>
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <Input
-                    id="streetAddress"
-                    value={streetAddress}
-                    onChange={(e) => setStreetAddress(e.target.value)}
-                    placeholder="Street address"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="space-y-2">
-                    <Input
-                      id="city"
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
-                      placeholder="City"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Input
-                      id="state"
-                      value={state}
-                      onChange={(e) => setState(e.target.value)}
-                      placeholder="State"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Input
-                    id="zipCode"
-                    value={zipCode}
-                    onChange={(e) => setZipCode(e.target.value)}
-                    placeholder="ZIP code"
-                  />
-                </div>
+              <div className="space-y-2">
+                <Label htmlFor="address">Address</Label>
+                <Textarea
+                  id="address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Your address (optional)"
+                  rows={3}
+                />
               </div>
               
               <div className="mt-6">
@@ -230,35 +168,11 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
                 >
                   {isLoading ? "Processing..." : "Continue to Payment"} <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-                
-                {/* Security message under button */}
-                <div className="mt-3 p-2 bg-blue-50 rounded-lg border border-blue-200">
-                  <div className="flex items-center gap-2 text-xs text-blue-700">
-                    <Shield className="h-3 w-3" />
-                    <span className="font-medium">Your information is protected with bank-level security</span>
-                  </div>
-                </div>
               </div>
               
               <p className="text-xs text-center text-warm-gray mt-4">
-                🔒 We value your privacy. Your information is secure and will never be shared with third parties.
+                We value your privacy. Your information is secure and will never be shared.
               </p>
-              
-              {/* Additional trust indicators */}
-              <div className="flex items-center justify-center gap-4 text-xs text-gray-500 mt-3">
-                <div className="flex items-center gap-1">
-                  <span>✓</span>
-                  <span>SSL Secured</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <span>✓</span>
-                  <span>No Spam</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <span>✓</span>
-                  <span>Cancel Anytime</span>
-                </div>
-              </div>
             </form>
           </>
         ) : (
@@ -299,4 +213,4 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
   );
 };
 
-export default TrialSignupModal;
+export default TrialSignupModal; 
