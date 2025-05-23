@@ -75,7 +75,7 @@ const FreeTrial: React.FC<FreeTrialProps> = ({ onStartTrial, primaryHormone, sco
                 Start 7-Day Free Trial
               </Button>
               <p className="text-xs text-center mt-1 text-gray-500">
-                Then $9.99/month after trial
+                Then $12.95/month after trial
               </p>
             </div>
             

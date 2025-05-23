@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { 
   Dialog,
@@ -138,6 +139,9 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
                 {source === 'free_trial' 
                   ? 'Enter your details below to start your 7-day free trial.'
                   : 'Enter your details to see your personalized results.'}
+                {source === 'free_trial' && (
+                  <p className="text-[#5D4154] font-medium text-sm mt-1">7-day trial then only $12.95/month</p>
+                )}
               </DialogDescription>
             </DialogHeader>
             
@@ -206,6 +210,11 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
                 >
                   {isLoading ? "Processing..." : source === 'free_trial' ? "Start 7-Day Free Trial" : "Show My Results"}
                 </Button>
+                {source === 'free_trial' && (
+                  <p className="text-xs text-center mt-1 text-[#5D4154]">
+                    7-day trial then only $12.95/month
+                  </p>
+                )}
               </div>
               
               <p className="text-xs text-center text-gray-500 mt-4">
