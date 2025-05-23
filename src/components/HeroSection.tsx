@@ -15,19 +15,15 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="hero-section bg-gradient-to-br from-[#f8f5ff] to-white py-8 min-h-[60vh] flex items-center">
-      <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-6 items-center">
+    <section className="hero-section bg-hero-gradient py-5 lg:py-6 min-h-[60vh] flex items-center">
+      <div className="container mx-auto px-4 lg:px-6">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           <div className="hero-content fade-in-up">
-            <div className="bg-white inline-block px-3 py-1 rounded-full text-sm font-medium text-[#9b87f5] mb-3 shadow-sm">
-              #1 Perimenopause Management App
-            </div>
-            
-            <h1 className="font-headline font-bold text-3xl lg:text-4xl xl:text-5xl text-primary mb-4 leading-tight">
+            <h1 className="font-headline font-bold text-h1 text-primary mb-3 leading-tight">
               The Perimenopause Tracker That Actually Helps You Feel Better
             </h1>
             
-            <p className="text-lg text-warm-gray font-medium mb-3 leading-relaxed">
+            <p className="text-body-large text-warm-gray font-medium mb-3 leading-relaxed">
               Track your symptoms, get personalized relief strategies, and receive daily coaching tips based on YOUR unique patterns. Finally, a system that helps you manage perimenopause instead of just tracking it.
             </p>
             
@@ -35,44 +31,33 @@ const HeroSection = () => {
               Stop suffering through unpredictable symptoms. Peritrack combines intelligent tracking with personalized coaching to help you find real relief from hot flashes, mood swings, sleep issues, and PMS.
             </p>
             
-            <div className="social-proof-mini bg-white p-3 rounded-xl mb-5 shadow-lg border border-gray-100">
-              <div className="flex items-center">
-                <div className="flex -space-x-2 mr-3">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-xs">
-                      👩
-                    </div>
-                  ))}
-                </div>
-                <span className="font-semibold text-primary text-body-regular">
-                  Join 15,000+ women who've found symptom relief through smart tracking and personalized coaching.
-                </span>
-              </div>
+            <div className="social-proof-mini bg-white p-3 rounded-xl mb-4 shadow-lg border border-gray-100">
+              <span className="font-semibold text-primary text-body-regular block">
+                Join 15,000+ women who've found symptom relief through smart tracking and personalized coaching.
+              </span>
             </div>
             
             <div className="cta-container">
               <CTAButton 
                 size="large" 
                 variant="primary"
-                className="w-full sm:w-auto mb-1"
+                className="w-full lg:w-auto mb-1"
                 onClick={handleOpenSignupModal}
               >
-                START YOUR FREE 7-DAY TRIAL
+                DISCOVER YOUR PATTERNS TODAY
               </CTAButton>
-              <p className="text-sm text-warm-gray text-center sm:text-left">
-                7-day free trial then only $12.95/month
+              <p className="text-sm text-warm-gray text-center lg:text-left">
+                7-day trial then only $12.95/month • Join thousands of women who've transformed their perimenopause experience
               </p>
             </div>
           </div>
           
-          <div className="hero-visual fade-in-up text-center mt-4 lg:mt-0">
-            <div className="relative inline-block">
-              <div className="absolute -top-4 -left-4 w-24 h-24 bg-[#f1eaff] rounded-full -z-10"></div>
-              <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-[#e5f8e2] rounded-full -z-10"></div>
+          <div className="hero-visual fade-in-up text-center">
+            <div className="relative inline-block animate-float">
               <img 
                 src="/images/daily-check-in.png" 
                 alt="PeriTrack Daily Check-In Interface" 
-                className="w-auto h-auto max-w-full max-h-[550px] rounded-[2rem] shadow-xl mx-auto relative z-10"
+                className="w-auto h-auto max-w-full max-h-[600px] rounded-[3rem] shadow-2xl mx-auto"
               />
             </div>
           </div>

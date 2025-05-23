@@ -9,7 +9,7 @@ import Tracking from "./pages/Tracking";
 import Insights from "./pages/Insights";
 import NotFound from "./pages/NotFound";
 import TryPeriTrack from "./pages/tryperitrack";
-import AdminLeads from "./pages/AdminLeads";
+import AdminLeads from "./pages/AdminLeads"; // Add this new import
 import "./App.css";
 
 function App() {
@@ -23,10 +23,10 @@ function App() {
         <Route path="/tracking" element={<Tracking />} />
         <Route path="/insights" element={<Insights />} />
         <Route path="/admin/leads" element={<AdminLeads />} />
-        <Route path="/tryperitrack" element={<TryPeriTrack />} />
-        <Route path="/tryperitracker" element={<TryPeriTrack />} /> {/* Add redirect for alternate URL */}
+        <Route path="/tryperitracker" element={<TryPeriTrack />} /> {/* Add new route */}
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
+        <Route path="/tryperitrack" element={<TryPeriTrack />} />
       </Routes>
     </Router>
   );
