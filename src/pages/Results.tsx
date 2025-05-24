@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -387,7 +386,7 @@ const Results = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      {/* Results Section */}
+      {/* Results Section - Keep constrained */}
       <div className="w-full max-w-4xl mx-auto px-4 md:px-6 lg:px-8 py-8">
         <div className="results-container all-visible">
           {/* Results Header with Score and User Name */}
@@ -419,112 +418,66 @@ const Results = () => {
         </div>
       </div>
 
-      {/* TryPeriTrack Content - Full Width Sections - Make all visible */}
+      {/* TryPeriTrack Content - Full Width Sections */}
       <div className="flex-grow w-full">
-        {/* Hero Section */}
-        <div className="w-full">
-          <HeroSection />
-        </div>
+        <HeroSection />
 
-        {/* Stats Section */}
         <div className="w-full bg-white">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
-            <StatsSection />
-          </div>
+          <StatsSection />
         </div>
 
-        {/* Problem Section */}
         <div className="w-full bg-gray-50">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
-            <ProblemSection />
-          </div>
+          <ProblemSection />
         </div>
 
-        {/* Solution Section */}
         <div className="w-full bg-white">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
-            <SolutionSection />
-          </div>
+          <SolutionSection />
         </div>
 
-        {/* Why Choose Us Section */}
         <div className="w-full bg-gray-50">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
-            <WhyChooseUsSection />
-          </div>
+          <WhyChooseUsSection />
         </div>
 
-        {/* Features Section */}
         <div id="features" className="w-full bg-white py-12">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8">
-            <FeaturesSection />
-          </div>
+          <FeaturesSection />
         </div>
 
-        {/* Comparison Section */}
         <div className="w-full bg-gray-50">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
-            <ComparisonSection />
-          </div>
+          <ComparisonSection />
         </div>
 
-        {/* How It Works Section */}
         <div id="how-it-works" className="w-full bg-white py-12">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8">
-            <HowItWorksSection />
-          </div>
+          <HowItWorksSection />
         </div>
 
-        {/* Luna Section */}
         <div className="w-full bg-gray-50">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
-            <LunaSection />
-          </div>
+          <LunaSection />
         </div>
 
-        {/* Testimonial Carousel */}
         <div className="w-full bg-white">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
-            <TestimonialCarousel />
-          </div>
+          <TestimonialCarousel />
         </div>
 
-        {/* Social Proof Section */}
         <div className="w-full bg-gray-50">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
-            <SocialProofSection />
-          </div>
+          <SocialProofSection />
         </div>
 
-        {/* Pricing Section */}
         <div id="pricing" className="w-full bg-white py-12">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8">
-            <PricingSection />
-          </div>
+          <PricingSection />
         </div>
 
-        {/* FAQ Section */}
         <div id="faq" className="w-full bg-gray-50 py-12">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8">
-            <FAQSection />
-          </div>
+          <FAQSection />
         </div>
 
-        {/* Final CTA Section */}
         <div className="w-full bg-white">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
-            <FinalCTASection />
-          </div>
+          <FinalCTASection />
         </div>
 
-        {/* Trust Footer */}
         <div className="w-full bg-gray-50">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
-            <TrustFooter />
-          </div>
+          <TrustFooter />
         </div>
         
-        {/* Global Trial Signup Modal */}
         <TrialSignupModal 
           isOpen={isSignupModalOpen}
           onClose={handleCloseSignupModal}
