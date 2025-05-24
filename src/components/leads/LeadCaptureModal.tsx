@@ -36,10 +36,14 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const [address, setAddress] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+
+  // Check if this is a hormone testing offer
+  const isHormoneTestingOffer = quizResults?.source === "HORMONE_TESTING_OFFER";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,11 +65,23 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
       });
       return;
     }
+
+    // For hormone testing offers, require phone and zip code
+    if (isHormoneTestingOffer && (!phoneNumber || !zipCode)) {
+      toast({
+        title: "Missing information",
+        description: "Please provide your phone number and zip code.",
+        variant: "destructive"
+      });
+      return;
+    }
     
     setIsLoading(true);
     
     try {
-      const additionalNotes = source === 'free_trial' 
+      const additionalNotes = isHormoneTestingOffer 
+        ? `Phone: ${phoneNumber}, Zip Code: ${zipCode}, Address: ${address}, Captured at: ${new Date().toISOString()}` 
+        : source === 'free_trial' 
         ? `Phone: ${phoneNumber}, Address: ${address}, Captured at: ${new Date().toISOString()}` 
         : `Captured at: ${new Date().toISOString()}`;
         
@@ -93,7 +109,9 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
       
       toast({
         title: "Successfully Added",
-        description: "You've been added to our waitlist. We'll notify you when we launch!",
+        description: isHormoneTestingOffer 
+          ? "Your hormone testing request has been submitted. We'll contact you soon!"
+          : "You've been added to our waitlist. We'll notify you when we launch!",
         action: <Check className="h-4 w-4 text-green-500" />
       });
       
@@ -113,6 +131,7 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
     setFirstName("");
     setEmail("");
     setPhoneNumber("");
+    setZipCode("");
     setAddress("");
     setIsSubmitted(false);
   };
@@ -133,14 +152,21 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
           <>
             <DialogHeader>
               <DialogTitle className="text-xl font-bold text-[#5D4154]">
-                {source === 'free_trial' ? 'Start Your Free Trial' : 'Get Your Results'}
+                {isHormoneTestingOffer 
+                  ? 'Order Your Hormone Testing' 
+                  : source === 'free_trial' ? 'Start Your Free Trial' : 'Get Your Results'}
               </DialogTitle>
               <DialogDescription>
-                {source === 'free_trial' 
+                {isHormoneTestingOffer 
+                  ? 'Enter your details to order comprehensive hormone testing.'
+                  : source === 'free_trial' 
                   ? 'Enter your details below to start your 7-day free trial.'
                   : 'Enter your details to see your personalized results.'}
                 {source === 'free_trial' && (
                   <p className="text-[#5D4154] font-medium text-sm mt-1">7-day trial then only $12.95/month</p>
+                )}
+                {isHormoneTestingOffer && (
+                  <p className="text-[#5D4154] font-medium text-sm mt-1">Complete Perimenopause Testing Panel - $199</p>
                 )}
               </DialogDescription>
             </DialogHeader>
@@ -169,31 +195,44 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
                 />
               </div>
               
+              {(source === 'free_trial' || isHormoneTestingOffer) && (
+                <div className="space-y-2">
+                  <Label htmlFor="phone">Phone Number</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    placeholder="Your phone number"
+                    required={isHormoneTestingOffer}
+                  />
+                </div>
+              )}
+
+              {isHormoneTestingOffer && (
+                <div className="space-y-2">
+                  <Label htmlFor="zipCode">Zip Code</Label>
+                  <Input
+                    id="zipCode"
+                    value={zipCode}
+                    onChange={(e) => setZipCode(e.target.value)}
+                    placeholder="Your zip code"
+                    required
+                  />
+                </div>
+              )}
+              
               {source === 'free_trial' && (
-                <>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
-                      placeholder="Your phone number"
-                      required
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="address">Address</Label>
-                    <Textarea
-                      id="address"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                      placeholder="Your address"
-                      rows={3}
-                    />
-                  </div>
-                </>
+                <div className="space-y-2">
+                  <Label htmlFor="address">Address</Label>
+                  <Textarea
+                    id="address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Your address"
+                    rows={3}
+                  />
+                </div>
               )}
               
               {source === 'free_trial' && pricingPlan && (
@@ -208,11 +247,18 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
                   className="w-full bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Processing..." : source === 'free_trial' ? "Start 7-Day Free Trial" : "Show My Results"}
+                  {isLoading ? "Processing..." : 
+                   isHormoneTestingOffer ? "ORDER BLOODWORK NOW" :
+                   source === 'free_trial' ? "Start 7-Day Free Trial" : "Show My Results"}
                 </Button>
                 {source === 'free_trial' && (
                   <p className="text-xs text-center mt-1 text-[#5D4154]">
                     7-day trial then only $12.95/month
+                  </p>
+                )}
+                {isHormoneTestingOffer && (
+                  <p className="text-xs text-center mt-1 text-[#5D4154]">
+                    Results in 3-5 business days
                   </p>
                 )}
               </div>
@@ -229,17 +275,23 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
             </div>
             
             <DialogTitle className="text-xl font-bold text-[#5D4154] mb-4">
-              Thank You For Requesting Your Trial
+              {isHormoneTestingOffer 
+                ? "Thank You For Your Order!" 
+                : "Thank You For Requesting Your Trial"}
             </DialogTitle>
             
             <div className="mb-6">
               <p className="text-[#5D4154] mb-4">
-                We Are Currently In Beta And Will Email You As Soon As We Open
+                {isHormoneTestingOffer 
+                  ? "We will contact you within 24 hours to schedule your lab appointment and send you the testing kit."
+                  : "We Are Currently In Beta And Will Email You As Soon As We Open"}
               </p>
               
               <div className="mt-4 bg-[#F9F5FF]/50 p-4 rounded-lg border border-[#9b87f5]/20">
                 <p className="text-sm font-medium text-[#5D4154] mt-2">
-                  <span className="font-bold">*1 - 2 weeks*</span>
+                  <span className="font-bold">
+                    {isHormoneTestingOffer ? "*Within 24 hours*" : "*1 - 2 weeks*"}
+                  </span>
                 </p>
               </div>
             </div>
