@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -201,7 +200,7 @@ const FinalCTA: React.FC = () => {
               onClick={handleStartTrial}
               className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/90 text-white font-semibold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 w-full md:w-auto text-base"
             >
-              CLAIM MY FREE TRIAL NOW
+              Order Bloodwork Now!
             </Button>
             <p className="text-xs text-center mt-1 text-white/80">
               7-day trial then only $9.99/month
