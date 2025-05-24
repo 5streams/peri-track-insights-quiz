@@ -10,6 +10,23 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
+
+// Import all components from the tryperitrack page
+import StatsSection from "@/components/StatsSection";
+import ProblemSection from "@/components/ProblemSection";
+import SolutionSection from "@/components/SolutionSection";
+import FeaturesSection from "@/components/FeaturesSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
+import LunaSection from "@/components/LunaSection";
+import SocialProofSection from "@/components/SocialProofSection";
+import PricingSection from "@/components/PricingSection";
+import FAQSection from "@/components/FAQSection";
+import FinalCTASection from "@/components/FinalCTASection";
+import TrustFooter from "@/components/TrustFooter";
+import ComparisonSection from "@/components/ComparisonSection";
+import WhyChooseUsSection from "@/components/WhyChooseUsSection";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
+
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
 import PeritrackIntro from "@/components/results/PeritrackIntro";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
@@ -132,6 +149,80 @@ const Results = () => {
               scoreCategory={scoreCategory}
             />
           </div>
+
+          {/* ALL TRYPERITRACK PAGE CONTENT STARTS HERE */}
+          
+          {/* Stats Section */}
+          <div className="revealed mb-6">
+            <StatsSection />
+          </div>
+          
+          {/* Problem Section */}
+          <div className="revealed mb-6">
+            <ProblemSection />
+          </div>
+          
+          {/* Solution Section */}
+          <div className="revealed mb-6">
+            <SolutionSection />
+          </div>
+          
+          {/* Why Choose Us Section */}
+          <div className="revealed mb-6">
+            <WhyChooseUsSection />
+          </div>
+          
+          {/* Features Section */}
+          <div className="revealed mb-6">
+            <FeaturesSection />
+          </div>
+          
+          {/* Comparison Section */}
+          <div className="revealed mb-6">
+            <ComparisonSection />
+          </div>
+          
+          {/* How It Works Section */}
+          <div className="revealed mb-6">
+            <HowItWorksSection />
+          </div>
+          
+          {/* Luna Section */}
+          <div className="revealed mb-6">
+            <LunaSection />
+          </div>
+          
+          {/* Testimonial Carousel */}
+          <div className="revealed mb-6">
+            <TestimonialCarousel />
+          </div>
+          
+          {/* Social Proof Section */}
+          <div className="revealed mb-6">
+            <SocialProofSection />
+          </div>
+          
+          {/* Pricing Section */}
+          <div className="revealed mb-6">
+            <PricingSection />
+          </div>
+          
+          {/* FAQ Section */}
+          <div className="revealed mb-6">
+            <FAQSection />
+          </div>
+          
+          {/* Final CTA Section */}
+          <div className="revealed mb-6">
+            <FinalCTASection />
+          </div>
+          
+          {/* Trust Footer */}
+          <div className="revealed mb-6">
+            <TrustFooter />
+          </div>
+
+          {/* ORIGINAL RESULTS PAGE CONTENT CONTINUES */}
           
           {/* Peritrack Intro - Main call to action - Force visibility */}
           <div className="revealed mb-6">
