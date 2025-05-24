@@ -4,22 +4,22 @@ import React from 'react';
 const WeightPatternTestimonials = () => {
   const testimonials = [
     {
-      quote: "Tracking helped me understand my weight patterns and have better conversations with my doctor about management strategies. The data showed connections I never would have noticed on my own.",
+      quote: "After 3 months of tracking, I identified that poor sleep was directly impacting my weight patterns. I focused on sleep hygiene and saw a 12-pound change over 4 months. The data helped me understand what my body needed.",
       name: "Sarah M.",
       age: 47,
-      context: "Tracked patterns for 3 months"
+      context: "Lost 12 lbs by tracking sleep-weight patterns"
     },
     {
-      quote: "I finally understood which foods seemed to correlate with my weight changes during perimenopause. This information was invaluable when discussing nutrition strategies with my healthcare provider.",
+      quote: "PeriTrack showed me that certain foods triggered weight gain during specific cycle phases. By adjusting my eating patterns based on the data, I've maintained a stable weight for 6 months - something I couldn't achieve before.",
       name: "Jennifer L.",
       age: 44,
-      context: "Used food and weight correlation tracking"
+      context: "Achieved weight stability through food pattern tracking"
     },
     {
-      quote: "The insights helped my doctor and I develop a personalized approach to managing my perimenopause weight concerns. Having actual data made such a difference in our discussions.",
+      quote: "The weekly insights helped me understand that stress was sabotaging my weight management. By tracking and addressing stress patterns, I've been able to manage my weight more effectively than ever during perimenopause.",
       name: "Michelle R.", 
       age: 49,
-      context: "Generated healthcare reports"
+      context: "Managed weight by identifying stress triggers"
     }
   ];
 
@@ -29,10 +29,10 @@ const WeightPatternTestimonials = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-              Supporting Weight Management Discussions Through Pattern Tracking
+              Real Women, Real Weight Management Success Through Pattern Tracking
             </h2>
             <p className="text-body-large text-warm-gray max-w-3xl mx-auto fade-in-up">
-              See how women are using pattern tracking to have more informed conversations with their healthcare providers about perimenopause weight management.
+              See how women are using PeriTrack's pattern analysis to identify what works for their bodies and achieve sustainable weight management during perimenopause.
             </p>
           </div>
 
@@ -49,7 +49,7 @@ const WeightPatternTestimonials = () => {
                   <p className="font-medium text-primary">
                     — {testimonial.name}, {testimonial.age}
                   </p>
-                  <p className="text-sm text-warm-gray">
+                  <p className="text-sm text-secondary font-medium">
                     {testimonial.context}
                   </p>
                 </div>
@@ -57,11 +57,15 @@ const WeightPatternTestimonials = () => {
             ))}
           </div>
 
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 fade-in-up">
-            <p className="text-sm text-gray-600 text-center leading-relaxed">
-              <strong>Testimonial Disclaimer:</strong> These testimonials reflect individual experiences with pattern tracking and healthcare discussions. 
-              Results vary between individuals. Tracking tools are for educational purposes and to support healthcare conversations, not to diagnose or treat conditions. 
-              Always consult your healthcare provider for personalized medical advice.
+          <div className="bg-gradient-to-r from-primary/5 to-secondary/5 border border-primary/20 rounded-xl p-6 fade-in-up">
+            <h4 className="font-semibold text-primary mb-3 text-center">Why Pattern-Based Weight Management Works</h4>
+            <p className="text-warm-gray text-center leading-relaxed mb-4">
+              These results come from understanding personal patterns rather than following generic advice. 
+              PeriTrack helps you discover what specifically affects YOUR weight during perimenopause, leading to more sustainable management strategies.
+            </p>
+            <p className="text-xs text-gray-600 text-center leading-relaxed">
+              <strong>Testimonial Disclaimer:</strong> Individual results vary and depend on consistent tracking, lifestyle factors, and personal health conditions. 
+              These testimonials reflect individual experiences with pattern-based approaches. Always consult your healthcare provider for personalized weight management guidance.
             </p>
           </div>
         </div>

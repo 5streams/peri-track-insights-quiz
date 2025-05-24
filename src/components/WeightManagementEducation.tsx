@@ -8,64 +8,69 @@ const WeightManagementEducation = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-              Understanding Perimenopause Weight Management
+              How PeriTrack Helps You Manage Perimenopause Weight Changes
             </h2>
             <p className="text-body-large text-warm-gray max-w-3xl mx-auto fade-in-up">
-              Research indicates that 60-90% of women experience weight changes during perimenopause. 
-              Our tracking system helps you understand patterns and support informed healthcare discussions.
+              Research shows 60-90% of women experience weight changes during perimenopause. 
+              PeriTrack's pattern-tracking system helps you identify what factors influence your weight and develop personalized management strategies.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-8">
             <div className="bg-white p-6 rounded-2xl shadow-lg fade-in-up">
-              <h3 className="font-headline text-xl text-primary mb-4">What Research Shows</h3>
+              <h3 className="font-headline text-xl text-primary mb-4">Pattern Discovery for Weight Management</h3>
               <ul className="space-y-3 text-warm-gray">
                 <li className="flex items-start">
                   <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Hormonal changes during perimenopause may affect metabolism and fat distribution</span>
+                  <span><strong>Sleep-Weight Correlations:</strong> Track how sleep quality affects your weight patterns and metabolism</span>
                 </li>
                 <li className="flex items-start">
                   <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Sleep disruption and stress may influence weight patterns during this transition</span>
+                  <span><strong>Food Pattern Analysis:</strong> Identify which foods correlate with weight stability during hormonal fluctuations</span>
                 </li>
                 <li className="flex items-start">
                   <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Individual responses to dietary and lifestyle factors can vary significantly</span>
+                  <span><strong>Stress Impact Tracking:</strong> Monitor how stress levels influence your weight management efforts</span>
                 </li>
                 <li className="flex items-start">
                   <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Tracking patterns may help inform evidence-based management approaches</span>
+                  <span><strong>Cycle Phase Insights:</strong> Understand weight fluctuations based on hormonal cycle changes</span>
                 </li>
               </ul>
             </div>
 
             <div className="bg-white p-6 rounded-2xl shadow-lg fade-in-up">
-              <h3 className="font-headline text-xl text-primary mb-4">How PeriTrack Helps</h3>
+              <h3 className="font-headline text-xl text-primary mb-4">Weekly Progress & Personalized Strategies</h3>
               <ul className="space-y-3 text-warm-gray">
                 <li className="flex items-start">
                   <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Monitor factors that research suggests may influence perimenopause weight patterns</span>
+                  <span><strong>Weekly Pattern Reports:</strong> See which strategies worked best for your weight management goals</span>
                 </li>
                 <li className="flex items-start">
                   <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Identify potential correlations between lifestyle choices and weight changes</span>
+                  <span><strong>Customized Recommendations:</strong> Get personalized suggestions based on your unique patterns</span>
                 </li>
                 <li className="flex items-start">
                   <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Create comprehensive data to support weight management discussions with your healthcare provider</span>
+                  <span><strong>Progress Tracking:</strong> Monitor which lifestyle changes support your weight management during perimenopause</span>
                 </li>
                 <li className="flex items-start">
                   <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Understand patterns that may inform evidence-based approaches to perimenopause weight management</span>
+                  <span><strong>Healthcare Support:</strong> Generate comprehensive reports to discuss evidence-based weight management with your provider</span>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 fade-in-up">
-            <p className="text-sm text-gray-600 text-center leading-relaxed">
-              <strong>Educational Purpose:</strong> Individual experiences vary. This information is for educational purposes and pattern tracking only. 
-              Always consult your healthcare provider for personalized weight management guidance. Results are not guaranteed and may differ between individuals.
+          <div className="bg-gradient-to-r from-secondary/10 to-primary/10 border border-secondary/20 rounded-xl p-6 fade-in-up">
+            <h4 className="font-semibold text-primary mb-3 text-center">The PeriTrack Weight Management Advantage</h4>
+            <p className="text-warm-gray text-center leading-relaxed mb-4">
+              Unlike generic weight loss apps, PeriTrack understands that perimenopause weight changes are driven by hormonal fluctuations. 
+              Our system helps you identify your personal patterns and develop strategies that work with your changing body, not against it.
+            </p>
+            <p className="text-xs text-gray-600 text-center leading-relaxed">
+              <strong>Individual Results Vary:</strong> This system helps you understand patterns and correlations. 
+              Always consult your healthcare provider for personalized weight management guidance. Results depend on individual factors and consistent tracking.
             </p>
           </div>
         </div>

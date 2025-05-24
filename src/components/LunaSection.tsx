@@ -17,31 +17,31 @@ const LunaSection = () => {
   const chatMessages = [
     {
       user: true,
-      message: "I've been gaining weight during perimenopause and nothing seems to work. Can you help me understand what's happening?"
+      message: "I've gained 15 pounds in 6 months and nothing I used to do for weight loss is working anymore. Can you help me understand what's changed?"
     },
     {
       user: false,
-      message: "I see you've been tracking your weight patterns for 3 weeks. Based on your data, I notice your weight fluctuates most during the luteal phase of your cycle. This is very common during perimenopause due to hormonal changes."
+      message: "I see you've been tracking for 4 weeks now. Your data shows interesting patterns - your weight fluctuates most during weeks when you get less than 6 hours of sleep. This is common during perimenopause when falling progesterone affects both sleep and metabolism."
     },
     {
       user: false,
-      message: "Your tracking shows weight increases correlate with: 1. Sleep disruption (less than 6 hours), 2. Higher stress days, 3. Certain foods that may trigger inflammation. Want me to show you the specific patterns I've identified?"
+      message: "Looking at your food and weight correlations, I notice you maintain stable weight when you eat protein within 2 hours of waking, and weight tends to increase during weeks with high processed carbs during your luteal phase. Your body is responding differently to timing and food types now."
     },
     {
       user: true,
-      message: "Yes! I had no idea there were patterns. What should I focus on first?"
+      message: "That makes so much sense! What should I focus on first to start managing this weight gain?"
     },
     {
       user: false,
-      message: "Based on your data, improving sleep quality shows the strongest correlation with weight stability. I've created a personalized plan: prioritize 7+ hours sleep, track which foods correlate with your best weeks, and monitor stress during high-fluctuation days."
+      message: "Based on your strongest correlations: 1) Prioritize 7+ hours of sleep - this shows the biggest impact on your weight stability, 2) Focus on protein timing in the morning, 3) Reduce processed carbs during luteal phase. These changes work WITH your hormonal patterns instead of against them."
     },
     {
       user: true,
-      message: "This is exactly what I needed! How do you track all these connections?"
+      message: "Will this actually help me lose the weight I've gained?"
     },
     {
       user: false,
-      message: "I analyze your daily inputs - weight, sleep, food, stress, cycle phase - and identify correlations over time. This data helps you understand what factors support your weight management goals during perimenopause."
+      message: "Your tracking data suggests these strategies should support weight management. Sarah with similar patterns lost 12 pounds in 4 months focusing on sleep, and Jennifer achieved stable weight by adjusting food timing. Each person's patterns are unique, which is why tracking YOUR specific correlations is so powerful."
     }
   ];
 
@@ -51,11 +51,11 @@ const LunaSection = () => {
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div className="luna-content fade-in-up">
             <h2 className="font-headline font-bold text-h2 text-primary mb-4">
-              Meet Luna: Your Personal Perimenopause Weight Management Coach
+              Meet Luna: Your Personal Weight Management Coach for Perimenopause
             </h2>
             
             <p className="text-body-large text-warm-gray mb-4 leading-relaxed">
-              Luna analyzes your unique patterns to help you understand what factors influence your weight during perimenopause and creates personalized strategies for better management.
+              Luna analyzes your unique weight patterns during perimenopause and creates personalized strategies to help you manage weight changes based on YOUR specific data and correlations.
             </p>
             
             <div className="luna-features space-y-3 mb-5">
@@ -64,8 +64,8 @@ const LunaSection = () => {
                   <span className="text-white text-sm font-bold">✓</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary mb-1">Identifies Weight Patterns</h4>
-                  <p className="text-warm-gray text-sm">Tracks correlations between sleep, stress, food, and weight changes</p>
+                  <h4 className="font-semibold text-primary mb-1">Identifies Your Weight Patterns</h4>
+                  <p className="text-warm-gray text-sm">Tracks correlations between sleep, stress, food, hormones and weight changes to find what affects YOUR body</p>
                 </div>
               </div>
               
@@ -74,8 +74,8 @@ const LunaSection = () => {
                   <span className="text-white text-sm font-bold">✓</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary mb-1">Personalized Weight Strategies</h4>
-                  <p className="text-warm-gray text-sm">Creates custom plans based on your specific patterns and triggers</p>
+                  <h4 className="font-semibold text-primary mb-1">Personalized Weight Management Strategies</h4>
+                  <p className="text-warm-gray text-sm">Creates custom plans based on what actually works for weight management in your specific situation</p>
                 </div>
               </div>
               
@@ -85,7 +85,7 @@ const LunaSection = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-primary mb-1">Weekly Progress Insights</h4>
-                  <p className="text-warm-gray text-sm">Shows what's working and adjusts recommendations for better results</p>
+                  <p className="text-warm-gray text-sm">Shows which strategies are supporting your weight goals and adjusts recommendations for better results</p>
                 </div>
               </div>
             </div>
@@ -95,7 +95,7 @@ const LunaSection = () => {
               variant="primary"
               onClick={handleOpenSignupModal}
             >
-              START TRACKING MY PATTERNS
+              START TRACKING MY WEIGHT PATTERNS
             </CTAButton>
             <p className="text-xs text-center lg:text-left mt-1 text-warm-gray">
               7-day trial then only $12.95/month
