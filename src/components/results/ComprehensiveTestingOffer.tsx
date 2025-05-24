@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { AlertTriangle, Shield, Clock, CheckCircle, Users, Award } from "lucide-react";
+import { AlertTriangle, Shield, Clock, CheckCircle, Users, Award, Lock, ShieldCheck } from "lucide-react";
 import { useLeadCapture } from "@/hooks/use-lead-capture";
 import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
 
@@ -43,7 +42,7 @@ const ComprehensiveTestingOffer: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 mt-6">
+    <div className="space-y-8 mt-8">
       {/* Headline Section */}
       <div className="text-center bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-lg border-l-2 border-red-400">
         <h2 className="font-headline text-2xl lg:text-3xl font-bold text-red-700 mb-3">
@@ -165,12 +164,12 @@ const ComprehensiveTestingOffer: React.FC = () => {
       </Card>
 
       <Card className="border-l-2 border-green-500 bg-gradient-to-br from-green-50 to-blue-50">
-        <CardContent className="p-6">
-          <div className="text-center mb-4">
-            <h3 className="font-headline text-2xl font-bold text-green-700 mb-3">
+        <CardContent className="p-8">
+          <div className="text-center mb-6">
+            <h3 className="font-headline text-3xl font-bold text-green-700 mb-4">
               Complete Perimenopause Hormone Assessment - $199
             </h3>
-            <p className="text-lg text-gray-600">🧪 What's Included (Value: $800+ at traditional labs):</p>
+            <p className="text-xl text-gray-600">🧪 What's Included (Value: $800+ at traditional labs):</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
@@ -205,11 +204,27 @@ const ComprehensiveTestingOffer: React.FC = () => {
             </div>
           </div>
 
-          {/* Add CTA Button */}
-          <div className="mt-6 text-center">
+          {/* Add CTA Button with Security Seals */}
+          <div className="mt-8 text-center">
+            {/* Security Seals */}
+            <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
+              <div className="flex items-center bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200">
+                <ShieldCheck className="text-green-600 mr-2" size={20} />
+                <span className="text-sm font-semibold text-gray-700">HIPAA Compliant</span>
+              </div>
+              <div className="flex items-center bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200">
+                <Lock className="text-blue-600 mr-2" size={20} />
+                <span className="text-sm font-semibold text-gray-700">256-bit SSL Encryption</span>
+              </div>
+              <div className="flex items-center bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200">
+                <Shield className="text-purple-600 mr-2" size={20} />
+                <span className="text-sm font-semibold text-gray-700">Secure Payment</span>
+              </div>
+            </div>
+            
             <Button 
               onClick={handleOrderNow}
-              className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold py-4 px-8 rounded-lg text-lg transform hover:scale-105 transition-all duration-200"
+              className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold py-4 px-8 rounded-lg text-xl transform hover:scale-105 transition-all duration-200"
             >
               Order Bloodwork
             </Button>
@@ -345,17 +360,33 @@ const ComprehensiveTestingOffer: React.FC = () => {
       </Card>
 
       <Card className="border-l-2 border-purple-500 bg-gradient-to-br from-purple-50 to-pink-50">
-        <CardContent className="p-6 text-center">
-          <h3 className="font-headline text-2xl font-bold text-purple-800 mb-3">
+        <CardContent className="p-8 text-center">
+          <h3 className="font-headline text-3xl font-bold text-purple-800 mb-4">
             Order Your Comprehensive Hormone Assessment
           </h3>
           
-          <div className="text-4xl font-bold text-green-600 mb-3">$199</div>
-          <p className="text-lg text-gray-600 mb-4">Complete Perimenopause Testing Panel</p>
+          <div className="text-5xl font-bold text-green-600 mb-4">$199</div>
+          <p className="text-xl text-gray-600 mb-6">Complete Perimenopause Testing Panel</p>
+
+          {/* Security Seals for Final CTA */}
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
+            <div className="flex items-center bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200">
+              <ShieldCheck className="text-green-600 mr-2" size={20} />
+              <span className="text-sm font-semibold text-gray-700">HIPAA Compliant</span>
+            </div>
+            <div className="flex items-center bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200">
+              <Lock className="text-blue-600 mr-2" size={20} />
+              <span className="text-sm font-semibold text-gray-700">256-bit SSL Encryption</span>
+            </div>
+            <div className="flex items-center bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200">
+              <Shield className="text-purple-600 mr-2" size={20} />
+              <span className="text-sm font-semibold text-gray-700">Secure Payment</span>
+            </div>
+          </div>
 
           <Button 
             onClick={handleOrderNow}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-6 sm:py-4 sm:px-8 rounded-lg text-lg md:text-xl mb-4 transform hover:scale-105 transition-all duration-200 w-full sm:w-auto max-w-full break-words hyphens-auto"
+            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-6 sm:py-4 sm:px-8 rounded-lg text-lg md:text-xl mb-6 transform hover:scale-105 transition-all duration-200 w-full sm:w-auto max-w-full break-words hyphens-auto"
           >
             Order Bloodwork Now!
           </Button>
