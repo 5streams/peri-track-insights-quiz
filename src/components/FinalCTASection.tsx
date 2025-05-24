@@ -19,29 +19,29 @@ const FinalCTASection = () => {
       <div className="container mx-auto px-4 text-center">
         <div className="max-w-3xl mx-auto">
           <h2 className="font-headline font-bold text-h2 mb-2 fade-in-up">
-            Stop Letting Symptoms Control Your Life
+            Stop Letting Perimenopause Weight Gain Control Your Life
           </h2>
           
           <p className="text-body-large mb-3 leading-relaxed fade-in-up opacity-90">
-            You don't have to suffer through unpredictable hot flashes, sleepless nights, and mood swings. 
-            Join 15,000+ women who've found relief through smart tracking and personalized coaching.
+            You don't have to accept unexplained weight gain as "just part of aging." 
+            Join 15,000+ women who've discovered their personal weight loss formula through smart tracking.
           </p>
           
           <div className="bg-white/10 p-4 rounded-2xl mb-3 fade-in-up">
-            <h3 className="font-headline text-xl mb-1">Complete Symptom Relief System</h3>
-            <p className="text-base mb-2">Everything you need to understand, predict, and manage your symptoms</p>
+            <h3 className="font-headline text-xl mb-1">Complete Weight Loss Tracking System</h3>
+            <p className="text-base mb-2">Everything you need to understand, predict, and reverse perimenopause weight gain</p>
             <div className="grid md:grid-cols-3 gap-2 text-sm">
               <div>
-                <div className="text-secondary font-bold mb-1">Day 1-2</div>
-                <div>Start tracking symptoms, meet Luna</div>
+                <div className="text-secondary font-bold mb-1">Week 1-2</div>
+                <div>Start tracking patterns, identify triggers</div>
               </div>
               <div>
-                <div className="text-secondary font-bold mb-1">Day 3-5</div>
-                <div>First pattern insights and personalized tips</div>
+                <div className="text-secondary font-bold mb-1">Week 3-4</div>
+                <div>First weight loss insights and strategies</div>
               </div>
               <div>
-                <div className="text-secondary font-bold mb-1">Day 6-7</div>
-                <div>Symptom predictions and relief strategies</div>
+                <div className="text-secondary font-bold mb-1">Week 5+</div>
+                <div>Personalized weight loss plan in action</div>
               </div>
             </div>
           </div>
@@ -52,11 +52,11 @@ const FinalCTASection = () => {
             className="mb-1 text-lg px-10 py-3"
             onClick={handleOpenSignupModal}
           >
-            DISCOVER YOUR PATTERNS TODAY
+            START MY WEIGHT LOSS TRACKING
           </CTAButton>
           
           <p className="text-sm opacity-75 mb-2">
-            7-day trial then only $12.95/month • Join thousands of women who've transformed their perimenopause experience
+            7-day trial then only $12.95/month • Join thousands who've solved perimenopause weight gain
           </p>
           
           <div className="flex flex-wrap justify-center gap-3 text-sm opacity-75 fade-in-up">

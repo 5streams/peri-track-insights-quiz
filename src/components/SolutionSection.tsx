@@ -19,10 +19,10 @@ const SolutionSection = () => {
       <div className="container mx-auto px-4 lg:px-6">
         <div className="text-center mb-4">
           <h2 className="font-headline font-bold text-h2 text-primary mb-2 fade-in-up">
-            What if you could predict and prevent your worst symptoms?
+            What if you could identify exactly what's causing YOUR perimenopause weight gain?
           </h2>
           <p className="text-body-large text-warm-gray max-w-3xl mx-auto fade-in-up">
-            Peritrack doesn't just track your symptoms - it learns your unique patterns and gives you personalized strategies to feel better before symptoms strike.
+            Peritrack doesn't just track your weight - it connects your hormonal patterns, symptoms, and lifestyle factors to reveal YOUR unique weight gain triggers and create a personalized weight loss strategy.
           </p>
         </div>
 
@@ -31,9 +31,9 @@ const SolutionSection = () => {
             <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-xl text-white">📊</span>
             </div>
-            <h3 className="font-headline text-xl text-primary mb-1">Smart Pattern Recognition</h3>
+            <h3 className="font-headline text-xl text-primary mb-1">Track Weight + Hormones + Lifestyle</h3>
             <p className="text-warm-gray">
-              Our AI identifies your unique symptom patterns, triggers, and cycles so you know what to expect and when.
+              Connect your weight changes to hormone fluctuations, sleep, stress, food, and exercise to see the complete picture.
             </p>
           </div>
 
@@ -41,19 +41,19 @@ const SolutionSection = () => {
             <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-xl text-white">🎯</span>
             </div>
-            <h3 className="font-headline text-xl text-primary mb-1">Personalized Relief Strategies</h3>
+            <h3 className="font-headline text-xl text-primary mb-1">Discover YOUR Weight Gain Triggers</h3>
             <p className="text-warm-gray">
-              Get targeted recommendations based on YOUR data - not generic advice that might not work for you.
+              Identify exactly which foods, stress patterns, or hormone phases trigger YOUR weight gain - not generic advice.
             </p>
           </div>
 
           <div className="solution-card bg-white p-4 rounded-2xl shadow-lg text-center hover:shadow-xl transition-all duration-300 fade-in-up">
             <div className="w-12 h-12 bg-alert rounded-full flex items-center justify-center mx-auto mb-2">
-              <span className="text-xl text-white">🤖</span>
+              <span className="text-xl text-white">📉</span>
             </div>
-            <h3 className="font-headline text-xl text-primary mb-1">24/7 AI Coach Luna</h3>
+            <h3 className="font-headline text-xl text-primary mb-1">Get Your Personalized Weight Loss Plan</h3>
             <p className="text-warm-gray">
-              Your personal perimenopause coach available anytime to answer questions and provide support.
+              Receive customized strategies that work WITH your hormones, not against them, for sustainable weight loss.
             </p>
           </div>
         </div>
@@ -65,10 +65,10 @@ const SolutionSection = () => {
             className="mb-1"
             onClick={handleOpenSignupModal}
           >
-            DISCOVER YOUR PATTERNS TODAY
+            START MY WEIGHT LOSS TRACKING
           </CTAButton>
           <p className="text-sm text-warm-gray">
-            7-day trial then only $12.95/month • Join thousands of women who've transformed their perimenopause experience
+            7-day trial then only $12.95/month • Join thousands who've solved perimenopause weight gain
           </p>
         </div>
       </div>

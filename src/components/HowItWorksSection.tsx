@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import CTAButton from './CTAButton';
 import TrialSignupModal from './TrialSignupModal';
@@ -16,27 +17,27 @@ const HowItWorksSection = () => {
   const steps = [
     {
       number: '01',
-      title: 'Track Your Symptoms',
-      description: 'Log your symptoms in seconds with our intuitive interface. Track hot flashes, sleep, mood, energy, and more.',
+      title: 'Track Your Weight + Factors',
+      description: 'Log your weight, hormones, sleep, stress, food, and exercise daily to see how everything connects to weight changes.',
       time: '2 minutes daily',
       image: '/images/Per1.jpg',
-      alt: 'Woman using the Peritrack app to log symptoms on a smartphone'
+      alt: 'Woman using the Peritrack app to log weight and hormone data'
     },
     {
       number: '02',
-      title: 'Discover Your Patterns',
-      description: 'Our AI analyzes your data to identify triggers, predict symptoms, and understand your unique cycles.',
-      time: 'Insights in 24 hours',
+      title: 'Discover Your Weight Gain Patterns',
+      description: 'Our AI analyzes your data to identify exactly what triggers YOUR weight gain and when you lose weight most easily.',
+      time: 'Insights in 7-14 days',
       image: '/images/peri2.jpg',
-      alt: 'Data visualization showing symptom patterns and insights'
+      alt: 'Data visualization showing weight gain patterns and triggers'
     },
     {
       number: '03',
-      title: 'Get Personalized Relief',
-      description: 'Receive customized strategies, tips, and support from Luna, your AI perimenopause coach.',
-      time: 'Ongoing support',
+      title: 'Get Your Personal Weight Loss Plan',
+      description: 'Receive customized strategies that work with your hormones, metabolism, and lifestyle for sustainable weight loss.',
+      time: 'Ongoing optimization',
       image: '/images/per3.jpg',
-      alt: 'Woman feeling relieved after following personalized recommendations'
+      alt: 'Woman celebrating weight loss success with personalized plan'
     }
   ];
 
@@ -45,10 +46,10 @@ const HowItWorksSection = () => {
       <div className="container mx-auto px-4 lg:px-6">
         <div className="text-center mb-10">
           <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-            How Peritrack Works
+            How Peritrack Solves Perimenopause Weight Gain
           </h2>
           <p className="text-body-large text-warm-gray max-w-2xl mx-auto fade-in-up">
-            Simple, science-backed approach to understanding and managing your perimenopause symptoms.
+            Simple, science-backed approach to understanding and reversing perimenopause weight gain.
           </p>
         </div>
 
@@ -98,10 +99,10 @@ const HowItWorksSection = () => {
             className="mb-3"
             onClick={handleOpenSignupModal}
           >
-            START TRACKING TODAY
+            START MY WEIGHT LOSS JOURNEY
           </CTAButton>
           <p className="text-sm text-warm-gray">
-            See your first insights within 24 hours
+            See your first weight loss insights within 2 weeks
           </p>
         </div>
       </div>

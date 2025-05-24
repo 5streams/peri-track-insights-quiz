@@ -20,19 +20,19 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-6 items-center">
           <div className="hero-content fade-in-up">
             <div className="bg-white inline-block px-3 py-1 rounded-full text-sm font-medium text-[#9b87f5] mb-3 shadow-sm">
-              #1 Perimenopause Management App
+              #1 Perimenopause Weight Loss Tracker
             </div>
             
             <h1 className="font-headline font-bold text-3xl lg:text-4xl xl:text-5xl text-primary mb-4 leading-tight">
-              The Perimenopause Symptom Tracker That Actually Helps You Feel Better
+              Finally Understand Why Perimenopause Causes Weight Gain - And How to Lose It
             </h1>
             
             <p className="text-lg text-warm-gray font-medium mb-3 leading-relaxed">
-              Track your symptoms, get personalized relief strategies, and receive daily coaching tips based on YOUR unique patterns. Finally, a system that helps you manage perimenopause instead of just tracking it.
+              Track your hormones, metabolism, and weight patterns to discover YOUR unique perimenopause weight loss formula. Stop struggling with unexplained weight gain and start losing weight the smart way.
             </p>
             
             <p className="text-body-regular text-warm-gray mb-4 leading-relaxed">
-              Stop suffering through unpredictable symptoms. Peritrack combines intelligent tracking with personalized coaching to help you find real relief from hot flashes, mood swings, sleep issues, and PMS.
+              Perimenopause weight gain isn't your fault - but now you can track exactly what's causing it and create a personalized weight loss plan that actually works with your changing hormones.
             </p>
             
             <div className="social-proof-mini bg-white p-3 rounded-xl mb-5 shadow-lg border border-gray-100">
@@ -45,7 +45,7 @@ const HeroSection = () => {
                   ))}
                 </div>
                 <span className="font-semibold text-primary text-body-regular">
-                  Join 15,000+ women who've found symptom relief through smart tracking and personalized coaching.
+                  Join 15,000+ women who've cracked the code on perimenopause weight loss through smart tracking.
                 </span>
               </div>
             </div>
@@ -57,7 +57,7 @@ const HeroSection = () => {
                 className="w-full sm:w-auto mb-1"
                 onClick={handleOpenSignupModal}
               >
-                START YOUR FREE 7-DAY TRIAL
+                START TRACKING MY WEIGHT LOSS
               </CTAButton>
               <p className="text-sm text-warm-gray text-center sm:text-left">
                 7-day free trial then only $9.99/month
@@ -71,7 +71,7 @@ const HeroSection = () => {
               <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-[#e5f8e2] rounded-full -z-10"></div>
               <img 
                 src="/images/daily-check-in.png" 
-                alt="PeriTrack Daily Check-In Interface" 
+                alt="PeriTrack Weight Loss Tracking Interface" 
                 className="w-auto h-auto max-w-full max-h-[550px] rounded-[2rem] shadow-xl mx-auto relative z-10"
               />
             </div>
