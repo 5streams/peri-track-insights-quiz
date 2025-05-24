@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import LoadingSpinner from "@/components/results/LoadingSpinner";
 import { calculateHormoneScores } from "@/utils/scoreCalculation";
-import HormoneOrderForm from "@/components/HormoneOrderForm";
 
 // Import our components for the results page
 import ResultsHeader from "@/components/results/ResultsHeader";
