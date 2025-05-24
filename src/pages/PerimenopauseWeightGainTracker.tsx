@@ -19,6 +19,10 @@ import WhyChooseUsSection from '../components/WhyChooseUsSection';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import WeightManagementEducation from '../components/WeightManagementEducation';
 import WeightPatternTestimonials from '../components/WeightPatternTestimonials';
+import WeightPainAmplification from '../components/WeightPainAmplification';
+import WeightTimeline from '../components/WeightTimeline';
+import BeforeAfterMindset from '../components/BeforeAfterMindset';
+import EnhancedFinalCTA from '../components/EnhancedFinalCTA';
 
 const PerimenopauseWeightGainTracker = () => {
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
@@ -98,7 +102,9 @@ const PerimenopauseWeightGainTracker = () => {
       <div className="flex-grow">
         <HeroSection />
         <StatsSection />
+        <WeightPainAmplification />
         <WeightManagementEducation />
+        <WeightTimeline />
         <ProblemSection />
         <SolutionSection />
         <WeightPatternTestimonials />
@@ -113,13 +119,14 @@ const PerimenopauseWeightGainTracker = () => {
         <LunaSection />
         <TestimonialCarousel />
         <SocialProofSection />
+        <BeforeAfterMindset />
         <div id="pricing">
           <PricingSection />
         </div>
         <div id="faq">
           <FAQSection />
         </div>
-        <FinalCTASection />
+        <EnhancedFinalCTA />
         <TrustFooter />
         
         {/* Global Trial Signup Modal that can be triggered from anywhere */}

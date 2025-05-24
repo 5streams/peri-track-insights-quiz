@@ -15,77 +15,86 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="hero-section bg-gradient-to-br from-[#f8f5ff] to-white py-8 min-h-[60vh] flex items-center">
+    <section className="hero-section bg-gradient-to-br from-primary/5 to-secondary/10 py-12 lg:py-20 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-6 items-center">
-          <div className="hero-content fade-in-up">
-            <div className="bg-white inline-block px-3 py-1 rounded-full text-sm font-medium text-[#9b87f5] mb-3 shadow-sm">
-              Perimenopause Weight Tracking System
-            </div>
-            
-            <h1 className="font-headline font-bold text-3xl lg:text-4xl xl:text-5xl text-primary mb-4 leading-tight">
-              Track Perimenopause Weight Patterns and Understand Your Body's Changes
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="hero-content">
+            <h1 className="font-headline font-bold text-h1 text-primary mb-6 fade-in-up">
+              Finally Understand Why You're Gaining Weight During Perimenopause
             </h1>
             
-            <p className="text-lg text-warm-gray font-medium mb-3 leading-relaxed">
-              Monitor your weight, hormones, and lifestyle factors to identify patterns during perimenopause. Educational tracking tools to help you understand your body's changes and discuss findings with your healthcare provider.
+            <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-400 rounded fade-in-up">
+              <p className="text-lg text-gray-800 leading-relaxed">
+                <strong>Frustrated by unexplained weight gain during perimenopause?</strong> You're not alone. 
+                68% of women gain 10+ pounds during perimenopause despite eating the same and exercising regularly.
+              </p>
+            </div>
+            
+            <p className="text-body-large text-warm-gray mb-6 fade-in-up">
+              The problem isn't willpower - it's not understanding how your changing hormones affect weight patterns. 
+              Our tracking system helps you identify what's actually driving YOUR weight changes so you can work WITH your body, not against it.
             </p>
             
-            <p className="text-body-regular text-warm-gray mb-4 leading-relaxed">
-              Perimenopause brings changes to your body - tracking these patterns can provide valuable insights to share with your doctor for personalized guidance.
-            </p>
-            
-            <div className="social-proof-mini bg-white p-3 rounded-xl mb-5 shadow-lg border border-gray-100">
-              <div className="flex items-center">
-                <div className="flex -space-x-2 mr-3">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-xs">
-                      👩
-                    </div>
-                  ))}
+            <div className="hero-benefits mb-8 fade-in-up">
+              <div className="grid grid-cols-1 gap-3">
+                <div className="flex items-center space-x-3">
+                  <div className="w-6 h-6 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-sm font-bold">✓</span>
+                  </div>
+                  <span className="text-warm-gray">Discover your personal weight gain triggers</span>
                 </div>
-                <span className="font-semibold text-primary text-body-regular">
-                  Join thousands of women tracking their perimenopause patterns.
-                </span>
+                <div className="flex items-center space-x-3">
+                  <div className="w-6 h-6 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-sm font-bold">✓</span>
+                  </div>
+                  <span className="text-warm-gray">Understand which strategies work for YOUR body</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-6 h-6 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-sm font-bold">✓</span>
+                  </div>
+                  <span className="text-warm-gray">Time your actions with your hormonal cycles</span>
+                </div>
               </div>
             </div>
             
-            <div className="cta-container">
+            <div className="hero-cta space-y-4 fade-in-up">
               <CTAButton 
                 size="large" 
-                variant="primary"
-                className="w-full sm:w-auto mb-1"
+                variant="secondary"
                 onClick={handleOpenSignupModal}
               >
-                START TRACKING MY PATTERNS
+                START DISCOVERING MY WEIGHT PATTERNS
               </CTAButton>
-              <p className="text-sm text-warm-gray text-center sm:text-left">
-                7-day free trial then only $9.99/month
-              </p>
-            </div>
-
-            <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-              <p className="text-xs text-gray-600">
-                <strong>Important:</strong> This is a tracking and educational tool. Results may vary. Always consult your healthcare provider before making changes to your health routine. Individual experiences may differ.
+              <p className="text-sm text-center lg:text-left text-warm-gray">
+                7-day free trial • No credit card required • Join 847 women tracking this week
               </p>
             </div>
           </div>
           
-          <div className="hero-visual fade-in-up text-center mt-4 lg:mt-0">
-            <div className="relative inline-block">
-              <div className="absolute -top-4 -left-4 w-24 h-24 bg-[#f1eaff] rounded-full -z-10"></div>
-              <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-[#e5f8e2] rounded-full -z-10"></div>
+          <div className="hero-image relative fade-in-up">
+            <div className="relative">
               <img 
-                src="/images/daily-check-in.png" 
-                alt="PeriTrack Weight Tracking Interface" 
-                className="w-auto h-auto max-w-full max-h-[550px] rounded-[2rem] shadow-xl mx-auto relative z-10"
+                src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=600&h=600&fit=crop&auto=format" 
+                alt="Woman tracking her perimenopause patterns for weight management"
+                className="rounded-2xl shadow-2xl w-full"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-2xl"></div>
+            </div>
+            
+            <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-xl shadow-lg max-w-xs">
+              <div className="flex items-center space-x-2 mb-2">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span className="text-sm font-medium">Pattern Discovered!</span>
+              </div>
+              <p className="text-xs text-gray-600">
+                "Sleep quality directly affects my weight stability. Best results when I get 7+ hours!"
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Trial Signup Modal */}
       <TrialSignupModal 
         isOpen={isSignupModalOpen}
         onClose={handleCloseSignupModal}
