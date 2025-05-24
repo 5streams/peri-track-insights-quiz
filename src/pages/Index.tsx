@@ -60,7 +60,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-b from-purple-50 to-white min-h-screen">
+    <div className="bg-gradient-to-b from-stone-100 to-stone-50 min-h-screen">
       <div className="container mx-auto px-4 py-4">
         <header className="flex justify-between items-center mb-4">
           <div className="logo">
@@ -68,8 +68,8 @@ const Index = () => {
           </div>
           <nav>
             <ul className="flex space-x-6">
-              <li><Link to="/quiz" className="text-purple-700 hover:text-purple-800 font-medium">Quiz</Link></li>
-              <li><Link to="/tryperitracker" className="text-purple-700 hover:text-purple-800 font-medium bg-purple-100 px-3 py-1 rounded-md">Try Peritrack</Link></li>
+              <li><Link to="/quiz" className="text-stone-700 hover:text-stone-800 font-medium">Quiz</Link></li>
+              <li><Link to="/tryperitracker" className="text-stone-700 hover:text-stone-800 font-medium bg-stone-200 px-3 py-1 rounded-md">Try Peritrack</Link></li>
             </ul>
           </nav>
         </header>
@@ -80,15 +80,15 @@ const Index = () => {
           {/* Symptoms Section */}
           <section className="mt-12 mb-12">
             <div className="text-center mb-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-purple-800 mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-stone-700 mb-6">
                 ARE THESE YOUR SYMPTOMS?
               </h2>
             </div>
             
             <div className="max-w-4xl mx-auto space-y-4">
               {symptoms.map((symptom, index) => (
-                <div key={index} className="bg-white/80 backdrop-blur-sm border-l-4 border-purple-500 p-4 rounded-r-lg shadow-sm">
-                  <p className="text-gray-700 text-lg">
+                <div key={index} className="bg-white/80 backdrop-blur-sm border-l-4 border-stone-400 p-4 rounded-r-lg shadow-sm">
+                  <p className="text-stone-600 text-lg">
                     {symptom}
                   </p>
                 </div>
@@ -99,7 +99,7 @@ const Index = () => {
               <Button 
                 onClick={handleStartQuiz}
                 size="lg" 
-                className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 text-lg transition-colors"
+                className="bg-stone-600 hover:bg-stone-700 text-white px-8 py-4 text-lg transition-colors"
               >
                 Find Out If It's Perimenopause
               </Button>
@@ -109,7 +109,7 @@ const Index = () => {
           {/* How Our Assessment Works Section */}
           <section className="mt-16 mb-12">
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-purple-800 mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold text-stone-700 mb-4">
                 HOW OUR ASSESSMENT WORKS
               </h2>
             </div>
@@ -117,13 +117,13 @@ const Index = () => {
             <div className="max-w-3xl mx-auto space-y-12">
               {assessmentSteps.map((step, index) => (
                 <div key={index} className="text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-600 text-white rounded-full text-2xl font-bold mb-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-stone-600 text-white rounded-full text-2xl font-bold mb-4">
                     {step.number}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  <h3 className="text-xl font-bold text-stone-800 mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-gray-600 text-lg">
+                  <p className="text-stone-600 text-lg">
                     {step.description}
                   </p>
                 </div>
@@ -134,25 +134,25 @@ const Index = () => {
           {/* Testimonials Section */}
           <section className="mt-16 mb-8">
             <div className="text-center mb-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-purple-800 mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold text-stone-700 mb-4">
                 WOMEN WHO FOUND ANSWERS
               </h2>
             </div>
             
             <div className="max-w-4xl mx-auto space-y-8">
               {testimonials.map((testimonial, index) => (
-                <div key={index} className="bg-white/60 backdrop-blur-sm border-purple-200/50 p-6 rounded-lg shadow-lg">
-                  <p className="text-gray-700 italic text-lg mb-4">
+                <div key={index} className="bg-white/60 backdrop-blur-sm border-stone-200/50 p-6 rounded-lg shadow-lg">
+                  <p className="text-stone-600 italic text-lg mb-4">
                     "{testimonial.quote}"
                   </p>
-                  <div className="font-medium text-purple-700">
+                  <div className="font-medium text-stone-700">
                     — {testimonial.name}, {testimonial.age}
                   </div>
                 </div>
               ))}
             </div>
             
-            <div className="bg-purple-700 text-white text-center py-12 mt-12 rounded-lg">
+            <div className="bg-stone-700 text-white text-center py-12 mt-12 rounded-lg">
               <h2 className="text-2xl md:text-3xl font-bold mb-4">
                 STOP WONDERING AND START KNOWING
               </h2>
@@ -162,7 +162,7 @@ const Index = () => {
               <Button 
                 onClick={handleStartQuiz}
                 size="lg" 
-                className="bg-white text-purple-700 hover:bg-gray-100 px-8 py-4 text-lg transition-colors"
+                className="bg-white text-stone-700 hover:bg-gray-100 px-8 py-4 text-lg transition-colors"
               >
                 Take The FREE Perimenopause Quiz
               </Button>
