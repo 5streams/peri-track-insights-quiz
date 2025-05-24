@@ -43,26 +43,6 @@ const ComprehensiveTestingOffer: React.FC = () => {
 
   return (
     <div className="space-y-8 mt-8">
-      {/* BBB Customer Review Ratings */}
-      <Card className="border-l-2 border-yellow-500 bg-yellow-50">
-        <CardContent className="p-6 text-center">
-          <h3 className="font-headline text-xl font-bold text-gray-800 mb-4">
-            Customer Review Ratings
-          </h3>
-          
-          <div className="flex justify-center items-center mb-3">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="h-8 w-8 text-yellow-500 fill-current" />
-            ))}
-            <span className="text-3xl font-bold text-gray-800 ml-3">4.8</span>
-          </div>
-          
-          <p className="text-lg text-gray-700 font-medium">
-            Average of 1,047 Customer Reviews
-          </p>
-        </CardContent>
-      </Card>
-
       {/* Headline Section */}
       <div className="text-center bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-lg border-l-2 border-red-400">
         <h2 className="font-headline text-2xl lg:text-3xl font-bold text-red-700 mb-3">
@@ -190,6 +170,24 @@ const ComprehensiveTestingOffer: React.FC = () => {
               Complete Perimenopause Hormone Assessment - $199
             </h3>
             <p className="text-xl text-gray-600 mb-4">🧪 What's Included (Value: $800+ at traditional labs):</p>
+            
+            {/* BBB Customer Review Ratings */}
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+              <h4 className="font-headline text-lg font-bold text-gray-800 mb-3">
+                Customer Review Ratings
+              </h4>
+              
+              <div className="flex justify-center items-center mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-6 w-6 text-yellow-500 fill-current" />
+                ))}
+                <span className="text-2xl font-bold text-gray-800 ml-2">4.8</span>
+              </div>
+              
+              <p className="text-base text-gray-700 font-medium">
+                Average of 1,047 Customer Reviews
+              </p>
+            </div>
             
             {/* Add the 4-step process */}
             <div className="bg-green-100 p-4 rounded-lg mb-6">
