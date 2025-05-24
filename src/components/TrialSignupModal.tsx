@@ -50,18 +50,35 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
     
     try {
       // Determine the pricing tier based on page source
-      const pricingTier = pageSource === 'weight-gain-tracker' ? 'WGFreeTrial' : 'free_trial';
+      let pricingTier: 'WGFreeTrial' | 'InsomniaFreeTrial' | 'free_trial';
+      
+      if (pageSource === 'weight-gain-tracker') {
+        pricingTier = 'WGFreeTrial';
+      } else if (pageSource === 'perimenopause-insomnia') {
+        pricingTier = 'InsomniaFreeTrial';
+      } else {
+        pricingTier = 'free_trial';
+      }
       
       // Format the notes to include page source information
-      const pageInfo = pageSource === 'weight-gain-tracker' 
-        ? 'Weight Gain Tracker page' 
-        : 'TryPeriTrack page';
+      let pageInfo: string;
+      if (pageSource === 'weight-gain-tracker') {
+        pageInfo = 'Weight Gain Tracker page';
+      } else if (pageSource === 'perimenopause-insomnia') {
+        pageInfo = 'Perimenopause Insomnia page';
+      } else {
+        pageInfo = 'TryPeriTrack page';
+      }
       
       const additionalNotes = `Captured from ${pageInfo} at ${new Date().toISOString()}`;
       
       // Create a quiz-like results object to maintain consistency with other leads
       const trialQuizResults = {
-        source: pageSource === 'weight-gain-tracker' ? "WEIGHT_GAIN_TRIAL_SIGNUP" : "TRIAL_SIGNUP",
+        source: pageSource === 'weight-gain-tracker' 
+          ? "WEIGHT_GAIN_TRIAL_SIGNUP" 
+          : pageSource === 'perimenopause-insomnia' 
+            ? "INSOMNIA_TRIAL_SIGNUP" 
+            : "TRIAL_SIGNUP",
         phase: "Trial Interest",
         score: 100,
         page_source: pageSource || 'unknown',
@@ -87,7 +104,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
         name.trim(), 
         email.trim(), 
         'TRIAL', 
-        pricingTier, // This will be 'WGFreeTrial' for weight gain tracker page
+        pricingTier,
         trialQuizResults, // Pass formatted results to maintain consistency
         additionalNotes
       );
