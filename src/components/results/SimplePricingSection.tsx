@@ -43,7 +43,7 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
             <div className="p-4">
               <h3 className="text-xl font-bold text-[#5D4154] mb-3">Monthly Plan</h3>
               <div className="flex items-baseline mb-3">
-                <span className="text-3xl font-bold text-[#5D4154]">$12.95</span>
+                <span className="text-3xl font-bold text-[#5D4154]">$9.99</span>
                 <span className="text-gray-600 ml-1">/month</span>
               </div>
               
@@ -69,7 +69,7 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
                 Start My Free Trial
               </Button>
               <p className="text-xs text-center mt-1 text-gray-500">
-                7-day trial then only $12.95/month
+                7-day trial then only $9.99/month
               </p>
             </div>
           </div>
@@ -86,7 +86,7 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
                 <span className="text-3xl font-bold text-[#5D4154]">$99</span>
                 <span className="text-gray-600 ml-1">/year</span>
               </div>
-              <p className="text-[#9b87f5] mb-2">Save $56.40</p>
+              <p className="text-[#9b87f5] mb-2">Save $20.88</p>
               
               <ul className="space-y-2 mb-4">
                 <li className="flex items-start">
@@ -95,7 +95,7 @@ const SimplePricingSection: React.FC<SimplePricingSectionProps> = ({ onStartTria
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />
-                  <span>Save $56.40 compared to monthly</span>
+                  <span>Save $20.88 compared to monthly</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#9b87f5] mr-2 mt-1 flex-shrink-0" />

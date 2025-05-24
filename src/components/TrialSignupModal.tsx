@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { 
   Dialog,
@@ -121,7 +120,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
               </DialogTitle>
               <DialogDescription>
                 Enter your details to get started with your trial.
-                <p className="text-primary font-medium text-sm mt-1">7-day trial then only $12.95/month</p>
+                <p className="text-primary font-medium text-sm mt-1">7-day trial then only $9.99/month</p>
               </DialogDescription>
             </DialogHeader>
             
@@ -213,4 +212,4 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
   );
 };
 
-export default TrialSignupModal; 
+export default TrialSignupModal;

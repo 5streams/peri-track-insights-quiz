@@ -60,7 +60,7 @@ const HeroSection = () => {
                 START YOUR FREE 7-DAY TRIAL
               </CTAButton>
               <p className="text-sm text-warm-gray text-center sm:text-left">
-                7-day free trial then only $12.95/month
+                7-day free trial then only $9.99/month
               </p>
             </div>
           </div>

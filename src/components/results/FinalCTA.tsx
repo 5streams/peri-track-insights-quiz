@@ -193,7 +193,7 @@ const FinalCTA: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-                <p className="text-base font-bold text-white mt-2">$197 TOTAL VALUE - YOURS FOR JUST $12.95/MONTH</p>
+                <p className="text-base font-bold text-white mt-2">$197 TOTAL VALUE - YOURS FOR JUST $9.99/MONTH</p>
               </div>
             </div>
             
@@ -204,7 +204,7 @@ const FinalCTA: React.FC = () => {
               CLAIM MY FREE TRIAL NOW
             </Button>
             <p className="text-xs text-center mt-1 text-white/80">
-              7-day trial then only $12.95/month
+              7-day trial then only $9.99/month
             </p>
             
             <div className="mt-3 text-center">
@@ -234,7 +234,7 @@ const FinalCTA: React.FC = () => {
               </div>
               
               <p className="mt-2 text-xs text-white/70">
-                7-day free trial then $12.95/month • Cancel anytime with one click
+                7-day free trial then $9.99/month • Cancel anytime with one click
               </p>
             </div>
           </div>

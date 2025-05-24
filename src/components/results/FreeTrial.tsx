@@ -50,7 +50,7 @@ const FreeTrial: React.FC<FreeTrialProps> = ({ onStartTrial, primaryHormone, sco
             {/* Monthly Option */}
             <div className="bg-white rounded-lg shadow-md p-4 border border-gray-200 hover:shadow-lg transition-all">
               <h3 className="font-semibold text-[#5D4154] text-lg mb-2">Monthly Plan</h3>
-              <div className="text-2xl font-bold text-[#5D4154] mb-2">$12.95<span className="text-sm font-normal text-gray-500">/month</span></div>
+              <div className="text-2xl font-bold text-[#5D4154] mb-2">$9.99<span className="text-sm font-normal text-gray-500">/month</span></div>
               
               <ul className="mb-4 text-left">
                 <li className="flex items-center gap-2 mb-2">
@@ -75,7 +75,7 @@ const FreeTrial: React.FC<FreeTrialProps> = ({ onStartTrial, primaryHormone, sco
                 Start 7-Day Free Trial
               </Button>
               <p className="text-xs text-center mt-1 text-gray-500">
-                Then $12.95/month after trial
+                Then $9.99/month after trial
               </p>
             </div>
             
