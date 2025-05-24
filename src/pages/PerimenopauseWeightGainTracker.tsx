@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
@@ -101,9 +100,9 @@ const PerimenopauseWeightGainTracker = () => {
       <Navbar />
       <div className="flex-grow">
         <HeroSection />
-        <StatsSection />
         <WeightPainAmplification />
         <WeightManagementEducation />
+        <StatsSection />
         <WeightTimeline />
         <ProblemSection />
         <SolutionSection />
