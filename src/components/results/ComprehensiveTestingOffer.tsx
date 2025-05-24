@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, Shield, Clock, CheckCircle, Users, Award } from "lucide-react";
 import { useLeadCapture } from "@/hooks/use-lead-capture";
 import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
+import HormoneOrderForm from "@/components/HormoneOrderForm";
 
 const ComprehensiveTestingOffer: React.FC = () => {
   const [spotsRemaining, setSpotsRemaining] = useState(47);
@@ -245,6 +245,8 @@ const ComprehensiveTestingOffer: React.FC = () => {
           </div>
         </CardContent>
       </Card>
+
+      <HormoneOrderForm />
 
       <Card className="border-l-4 border-blue-500">
         <CardContent className="p-8">
