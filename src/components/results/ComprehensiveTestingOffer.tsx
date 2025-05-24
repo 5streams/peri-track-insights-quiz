@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { AlertTriangle, Shield, Clock, CheckCircle, Users, Award, Lock, ShieldCheck } from "lucide-react";
+import { AlertTriangle, Shield, Clock, CheckCircle, Users, Award, Lock, ShieldCheck, Star } from "lucide-react";
 import { useLeadCapture } from "@/hooks/use-lead-capture";
 import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
 
@@ -43,6 +43,26 @@ const ComprehensiveTestingOffer: React.FC = () => {
 
   return (
     <div className="space-y-8 mt-8">
+      {/* BBB Customer Review Ratings */}
+      <Card className="border-l-2 border-yellow-500 bg-yellow-50">
+        <CardContent className="p-6 text-center">
+          <h3 className="font-headline text-xl font-bold text-gray-800 mb-4">
+            Customer Review Ratings
+          </h3>
+          
+          <div className="flex justify-center items-center mb-3">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="h-8 w-8 text-yellow-500 fill-current" />
+            ))}
+            <span className="text-3xl font-bold text-gray-800 ml-3">4.8</span>
+          </div>
+          
+          <p className="text-lg text-gray-700 font-medium">
+            Average of 1,047 Customer Reviews
+          </p>
+        </CardContent>
+      </Card>
+
       {/* Headline Section */}
       <div className="text-center bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-lg border-l-2 border-red-400">
         <h2 className="font-headline text-2xl lg:text-3xl font-bold text-red-700 mb-3">
