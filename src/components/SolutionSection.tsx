@@ -19,10 +19,10 @@ const SolutionSection = () => {
       <div className="container mx-auto px-4 lg:px-6">
         <div className="text-center mb-4">
           <h2 className="font-headline font-bold text-h2 text-primary mb-2 fade-in-up">
-            What if you could identify exactly what's causing YOUR perimenopause weight gain?
+            What if you could track and understand your perimenopause weight patterns?
           </h2>
           <p className="text-body-large text-warm-gray max-w-3xl mx-auto fade-in-up">
-            Peritrack doesn't just track your weight - it connects your hormonal patterns, symptoms, and lifestyle factors to reveal YOUR unique weight gain triggers and create a personalized weight loss strategy.
+            Peritrack helps you monitor your weight changes alongside hormonal patterns, symptoms, and lifestyle factors to identify connections and create insights for healthcare discussions.
           </p>
         </div>
 
@@ -33,7 +33,7 @@ const SolutionSection = () => {
             </div>
             <h3 className="font-headline text-xl text-primary mb-1">Track Weight + Hormones + Lifestyle</h3>
             <p className="text-warm-gray">
-              Connect your weight changes to hormone fluctuations, sleep, stress, food, and exercise to see the complete picture.
+              Monitor your weight changes alongside hormone fluctuations, sleep, stress, food, and exercise to see potential connections.
             </p>
           </div>
 
@@ -41,19 +41,19 @@ const SolutionSection = () => {
             <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-xl text-white">🎯</span>
             </div>
-            <h3 className="font-headline text-xl text-primary mb-1">Discover YOUR Weight Gain Triggers</h3>
+            <h3 className="font-headline text-xl text-primary mb-1">Identify YOUR Personal Patterns</h3>
             <p className="text-warm-gray">
-              Identify exactly which foods, stress patterns, or hormone phases trigger YOUR weight gain - not generic advice.
+              Discover which factors may be connected to your weight changes - creating personalized insights rather than generic information.
             </p>
           </div>
 
           <div className="solution-card bg-white p-4 rounded-2xl shadow-lg text-center hover:shadow-xl transition-all duration-300 fade-in-up">
             <div className="w-12 h-12 bg-alert rounded-full flex items-center justify-center mx-auto mb-2">
-              <span className="text-xl text-white">📉</span>
+              <span className="text-xl text-white">📋</span>
             </div>
-            <h3 className="font-headline text-xl text-primary mb-1">Get Your Personalized Weight Loss Plan</h3>
+            <h3 className="font-headline text-xl text-primary mb-1">Share Insights with Your Doctor</h3>
             <p className="text-warm-gray">
-              Receive customized strategies that work WITH your hormones, not against them, for sustainable weight loss.
+              Create comprehensive reports from your tracking data to have more informed discussions with your healthcare provider.
             </p>
           </div>
         </div>
@@ -65,10 +65,16 @@ const SolutionSection = () => {
             className="mb-1"
             onClick={handleOpenSignupModal}
           >
-            START MY WEIGHT LOSS TRACKING
+            START TRACKING MY PATTERNS
           </CTAButton>
           <p className="text-sm text-warm-gray">
-            7-day trial then only $12.95/month • Join thousands who've solved perimenopause weight gain
+            7-day trial then only $12.95/month • Educational tracking for informed discussions
+          </p>
+        </div>
+
+        <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg max-w-2xl mx-auto">
+          <p className="text-xs text-gray-600 text-center">
+            <strong>Important:</strong> Results may vary between individuals. This tool is for educational and tracking purposes only. Please consult your healthcare provider for personalized medical advice and before making any health-related changes.
           </p>
         </div>
       </div>

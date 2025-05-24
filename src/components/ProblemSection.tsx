@@ -5,41 +5,41 @@ const ProblemSection = () => {
   const problems = [
     {
       emoji: '⚖️',
-      title: 'Sudden weight gain around your midsection',
-      description: 'Despite eating the same and exercising, you\'re gaining weight - especially stubborn belly fat that won\'t budge'
+      title: 'Weight changes around your midsection',
+      description: 'Many women notice weight distribution changes during perimenopause, especially around the midsection area'
     },
     {
       emoji: '🍽️',
-      title: 'Increased cravings and appetite changes',
-      description: 'Craving sugar and carbs like never before, feeling hungrier, and struggling with portion control'
+      title: 'Changes in appetite and cravings',
+      description: 'Fluctuating hormones may influence appetite patterns and food cravings during this life stage'
     },
     {
       emoji: '🔥',
-      title: 'Slower metabolism during perimenopause',
-      description: 'Your body burns calories differently now - what used to work for weight loss doesn\'t work anymore'
+      title: 'Metabolic changes during perimenopause',
+      description: 'Your body\'s metabolism may change during perimenopause - tracking can help identify these patterns'
     },
     {
       emoji: '💪',
-      title: 'Muscle loss and body composition changes',
-      description: 'Losing muscle mass while gaining fat, especially around your waist, hips, and arms'
+      title: 'Body composition changes',
+      description: 'Many women notice changes in muscle mass and body composition during the perimenopause transition'
     },
     {
       emoji: '😴',
-      title: 'Sleep disruption affecting weight',
-      description: 'Poor sleep from perimenopause symptoms disrupting hunger hormones and making weight loss harder'
+      title: 'Sleep patterns affecting daily life',
+      description: 'Poor sleep from perimenopause symptoms may influence various aspects of health and wellbeing'
     },
     {
       emoji: '😤',
-      title: 'Stress and emotional eating patterns',
-      description: 'Mood swings and stress leading to comfort eating and making it impossible to stick to healthy habits'
+      title: 'Stress and emotional patterns',
+      description: 'Mood changes and stress during perimenopause may affect eating habits and lifestyle choices'
     }
   ];
 
-  const triedList = [
-    'Generic diets that don\'t account for hormonal changes during perimenopause',
-    'Extreme calorie restriction that actually slows your metabolism further',
-    'Exercise routines that worked before perimenopause but don\'t work now',
-    'Blaming yourself for "lack of willpower" when it\'s actually hormonal'
+  const challengesList = [
+    'Difficulty understanding which changes are related to perimenopause',
+    'Lack of clear patterns in symptoms and weight fluctuations',
+    'Generic advice that doesn\'t account for individual experiences',
+    'Feeling overwhelmed by all the changes happening at once'
   ];
 
   return (
@@ -47,10 +47,10 @@ const ProblemSection = () => {
       <div className="container mx-auto px-4 lg:px-6">
         <div className="text-center mb-10">
           <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-            Frustrated by Unexplained Perimenopause Weight Gain?
+            Understanding Perimenopause Weight Pattern Changes
           </h2>
           <p className="text-body-large text-warm-gray fade-in-up">
-            You're not imagining it - perimenopause weight gain is real and affects 90% of women:
+            Many women experience various changes during perimenopause that can be confusing:
           </p>
         </div>
         
@@ -73,13 +73,13 @@ const ProblemSection = () => {
         
         <div className="problem-conclusion text-center max-w-2xl mx-auto fade-in-up">
           <h3 className="font-headline text-2xl text-primary mb-6">
-            You've probably tried everything for perimenopause weight loss:
+            Common challenges women face during perimenopause:
           </h3>
           
           <ul className="tried-list space-y-3 mb-6 text-left max-w-lg mx-auto">
-            {triedList.map((item, index) => (
+            {challengesList.map((item, index) => (
               <li key={index} className="flex items-start text-warm-gray text-sm sm:text-base">
-                <span className="mr-3 text-lg text-alert flex-shrink-0 mt-0.5">❌</span>
+                <span className="mr-3 text-lg text-alert flex-shrink-0 mt-0.5">•</span>
                 <span className="flex-1">{item}</span>
               </li>
             ))}
@@ -87,9 +87,15 @@ const ProblemSection = () => {
           
           <div className="problem-insight bg-accent p-6 rounded-xl">
             <p className="text-primary text-body-large font-medium leading-relaxed">
-              <strong>The problem isn't your willpower - it's not understanding how your changing hormones affect weight gain and what specific patterns trigger YOUR weight gain.</strong>
+              <strong>Understanding your patterns through tracking can provide valuable insights to discuss with your healthcare provider.</strong>
             </p>
           </div>
+        </div>
+
+        <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg max-w-3xl mx-auto">
+          <p className="text-sm text-gray-600 text-center">
+            <strong>Medical Disclaimer:</strong> The information provided is for educational purposes only and should not replace professional medical advice. Individual experiences vary. Always consult with your healthcare provider before making health-related decisions.
+          </p>
         </div>
       </div>
     </section>

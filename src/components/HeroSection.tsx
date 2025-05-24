@@ -20,19 +20,19 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-6 items-center">
           <div className="hero-content fade-in-up">
             <div className="bg-white inline-block px-3 py-1 rounded-full text-sm font-medium text-[#9b87f5] mb-3 shadow-sm">
-              #1 Perimenopause Weight Loss Tracker
+              Perimenopause Weight Tracking System
             </div>
             
             <h1 className="font-headline font-bold text-3xl lg:text-4xl xl:text-5xl text-primary mb-4 leading-tight">
-              Finally Understand Why Perimenopause Causes Weight Gain - And How to Lose It
+              Track Perimenopause Weight Patterns and Understand Your Body's Changes
             </h1>
             
             <p className="text-lg text-warm-gray font-medium mb-3 leading-relaxed">
-              Track your hormones, metabolism, and weight patterns to discover YOUR unique perimenopause weight loss formula. Stop struggling with unexplained weight gain and start losing weight the smart way.
+              Monitor your weight, hormones, and lifestyle factors to identify patterns during perimenopause. Educational tracking tools to help you understand your body's changes and discuss findings with your healthcare provider.
             </p>
             
             <p className="text-body-regular text-warm-gray mb-4 leading-relaxed">
-              Perimenopause weight gain isn't your fault - but now you can track exactly what's causing it and create a personalized weight loss plan that actually works with your changing hormones.
+              Perimenopause brings changes to your body - tracking these patterns can provide valuable insights to share with your doctor for personalized guidance.
             </p>
             
             <div className="social-proof-mini bg-white p-3 rounded-xl mb-5 shadow-lg border border-gray-100">
@@ -45,7 +45,7 @@ const HeroSection = () => {
                   ))}
                 </div>
                 <span className="font-semibold text-primary text-body-regular">
-                  Join 15,000+ women who've cracked the code on perimenopause weight loss through smart tracking.
+                  Join thousands of women tracking their perimenopause patterns.
                 </span>
               </div>
             </div>
@@ -57,10 +57,16 @@ const HeroSection = () => {
                 className="w-full sm:w-auto mb-1"
                 onClick={handleOpenSignupModal}
               >
-                START TRACKING MY WEIGHT LOSS
+                START TRACKING MY PATTERNS
               </CTAButton>
               <p className="text-sm text-warm-gray text-center sm:text-left">
                 7-day free trial then only $9.99/month
+              </p>
+            </div>
+
+            <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <p className="text-xs text-gray-600">
+                <strong>Important:</strong> This is a tracking and educational tool. Results may vary. Always consult your healthcare provider before making changes to your health routine. Individual experiences may differ.
               </p>
             </div>
           </div>
@@ -71,7 +77,7 @@ const HeroSection = () => {
               <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-[#e5f8e2] rounded-full -z-10"></div>
               <img 
                 src="/images/daily-check-in.png" 
-                alt="PeriTrack Weight Loss Tracking Interface" 
+                alt="PeriTrack Weight Tracking Interface" 
                 className="w-auto h-auto max-w-full max-h-[550px] rounded-[2rem] shadow-xl mx-auto relative z-10"
               />
             </div>

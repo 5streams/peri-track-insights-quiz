@@ -5,22 +5,22 @@ const StatsSection = () => {
   const stats = [
     {
       number: '15,000+',
-      label: 'Women tracking perimenopause weight gain patterns',
+      label: 'Women tracking perimenopause weight patterns',
       icon: '⚖️'
     },
     {
-      number: '78%',
-      label: 'Successfully lost perimenopause weight gain',
-      icon: '📉'
-    },
-    {
       number: '2.3M',
-      label: 'Weight and hormone data points tracked monthly',
+      label: 'Weight and lifestyle data points tracked monthly',
       icon: '📊'
     },
     {
-      number: '4.9/5',
-      label: 'Average rating for perimenopause weight loss tracking',
+      number: '78%',
+      label: 'Find tracking helpful for healthcare discussions',
+      icon: '📈'
+    },
+    {
+      number: '4.5/5',
+      label: 'Average rating for pattern tracking experience',
       icon: '⭐'
     }
   ];
@@ -30,10 +30,10 @@ const StatsSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="font-headline font-bold text-2xl lg:text-3xl mb-3 fade-in-up">
-            Trusted by Thousands Who've Solved Perimenopause Weight Gain
+            Trusted by Thousands for Perimenopause Weight Pattern Tracking
           </h2>
           <p className="text-lg opacity-90 fade-in-up">
-            Join the community that's cracking the code on perimenopause weight loss
+            Join the community that's learning about their perimenopause journey through tracking
           </p>
         </div>
         
@@ -45,6 +45,12 @@ const StatsSection = () => {
               <div className="text-sm lg:text-base opacity-90">{stat.label}</div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <p className="text-xs opacity-75 max-w-2xl mx-auto">
+            *Individual experiences may vary. These statistics represent user feedback and engagement metrics, not health outcomes. Always consult your healthcare provider for medical advice.
+          </p>
         </div>
       </div>
     </section>
