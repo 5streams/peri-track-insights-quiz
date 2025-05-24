@@ -18,8 +18,8 @@ const Index = () => {
 
   return (
     <div className="bg-gradient-to-b from-purple-100/40 to-white min-h-screen">
-      <div className="container mx-auto px-4 py-8">
-        <header className="flex justify-between items-center mb-8">
+      <div className="container mx-auto px-4 py-4">
+        <header className="flex justify-between items-center mb-4">
           <div className="logo">
             <img src="/images/logo.png" alt="Peritrack Logo" className="h-16 w-auto" />
           </div>
@@ -31,7 +31,7 @@ const Index = () => {
           </nav>
         </header>
 
-        <main className="mt-16">
+        <main className="mt-4">
           <WelcomeScreen onStart={handleStartQuiz} />
           
           <div className="text-center mt-12 space-y-6">
