@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { getDynamicContent } from "@/utils/scoreCalculation";
@@ -53,17 +52,17 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
   };
 
   return (
-    <header className="text-center pt-4 pb-6 reveal-section transform opacity-0 heading-container">
+    <header className="text-center pt-2 pb-4 reveal-section transform opacity-0 heading-container">
       <div className="decorative-backdrop"></div>
       
-      <h1 className="assessment-heading text-2xl md:text-3xl lg:text-4xl font-playfair font-bold text-[#5D4154] mb-6">
+      <h1 className="assessment-heading text-2xl md:text-3xl lg:text-4xl font-playfair font-bold text-[#5D4154] mb-4">
         {capitalizedFirstName ? `${capitalizedFirstName}, ` : ""}We've Analyzed Your Answers
         <span className="block mt-2 font-raleway font-medium text-xl md:text-2xl text-[#6E59A5]">
           Your Personal Perimenopause Assessment
         </span>
       </h1>
       
-      <div className="relative max-w-2xl mx-auto mb-6">
+      <div className="relative max-w-2xl mx-auto mb-4">
         <div className="score-label-container mb-3 flex items-center justify-center">
           <h2 className="text-xl md:text-2xl font-medium text-[#5D4154] inline-block relative">
             PERIMENOPAUSE SCORE:
@@ -76,7 +75,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
           </h2>
         </div>
         
-        <div className="score-meter relative h-12 bg-[#E5DEFF] border border-[#D6BCFA] rounded-full w-full mb-5 shadow-inner overflow-hidden">
+        <div className="score-meter relative h-12 bg-[#E5DEFF] border border-[#D6BCFA] rounded-full w-full mb-4 shadow-inner overflow-hidden">
           <div 
             ref={scoreRef}
             className={`score-fill absolute left-0 top-0 h-full rounded-full transition-all duration-1500 ease-out w-0 ${getMeterFillColor()}`}
@@ -91,7 +90,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
           </div>
         </div>
         
-        <div className="score-description text-center mb-4">
+        <div className="score-description text-center mb-3">
           <p className={`inline-block py-1.5 px-4 rounded-lg shadow-sm font-medium ${
             scoreCategory === "mild" ? "bg-[#E5DEFF] text-[#7E69AB] border border-[#D6BCFA]" :
             scoreCategory === "moderate" ? "bg-[#9b87f5]/10 text-[#6E59A5] border border-[#9b87f5]" :
@@ -108,7 +107,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({
       {scoreCategory === "severe" && (
         <Button 
           onClick={onStartTrial}
-          className="cta-button bg-[#9b87f5] hover:bg-[#7E69AB] text-white font-semibold px-8 py-5 rounded-lg shadow-lg mb-6 text-lg transition-all duration-300 animate-pulse-subtle"
+          className="cta-button bg-[#9b87f5] hover:bg-[#7E69AB] text-white font-semibold px-8 py-5 rounded-lg shadow-lg mb-4 text-lg transition-all duration-300 animate-pulse-subtle"
         >
           Take Action Now - Start Free Trial
         </Button>

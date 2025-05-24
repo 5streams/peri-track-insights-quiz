@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -303,8 +304,8 @@ const Results = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      {/* Results Section - More compact */}
-      <div className="w-full max-w-4xl mx-auto px-2 md:px-4 lg:px-6 py-2">
+      {/* Results Section - More compact with reduced spacing */}
+      <div className="w-full max-w-4xl mx-auto px-2 md:px-4 lg:px-6 pt-4">
         <div className="results-container all-visible">
           {/* Results Header with Score and User Name */}
           <div className="mb-4">
