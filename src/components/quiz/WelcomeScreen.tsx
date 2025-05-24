@@ -9,7 +9,7 @@ interface WelcomeScreenProps {
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart }) => {
   return (
-    <div className="text-center flex flex-col items-center max-w-3xl mx-auto py-4">
+    <div className="text-center flex flex-col items-center max-w-3xl mx-auto py-2">
       <h1 className="font-playfair text-3xl md:text-4xl font-bold text-[#6b4e82] mb-3">
         Perimenopause Symptoms Quiz: Discover What's Really Happening to Your Body
       </h1>
