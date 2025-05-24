@@ -5,27 +5,27 @@ const WhyChooseUsSection = () => {
   const reasons = [
     {
       icon: '🧬',
-      title: 'Science-Backed Perimenopause Weight Analysis',
-      description: 'Our AI analyzes how hormonal changes specifically affect YOUR metabolism, appetite, and fat storage patterns during perimenopause.',
-      highlight: 'Hormone-focused'
+      title: 'Science-Informed Perimenopause Tracking',
+      description: 'Our tracking system is designed around current understanding of how hormonal changes may affect metabolism, appetite, and body composition during perimenopause.',
+      highlight: 'Evidence-based'
     },
     {
       icon: '⚖️',
-      title: 'Personalized Weight Loss Strategy',
-      description: 'Every recommendation is tailored to your specific hormone patterns, metabolism, and weight gain triggers for maximum effectiveness.',
-      highlight: 'Custom approach'
+      title: 'Personalized Pattern Recognition',
+      description: 'Every insight is based on your specific tracking data, helping you understand your unique patterns rather than generic information.',
+      highlight: 'Individual focus'
     },
     {
       icon: '📈',
-      title: 'Real-Time Weight Pattern Insights',
-      description: 'See exactly how your daily choices affect your weight in real-time, so you can make adjustments that actually work.',
-      highlight: 'Instant feedback'
+      title: 'Real-Time Pattern Insights',
+      description: 'See how your daily choices may connect to your weight patterns, helping you identify potential correlations to discuss with your doctor.',
+      highlight: 'Immediate feedback'
     },
     {
       icon: '👩‍⚕️',
-      title: 'Expert-Designed for Perimenopause',
-      description: 'Created specifically for women in perimenopause by reproductive health specialists who understand hormonal weight gain.',
-      highlight: 'Specialist-created'
+      title: 'Healthcare Discussion Support',
+      description: 'Generate comprehensive reports from your tracking data to facilitate more informed conversations with your healthcare provider.',
+      highlight: 'Doctor-friendly'
     }
   ];
 
@@ -34,10 +34,10 @@ const WhyChooseUsSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-            Why 15,000+ Women Choose PeriTrack for Weight Loss
+            Why Thousands Choose PeriTrack for Pattern Tracking
           </h2>
           <p className="text-body-large text-warm-gray max-w-2xl mx-auto fade-in-up">
-            We're not just another diet app. We're your comprehensive perimenopause weight loss system.
+            We're not just another tracking app. We're your comprehensive perimenopause pattern monitoring system.
           </p>
         </div>
 
@@ -64,6 +64,12 @@ const WhyChooseUsSection = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg max-w-3xl mx-auto">
+          <p className="text-sm text-gray-600 text-center">
+            <strong>Educational Tool:</strong> Individual results and experiences may vary. This tracking system is designed for educational purposes and to support healthcare discussions. Always consult your healthcare provider for medical advice.
+          </p>
         </div>
       </div>
     </section>
