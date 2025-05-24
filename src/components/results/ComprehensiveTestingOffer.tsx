@@ -2,10 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { AlertTriangle, Shield, Clock, CheckCircle, Users, Award, ShoppingCart, MapPin, CircleArrowRight } from "lucide-react";
+import { AlertTriangle, Shield, Clock, CheckCircle, Users, Award } from "lucide-react";
 import { useLeadCapture } from "@/hooks/use-lead-capture";
 import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
-import HormoneOrderForm from "@/components/HormoneOrderForm";
 
 const ComprehensiveTestingOffer: React.FC = () => {
   const [spotsRemaining, setSpotsRemaining] = useState(47);
@@ -246,57 +245,6 @@ const ComprehensiveTestingOffer: React.FC = () => {
           </div>
         </CardContent>
       </Card>
-
-      {/* 3-Step Process Section */}
-      <Card className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200">
-        <CardContent className="p-2">
-          <div className="grid md:grid-cols-3 gap-2">
-            {/* Step 1 */}
-            <div className="text-center">
-              <div className="mb-1">
-                <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mx-auto mb-1">
-                  1
-                </div>
-                <ShoppingCart className="w-4 h-4 text-purple-600 mx-auto mb-1" />
-              </div>
-              <h3 className="font-headline text-xs font-bold text-purple-600 mb-1">ORDER YOUR TEST</h3>
-              <p className="text-gray-700 text-xs">
-                Online or by phone, no doctors referral required
-              </p>
-            </div>
-
-            {/* Step 2 */}
-            <div className="text-center">
-              <div className="mb-1">
-                <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mx-auto mb-1">
-                  2
-                </div>
-                <MapPin className="w-4 h-4 text-purple-600 mx-auto mb-1" />
-              </div>
-              <h3 className="font-headline text-xs font-bold text-purple-600 mb-1">VISIT A LOCAL LAB</h3>
-              <p className="text-gray-700 text-xs">
-                Get tested locally at one of our 4,500+ labs
-              </p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="text-center">
-              <div className="mb-1">
-                <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mx-auto mb-1">
-                  3
-                </div>
-                <CircleArrowRight className="w-4 h-4 text-purple-600 mx-auto mb-1" />
-              </div>
-              <h3 className="font-headline text-xs font-bold text-purple-600 mb-1">GET YOUR RESULTS</h3>
-              <p className="text-gray-700 text-xs">
-                Receive your lab results within 1-3 business days!
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      <HormoneOrderForm />
 
       <Card className="border-l-2 border-blue-500">
         <CardContent className="p-2">
