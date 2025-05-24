@@ -9,6 +9,7 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 // Import our components for the results page
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
+import HormoneInsights from "@/components/results/HormoneInsights";
 
 interface QuizResults {
   score: number;
@@ -117,6 +118,14 @@ const Results = () => {
               scoreCategory={scoreCategory}
               firstName={capitalizedFirstName}
               primarySymptoms={hormoneScores.primarySymptoms}
+            />
+          </div>
+          
+          {/* Hormone Assessment - Force visibility */}
+          <div className="revealed mb-6">
+            <HormoneInsights 
+              scores={hormoneScores}
+              scoreCategory={scoreCategory}
             />
           </div>
         </div>
