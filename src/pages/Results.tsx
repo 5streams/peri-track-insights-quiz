@@ -1,9 +1,11 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import LoadingSpinner from "@/components/results/LoadingSpinner";
 import { calculateHormoneScores } from "@/utils/scoreCalculation";
+import HormoneOrderForm from "@/components/HormoneOrderForm";
 
 // Import our components for the results page
 import ResultsHeader from "@/components/results/ResultsHeader";
@@ -336,6 +338,11 @@ const Results = () => {
           {/* Comprehensive Testing Offer */}
           <div className="mb-12">
             <ComprehensiveTestingOffer />
+          </div>
+
+          {/* Hormone Order Form */}
+          <div className="mb-12">
+            <HormoneOrderForm />
           </div>
         </div>
       </div>

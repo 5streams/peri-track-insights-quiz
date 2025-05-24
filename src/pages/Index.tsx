@@ -1,7 +1,7 @@
+
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import WelcomeScreen from "../components/quiz/WelcomeScreen";
-import HormoneOrderForm from "../components/HormoneOrderForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Quote } from "lucide-react";
@@ -142,9 +142,6 @@ const Index = () => {
               </div>
             </div>
           </section>
-          
-          {/* Hormone Order Form Section */}
-          <HormoneOrderForm />
           
           {/* Testimonials Section */}
           <section className="mt-20 mb-16">
