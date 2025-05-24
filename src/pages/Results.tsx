@@ -9,11 +9,6 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 // Import our components for the results page
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
-import HormoneInsights from "@/components/results/HormoneInsights";
-import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
-import PeritrackIntro from "@/components/results/PeritrackIntro";
-import LunaAIFeature from "@/components/results/LunaAIFeature";
-import SimplePricingSection from "@/components/results/SimplePricingSection";
 
 interface QuizResults {
   score: number;
@@ -123,37 +118,6 @@ const Results = () => {
               firstName={capitalizedFirstName}
               primarySymptoms={hormoneScores.primarySymptoms}
             />
-          </div>
-          
-          {/* Hormone Insights - Force visibility */}
-          <div className="revealed mb-6">
-            <HormoneInsights 
-              scores={hormoneScores}
-              scoreCategory={scoreCategory}
-            />
-          </div>
-          
-          {/* Peritrack Intro - Main call to action - Force visibility */}
-          <div className="revealed mb-6">
-            <PeritrackIntro
-              onStartTrial={handleTrialCTA}
-              firstName={capitalizedFirstName}
-            />
-          </div>
-          
-          {/* Luna AI Feature with smoother transition */}
-          <div className="revealed mb-6">
-            <LunaAIFeature onStartTrial={handleTrialCTA} />
-          </div>
-          
-          {/* Simple Pricing Section at the very bottom */}
-          <div className="revealed mb-6">
-            <SimplePricingSection onStartTrial={handleTrialCTA} />
-          </div>
-          
-          {/* Perimenopause Explanation */}
-          <div className="revealed mb-6">
-            <PerimenopauseExplanation scoreCategory={scoreCategory} />
           </div>
         </div>
       </div>
