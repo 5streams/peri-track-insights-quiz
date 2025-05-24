@@ -397,9 +397,10 @@ const ComprehensiveTestingOffer: React.FC = () => {
 
           <Button 
             onClick={handleOrderNow}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 px-8 rounded-lg text-xl mb-6 transform hover:scale-105 transition-all duration-200"
+            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-4 sm:py-4 sm:px-8 rounded-lg text-sm sm:text-lg md:text-xl mb-6 transform hover:scale-105 transition-all duration-200 w-full sm:w-auto max-w-full break-words hyphens-auto"
           >
-            ORDER BLOODWORK NOW - GET ANSWERS IN 5 DAYS
+            <span className="block sm:inline">ORDER BLOODWORK NOW -</span>
+            <span className="block sm:inline"> GET ANSWERS IN 5 DAYS</span>
           </Button>
 
           <div className="grid md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto mb-6">
