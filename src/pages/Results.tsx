@@ -10,23 +10,10 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
-
-// Import ALL components from the tryperitrack page
-import HeroSection from "@/components/HeroSection";
-import StatsSection from "@/components/StatsSection";
-import ProblemSection from "@/components/ProblemSection";
-import SolutionSection from "@/components/SolutionSection";
-import FeaturesSection from "@/components/FeaturesSection";
-import HowItWorksSection from "@/components/HowItWorksSection";
-import LunaSection from "@/components/LunaSection";
-import SocialProofSection from "@/components/SocialProofSection";
-import PricingSection from "@/components/PricingSection";
-import FAQSection from "@/components/FAQSection";
-import FinalCTASection from "@/components/FinalCTASection";
-import TrustFooter from "@/components/TrustFooter";
-import ComparisonSection from "@/components/ComparisonSection";
-import WhyChooseUsSection from "@/components/WhyChooseUsSection";
-import TestimonialCarousel from "@/components/TestimonialCarousel";
+import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
+import PeritrackIntro from "@/components/results/PeritrackIntro";
+import LunaAIFeature from "@/components/results/LunaAIFeature";
+import SimplePricingSection from "@/components/results/SimplePricingSection";
 
 interface QuizResults {
   score: number;
@@ -77,7 +64,15 @@ const Results = () => {
       setUserInfo(JSON.parse(storedUserInfo));
     }
 
-    setIsLoaded(true);
+    // Force all sections to be revealed if they don't animate properly
+    setTimeout(() => {
+      document.querySelectorAll('.reveal-section').forEach((el) => {
+        if (!el.classList.contains('revealed')) {
+          el.classList.add('revealed');
+        }
+      });
+      setIsLoaded(true);
+    }, 300);
   }, [navigate]);
   
   if (!results) {
@@ -98,67 +93,69 @@ const Results = () => {
     ? userInfo.firstName.charAt(0).toUpperCase() + userInfo.firstName.slice(1)
     : "";
   
+  // Add a class to ensure all elements are visible even if animations fail
+  const containerClass = isLoaded ? "results-container all-visible" : "results-container";
+  
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F9F5FF]/20 to-white">
-      {/* RESULTS SECTION - Your Personal Assessment */}
-      <div className="w-full max-w-4xl mx-auto py-6 md:py-8 px-4 md:px-6 lg:px-8">
-        {/* Results Header with Score and User Name */}
-        <div className="mb-6">
-          <ResultsHeader 
-            score={hormoneScores.overall} 
-            firstName={capitalizedFirstName} 
-            scoreCategory={scoreCategory}
-            onStartTrial={handleTrialCTA}
-          />
+    <div 
+      className="min-h-screen bg-gradient-to-b from-[#F9F5FF]/20 to-white py-6 md:py-8 px-4 md:px-6 lg:px-8"
+      style={{
+        backgroundImage: "url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" fill=\"%235D4154\" fill-opacity=\"0.03\" fill-rule=\"evenodd\"%3E%3C/svg%3E')",
+        backgroundAttachment: "fixed"
+      }}
+    >
+      <div className="w-full max-w-4xl mx-auto">
+        <div className={containerClass}>
+          {/* Results Header with Score and User Name - Force visibility */}
+          <div className="revealed mb-6">
+            <ResultsHeader 
+              score={hormoneScores.overall} 
+              firstName={capitalizedFirstName} 
+              scoreCategory={scoreCategory}
+              onStartTrial={handleTrialCTA}
+            />
+          </div>
+          
+          {/* Personalized Assessment - Force visibility */}
+          <div className="revealed mb-6">
+            <PersonalizedAssessment
+              scoreCategory={scoreCategory}
+              firstName={capitalizedFirstName}
+              primarySymptoms={hormoneScores.primarySymptoms}
+            />
+          </div>
+          
+          {/* Hormone Insights - Force visibility */}
+          <div className="revealed mb-6">
+            <HormoneInsights 
+              scores={hormoneScores}
+              scoreCategory={scoreCategory}
+            />
+          </div>
+          
+          {/* Peritrack Intro - Main call to action - Force visibility */}
+          <div className="revealed mb-6">
+            <PeritrackIntro
+              onStartTrial={handleTrialCTA}
+              firstName={capitalizedFirstName}
+            />
+          </div>
+          
+          {/* Luna AI Feature with smoother transition */}
+          <div className="revealed mb-6">
+            <LunaAIFeature onStartTrial={handleTrialCTA} />
+          </div>
+          
+          {/* Simple Pricing Section at the very bottom */}
+          <div className="revealed mb-6">
+            <SimplePricingSection onStartTrial={handleTrialCTA} />
+          </div>
+          
+          {/* Perimenopause Explanation */}
+          <div className="revealed mb-6">
+            <PerimenopauseExplanation scoreCategory={scoreCategory} />
+          </div>
         </div>
-        
-        {/* Personalized Assessment */}
-        <div className="mb-6">
-          <PersonalizedAssessment
-            scoreCategory={scoreCategory}
-            firstName={capitalizedFirstName}
-            primarySymptoms={hormoneScores.primarySymptoms}
-          />
-        </div>
-        
-        {/* Hormone Insights */}
-        <div className="mb-8">
-          <HormoneInsights 
-            scores={hormoneScores}
-            scoreCategory={scoreCategory}
-          />
-        </div>
-      </div>
-
-      {/* SEPARATOR - Visual break between assessment and product info */}
-      <div className="w-full bg-primary/5 py-8">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4">
-            Now that you understand your symptoms...
-          </h2>
-          <p className="text-lg text-warm-gray max-w-2xl mx-auto">
-            Discover how PeriTrack can help you manage and predict your perimenopause journey
-          </p>
-        </div>
-      </div>
-
-      {/* FULL TRYPERITRACK PAGE CONTENT */}
-      <div className="w-full">
-        <HeroSection />
-        <StatsSection />
-        <ProblemSection />
-        <SolutionSection />
-        <WhyChooseUsSection />
-        <FeaturesSection />
-        <ComparisonSection />
-        <HowItWorksSection />
-        <LunaSection />
-        <TestimonialCarousel />
-        <SocialProofSection />
-        <PricingSection />
-        <FAQSection />
-        <FinalCTASection />
-        <TrustFooter />
       </div>
     </div>
   );
