@@ -24,7 +24,7 @@ const HeroSection = () => {
             </div>
             
             <h1 className="font-headline font-bold text-3xl lg:text-4xl xl:text-5xl text-primary mb-4 leading-tight">
-              The Perimenopause Tracker That Actually Helps You Feel Better
+              The Perimenopause Symptom Tracker That Actually Helps You Feel Better
             </h1>
             
             <p className="text-lg text-warm-gray font-medium mb-3 leading-relaxed">
