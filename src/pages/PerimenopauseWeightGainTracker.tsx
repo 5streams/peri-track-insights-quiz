@@ -17,6 +17,8 @@ import StatsSection from '../components/StatsSection';
 import ComparisonSection from '../components/ComparisonSection';
 import WhyChooseUsSection from '../components/WhyChooseUsSection';
 import TestimonialCarousel from '../components/TestimonialCarousel';
+import WeightManagementEducation from '../components/WeightManagementEducation';
+import WeightPatternTestimonials from '../components/WeightPatternTestimonials';
 
 const PerimenopauseWeightGainTracker = () => {
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
@@ -96,8 +98,10 @@ const PerimenopauseWeightGainTracker = () => {
       <div className="flex-grow">
         <HeroSection />
         <StatsSection />
+        <WeightManagementEducation />
         <ProblemSection />
         <SolutionSection />
+        <WeightPatternTestimonials />
         <WhyChooseUsSection />
         <div id="features">
           <FeaturesSection />
