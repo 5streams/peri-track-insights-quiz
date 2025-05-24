@@ -11,7 +11,8 @@ import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
 
-// Import all components from the tryperitrack page
+// Import ALL components from the tryperitrack page
+import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
@@ -81,15 +82,7 @@ const Results = () => {
       setUserInfo(JSON.parse(storedUserInfo));
     }
 
-    // Force all sections to be revealed if they don't animate properly
-    setTimeout(() => {
-      document.querySelectorAll('.reveal-section').forEach((el) => {
-        if (!el.classList.contains('revealed')) {
-          el.classList.add('revealed');
-        }
-      });
-      setIsLoaded(true);
-    }, 300);
+    setIsLoaded(true);
   }, [navigate]);
   
   if (!results) {
@@ -110,142 +103,79 @@ const Results = () => {
     ? userInfo.firstName.charAt(0).toUpperCase() + userInfo.firstName.slice(1)
     : "";
   
-  // Add a class to ensure all elements are visible even if animations fail
-  const containerClass = isLoaded ? "results-container all-visible" : "results-container";
-  
   return (
-    <div 
-      className="min-h-screen bg-gradient-to-b from-[#F9F5FF]/20 to-white py-6 md:py-8 px-4 md:px-6 lg:px-8"
-      style={{
-        backgroundImage: "url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" fill=\"%235D4154\" fill-opacity=\"0.03\" fill-rule=\"evenodd\"%3E%3C/svg%3E')",
-        backgroundAttachment: "fixed"
-      }}
-    >
-      <div className="w-full max-w-4xl mx-auto">
-        <div className={containerClass}>
-          {/* Results Header with Score and User Name - Force visibility */}
-          <div className="revealed mb-6">
-            <ResultsHeader 
-              score={hormoneScores.overall} 
-              firstName={capitalizedFirstName} 
-              scoreCategory={scoreCategory}
-              onStartTrial={handleTrialCTA}
-            />
-          </div>
-          
-          {/* Personalized Assessment - Force visibility */}
-          <div className="revealed mb-6">
-            <PersonalizedAssessment
-              scoreCategory={scoreCategory}
-              firstName={capitalizedFirstName}
-              primarySymptoms={hormoneScores.primarySymptoms}
-            />
-          </div>
-          
-          {/* Hormone Insights - Force visibility */}
-          <div className="revealed mb-6">
-            <HormoneInsights 
-              scores={hormoneScores}
-              scoreCategory={scoreCategory}
-            />
-          </div>
+    <div className="min-h-screen bg-gradient-to-b from-[#F9F5FF]/20 to-white">
+      <div className="w-full max-w-4xl mx-auto py-6 md:py-8 px-4 md:px-6 lg:px-8">
+        {/* Results Header with Score and User Name */}
+        <div className="mb-6">
+          <ResultsHeader 
+            score={hormoneScores.overall} 
+            firstName={capitalizedFirstName} 
+            scoreCategory={scoreCategory}
+            onStartTrial={handleTrialCTA}
+          />
+        </div>
+        
+        {/* Personalized Assessment */}
+        <div className="mb-6">
+          <PersonalizedAssessment
+            scoreCategory={scoreCategory}
+            firstName={capitalizedFirstName}
+            primarySymptoms={hormoneScores.primarySymptoms}
+          />
+        </div>
+        
+        {/* Hormone Insights */}
+        <div className="mb-6">
+          <HormoneInsights 
+            scores={hormoneScores}
+            scoreCategory={scoreCategory}
+          />
+        </div>
+      </div>
 
-          {/* ALL TRYPERITRACK PAGE CONTENT STARTS HERE */}
-          
-          {/* Stats Section */}
-          <div className="revealed mb-6">
-            <StatsSection />
-          </div>
-          
-          {/* Problem Section */}
-          <div className="revealed mb-6">
-            <ProblemSection />
-          </div>
-          
-          {/* Solution Section */}
-          <div className="revealed mb-6">
-            <SolutionSection />
-          </div>
-          
-          {/* Why Choose Us Section */}
-          <div className="revealed mb-6">
-            <WhyChooseUsSection />
-          </div>
-          
-          {/* Features Section */}
-          <div className="revealed mb-6">
-            <FeaturesSection />
-          </div>
-          
-          {/* Comparison Section */}
-          <div className="revealed mb-6">
-            <ComparisonSection />
-          </div>
-          
-          {/* How It Works Section */}
-          <div className="revealed mb-6">
-            <HowItWorksSection />
-          </div>
-          
-          {/* Luna Section */}
-          <div className="revealed mb-6">
-            <LunaSection />
-          </div>
-          
-          {/* Testimonial Carousel */}
-          <div className="revealed mb-6">
-            <TestimonialCarousel />
-          </div>
-          
-          {/* Social Proof Section */}
-          <div className="revealed mb-6">
-            <SocialProofSection />
-          </div>
-          
-          {/* Pricing Section */}
-          <div className="revealed mb-6">
-            <PricingSection />
-          </div>
-          
-          {/* FAQ Section */}
-          <div className="revealed mb-6">
-            <FAQSection />
-          </div>
-          
-          {/* Final CTA Section */}
-          <div className="revealed mb-6">
-            <FinalCTASection />
-          </div>
-          
-          {/* Trust Footer */}
-          <div className="revealed mb-6">
-            <TrustFooter />
-          </div>
+      {/* ALL TRYPERITRACK PAGE CONTENT - Full width sections */}
+      <div className="w-full">
+        <HeroSection />
+        <StatsSection />
+        <ProblemSection />
+        <SolutionSection />
+        <WhyChooseUsSection />
+        <FeaturesSection />
+        <ComparisonSection />
+        <HowItWorksSection />
+        <LunaSection />
+        <TestimonialCarousel />
+        <SocialProofSection />
+        <PricingSection />
+        <FAQSection />
+        <FinalCTASection />
+        <TrustFooter />
+      </div>
 
-          {/* ORIGINAL RESULTS PAGE CONTENT CONTINUES */}
-          
-          {/* Peritrack Intro - Main call to action - Force visibility */}
-          <div className="revealed mb-6">
-            <PeritrackIntro
-              onStartTrial={handleTrialCTA}
-              firstName={capitalizedFirstName}
-            />
-          </div>
-          
-          {/* Luna AI Feature with smoother transition */}
-          <div className="revealed mb-6">
-            <LunaAIFeature onStartTrial={handleTrialCTA} />
-          </div>
-          
-          {/* Simple Pricing Section at the very bottom */}
-          <div className="revealed mb-6">
-            <SimplePricingSection onStartTrial={handleTrialCTA} />
-          </div>
-          
-          {/* Perimenopause Explanation */}
-          <div className="revealed mb-6">
-            <PerimenopauseExplanation scoreCategory={scoreCategory} />
-          </div>
+      {/* ORIGINAL RESULTS PAGE CONTENT CONTINUES - Back to constrained width */}
+      <div className="w-full max-w-4xl mx-auto py-6 md:py-8 px-4 md:px-6 lg:px-8">
+        {/* Peritrack Intro - Main call to action */}
+        <div className="mb-6">
+          <PeritrackIntro
+            onStartTrial={handleTrialCTA}
+            firstName={capitalizedFirstName}
+          />
+        </div>
+        
+        {/* Luna AI Feature */}
+        <div className="mb-6">
+          <LunaAIFeature onStartTrial={handleTrialCTA} />
+        </div>
+        
+        {/* Simple Pricing Section at the very bottom */}
+        <div className="mb-6">
+          <SimplePricingSection onStartTrial={handleTrialCTA} />
+        </div>
+        
+        {/* Perimenopause Explanation */}
+        <div className="mb-6">
+          <PerimenopauseExplanation scoreCategory={scoreCategory} />
         </div>
       </div>
     </div>
