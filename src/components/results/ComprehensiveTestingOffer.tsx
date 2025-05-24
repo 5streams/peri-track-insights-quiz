@@ -3,10 +3,13 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, Shield, Clock, CheckCircle, Users, Award } from "lucide-react";
+import { useLeadCapture } from "@/hooks/use-lead-capture";
+import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
 
 const ComprehensiveTestingOffer: React.FC = () => {
   const [spotsRemaining, setSpotsRemaining] = useState(47);
   const [timeLeft, setTimeLeft] = useState({ days: 3, hours: 14, minutes: 27 });
+  const { isModalOpen, openLeadModal, closeLeadModal } = useLeadCapture();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -26,8 +29,17 @@ const ComprehensiveTestingOffer: React.FC = () => {
   }, []);
 
   const handleOrderNow = () => {
-    // Implementation for ordering process
-    console.log("Order bloodwork initiated");
+    // Create mock quiz results for hormone testing lead
+    const testingQuizResults = {
+      source: "HORMONE_TESTING_OFFER",
+      phase: "Comprehensive Testing",
+      score: 100,
+      page_source: 'results_page',
+      timestamp: new Date().toISOString(),
+      interest: "comprehensive_hormone_testing"
+    };
+    
+    openLeadModal('quiz_results', undefined, testingQuizResults);
   };
 
   return (
@@ -87,7 +99,6 @@ const ComprehensiveTestingOffer: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Hidden Dangers */}
       <Card className="border-l-4 border-orange-500">
         <CardContent className="p-8">
           <h3 className="font-headline text-2xl font-bold text-gray-800 mb-6">
@@ -126,7 +137,6 @@ const ComprehensiveTestingOffer: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Why Normal Lab Results Are Dangerous */}
       <Card className="border-l-4 border-yellow-500">
         <CardContent className="p-8">
           <h3 className="font-headline text-2xl font-bold text-gray-800 mb-6">
@@ -154,7 +164,6 @@ const ComprehensiveTestingOffer: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Comprehensive Testing Solution */}
       <Card className="border-l-4 border-green-500 bg-gradient-to-br from-green-50 to-blue-50">
         <CardContent className="p-8">
           <div className="text-center mb-8">
@@ -198,7 +207,6 @@ const ComprehensiveTestingOffer: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Urgency & Scarcity */}
       <Card className="border-l-4 border-purple-500 bg-purple-50">
         <CardContent className="p-8">
           <h3 className="font-headline text-2xl font-bold text-purple-800 mb-6 flex items-center">
@@ -238,7 +246,6 @@ const ComprehensiveTestingOffer: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Social Proof */}
       <Card className="border-l-4 border-blue-500">
         <CardContent className="p-8">
           <h3 className="font-headline text-2xl font-bold text-gray-800 mb-6 flex items-center">
@@ -271,7 +278,6 @@ const ComprehensiveTestingOffer: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Risk Reversal */}
       <Card className="border-l-4 border-green-500 bg-green-50">
         <CardContent className="p-8">
           <h3 className="font-headline text-2xl font-bold text-green-800 mb-6 flex items-center">
@@ -302,7 +308,6 @@ const ComprehensiveTestingOffer: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Final Push */}
       <Card className="border-l-4 border-red-500 bg-gradient-to-br from-red-50 to-orange-50">
         <CardContent className="p-8 text-center">
           <h3 className="font-headline text-3xl font-bold text-red-700 mb-6">
@@ -329,7 +334,6 @@ const ComprehensiveTestingOffer: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* CTA Section */}
       <Card className="border-l-4 border-purple-500 bg-gradient-to-br from-purple-50 to-pink-50">
         <CardContent className="p-8 text-center">
           <h3 className="font-headline text-3xl font-bold text-purple-800 mb-4">
@@ -366,6 +370,20 @@ const ComprehensiveTestingOffer: React.FC = () => {
           </div>
         </CardContent>
       </Card>
+
+      <LeadCaptureModal
+        isOpen={isModalOpen}
+        onClose={closeLeadModal}
+        source="quiz_results"
+        quizResults={{
+          source: "HORMONE_TESTING_OFFER",
+          phase: "Comprehensive Testing",
+          score: 100,
+          page_source: 'results_page',
+          timestamp: new Date().toISOString(),
+          interest: "comprehensive_hormone_testing"
+        }}
+      />
     </div>
   );
 };
