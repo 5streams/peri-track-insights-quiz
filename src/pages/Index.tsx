@@ -60,7 +60,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="bg-[#F5E6D3] min-h-screen">
+    <div className="bg-[#F5F3F7] min-h-screen">
       <div className="container mx-auto px-4 py-6">
         <header className="flex justify-between items-center mb-8">
           <div className="logo">
@@ -68,8 +68,8 @@ const Index = () => {
           </div>
           <nav>
             <ul className="flex space-x-6">
-              <li><Link to="/quiz" className="text-[#6B4E7A] hover:text-[#6B4E7A]/80 font-medium">Quiz</Link></li>
-              <li><Link to="/tryperitracker" className="bg-[#6B4E7A] hover:bg-[#6B4E7A]/90 text-white px-6 py-2 rounded-lg transition-colors">Try Peritrack</Link></li>
+              <li><Link to="/quiz" className="text-[#5D4154] hover:text-[#5D4154]/80 font-medium">Quiz</Link></li>
+              <li><Link to="/tryperitracker" className="bg-[#5D4154] hover:bg-[#5D4154]/90 text-white px-6 py-2 rounded-lg transition-colors">Try Peritrack</Link></li>
             </ul>
           </nav>
         </header>
@@ -80,10 +80,10 @@ const Index = () => {
           {/* Symptoms Section */}
           <section className="mt-8 mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#6B4E7A] mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#5D4154] mb-4">
                 Do These Sound Familiar?
               </h2>
-              <p className="text-lg text-[#4A4A4A] max-w-2xl mx-auto">
+              <p className="text-lg text-[#6D6875] max-w-2xl mx-auto">
                 These common experiences might be signs of perimenopause
               </p>
             </div>
@@ -92,7 +92,7 @@ const Index = () => {
               {symptoms.map((symptom, index) => (
                 <Card key={index} className="bg-white shadow-sm hover:shadow-md transition-all duration-200 border-0">
                   <CardContent className="p-6">
-                    <p className="text-[#4A4A4A] text-lg">
+                    <p className="text-[#5D4154] text-lg">
                       {symptom}
                     </p>
                   </CardContent>
@@ -104,7 +104,7 @@ const Index = () => {
               <Button 
                 onClick={handleStartQuiz}
                 size="lg" 
-                className="bg-[#6B4E7A] hover:bg-[#6B4E7A]/90 text-white px-8 py-4 text-lg font-medium rounded-lg transition-colors shadow-md"
+                className="bg-[#5D4154] hover:bg-[#5D4154]/90 text-white px-8 py-4 text-lg font-medium rounded-lg transition-colors shadow-md"
               >
                 Take the Assessment
               </Button>
@@ -114,10 +114,10 @@ const Index = () => {
           {/* How Our Assessment Works Section */}
           <section className="mt-20 mb-20">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#6B4E7A] mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#5D4154] mb-4">
                 How It Works
               </h2>
-              <p className="text-lg text-[#4A4A4A] max-w-2xl mx-auto">
+              <p className="text-lg text-[#6D6875] max-w-2xl mx-auto">
                 A simple 3-step process to understand your symptoms
               </p>
             </div>
@@ -127,13 +127,13 @@ const Index = () => {
                 {assessmentSteps.map((step, index) => (
                   <Card key={index} className="text-center bg-white shadow-sm hover:shadow-md transition-all duration-200 border-0">
                     <CardContent className="p-8">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-[#6B4E7A] text-white rounded-full text-xl font-bold mb-6">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-[#5D4154] text-white rounded-full text-xl font-bold mb-6">
                         {step.number}
                       </div>
-                      <h3 className="text-xl font-bold text-[#6B4E7A] mb-4">
+                      <h3 className="text-xl font-bold text-[#5D4154] mb-4">
                         {step.title}
                       </h3>
-                      <p className="text-[#4A4A4A] text-lg leading-relaxed">
+                      <p className="text-[#6D6875] text-lg leading-relaxed">
                         {step.description}
                       </p>
                     </CardContent>
@@ -146,10 +146,10 @@ const Index = () => {
           {/* Testimonials Section */}
           <section className="mt-20 mb-16">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#6B4E7A] mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#5D4154] mb-4">
                 What Women Are Saying
               </h2>
-              <p className="text-lg text-[#4A4A4A] max-w-2xl mx-auto">
+              <p className="text-lg text-[#6D6875] max-w-2xl mx-auto">
                 Real stories from women who found clarity
               </p>
             </div>
@@ -158,11 +158,11 @@ const Index = () => {
               {testimonials.map((testimonial, index) => (
                 <Card key={index} className="bg-white shadow-sm hover:shadow-md transition-all duration-200 border-0">
                   <CardContent className="p-8">
-                    <div className="text-[#6B4E7A]/30 text-3xl mb-4">"</div>
-                    <p className="text-[#4A4A4A] text-lg mb-6 leading-relaxed">
+                    <div className="text-[#5D4154]/30 text-3xl mb-4">"</div>
+                    <p className="text-[#5D4154] text-lg mb-6 leading-relaxed">
                       {testimonial.quote}
                     </p>
-                    <div className="font-semibold text-[#6B4E7A]">
+                    <div className="font-semibold text-[#5D4154]">
                       — {testimonial.name}, {testimonial.age}
                     </div>
                   </CardContent>
@@ -170,7 +170,7 @@ const Index = () => {
               ))}
             </div>
             
-            <Card className="bg-[#6B4E7A] text-white shadow-lg border-0">
+            <Card className="bg-[#5D4154] text-white shadow-lg border-0">
               <CardContent className="text-center py-16 px-8">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
                   Get Clarity in 2 Minutes
@@ -181,7 +181,7 @@ const Index = () => {
                 <Button 
                   onClick={handleStartQuiz}
                   size="lg" 
-                  className="bg-white text-[#6B4E7A] hover:bg-white/90 px-8 py-4 text-lg font-medium rounded-lg transition-colors shadow-md"
+                  className="bg-white text-[#5D4154] hover:bg-white/90 px-8 py-4 text-lg font-medium rounded-lg transition-colors shadow-md"
                 >
                   Start Your Free Assessment
                 </Button>
