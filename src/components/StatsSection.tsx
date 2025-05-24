@@ -5,22 +5,22 @@ const StatsSection = () => {
   const stats = [
     {
       number: '15,000+',
-      label: 'Women tracking perimenopause symptoms',
-      icon: '👩‍⚕️'
+      label: 'Women tracking perimenopause weight gain patterns',
+      icon: '⚖️'
     },
     {
-      number: '89%',
-      label: 'Report perimenopause symptom improvement',
-      icon: '📈'
+      number: '78%',
+      label: 'Successfully lost perimenopause weight gain',
+      icon: '📉'
     },
     {
       number: '2.3M',
-      label: 'Perimenopause symptoms tracked monthly',
+      label: 'Weight and hormone data points tracked monthly',
       icon: '📊'
     },
     {
       number: '4.9/5',
-      label: 'Average perimenopause symptom tracker rating',
+      label: 'Average rating for perimenopause weight loss tracking',
       icon: '⭐'
     }
   ];
@@ -30,10 +30,10 @@ const StatsSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="font-headline font-bold text-2xl lg:text-3xl mb-3 fade-in-up">
-            Trusted by Thousands Managing Perimenopause Symptoms Worldwide
+            Trusted by Thousands Who've Solved Perimenopause Weight Gain
           </h2>
           <p className="text-lg opacity-90 fade-in-up">
-            Join the community that's transforming perimenopause symptom management
+            Join the community that's cracking the code on perimenopause weight loss
           </p>
         </div>
         

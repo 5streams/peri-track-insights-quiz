@@ -4,42 +4,42 @@ import React from 'react';
 const ProblemSection = () => {
   const problems = [
     {
+      emoji: '⚖️',
+      title: 'Sudden weight gain around your midsection',
+      description: 'Despite eating the same and exercising, you\'re gaining weight - especially stubborn belly fat that won\'t budge'
+    },
+    {
+      emoji: '🍽️',
+      title: 'Increased cravings and appetite changes',
+      description: 'Craving sugar and carbs like never before, feeling hungrier, and struggling with portion control'
+    },
+    {
       emoji: '🔥',
-      title: 'Hot flashes - the most common perimenopause symptom',
-      description: 'Embarrassing moments during meetings, social events, or important conversations that disrupt your daily life'
-    },
-    {
-      emoji: '😴',
-      title: 'Sleep disruption - a debilitating perimenopause symptom',
-      description: 'Waking up at 3 AM unable to get back to sleep, this perimenopause symptom affects your entire next day'
-    },
-    {
-      emoji: '😢',
-      title: 'Mood changes - an overwhelming perimenopause symptom',
-      description: 'Mood swings, irritability, and emotional changes that strain relationships and affect your well-being'
-    },
-    {
-      emoji: '🧠',
-      title: 'Brain fog - a frustrating perimenopause symptom',
-      description: 'Forgetting words, losing focus during important tasks, feeling "not sharp" when you need clarity most'
-    },
-    {
-      emoji: '😤',
-      title: 'Increased PMS - a worsening perimenopause symptom',
-      description: 'Bloating, breast tenderness, and emotional sensitivity that seems worse than ever before'
+      title: 'Slower metabolism during perimenopause',
+      description: 'Your body burns calories differently now - what used to work for weight loss doesn\'t work anymore'
     },
     {
       emoji: '💪',
-      title: 'Energy crashes - an exhausting perimenopause symptom',
-      description: 'Feeling drained when you want to be active, missing out on life due to fatigue'
+      title: 'Muscle loss and body composition changes',
+      description: 'Losing muscle mass while gaining fat, especially around your waist, hips, and arms'
+    },
+    {
+      emoji: '😴',
+      title: 'Sleep disruption affecting weight',
+      description: 'Poor sleep from perimenopause symptoms disrupting hunger hormones and making weight loss harder'
+    },
+    {
+      emoji: '😤',
+      title: 'Stress and emotional eating patterns',
+      description: 'Mood swings and stress leading to comfort eating and making it impossible to stick to healthy habits'
     }
   ];
 
   const triedList = [
-    'Generic supplements that don\'t address your specific perimenopause symptoms',
-    'One-size-fits-all advice that ignores your unique perimenopause symptom pattern',
-    'Random tips from friends whose perimenopause symptoms are different from yours',
-    'Hoping your perimenopause symptoms will just disappear on their own'
+    'Generic diets that don\'t account for hormonal changes during perimenopause',
+    'Extreme calorie restriction that actually slows your metabolism further',
+    'Exercise routines that worked before perimenopause but don\'t work now',
+    'Blaming yourself for "lack of willpower" when it\'s actually hormonal'
   ];
 
   return (
@@ -47,10 +47,10 @@ const ProblemSection = () => {
       <div className="container mx-auto px-4 lg:px-6">
         <div className="text-center mb-10">
           <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-            Tired of Perimenopause Symptoms Controlling Your Life?
+            Frustrated by Unexplained Perimenopause Weight Gain?
           </h2>
           <p className="text-body-large text-warm-gray fade-in-up">
-            Every day with perimenopause symptoms feels like a guessing game:
+            You're not imagining it - perimenopause weight gain is real and affects 90% of women:
           </p>
         </div>
         
@@ -73,7 +73,7 @@ const ProblemSection = () => {
         
         <div className="problem-conclusion text-center max-w-2xl mx-auto fade-in-up">
           <h3 className="font-headline text-2xl text-primary mb-6">
-            You've probably tried everything for your perimenopause symptoms:
+            You've probably tried everything for perimenopause weight loss:
           </h3>
           
           <ul className="tried-list space-y-3 mb-6 text-left max-w-lg mx-auto">
@@ -87,7 +87,7 @@ const ProblemSection = () => {
           
           <div className="problem-insight bg-accent p-6 rounded-xl">
             <p className="text-primary text-body-large font-medium leading-relaxed">
-              <strong>The problem isn't the perimenopause symptoms themselves - it's not knowing what triggers them or how to manage them effectively.</strong>
+              <strong>The problem isn't your willpower - it's not understanding how your changing hormones affect weight gain and what specific patterns trigger YOUR weight gain.</strong>
             </p>
           </div>
         </div>

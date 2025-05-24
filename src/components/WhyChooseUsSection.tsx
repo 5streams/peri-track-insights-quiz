@@ -4,28 +4,28 @@ import React from 'react';
 const WhyChooseUsSection = () => {
   const reasons = [
     {
-      icon: '🧠',
-      title: 'Science-Backed Perimenopause Symptom Analysis',
-      description: 'Our AI analyzes 50+ perimenopause symptom patterns using medical research to provide accurate insights for your unique experience.',
-      highlight: 'Evidence-based'
+      icon: '🧬',
+      title: 'Science-Backed Perimenopause Weight Analysis',
+      description: 'Our AI analyzes how hormonal changes specifically affect YOUR metabolism, appetite, and fat storage patterns during perimenopause.',
+      highlight: 'Hormone-focused'
     },
     {
-      icon: '🎯',
-      title: 'Personalized Perimenopause Symptom Relief',
-      description: 'Every recommendation is tailored to your specific perimenopause symptoms, lifestyle, and hormonal patterns for maximum effectiveness.',
-      highlight: 'Custom solutions'
+      icon: '⚖️',
+      title: 'Personalized Weight Loss Strategy',
+      description: 'Every recommendation is tailored to your specific hormone patterns, metabolism, and weight gain triggers for maximum effectiveness.',
+      highlight: 'Custom approach'
     },
     {
-      icon: '⚡',
-      title: 'Instant Perimenopause Symptom Management',
-      description: 'Get immediate, actionable tips when perimenopause symptoms strike - from hot flashes to mood changes - not generic advice.',
-      highlight: 'Real-time help'
+      icon: '📈',
+      title: 'Real-Time Weight Pattern Insights',
+      description: 'See exactly how your daily choices affect your weight in real-time, so you can make adjustments that actually work.',
+      highlight: 'Instant feedback'
     },
     {
-      icon: '🤝',
-      title: 'Expert-Designed Perimenopause Care',
-      description: 'Created with reproductive health specialists and validated by thousands of women experiencing perimenopause symptoms.',
-      highlight: 'Medical expertise'
+      icon: '👩‍⚕️',
+      title: 'Expert-Designed for Perimenopause',
+      description: 'Created specifically for women in perimenopause by reproductive health specialists who understand hormonal weight gain.',
+      highlight: 'Specialist-created'
     }
   ];
 
@@ -34,10 +34,10 @@ const WhyChooseUsSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-            Why 15,000+ Women Choose PeriTrack for Perimenopause Symptoms
+            Why 15,000+ Women Choose PeriTrack for Weight Loss
           </h2>
           <p className="text-body-large text-warm-gray max-w-2xl mx-auto fade-in-up">
-            We're not just another period app. We're your comprehensive perimenopause symptom management system.
+            We're not just another diet app. We're your comprehensive perimenopause weight loss system.
           </p>
         </div>
 
