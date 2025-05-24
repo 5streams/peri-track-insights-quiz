@@ -11,11 +11,6 @@ const Index = () => {
     navigate("/quiz");
   };
 
-  const handleLearnMore = () => {
-    // Navigate to the Peritrack info page using React Router
-    navigate("/tryperitracker");
-  };
-
   return (
     <div className="bg-gradient-to-b from-purple-100/40 to-white min-h-screen">
       <div className="container mx-auto px-4 py-4">
@@ -33,19 +28,6 @@ const Index = () => {
 
         <main className="mt-4">
           <WelcomeScreen onStart={handleStartQuiz} />
-          
-          <div className="text-center mt-12 space-y-6">
-            <button 
-              onClick={handleLearnMore}
-              className="inline-block bg-[#a68bc7] hover:bg-[#8a6eaa] text-white px-8 py-4 text-lg rounded-md shadow-md transition-colors"
-            >
-              Learn More About Peritrack
-            </button>
-            
-            <p className="text-[#6b4e82] max-w-md mx-auto">
-              Visit our sales page to learn about the full features of Peritrack and how it can help with your perimenopause journey.
-            </p>
-          </div>
         </main>
       </div>
     </div>
