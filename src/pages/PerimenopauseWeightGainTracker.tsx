@@ -22,6 +22,7 @@ import WeightPainAmplification from '../components/WeightPainAmplification';
 import WeightTimeline from '../components/WeightTimeline';
 import BeforeAfterMindset from '../components/BeforeAfterMindset';
 import EnhancedFinalCTA from '../components/EnhancedFinalCTA';
+import StickyCTABar from '../components/StickyCTABar';
 
 const PerimenopauseWeightGainTracker = () => {
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
@@ -102,6 +103,7 @@ const PerimenopauseWeightGainTracker = () => {
         <HeroSection />
         <WeightPainAmplification />
         <WeightManagementEducation />
+        <WeightTimeline />
         <StatsSection />
         <WeightTimeline />
         <ProblemSection />
@@ -132,7 +134,11 @@ const PerimenopauseWeightGainTracker = () => {
         <TrialSignupModal 
           isOpen={isSignupModalOpen}
           onClose={handleCloseSignupModal}
+          pageSource="weight-gain-tracker"
         />
+
+        {/* Sticky CTA Bar */}
+        <StickyCTABar />
       </div>
     </div>
   );

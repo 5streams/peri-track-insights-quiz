@@ -32,9 +32,16 @@ const SolutionSection = () => {
               <span className="text-xl text-white">📊</span>
             </div>
             <h3 className="font-headline text-xl text-primary mb-1">Track Weight + Hormones + Lifestyle</h3>
-            <p className="text-warm-gray">
+            <p className="text-warm-gray mb-4">
               Monitor your weight changes alongside hormone fluctuations, sleep, stress, food, and exercise to see potential connections.
             </p>
+            <CTAButton 
+              size="small" 
+              variant="outline"
+              onClick={handleOpenSignupModal}
+            >
+              Try It Free
+            </CTAButton>
           </div>
 
           <div className="solution-card bg-white p-4 rounded-2xl shadow-lg text-center hover:shadow-xl transition-all duration-300 fade-in-up">
@@ -42,9 +49,16 @@ const SolutionSection = () => {
               <span className="text-xl text-white">🎯</span>
             </div>
             <h3 className="font-headline text-xl text-primary mb-1">Identify YOUR Personal Patterns</h3>
-            <p className="text-warm-gray">
+            <p className="text-warm-gray mb-4">
               Discover which factors may be connected to your weight changes - creating personalized insights rather than generic information.
             </p>
+            <CTAButton 
+              size="small" 
+              variant="outline"
+              onClick={handleOpenSignupModal}
+            >
+              Get Started
+            </CTAButton>
           </div>
 
           <div className="solution-card bg-white p-4 rounded-2xl shadow-lg text-center hover:shadow-xl transition-all duration-300 fade-in-up">
@@ -52,13 +66,20 @@ const SolutionSection = () => {
               <span className="text-xl text-white">📋</span>
             </div>
             <h3 className="font-headline text-xl text-primary mb-1">Share Insights with Your Doctor</h3>
-            <p className="text-warm-gray">
+            <p className="text-warm-gray mb-4">
               Create comprehensive reports from your tracking data to have more informed discussions with your healthcare provider.
             </p>
+            <CTAButton 
+              size="small" 
+              variant="outline"
+              onClick={handleOpenSignupModal}
+            >
+              Start Tracking
+            </CTAButton>
           </div>
         </div>
 
-        <div className="text-center fade-in-up">
+        <div className="text-center fade-in-up mb-6">
           <CTAButton 
             size="large" 
             variant="primary" 
@@ -68,8 +89,22 @@ const SolutionSection = () => {
             START TRACKING MY PATTERNS
           </CTAButton>
           <p className="text-sm text-warm-gray">
-            7-day trial then only $12.95/month • Educational tracking for informed discussions
+            7-day trial then only $9.99/month • Educational tracking for informed discussions
           </p>
+        </div>
+
+        {/* Additional urgency CTA */}
+        <div className="text-center bg-red-50 border border-red-200 rounded-lg p-4 mb-4 fade-in-up">
+          <p className="text-red-700 font-medium mb-2">
+            ⚠️ Don't let another month pass without understanding your weight patterns
+          </p>
+          <CTAButton 
+            size="medium" 
+            variant="urgent"
+            onClick={handleOpenSignupModal}
+          >
+            TAKE ACTION TODAY
+          </CTAButton>
         </div>
 
         <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg max-w-2xl mx-auto">
@@ -83,6 +118,7 @@ const SolutionSection = () => {
       <TrialSignupModal 
         isOpen={isSignupModalOpen}
         onClose={handleCloseSignupModal}
+        pageSource="weight-gain-tracker"
       />
     </section>
   );

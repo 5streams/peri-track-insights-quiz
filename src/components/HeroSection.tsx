@@ -1,7 +1,19 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import CTAButton from './CTAButton';
+import TrialSignupModal from './TrialSignupModal';
 
 const HeroSection = () => {
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+
+  const handleOpenSignupModal = () => {
+    setIsSignupModalOpen(true);
+  };
+
+  const handleCloseSignupModal = () => {
+    setIsSignupModalOpen(false);
+  };
+
   return (
     <section className="hero-section bg-gradient-to-br from-primary/5 to-secondary/10 py-12 lg:py-20 overflow-hidden">
       <div className="container mx-auto px-4">
@@ -45,6 +57,33 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
+
+            {/* Primary CTA */}
+            <div className="mb-4 fade-in-up">
+              <CTAButton 
+                size="large" 
+                variant="primary" 
+                className="mb-3"
+                onClick={handleOpenSignupModal}
+              >
+                START MY WEIGHT PATTERN TRACKING
+              </CTAButton>
+              <p className="text-sm text-warm-gray text-center">
+                7-day trial • Only $9.99/month after • Cancel anytime
+              </p>
+            </div>
+
+            {/* Secondary urgent CTA */}
+            <div className="text-center fade-in-up">
+              <p className="text-sm text-red-600 font-medium mb-2">⚡ Limited Time: Only 47 spots left this week</p>
+              <CTAButton 
+                size="medium" 
+                variant="urgent" 
+                onClick={handleOpenSignupModal}
+              >
+                CLAIM YOUR SPOT NOW
+              </CTAButton>
+            </div>
           </div>
           
           <div className="hero-image relative fade-in-up">
@@ -69,6 +108,13 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Trial Signup Modal */}
+      <TrialSignupModal 
+        isOpen={isSignupModalOpen}
+        onClose={handleCloseSignupModal}
+        pageSource="weight-gain-tracker"
+      />
     </section>
   );
 };
