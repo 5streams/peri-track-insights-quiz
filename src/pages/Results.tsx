@@ -100,7 +100,7 @@ const Results = () => {
   
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#F9F5FF]/20 to-white">
-      {/* RESULTS HEADER SECTION - Constrained width */}
+      {/* RESULTS SECTION - Your Personal Assessment */}
       <div className="w-full max-w-4xl mx-auto py-6 md:py-8 px-4 md:px-6 lg:px-8">
         {/* Results Header with Score and User Name */}
         <div className="mb-6">
@@ -130,7 +130,19 @@ const Results = () => {
         </div>
       </div>
 
-      {/* ALL TRYPERITRACK PAGE CONTENT - Full width sections */}
+      {/* SEPARATOR - Visual break between assessment and product info */}
+      <div className="w-full bg-primary/5 py-8">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4">
+            Now that you understand your symptoms...
+          </h2>
+          <p className="text-lg text-warm-gray max-w-2xl mx-auto">
+            Discover how PeriTrack can help you manage and predict your perimenopause journey
+          </p>
+        </div>
+      </div>
+
+      {/* FULL TRYPERITRACK PAGE CONTENT */}
       <div className="w-full">
         <HeroSection />
         <StatsSection />
