@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -195,9 +196,11 @@ const AdminLeadList = () => {
     const plans = new Set<string>();
     leads.forEach(lead => {
       if (lead.pricing_tier) {
-        // Handle 'free_trial' specially
+        // Handle different plan types
         if (lead.pricing_tier === 'free_trial') {
           plans.add('Free Trial');
+        } else if (lead.pricing_tier === 'WGFreeTrial') {
+          plans.add('WG Free Trial');
         } else {
           plans.add(lead.pricing_tier);
         }

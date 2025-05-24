@@ -79,6 +79,7 @@ const EnhancedFinalCTA = () => {
       <TrialSignupModal 
         isOpen={isSignupModalOpen}
         onClose={handleCloseSignupModal}
+        pageSource="weight-gain-tracker"
       />
     </section>
   );

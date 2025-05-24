@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { 
   Dialog,
@@ -18,11 +19,13 @@ import { Check, ArrowRight } from "lucide-react";
 interface TrialSignupModalProps {
   isOpen: boolean;
   onClose: () => void;
+  pageSource?: string; // Add optional page source prop
 }
 
 const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
   isOpen,
-  onClose
+  onClose,
+  pageSource
 }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -46,14 +49,22 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
     setIsLoading(true);
     
     try {
-      // Format the notes to be consistent with other lead types
-      const additionalNotes = `Captured from TryPeriTrack page at ${new Date().toISOString()}`;
+      // Determine the pricing tier based on page source
+      const pricingTier = pageSource === 'weight-gain-tracker' ? 'WGFreeTrial' : 'free_trial';
+      
+      // Format the notes to include page source information
+      const pageInfo = pageSource === 'weight-gain-tracker' 
+        ? 'Weight Gain Tracker page' 
+        : 'TryPeriTrack page';
+      
+      const additionalNotes = `Captured from ${pageInfo} at ${new Date().toISOString()}`;
       
       // Create a quiz-like results object to maintain consistency with other leads
       const trialQuizResults = {
-        source: "TRIAL_SIGNUP",
+        source: pageSource === 'weight-gain-tracker' ? "WEIGHT_GAIN_TRIAL_SIGNUP" : "TRIAL_SIGNUP",
         phase: "Trial Interest",
         score: 100,
+        page_source: pageSource || 'unknown',
         timestamp: new Date().toISOString(),
         device_info: {
           userAgent: navigator.userAgent,
@@ -66,6 +77,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
         email: email.trim(),
         address: address.trim() + " (NOTE: address not saved until database schema is updated)",
         source: 'TRIAL',
+        pricingTier,
         quizResults: trialQuizResults,
         additionalNotes
       });
@@ -75,7 +87,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
         name.trim(), 
         email.trim(), 
         'TRIAL', 
-        'free_trial', // Set pricing tier to "free_trial" instead of null
+        pricingTier, // This will be 'WGFreeTrial' for weight gain tracker page
         trialQuizResults, // Pass formatted results to maintain consistency
         additionalNotes
       );
