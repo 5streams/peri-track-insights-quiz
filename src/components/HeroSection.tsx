@@ -1,19 +1,7 @@
 
-import React, { useState } from 'react';
-import CTAButton from './CTAButton';
-import TrialSignupModal from './TrialSignupModal';
+import React from 'react';
 
 const HeroSection = () => {
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
-
-  const handleOpenSignupModal = () => {
-    setIsSignupModalOpen(true);
-  };
-
-  const handleCloseSignupModal = () => {
-    setIsSignupModalOpen(false);
-  };
-
   return (
     <section className="hero-section bg-gradient-to-br from-primary/5 to-secondary/10 py-12 lg:py-20 overflow-hidden">
       <div className="container mx-auto px-4">
@@ -57,19 +45,6 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-            
-            <div className="hero-cta space-y-4 fade-in-up">
-              <CTAButton 
-                size="large" 
-                variant="secondary"
-                onClick={handleOpenSignupModal}
-              >
-                START DISCOVERING MY WEIGHT PATTERNS
-              </CTAButton>
-              <p className="text-sm text-center lg:text-left text-warm-gray">
-                7-day free trial • No credit card required • Join 847 women tracking this week
-              </p>
-            </div>
           </div>
           
           <div className="hero-image relative fade-in-up">
@@ -94,12 +69,6 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-
-      <TrialSignupModal 
-        isOpen={isSignupModalOpen}
-        onClose={handleCloseSignupModal}
-        pageSource="weight-gain-tracker"
-      />
     </section>
   );
 };
