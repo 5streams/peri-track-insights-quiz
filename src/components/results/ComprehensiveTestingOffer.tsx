@@ -169,7 +169,30 @@ const ComprehensiveTestingOffer: React.FC = () => {
             <h3 className="font-headline text-3xl font-bold text-green-700 mb-4">
               Complete Perimenopause Hormone Assessment - $199
             </h3>
-            <p className="text-xl text-gray-600">🧪 What's Included (Value: $800+ at traditional labs):</p>
+            <p className="text-xl text-gray-600 mb-4">🧪 What's Included (Value: $800+ at traditional labs):</p>
+            
+            {/* Add the 4-step process */}
+            <div className="bg-green-100 p-4 rounded-lg mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+                <div className="flex flex-col items-center">
+                  <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mb-2">1</div>
+                  <p className="text-sm font-semibold text-green-800">Order Lab Testing</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mb-2">2</div>
+                  <p className="text-sm font-semibold text-green-800">Visit Your Nearest Lab</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mb-2">3</div>
+                  <p className="text-sm font-semibold text-green-800">Results Get Sent To Us</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mb-2">4</div>
+                  <p className="text-sm font-semibold text-green-800">You Get A Full Evaluation!</p>
+                </div>
+              </div>
+              <p className="text-center text-green-700 font-bold mt-3">No Doctor Needed!</p>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
