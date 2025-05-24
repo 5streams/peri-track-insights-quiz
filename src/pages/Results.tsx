@@ -304,11 +304,11 @@ const Results = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      {/* Results Section - Keep constrained */}
-      <div className="w-full max-w-4xl mx-auto px-4 md:px-6 lg:px-8 py-8">
+      {/* Results Section - More compact */}
+      <div className="w-full max-w-4xl mx-auto px-2 md:px-4 lg:px-6 py-2">
         <div className="results-container all-visible">
           {/* Results Header with Score and User Name */}
-          <div className="mb-12">
+          <div className="mb-4">
             <ResultsHeader 
               score={hormoneScores.overall} 
               firstName={capitalizedFirstName} 
@@ -318,7 +318,7 @@ const Results = () => {
           </div>
           
           {/* Personalized Assessment */}
-          <div className="mb-12">
+          <div className="mb-4">
             <PersonalizedAssessment
               scoreCategory={scoreCategory}
               firstName={capitalizedFirstName}
@@ -327,7 +327,7 @@ const Results = () => {
           </div>
           
           {/* Hormone Insights */}
-          <div className="mb-12">
+          <div className="mb-4">
             <HormoneInsights 
               scores={hormoneScores}
               scoreCategory={scoreCategory}
@@ -335,7 +335,7 @@ const Results = () => {
           </div>
 
           {/* Comprehensive Testing Offer */}
-          <div className="mb-12">
+          <div className="mb-4">
             <ComprehensiveTestingOffer />
           </div>
         </div>
