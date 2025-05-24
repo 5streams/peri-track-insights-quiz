@@ -21,6 +21,21 @@ const WeightManagementEducation = () => {
             What Happens When You Understand YOUR Weight Patterns
           </h2>
           
+          {/* Primary CTA */}
+          <div className="mb-8 fade-in-up">
+            <CTAButton 
+              size="large" 
+              variant="primary" 
+              className="mb-3"
+              onClick={handleOpenSignupModal}
+            >
+              START MY WEIGHT PATTERN TRACKING
+            </CTAButton>
+            <p className="text-sm text-warm-gray text-center">
+              7-day trial • Only $9.99/month after • Cancel anytime
+            </p>
+          </div>
+          
           <p className="text-body-large text-warm-gray max-w-3xl mx-auto fade-in-up">
             Imagine a life where you're not constantly battling your body. Instead, you're working WITH it.
           </p>
