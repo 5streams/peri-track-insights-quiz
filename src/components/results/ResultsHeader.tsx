@@ -1,8 +1,6 @@
 
-import React, { useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { getDynamicContent } from "@/utils/scoreCalculation";
-import { Badge } from "@/components/ui/badge";
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface ResultsHeaderProps {
   score: number;
@@ -11,109 +9,65 @@ interface ResultsHeaderProps {
   onStartTrial: () => void;
 }
 
-const ResultsHeader: React.FC<ResultsHeaderProps> = ({ 
-  score, 
-  firstName, 
+const ResultsHeader: React.FC<ResultsHeaderProps> = ({
+  score,
+  firstName,
   scoreCategory,
-  onStartTrial 
+  onStartTrial
 }) => {
-  // Capitalize first letter of firstName
-  const capitalizedFirstName = firstName ? firstName.charAt(0).toUpperCase() + firstName.slice(1) : "";
-  const scoreRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    // Animate the score fill on component mount
-    if (scoreRef.current) {
-      setTimeout(() => {
-        if (scoreRef.current) {
-          scoreRef.current.style.width = `${Math.max(5, score)}%`;
-        }
-      }, 300);
-    }
-  }, [score]);
-  
-  // Get color based on score category
-  const getScoreColor = () => {
-    switch (scoreCategory) {
-      case "mild": return "text-[#9b87f5]";
-      case "moderate": return "text-[#7E69AB]";
-      case "severe": return "text-[#5D4154]";
-      default: return "text-[#6E59A5]";
+  const getScoreColor = (category: string) => {
+    switch (category) {
+      case "mild":
+        return "text-yellow-600";
+      case "moderate":
+        return "text-orange-600";
+      case "severe":
+        return "text-red-600";
+      default:
+        return "text-purple-600";
     }
   };
-  
-  // Get meter fill color
-  const getMeterFillColor = () => {
-    switch (scoreCategory) {
-      case "mild": return "bg-[#D6BCFA]";
-      case "moderate": return "bg-[#9b87f5]";
-      case "severe": return "bg-[#7E69AB]";
-      default: return "bg-[#9b87f5]";
+
+  const getScoreDescription = (category: string) => {
+    switch (category) {
+      case "mild":
+        return "Early Perimenopause Indicators";
+      case "moderate":
+        return "Moderate Hormone Disruption";
+      case "severe":
+        return "Significant Hormone Imbalance";
+      default:
+        return "Hormone Assessment Complete";
     }
   };
 
   return (
-    <header className="text-center pt-4 pb-6 reveal-section transform opacity-0 heading-container">
-      <div className="decorative-backdrop"></div>
-      
-      <h1 className="assessment-heading text-2xl md:text-3xl lg:text-4xl font-playfair font-bold text-[#5D4154] mb-6">
-        {capitalizedFirstName ? `${capitalizedFirstName}, ` : ""}We've Analyzed Your Answers
-        <span className="block mt-2 font-raleway font-medium text-xl md:text-2xl text-[#6E59A5]">
-          Your Personal Perimenopause Assessment
-        </span>
-      </h1>
-      
-      <div className="relative max-w-2xl mx-auto mb-6">
-        <div className="score-label-container mb-3 flex items-center justify-center">
-          <h2 className="text-xl md:text-2xl font-medium text-[#5D4154] inline-block relative">
-            PERIMENOPAUSE SCORE:
-            <Badge 
-              variant="outline" 
-              className={`score-indicator ml-3 px-4 py-1.5 text-lg md:text-xl ${getScoreColor()} border-2`}
-            >
-              {score}/100
-            </Badge>
-          </h2>
-        </div>
-        
-        <div className="score-meter relative h-12 bg-[#E5DEFF] border border-[#D6BCFA] rounded-full w-full mb-5 shadow-inner overflow-hidden">
-          <div 
-            ref={scoreRef}
-            className={`score-fill absolute left-0 top-0 h-full rounded-full transition-all duration-1500 ease-out w-0 ${getMeterFillColor()}`}
-          />
+    <Card className="mb-6 bg-gradient-to-br from-purple-50 to-pink-50 border-l-4 border-purple-500">
+      <CardContent className="p-8">
+        <div className="text-center">
+          <h1 className="font-headline text-4xl lg:text-5xl font-bold text-purple-800 mb-4">
+            {firstName ? `${firstName}, Your` : "Your"} Perimenopause Assessment Results
+          </h1>
           
-          <div className="score-labels absolute w-full top-0 h-full flex items-center">
-            <div className="relative w-full px-6">
-              <div className="absolute left-[20%] top-1/2 -translate-y-1/2 bg-[#D6BCFA] px-3 py-1 rounded-md text-[#5D4154] font-medium shadow-md transform -translate-x-1/2">Mild</div>
-              <div className="absolute left-[55%] top-1/2 -translate-y-1/2 bg-[#9b87f5] px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Moderate</div>
-              <div className="absolute left-[85%] top-1/2 -translate-y-1/2 bg-[#7E69AB] px-3 py-1 rounded-md text-white font-medium shadow-md transform -translate-x-1/2">Severe</div>
+          <div className="mb-6">
+            <div className={`text-6xl lg:text-7xl font-bold ${getScoreColor(scoreCategory)} mb-3`}>
+              {score}%
             </div>
+            <p className="text-2xl lg:text-3xl font-semibold text-gray-700">
+              {getScoreDescription(scoreCategory)}
+            </p>
+          </div>
+          
+          <div className="bg-white p-6 rounded-lg shadow-sm">
+            <p className="text-xl lg:text-2xl text-gray-700 leading-relaxed">
+              Based on your responses, our analysis indicates you're experiencing symptoms 
+              consistent with {scoreCategory} perimenopause changes. This assessment will help 
+              you understand what's happening in your body and what steps you can take.
+            </p>
           </div>
         </div>
-        
-        <div className="score-description text-center mb-4">
-          <p className={`inline-block py-1.5 px-4 rounded-lg shadow-sm font-medium ${
-            scoreCategory === "mild" ? "bg-[#E5DEFF] text-[#7E69AB] border border-[#D6BCFA]" :
-            scoreCategory === "moderate" ? "bg-[#9b87f5]/10 text-[#6E59A5] border border-[#9b87f5]" :
-            "bg-[#7E69AB]/10 text-[#5D4154] border border-[#7E69AB]"
-          }`}>
-            {scoreCategory === "mild" ? "Early Stage Symptoms" :
-            scoreCategory === "moderate" ? "Moderate Perimenopause Signs" :
-            "Advanced Hormonal Changes"}
-          </p>
-        </div>
-      </div>
-      
-      {/* Immediate CTA for high-intent users */}
-      {scoreCategory === "severe" && (
-        <Button 
-          onClick={onStartTrial}
-          className="cta-button bg-[#9b87f5] hover:bg-[#7E69AB] text-white font-semibold px-8 py-5 rounded-lg shadow-lg mb-6 text-lg transition-all duration-300 animate-pulse-subtle"
-        >
-          Take Action Now - Start Free Trial
-        </Button>
-      )}
-    </header>
+      </CardContent>
+    </Card>
   );
 };
 
