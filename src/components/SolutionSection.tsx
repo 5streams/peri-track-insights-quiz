@@ -93,20 +93,6 @@ const SolutionSection = () => {
           </p>
         </div>
 
-        {/* Additional urgency CTA */}
-        <div className="text-center bg-red-50 border border-red-200 rounded-lg p-4 mb-4 fade-in-up">
-          <p className="text-red-700 font-medium mb-2">
-            ⚠️ Don't let another month pass without understanding your weight patterns
-          </p>
-          <CTAButton 
-            size="medium" 
-            variant="urgent"
-            onClick={handleOpenSignupModal}
-          >
-            TAKE ACTION TODAY
-          </CTAButton>
-        </div>
-
         <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg max-w-2xl mx-auto">
           <p className="text-xs text-gray-600 text-center">
             <strong>Important:</strong> Results may vary between individuals. This tool is for educational and tracking purposes only. Please consult your healthcare provider for personalized medical advice and before making any health-related changes.

@@ -72,18 +72,6 @@ const HeroSection = () => {
                 7-day trial • Only $9.99/month after • Cancel anytime
               </p>
             </div>
-
-            {/* Secondary urgent CTA */}
-            <div className="text-center fade-in-up">
-              <p className="text-sm text-red-600 font-medium mb-2">⚡ Limited Time: Only 47 spots left this week</p>
-              <CTAButton 
-                size="medium" 
-                variant="urgent" 
-                onClick={handleOpenSignupModal}
-              >
-                CLAIM YOUR SPOT NOW
-              </CTAButton>
-            </div>
           </div>
           
           <div className="hero-image relative fade-in-up">

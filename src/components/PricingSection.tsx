@@ -100,19 +100,6 @@ const PricingSection = () => {
             <p className="text-xs text-warm-gray mb-4">
               No credit card required • Cancel anytime • 30-day money-back guarantee
             </p>
-
-            {/* Secondary CTA */}
-            <div className="border-t pt-4">
-              <p className="text-sm text-red-600 font-medium mb-2">⏰ Limited spots available this week</p>
-              <CTAButton 
-                size="medium" 
-                variant="urgent"
-                className="w-full"
-                onClick={handleOpenSignupModal}
-              >
-                SECURE MY SPOT NOW
-              </CTAButton>
-            </div>
           </div>
         </div>
 
