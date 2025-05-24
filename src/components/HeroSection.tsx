@@ -57,21 +57,6 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-
-            {/* Primary CTA */}
-            <div className="mb-4 fade-in-up">
-              <CTAButton 
-                size="large" 
-                variant="primary" 
-                className="mb-3"
-                onClick={handleOpenSignupModal}
-              >
-                START MY WEIGHT PATTERN TRACKING
-              </CTAButton>
-              <p className="text-sm text-warm-gray text-center">
-                7-day trial • Only $9.99/month after • Cancel anytime
-              </p>
-            </div>
           </div>
           
           <div className="hero-image relative fade-in-up">
