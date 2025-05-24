@@ -1,19 +1,7 @@
 
-import React, { useState } from 'react';
-import CTAButton from './CTAButton';
-import TrialSignupModal from './TrialSignupModal';
+import React from 'react';
 
 const HeroSection = () => {
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
-
-  const handleOpenSignupModal = () => {
-    setIsSignupModalOpen(true);
-  };
-
-  const handleCloseSignupModal = () => {
-    setIsSignupModalOpen(false);
-  };
-
   return (
     <section className="hero-section bg-gradient-to-br from-primary/5 to-secondary/10 py-12 lg:py-20 overflow-hidden">
       <div className="container mx-auto px-4">
@@ -81,13 +69,6 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-
-      {/* Trial Signup Modal */}
-      <TrialSignupModal 
-        isOpen={isSignupModalOpen}
-        onClose={handleCloseSignupModal}
-        pageSource="weight-gain-tracker"
-      />
     </section>
   );
 };

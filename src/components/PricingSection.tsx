@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import CTAButton from './CTAButton';
 import TrialSignupModal from './TrialSignupModal';
@@ -27,11 +26,7 @@ const PricingSection = () => {
         </div>
 
         <div className="max-w-lg mx-auto">
-          <div className="pricing-card bg-white p-6 lg:p-8 rounded-2xl shadow-xl text-center fade-in-up border-2 border-primary">
-            <div className="bg-primary text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
-              🔥 MOST POPULAR
-            </div>
-            
+          <div className="pricing-card bg-white p-6 lg:p-8 rounded-2xl shadow-xl text-center fade-in-up">
             <div className="mb-6">
               <div className="text-sm font-semibold text-secondary mb-1 uppercase tracking-wide">
                 Free Trial
@@ -97,7 +92,7 @@ const PricingSection = () => {
               START YOUR FREE TRIAL
             </CTAButton>
             
-            <p className="text-xs text-warm-gray mb-4">
+            <p className="text-xs text-warm-gray">
               No credit card required • Cancel anytime • 30-day money-back guarantee
             </p>
           </div>
@@ -116,7 +111,6 @@ const PricingSection = () => {
       <TrialSignupModal 
         isOpen={isSignupModalOpen}
         onClose={handleCloseSignupModal}
-        pageSource="weight-gain-tracker"
       />
     </section>
   );

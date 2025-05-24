@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 interface CTAButtonProps {
   children: React.ReactNode;
   size?: 'small' | 'medium' | 'large';
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'secondary';
   className?: string;
   onClick?: () => void;
 }
@@ -25,8 +25,7 @@ const CTAButton: React.FC<CTAButtonProps> = ({
 
   const variantClasses = {
     primary: 'bg-primary-gradient hover:shadow-[0_10px_25px_rgba(93,65,84,0.5)]',
-    secondary: 'bg-cta-gradient hover:shadow-[0_10px_25px_rgba(167,196,160,0.5)]',
-    outline: 'border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-white'
+    secondary: 'bg-cta-gradient hover:shadow-[0_10px_25px_rgba(167,196,160,0.5)]'
   };
 
   return (

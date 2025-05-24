@@ -102,7 +102,6 @@ const PerimenopauseWeightGainTracker = () => {
         <HeroSection />
         <WeightPainAmplification />
         <WeightManagementEducation />
-        <WeightTimeline />
         <StatsSection />
         <WeightTimeline />
         <ProblemSection />
@@ -133,7 +132,6 @@ const PerimenopauseWeightGainTracker = () => {
         <TrialSignupModal 
           isOpen={isSignupModalOpen}
           onClose={handleCloseSignupModal}
-          pageSource="weight-gain-tracker"
         />
       </div>
     </div>
