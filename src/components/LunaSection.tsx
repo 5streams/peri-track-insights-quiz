@@ -29,11 +29,19 @@ const LunaSection = () => {
     },
     {
       user: true,
-      message: "That's so specific to me! How did you know about my sleep and stress patterns?"
+      message: "Yes! I had no idea there were patterns. What should I focus on first?"
     },
     {
       user: false,
-      message: "I analyzed your daily tracking data and noticed weight changes typically happen 1-2 days after poor sleep nights and high stress days. Your metabolism may be more sensitive during perimenopause. Let's work on optimizing your sleep and stress management first - this often helps with weight stability."
+      message: "Based on your data, improving sleep quality shows the strongest correlation with weight stability. I've created a personalized plan: prioritize 7+ hours sleep, track which foods correlate with your best weeks, and monitor stress during high-fluctuation days."
+    },
+    {
+      user: true,
+      message: "This is exactly what I needed! How do you track all these connections?"
+    },
+    {
+      user: false,
+      message: "I analyze your daily inputs - weight, sleep, food, stress, cycle phase - and identify correlations over time. This data helps you understand what factors support your weight management goals during perimenopause."
     }
   ];
 
@@ -43,11 +51,11 @@ const LunaSection = () => {
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div className="luna-content fade-in-up">
             <h2 className="font-headline font-bold text-h2 text-primary mb-4">
-              Meet Luna: Your Personal Perimenopause Coach
+              Meet Luna: Your Personal Perimenopause Weight Management Coach
             </h2>
             
             <p className="text-body-large text-warm-gray mb-4 leading-relaxed">
-              Luna isn't just another chatbot. She's your perimenopause expert who knows your unique patterns, triggers, and what actually works for YOUR body.
+              Luna analyzes your unique patterns to help you understand what factors influence your weight during perimenopause and creates personalized strategies for better management.
             </p>
             
             <div className="luna-features space-y-3 mb-5">
@@ -56,8 +64,8 @@ const LunaSection = () => {
                   <span className="text-white text-sm font-bold">✓</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary mb-1">Knows Your History</h4>
-                  <p className="text-warm-gray text-sm">Remembers every symptom, trigger, and what's worked for you</p>
+                  <h4 className="font-semibold text-primary mb-1">Identifies Weight Patterns</h4>
+                  <p className="text-warm-gray text-sm">Tracks correlations between sleep, stress, food, and weight changes</p>
                 </div>
               </div>
               
@@ -66,8 +74,8 @@ const LunaSection = () => {
                   <span className="text-white text-sm font-bold">✓</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary mb-1">24/7 Available</h4>
-                  <p className="text-warm-gray text-sm">Get support during 3 AM symptoms or sudden questions</p>
+                  <h4 className="font-semibold text-primary mb-1">Personalized Weight Strategies</h4>
+                  <p className="text-warm-gray text-sm">Creates custom plans based on your specific patterns and triggers</p>
                 </div>
               </div>
               
@@ -76,8 +84,8 @@ const LunaSection = () => {
                   <span className="text-white text-sm font-bold">✓</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary mb-1">Evidence-Based</h4>
-                  <p className="text-warm-gray text-sm">Recommendations based on latest perimenopause research</p>
+                  <h4 className="font-semibold text-primary mb-1">Weekly Progress Insights</h4>
+                  <p className="text-warm-gray text-sm">Shows what's working and adjusts recommendations for better results</p>
                 </div>
               </div>
             </div>
@@ -87,7 +95,7 @@ const LunaSection = () => {
               variant="primary"
               onClick={handleOpenSignupModal}
             >
-              CHAT WITH LUNA NOW
+              START TRACKING MY PATTERNS
             </CTAButton>
             <p className="text-xs text-center lg:text-left mt-1 text-warm-gray">
               7-day trial then only $12.95/month
@@ -102,7 +110,7 @@ const LunaSection = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold">Luna</h4>
-                  <p className="text-xs opacity-75">Your Perimenopause Coach</p>
+                  <p className="text-xs opacity-75">Your Weight Management Coach</p>
                 </div>
                 <div className="ml-auto flex space-x-1">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
@@ -133,7 +141,7 @@ const LunaSection = () => {
                 <div className="flex items-center space-x-2">
                   <input 
                     type="text" 
-                    placeholder="Ask Luna anything..."
+                    placeholder="Ask about my weight patterns..."
                     className="flex-1 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-secondary"
                     disabled
                   />
