@@ -6,32 +6,32 @@ const TestimonialCarousel = () => {
 
   const testimonials = [
     {
-      text: "PeriTrack predicted my hot flashes 2 hours before they hit. I was able to prepare and they were so much more manageable!",
+      text: "PeriTrack predicted my perimenopause hot flash symptoms 2 hours before they hit. I was able to prepare and they were so much more manageable!",
       author: "Sarah M.",
       age: "Age 47",
       location: "California",
-      benefit: "Hot flash prediction"
+      benefit: "Perimenopause symptom prediction"
     },
     {
-      text: "Finally, an app that understands perimenopause isn't just about periods. The mood tracking and insights have been life-changing.",
+      text: "Finally, an app that understands perimenopause symptoms aren't just about periods. The mood tracking and insights have been life-changing for managing my perimenopause symptoms.",
       author: "Jennifer K.",
       age: "Age 51",
       location: "Texas",
-      benefit: "Comprehensive tracking"
+      benefit: "Comprehensive perimenopause tracking"
     },
     {
-      text: "Luna's daily tips are so spot-on. It's like having a personal coach who knows exactly what I'm going through.",
+      text: "Luna's daily tips are so spot-on for my specific perimenopause symptoms. It's like having a personal coach who knows exactly what I'm going through.",
       author: "Maria L.",
       age: "Age 49",
       location: "New York",
-      benefit: "AI coaching"
+      benefit: "AI perimenopause coaching"
     },
     {
-      text: "I've tried 5 different apps. PeriTrack is the only one that actually helped me feel better, not just track symptoms.",
+      text: "I've tried 5 different apps for perimenopause symptoms. PeriTrack is the only one that actually helped me feel better, not just track symptoms.",
       author: "Amanda R.",
       age: "Age 45",
       location: "Florida",
-      benefit: "Real results"
+      benefit: "Real perimenopause relief"
     }
   ];
 
@@ -48,10 +48,10 @@ const TestimonialCarousel = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="font-headline font-bold text-2xl lg:text-3xl mb-3 fade-in-up">
-            Real Stories, Real Relief
+            Real Perimenopause Symptom Stories, Real Relief
           </h2>
           <p className="text-lg opacity-90 fade-in-up">
-            See how PeriTrack is changing lives every day
+            See how PeriTrack is changing perimenopause symptom experiences every day
           </p>
         </div>
 

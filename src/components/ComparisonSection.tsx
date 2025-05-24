@@ -5,32 +5,32 @@ import { Check, X } from 'lucide-react';
 const ComparisonSection = () => {
   const features = [
     {
-      feature: 'AI-powered pattern recognition',
+      feature: 'AI-powered perimenopause symptom pattern recognition',
       peritrack: true,
       others: false
     },
     {
-      feature: 'Personalized relief strategies',
+      feature: 'Personalized perimenopause symptom relief strategies',
       peritrack: true,
       others: false
     },
     {
-      feature: '24/7 AI coach Luna',
+      feature: '24/7 AI coach for perimenopause symptoms',
       peritrack: true,
       others: false
     },
     {
-      feature: 'Symptom prediction alerts',
+      feature: 'Perimenopause symptom prediction alerts',
       peritrack: true,
       others: false
     },
     {
-      feature: 'Basic symptom tracking',
+      feature: 'Basic perimenopause symptom tracking',
       peritrack: true,
       others: true
     },
     {
-      feature: 'Generic health tips',
+      feature: 'Generic health tips (not perimenopause-specific)',
       peritrack: false,
       others: true
     }
@@ -41,10 +41,10 @@ const ComparisonSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-            Why PeriTrack vs. Other Apps?
+            Why PeriTrack vs. Other Perimenopause Symptom Apps?
           </h2>
           <p className="text-body-large text-warm-gray fade-in-up">
-            See how we compare to generic period tracking apps
+            See how we compare to generic period and perimenopause symptom tracking apps
           </p>
         </div>
 
@@ -52,7 +52,7 @@ const ComparisonSection = () => {
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden fade-in-up">
             <div className="grid grid-cols-3 bg-primary text-white p-4">
               <div className="text-left">
-                <h3 className="font-semibold">Features</h3>
+                <h3 className="font-semibold">Perimenopause Symptom Features</h3>
               </div>
               <div className="text-center">
                 <h3 className="font-semibold">PeriTrack</h3>

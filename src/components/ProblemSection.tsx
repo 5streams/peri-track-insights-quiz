@@ -5,41 +5,41 @@ const ProblemSection = () => {
   const problems = [
     {
       emoji: '🔥',
-      title: 'Hot flashes that come out of nowhere',
-      description: 'Embarrassing moments during meetings, social events, or important conversations'
+      title: 'Hot flashes - the most common perimenopause symptom',
+      description: 'Embarrassing moments during meetings, social events, or important conversations that disrupt your daily life'
     },
     {
       emoji: '😴',
-      title: 'Sleepless nights leaving you exhausted',
-      description: 'Waking up at 3 AM, unable to get back to sleep, affecting your entire next day'
+      title: 'Sleep disruption - a debilitating perimenopause symptom',
+      description: 'Waking up at 3 AM unable to get back to sleep, this perimenopause symptom affects your entire next day'
     },
     {
       emoji: '😢',
-      title: 'PMS symptoms that seem worse than ever',
-      description: 'Mood swings, bloating, and irritability that disrupt your relationships'
+      title: 'Mood changes - an overwhelming perimenopause symptom',
+      description: 'Mood swings, irritability, and emotional changes that strain relationships and affect your well-being'
     },
     {
       emoji: '🧠',
-      title: 'Brain fog when you need to think clearly',
-      description: 'Forgetting words, losing focus during important tasks, feeling "not sharp"'
+      title: 'Brain fog - a frustrating perimenopause symptom',
+      description: 'Forgetting words, losing focus during important tasks, feeling "not sharp" when you need clarity most'
     },
     {
       emoji: '😤',
-      title: 'Mood swings affecting your relationships',
-      description: 'Snapping at loved ones, feeling emotional without reason, straining connections'
+      title: 'Increased PMS - a worsening perimenopause symptom',
+      description: 'Bloating, breast tenderness, and emotional sensitivity that seems worse than ever before'
     },
     {
       emoji: '💪',
-      title: 'Energy crashes ruining your plans',
-      description: 'Feeling exhausted when you want to be active, missing out on life'
+      title: 'Energy crashes - an exhausting perimenopause symptom',
+      description: 'Feeling drained when you want to be active, missing out on life due to fatigue'
     }
   ];
 
   const triedList = [
-    'Generic supplements that don\'t help',
-    'One-size-fits-all advice from websites',
-    'Random tips from friends that don\'t work for you',
-    'Hoping symptoms will just disappear'
+    'Generic supplements that don\'t address your specific perimenopause symptoms',
+    'One-size-fits-all advice that ignores your unique perimenopause symptom pattern',
+    'Random tips from friends whose perimenopause symptoms are different from yours',
+    'Hoping your perimenopause symptoms will just disappear on their own'
   ];
 
   return (
@@ -47,10 +47,10 @@ const ProblemSection = () => {
       <div className="container mx-auto px-4 lg:px-6">
         <div className="text-center mb-10">
           <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-            Tired of Symptoms Controlling Your Life?
+            Tired of Perimenopause Symptoms Controlling Your Life?
           </h2>
           <p className="text-body-large text-warm-gray fade-in-up">
-            Every day feels like a guessing game:
+            Every day with perimenopause symptoms feels like a guessing game:
           </p>
         </div>
         
@@ -73,7 +73,7 @@ const ProblemSection = () => {
         
         <div className="problem-conclusion text-center max-w-2xl mx-auto fade-in-up">
           <h3 className="font-headline text-2xl text-primary mb-6">
-            You've probably tried everything:
+            You've probably tried everything for your perimenopause symptoms:
           </h3>
           
           <ul className="tried-list space-y-3 mb-6 text-left max-w-lg mx-auto">
@@ -87,7 +87,7 @@ const ProblemSection = () => {
           
           <div className="problem-insight bg-accent p-6 rounded-xl">
             <p className="text-primary text-body-large font-medium leading-relaxed">
-              <strong>The problem isn't the symptoms themselves - it's not knowing what triggers them or how to stop them.</strong>
+              <strong>The problem isn't the perimenopause symptoms themselves - it's not knowing what triggers them or how to manage them effectively.</strong>
             </p>
           </div>
         </div>

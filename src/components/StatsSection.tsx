@@ -5,22 +5,22 @@ const StatsSection = () => {
   const stats = [
     {
       number: '15,000+',
-      label: 'Women tracking symptoms',
+      label: 'Women tracking perimenopause symptoms',
       icon: '👩‍⚕️'
     },
     {
       number: '89%',
-      label: 'Report symptom improvement',
+      label: 'Report perimenopause symptom improvement',
       icon: '📈'
     },
     {
       number: '2.3M',
-      label: 'Symptoms tracked monthly',
+      label: 'Perimenopause symptoms tracked monthly',
       icon: '📊'
     },
     {
       number: '4.9/5',
-      label: 'Average app rating',
+      label: 'Average perimenopause symptom tracker rating',
       icon: '⭐'
     }
   ];
@@ -30,10 +30,10 @@ const StatsSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="font-headline font-bold text-2xl lg:text-3xl mb-3 fade-in-up">
-            Trusted by Thousands of Women Worldwide
+            Trusted by Thousands Managing Perimenopause Symptoms Worldwide
           </h2>
           <p className="text-lg opacity-90 fade-in-up">
-            Join the community that's transforming perimenopause management
+            Join the community that's transforming perimenopause symptom management
           </p>
         </div>
         

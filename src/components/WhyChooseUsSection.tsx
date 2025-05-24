@@ -5,26 +5,26 @@ const WhyChooseUsSection = () => {
   const reasons = [
     {
       icon: '🧠',
-      title: 'Science-Backed Approach',
-      description: 'Our AI analyzes 50+ symptom patterns using medical research to provide accurate insights.',
+      title: 'Science-Backed Perimenopause Symptom Analysis',
+      description: 'Our AI analyzes 50+ perimenopause symptom patterns using medical research to provide accurate insights for your unique experience.',
       highlight: 'Evidence-based'
     },
     {
       icon: '🎯',
-      title: 'Personalized Just for You',
-      description: 'Every recommendation is tailored to your unique symptoms, lifestyle, and health patterns.',
+      title: 'Personalized Perimenopause Symptom Relief',
+      description: 'Every recommendation is tailored to your specific perimenopause symptoms, lifestyle, and hormonal patterns for maximum effectiveness.',
       highlight: 'Custom solutions'
     },
     {
       icon: '⚡',
-      title: 'Instant Relief Strategies',
-      description: 'Get immediate, actionable tips when symptoms strike, not generic advice that might not work.',
+      title: 'Instant Perimenopause Symptom Management',
+      description: 'Get immediate, actionable tips when perimenopause symptoms strike - from hot flashes to mood changes - not generic advice.',
       highlight: 'Real-time help'
     },
     {
       icon: '🤝',
-      title: 'Expert-Designed Care',
-      description: 'Created with reproductive health specialists and validated by thousands of real users.',
+      title: 'Expert-Designed Perimenopause Care',
+      description: 'Created with reproductive health specialists and validated by thousands of women experiencing perimenopause symptoms.',
       highlight: 'Medical expertise'
     }
   ];
@@ -34,10 +34,10 @@ const WhyChooseUsSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-            Why 15,000+ Women Choose PeriTrack
+            Why 15,000+ Women Choose PeriTrack for Perimenopause Symptoms
           </h2>
           <p className="text-body-large text-warm-gray max-w-2xl mx-auto fade-in-up">
-            We're not just another period app. We're your personal perimenopause management system.
+            We're not just another period app. We're your comprehensive perimenopause symptom management system.
           </p>
         </div>
 
