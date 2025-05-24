@@ -9,6 +9,7 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
+import ComprehensiveTestingOffer from "@/components/results/ComprehensiveTestingOffer";
 
 // Add global styles for remaining components
 const globalStyles = `
@@ -330,6 +331,11 @@ const Results = () => {
               scores={hormoneScores}
               scoreCategory={scoreCategory}
             />
+          </div>
+
+          {/* Comprehensive Testing Offer */}
+          <div className="mb-12">
+            <ComprehensiveTestingOffer />
           </div>
         </div>
       </div>
