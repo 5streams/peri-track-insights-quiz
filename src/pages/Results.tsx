@@ -314,16 +314,8 @@ const Results = () => {
       setUserInfo(JSON.parse(storedUserInfo));
     }
 
-    const timer = setTimeout(() => {
-      document.querySelectorAll('.reveal-section').forEach((el) => {
-        if (!el.classList.contains('revealed')) {
-          el.classList.add('revealed');
-        }
-      });
-      setIsLoaded(true);
-    }, 300);
-
-    return () => clearTimeout(timer);
+    // Remove the delayed reveal and make everything visible immediately
+    setIsLoaded(true);
   }, [navigate]);
 
   // Inject global styles
@@ -397,9 +389,9 @@ const Results = () => {
     <div className="min-h-screen flex flex-col bg-white">
       {/* Results Section */}
       <div className="w-full max-w-4xl mx-auto px-4 md:px-6 lg:px-8 py-8">
-        <div className={containerClass}>
-          {/* Results Header with Score and User Name - Force visibility */}
-          <div className="revealed mb-12">
+        <div className="results-container all-visible">
+          {/* Results Header with Score and User Name */}
+          <div className="mb-12">
             <ResultsHeader 
               score={hormoneScores.overall} 
               firstName={capitalizedFirstName} 
@@ -408,8 +400,8 @@ const Results = () => {
             />
           </div>
           
-          {/* Personalized Assessment - Force visibility */}
-          <div className="revealed mb-12">
+          {/* Personalized Assessment */}
+          <div className="mb-12">
             <PersonalizedAssessment
               scoreCategory={scoreCategory}
               firstName={capitalizedFirstName}
@@ -417,8 +409,8 @@ const Results = () => {
             />
           </div>
           
-          {/* Hormone Insights - Force visibility */}
-          <div className="revealed mb-12">
+          {/* Hormone Insights */}
+          <div className="mb-12">
             <HormoneInsights 
               scores={hormoneScores}
               scoreCategory={scoreCategory}
@@ -427,99 +419,112 @@ const Results = () => {
         </div>
       </div>
 
-      {/* TryPeriTrack Content - Full Width Sections */}
+      {/* TryPeriTrack Content - Full Width Sections - Make all visible */}
       <div className="flex-grow w-full">
-        {/* Hero Section - Full Width */}
+        {/* Hero Section */}
         <div className="w-full">
           <HeroSection />
         </div>
 
-        {/* Other Sections with Full Width Backgrounds */}
+        {/* Stats Section */}
         <div className="w-full bg-white">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
             <StatsSection />
           </div>
         </div>
 
+        {/* Problem Section */}
         <div className="w-full bg-gray-50">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
             <ProblemSection />
           </div>
         </div>
 
+        {/* Solution Section */}
         <div className="w-full bg-white">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
             <SolutionSection />
           </div>
         </div>
 
+        {/* Why Choose Us Section */}
         <div className="w-full bg-gray-50">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
             <WhyChooseUsSection />
           </div>
         </div>
 
+        {/* Features Section */}
         <div id="features" className="w-full bg-white py-12">
           <div className="container mx-auto px-4 md:px-6 lg:px-8">
             <FeaturesSection />
           </div>
         </div>
 
+        {/* Comparison Section */}
         <div className="w-full bg-gray-50">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
             <ComparisonSection />
           </div>
         </div>
 
+        {/* How It Works Section */}
         <div id="how-it-works" className="w-full bg-white py-12">
           <div className="container mx-auto px-4 md:px-6 lg:px-8">
             <HowItWorksSection />
           </div>
         </div>
 
+        {/* Luna Section */}
         <div className="w-full bg-gray-50">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
             <LunaSection />
           </div>
         </div>
 
+        {/* Testimonial Carousel */}
         <div className="w-full bg-white">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
             <TestimonialCarousel />
           </div>
         </div>
 
+        {/* Social Proof Section */}
         <div className="w-full bg-gray-50">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
             <SocialProofSection />
           </div>
         </div>
 
+        {/* Pricing Section */}
         <div id="pricing" className="w-full bg-white py-12">
           <div className="container mx-auto px-4 md:px-6 lg:px-8">
             <PricingSection />
           </div>
         </div>
 
+        {/* FAQ Section */}
         <div id="faq" className="w-full bg-gray-50 py-12">
           <div className="container mx-auto px-4 md:px-6 lg:px-8">
             <FAQSection />
           </div>
         </div>
 
+        {/* Final CTA Section */}
         <div className="w-full bg-white">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
             <FinalCTASection />
           </div>
         </div>
 
+        {/* Trust Footer */}
         <div className="w-full bg-gray-50">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12">
             <TrustFooter />
           </div>
         </div>
         
-        {/* Global Trial Signup Modal that can be triggered from anywhere */}
+        {/* Global Trial Signup Modal */}
         <TrialSignupModal 
           isOpen={isSignupModalOpen}
           onClose={handleCloseSignupModal}
