@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -338,16 +337,6 @@ const Results = () => {
           {/* Comprehensive Testing Offer */}
           <div className="mb-12">
             <ComprehensiveTestingOffer />
-          </div>
-
-          {/* First Hormone Order Form */}
-          <div className="mb-12">
-            <HormoneOrderForm />
-          </div>
-
-          {/* Second Hormone Order Form */}
-          <div className="mb-12">
-            <HormoneOrderForm />
           </div>
         </div>
       </div>
