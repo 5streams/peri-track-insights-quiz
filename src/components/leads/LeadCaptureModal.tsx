@@ -84,12 +84,15 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
         : source === 'free_trial' 
         ? `Phone: ${phoneNumber}, Address: ${address}, Captured at: ${new Date().toISOString()}` 
         : `Captured at: ${new Date().toISOString()}`;
+
+      // Set pricing tier to "BW" for bloodwork orders
+      const finalPricingTier = isHormoneTestingOffer ? "BW" : pricingPlan;
         
       console.log("LeadCaptureModal: About to save lead with data:", {
         firstName: firstName.trim(),
         email: email.trim(),
         source,
-        pricingPlan,
+        pricingPlan: finalPricingTier,
         quizResults,
         additionalNotes
       });
@@ -98,7 +101,7 @@ const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({
         firstName.trim(), 
         email.trim(), 
         source, 
-        pricingPlan, 
+        finalPricingTier, 
         quizResults,
         additionalNotes
       );
