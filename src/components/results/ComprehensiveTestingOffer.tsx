@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -203,6 +202,16 @@ const ComprehensiveTestingOffer: React.FC = () => {
                 <li className="flex items-center"><CheckCircle className="text-green-500 mr-1" size={10} />Lifestyle optimization plan</li>
               </ul>
             </div>
+          </div>
+
+          {/* Add CTA Button */}
+          <div className="mt-4 text-center">
+            <Button 
+              onClick={handleOrderNow}
+              className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold py-2 px-6 rounded-lg text-sm transform hover:scale-105 transition-all duration-200"
+            >
+              Order Bloodwork
+            </Button>
           </div>
         </CardContent>
       </Card>
