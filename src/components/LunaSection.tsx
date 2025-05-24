@@ -17,23 +17,23 @@ const LunaSection = () => {
   const chatMessages = [
     {
       user: true,
-      message: "I'm having terrible hot flashes at work. What can I do?"
+      message: "I've been gaining weight during perimenopause and nothing seems to work. Can you help me understand what's happening?"
     },
     {
       user: false,
-      message: "I see you've been tracking hot flashes for 2 weeks. Based on your patterns, they seem to happen most between 2-4 PM. Here are 3 strategies that work for your symptom profile:"
+      message: "I see you've been tracking your weight patterns for 3 weeks. Based on your data, I notice your weight fluctuates most during the luteal phase of your cycle. This is very common during perimenopause due to hormonal changes."
     },
     {
       user: false,
-      message: "1. Cooling breathwork: 4-4-6 breathing (in for 4, hold 4, out for 6)\n2. Keep a cooling towel at your desk\n3. Your triggers show stress + afternoon coffee might be contributing"
+      message: "Your tracking shows weight increases correlate with: 1. Sleep disruption (less than 6 hours), 2. Higher stress days, 3. Certain foods that may trigger inflammation. Want me to show you the specific patterns I've identified?"
     },
     {
       user: true,
-      message: "That's so specific to me! How did you know about the coffee?"
+      message: "That's so specific to me! How did you know about my sleep and stress patterns?"
     },
     {
       user: false,
-      message: "I noticed in your tracking that hot flashes increased 60-90 minutes after you logged coffee consumption. Your body might be more sensitive to caffeine during perimenopause. Want to try cutting it after 12 PM for a week?"
+      message: "I analyzed your daily tracking data and noticed weight changes typically happen 1-2 days after poor sleep nights and high stress days. Your metabolism may be more sensitive during perimenopause. Let's work on optimizing your sleep and stress management first - this often helps with weight stability."
     }
   ];
 
