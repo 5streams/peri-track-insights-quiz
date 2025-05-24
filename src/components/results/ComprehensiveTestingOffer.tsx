@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -159,6 +160,122 @@ const ComprehensiveTestingOffer: React.FC = () => {
               <li>• "Normal" doesn't mean "optimal" for symptom relief</li>
               <li>• Many doctors dismiss perimenopause symptoms as "just aging"</li>
             </ul>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* New Value Proposition Section */}
+      <Card className="border-l-2 border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50">
+        <CardContent className="p-8">
+          <h2 className="font-headline text-2xl lg:text-3xl font-bold text-blue-800 mb-6 text-center">
+            🎯 Here's Exactly What You'll Get With Your Results (And Why It Changes Everything)
+          </h2>
+          
+          <div className="mb-6">
+            <p className="text-lg text-gray-700 text-center max-w-3xl mx-auto">
+              Getting your bloodwork isn't just about numbers on a page. It's about finally having the roadmap to feeling like yourself again.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-blue-200">
+              <div className="text-3xl mb-3">🎯</div>
+              <h3 className="font-semibold text-lg text-gray-800 mb-3">Your Personalized Treatment Roadmap</h3>
+              <p className="text-gray-700 mb-3"><strong>Instead of guessing what might help,</strong> you'll get specific recommendations based on YOUR exact hormone levels:</p>
+              <ul className="space-y-2 text-gray-700">
+                <li>• Exact supplements that work for your deficiencies</li>
+                <li>• Bioidentical hormone therapy recommendations (if needed)</li>
+                <li>• Lifestyle changes that target your specific imbalances</li>
+                <li>• Timing guidance for maximum effectiveness</li>
+              </ul>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-blue-200">
+              <div className="text-3xl mb-3">💪</div>
+              <h3 className="font-semibold text-lg text-gray-800 mb-3">Stop Wasting Money on Things That Don't Work</h3>
+              <p className="text-gray-700 mb-3"><strong>No more trial and error.</strong> Your results show exactly what your body needs:</p>
+              <ul className="space-y-2 text-gray-700">
+                <li>• Know which supplements are useless for YOU</li>
+                <li>• Understand why previous treatments failed</li>
+                <li>• Get targeted solutions that actually work</li>
+                <li>• Save hundreds on ineffective products</li>
+              </ul>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-blue-200">
+              <div className="text-3xl mb-3">🩺</div>
+              <h3 className="font-semibold text-lg text-gray-800 mb-3">Become Your Own Health Advocate</h3>
+              <p className="text-gray-700 mb-3"><strong>Never be dismissed by doctors again.</strong> Armed with comprehensive data:</p>
+              <ul className="space-y-2 text-gray-700">
+                <li>• Show doctors exactly what's wrong</li>
+                <li>• Request specific treatments with confidence</li>
+                <li>• Get taken seriously at medical appointments</li>
+                <li>• Make informed decisions about your health</li>
+              </ul>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-blue-200">
+              <div className="text-3xl mb-3">⚡</div>
+              <h3 className="font-semibold text-lg text-gray-800 mb-3">Fast-Track Your Recovery</h3>
+              <p className="text-gray-700 mb-3"><strong>Start feeling better in weeks, not years:</strong></p>
+              <ul className="space-y-2 text-gray-700">
+                <li>• Target the root cause immediately</li>
+                <li>• Skip months of unsuccessful treatments</li>
+                <li>• Get relief from your worst symptoms first</li>
+                <li>• Monitor progress with follow-up testing</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg mb-6">
+            <h3 className="font-semibold text-xl text-gray-800 mb-4 text-center">🌟 The Bottom Line: Transform From Confused to Confident</h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-red-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-red-700 mb-3">Before Your Results:</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li>❌ Trying random supplements hoping something works</li>
+                  <li>❌ Doctors saying "you're fine" when you feel terrible</li>
+                  <li>❌ Wondering if you're going crazy</li>
+                  <li>❌ Symptoms getting worse with no plan</li>
+                </ul>
+              </div>
+              <div className="bg-green-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-green-700 mb-3">After Your Results:</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li>✅ Exact treatment plan based on YOUR data</li>
+                  <li>✅ Confidence in every health decision</li>
+                  <li>✅ Clear understanding of what's happening</li>
+                  <li>✅ Targeted solutions that actually work</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg border border-gray-200 mb-6">
+            <h3 className="font-semibold text-lg text-gray-800 mb-4">📋 Real Example: What Your Results Look Like</h3>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="font-semibold text-gray-800 mb-3">Sarah's Results Revealed:</p>
+              <ul className="space-y-2 text-gray-700 mb-4">
+                <li><strong>Progesterone:</strong> 67% below optimal (explaining her insomnia)</li>
+                <li><strong>Testosterone:</strong> 43% below optimal (explaining brain fog and low energy)</li>
+                <li><strong>Cortisol:</strong> 3x higher than normal (explaining anxiety and weight gain)</li>
+                <li><strong>Thyroid:</strong> T3 conversion issues (explaining metabolism problems)</li>
+              </ul>
+              <p className="text-gray-700 mb-3"><strong>Her Personalized Plan:</strong> Specific progesterone support, adaptogenic herbs for cortisol, T3 support nutrients, and stress management protocol.</p>
+              <p className="text-green-700 font-semibold"><strong>Results in 6 weeks:</strong> Sleeping 7+ hours nightly, lost 12 pounds, energy back to normal, anxiety 80% improved.</p>
+            </div>
+          </div>
+
+          <div className="bg-red-50 p-6 rounded-lg border-l-4 border-red-400">
+            <h3 className="font-semibold text-lg text-red-700 mb-3">⚡ Why Waiting Even One More Month Costs You</h3>
+            <p className="text-gray-700 mb-3">Every month you delay testing is another month of:</p>
+            <ul className="space-y-2 text-gray-700 mb-4">
+              <li>• Wasting money on supplements that might be wrong for your body</li>
+              <li>• Symptoms potentially getting worse</li>
+              <li>• Missing the optimal intervention window</li>
+              <li>• Living with preventable suffering</li>
+            </ul>
+            <p className="font-semibold text-red-700">Your comprehensive hormone roadmap is waiting. Get the answers you deserve.</p>
           </div>
         </CardContent>
       </Card>
