@@ -56,21 +56,21 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
   return (
     <Card className="mb-8 reveal-section transform opacity-0 border-t-4 border-[#5D4154]">
       <CardContent className="p-6 md:p-8">
-        <h2 className="text-xl md:text-2xl font-bold text-[#5D4154] mb-6">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#5D4154] mb-6">
           YOUR HORMONE ASSESSMENT
         </h2>
         
         {/* Hormone patterns description */}
         <div className="bg-white p-4 rounded-lg mb-8 border border-gray-200 shadow-sm">
-          <h4 className="text-sm font-bold text-[#5D4154] mb-3">Your Three-Hormone Pattern:</h4>
+          <h4 className="text-base md:text-lg font-bold text-[#5D4154] mb-3">Your Three-Hormone Pattern:</h4>
           
           <div className="space-y-3">
             {/* Hormone indicators with clear visual separation */}
             <div className="flex items-start">
               <div className="w-3 h-3 rounded-full mt-1.5 mr-2 flex-shrink-0 bg-[#F472B6]"></div>
               <div>
-                <span className="font-medium text-[#5D4154]">Estrogen:</span>{" "}
-                <span className="text-gray-700 text-sm">
+                <span className="font-medium text-[#5D4154] text-lg md:text-xl">Estrogen:</span>{" "}
+                <span className="text-gray-700 text-base md:text-lg">
                   {getHormoneScoreCategory(estrogen) === "mild" ? "Within optimal range with normal fluctuations" : 
                    getHormoneScoreCategory(estrogen) === "moderate" ? "Notable fluctuations affecting temperature regulation and mood stability" : 
                    "Pronounced fluctuations affecting temperature regulation and mood stability"}
@@ -81,8 +81,8 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
             <div className="flex items-start">
               <div className="w-3 h-3 rounded-full mt-1.5 mr-2 flex-shrink-0 bg-[#60A5FA]"></div>
               <div>
-                <span className="font-medium text-[#5D4154]">Progesterone:</span>{" "}
-                <span className="text-gray-700 text-sm">
+                <span className="font-medium text-[#5D4154] text-lg md:text-xl">Progesterone:</span>{" "}
+                <span className="text-gray-700 text-base md:text-lg">
                   {getHormoneScoreCategory(progesterone) === "mild" ? "Healthy levels supporting sleep and mood" : 
                    getHormoneScoreCategory(progesterone) === "moderate" ? "Moderate decline (30-40%) affecting sleep and mood" : 
                    "Significant decline (45-55%) affecting sleep and mood"}
@@ -93,8 +93,8 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
             <div className="flex items-start">
               <div className="w-3 h-3 rounded-full mt-1.5 mr-2 flex-shrink-0 bg-[#10B981]"></div>
               <div>
-                <span className="font-medium text-[#5D4154]">Testosterone:</span>{" "}
-                <span className="text-gray-700 text-sm">
+                <span className="font-medium text-[#5D4154] text-lg md:text-xl">Testosterone:</span>{" "}
+                <span className="text-gray-700 text-base md:text-lg">
                   {getHormoneScoreCategory(testosterone) === "mild" ? "Balanced levels supporting energy and vitality" : 
                    getHormoneScoreCategory(testosterone) === "moderate" ? "Notable decrease (25-35%) affecting energy and motivation" : 
                    "Substantial decrease (40-50%) affecting energy and motivation"}
@@ -104,7 +104,7 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
           </div>
           
           <div className="mt-4 pt-3 border-t border-gray-100">
-            <p className="text-sm text-[#5D4154] font-medium">
+            <p className="text-base md:text-lg text-[#5D4154] font-medium">
               {scoreCategory === "mild" ? "You are showing minimal perimenopause symptoms with hormone levels in optimal ranges." :
                scoreCategory === "moderate" ? "This specific pattern explains why you're experiencing your particular symptom cluster." :
                "This pattern explains why your symptoms feel so intense and why generic approaches may not work."}
@@ -114,9 +114,9 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
         
         {/* Estrogen Section */}
         <div className="mb-12">
-          <h3 className="text-lg font-semibold text-[#5D4154] mb-3 flex items-center">
+          <h3 className="text-xl md:text-2xl font-semibold text-[#5D4154] mb-3 flex items-center">
             ESTROGEN ASSESSMENT: 
-            <span className={`ml-2 ${getScoreColor(estrogen)}`}>
+            <span className={`ml-2 ${getScoreColor(estrogen)} text-lg md:text-xl`}>
               {estrogen <= 40 ? "EARLY CHANGES" : 
                estrogen <= 70 ? "MODERATE FLUCTUATIONS" : 
                "SIGNIFICANT FLUCTUATIONS"} [{estrogen}/100]
@@ -124,13 +124,13 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
           </h3>
           
           <div className="bg-gradient-to-r from-[#F472B6]/5 to-white p-4 rounded-lg mb-4">
-            <p className="text-gray-700">
+            <p className="text-gray-700 text-lg md:text-xl">
               {getHormoneExplanation("estrogen", getHormoneScoreCategory(estrogen))}
             </p>
           </div>
           
           <div className="mb-6">
-            <h4 className="font-medium text-[#5D4154] mb-2">
+            <h4 className="font-medium text-[#5D4154] mb-2 text-lg md:text-xl">
               This could potentially relate to your reported symptoms:
             </h4>
             <ul className="space-y-3">
@@ -140,8 +140,8 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
                     •
                   </div>
                   <div>
-                    <strong className="text-[#5D4154]">{symptom}</strong>
-                    <p className="text-sm text-gray-600 mt-1">
+                    <strong className="text-[#5D4154] text-lg md:text-xl">{symptom}</strong>
+                    <p className="text-gray-600 mt-1 text-base md:text-lg">
                       {getSymptomExplanation(symptom, "estrogen")}
                     </p>
                   </div>
@@ -153,9 +153,9 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
         
         {/* Progesterone Section */}
         <div className="mb-12">
-          <h3 className="text-lg font-semibold text-[#5D4154] mb-3 flex items-center">
+          <h3 className="text-xl md:text-2xl font-semibold text-[#5D4154] mb-3 flex items-center">
             PROGESTERONE ASSESSMENT: 
-            <span className={`ml-2 ${getScoreColor(progesterone)}`}>
+            <span className={`ml-2 ${getScoreColor(progesterone)} text-lg md:text-xl`}>
               {progesterone <= 40 ? "EARLY CHANGES" : 
                progesterone <= 70 ? "MODERATE CHANGES" : 
                "SIGNIFICANT CHANGES"} [{progesterone}/100]
@@ -163,13 +163,13 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
           </h3>
           
           <div className="bg-gradient-to-r from-[#60A5FA]/5 to-white p-4 rounded-lg mb-4">
-            <p className="text-gray-700">
+            <p className="text-gray-700 text-lg md:text-xl">
               {getHormoneExplanation("progesterone", getHormoneScoreCategory(progesterone))}
             </p>
           </div>
           
           <div className="mb-6">
-            <h4 className="font-medium text-[#5D4154] mb-2">
+            <h4 className="font-medium text-[#5D4154] mb-2 text-lg md:text-xl">
               This could potentially relate to your reported symptoms:
             </h4>
             <ul className="space-y-3">
@@ -179,8 +179,8 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
                     •
                   </div>
                   <div>
-                    <strong className="text-[#5D4154]">{symptom}</strong>
-                    <p className="text-sm text-gray-600 mt-1">
+                    <strong className="text-[#5D4154] text-lg md:text-xl">{symptom}</strong>
+                    <p className="text-gray-600 mt-1 text-base md:text-lg">
                       {getSymptomExplanation(symptom, "progesterone")}
                     </p>
                   </div>
@@ -192,9 +192,9 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
         
         {/* Testosterone Section */}
         <div className="mb-6">
-          <h3 className="text-lg font-semibold text-[#5D4154] mb-3 flex items-center">
+          <h3 className="text-xl md:text-2xl font-semibold text-[#5D4154] mb-3 flex items-center">
             TESTOSTERONE ASSESSMENT: 
-            <span className={`ml-2 ${getScoreColor(testosterone)}`}>
+            <span className={`ml-2 ${getScoreColor(testosterone)} text-lg md:text-xl`}>
               {testosterone <= 40 ? "EARLY CHANGES" : 
                testosterone <= 70 ? "MODERATE CHANGES" : 
                "SIGNIFICANT CHANGES"} [{testosterone}/100]
@@ -202,13 +202,13 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
           </h3>
           
           <div className="bg-gradient-to-r from-[#10B981]/5 to-white p-4 rounded-lg mb-4">
-            <p className="text-gray-700">
+            <p className="text-gray-700 text-lg md:text-xl">
               {getHormoneExplanation("testosterone", getHormoneScoreCategory(testosterone))}
             </p>
           </div>
           
           <div className="mb-6">
-            <h4 className="font-medium text-[#5D4154] mb-2">
+            <h4 className="font-medium text-[#5D4154] mb-2 text-lg md:text-xl">
               This could potentially relate to your reported symptoms:
             </h4>
             <ul className="space-y-3">
@@ -218,8 +218,8 @@ const HormoneInsights: React.FC<HormoneInsightsProps> = ({ scores, scoreCategory
                     •
                   </div>
                   <div>
-                    <strong className="text-[#5D4154]">{symptom}</strong>
-                    <p className="text-sm text-gray-600 mt-1">
+                    <strong className="text-[#5D4154] text-lg md:text-xl">{symptom}</strong>
+                    <p className="text-gray-600 mt-1 text-base md:text-lg">
                       {getSymptomExplanation(symptom, "testosterone")}
                     </p>
                   </div>
