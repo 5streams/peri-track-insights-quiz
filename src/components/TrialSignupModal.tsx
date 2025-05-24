@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { 
   Dialog,
@@ -194,7 +193,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
                   className="w-full bg-primary-gradient hover:bg-primary/90 text-white"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Processing..." : "Continue to Payment"} <ArrowRight className="ml-2 h-4 w-4" />
+                  {isLoading ? "Processing..." : "Sign Up"} <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
               
