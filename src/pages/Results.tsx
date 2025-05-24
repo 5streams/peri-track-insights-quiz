@@ -28,11 +28,6 @@ import ComparisonSection from "@/components/ComparisonSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 
-import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
-import PeritrackIntro from "@/components/results/PeritrackIntro";
-import LunaAIFeature from "@/components/results/LunaAIFeature";
-import SimplePricingSection from "@/components/results/SimplePricingSection";
-
 interface QuizResults {
   score: number;
   phase: string;
@@ -105,6 +100,7 @@ const Results = () => {
   
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#F9F5FF]/20 to-white">
+      {/* RESULTS HEADER SECTION - Constrained width */}
       <div className="w-full max-w-4xl mx-auto py-6 md:py-8 px-4 md:px-6 lg:px-8">
         {/* Results Header with Score and User Name */}
         <div className="mb-6">
@@ -126,7 +122,7 @@ const Results = () => {
         </div>
         
         {/* Hormone Insights */}
-        <div className="mb-6">
+        <div className="mb-8">
           <HormoneInsights 
             scores={hormoneScores}
             scoreCategory={scoreCategory}
@@ -151,32 +147,6 @@ const Results = () => {
         <FAQSection />
         <FinalCTASection />
         <TrustFooter />
-      </div>
-
-      {/* ORIGINAL RESULTS PAGE CONTENT CONTINUES - Back to constrained width */}
-      <div className="w-full max-w-4xl mx-auto py-6 md:py-8 px-4 md:px-6 lg:px-8">
-        {/* Peritrack Intro - Main call to action */}
-        <div className="mb-6">
-          <PeritrackIntro
-            onStartTrial={handleTrialCTA}
-            firstName={capitalizedFirstName}
-          />
-        </div>
-        
-        {/* Luna AI Feature */}
-        <div className="mb-6">
-          <LunaAIFeature onStartTrial={handleTrialCTA} />
-        </div>
-        
-        {/* Simple Pricing Section at the very bottom */}
-        <div className="mb-6">
-          <SimplePricingSection onStartTrial={handleTrialCTA} />
-        </div>
-        
-        {/* Perimenopause Explanation */}
-        <div className="mb-6">
-          <PerimenopauseExplanation scoreCategory={scoreCategory} />
-        </div>
       </div>
     </div>
   );
