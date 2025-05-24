@@ -10,7 +10,7 @@ export interface Lead {
   email: string;
   address?: string;
   source: 'quiz_results' | 'free_trial' | string;
-  pricing_tier?: 'monthly' | 'annual' | 'free_trial' | null;
+  pricing_tier?: 'monthly' | 'annual' | 'free_trial' | 'WGFreeTrial' | null;
   quiz_results?: any;
   created_at?: string;
   status: 'new' | 'contacted' | 'interested' | 'converted' | 'unqualified';
@@ -34,7 +34,7 @@ export const saveLead = async (
   name: string,
   email: string,
   source: 'quiz_results' | 'free_trial' | string,
-  pricingTier?: 'monthly' | 'annual' | 'free_trial' | null,
+  pricingTier?: 'monthly' | 'annual' | 'free_trial' | 'WGFreeTrial' | null,
   quizResults?: any,
   notes?: string,
   address?: string
