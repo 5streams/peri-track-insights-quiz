@@ -181,7 +181,7 @@ const Index = () => {
                 <Button 
                   onClick={handleStartQuiz}
                   size="lg" 
-                  className="bg-white text-[#4A2C5A] hover:bg-white/90 px-8 py-4 text-lg font-medium rounded-lg transition-colors shadow-md"
+                  className="bg-white text-[#6B4E7A] hover:bg-white/90 px-8 py-4 text-lg font-medium rounded-lg transition-colors shadow-md"
                 >
                   Start Your Free Assessment
                 </Button>
