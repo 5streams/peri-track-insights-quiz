@@ -3,7 +3,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 interface CTAButtonProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   size?: 'small' | 'medium' | 'large';
   variant?: 'primary' | 'secondary';
   className?: string;
@@ -11,7 +11,7 @@ interface CTAButtonProps {
 }
 
 const CTAButton: React.FC<CTAButtonProps> = ({ 
-  children, 
+  children = "Order Bloodwork Now!", 
   size = 'medium', 
   variant = 'secondary',
   className,
