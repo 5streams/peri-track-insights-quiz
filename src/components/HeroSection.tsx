@@ -75,7 +75,7 @@ const HeroSection = () => {
           <div className="hero-image relative fade-in-up">
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=600&h=600&fit=crop&auto=format" 
+                src="/lovable-uploads/0537213b-9be6-4241-bed0-9e9f3f61a94e.png" 
                 alt="Woman using tracking app in kitchen with healthy foods"
                 className="rounded-2xl shadow-2xl w-full"
               />
