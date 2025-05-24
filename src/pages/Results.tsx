@@ -10,26 +10,7 @@ import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
 
-// Import TryPeriTrack components
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import ProblemSection from "@/components/ProblemSection";
-import SolutionSection from "@/components/SolutionSection";
-import FeaturesSection from "@/components/FeaturesSection";
-import HowItWorksSection from "@/components/HowItWorksSection";
-import LunaSection from "@/components/LunaSection";
-import SocialProofSection from "@/components/SocialProofSection";
-import PricingSection from "@/components/PricingSection";
-import FAQSection from "@/components/FAQSection";
-import FinalCTASection from "@/components/FinalCTASection";
-import TrustFooter from "@/components/TrustFooter";
-import TrialSignupModal from "@/components/TrialSignupModal";
-import StatsSection from "@/components/StatsSection";
-import ComparisonSection from "@/components/ComparisonSection";
-import WhyChooseUsSection from "@/components/WhyChooseUsSection";
-import TestimonialCarousel from "@/components/TestimonialCarousel";
-
-// Add global styles for TryPeriTrack components
+// Add global styles for remaining components
 const globalStyles = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap');
   
@@ -49,7 +30,7 @@ const globalStyles = `
   .text-primary { color: rgb(93 65 84 / var(--tw-text-opacity, 1)); }
   .text-warm-gray { color: #6B7280; }
   .bg-warm-gray-50 { background-color: #F9FAFB; }
-  .from-\[#f8f5ff\] { --tw-gradient-from: #f8f5ff; --tw-gradient-to: rgba(248, 245, 255, 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .from-\\[#f8f5ff\\] { --tw-gradient-from: #f8f5ff; --tw-gradient-to: rgba(248, 245, 255, 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
 
   /* Typography */
   .font-headline {
@@ -148,7 +129,7 @@ const globalStyles = `
   .flex { display: flex; }
   .items-center { align-items: center; }
   .gap-6 { gap: 1.5rem; }
-  .min-h-\[60vh\] { min-height: 60vh; }
+  .min-h-\\[60vh\\] { min-height: 60vh; }
   .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
   .to-white { --tw-gradient-to: #ffffff; }
   .bg-white { background-color: #ffffff; }
@@ -202,32 +183,32 @@ const globalStyles = `
   .text-gray-500 { color: #6B7280; }
   .mt-2 { margin-top: 0.5rem; }
   .text-indigo-600 { color: #4F46E5; }
-  .hover\:text-indigo-500:hover { color: #6366F1; }
-  .focus\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
-  .focus\:ring-2:focus { --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color); box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000); }
-  .focus\:ring-indigo-500:focus { --tw-ring-opacity: 1; --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity)); }
-  .focus\:ring-offset-2:focus { --tw-ring-offset-width: 2px; }
-  .sm\:flex { display: flex; }
-  .sm\:items-start { align-items: flex-start; }
-  .sm\:justify-between { justify-content: space-between; }
-  .sm\:space-y-0 > :not([hidden]) ~ :not([hidden]) { --tw-space-y-reverse: 0; margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse))); margin-bottom: calc(0px * var(--tw-space-y-reverse)); }
-  .sm\:space-x-4 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 0; margin-right: calc(1rem * var(--tw-space-x-reverse)); margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse))); }
-  .sm\:text-left { text-align: left; }
-  .sm\:text-sm { font-size: 0.875rem; }
+  .hover\\:text-indigo-500:hover { color: #6366F1; }
+  .focus\\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
+  .focus\\:ring-2:focus { --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color); box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000); }
+  .focus\\:ring-indigo-500:focus { --tw-ring-opacity: 1; --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity)); }
+  .focus\\:ring-offset-2:focus { --tw-ring-offset-width: 2px; }
+  .sm\\:flex { display: flex; }
+  .sm\\:items-start { align-items: flex-start; }
+  .sm\\:justify-between { justify-content: space-between; }
+  .sm\\:space-y-0 > :not([hidden]) ~ :not([hidden]) { --tw-space-y-reverse: 0; margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse))); margin-bottom: calc(0px * var(--tw-space-y-reverse)); }
+  .sm\\:space-x-4 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 0; margin-right: calc(1rem * var(--tw-space-x-reverse)); margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse))); }
+  .sm\\:text-left { text-align: left; }
+  .sm\\:text-sm { font-size: 0.875rem; }
   
   /* Responsive utilities */
   @media (min-width: 768px) {
-    .md\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .md\\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
   }
   
   @media (min-width: 1024px) {
-    .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
-    .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .lg\:text-4xl { font-size: 2.25rem; }
+    .lg\\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+    .lg\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .lg\\:text-4xl { font-size: 2.25rem; }
   }
   
   @media (min-width: 1280px) {
-    .xl\:text-5xl { font-size: 3rem; }
+    .xl\\:text-5xl { font-size: 3rem; }
   }
 `;
 
@@ -251,7 +232,6 @@ const Results = () => {
     primarySymptoms: [] as string[]
   });
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
   const navigate = useNavigate();
   
   // Helper functions
@@ -259,40 +239,6 @@ const Results = () => {
     if (score <= 40) return "mild";
     if (score <= 70) return "moderate";
     return "severe";
-  }, []);
-
-  // Handlers
-  const handleTrialCTA = React.useCallback(() => {
-    localStorage.setItem("trialStartDate", new Date().toString());
-  }, []);
-
-  const handleOpenSignupModal = React.useCallback(() => {
-    setIsSignupModalOpen(true);
-  }, []);
-
-  const handleCloseSignupModal = React.useCallback(() => {
-    setIsSignupModalOpen(false);
-  }, []);
-
-  const handleCTAClick = React.useCallback((e: React.MouseEvent) => {
-    const button = e.currentTarget as HTMLElement;
-    console.log('CTA clicked:', {
-      button_location: button.closest('section')?.className || 'unknown',
-      button_text: button.textContent?.trim(),
-      lead_to: 'TrialSignupModal'
-    });
-  }, []);
-
-  const handleHashNavigation = React.useCallback(() => {
-    const hash = window.location.hash;
-    if (hash) {
-      const element = document.getElementById(hash.substring(1));
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
-    }
   }, []);
 
   // Data loading effect
@@ -336,34 +282,6 @@ const Results = () => {
     };
   }, []);
 
-  // Scroll and animation effects
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
-      }
-    );
-
-    const fadeElements = document.querySelectorAll('.fade-in-up');
-    fadeElements.forEach((el) => observer.observe(el));
-
-    handleHashNavigation();
-    window.addEventListener('hashchange', handleHashNavigation);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('hashchange', handleHashNavigation);
-    };
-  }, [handleHashNavigation]);
-
   // Derived state
   const scoreCategory = React.useMemo(
     () => results ? getScoreCategory(hormoneScores.overall) : "mild",
@@ -376,8 +294,6 @@ const Results = () => {
       : "",
     [userInfo.firstName]
   );
-
-  const containerClass = isLoaded ? "results-container all-visible" : "results-container";
 
   // Show loading state
   if (!results) {
@@ -395,7 +311,7 @@ const Results = () => {
               score={hormoneScores.overall} 
               firstName={capitalizedFirstName} 
               scoreCategory={scoreCategory}
-              onStartTrial={handleOpenSignupModal}
+              onStartTrial={() => {}}
             />
           </div>
           
@@ -416,72 +332,6 @@ const Results = () => {
             />
           </div>
         </div>
-      </div>
-
-      {/* TryPeriTrack Content - Full Width Sections */}
-      <div className="flex-grow w-full">
-        <HeroSection />
-
-        <div className="w-full bg-white">
-          <StatsSection />
-        </div>
-
-        <div className="w-full bg-gray-50">
-          <ProblemSection />
-        </div>
-
-        <div className="w-full bg-white">
-          <SolutionSection />
-        </div>
-
-        <div className="w-full bg-gray-50">
-          <WhyChooseUsSection />
-        </div>
-
-        <div id="features" className="w-full bg-white py-12">
-          <FeaturesSection />
-        </div>
-
-        <div className="w-full bg-gray-50">
-          <ComparisonSection />
-        </div>
-
-        <div id="how-it-works" className="w-full bg-white py-12">
-          <HowItWorksSection />
-        </div>
-
-        <div className="w-full bg-gray-50">
-          <LunaSection />
-        </div>
-
-        <div className="w-full bg-white">
-          <TestimonialCarousel />
-        </div>
-
-        <div className="w-full bg-gray-50">
-          <SocialProofSection />
-        </div>
-
-        <div id="pricing" className="w-full bg-white py-12">
-          <PricingSection />
-        </div>
-
-        <div id="faq" className="w-full bg-gray-50 py-12">
-          <FAQSection />
-        </div>
-
-        <div className="w-full bg-white">
-          <FinalCTASection />
-        </div>
-
-        <div className="w-full bg-gray-50">
-          <TrustFooter />
-        </div>
-        
-        <TrialSignupModal 
-          isOpen={isSignupModalOpen}
-          onClose={handleCloseSignupModal}
-        />
       </div>
     </div>
   );
