@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import LoadingSpinner from "@/components/results/LoadingSpinner";
 import { calculateHormoneScores } from "@/utils/scoreCalculation";
+import { AlertTriangle, TrendingUp, CheckCircle } from "lucide-react";
 
 interface QuizResults {
   score: number;
@@ -137,8 +138,11 @@ const Results = () => {
       <section className="py-12 bg-red-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
+            <div className="flex justify-center mb-4">
+              <AlertTriangle className="w-12 h-12 text-red-600" />
+            </div>
             <h2 className="text-3xl font-bold text-red-600 mb-8">
-              ⚠️ WARNING: WHAT HAPPENS NEXT WITHOUT ACTION
+              WARNING: WHAT HAPPENS NEXT WITHOUT ACTION
             </h2>
             
             <div className="bg-white rounded-lg p-8 shadow-lg">
@@ -181,6 +185,9 @@ const Results = () => {
       <section className="py-12 bg-green-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
+            <div className="flex justify-center mb-4">
+              <TrendingUp className="w-12 h-12 text-green-600" />
+            </div>
             <h2 className="text-3xl font-bold text-green-700 mb-8">
               BUT HERE'S THE AMAZING NEWS...
             </h2>
@@ -277,11 +284,26 @@ const Results = () => {
             <div className="bg-white/20 rounded-lg p-6 mb-8">
               <h3 className="text-2xl font-bold mb-4">START YOUR FREE 7-DAY TRIAL</h3>
               <ul className="text-left max-w-md mx-auto space-y-2 mb-6">
-                <li>✓ Personalized tracking focused on YOUR symptoms</li>
-                <li>✓ AI pattern recognition within days</li>
-                <li>✓ Luna AI support companion 24/7</li>
-                <li>✓ Lab results interpretation</li>
-                <li>✓ Your personal relief protocol</li>
+                <li className="flex items-center">
+                  <CheckCircle className="w-5 h-5 mr-2 flex-shrink-0" /> 
+                  Personalized tracking focused on YOUR symptoms
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="w-5 h-5 mr-2 flex-shrink-0" /> 
+                  AI pattern recognition within days
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="w-5 h-5 mr-2 flex-shrink-0" /> 
+                  Luna AI support companion 24/7
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="w-5 h-5 mr-2 flex-shrink-0" /> 
+                  Lab results interpretation
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="w-5 h-5 mr-2 flex-shrink-0" /> 
+                  Your personal relief protocol
+                </li>
               </ul>
               <p className="text-lg font-bold">$0 for 7 days, then just $9.99/month</p>
             </div>
