@@ -10,6 +10,11 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
+import ResultsStatsSection from "@/components/results/ResultsStatsSection";
+import ResultsProblemSection from "@/components/results/ResultsProblemSection";
+import ResultsSolutionSection from "@/components/results/ResultsSolutionSection";
+import ResultsComparisonSection from "@/components/results/ResultsComparisonSection";
+import ResultsTestimonialSection from "@/components/results/ResultsTestimonialSection";
 import PerimenopauseExplanation from "@/components/results/PerimenopauseExplanation";
 import PeritrackIntro from "@/components/results/PeritrackIntro";
 import LunaAIFeature from "@/components/results/LunaAIFeature";
@@ -132,6 +137,35 @@ const Results = () => {
               scoreCategory={scoreCategory}
             />
           </div>
+          
+          {/* NEW SECTIONS FROM TRYPERITRACK - Added after hormone insights */}
+          
+          {/* Stats Section */}
+          <div className="revealed mb-6">
+            <ResultsStatsSection />
+          </div>
+          
+          {/* Problem Section */}
+          <div className="revealed mb-6">
+            <ResultsProblemSection />
+          </div>
+          
+          {/* Solution Section */}
+          <div className="revealed mb-6">
+            <ResultsSolutionSection />
+          </div>
+          
+          {/* Comparison Section */}
+          <div className="revealed mb-6">
+            <ResultsComparisonSection />
+          </div>
+          
+          {/* Testimonial Section */}
+          <div className="revealed mb-6">
+            <ResultsTestimonialSection />
+          </div>
+          
+          {/* END NEW SECTIONS */}
           
           {/* Peritrack Intro - Main call to action - Force visibility */}
           <div className="revealed mb-6">
