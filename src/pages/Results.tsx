@@ -11,6 +11,22 @@ import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
 
+// Import all sales components from tryperitracker page
+import ProblemSection from "@/components/ProblemSection";
+import SolutionSection from "@/components/SolutionSection";
+import FeaturesSection from "@/components/FeaturesSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
+import LunaSection from "@/components/LunaSection";
+import SocialProofSection from "@/components/SocialProofSection";
+import PricingSection from "@/components/PricingSection";
+import FAQSection from "@/components/FAQSection";
+import FinalCTASection from "@/components/FinalCTASection";
+import TrustFooter from "@/components/TrustFooter";
+import StatsSection from "@/components/StatsSection";
+import ComparisonSection from "@/components/ComparisonSection";
+import WhyChooseUsSection from "@/components/WhyChooseUsSection";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
+
 interface QuizResults {
   score: number;
   phase: string;
@@ -128,7 +144,45 @@ const Results = () => {
               scoreCategory={scoreCategory}
             />
           </div>
+
+          {/* Bridge Section to Sales Content */}
+          <div className="revealed mb-8">
+            <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
+              <h2 className="font-headline font-bold text-2xl text-primary mb-4">
+                {capitalizedFirstName ? `${capitalizedFirstName}, Now That You Know Your Score, Here's How to Take Control` : "Now That You Know Your Score, Here's How to Take Control"}
+              </h2>
+              <p className="text-body-large text-warm-gray max-w-2xl mx-auto">
+                Understanding your perimenopause patterns is just the beginning. Here's how Peritrack helps you move from confusion to clarity and finally get the relief you deserve.
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Sales Content from TryPeriTrack Page */}
+      <div className="sales-content">
+        <StatsSection />
+        <ProblemSection />
+        <SolutionSection />
+        <WhyChooseUsSection />
+        <div id="features">
+          <FeaturesSection />
+        </div>
+        <ComparisonSection />
+        <div id="how-it-works">
+          <HowItWorksSection />
+        </div>
+        <LunaSection />
+        <TestimonialCarousel />
+        <SocialProofSection />
+        <div id="pricing">
+          <PricingSection />
+        </div>
+        <div id="faq">
+          <FAQSection />
+        </div>
+        <FinalCTASection />
+        <TrustFooter />
       </div>
     </div>
   );
