@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -11,6 +10,7 @@ import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import HormoneInsights from "@/components/results/HormoneInsights";
 import ComprehensiveTestingOffer from "@/components/results/ComprehensiveTestingOffer";
+import TrustFooter from "@/components/TrustFooter";
 
 // Add global styles for remaining components
 const globalStyles = `
@@ -340,6 +340,9 @@ const Results = () => {
           </div>
         </div>
       </div>
+      
+      {/* Trust Footer at the very bottom */}
+      <TrustFooter />
     </div>
   );
 };
