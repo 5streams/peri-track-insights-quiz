@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -168,7 +167,7 @@ const ComprehensiveTestingOffer: React.FC = () => {
       <Card className="border-l-2 border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50">
         <CardContent className="p-8">
           <h2 className="font-headline text-2xl lg:text-3xl font-bold text-blue-800 mb-6 text-center">
-            🎯 Here's Exactly What You'll Get With Your Results (And Why It Changes Everything)
+            It's Time To Take Action And Get To The Bottom Of Whats Going On With Your Body. Get Bloodwork To Find Out Exactly What's Going On!
           </h2>
           
           <div className="mb-6">
