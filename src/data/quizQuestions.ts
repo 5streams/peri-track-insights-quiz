@@ -109,5 +109,15 @@ export const quizQuestions: QuizQuestion[] = [
       { id: "50_54", text: "50-54" },
       { id: "55_plus", text: "55 or older" }
     ]
+  },
+  {
+    id: "bloodworkInterest",
+    text: "Have you ever wanted to get the proper bloodwork done in order to see exactly what might be going on with your body?",
+    type: "single",
+    options: [
+      { id: "thinking_about_it", text: "Yes I am thinking about it" },
+      { id: "not_at_this_time", text: "No not at this time" },
+      { id: "done_no_results", text: "I've had bloodwork done and nothing came from it" }
+    ]
   }
 ];
