@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -65,12 +66,17 @@ const Quiz = () => {
   };
   
   const handleSubmit = async (firstName: string, email: string) => {
+    console.log("handleSubmit called with:", { firstName, email });
     setIsLoading(true);
 
     try {
+      console.log("Starting quiz submission process...");
+      
       // 1. Save Lead and User information (this also creates/updates the user)
       // The quizResults are passed to saveLead, which will handle saving them to quiz_submissions
       const calculatedQuizResults = calculateResults(answers);
+      console.log("Calculated quiz results:", calculatedQuizResults);
+      
       const lead = await saveLead(
         firstName,
         email,
@@ -80,7 +86,10 @@ const Quiz = () => {
         "Lead captured from quiz completion."
       );
 
+      console.log("Lead saved:", lead);
+
       if (!lead || !lead.user_id) {
+        console.error("Lead or user_id is missing:", lead);
         toast({
           title: "Error Saving Progress",
           description: "Could not get user information to save answers. Please try again.",
@@ -92,6 +101,7 @@ const Quiz = () => {
       const currentUserId = lead.user_id;
       setUserId(currentUserId); // Store user ID
 
+      console.log("Saving individual quiz answers...");
       // 2. Save individual quiz answers to Supabase
       const answerPromises = Object.entries(answers).map(([questionId, answer]) => {
         const answerArray = Array.isArray(answer) ? answer : [answer];
@@ -115,6 +125,7 @@ const Quiz = () => {
         // Continue, as lead and overall submission are likely saved.
       }
 
+      console.log("Storing results in localStorage...");
       // Store results in localStorage for the results page (can be refactored later)
       localStorage.setItem("quizResults", JSON.stringify(calculatedQuizResults));
       localStorage.setItem("userInfo", JSON.stringify({ firstName, email, userId: currentUserId }));
@@ -130,6 +141,7 @@ const Quiz = () => {
         description: "Your results are being processed.",
       });
 
+      console.log("Navigating to results page...");
       navigate("/results");
 
     } catch (error) {
