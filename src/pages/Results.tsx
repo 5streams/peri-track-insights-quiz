@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -327,64 +325,6 @@ const Results = () => {
           </div>
         </div>
       </div>
-
-      {/* Add this section after the quiz results */}
-      <section className="tripwire-offer" style={{background: '#f8f6ff', padding: '40px 20px', margin: '40px 0', borderRadius: '16px'}}>
-        <div className="container" style={{maxWidth: '800px', margin: '0 auto'}}>
-          
-          {/* Start with just this headline */}
-          <h2 style={{color: '#6B4E7A', fontSize: '32px', textAlign: 'center', marginBottom: '20px'}}>
-            Your Results Reveal Something Critical...
-          </h2>
-          
-          <p style={{fontSize: '18px', textAlign: 'center', color: '#5D4A37', marginBottom: '30px'}}>
-            Your moderate perimenopause score puts you at the tipping point where symptoms either stabilize with the right intervention... or spiral into severe territory.
-          </p>
-          
-        </div>
-      </section>
-
-      {/* Story section */}
-      <div className="story-section" style={{background: 'white', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
-        <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
-          Dear Beautiful Sister, You're Not Yourself—And It's Breaking Your Heart 😢
-        </h3>
-        
-        <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
-          Four years ago, I was drowning in perimenopause hell. At 2:47 AM on a Tuesday, my husband found me on the bathroom floor, drenched in sweat and crying. I'd been waking up like this for 14 nights straight.
-        </p>
-        
-        <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
-          <strong>I looked at him with tears streaming down my face and whispered, "I'm losing myself... and I'm losing you."</strong>
-        </p>
-      </div>
-
-      {/* Offer section */}
-      <div className="offer-section" style={{background: 'linear-gradient(135deg, #6B4E7A 0%, #8B7A94 100%)', color: 'white', padding: '30px', borderRadius: '12px', textAlign: 'center', margin: '20px 0'}}>
-        
-        <h3 style={{color: '#D4AF37', fontSize: '28px', marginBottom: '15px'}}>
-          The EXACT Protocol That Saved My Marriage - Just $7
-        </h3>
-        
-        <p style={{fontSize: '18px', marginBottom: '20px'}}>
-          The same 3-week system that brought me back from the brink is available right now for just $7.
-        </p>
-        
-        <div style={{background: 'rgba(255,255,255,0.1)', padding: '20px', borderRadius: '8px', margin: '20px 0'}}>
-          <div style={{fontSize: '14px', opacity: 0.8}}>Was $97</div>
-          <div style={{fontSize: '48px', fontWeight: 'bold', color: '#D4AF37'}}>$7</div>
-          <div style={{fontSize: '14px'}}>24-hour special price</div>
-        </div>
-        
-        <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '20px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0'}}>
-          🎁 Get My Protocol for $7 - Download Instantly!
-        </button>
-        
-        <p style={{fontSize: '14px', opacity: 0.9}}>
-          ✅ Instant PDF download ✅ 30-day guarantee ✅ Start tonight
-        </p>
-        
-      </div>
       
       {/* Trust Footer at the very bottom */}
       <TrustFooter />
@@ -393,4 +333,3 @@ const Results = () => {
 };
 
 export default Results;
-
