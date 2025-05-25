@@ -330,16 +330,16 @@ const Results = () => {
             {/* Critical Assessment Section */}
             <section className="critical-assessment" style={{background: '#f8f6ff', padding: '40px 20px', margin: '40px 0', borderRadius: '16px'}}>
               <div className="container" style={{maxWidth: '800px', margin: '0 auto'}}>
-                <h2 style={{color: '#6B4E7A', fontSize: '32px', textAlign: 'center', marginBottom: '20px'}}>
+                <h2 style={{color: '#6B4E7A', fontSize: '36px', textAlign: 'center', marginBottom: '20px'}}>
                   Your Assessment Reveals Something Critical...
                 </h2>
-                <p style={{fontSize: '18px', textAlign: 'center', color: '#5D4A37', marginBottom: '30px'}}>
+                <p style={{fontSize: '22px', textAlign: 'center', color: '#5D4A37', marginBottom: '30px'}}>
                   Your moderate perimenopause score puts you in a dangerous zone.
                 </p>
-                <p style={{fontSize: '16px', textAlign: 'center', color: '#5D4A37', marginBottom: '20px'}}>
+                <p style={{fontSize: '18px', textAlign: 'center', color: '#5D4A37', marginBottom: '20px'}}>
                   You're not "fine" - you're at the tipping point where symptoms either stabilize with the right intervention... or spiral into severe territory.
                 </p>
-                <p style={{fontSize: '16px', textAlign: 'center', color: '#5D4A37'}}>
+                <p style={{fontSize: '18px', textAlign: 'center', color: '#5D4A37'}}>
                   Those vasomotor symptoms, sleep disturbances, and mood fluctuations you're experiencing right now? They're warning signals that your hormones are collapsing.
                 </p>
               </div>
@@ -347,51 +347,51 @@ const Results = () => {
 
             {/* 72-Hour Window Section */}
             <div className="intervention-window" style={{background: 'white', padding: '30px', borderRadius: '12px', margin: '20px 0', border: '2px solid #D4AF37'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 ❗ The 72-Hour Window That Saved My Marriage
               </h3>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 Here's what most doctors won't tell you: Women with moderate perimenopause scores have a critical 72-hour intervention window.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 Act now, and you can prevent your symptoms from escalating.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 Wait, and you risk months or years of severe suffering.
               </p>
-              <p style={{lineHeight: '1.6', fontWeight: 'bold'}}>
+              <p style={{lineHeight: '1.6', fontWeight: 'bold', fontSize: '18px'}}>
                 I know because I lived through this exact scenario...
               </p>
             </div>
 
             {/* Personal Story Section */}
             <div className="story-section" style={{background: 'white', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 Dear Beautiful friend, You're Not Yourself—And It's Breaking Your Heart 😢
               </h3>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 Four years ago, I was drowning in perimenopause hell. My husband and I were that couple everyone envied—26 years of marriage, three incredible kids, and a love story so passionate that friends begged us to write a book.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 But perimenopause was destroying everything.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 At 2:47 AM on a Tuesday, my husband found me on the bathroom floor, drenched in sweat and crying. I'd been waking up like this for 14 nights straight. My perimenopause assessment score? 66/100 - almost identical to yours.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 <strong>I looked at him with tears streaming down my face and whispered, "I'm losing myself... and I'm losing you."</strong>
               </p>
             </div>
 
             {/* Love Story Dying Section */}
             <div className="love-story" style={{background: '#fff5f5', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 My Love Story Was Dying (And We Both Knew It) 💔
               </h3>
-              <p style={{lineHeight: '1.6', marginBottom: '15px', fontWeight: 'bold'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontWeight: 'bold', fontSize: '18px'}}>
                 What perimenopause stole from me:
               </p>
-              <ul style={{lineHeight: '1.6', marginBottom: '15px', paddingLeft: '20px'}}>
+              <ul style={{lineHeight: '1.6', marginBottom: '15px', paddingLeft: '20px', fontSize: '18px'}}>
                 <li>I had zero energy - couldn't even play with my kids</li>
                 <li>My libido disappeared - we became roommates, not lovers</li>
                 <li>Mood swings so severe I'd snap at everyone, then cry for hours</li>
@@ -399,95 +399,95 @@ const Results = () => {
                 <li>Brain fog so bad I feared early dementia</li>
                 <li>Our once-electric marriage felt cold and empty</li>
               </ul>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 We tried everything. Moved to Mexico hoping a fresh start would help. Hit the gym religiously for 8 months. Kept up weekly date nights. Even tried a couples' resort as my last desperate attempt to save our marriage.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 Nothing worked. I watched myself disappear and felt helpless to stop it.
               </p>
-              <p style={{lineHeight: '1.6', fontWeight: 'bold'}}>
+              <p style={{lineHeight: '1.6', fontWeight: 'bold', fontSize: '18px'}}>
                 I was terrified our 26-year love story was ending because of me.
               </p>
             </div>
 
             {/* Couple Discovery Section */}
             <div className="discovery" style={{background: '#f0fff4', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 The Couple That Changed Everything ⚡️
               </h3>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 At that resort (our final attempt to reconnect), we met an incredible couple. They were 47 - older than us - but radiant, muscular, vibrant, and SO in love. They looked 10 years younger and had this magnetic energy.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 My husband had to ask their secret.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 The husband leaned in and said, "You've got to hack your hormones the right way. Find the right expert."
               </p>
-              <p style={{lineHeight: '1.6', fontWeight: 'bold'}}>
+              <p style={{lineHeight: '1.6', fontWeight: 'bold', fontSize: '18px'}}>
                 Those 10 words saved my marriage.
               </p>
             </div>
 
             {/* Discovery Section */}
             <div className="hormone-discovery" style={{background: 'white', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 The Discovery That Brought Me Back to Life 🗝️
               </h3>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 We found a hormone optimization expert in Mexico - not some random doctor, but a genius who understood how to rebuild hormones properly.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 My bloodwork revealed the devastating truth: My hormones were nearly gone. Testosterone, progesterone, estrogen - all critically low. No wonder I felt like I was dying.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 The expert said something that changed everything:
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px', fontStyle: 'italic', fontWeight: 'bold'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontStyle: 'italic', fontWeight: 'bold', fontSize: '20px'}}>
                 "No diet or workout can fix missing hormones. And the wrong approach makes it worse. But with the right protocol, we can have you feeling like yourself again in 3 weeks."
               </p>
-              <p style={{lineHeight: '1.6'}}>
+              <p style={{lineHeight: '1.6', fontSize: '18px'}}>
                 He gave me the Hormonal Optimization Protocol - targeted nutrition, gentle movement, and strategic hormone support.
               </p>
             </div>
 
             {/* 3 Weeks Later Section */}
             <div className="transformation" style={{background: 'linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%)', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 3 Weeks Later: I Came Roaring Back to Life! 🎉
               </h3>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 <strong>Week 1:</strong> I slept through the night for the first time in months
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 <strong>Week 2:</strong> My energy returned, mood stabilized, hair stopped falling out
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 <strong>Week 3:</strong> My libido EXPLODED - we were sneaking away like teenagers!
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 I'm not exaggerating - we were making love at my parents' house during vacation like we were 25 again!
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 After 26 years of marriage, I became more passionate, more confident, more in love than ever. I transformed from a shadow of myself into this vibrant, energetic woman who could light up any room.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 My kids said, "Mom's back!" My friends asked what I was doing differently.
               </p>
-              <p style={{lineHeight: '1.6', fontWeight: 'bold'}}>
+              <p style={{lineHeight: '1.6', fontWeight: 'bold', fontSize: '18px'}}>
                 The secret? I hacked my hormones the right way.
               </p>
             </div>
 
             {/* Best Life Section */}
             <div className="best-life" style={{background: '#f8f6ff', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 Now I'm Living My Best Life (At 47!) 🌟
               </h3>
-              <p style={{lineHeight: '1.6', marginBottom: '15px', fontWeight: 'bold'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontWeight: 'bold', fontSize: '18px'}}>
                 Today, four years later:
               </p>
-              <ul style={{lineHeight: '1.6', marginBottom: '15px', paddingLeft: '20px'}}>
+              <ul style={{lineHeight: '1.6', marginBottom: '15px', paddingLeft: '20px', fontSize: '18px'}}>
                 <li>I'm more energetic than women half my age</li>
                 <li>Our sex life is incredible - better than our honeymoon phase</li>
                 <li>I'm confident, radiant, and glowing</li>
@@ -495,50 +495,50 @@ const Results = () => {
                 <li>I help thousands of women through my perimenopause community</li>
                 <li>Our marriage is our friends' relationship goals</li>
               </ul>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 Perimenopause didn't ruin my love story - it made it BETTER.
               </p>
-              <p style={{lineHeight: '1.6', fontWeight: 'bold'}}>
+              <p style={{lineHeight: '1.6', fontWeight: 'bold', fontSize: '18px'}}>
                 But only because I found the right protocol at the right time.
               </p>
             </div>
 
             {/* Main Offer Section */}
             <div className="main-offer" style={{background: 'linear-gradient(135deg, #6B4E7A 0%, #8B7A94 100%)', color: 'white', padding: '30px', borderRadius: '12px', textAlign: 'center', margin: '20px 0'}}>
-              <h3 style={{color: '#D4AF37', fontSize: '28px', marginBottom: '15px'}}>
+              <h3 style={{color: '#D4AF37', fontSize: '32px', marginBottom: '15px'}}>
                 🎯 The EXACT Protocol That Saved My Marriage - Just $7
               </h3>
-              <p style={{fontSize: '18px', marginBottom: '20px'}}>
+              <p style={{fontSize: '20px', marginBottom: '20px'}}>
                 What if I told you the same 3-week system that brought me back from the brink is available right now for just $7?
               </p>
-              <p style={{fontSize: '16px', marginBottom: '20px'}}>
+              <p style={{fontSize: '18px', marginBottom: '20px'}}>
                 Not the $500 we paid that hormone expert. Not even $97.
               </p>
-              <p style={{fontSize: '16px', marginBottom: '20px'}}>
+              <p style={{fontSize: '18px', marginBottom: '20px'}}>
                 Just $7 - because when you're suffering like I was, money shouldn't be a barrier to getting your life back.
               </p>
               
               <div style={{background: 'rgba(255,255,255,0.1)', padding: '20px', borderRadius: '8px', margin: '20px 0'}}>
-                <div style={{fontSize: '14px', opacity: '0.8'}}>Was $97</div>
+                <div style={{fontSize: '16px', opacity: '0.8'}}>Was $97</div>
                 <div style={{fontSize: '48px', fontWeight: 'bold', color: '#D4AF37'}}>$7</div>
-                <div style={{fontSize: '14px'}}>24-hour special price</div>
+                <div style={{fontSize: '16px'}}>24-hour special price</div>
               </div>
               
-              <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '20px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0'}}>
+              <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '22px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0'}}>
                 🎁 Get My Protocol for $7 - Download Instantly!
               </button>
               
-              <p style={{fontSize: '14px', opacity: '0.9'}}>
+              <p style={{fontSize: '16px', opacity: '0.9'}}>
                 ✅ Instant PDF download ✅ 30-day guarantee ✅ Start tonight
               </p>
             </div>
 
             {/* What You Get Section */}
             <div className="what-you-get" style={{background: 'white', padding: '30px', borderRadius: '12px', margin: '20px 0', border: '2px solid #D4AF37'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 ⚡ What You Get Instantly (My Complete Transformation Guide):
               </h3>
-              <ul style={{lineHeight: '1.8', paddingLeft: '20px'}}>
+              <ul style={{lineHeight: '1.8', paddingLeft: '20px', fontSize: '18px'}}>
                 <li>📱 INSTANT DOWNLOAD - Start your transformation tonight</li>
                 <li>🔥 The 60-Second Hot Flash Killer - My emergency technique (works instantly)</li>
                 <li>😴 Sleep Rescue Protocol - How I went from 14 nights of hell to 8+ hours of bliss</li>
@@ -554,41 +554,41 @@ const Results = () => {
 
             {/* Real Results Section */}
             <div className="real-results" style={{background: '#f0fff4', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 🔥 Real Results From Women Just Like You:
               </h3>
               <div style={{marginBottom: '20px'}}>
-                <p style={{fontWeight: 'bold', color: '#D4AF37'}}>💕 "My husband said 'I have my wife back' after just 2 weeks!"</p>
-                <p style={{fontStyle: 'italic'}}>"We hadn't been intimate in 6 months. Now we can't keep our hands off each other!" - Jennifer, Score: 62</p>
+                <p style={{fontWeight: 'bold', color: '#D4AF37', fontSize: '18px'}}>💕 "My husband said 'I have my wife back' after just 2 weeks!"</p>
+                <p style={{fontStyle: 'italic', fontSize: '16px'}}>"We hadn't been intimate in 6 months. Now we can't keep our hands off each other!" - Jennifer, Score: 62</p>
               </div>
               <div style={{marginBottom: '20px'}}>
-                <p style={{fontWeight: 'bold', color: '#D4AF37'}}>💕 "From divorce papers to second honeymoon in 3 weeks"</p>
-                <p style={{fontStyle: 'italic'}}>"I was ready to leave my marriage. This protocol saved everything." - Sarah, Score: 67</p>
+                <p style={{fontWeight: 'bold', color: '#D4AF37', fontSize: '18px'}}>💕 "From divorce papers to second honeymoon in 3 weeks"</p>
+                <p style={{fontStyle: 'italic', fontSize: '16px'}}>"I was ready to leave my marriage. This protocol saved everything." - Sarah, Score: 67</p>
               </div>
               <div>
-                <p style={{fontWeight: 'bold', color: '#D4AF37'}}>💕 "My energy is through the roof - my kids can't keep up!"</p>
-                <p style={{fontStyle: 'italic'}}>"I went from exhausted mom to energizer bunny. My family is amazed." - Michelle, Score: 69</p>
+                <p style={{fontWeight: 'bold', color: '#D4AF37', fontSize: '18px'}}>💕 "My energy is through the roof - my kids can't keep up!"</p>
+                <p style={{fontStyle: 'italic', fontSize: '16px'}}>"I went from exhausted mom to energizer bunny. My family is amazed." - Michelle, Score: 69</p>
               </div>
             </div>
 
             {/* Brutal Truth Section */}
             <div className="brutal-truth" style={{background: '#fff5f5', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 ⏰ The Brutal Truth About Your 72-Hour Window
               </h3>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 {capitalizedFirstName}, here's what happens if you wait:
               </p>
-              <ul style={{lineHeight: '1.6', marginBottom: '20px', paddingLeft: '20px', color: '#d32f2f'}}>
+              <ul style={{lineHeight: '1.6', marginBottom: '20px', paddingLeft: '20px', color: '#d32f2f', fontSize: '18px'}}>
                 <li><strong>Tonight:</strong> Another sleepless, sweaty night while your relationship suffers</li>
                 <li><strong>This week:</strong> Continued mood swings pushing your partner away</li>
                 <li><strong>This month:</strong> Symptoms escalating toward severe territory</li>
                 <li><strong>This year:</strong> Watching your marriage become another perimenopause casualty</li>
               </ul>
-              <p style={{lineHeight: '1.6', marginBottom: '15px', fontWeight: 'bold'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontWeight: 'bold', fontSize: '18px'}}>
                 vs. What happens if you act RIGHT NOW:
               </p>
-              <ul style={{lineHeight: '1.6', paddingLeft: '20px', color: '#388e3c'}}>
+              <ul style={{lineHeight: '1.6', paddingLeft: '20px', color: '#388e3c', fontSize: '18px'}}>
                 <li><strong>Tonight:</strong> Start my sleep protocol</li>
                 <li><strong>72 hours:</strong> Notice dramatic symptom reduction</li>
                 <li><strong>2 weeks:</strong> Your partner notices the "old you" returning</li>
@@ -598,10 +598,10 @@ const Results = () => {
 
             {/* Why This Works Section */}
             <div className="why-works" style={{background: 'white', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 Why This Works When Everything Else Fails
               </h3>
-              <div style={{display: 'grid', gap: '15px'}}>
+              <div style={{display: 'grid', gap: '15px', fontSize: '18px'}}>
                 <div>
                   <span style={{color: '#d32f2f', fontWeight: 'bold'}}>❌ Generic perimenopause advice:</span> One-size-fits-all approach<br/>
                   <span style={{color: '#388e3c', fontWeight: 'bold'}}>✅ My protocol:</span> Battle-tested by a woman who almost lost everything
@@ -619,28 +619,28 @@ const Results = () => {
 
             {/* Personal Promise Section */}
             <div className="personal-promise" style={{background: '#f8f6ff', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 🛡️ My Personal Promise to You
               </h3>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 I'm staking my reputation on this: Try my protocol for 30 days. If you don't feel dramatically better - if your relationship doesn't improve - if you don't start sleeping better and feeling more like yourself - email me personally for a full refund.
               </p>
-              <p style={{lineHeight: '1.6', fontWeight: 'bold'}}>
+              <p style={{lineHeight: '1.6', fontWeight: 'bold', fontSize: '18px'}}>
                 But here's what's really going to happen: You'll start seeing results tonight. Your partner will notice changes within days. And in 3 weeks, you'll be thanking me for giving you your life back.
               </p>
             </div>
 
             {/* Final CTA Section */}
             <div className="final-cta" style={{background: 'linear-gradient(135deg, #6B4E7A 0%, #8B7A94 100%)', color: 'white', padding: '30px', borderRadius: '12px', textAlign: 'center', margin: '20px 0'}}>
-              <h3 style={{color: '#D4AF37', fontSize: '28px', marginBottom: '15px'}}>
+              <h3 style={{color: '#D4AF37', fontSize: '32px', marginBottom: '15px'}}>
                 🚀 Get My Marriage-Saving Protocol Now - $7
               </h3>
               
-              <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '20px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0', display: 'block', marginLeft: 'auto', marginRight: 'auto'}}>
+              <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '22px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0', display: 'block', marginLeft: 'auto', marginRight: 'auto'}}>
                 DOWNLOAD MY COMPLETE PROTOCOL - $7
               </button>
               
-              <div style={{marginTop: '20px'}}>
+              <div style={{marginTop: '20px', fontSize: '18px'}}>
                 <p>✅ Instant access to everything that saved my marriage</p>
                 <p>✅ Start your transformation tonight</p>
                 <p>✅ 30-day personal guarantee</p>
@@ -650,67 +650,67 @@ const Results = () => {
 
             {/* 24 Hour Warning */}
             <div className="time-warning" style={{background: '#fff5f5', padding: '20px', borderRadius: '8px', margin: '20px 0', border: '2px solid #d32f2f'}}>
-              <h4 style={{color: '#d32f2f', fontSize: '20px', marginBottom: '10px', textAlign: 'center'}}>
+              <h4 style={{color: '#d32f2f', fontSize: '24px', marginBottom: '10px', textAlign: 'center'}}>
                 ⏰ This $7 Price Disappears in 24 Hours
               </h4>
-              <p style={{textAlign: 'center', marginBottom: '10px'}}>
+              <p style={{textAlign: 'center', marginBottom: '10px', fontSize: '18px'}}>
                 After 24 hours, this goes back to $97 - the price other hormone programs charge.
               </p>
-              <p style={{textAlign: 'center', marginBottom: '10px'}}>
+              <p style={{textAlign: 'center', marginBottom: '10px', fontSize: '18px'}}>
                 Why $7 today? Because I remember sitting on that bathroom floor at 3 AM. I remember thinking my love story was over. I remember the desperation.
               </p>
-              <p style={{textAlign: 'center', fontWeight: 'bold'}}>
+              <p style={{textAlign: 'center', fontWeight: 'bold', fontSize: '18px'}}>
                 $7 removes every excuse. It's less than a Starbucks run, but it could save your marriage like it saved mine.
               </p>
             </div>
 
             {/* Don't Let Perimenopause Section */}
             <div className="dont-let" style={{background: 'white', padding: '30px', borderRadius: '12px', margin: '20px 0', textAlign: 'center'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+              <h3 style={{color: '#6B4E7A', fontSize: '28px', marginBottom: '15px'}}>
                 Don't Let Perimenopause Steal Your Love Story
               </h3>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 {capitalizedFirstName}, your score of {hormoneScores.overall}/100 is exactly where I was when I almost lost everything.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 The difference? I found the right protocol at the right time.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '18px'}}>
                 You have the same opportunity right now.
               </p>
-              <p style={{lineHeight: '1.6', marginBottom: '20px', fontWeight: 'bold'}}>
+              <p style={{lineHeight: '1.6', marginBottom: '20px', fontWeight: 'bold', fontSize: '18px'}}>
                 Your 72-hour transformation window starts the moment you click below.
               </p>
               
-              <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '20px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', marginBottom: '20px'}}>
+              <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '22px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', marginBottom: '20px'}}>
                 GET MY $7 MARRIAGE-SAVING PROTOCOL NOW
               </button>
             </div>
 
             {/* Signature Section */}
             <div className="signature" style={{background: '#f8f6ff', padding: '20px', borderRadius: '8px', margin: '20px 0'}}>
-              <p style={{fontStyle: 'italic', textAlign: 'center', marginBottom: '10px'}}>
+              <p style={{fontStyle: 'italic', textAlign: 'center', marginBottom: '10px', fontSize: '18px'}}>
                 To your passionate, unstoppable future,
               </p>
-              <p style={{fontWeight: 'bold', textAlign: 'center', marginBottom: '5px'}}>
+              <p style={{fontWeight: 'bold', textAlign: 'center', marginBottom: '5px', fontSize: '20px'}}>
                 Melanie Dagenais
               </p>
-              <p style={{fontSize: '14px', textAlign: 'center', color: '#666'}}>
+              <p style={{fontSize: '16px', textAlign: 'center', color: '#666'}}>
                 The woman who turned perimenopause into the best years of her marriage
               </p>
             </div>
 
             {/* P.S. Section */}
-            <div className="ps-section" style={{background: 'white', padding: '20px', borderRadius: '8px', margin: '20px 0', fontSize: '14px'}}>
-              <p style={{marginBottom: '10px'}}>
+            <div className="ps-section" style={{background: 'white', padding: '20px', borderRadius: '8px', margin: '20px 0', fontSize: '16px'}}>
+              <p style={{marginBottom: '10px', fontSize: '18px'}}>
                 <strong>P.S.</strong> The libido revival techniques alone saved my marriage. The sleep protocols gave me my energy back. The mood stability formula made us best friends again. You're getting a complete relationship rescue system for $7.
               </p>
-              <p style={{marginBottom: '15px'}}>
+              <p style={{marginBottom: '15px', fontSize: '18px'}}>
                 <strong>P.P.S.</strong> Four years later, I'm having the best sex of my 26-year marriage. My friends call us "relationship goals." Perimenopause could be the beginning of YOUR best years too - but only if you act in the next 24 hours.
               </p>
               
               <div style={{textAlign: 'center'}}>
-                <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '15px 30px', fontSize: '16px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer'}}>
+                <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '15px 30px', fontSize: '18px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer'}}>
                   CLICK HERE - SAVE YOUR RELATIONSHIP FOR $7
                 </button>
               </div>
