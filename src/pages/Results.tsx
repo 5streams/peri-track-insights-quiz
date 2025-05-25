@@ -327,7 +327,16 @@ const Results = () => {
 
           {/* Sales Pitch Content */}
           <div className="max-w-4xl mx-auto px-4 py-8">
-            <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
+            <div className="bg-white rounded-xl shadow-lg p-8 space-y-8">
+              {/* Hero Image */}
+              <div className="text-center mb-8">
+                <img 
+                  src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=800&h=400&fit=crop&crop=center" 
+                  alt="Woman feeling confident and empowered" 
+                  className="w-full h-64 object-cover rounded-xl shadow-lg"
+                />
+              </div>
+
               <h2 className="text-3xl font-bold text-center text-[#5D4154] mb-6">
                 Dear Beautiful Sister,
               </h2>
@@ -344,6 +353,15 @@ const Results = () => {
                 Maybe brain fog's got you scared you're losing your mind, or your libido's vanished, leaving your marriage cold and empty. Weight gain, hair loss, feeling like a stranger in your own skin—it's stealing your joy, isn't it?
               </p>
               
+              {/* Wellness Image */}
+              <div className="my-8">
+                <img 
+                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=300&fit=crop&crop=center" 
+                  alt="Woman practicing self-care and wellness" 
+                  className="w-full h-48 object-cover rounded-lg shadow-md"
+                />
+              </div>
+
               <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
                 You're Not Crazy—This Is My Story Too 💕
               </h3>
@@ -356,9 +374,20 @@ const Results = () => {
                 My Journey: A Love Story Nearly Lost 💔
               </h3>
               
-              <p className="text-lg text-gray-700 leading-relaxed">
-                My husband and I were the couple everyone envied. For 26 years, we raised three incredible kids (10, 12, and 15) and lived a love story so fiery, friends begged us to write a book. They'd gush, "How are you so in love, so passionate?" Our flirty connection was magic.
-              </p>
+              <div className="grid md:grid-cols-2 gap-8 items-center my-8">
+                <div>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    My husband and I were the couple everyone envied. For 26 years, we raised three incredible kids (10, 12, and 15) and lived a love story so fiery, friends begged us to write a book. They'd gush, "How are you so in love, so passionate?" Our flirty connection was magic.
+                  </p>
+                </div>
+                <div>
+                  <img 
+                    src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=500&h=300&fit=crop&crop=center" 
+                    alt="Beautiful sunset representing hope and new beginnings" 
+                    className="w-full h-48 object-cover rounded-lg shadow-md"
+                  />
+                </div>
+              </div>
               
               <p className="text-lg text-gray-700 leading-relaxed">
                 But four years ago, that magic started fading. I had no energy. My libido disappeared. My hair was falling out, I couldn't sleep, and my moods were a rollercoaster. I snapped at my kids, cried over nothing, and felt like I was failing as a wife. Our once-electric marriage felt hollow, and I saw the pain in my husband's eyes. I was terrified our love was dying.
@@ -388,6 +417,15 @@ const Results = () => {
                 Then, at that resort, we met a couple who blew us away. They were 47, older than us, yet radiant—muscular, vibrant, and so in love. My husband asked their secret. The man leaned in and said, "You've got to hack your hormones. Find the right expert." Those words were our lifeline.
               </p>
               
+              {/* Transformation Image */}
+              <div className="my-8">
+                <img 
+                  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&h=300&fit=crop&crop=center" 
+                  alt="Peaceful nature scene representing transformation and renewal" 
+                  className="w-full h-48 object-cover rounded-lg shadow-md"
+                />
+              </div>
+
               <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
                 The Secret That Changed Everything 🗝️
               </h3>
@@ -404,12 +442,23 @@ const Results = () => {
                 My Life Came Roaring Back in 3 Weeks! 🎉
               </h3>
               
-              <p className="text-lg text-gray-700 leading-relaxed">
-                My energy surged. My hair stopped falling out. My mood stabilized. And my libido? It exploded, and we were sneaking away like teenagers—even at my parents' house on vacation! In just 3 weeks, I felt vibrant, confident, and deeply in love again. My husband's energy and passion skyrocketed, too. We built muscle with light exercise, and our marriage became hotter, stronger, more passionate than ever—26 years in!
-              </p>
+              <div className="grid md:grid-cols-2 gap-8 items-center my-8">
+                <div>
+                  <img 
+                    src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=500&h=300&fit=crop&crop=center" 
+                    alt="Modern wellness and health concept" 
+                    className="w-full h-48 object-cover rounded-lg shadow-md"
+                  />
+                </div>
+                <div>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    My energy surged. My hair stopped falling out. My mood stabilized. And my libido? It exploded, and we were sneaking away like teenagers—even at my parents' house on vacation! In just 3 weeks, I felt vibrant, confident, and deeply in love again.
+                  </p>
+                </div>
+              </div>
               
               <p className="text-lg text-gray-700 leading-relaxed">
-                The key was rebuilding our hormones the right way with the right expert, using simple diet tweaks, light exercise, and BHRT. That's when I knew I had to share this with you.
+                My husband's energy and passion skyrocketed, too. We built muscle with light exercise, and our marriage became hotter, stronger, more passionate than ever—26 years in! The key was rebuilding our hormones the right way with the right expert, using simple diet tweaks, light exercise, and BHRT. That's when I knew I had to share this with you.
               </p>
               
               <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
@@ -424,7 +473,7 @@ const Results = () => {
                 —for just $14 (was $27, 24-hour deal!). This 33-page eBook is your step-by-step plan to rebuild and rebalance your hormones fast with targeted diet, light exercise, BHRT insights, and expert strategies, so you can feel vibrant, sexy, and in control again. Plus, it includes a self-assessment quiz to confirm if you're in perimenopause and a detailed symptom tracker to monitor your progress.
               </p>
               
-              <div className="bg-purple-100 p-6 rounded-lg text-center">
+              <div className="bg-purple-100 p-6 rounded-lg text-center my-8">
                 <p className="text-xl font-bold text-[#5D4154]">
                   ⏰ Only $14 for 24 hours—grab it before it's gone!
                 </p>
@@ -539,7 +588,7 @@ const Results = () => {
                 For $14, you get a $297 value—everything you need to confirm perimenopause and feel vibrant in 3 weeks!
               </p>
               
-              <div className="bg-red-100 p-6 rounded-lg text-center">
+              <div className="bg-red-100 p-6 rounded-lg text-center my-8">
                 <p className="text-xl font-bold text-red-600">
                   ⏰ 24 Hours Left—Grab Your $14 Guide Now!
                 </p>
@@ -553,7 +602,7 @@ const Results = () => {
                 Hear from sisters who crushed it with these secrets:
               </p>
               
-              <div className="bg-gray-50 p-6 rounded-lg space-y-4">
+              <div className="bg-gray-50 p-6 rounded-lg space-y-4 my-8">
                 <blockquote className="text-lg italic text-gray-700">
                   "Hot flashes and brain fog were killing me. MenoMastery's quiz confirmed perimenopause, and the 3-week plan got me sleeping and thinking clearly again!"
                   <footer className="text-right font-bold">—Tanya, 39</footer>
@@ -670,7 +719,7 @@ const Results = () => {
                 [Your Name], Co-Creator of MenoMastery
               </p>
               
-              <div className="bg-yellow-100 p-6 rounded-lg space-y-4">
+              <div className="bg-yellow-100 p-6 rounded-lg space-y-4 my-8">
                 <p className="text-lg text-gray-700 leading-relaxed">
                   <strong>P.S.</strong> Picture laughing with your family, feeling sexy, loving life again—in just 3 weeks. MenoMastery's quiz and tracker make it real for just $14. Click "Grab Your Guide Now!" before this 24-hour deal vanishes! 🚀
                 </p>
