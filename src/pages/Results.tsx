@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -503,34 +502,54 @@ const Results = () => {
               </p>
             </div>
 
-            {/* Main Offer Section */}
-            <div className="main-offer" style={{background: 'linear-gradient(135deg, #6B4E7A 0%, #8B7A94 100%)', color: 'white', padding: '30px', borderRadius: '12px', textAlign: 'center', margin: '20px 0'}}>
-              <h3 style={{color: '#D4AF37', fontSize: '32px', marginBottom: '15px'}}>
-                🎯 The EXACT Protocol That Saved My Marriage - Just $7
-              </h3>
-              <p style={{fontSize: '20px', marginBottom: '20px'}}>
-                What if I told you the same 3-week system that brought me back from the brink is available right now for just $7?
-              </p>
-              <p style={{fontSize: '18px', marginBottom: '20px'}}>
-                Not the $500 we paid that hormone expert. Not even $97.
-              </p>
-              <p style={{fontSize: '18px', marginBottom: '20px'}}>
-                Just $7 - because when you're suffering like I was, money shouldn't be a barrier to getting your life back.
-              </p>
-              
-              <div style={{background: 'rgba(255,255,255,0.1)', padding: '20px', borderRadius: '8px', margin: '20px 0'}}>
-                <div style={{fontSize: '16px', opacity: '0.8'}}>Was $97</div>
-                <div style={{fontSize: '48px', fontWeight: 'bold', color: '#D4AF37'}}>$7</div>
-                <div style={{fontSize: '16px'}}>24-hour special price</div>
+            {/* Main Offer Section with Book Cover */}
+            <div className="main-offer" style={{background: 'linear-gradient(135deg, #6B4E7A 0%, #8B7A94 100%)', color: 'white', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
+              <div style={{display: 'flex', alignItems: 'center', gap: '30px', flexWrap: 'wrap'}}>
+                {/* Left side - Text content */}
+                <div style={{flex: '1', minWidth: '300px', textAlign: 'center'}}>
+                  <h3 style={{color: '#D4AF37', fontSize: '32px', marginBottom: '15px'}}>
+                    🎯 The EXACT Protocol That Saved My Marriage - Just $7
+                  </h3>
+                  <p style={{fontSize: '20px', marginBottom: '20px'}}>
+                    What if I told you the same 3-week system that brought me back from the brink is available right now for just $7?
+                  </p>
+                  <p style={{fontSize: '18px', marginBottom: '20px'}}>
+                    Not the $500 we paid that hormone expert. Not even $97.
+                  </p>
+                  <p style={{fontSize: '18px', marginBottom: '20px'}}>
+                    Just $7 - because when you're suffering like I was, money shouldn't be a barrier to getting your life back.
+                  </p>
+                  
+                  <div style={{background: 'rgba(255,255,255,0.1)', padding: '20px', borderRadius: '8px', margin: '20px 0'}}>
+                    <div style={{fontSize: '16px', opacity: '0.8'}}>Was $97</div>
+                    <div style={{fontSize: '48px', fontWeight: 'bold', color: '#D4AF37'}}>$7</div>
+                    <div style={{fontSize: '16px'}}>24-hour special price</div>
+                  </div>
+                  
+                  <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '22px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0'}}>
+                    🎁 Get My Protocol for $7 - Download Instantly!
+                  </button>
+                  
+                  <p style={{fontSize: '16px', opacity: '0.9'}}>
+                    ✅ Instant PDF download ✅ 30-day guarantee ✅ Start tonight
+                  </p>
+                </div>
+                
+                {/* Right side - Book cover */}
+                <div style={{flex: '0 0 250px', textAlign: 'center'}}>
+                  <img 
+                    src="/lovable-uploads/1f0d2f31-386a-4fb1-b5d8-4cc4a86a31a4.png" 
+                    alt="MenoMastery - Your Essential Guide to Thriving Through Perimenopause by Melanie Dagenais"
+                    style={{
+                      width: '100%',
+                      maxWidth: '250px',
+                      height: 'auto',
+                      borderRadius: '8px',
+                      boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
+                    }}
+                  />
+                </div>
               </div>
-              
-              <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '22px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0'}}>
-                🎁 Get My Protocol for $7 - Download Instantly!
-              </button>
-              
-              <p style={{fontSize: '16px', opacity: '0.9'}}>
-                ✅ Instant PDF download ✅ 30-day guarantee ✅ Start tonight
-              </p>
             </div>
 
             {/* What You Get Section */}
