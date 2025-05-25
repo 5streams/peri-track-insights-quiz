@@ -172,7 +172,7 @@ const ComprehensiveTestingOffer: React.FC = () => {
           
           <div className="mb-6">
             <p className="text-lg text-gray-700 text-center max-w-3xl mx-auto">
-              Getting your bloodwork isn't just about numbers on a page. It's about finally having the roadmap to feeling like yourself again.
+              The only true way to get answers is by doing bloodwork an analyzing all of your markers to see what's going on. Then we can tell you exactly how to get rid of your symptoms.
             </p>
           </div>
 
