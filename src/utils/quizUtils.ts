@@ -60,13 +60,10 @@ const scoreMap: Record<string, Record<string, number>> = {
     arousal_changes: 10, 
     none: 0 
   },
-  age: { 
-    under_35: -10, 
-    "35_39": 0, 
-    "40_44": 10, 
-    "45_49": 20, 
-    "50_54": 30, 
-    "55_plus": 40 
+  seekingRelief: { 
+    actively_looking: 20, 
+    just_research: 0, 
+    tried_everything: 30 
   }
 };
 
@@ -79,10 +76,13 @@ const symptomCategories: Record<string, string> = {
   cognitiveFunction: "Cognitive Changes",
   physicalChanges: "Physical Changes",
   sexualHealth: "Sexual Health Changes",
+  seekingRelief: "Symptom Relief Seeking"
 };
 
 // Function to calculate quiz results
 export const calculateResults = (answers: Record<string, string | string[]>): QuizResults => {
+  console.log("calculateResults: Processing answers:", answers);
+  
   let rawScore = 0;
   const symptomScores: Record<string, number> = {};
 
@@ -94,20 +94,23 @@ export const calculateResults = (answers: Record<string, string | string[]>): Qu
     if (Array.isArray(answer)) {
       let questionScore = 0;
       answer.forEach(option => {
-        questionScore += scoreMap[questionId][option] || 0;
+        questionScore += scoreMap[questionId]?.[option] || 0;
       });
       rawScore += questionScore;
       symptomScores[questionId] = questionScore;
     } 
     // Handle single selection questions
     else {
-      rawScore += scoreMap[questionId][answer] || 0;
-      symptomScores[questionId] = scoreMap[questionId][answer] || 0;
+      const score = scoreMap[questionId]?.[answer] || 0;
+      rawScore += score;
+      symptomScores[questionId] = score;
     }
   }
 
+  console.log("calculateResults: Raw score:", rawScore, "Symptom scores:", symptomScores);
+
   // Calculate normalized score (0-100)
-  const maxPossibleScore = 305; // Sum of maximum scores
+  const maxPossibleScore = 325; // Updated to include seekingRelief max score
   const normalizedScore = Math.min(100, Math.round((rawScore / maxPossibleScore) * 100));
 
   // Determine phase
@@ -118,7 +121,7 @@ export const calculateResults = (answers: Record<string, string | string[]>): Qu
   // Determine primary symptom clusters based on highest scoring areas
   const sortedSymptoms = Object.entries(symptomScores)
     .sort(([, scoreA], [, scoreB]) => scoreB - scoreA)
-    .filter(([questionId]) => questionId !== 'age') // Exclude age from symptom clusters
+    .filter(([questionId]) => questionId !== 'seekingRelief') // Exclude seekingRelief from symptom clusters
     .slice(0, 3)
     .map(([questionId]) => symptomCategories[questionId]);
 
@@ -142,10 +145,13 @@ export const calculateResults = (answers: Record<string, string | string[]>): Qu
     );
   }
 
-  return {
+  const results = {
     score: normalizedScore,
     phase,
     primarySymptoms: sortedSymptoms,
     recommendedActions
   };
+
+  console.log("calculateResults: Final results:", results);
+  return results;
 };

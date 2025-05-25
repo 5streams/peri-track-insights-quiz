@@ -66,15 +66,21 @@ const Quiz = () => {
   };
   
   const handleSubmit = async (firstName: string) => {
+    console.log("Quiz handleSubmit called with firstName:", firstName);
+    console.log("Current answers:", answers);
+    
     setIsLoading(true);
 
     try {
       // Create a placeholder email based on the name
       const placeholderEmail = `${firstName.toLowerCase().replace(/\s+/g, '')}@pending.com`;
       
+      console.log("Calculating quiz results...");
       // 1. Save Lead and User information (this also creates/updates the user)
       // The quizResults are passed to saveLead, which will handle saving them to quiz_submissions
       const calculatedQuizResults = calculateResults(answers);
+      console.log("Calculated results:", calculatedQuizResults);
+      
       const lead = await saveLead(
         firstName,
         placeholderEmail,
@@ -84,7 +90,10 @@ const Quiz = () => {
         "Lead captured from quiz completion - email pending."
       );
 
+      console.log("Lead saved:", lead);
+
       if (!lead || !lead.user_id) {
+        console.error("No user ID returned from saveLead");
         toast({
           title: "Error Saving Progress",
           description: "Could not get user information to save answers. Please try again.",
@@ -96,6 +105,7 @@ const Quiz = () => {
       const currentUserId = lead.user_id;
       setUserId(currentUserId); // Store user ID
 
+      console.log("Saving individual quiz answers...");
       // 2. Save individual quiz answers to Supabase
       const answerPromises = Object.entries(answers).map(([questionId, answer]) => {
         const answerArray = Array.isArray(answer) ? answer : [answer];
@@ -123,6 +133,8 @@ const Quiz = () => {
       localStorage.setItem("quizResults", JSON.stringify(calculatedQuizResults));
       localStorage.setItem("userInfo", JSON.stringify({ firstName, email: placeholderEmail, userId: currentUserId }));
 
+      console.log("Stored results in localStorage, navigating to results...");
+
       // Clear local quiz state (answers, currentStep) as it's now submitted
       // localStorage.removeItem("quizProgress"); // Already removed effect that sets this
       // localStorage.removeItem("quizAnswers"); // Already removed effect that sets this
@@ -134,6 +146,7 @@ const Quiz = () => {
         description: "Your results are being processed.",
       });
 
+      console.log("About to navigate to /results");
       navigate("/results");
 
     } catch (error) {
