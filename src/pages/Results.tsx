@@ -8,8 +8,6 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 // Import our components for the results page
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
-import HormoneInsights from "@/components/results/HormoneInsights";
-import ComprehensiveTestingOffer from "@/components/results/ComprehensiveTestingOffer";
 import TrustFooter from "@/components/TrustFooter";
 
 // Add global styles for remaining components
@@ -324,19 +322,6 @@ const Results = () => {
               firstName={capitalizedFirstName}
               primarySymptoms={hormoneScores.primarySymptoms}
             />
-          </div>
-          
-          {/* Hormone Insights */}
-          <div className="mb-4">
-            <HormoneInsights 
-              scores={hormoneScores}
-              scoreCategory={scoreCategory}
-            />
-          </div>
-
-          {/* Comprehensive Testing Offer */}
-          <div className="mb-4">
-            <ComprehensiveTestingOffer />
           </div>
         </div>
       </div>
