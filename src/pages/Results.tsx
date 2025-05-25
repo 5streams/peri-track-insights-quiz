@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -342,6 +343,21 @@ const Results = () => {
           
         </div>
       </section>
+
+      {/* Story section */}
+      <div className="story-section" style={{background: 'white', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
+        <h3 style={{color: '#6B4E7A', fontSize: '24px', marginBottom: '15px'}}>
+          Dear Beautiful Sister, You're Not Yourself—And It's Breaking Your Heart 😢
+        </h3>
+        
+        <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+          Four years ago, I was drowning in perimenopause hell. At 2:47 AM on a Tuesday, my husband found me on the bathroom floor, drenched in sweat and crying. I'd been waking up like this for 14 nights straight.
+        </p>
+        
+        <p style={{lineHeight: '1.6', marginBottom: '15px'}}>
+          <strong>I looked at him with tears streaming down my face and whispered, "I'm losing myself... and I'm losing you."</strong>
+        </p>
+      </div>
       
       {/* Trust Footer at the very bottom */}
       <TrustFooter />
