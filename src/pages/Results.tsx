@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Shield, ShieldCheck, Lock } from "lucide-react";
 import LoadingSpinner from "@/components/results/LoadingSpinner";
 import { calculateHormoneScores } from "@/utils/scoreCalculation";
 
@@ -185,7 +185,7 @@ const globalStyles = `
   .text-indigo-600 { color: #4F46E5; }
   .hover\\:text-indigo-500:hover { color: #6366F1; }
   .focus\\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
-  .focus\\:ring-2:focus { --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color); box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000); }
+  .focus\\:ring-2:focus { --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color); box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0, 0, #0000); }
   .focus\\:ring-indigo-500:focus { --tw-ring-opacity: 1; --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity)); }
   .focus\\:ring-offset-2:focus { --tw-ring-offset-width: 2px; }
   .sm\\:flex { display: flex; }
@@ -211,6 +211,31 @@ const globalStyles = `
     .xl\\:text-5xl { font-size: 3rem; }
   }
 `;
+
+// Component for security seals
+const SecuritySeals: React.FC = () => {
+  return (
+    <div style={{marginTop: '15px', padding: '10px', background: 'rgba(255,255,255,0.1)', borderRadius: '8px'}}>
+      <div style={{display: 'flex', justifyContent: 'center', gap: '15px', flexWrap: 'wrap', marginBottom: '8px'}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', color: 'rgba(255,255,255,0.9)'}}>
+          <ShieldCheck style={{width: '16px', height: '16px'}} />
+          <span>SSL Encrypted</span>
+        </div>
+        <div style={{display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', color: 'rgba(255,255,255,0.9)'}}>
+          <Shield style={{width: '16px', height: '16px'}} />
+          <span>Secure Checkout</span>
+        </div>
+        <div style={{display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', color: 'rgba(255,255,255,0.9)'}}>
+          <Lock style={{width: '16px', height: '16px'}} />
+          <span>Safe Payment</span>
+        </div>
+      </div>
+      <div style={{textAlign: 'center', fontSize: '12px', color: 'rgba(255,255,255,0.8)'}}>
+        30-day money-back guarantee • Instant access
+      </div>
+    </div>
+  );
+};
 
 interface QuizResults {
   score: number;
@@ -553,8 +578,10 @@ const Results = () => {
                       🎁 Get My Protocol for $7 - Download Instantly!
                     </button>
                   </a>
+
+                  <SecuritySeals />
                   
-                  <p style={{fontSize: '18px', opacity: '0.9'}}>
+                  <p style={{fontSize: '18px', opacity: '0.9', marginTop: '10px'}}>
                     ✅ Instant PDF download ✅ 30-day guarantee ✅ Start tonight
                   </p>
                 </div>
@@ -684,6 +711,8 @@ const Results = () => {
                   DOWNLOAD MY COMPLETE PROTOCOL - $7
                 </button>
               </a>
+
+              <SecuritySeals />
               
               <div style={{marginTop: '20px', fontSize: '22px'}}>
                 <p>✅ Instant access to everything that saved my marriage</p>
@@ -732,6 +761,26 @@ const Results = () => {
                   GET MY $7 MARRIAGE-SAVING PROTOCOL NOW
                 </button>
               </a>
+
+              <div style={{marginTop: '15px', padding: '10px', background: '#f9f9f9', borderRadius: '8px'}}>
+                <div style={{display: 'flex', justifyContent: 'center', gap: '15px', flexWrap: 'wrap', marginBottom: '8px'}}>
+                  <div style={{display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', color: '#666'}}>
+                    <ShieldCheck style={{width: '16px', height: '16px', color: '#22c55e'}} />
+                    <span>SSL Encrypted</span>
+                  </div>
+                  <div style={{display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', color: '#666'}}>
+                    <Shield style={{width: '16px', height: '16px', color: '#3b82f6'}} />
+                    <span>Secure Checkout</span>
+                  </div>
+                  <div style={{display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', color: '#666'}}>
+                    <Lock style={{width: '16px', height: '16px', color: '#8b5cf6'}} />
+                    <span>Safe Payment</span>
+                  </div>
+                </div>
+                <div style={{textAlign: 'center', fontSize: '12px', color: '#888'}}>
+                  30-day money-back guarantee • Instant access
+                </div>
+              </div>
             </div>
 
             {/* Signature Section */}
@@ -758,10 +807,30 @@ const Results = () => {
               
               <div style={{textAlign: 'center'}}>
                 <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
-                  <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '15px 30px', fontSize: '20px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer'}}>
+                  <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '15px 30px', fontSize: '20px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', marginBottom: '15px'}}>
                     CLICK HERE - SAVE YOUR RELATIONSHIP FOR $7
                   </button>
                 </a>
+
+                <div style={{marginTop: '10px', padding: '10px', background: '#f9f9f9', borderRadius: '8px'}}>
+                  <div style={{display: 'flex', justifyContent: 'center', gap: '15px', flexWrap: 'wrap', marginBottom: '8px'}}>
+                    <div style={{display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', color: '#666'}}>
+                      <ShieldCheck style={{width: '16px', height: '16px', color: '#22c55e'}} />
+                      <span>SSL Encrypted</span>
+                    </div>
+                    <div style={{display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', color: '#666'}}>
+                      <Shield style={{width: '16px', height: '16px', color: '#3b82f6'}} />
+                      <span>Secure Checkout</span>
+                    </div>
+                    <div style={{display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', color: '#666'}}>
+                      <Lock style={{width: '16px', height: '16px', color: '#8b5cf6'}} />
+                      <span>Safe Payment</span>
+                    </div>
+                  </div>
+                  <div style={{textAlign: 'center', fontSize: '12px', color: '#888'}}>
+                    30-day money-back guarantee • Instant access
+                  </div>
+                </div>
               </div>
             </div>
           </div>
