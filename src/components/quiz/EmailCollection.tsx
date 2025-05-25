@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { saveLead } from "@/utils/leadStorage";
 
 interface EmailCollectionProps {
   onSubmit: (name: string, email: string) => void;
@@ -37,13 +38,35 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       return;
     }
     
-    // Show success message
-    toast({
-      title: "Information Saved",
-      description: "Your information has been saved. Preparing your results...",
-    });
+    try {
+      // Get quiz results from localStorage if available
+      const quizResults = localStorage.getItem("quizAnswers") 
+        ? JSON.parse(localStorage.getItem("quizAnswers") || "{}") 
+        : {};
+      
+      // Save lead to localStorage
+      saveLead(
+        name.trim(),
+        email.trim(),
+        'quiz_results',
+        `Quiz completed at ${new Date().toISOString()}`
+      );
+      
+      // Show success message
+      toast({
+        title: "Information Saved",
+        description: "Your information has been saved. Preparing your results...",
+      });
+    } catch (error) {
+      console.error("Error saving information:", error);
+      toast({
+        title: "Error saving information",
+        description: "Please try again.",
+        variant: "destructive",
+      });
+    }
     
-    // Continue with submission
+    // Continue with original submission
     onSubmit(name.trim(), email.trim());
   };
 
