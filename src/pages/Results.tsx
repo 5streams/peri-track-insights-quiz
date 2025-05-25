@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -349,7 +348,7 @@ const Results = () => {
               </h3>
               
               <p className="text-lg text-gray-700 leading-relaxed">
-                Four years ago, I was right where you are. My name's [Your Name], and I was losing everything—my energy, my confidence, my marriage. I'm here to tell you there's hope, because I found a way to crush those symptoms and come back stronger in just 3 weeks. Let me share my journey and show you how to take back your life.
+                Four years ago, I was right where you are. My name's Melanie Dagenais, and I was losing everything—my energy, my confidence, my marriage. I'm here to tell you there's hope, because I found a way to crush those symptoms and come back stronger in just 3 weeks. Let me share my journey and show you how to take back your life.
               </p>
               
               <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
@@ -667,7 +666,7 @@ const Results = () => {
               
               <p className="text-lg text-gray-700 leading-relaxed">
                 To your passionate, unstoppable future,<br/>
-                [Your Name], Co-Creator of MenoMastery
+                Melanie Dagenais, Co-Creator of MenoMastery
               </p>
               
               <div className="bg-yellow-100 p-6 rounded-lg space-y-4">
@@ -678,7 +677,6 @@ const Results = () => {
                 <p className="text-lg text-gray-700 leading-relaxed">
                   <strong>P.P.S.</strong> Reddit's r/Menopause is buzzing with women begging for answers. Be the one who crushes it. Get MenoMastery today and share your glow-up! 🌟
                 </p>
-              </div>
             </div>
           </div>
         </div>
