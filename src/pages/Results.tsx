@@ -358,6 +358,33 @@ const Results = () => {
           <strong>I looked at him with tears streaming down my face and whispered, "I'm losing myself... and I'm losing you."</strong>
         </p>
       </div>
+
+      {/* Offer section */}
+      <div className="offer-section" style={{background: 'linear-gradient(135deg, #6B4E7A 0%, #8B7A94 100%)', color: 'white', padding: '30px', borderRadius: '12px', textAlign: 'center', margin: '20px 0'}}>
+        
+        <h3 style={{color: '#D4AF37', fontSize: '28px', marginBottom: '15px'}}>
+          The EXACT Protocol That Saved My Marriage - Just $7
+        </h3>
+        
+        <p style={{fontSize: '18px', marginBottom: '20px'}}>
+          The same 3-week system that brought me back from the brink is available right now for just $7.
+        </p>
+        
+        <div style={{background: 'rgba(255,255,255,0.1)', padding: '20px', borderRadius: '8px', margin: '20px 0'}}>
+          <div style={{fontSize: '14px', opacity: 0.8}}>Was $97</div>
+          <div style={{fontSize: '48px', fontWeight: 'bold', color: '#D4AF37'}}>$7</div>
+          <div style={{fontSize: '14px'}}>24-hour special price</div>
+        </div>
+        
+        <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '20px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0'}}>
+          🎁 Get My Protocol for $7 - Download Instantly!
+        </button>
+        
+        <p style={{fontSize: '14px', opacity: 0.9}}>
+          ✅ Instant PDF download ✅ 30-day guarantee ✅ Start tonight
+        </p>
+        
+      </div>
       
       {/* Trust Footer at the very bottom */}
       <TrustFooter />
@@ -366,3 +393,4 @@ const Results = () => {
 };
 
 export default Results;
+
