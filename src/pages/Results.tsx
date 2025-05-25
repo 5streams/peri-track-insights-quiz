@@ -295,18 +295,6 @@ const Results = () => {
     [userInfo.firstName]
   );
 
-  const goToTripwire = () => {
-    const userData = {
-      name: capitalizedFirstName,
-      score: hormoneScores.overall.toString(),
-      symptoms: hormoneScores.primarySymptoms.join(',').toLowerCase().replace(/\s+/g, ''),
-      email: userInfo.email
-    };
-    
-    const params = new URLSearchParams(userData);
-    window.location.href = `/quiz-results/tripwire?${params.toString()}`;
-  };
-
   // Show loading state
   if (!results) {
     return <LoadingSpinner />;
@@ -334,28 +322,6 @@ const Results = () => {
               firstName={capitalizedFirstName}
               primarySymptoms={hormoneScores.primarySymptoms}
             />
-          </div>
-
-          {/* CTA to Tripwire */}
-          <div className="mb-4">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg p-8 text-center">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                Get Your Personalized 3-Week Recovery Protocol
-              </h3>
-              <p className="text-lg md:text-xl mb-6">
-                Based on your specific symptoms and score, get the exact protocol that can help transform your perimenopause experience.
-              </p>
-              <Button 
-                onClick={goToTripwire}
-                size="lg" 
-                className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-xl px-8 py-4 rounded-full"
-              >
-                Get My Personal Protocol - Just $7
-              </Button>
-              <p className="text-sm mt-4 opacity-90">
-                Instant access • Based on your assessment • Secure checkout
-              </p>
-            </div>
           </div>
         </div>
       </div>
