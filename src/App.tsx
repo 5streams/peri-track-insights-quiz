@@ -12,6 +12,7 @@ import TryPeriTrack from "./pages/tryperitrack";
 import PerimenopauseWeightGainTracker from "./pages/PerimenopauseWeightGainTracker";
 import PerimenopauseInsomnia from "./pages/PerimenopauseInsomnia";
 import AdminLeads from "./pages/AdminLeads";
+import TripwirePage from "./pages/TripwirePage";
 import "./App.css";
 
 function App() {
@@ -21,12 +22,13 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/results" element={<Results />} />
+        <Route path="/quiz-results/tripwire" element={<TripwirePage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/tracking" element={<Tracking />} />
         <Route path="/insights" element={<Insights />} />
         <Route path="/admin/leads" element={<AdminLeads />} />
         <Route path="/tryperitrack" element={<TryPeriTrack />} />
-        <Route path="/tryperitracker" element={<TryPeriTrack />} /> {/* Add redirect for alternate URL */}
+        <Route path="/tryperitracker" element={<TryPeriTrack />} />
         <Route path="/perimenopause-weight-gain-tracker" element={<PerimenopauseWeightGainTracker />} />
         <Route path="/perimenopause-insomnia" element={<PerimenopauseInsomnia />} />
         <Route path="/404" element={<NotFound />} />

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -296,6 +295,18 @@ const Results = () => {
     [userInfo.firstName]
   );
 
+  const goToTripwire = () => {
+    const userData = {
+      name: capitalizedFirstName,
+      score: hormoneScores.overall.toString(),
+      symptoms: hormoneScores.primarySymptoms.join(',').toLowerCase().replace(/\s+/g, ''),
+      email: userInfo.email
+    };
+    
+    const params = new URLSearchParams(userData);
+    window.location.href = `/quiz-results/tripwire?${params.toString()}`;
+  };
+
   // Show loading state
   if (!results) {
     return <LoadingSpinner />;
@@ -325,324 +336,25 @@ const Results = () => {
             />
           </div>
 
-          {/* Dynamic Salespage Implementation Content */}
+          {/* CTA to Tripwire */}
           <div className="mb-4">
-            <div className="bg-white rounded-lg border-2 border-gray-200 p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                Yes! Here's exactly what you need to give Lovable to make this salespage dynamic with quiz integration:
-              </h2>
-              
-              <div className="space-y-6">
-                <section>
-                  <h3 className="text-xl font-semibold text-gray-700 mb-3">
-                    ## **Dynamic Salespage Implementation for Lovable**
-                  </h3>
-                  
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-600 mb-2">### **1. URL Structure & Routing**</h4>
-                      <p className="text-gray-600 mb-2">Tell Lovable to create:</p>
-                      <div className="bg-gray-100 p-3 rounded font-mono text-sm">
-                        /quiz-results/tripwire
-                      </div>
-                      <p className="text-gray-600 mt-2">This page should receive URL parameters from the quiz results.</p>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-600 mb-2">### **2. URL Parameters to Pass From Quiz**</h4>
-                      <div className="bg-gray-100 p-3 rounded">
-                        <pre className="text-sm">
-{`// Example URL from quiz results page:
-/quiz-results/tripwire?name=Sarah&score=64&symptoms=vasomotor,sleep,mood&email=sarah@email.com`}
-                        </pre>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-600 mb-2">### **3. Dynamic Content Replacement Instructions**</h4>
-                      <p className="text-gray-600 mb-2">Tell Lovable: <strong>"Please create a dynamic salespage that pulls user data from URL parameters and personalizes the content as follows:"</strong></p>
-                      
-                      <div className="space-y-3">
-                        <div>
-                          <h5 className="font-medium text-gray-600">#### **Replace Static Text With Dynamic Variables:**</h5>
-                          <div className="ml-4 space-y-2">
-                            <p><strong>Current Static:</strong> "Roger, Your Assessment Reveals..."</p>
-                            <p><strong>Dynamic:</strong> `{"{name}"}, Your Assessment Reveals...`</p>
-                            
-                            <p><strong>Current Static:</strong> "Your moderate perimenopause score of 64/100"</p>
-                            <p><strong>Dynamic:</strong> `Your {"{scoreLevel}"} perimenopause score of {"{score}"}/100`</p>
-                            
-                            <p><strong>Current Static:</strong> "vasomotor symptoms, sleep disturbances, and mood fluctuations"</p>
-                            <p><strong>Dynamic:</strong> `{"{symptom1}"}, {"{symptom2}"}, and {"{symptom3}"}`</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-600 mb-2">### **4. JavaScript Code for Lovable**</h4>
-                      <div className="bg-gray-100 p-4 rounded overflow-x-auto">
-                        <pre className="text-sm">
-{`// Dynamic content handler
-document.addEventListener('DOMContentLoaded', function() {
-    // Get URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const userName = urlParams.get('name') || 'Beautiful Sister';
-    const userScore = urlParams.get('score') || '64';
-    const userEmail = urlParams.get('email') || '';
-    const symptoms = urlParams.get('symptoms') || 'vasomotor,sleep,mood';
-    
-    // Determine score level
-    function getScoreLevel(score) {
-        if (score < 40) return 'mild';
-        if (score < 70) return 'moderate';
-        return 'severe';
-    }
-    
-    // Convert symptoms to readable format
-    function formatSymptoms(symptomsString) {
-        const symptomMap = {
-            'vasomotor': 'vasomotor symptoms',
-            'sleep': 'sleep disturbances',
-            'mood': 'mood fluctuations',
-            'cognitive': 'brain fog',
-            'physical': 'physical changes',
-            'sexual': 'intimacy issues'
-        };
-        
-        const symptomArray = symptomsString.split(',');
-        const formatted = symptomArray.map(s => symptomMap[s] || s);
-        
-        if (formatted.length === 1) return formatted[0];
-        if (formatted.length === 2) return formatted.join(' and ');
-        return formatted.slice(0, -1).join(', ') + ', and ' + formatted[formatted.length - 1];
-    }
-    
-    // Replace dynamic content
-    const scoreLevel = getScoreLevel(parseInt(userScore));
-    const formattedSymptoms = formatSymptoms(symptoms);
-    
-    // Update all dynamic elements
-    document.querySelectorAll('[data-dynamic="name"]').forEach(el => {
-        el.textContent = userName;
-    });
-    
-    document.querySelectorAll('[data-dynamic="score"]').forEach(el => {
-        el.textContent = userScore;
-    });
-    
-    document.querySelectorAll('[data-dynamic="score-level"]').forEach(el => {
-        el.textContent = scoreLevel;
-    });
-    
-    document.querySelectorAll('[data-dynamic="symptoms"]').forEach(el => {
-        el.textContent = formattedSymptoms;
-    });
-    
-    // Update email in forms if present
-    document.querySelectorAll('input[name="email"]').forEach(el => {
-        el.value = userEmail;
-    });
-});`}
-                        </pre>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-600 mb-2">### **5. HTML Template with Dynamic Markers**</h4>
-                      <p className="text-gray-600 mb-2">Tell Lovable: <strong>"Please update the HTML to include these dynamic data attributes:"</strong></p>
-                      <div className="bg-gray-100 p-4 rounded overflow-x-auto">
-                        <pre className="text-sm">
-{`<!-- Dynamic Headlines -->
-<h1><span data-dynamic="name">Roger</span>, Your Assessment Reveals Something Critical...</h1>
-
-<p>Your <span data-dynamic="score-level">moderate</span> perimenopause score of <span data-dynamic="score">64</span>/100 puts you in a dangerous zone.</p>
-
-<p>Those <span data-dynamic="symptoms">vasomotor symptoms, sleep disturbances, and mood fluctuations</span> you're experiencing right now? They're warning signals that your hormones are collapsing.</p>
-
-<!-- Score-specific messaging -->
-<div class="score-message" data-score-range="mild">
-    <p>Your mild symptoms are actually a blessing - you caught this early! With the right intervention, you can prevent escalation completely.</p>
-</div>
-
-<div class="score-message" data-score-range="moderate">
-    <p>You're at the tipping point where symptoms either stabilize with the right intervention... or spiral into severe territory.</p>
-</div>
-
-<div class="score-message" data-score-range="severe">
-    <p>Your severe symptoms need immediate intervention. But don't worry - even severe cases can see dramatic improvement in 72 hours with the right protocol.</p>
-</div>
-
-<!-- Personal story adaptation -->
-<p>My perimenopause assessment score? <strong>66/100</strong> - almost identical to yours at <span data-dynamic="score">64</span>/100.</p>
-
-<!-- Testimonials with similar scores -->
-<div class="testimonial-match" data-score-range="moderate">
-    <p><strong>"Score 67 → Sleeping 8 hours within 5 days"</strong><br>
-    <em>"The emergency sleep protocol changed my life. First full night of sleep in months."</em> - Sarah M.</p>
-</div>`}
-                        </pre>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-600 mb-2">### **6. CSS for Dynamic Score Ranges**</h4>
-                      <div className="bg-gray-100 p-4 rounded overflow-x-auto">
-                        <pre className="text-sm">
-{`/* Hide all score messages by default */
-.score-message {
-    display: none;
-}
-
-/* Show relevant score message */
-.score-message.active {
-    display: block;
-}
-
-/* Score-specific styling */
-.score-mild {
-    border-left: 4px solid #28a745;
-    background: #d4edda;
-}
-
-.score-moderate {
-    border-left: 4px solid #ffc107;
-    background: #fff3cd;
-}
-
-.score-severe {
-    border-left: 4px solid #dc3545;
-    background: #f8d7da;
-}`}
-                        </pre>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-600 mb-2">### **7. Enhanced JavaScript for Score-Specific Content**</h4>
-                      <div className="bg-gray-100 p-4 rounded overflow-x-auto">
-                        <pre className="text-sm">
-{`// Show relevant score-specific content
-function updateScoreSpecificContent(scoreLevel) {
-    // Hide all score messages
-    document.querySelectorAll('.score-message').forEach(el => {
-        el.classList.remove('active');
-    });
-    
-    // Show relevant score message
-    document.querySelectorAll(\`[data-score-range="\${scoreLevel}"]\`).forEach(el => {
-        el.classList.add('active');
-    });
-    
-    // Update urgency messaging based on score
-    const urgencyElement = document.querySelector('[data-dynamic="urgency"]');
-    if (urgencyElement) {
-        if (scoreLevel === 'severe') {
-            urgencyElement.textContent = 'IMMEDIATE';
-        } else if (scoreLevel === 'moderate') {
-            urgencyElement.textContent = '72-hour';
-        } else {
-            urgencyElement.textContent = '7-day';
-        }
-    }
-}`}
-                        </pre>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-600 mb-2">### **8. Quiz Results Page Integration**</h4>
-                      <p className="text-gray-600 mb-2">Tell Lovable: <strong>"On the quiz results page, add this button that passes the user data:"</strong></p>
-                      <div className="bg-gray-100 p-4 rounded overflow-x-auto">
-                        <pre className="text-sm">
-{`<div class="tripwire-cta">
-    <h3>Get Your Personalized 3-Week Recovery Protocol</h3>
-    <p>Based on your specific symptoms and score, get the exact protocol that saved my marriage.</p>
-    <button onclick="goToTripwire()" class="cta-button">
-        Get My Personal Protocol - Just $7
-    </button>
-</div>
-
-<script>
-function goToTripwire() {
-    const userData = {
-        name: getQuizUserName(), // Function to get user's name
-        score: getQuizScore(),   // Function to get their score
-        symptoms: getQuizSymptoms(), // Function to get their symptoms
-        email: getQuizEmail()    // Function to get their email
-    };
-    
-    const params = new URLSearchParams(userData);
-    window.location.href = \`/quiz-results/tripwire?\${params.toString()}\`;
-}
-</script>`}
-                        </pre>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-600 mb-2">### **9. Conversion Tracking Enhancement**</h4>
-                      <div className="bg-gray-100 p-4 rounded overflow-x-auto">
-                        <pre className="text-sm">
-{`// Enhanced conversion tracking with user data
-function trackTripwireConversion() {
-    const urlParams = new URLSearchParams(window.location.search);
-    
-    gtag('event', 'conversion', {
-        'send_to': 'AW-828832872/GZATCPyNqXkQ6PibiwM',
-        'value': 7.0,
-        'currency': 'USD',
-        'custom_parameters': {
-            'user_score': urlParams.get('score'),
-            'user_symptoms': urlParams.get('symptoms'),
-            'conversion_type': 'tripwire'
-        }
-    });
-}`}
-                        </pre>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-600 mb-2">### **10. Complete Implementation Checklist for Lovable**</h4>
-                      <p className="text-gray-600 mb-2">Tell Lovable: <strong>"Please implement this dynamic salespage with the following requirements:"</strong></p>
-                      <div className="ml-4 space-y-1">
-                        <p>✅ <strong>Create `/quiz-results/tripwire` route</strong></p>
-                        <p>✅ <strong>Add dynamic content replacement JavaScript</strong></p>
-                        <p>✅ <strong>Update HTML with data-dynamic attributes</strong></p>
-                        <p>✅ <strong>Add score-specific content sections</strong></p>
-                        <p>✅ <strong>Include CSS for different score levels</strong></p>
-                        <p>✅ <strong>Add conversion tracking with user data</strong></p>
-                        <p>✅ <strong>Create seamless transition from quiz results</strong></p>
-                        <p>✅ <strong>Test with sample URLs:</strong></p>
-                        <div className="ml-4">
-                          <p>- `/quiz-results/tripwire?name=Sarah&score=45&symptoms=sleep,mood`</p>
-                          <p>- `/quiz-results/tripwire?name=Jennifer&score=72&symptoms=vasomotor,cognitive,physical`</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-medium text-gray-600 mb-2">### **11. Sample Test URLs for Lovable**</h4>
-                      <div className="bg-gray-100 p-4 rounded">
-                        <pre className="text-sm">
-{`Low Score: /quiz-results/tripwire?name=Sarah&score=35&symptoms=sleep,mood&email=sarah@email.com
-
-Moderate Score: /quiz-results/tripwire?name=Jennifer&score=64&symptoms=vasomotor,sleep,mood&email=jen@email.com
-
-High Score: /quiz-results/tripwire?name=Michelle&score=82&symptoms=vasomotor,cognitive,physical,mood&email=michelle@email.com`}
-                        </pre>
-                      </div>
-                    </div>
-
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <p className="text-blue-800 font-medium">
-                        This dynamic implementation will make each user feel like the page was created specifically for them, significantly increasing conversion rates!
-                      </p>
-                    </div>
-                  </div>
-                </section>
-              </div>
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg p-8 text-center">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                Get Your Personalized 3-Week Recovery Protocol
+              </h3>
+              <p className="text-lg md:text-xl mb-6">
+                Based on your specific symptoms and score, get the exact protocol that can help transform your perimenopause experience.
+              </p>
+              <Button 
+                onClick={goToTripwire}
+                size="lg" 
+                className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-xl px-8 py-4 rounded-full"
+              >
+                Get My Personal Protocol - Just $7
+              </Button>
+              <p className="text-sm mt-4 opacity-90">
+                Instant access • Based on your assessment • Secure checkout
+              </p>
             </div>
           </div>
         </div>
