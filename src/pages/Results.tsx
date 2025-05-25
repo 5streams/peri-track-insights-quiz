@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -322,6 +323,363 @@ const Results = () => {
               firstName={capitalizedFirstName}
               primarySymptoms={hormoneScores.primarySymptoms}
             />
+          </div>
+
+          {/* Sales Pitch Content */}
+          <div className="max-w-4xl mx-auto px-4 py-8">
+            <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
+              <h2 className="text-3xl font-bold text-center text-[#5D4154] mb-6">
+                Dear Beautiful Sister,
+              </h2>
+              
+              <h3 className="text-2xl font-bold text-center text-[#7E69AB] mb-4">
+                You're Not Yourself—And It's Breaking Your Heart 😢
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Are you waking up drenched in sweat, wondering why your body's turned against you? Do you snap at your kids or partner, then cry over nothing?
+              </p>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Maybe brain fog's got you scared you're losing your mind, or your libido's vanished, leaving your marriage cold and empty. Weight gain, hair loss, feeling like a stranger in your own skin—it's stealing your joy, isn't it?
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                You're Not Crazy—This Is My Story Too 💕
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Four years ago, I was right where you are. My name's [Your Name], and I was losing everything—my energy, my confidence, my marriage. I'm here to tell you there's hope, because I found a way to crush those symptoms and come back stronger in just 3 weeks. Let me share my journey and show you how to take back your life.
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                My Journey: A Love Story Nearly Lost 💔
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                My husband and I were the couple everyone envied. For 26 years, we raised three incredible kids (10, 12, and 15) and lived a love story so fiery, friends begged us to write a book. They'd gush, "How are you so in love, so passionate?" Our flirty connection was magic.
+              </p>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                But four years ago, that magic started fading. I had no energy. My libido disappeared. My hair was falling out, I couldn't sleep, and my moods were a rollercoaster. I snapped at my kids, cried over nothing, and felt like I was failing as a wife. Our once-electric marriage felt hollow, and I saw the pain in my husband's eyes. I was terrified our love was dying.
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                I Didn't Know What Was Wrong 😞
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                I later learned I was in perimenopause—the confusing, hormonal phase before menopause that can start in your 30s or 40s and last up to 10 years. It's when your hormones go haywire, causing hot flashes, mood swings, and more. But back then, nobody warned me, and my doctor dismissed my symptoms with, "It's just stress." Sound familiar?
+              </p>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                We tried everything to fix it. We moved to Mexico with our kids, hoping a fresh start would help. We hit the gym, lifting heavy weights, but after eight months, we saw no progress.
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                Desperate to Save Our Love ⚡️
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                We kept up our weekly date nights, even tried a spicy couples' resort to rekindle our spark. Nothing worked. I was still exhausted, moody, disconnected. My husband stood by me, but I could feel the distance growing. I thought, "Is this the end of our love story?"
+              </p>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Then, at that resort, we met a couple who blew us away. They were 47, older than us, yet radiant—muscular, vibrant, and so in love. My husband asked their secret. The man leaned in and said, "You've got to hack your hormones. Find the right expert." Those words were our lifeline.
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                The Secret That Changed Everything 🗝️
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                We found a hormone expert in Mexico—not some random doctor, but a genius who knew how to optimize hormones the right way. My bloodwork revealed the truth: my hormones—testosterone, progesterone, estrogen—were nearly gone, the root of my perimenopause chaos. My husband's hormones were off, too.
+              </p>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                The expert said, "No diet or workout can fix unbalanced hormones, and the wrong approach makes it worse." He shared Hormonal Optimization Secrets—a precise, tailored plan to rebuild our hormones using targeted diet, light exercise, and bioidentical hormone replacement therapy (BHRT). Within 3 weeks, I was reborn.
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                My Life Came Roaring Back in 3 Weeks! 🎉
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                My energy surged. My hair stopped falling out. My mood stabilized. And my libido? It exploded, and we were sneaking away like teenagers—even at my parents' house on vacation! In just 3 weeks, I felt vibrant, confident, and deeply in love again. My husband's energy and passion skyrocketed, too. We built muscle with light exercise, and our marriage became hotter, stronger, more passionate than ever—26 years in!
+              </p>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                The key was rebuilding our hormones the right way with the right expert, using simple diet tweaks, light exercise, and BHRT. That's when I knew I had to share this with you.
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                You Can Feel Amazing in 3 Weeks Too 🌈
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                You don't have to suffer through hot flashes, mood swings, or a fading spark. I created MenoMastery: Your Essential Guide to Thriving Through Perimenopause to hand you the exact Hormonal Optimization Secrets that transformed my life in 3 weeks.
+              </p>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                —for just $14 (was $27, 24-hour deal!). This 33-page eBook is your step-by-step plan to rebuild and rebalance your hormones fast with targeted diet, light exercise, BHRT insights, and expert strategies, so you can feel vibrant, sexy, and in control again. Plus, it includes a self-assessment quiz to confirm if you're in perimenopause and a detailed symptom tracker to monitor your progress.
+              </p>
+              
+              <div className="bg-purple-100 p-6 rounded-lg text-center">
+                <p className="text-xl font-bold text-[#5D4154]">
+                  ⏰ Only $14 for 24 hours—grab it before it's gone!
+                </p>
+              </div>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                Why MenoMastery Is Your Hormone Game-Changer 💪
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Your symptoms—hot flashes, mood swings, low libido—aren't "just aging." They're hormonal chaos from perimenopause, and you can fix them in 3 weeks. Reddit's full of women like you, battling:
+              </p>
+              
+              <ul className="list-disc pl-8 space-y-3 text-lg text-gray-700">
+                <li><strong>Hot Flashes & Night Sweats:</strong> Waking up drenched, no rest.</li>
+                <li><strong>Mood Swings & Anxiety:</strong> Snapping, then crying, out of control.</li>
+                <li><strong>Brain Fog:</strong> Forgetting words, fearing the worst.</li>
+                <li><strong>Low Libido & Dryness:</strong> Losing intimacy with your partner.</li>
+                <li><strong>Weight Gain & Hair Loss:</strong> Not recognizing your body.</li>
+                <li><strong>Dismissive Doctors:</strong> Told it's "normal" with no help.</li>
+              </ul>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                MenoMastery delivers the secrets to crush these symptoms by rebalancing your hormones in just 3 weeks, using proven methods thousands of women swear by.
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                Backed by Science & 1,000+ Women's Stories! 🩺
+              </h3>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                What's Inside Your $14 Hormone-Rebuilding Guide? 📖
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                This 33-page eBook is your hormone expert, nutritionist, and bestie in one. Here's the gold you get:
+              </p>
+              
+              <ul className="list-disc pl-8 space-y-3 text-lg text-gray-700">
+                <li><strong>Perimenopause Self-Assessment Quiz:</strong> Confirm if you're in perimenopause in minutes—no doctor needed. Know your status and start your transformation with confidence.</li>
+                <li><strong>Detailed Symptom Tracker:</strong> Log hot flashes, mood, sleep, and libido to pinpoint triggers and track your 3-week progress, empowering you and your hormone expert.</li>
+              </ul>
+              
+              <h4 className="text-xl font-bold text-[#7E69AB] mt-6 mb-3">
+                Your 3-Week Hormone Rebalance Plan 🌱
+              </h4>
+              
+              <ul className="list-disc pl-8 space-y-3 text-lg text-gray-700">
+                <li><strong>3-Week Hormone Rebalance Plan:</strong> A day-by-day roadmap to rebuild estrogen, progesterone, and testosterone with diet, light exercise, and expert advocacy. Feel better in days, vibrant by Week 3.</li>
+                <li><strong>Hormone-Optimizing Diet:</strong> 7-day meal plan with phytoestrogen-rich recipes (soy smoothies, kale salads) to mimic estrogen, boost progesterone, and reduce inflammation.</li>
+              </ul>
+              
+              <h4 className="text-xl font-bold text-[#7E69AB] mt-6 mb-3">
+                Sleep Soundly & Feel Sharp 🌙
+              </h4>
+              
+              <ul className="list-disc pl-8 space-y-3 text-lg text-gray-700">
+                <li><strong>Hot Flash & Night Sweat Hacks:</strong> Cooling recipes, bedroom tricks, and BHRT insights to rest easy in days.</li>
+                <li><strong>Mood & Brain Fog Fixes:</strong> 5-minute breathing exercises, brain-boosting snacks, and hormone hacks to feel calm and clear.</li>
+              </ul>
+              
+              <h4 className="text-xl font-bold text-[#7E69AB] mt-6 mb-3">
+                Reignite Your Passion 🔥
+              </h4>
+              
+              <ul className="list-disc pl-8 space-y-3 text-lg text-gray-700">
+                <li><strong>Libido & Intimacy Boosters:</strong> Hormone-rebuilding foods, yoga poses, and BHRT tips to bring back your spark, like I did.</li>
+                <li><strong>Doctor Advocacy Toolkit:</strong> Scripts to find the right hormone expert (homeopathic doctor or naturopath) and demand bloodwork in Week 1 for rapid results.</li>
+              </ul>
+              
+              <h4 className="text-xl font-bold text-[#7E69AB] mt-6 mb-3">
+                Get Strong & Confident 💪
+              </h4>
+              
+              <ul className="list-disc pl-8 space-y-3 text-lg text-gray-700">
+                <li><strong>3-Week Light Exercise Plan:</strong> Gentle walks, yoga, and bodyweight circuits to boost energy, sculpt muscle, and rebuild hormones.</li>
+                <li><strong>Stress-Busting Self-Care:</strong> 5-minute meditations, gratitude journaling to support hormone balance and calm the chaos.</li>
+              </ul>
+              
+              <h4 className="text-xl font-bold text-[#7E69AB] mt-6 mb-3">
+                Resources & Sisterhood 👭
+              </h4>
+              
+              <ul className="list-disc pl-8 space-y-3 text-lg text-gray-700">
+                <li><strong>BHRT Insights:</strong> Learn why bioidentical hormone therapy may be safer and how it turbocharges your 3-week plan.</li>
+                <li><strong>Resources & Community:</strong> Books, apps, and Reddit communities to keep you connected and inspired.</li>
+              </ul>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                Hormonal Optimization Secrets: Your 3-Week Miracle 🔓
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                MenoMastery unlocks the secrets that saved me:
+              </p>
+              
+              <ul className="list-disc pl-8 space-y-3 text-lg text-gray-700">
+                <li><strong>Fast Hormone Rebuilding:</strong> Diet, exercise, and BHRT tweaks to rebalance hormones in days, not months.</li>
+                <li><strong>Expert Guidance:</strong> How to find certified pros who customize your plan for rapid results.</li>
+              </ul>
+              
+              <h4 className="text-xl font-bold text-[#7E69AB] mt-6 mb-3">
+                No More Guesswork 🚫
+              </h4>
+              
+              <ul className="list-disc pl-8 space-y-3 text-lg text-gray-700">
+                <li><strong>3-Week Action Plan:</strong> Daily steps, tests, scripts to start feeling better fast.</li>
+                <li><strong>Avoid Traps:</strong> Why generic fixes fail and how to get it right with the right expert.</li>
+              </ul>
+              
+              <p className="text-lg text-gray-700 leading-relaxed font-bold">
+                For $14, you get a $297 value—everything you need to confirm perimenopause and feel vibrant in 3 weeks!
+              </p>
+              
+              <div className="bg-red-100 p-6 rounded-lg text-center">
+                <p className="text-xl font-bold text-red-600">
+                  ⏰ 24 Hours Left—Grab Your $14 Guide Now!
+                </p>
+              </div>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                Real Women, Real Wins 🌈
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Hear from sisters who crushed it with these secrets:
+              </p>
+              
+              <div className="bg-gray-50 p-6 rounded-lg space-y-4">
+                <blockquote className="text-lg italic text-gray-700">
+                  "Hot flashes and brain fog were killing me. MenoMastery's quiz confirmed perimenopause, and the 3-week plan got me sleeping and thinking clearly again!"
+                  <footer className="text-right font-bold">—Tanya, 39</footer>
+                </blockquote>
+                
+                <blockquote className="text-lg italic text-gray-700">
+                  "My libido was gone, and my marriage was fading. MenoMastery's hormone hacks and tracker brought our spark back in weeks!"
+                  <footer className="text-right font-bold">—Jennifer, 44</footer>
+                </blockquote>
+                
+                <blockquote className="text-lg italic text-gray-700">
+                  "My doctor ignored my hair loss. MenoMastery's scripts got me a hormone expert. I'm vibrant again!"
+                  <footer className="text-right font-bold">—Rachel, 46</footer>
+                </blockquote>
+              </div>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                These women were lost, like you. MenoMastery gave them their lives back—and it's your turn.
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                Why $14? You Deserve to Thrive 💖
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Why's a guide worth $297 just $14? Because my husband and I know the pain of feeling broken. We've been there. We want every woman to feel vibrant, sexy, alive—not just those who can afford $500+ clinics.
+              </p>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Normally $27, we're slashing it to $14 for 24 hours to get this into your hands. It's less than a coffee run, but it's your ticket to a radiant life in 3 weeks. ⏰ Don't miss out!
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                Zero Risk, All Reward 🎯
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                No worries—there's no risk. If MenoMastery doesn't light you up in 30 days, email us for a full refund. But you'll be too busy feeling fabulous to want one!
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                Don't Let Chaos Steal Your Life ⏰
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Every sweaty night, every mood swing, every lost moment with your partner is hormonal chaos winning. If you wait, you risk:
+              </p>
+              
+              <ul className="list-disc pl-8 space-y-3 text-lg text-gray-700">
+                <li><strong>Years of Struggle:</strong> Perimenopause can drag on a decade.</li>
+                <li><strong>Fading Love:</strong> Low libido and irritability can break marriages.</li>
+                <li><strong>Health Risks:</strong> Hormone imbalances hit your bones, heart, brain.</li>
+                <li><strong>Lost You:</strong> Missing the vibrant, confident woman you are.</li>
+              </ul>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                I almost lost my marriage waiting. Don't make my mistake. For $14, MenoMastery hands you the secrets to rebalance your hormones in 3 weeks.
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                Act Now—Feel Better in 3 Weeks! 🚀
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                This is your moment to take back your body, mood, and spark. MenoMastery is ready to download instantly—no waiting, just transformation.
+              </p>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Here's how to start:
+              </p>
+              
+              <ol className="list-decimal pl-8 space-y-3 text-lg text-gray-700">
+                <li>Click "Grab Your Guide Now!" below.</li>
+                <li>Get your 33-page PDF instantly.</li>
+                <li>Confirm perimenopause and rebalance your hormones in 3 weeks!</li>
+              </ol>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                Only $14—Your Spark's Worth It 💸
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Only $14—one-time payment, no subscriptions, no tricks. ⏰ 24-hour deal—don't wait!
+              </p>
+              
+              <div className="text-center py-8">
+                <Button className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/80 text-white font-bold text-xl px-12 py-4 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105">
+                  Grab Your Guide Now!
+                </Button>
+              </div>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Don't let another sleepless night or tearful day define you. With MenoMastery's Hormonal Optimization Secrets, you're stronger than this chaos. Join me and thousands of women who've reignited their spark for just $14.
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                Your Vibrant Future Is Here 🌞
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Imagine waking up energized, flirting with your partner, feeling confident in your skin—in just 3 weeks. That's what MenoMastery did for me. For $14, you've got nothing to lose and a radiant life to gain.
+              </p>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                My journey started with one step—yours starts now. Click "Grab Your Guide Now!" and take back your life.
+              </p>
+              
+              <h3 className="text-2xl font-bold text-[#7E69AB] mt-8 mb-4">
+                To Your Passionate, Unstoppable Future 🎈
+              </h3>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                To your passionate, unstoppable future,<br/>
+                [Your Name], Co-Creator of MenoMastery
+              </p>
+              
+              <div className="bg-yellow-100 p-6 rounded-lg space-y-4">
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  <strong>P.S.</strong> Picture laughing with your family, feeling sexy, loving life again—in just 3 weeks. MenoMastery's quiz and tracker make it real for just $14. Click "Grab Your Guide Now!" before this 24-hour deal vanishes! 🚀
+                </p>
+                
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  <strong>P.P.S.</strong> Reddit's r/Menopause is buzzing with women begging for answers. Be the one who crushes it. Get MenoMastery today and share your glow-up! 🌟
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
