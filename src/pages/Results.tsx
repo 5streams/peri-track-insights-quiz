@@ -295,6 +295,8 @@ const Results = () => {
     [userInfo.firstName]
   );
 
+  const checkoutUrl = "https://gumroad.com/checkout?product=kldyvn&quantity=1&_gl=1*gmjh3b*_ga*MTY4MzAxMjk4NC4xNzQ4MTgyOTgx*_ga_6LJN6D94N6*czE3NDgxODI5ODAkbzEkZzAkdDE3NDgxODI5ODAkajAkbDAkaDA.";
+
   // Show loading state
   if (!results) {
     return <LoadingSpinner />;
@@ -526,9 +528,11 @@ const Results = () => {
                     <div style={{fontSize: '18px'}}>24-hour special price</div>
                   </div>
                   
-                  <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '24px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0'}}>
-                    🎁 Get My Protocol for $7 - Download Instantly!
-                  </button>
+                  <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
+                    <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '24px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0'}}>
+                      🎁 Get My Protocol for $7 - Download Instantly!
+                    </button>
+                  </a>
                   
                   <p style={{fontSize: '18px', opacity: '0.9'}}>
                     ✅ Instant PDF download ✅ 30-day guarantee ✅ Start tonight
@@ -655,9 +659,11 @@ const Results = () => {
                 🚀 Get My Marriage-Saving Protocol Now - $7
               </h3>
               
-              <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '24px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0', display: 'block', marginLeft: 'auto', marginRight: 'auto'}}>
-                DOWNLOAD MY COMPLETE PROTOCOL - $7
-              </button>
+              <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
+                <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '24px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0', display: 'block', marginLeft: 'auto', marginRight: 'auto'}}>
+                  DOWNLOAD MY COMPLETE PROTOCOL - $7
+                </button>
+              </a>
               
               <div style={{marginTop: '20px', fontSize: '22px'}}>
                 <p>✅ Instant access to everything that saved my marriage</p>
@@ -701,9 +707,11 @@ const Results = () => {
                 Your 72-hour transformation window starts the moment you click below.
               </p>
               
-              <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '24px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', marginBottom: '20px'}}>
-                GET MY $7 MARRIAGE-SAVING PROTOCOL NOW
-              </button>
+              <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
+                <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '24px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', marginBottom: '20px'}}>
+                  GET MY $7 MARRIAGE-SAVING PROTOCOL NOW
+                </button>
+              </a>
             </div>
 
             {/* Signature Section */}
@@ -729,9 +737,11 @@ const Results = () => {
               </p>
               
               <div style={{textAlign: 'center'}}>
-                <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '15px 30px', fontSize: '20px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer'}}>
-                  CLICK HERE - SAVE YOUR RELATIONSHIP FOR $7
-                </button>
+                <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
+                  <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '15px 30px', fontSize: '20px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer'}}>
+                    CLICK HERE - SAVE YOUR RELATIONSHIP FOR $7
+                  </button>
+                </a>
               </div>
             </div>
           </div>
