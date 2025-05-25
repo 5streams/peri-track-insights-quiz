@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -325,6 +326,22 @@ const Results = () => {
           </div>
         </div>
       </div>
+
+      {/* Add this section after the quiz results */}
+      <section className="tripwire-offer" style={{background: '#f8f6ff', padding: '40px 20px', margin: '40px 0', borderRadius: '16px'}}>
+        <div className="container" style={{maxWidth: '800px', margin: '0 auto'}}>
+          
+          {/* Start with just this headline */}
+          <h2 style={{color: '#6B4E7A', fontSize: '32px', textAlign: 'center', marginBottom: '20px'}}>
+            Your Results Reveal Something Critical...
+          </h2>
+          
+          <p style={{fontSize: '18px', textAlign: 'center', color: '#5D4A37', marginBottom: '30px'}}>
+            Your moderate perimenopause score puts you at the tipping point where symptoms either stabilize with the right intervention... or spiral into severe territory.
+          </p>
+          
+        </div>
+      </section>
       
       {/* Trust Footer at the very bottom */}
       <TrustFooter />
