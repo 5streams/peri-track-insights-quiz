@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -64,20 +65,23 @@ const Quiz = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 1)); // Minimum is now 1, not 0
   };
   
-  const handleSubmit = async (firstName: string, email: string) => {
+  const handleSubmit = async (firstName: string) => {
     setIsLoading(true);
 
     try {
+      // Create a placeholder email based on the name
+      const placeholderEmail = `${firstName.toLowerCase().replace(/\s+/g, '')}@pending.com`;
+      
       // 1. Save Lead and User information (this also creates/updates the user)
       // The quizResults are passed to saveLead, which will handle saving them to quiz_submissions
       const calculatedQuizResults = calculateResults(answers);
       const lead = await saveLead(
         firstName,
-        email,
+        placeholderEmail,
         "quiz_results",
         undefined, // No pricing tier selected at this point
         calculatedQuizResults, 
-        "Lead captured from quiz completion."
+        "Lead captured from quiz completion - email pending."
       );
 
       if (!lead || !lead.user_id) {
@@ -117,7 +121,7 @@ const Quiz = () => {
 
       // Store results in localStorage for the results page (can be refactored later)
       localStorage.setItem("quizResults", JSON.stringify(calculatedQuizResults));
-      localStorage.setItem("userInfo", JSON.stringify({ firstName, email, userId: currentUserId }));
+      localStorage.setItem("userInfo", JSON.stringify({ firstName, email: placeholderEmail, userId: currentUserId }));
 
       // Clear local quiz state (answers, currentStep) as it's now submitted
       // localStorage.removeItem("quizProgress"); // Already removed effect that sets this

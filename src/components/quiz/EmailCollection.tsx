@@ -7,13 +7,12 @@ import { useToast } from "@/hooks/use-toast";
 import { saveLead } from "@/utils/leadStorage";
 
 interface EmailCollectionProps {
-  onSubmit: (name: string, email: string) => void;
+  onSubmit: (name: string) => void;
   isLoading: boolean;
 }
 
 const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }) => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -29,25 +28,16 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       return;
     }
     
-    if (!email.trim() || !email.includes('@') || !email.includes('.')) {
-      toast({
-        title: "Valid email required",
-        description: "Please enter a valid email address to receive your results.",
-        variant: "destructive",
-      });
-      return;
-    }
-    
     try {
       // Get quiz results from localStorage if available
       const quizResults = localStorage.getItem("quizAnswers") 
         ? JSON.parse(localStorage.getItem("quizAnswers") || "{}") 
         : {};
       
-      // Save lead to localStorage
+      // Save lead to localStorage with placeholder email
       saveLead(
         name.trim(),
-        email.trim(),
+        `${name.trim().toLowerCase().replace(/\s+/g, '')}@pending.com`,
         'quiz_results',
         `Quiz completed at ${new Date().toISOString()}`
       );
@@ -67,7 +57,7 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
     }
     
     // Continue with original submission
-    onSubmit(name.trim(), email.trim());
+    onSubmit(name.trim());
   };
 
   return (
@@ -77,7 +67,7 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
       </h2>
       
       <p className="mb-5 text-[#8a6eaa]">
-        Enter your email to view your personalized perimenopause assessment
+        Enter your name to view your personalized perimenopause assessment
       </p>
       
       <form onSubmit={handleSubmit} className="space-y-5 max-w-md mx-auto text-left">
@@ -88,20 +78,6 @@ const EmailCollection: React.FC<EmailCollectionProps> = ({ onSubmit, isLoading }
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your first name"
-            disabled={isLoading}
-            required
-            className="border-[#D6BCFA] focus:border-[#a68bc7] focus:ring-[#a68bc7]"
-          />
-        </div>
-        
-        <div className="space-y-1.5">
-          <Label htmlFor="email" className="text-[#6b4e82]">Email Address</Label>
-          <Input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Your email address"
             disabled={isLoading}
             required
             className="border-[#D6BCFA] focus:border-[#a68bc7] focus:ring-[#a68bc7]"
