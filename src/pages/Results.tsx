@@ -480,28 +480,48 @@ const Results = () => {
               </p>
             </div>
 
-            {/* Best Life Section */}
+            {/* Best Life Section with Photo */}
             <div className="best-life" style={{background: '#f8f6ff', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
-              <h3 style={{color: '#6B4E7A', fontSize: '32px', marginBottom: '15px'}}>
-                Now I'm Living My Best Life (At 47!) 🌟
-              </h3>
-              <p style={{lineHeight: '1.6', marginBottom: '15px', fontWeight: 'bold', fontSize: '22px'}}>
-                Today, four years later:
-              </p>
-              <ul style={{lineHeight: '1.6', marginBottom: '15px', paddingLeft: '20px', fontSize: '22px'}}>
-                <li>I'm more energetic than women half my age</li>
-                <li>Our sex life is incredible - better than our honeymoon phase</li>
-                <li>I'm confident, radiant, and glowing</li>
-                <li>We travel the world together (just got back from Bali!)</li>
-                <li>I help thousands of women through my perimenopause community</li>
-                <li>Our marriage is our friends' relationship goals</li>
-              </ul>
-              <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '22px'}}>
-                Perimenopause didn't ruin my love story - it made it BETTER.
-              </p>
-              <p style={{lineHeight: '1.6', fontWeight: 'bold', fontSize: '22px'}}>
-                But only because I found the right protocol at the right time.
-              </p>
+              <div style={{display: 'flex', alignItems: 'center', gap: '30px', flexWrap: 'wrap'}}>
+                {/* Left side - Text content */}
+                <div style={{flex: '1', minWidth: '300px'}}>
+                  <h3 style={{color: '#6B4E7A', fontSize: '32px', marginBottom: '15px'}}>
+                    Now I'm Living My Best Life (At 47!) 🌟
+                  </h3>
+                  <p style={{lineHeight: '1.6', marginBottom: '15px', fontWeight: 'bold', fontSize: '22px'}}>
+                    Today, four years later:
+                  </p>
+                  <ul style={{lineHeight: '1.6', marginBottom: '15px', paddingLeft: '20px', fontSize: '22px'}}>
+                    <li>I'm more energetic than women half my age</li>
+                    <li>Our sex life is incredible - better than our honeymoon phase</li>
+                    <li>I'm confident, radiant, and glowing</li>
+                    <li>We travel the world together (just got back from Bali!)</li>
+                    <li>I help thousands of women through my perimenopause community</li>
+                    <li>Our marriage is our friends' relationship goals</li>
+                  </ul>
+                  <p style={{lineHeight: '1.6', marginBottom: '15px', fontSize: '22px'}}>
+                    Perimenopause didn't ruin my love story - it made it BETTER.
+                  </p>
+                  <p style={{lineHeight: '1.6', fontWeight: 'bold', fontSize: '22px'}}>
+                    But only because I found the right protocol at the right time.
+                  </p>
+                </div>
+                
+                {/* Right side - Personal photo */}
+                <div style={{flex: '0 0 250px', textAlign: 'center'}}>
+                  <img 
+                    src="/lovable-uploads/b173cad7-a665-451a-8831-3cd33d7f792e.png" 
+                    alt="Melanie and her husband living their best life together"
+                    style={{
+                      width: '100%',
+                      maxWidth: '250px',
+                      height: 'auto',
+                      borderRadius: '12px',
+                      boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
+                    }}
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Main Offer Section with Book Cover */}
