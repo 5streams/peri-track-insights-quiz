@@ -98,16 +98,13 @@ export const quizQuestions: QuizQuestion[] = [
     ]
   },
   {
-    id: "age",
-    text: "What is your current age?",
+    id: "seekingRelief",
+    text: "Are you actively trying to find a product or service that will offer you some form of symptom relief at the moment?",
     type: "single",
     options: [
-      { id: "under_35", text: "Under 35" },
-      { id: "35_39", text: "35-39" },
-      { id: "40_44", text: "40-44" },
-      { id: "45_49", text: "45-49" },
-      { id: "50_54", text: "50-54" },
-      { id: "55_plus", text: "55 or older" }
+      { id: "actively_looking", text: "Yes I am actively looking for something to offer me relief" },
+      { id: "just_research", text: "No at the moment just doing some research not looking for any relief" },
+      { id: "tried_everything", text: "Yes I've tried everything and I can't find anything that works" }
     ]
   }
 ];
