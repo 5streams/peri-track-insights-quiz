@@ -145,7 +145,7 @@ const PDFMerger = () => {
           </div>
 
           {/* Security Badges */}
-          <div className="flex justify-center items-center gap-6 mb-12 flex-wrap">
+          <div className="flex justify-center items-center gap-6 mb-8 flex-wrap">
             <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-md border border-gray-200">
               <ShieldCheck className="h-5 w-5 text-green-600" />
               <span className="text-sm font-semibold text-gray-700">SSL Secured</span>
@@ -164,7 +164,7 @@ const PDFMerger = () => {
             </div>
           </div>
           
-          <div className="flex gap-4 justify-center items-center flex-wrap mb-12">
+          <div className="flex gap-4 justify-center items-center flex-wrap">
             <div className="text-center">
               <span className="block text-4xl font-extrabold text-gray-900 mb-1">2.5M+</span>
               <div className="text-sm text-gray-600 font-medium">Files processed monthly</div>
@@ -186,7 +186,7 @@ const PDFMerger = () => {
       </section>
 
       {/* Value Proposition */}
-      <section className="py-20 bg-white" id="features">
+      <section className="py-16 bg-white" id="features">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center max-w-4xl mx-auto mb-20">
             <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
