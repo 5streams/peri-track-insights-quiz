@@ -118,6 +118,15 @@ const PDFMerger = () => {
             Professional PDF Merge & Document Processing Platform
           </h1>
           
+          {/* PDF Merger Illustration */}
+          <div className="flex justify-center mb-8">
+            <img 
+              src="/lovable-uploads/c67d6f1e-ddfd-40e8-90c4-87f5bcb29e32.png" 
+              alt="PDF Merge Process - Multiple PDFs combining into one secure document"
+              className="max-w-md w-full h-auto"
+            />
+          </div>
+          
           <p className="text-xl text-gray-600 mb-12 leading-relaxed max-w-3xl mx-auto">
             Merge PDF files instantly, convert documents, process data with enterprise security. 
             Trusted by 150,000+ professionals. Transparent pricing, guaranteed results.
