@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import PDFMergerLeadModal from '@/components/PDFMergerLeadModal';
 import PDFEnterpriseLeadModal from '@/components/PDFEnterpriseLeadModal';
@@ -358,10 +359,7 @@ const PDFMerger = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-            <div className="bg-white border-2 border-blue-500 p-12 rounded-3xl relative transform scale-105 bg-gradient-to-br from-blue-50 to-white">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-8 py-2 rounded-full font-bold text-sm tracking-wider">
-                Most Popular
-              </div>
+            <div className="bg-white border-2 border-gray-200 p-12 rounded-3xl hover:-translate-y-2 transition-all hover:shadow-xl">
               <h3 className="text-2xl font-bold mb-2 text-gray-900">Professional</h3>
               <div className="text-6xl font-black text-blue-500 mb-2 leading-none">$12</div>
               <p className="text-gray-600 mb-8">per month, billed monthly</p>
@@ -403,7 +401,7 @@ const PDFMerger = () => {
               
               <button 
                 onClick={startTrial}
-                className="w-full bg-gradient-to-br from-blue-500 to-purple-600 text-white p-4 border-none rounded-xl font-bold text-lg cursor-pointer hover:from-blue-600 hover:to-purple-700 transform hover:-translate-y-1 transition-all mb-6 shadow-lg hover:shadow-blue-500/30"
+                className="w-full bg-blue-500 text-white p-4 border-none rounded-xl font-bold text-lg cursor-pointer hover:bg-blue-600 transform hover:-translate-y-1 transition-all mb-6"
               >
                 Start Free Trial
               </button>
@@ -431,7 +429,10 @@ const PDFMerger = () => {
               </div>
             </div>
             
-            <div className="bg-white border-2 border-gray-200 p-12 rounded-3xl hover:-translate-y-2 transition-all hover:shadow-xl">
+            <div className="bg-white border-2 border-blue-500 p-12 rounded-3xl relative transform scale-105 bg-gradient-to-br from-blue-50 to-white">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-2 rounded-full font-bold text-sm tracking-wider shadow-lg">
+                Save 55% Plus Bonuses!
+              </div>
               <h3 className="text-2xl font-bold mb-2 text-gray-900">Enterprise</h3>
               <div className="text-6xl font-black text-blue-500 mb-2 leading-none">$79</div>
               <p className="text-gray-600 mb-1">one-time payment for 12 months</p>
@@ -474,7 +475,7 @@ const PDFMerger = () => {
               
               <button 
                 onClick={startEnterpriseTrial}
-                className="w-full bg-blue-500 text-white p-4 border-none rounded-xl font-bold text-lg cursor-pointer hover:bg-blue-600 transform hover:-translate-y-1 transition-all mb-6"
+                className="w-full bg-gradient-to-br from-blue-500 to-purple-600 text-white p-4 border-none rounded-xl font-bold text-lg cursor-pointer hover:from-blue-600 hover:to-purple-700 transform hover:-translate-y-1 transition-all mb-6 shadow-lg hover:shadow-blue-500/30"
               >
                 Get Enterprise Access
               </button>
