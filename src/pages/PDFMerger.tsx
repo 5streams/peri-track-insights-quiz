@@ -1,9 +1,15 @@
-
-import React from 'react';
+import React, { useState } from 'react';
+import PDFMergerLeadModal from '@/components/PDFMergerLeadModal';
 
 const PDFMerger = () => {
+  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+
   const startTrial = () => {
-    alert('🚀 Starting your free trial!\n\n✅ 14 days completely free\n✅ No credit card required\n✅ Full access to all features\n✅ Transparent $12/month after trial\n\nRedirecting to signup...');
+    setIsLeadModalOpen(true);
+  };
+
+  const handleCloseLeadModal = () => {
+    setIsLeadModalOpen(false);
   };
 
   return (
@@ -570,6 +576,12 @@ const PDFMerger = () => {
           </div>
         </div>
       </footer>
+      
+      {/* Lead Capture Modal */}
+      <PDFMergerLeadModal
+        isOpen={isLeadModalOpen}
+        onClose={handleCloseLeadModal}
+      />
     </div>
   );
 };
