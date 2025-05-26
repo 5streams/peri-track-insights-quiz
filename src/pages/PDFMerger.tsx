@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import PDFMergerLeadModal from '@/components/PDFMergerLeadModal';
 import PDFEnterpriseLeadModal from '@/components/PDFEnterpriseLeadModal';
@@ -10,7 +9,6 @@ const PDFMerger = () => {
   const [isUpsellModalOpen, setIsUpsellModalOpen] = useState(false);
 
   const startTrial = () => {
-    // Show upsell modal first instead of going directly to trial
     setIsUpsellModalOpen(true);
   };
 
@@ -115,7 +113,7 @@ const PDFMerger = () => {
             Trusted by Fortune 500 companies
           </div>
           
-          <h1 className="text-6xl font-extrabold text-gray-900 mb-6 leading-tight tracking-tight">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight tracking-tight">
             Professional PDF Merge & Document Processing Platform
           </h1>
           
