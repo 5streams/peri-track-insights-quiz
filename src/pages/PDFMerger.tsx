@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import PDFMergerLeadModal from '@/components/PDFMergerLeadModal';
 import PDFEnterpriseLeadModal from '@/components/PDFEnterpriseLeadModal';
@@ -429,11 +428,11 @@ const PDFMerger = () => {
               </div>
             </div>
             
-            <div className="bg-white border-2 border-blue-500 p-12 rounded-3xl relative transform scale-105 bg-gradient-to-br from-blue-50 to-white">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-2 rounded-full font-bold text-sm tracking-wider shadow-lg">
+            <div className="bg-white border-2 border-blue-500 p-12 rounded-3xl relative transform scale-105 bg-gradient-to-br from-blue-50 to-white mt-8 md:mt-0">
+              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-full font-bold text-sm tracking-wider shadow-lg z-10">
                 Save 55% Plus Bonuses!
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-gray-900">Enterprise</h3>
+              <h3 className="text-2xl font-bold mb-2 text-gray-900 mt-4">Enterprise</h3>
               <div className="text-6xl font-black text-blue-500 mb-2 leading-none">$79</div>
               <p className="text-gray-600 mb-1">one-time payment for 12 months</p>
               <p className="text-green-600 font-semibold mb-8">Save 55% compared to monthly</p>
