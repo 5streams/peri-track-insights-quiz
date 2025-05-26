@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
 import PDFMergerLeadModal from '@/components/PDFMergerLeadModal';
+import PDFEnterpriseLeadModal from '@/components/PDFEnterpriseLeadModal';
 
 const PDFMerger = () => {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+  const [isEnterpriseModalOpen, setIsEnterpriseModalOpen] = useState(false);
 
   const startTrial = () => {
     setIsLeadModalOpen(true);
   };
 
+  const startEnterpriseTrial = () => {
+    setIsEnterpriseModalOpen(true);
+  };
+
   const handleCloseLeadModal = () => {
     setIsLeadModalOpen(false);
+  };
+
+  const handleCloseEnterpriseModal = () => {
+    setIsEnterpriseModalOpen(false);
   };
 
   return (
@@ -393,7 +403,7 @@ const PDFMerger = () => {
               </ul>
               
               <button 
-                onClick={startTrial}
+                onClick={startEnterpriseTrial}
                 className="w-full bg-blue-500 text-white p-4 border-none rounded-xl font-bold text-lg cursor-pointer hover:bg-blue-600 transform hover:-translate-y-1 transition-all mb-6"
               >
                 Start Enterprise Trial
@@ -449,7 +459,7 @@ const PDFMerger = () => {
               
               <div className="flex gap-4">
                 <button 
-                  onClick={startTrial}
+                  onClick={startEnterpriseTrial}
                   className="bg-blue-500 text-white px-9 py-4 rounded-xl font-bold text-lg hover:bg-blue-600 transform hover:-translate-y-1 transition-all border-none cursor-pointer"
                 >
                   Start Enterprise Trial
@@ -577,10 +587,15 @@ const PDFMerger = () => {
         </div>
       </footer>
       
-      {/* Lead Capture Modal */}
+      {/* Lead Capture Modals */}
       <PDFMergerLeadModal
         isOpen={isLeadModalOpen}
         onClose={handleCloseLeadModal}
+      />
+      
+      <PDFEnterpriseLeadModal
+        isOpen={isEnterpriseModalOpen}
+        onClose={handleCloseEnterpriseModal}
       />
     </div>
   );
