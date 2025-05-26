@@ -434,7 +434,8 @@ const PDFMerger = () => {
             <div className="bg-white border-2 border-gray-200 p-12 rounded-3xl hover:-translate-y-2 transition-all hover:shadow-xl">
               <h3 className="text-2xl font-bold mb-2 text-gray-900">Enterprise</h3>
               <div className="text-6xl font-black text-blue-500 mb-2 leading-none">$79</div>
-              <p className="text-gray-600 mb-8">per month, billed monthly</p>
+              <p className="text-gray-600 mb-1">one-time payment for 12 months</p>
+              <p className="text-green-600 font-semibold mb-8">Save 55% compared to monthly</p>
               
               <ul className="text-left mb-10 space-y-3">
                 <li className="flex items-center gap-3 font-medium">
@@ -443,7 +444,7 @@ const PDFMerger = () => {
                 </li>
                 <li className="flex items-center gap-3 font-medium">
                   <span className="w-6 h-6 bg-green-200 rounded-full flex items-center justify-center text-green-700 text-sm font-bold flex-shrink-0">✓</span>
-                  10 team members included
+                  10 team member seats included
                 </li>
                 <li className="flex items-center gap-3 font-medium">
                   <span className="w-6 h-6 bg-green-200 rounded-full flex items-center justify-center text-green-700 text-sm font-bold flex-shrink-0">✓</span>
@@ -475,7 +476,7 @@ const PDFMerger = () => {
                 onClick={startEnterpriseTrial}
                 className="w-full bg-blue-500 text-white p-4 border-none rounded-xl font-bold text-lg cursor-pointer hover:bg-blue-600 transform hover:-translate-y-1 transition-all mb-6"
               >
-                Start Enterprise Trial
+                Get Enterprise Access
               </button>
               
               <div className="bg-green-50 p-5 rounded-xl border border-green-200 mb-6">
