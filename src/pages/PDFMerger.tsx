@@ -115,7 +115,7 @@ const PDFMerger = () => {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight tracking-tight">
-            Professional PDF Merge & Document Processing Platform
+            Professional And Secure PDF Merge & Document Processing Platform
           </h1>
           
           <div className="mb-8 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg max-w-4xl mx-auto">
