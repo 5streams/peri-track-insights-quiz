@@ -118,6 +118,12 @@ const PDFMerger = () => {
             Professional PDF Merge & Document Processing Platform
           </h1>
           
+          <div className="mb-8 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg max-w-4xl mx-auto">
+            <p className="text-lg text-red-800 font-semibold leading-relaxed">
+              Don't Trust Your Personal Or Professional Documents With FREE Tools They Don't Offer The Security That We Do! Your Information Is At Risk When Using Them!
+            </p>
+          </div>
+          
           {/* PDF Merger Illustration */}
           <div className="flex justify-center mb-8">
             <img 
