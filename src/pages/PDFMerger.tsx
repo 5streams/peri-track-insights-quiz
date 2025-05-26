@@ -1,13 +1,17 @@
+
 import React, { useState } from 'react';
 import PDFMergerLeadModal from '@/components/PDFMergerLeadModal';
 import PDFEnterpriseLeadModal from '@/components/PDFEnterpriseLeadModal';
+import PDFUpsellModal from '@/components/PDFUpsellModal';
 
 const PDFMerger = () => {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [isEnterpriseModalOpen, setIsEnterpriseModalOpen] = useState(false);
+  const [isUpsellModalOpen, setIsUpsellModalOpen] = useState(false);
 
   const startTrial = () => {
-    setIsLeadModalOpen(true);
+    // Show upsell modal first instead of going directly to trial
+    setIsUpsellModalOpen(true);
   };
 
   const startEnterpriseTrial = () => {
@@ -20,6 +24,20 @@ const PDFMerger = () => {
 
   const handleCloseEnterpriseModal = () => {
     setIsEnterpriseModalOpen(false);
+  };
+
+  const handleCloseUpsellModal = () => {
+    setIsUpsellModalOpen(false);
+  };
+
+  const handleAcceptUpsell = () => {
+    setIsUpsellModalOpen(false);
+    setIsEnterpriseModalOpen(true);
+  };
+
+  const handleDeclineUpsell = () => {
+    setIsUpsellModalOpen(false);
+    setIsLeadModalOpen(true);
   };
 
   return (
@@ -588,6 +606,13 @@ const PDFMerger = () => {
       </footer>
       
       {/* Lead Capture Modals */}
+      <PDFUpsellModal
+        isOpen={isUpsellModalOpen}
+        onClose={handleCloseUpsellModal}
+        onAcceptUpsell={handleAcceptUpsell}
+        onDeclineUpsell={handleDeclineUpsell}
+      />
+      
       <PDFMergerLeadModal
         isOpen={isLeadModalOpen}
         onClose={handleCloseLeadModal}
