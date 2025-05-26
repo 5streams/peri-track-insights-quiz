@@ -12,6 +12,7 @@ import TryPeriTrack from "./pages/tryperitrack";
 import PerimenopauseWeightGainTracker from "./pages/PerimenopauseWeightGainTracker";
 import PerimenopauseInsomnia from "./pages/PerimenopauseInsomnia";
 import AdminLeads from "./pages/AdminLeads";
+import PDFMerger from "./pages/PDFMerger";
 import "./App.css";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/tryperitracker" element={<TryPeriTrack />} /> {/* Add redirect for alternate URL */}
         <Route path="/perimenopause-weight-gain-tracker" element={<PerimenopauseWeightGainTracker />} />
         <Route path="/perimenopause-insomnia" element={<PerimenopauseInsomnia />} />
+        <Route path="/pdfmerger" element={<PDFMerger />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
