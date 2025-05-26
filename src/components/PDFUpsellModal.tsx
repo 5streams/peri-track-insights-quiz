@@ -1,4 +1,3 @@
-
 import React from "react";
 import { 
   Dialog,
@@ -45,7 +44,7 @@ const PDFUpsellModal: React.FC<PDFUpsellModalProps> = ({
             
             <h3 className="text-base font-bold mb-1 text-gray-900 mt-1">Enterprise</h3>
             <div className="text-3xl font-black text-blue-500 mb-0.5 leading-none">$79</div>
-            <p className="text-xs text-gray-600 mb-3">per month, billed monthly</p>
+            <p className="text-xs text-gray-600 mb-3">per year, billed annually</p>
             
             <ul className="text-left mb-3 space-y-1">
               <li className="flex items-center gap-2 text-xs">
