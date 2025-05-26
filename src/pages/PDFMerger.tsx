@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PDFMergerLeadModal from '@/components/PDFMergerLeadModal';
 import PDFEnterpriseLeadModal from '@/components/PDFEnterpriseLeadModal';
 import PDFUpsellModal from '@/components/PDFUpsellModal';
+import { Shield, ShieldCheck, Lock } from 'lucide-react';
 
 const PDFMerger = () => {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
@@ -122,7 +123,7 @@ const PDFMerger = () => {
             Trusted by 150,000+ professionals. Transparent pricing, guaranteed results.
           </p>
           
-          <div className="flex gap-4 justify-center items-center flex-wrap mb-12">
+          <div className="flex gap-4 justify-center items-center flex-wrap mb-6">
             <button 
               onClick={startTrial}
               className="bg-blue-500 text-white px-9 py-4 rounded-xl font-bold text-lg hover:bg-blue-600 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-blue-500/25 border-none cursor-pointer"
@@ -133,8 +134,28 @@ const PDFMerger = () => {
               See Features
             </a>
           </div>
+
+          {/* Security Badges */}
+          <div className="flex justify-center items-center gap-6 mb-12 flex-wrap">
+            <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-md border border-gray-200">
+              <ShieldCheck className="h-5 w-5 text-green-600" />
+              <span className="text-sm font-semibold text-gray-700">SSL Secured</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-md border border-gray-200">
+              <Shield className="h-5 w-5 text-blue-600" />
+              <span className="text-sm font-semibold text-gray-700">SOC 2 Certified</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-md border border-gray-200">
+              <Lock className="h-5 w-5 text-purple-600" />
+              <span className="text-sm font-semibold text-gray-700">Bank-Level Security</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-md border border-gray-200">
+              <span className="text-sm font-bold text-green-600">✓</span>
+              <span className="text-sm font-semibold text-gray-700">30-Day Guarantee</span>
+            </div>
+          </div>
           
-          <div className="flex justify-center gap-12 flex-wrap">
+          <div className="flex gap-4 justify-center items-center flex-wrap mb-12">
             <div className="text-center">
               <span className="block text-4xl font-extrabold text-gray-900 mb-1">2.5M+</span>
               <div className="text-sm text-gray-600 font-medium">Files processed monthly</div>
@@ -378,9 +399,25 @@ const PDFMerger = () => {
                 Start Free Trial
               </button>
               
-              <div className="bg-green-50 p-5 rounded-xl border border-green-200">
+              <div className="bg-green-50 p-5 rounded-xl border border-green-200 mb-6">
                 <div className="text-green-800 font-semibold text-sm">
                   <strong>14-day free trial</strong> • No credit card required • Cancel anytime
+                </div>
+              </div>
+
+              {/* Security Badges for Professional Plan */}
+              <div className="flex justify-center items-center gap-3 flex-wrap">
+                <div className="flex items-center gap-1 text-xs text-gray-600">
+                  <ShieldCheck className="h-4 w-4 text-green-600" />
+                  <span>SSL Protected</span>
+                </div>
+                <div className="flex items-center gap-1 text-xs text-gray-600">
+                  <Shield className="h-4 w-4 text-blue-600" />
+                  <span>Enterprise Security</span>
+                </div>
+                <div className="flex items-center gap-1 text-xs text-gray-600">
+                  <Lock className="h-4 w-4 text-purple-600" />
+                  <span>Data Encrypted</span>
                 </div>
               </div>
             </div>
@@ -432,9 +469,25 @@ const PDFMerger = () => {
                 Start Enterprise Trial
               </button>
               
-              <div className="bg-green-50 p-5 rounded-xl border border-green-200">
+              <div className="bg-green-50 p-5 rounded-xl border border-green-200 mb-6">
                 <div className="text-green-800 font-semibold text-sm">
                   <strong>14-day free trial</strong> • No credit card required • Cancel anytime
+                </div>
+              </div>
+
+              {/* Security Badges for Enterprise Plan */}
+              <div className="flex justify-center items-center gap-3 flex-wrap">
+                <div className="flex items-center gap-1 text-xs text-gray-600">
+                  <ShieldCheck className="h-4 w-4 text-green-600" />
+                  <span>SOC 2 Certified</span>
+                </div>
+                <div className="flex items-center gap-1 text-xs text-gray-600">
+                  <Shield className="h-4 w-4 text-blue-600" />
+                  <span>GDPR Compliant</span>
+                </div>
+                <div className="flex items-center gap-1 text-xs text-gray-600">
+                  <Lock className="h-4 w-4 text-purple-600" />
+                  <span>Bank Security</span>
                 </div>
               </div>
             </div>
