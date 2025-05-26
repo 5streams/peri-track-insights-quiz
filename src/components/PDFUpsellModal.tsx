@@ -25,8 +25,8 @@ const PDFUpsellModal: React.FC<PDFUpsellModalProps> = ({
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px]">
-        <DialogClose className="absolute right-4 top-4" />
+      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+        <DialogClose className="absolute right-4 top-4 z-10" />
         
         <div className="text-center py-6">
           <DialogHeader className="mb-8">
