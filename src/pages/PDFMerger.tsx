@@ -410,7 +410,7 @@ const PDFMerger = () => {
               
               <div className="bg-green-50 p-5 rounded-xl border border-green-200 mb-6">
                 <div className="text-green-800 font-semibold text-sm">
-                  <strong>14-day free trial</strong> • No credit card required • Cancel anytime
+                  <strong>14-day free trial</strong> • Cancel anytime
                 </div>
               </div>
 
@@ -480,7 +480,7 @@ const PDFMerger = () => {
               
               <div className="bg-green-50 p-5 rounded-xl border border-green-200 mb-6">
                 <div className="text-green-800 font-semibold text-sm">
-                  <strong>14-day free trial</strong> • No credit card required • Cancel anytime
+                  <strong>14-day free trial</strong> • Cancel anytime
                 </div>
               </div>
 
