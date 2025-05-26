@@ -14,6 +14,13 @@ const PDFMerger = () => {
     setIsUpsellModalOpen(true);
   };
 
+  const scrollToPricing = () => {
+    const pricingSection = document.getElementById('pricing');
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const startEnterpriseTrial = () => {
     setIsEnterpriseModalOpen(true);
   };
@@ -61,7 +68,7 @@ const PDFMerger = () => {
           
           <div className="flex items-center gap-4">
             <button 
-              onClick={startTrial}
+              onClick={scrollToPricing}
               className="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold text-sm hover:bg-blue-600 transform hover:-translate-y-0.5 transition-all border-none cursor-pointer"
             >
               Start Free Trial
