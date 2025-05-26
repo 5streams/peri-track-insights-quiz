@@ -116,7 +116,7 @@ const PDFEnterpriseLeadModal: React.FC<PDFEnterpriseLeadModalProps> = ({
                 Get 14 days of unlimited enterprise-grade PDF processing with team collaboration.
               </p>
               <p className="text-blue-600 font-medium text-sm mt-1">
-                Then only $79/month • Cancel anytime
+                Then only $79/year • Cancel anytime
               </p>
             </DialogHeader>
             
