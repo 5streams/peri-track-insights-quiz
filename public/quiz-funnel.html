@@ -698,7 +698,7 @@ const ROUTES = {
       <div class="testimonial">"I was snapping at the people I love and hating myself for it. The plan explained what was actually happening in my body — and gave me something to do about it that took ten minutes a day. My husband said, 'you're back.' That was week four."<b>— Michelle, 46 · Columbus, OH</b></div>
 
       <p class="note">Includes daily 10-minute lessons · symptom & protocol tracker · relaxation audio · doctor-visit prep. Member stories in this prototype are illustrative.</p>`;
-    s.querySelector("#buy").onclick=()=>go({name:"upsell"});
+    s.querySelector("#buy").onclick=()=>startTrialCheckout(7);
     s.querySelector("#hesitate").onclick=()=>go({name:"downsell",dom:ctx.dom,total:ctx.total});
     let secs=15*60;const t=s.querySelector("#timer");
     const tick=setInterval(()=>{
@@ -717,7 +717,7 @@ const ROUTES = {
       <p>If it's not for you, cancel in one tap and keep the 3 A.M. Protocol free, as our thank-you for taking the assessment.</p>
       <button class="cta" id="take">Take the 14-day trial — $${state.trialPrice||1}</button>
       <button class="ghost" id="leave" style="color:#E4CDD9">No thanks — email me my results only</button></div>`;
-    s.querySelector("#take").onclick=()=>go({name:"upsell"});
+    s.querySelector("#take").onclick=()=>startTrialCheckout(14);
     s.querySelector("#leave").onclick=()=>go({name:"confirm",kit:false,declined:true});
   },
 
