@@ -946,6 +946,39 @@ const ROUTES = {
 };
 
 /* -------------- helpers -------------- */
+const STRIPE_CHECKOUT_URL = "https://bjwrfmoivnttemjydvyz.supabase.co/functions/v1/create-trial-checkout";
+const STRIPE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqd3JmbW9pdm50dGVtanlkdnl6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM4NTg5MDgsImV4cCI6MjA5OTQzNDkwOH0.qy-dVr9MHDcBXAeUSpG-6emyvFPfZGsl4eixvyvvtOs";
+async function startStripeCheckout(trialDays, btn){
+  const cents = Math.round((state.trialPrice||1) * 100);
+  const original = btn ? btn.textContent : "";
+  if (btn){ btn.disabled = true; btn.textContent = "Starting secure checkout…"; }
+  try {
+    const res = await fetch(STRIPE_CHECKOUT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": STRIPE_ANON_KEY,
+        "Authorization": "Bearer " + STRIPE_ANON_KEY,
+      },
+      body: JSON.stringify({
+        trial_price_cents: cents,
+        trial_days: trialDays,
+        email: state.email || null,
+        name: state.name || null,
+        lead_id: state.leadId || null,
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.url) throw new Error(data.error || "checkout failed");
+    if (data.lead_id) state.leadId = data.lead_id;
+    window.location.href = data.url;
+  } catch (err) {
+    console.error("checkout error", err);
+    alert("Could not start checkout: " + (err.message || err));
+    if (btn){ btn.disabled = false; btn.textContent = original; }
+  }
+}
+
 function trialEndString(){
   const d=new Date();d.setDate(d.getDate()+7);
   return d.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
