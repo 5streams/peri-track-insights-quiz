@@ -915,7 +915,7 @@ const ROUTES = {
         <div class="then">One-time. Instant download. Added to the card on file only if you tap yes below.</div>
       </div>
       <button class="cta gold" id="yes">Yes — add the Doctor Visit Kit ($14.99)</button>
-      <button class="ghost" id="no">No thanks, continue to my plan</button>`;
+      <button class="ghost" id="no" style="border:2px solid #4A2F3A;color:#4A2F3A;background:#fff;font-weight:700;font-size:16px;padding:14px;margin-top:10px">No thanks, continue to my plan</button>`;
     s.querySelector("#yes").onclick=()=>go({name:"checkout",days,kit:true});
     s.querySelector("#no").onclick=()=>go({name:"checkout",days,kit:false});
   },

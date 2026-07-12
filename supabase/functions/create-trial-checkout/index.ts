@@ -136,7 +136,7 @@ Deno.serve(async (req) => {
     };
 
     if (embedded) {
-      sessionParams.ui_mode = "embedded";
+      sessionParams.ui_mode = "embedded_page";
       sessionParams.return_url = `${siteUrl}/confirm?lead=${lead_id}${add_kit ? "&kit=1" : ""}&session_id={CHECKOUT_SESSION_ID}`;
     } else {
       sessionParams.success_url = `${siteUrl}/confirm?lead=${lead_id}${add_kit ? "&kit=1" : ""}&session_id={CHECKOUT_SESSION_ID}`;
