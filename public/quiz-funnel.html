@@ -263,6 +263,113 @@ function render(){
 }
 
 /* -------------- routes -------------- */
+
+function renderPaySection(container, trial){
+  const monthly=29.99;
+  const perDayMonthly=(monthly/28).toFixed(2);
+  const total=Number(trial).toFixed(2);
+  container.innerHTML=`
+    <div class="eyebrow" style="text-align:center">Your plan is ready</div>
+    <h1 style="font-size:26px;text-align:center;margin-bottom:6px">Try it for 7 days.</h1>
+    <p class="sub" style="text-align:center;margin-bottom:20px">Full access. Cancel in one tap. We email a reminder 2 days before your trial ends.</p>
+
+    <div style="background:#fff;border:1px solid #E8D7DF;border-radius:20px;padding:22px;box-shadow:0 12px 30px rgba(51,29,46,.06);text-align:left;margin-bottom:18px">
+      <h2 style="font-size:20px;text-align:center;margin-bottom:20px">How your trial works</h2>
+      <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px">
+        <div style="flex:0 0 34px;height:34px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800">✓</div>
+        <div><div style="text-decoration:line-through;color:var(--gold);font-weight:700;font-size:16px">Sign up for MenoMastery</div>
+        <p style="color:#46293F;font-size:14.5px;line-height:1.5;margin-top:2px">You've built your Perimenopause Profile — the first step toward feeling like yourself again.</p></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px">
+        <div style="flex:0 0 34px;height:34px;border-radius:50%;background:var(--blush-soft);color:var(--plum);display:flex;align-items:center;justify-content:center;font-weight:800">★</div>
+        <div><div style="color:var(--gold);font-weight:800;font-size:16px">Today</div>
+        <p style="color:#46293F;font-size:14.5px;line-height:1.5;margin-top:2px">Full access to your 28-Day Reclamation Plan, the 3 A.M. Protocol, and every tracker.</p></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px">
+        <div style="flex:0 0 34px;height:34px;border-radius:50%;background:var(--blush-soft);color:var(--plum);display:flex;align-items:center;justify-content:center;font-weight:800">◷</div>
+        <div><div style="color:var(--plum);font-weight:800;font-size:16px">Day 5</div>
+        <p style="color:#46293F;font-size:14.5px;line-height:1.5;margin-top:2px">We email you a reminder — cancel in one tap if it's not for you.</p></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start">
+        <div style="flex:0 0 34px;height:34px;border-radius:50%;background:var(--blush-soft);color:var(--plum);display:flex;align-items:center;justify-content:center;font-weight:800">✓</div>
+        <div><div style="color:var(--plum);font-weight:800;font-size:16px">Day 7</div>
+        <p style="color:#46293F;font-size:14.5px;line-height:1.5;margin-top:2px">Your trial converts to $${monthly.toFixed(2)}/month unless canceled.</p></div>
+      </div>
+
+      <h3 style="margin-top:22px;font-size:18px;color:var(--plum)">Total today</h3>
+      <hr style="border:none;border-top:1px solid #E8D7DF;margin:8px 0 12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <span style="color:#46293F">7-day trial</span>
+        <div style="text-align:right">
+          <b style="font-size:17px;color:var(--plum)">$${total} USD</b>
+          <div style="font-size:13px;color:#6E5665;margin-top:2px">Billed at $${total}</div>
+        </div>
+      </div>
+      <h3 style="margin-top:18px;font-size:18px;color:var(--plum)">Price after trial</h3>
+      <hr style="border:none;border-top:1px solid #E8D7DF;margin:8px 0 12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <span style="color:#46293F">4-weeks plan</span>
+        <div style="text-align:right">
+          <b style="font-size:17px;color:var(--plum)">${perDayMonthly} USD</b><span style="color:#6E5665">/per day</span>
+          <div style="font-size:13px;color:#6E5665;margin-top:2px">Billed at ${monthly.toFixed(2)} USD</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="eyebrow" style="text-align:center">People trust us</div>
+    <div style="display:flex;gap:10px;overflow-x:auto;padding:6px 2px 14px;margin:0 -8px">
+      <div style="flex:0 0 78%;background:#fff;border:1px solid #EEE0E7;border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(51,29,46,.05)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><b>Olivia J.</b><span style="color:var(--gold);letter-spacing:1px">★★★★★</span></div>
+        <p style="font-size:14px;color:#46293F;line-height:1.55;margin:0">"I'm usually not that person who leaves reviews on apps… But this time, I've said THANK YOU. I've tried many programs, and finally, I got MenoMastery — which digs deeply."</p>
+      </div>
+      <div style="flex:0 0 78%;background:#fff;border:1px solid #EEE0E7;border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(51,29,46,.05)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><b>Mary F.</b><span style="color:var(--gold);letter-spacing:1px">★★★★★</span></div>
+        <p style="font-size:14px;color:#46293F;line-height:1.55;margin:0">"I used to not notice how my hormones limited me. This shed light on my issues and helped me cope with everything better!"</p>
+      </div>
+      <div style="flex:0 0 78%;background:#fff;border:1px solid #EEE0E7;border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(51,29,46,.05)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><b>Dana R.</b><span style="color:var(--gold);letter-spacing:1px">★★★★★</span></div>
+        <p style="font-size:14px;color:#46293F;line-height:1.55;margin:0">"The 3 A.M. Protocol alone gave me my first full night of sleep in two years. I cried when I realized I wasn't dreading bedtime anymore."</p>
+      </div>
+    </div>
+
+    <div style="background:#fff;border:1px solid #E8D7DF;border-radius:20px;padding:22px;box-shadow:0 12px 30px rgba(51,29,46,.06);text-align:left">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+        <h2 style="font-size:20px;margin:0;color:var(--plum)">Payment method</h2>
+        <span style="color:var(--orchid);font-size:13px;font-weight:600">Secure</span>
+      </div>
+      <p style="color:#46293F;font-size:13.5px;line-height:1.5;margin-bottom:6px">You'll have a full <b>7 days</b> to experience how MenoMastery can improve your life.</p>
+      <p style="color:var(--plum);font-size:13.5px;font-weight:700;margin-bottom:4px">Price after trial: $29.99/month.</p>
+      <p style="color:#6E5665;font-size:13.5px;margin-bottom:16px">No charges if you cancel before the trial ends.</p>
+
+      <label style="display:flex;align-items:center;gap:12px;padding:14px 14px;border:1px solid #E8D7DF;border-radius:12px;margin-bottom:10px;cursor:pointer">
+        <input type="radio" name="pm" value="gpay" style="accent-color:var(--gold)">
+        <span style="flex:1;font-weight:600;color:var(--plum)">Google Pay</span>
+        <span style="font-size:11px;border:1px solid #D9C4CE;border-radius:6px;padding:3px 7px;color:#6E5665">G Pay</span>
+      </label>
+
+      <div style="border:2px solid var(--gold);border-radius:12px;padding:14px;background:#FFF9EE">
+        <label style="display:flex;align-items:center;gap:12px;cursor:pointer">
+          <input type="radio" name="pm" value="cc" checked style="accent-color:var(--gold)">
+          <span style="flex:1;font-weight:700;color:var(--plum)">Credit Card</span>
+          <span style="font-size:11px;color:#6E5665">VISA · MC · AMEX</span>
+        </label>
+        <form id="ccform" style="margin-top:14px;display:flex;flex-direction:column;gap:10px">
+          <input required type="text" name="cc" inputmode="numeric" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" style="width:100%;padding:13px 14px;border:1px solid #D9C4CE;border-radius:10px;font-size:15.5px;background:#fff;box-sizing:border-box;min-width:0;color:var(--plum)">
+          <div style="display:flex;gap:10px">
+            <input required type="text" name="exp" maxlength="5" placeholder="MM/YY" style="flex:1;padding:13px 14px;border:1px solid #D9C4CE;border-radius:10px;font-size:15.5px;background:#fff;box-sizing:border-box;min-width:0;color:var(--plum)">
+            <input required type="text" name="cvv" inputmode="numeric" maxlength="4" placeholder="CVV" style="flex:1;padding:13px 14px;border:1px solid #D9C4CE;border-radius:10px;font-size:15.5px;background:#fff;box-sizing:border-box;min-width:0;color:var(--plum)">
+          </div>
+          <input required type="text" name="name" placeholder="Full name as on card" style="width:100%;padding:13px 14px;border:1px solid #D9C4CE;border-radius:10px;font-size:15.5px;background:#fff;box-sizing:border-box;min-width:0;color:var(--plum)">
+          <button class="cta gold" type="submit" style="margin-top:6px">🔒 Start my 7-day trial — $${total}</button>
+        </form>
+      </div>
+
+      <p class="note" style="text-align:center;margin-top:12px">🔒 Encrypted checkout · Cancel anytime · Reminder email before renewal</p>
+    </div>`;
+  const f=container.querySelector("#ccform");
+  if(f) f.onsubmit=(e)=>{e.preventDefault();go({name:"confirm",kit:false});};
+}
+
 const ROUTES = {
 
   landing(s){
