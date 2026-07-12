@@ -881,7 +881,7 @@ const ROUTES = {
       <div class="testimonial">"I was snapping at the people I love and hating myself for it. The plan explained what was actually happening in my body — and gave me something to do about it that took ten minutes a day. My husband said, 'you're back.' That was week four."<b>— Michelle, 46 · Columbus, OH</b></div>
 
       <p class="note">Includes daily 10-minute lessons · symptom & protocol tracker · relaxation audio · doctor-visit prep. Member stories in this prototype are illustrative.</p>`;
-    s.querySelector("#buy").onclick=()=>go({name:"upsell"});
+    s.querySelector("#buy").onclick=()=>startStripeCheckout(7,s.querySelector("#buy"));
     s.querySelector("#hesitate").onclick=()=>go({name:"downsell",dom:ctx.dom,total:ctx.total});
     let secs=15*60;const t=s.querySelector("#timer");
     const tick=setInterval(()=>{
@@ -900,7 +900,7 @@ const ROUTES = {
       <p>If it's not for you, cancel in one tap and keep the 3 A.M. Protocol free, as our thank-you for taking the assessment.</p>
       <button class="cta" id="take">Take the 14-day trial — $${state.trialPrice||1}</button>
       <button class="ghost" id="leave" style="color:#E4CDD9">No thanks — email me my results only</button></div>`;
-    s.querySelector("#take").onclick=()=>go({name:"upsell"});
+    s.querySelector("#take").onclick=()=>startStripeCheckout(14,s.querySelector("#take"));
     s.querySelector("#leave").onclick=()=>go({name:"confirm",kit:false,declined:true});
   },
 
@@ -946,6 +946,39 @@ const ROUTES = {
 };
 
 /* -------------- helpers -------------- */
+const STRIPE_CHECKOUT_URL = "https://bjwrfmoivnttemjydvyz.supabase.co/functions/v1/create-trial-checkout";
+const STRIPE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqd3JmbW9pdm50dGVtanlkdnl6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM4NTg5MDgsImV4cCI6MjA5OTQzNDkwOH0.qy-dVr9MHDcBXAeUSpG-6emyvFPfZGsl4eixvyvvtOs";
+async function startStripeCheckout(trialDays, btn){
+  const cents = Math.round((state.trialPrice||1) * 100);
+  const original = btn ? btn.textContent : "";
+  if (btn){ btn.disabled = true; btn.textContent = "Starting secure checkout…"; }
+  try {
+    const res = await fetch(STRIPE_CHECKOUT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": STRIPE_ANON_KEY,
+        "Authorization": "Bearer " + STRIPE_ANON_KEY,
+      },
+      body: JSON.stringify({
+        trial_price_cents: cents,
+        trial_days: trialDays,
+        email: state.email || null,
+        name: state.name || null,
+        lead_id: state.leadId || null,
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.url) throw new Error(data.error || "checkout failed");
+    if (data.lead_id) state.leadId = data.lead_id;
+    window.location.href = data.url;
+  } catch (err) {
+    console.error("checkout error", err);
+    alert("Could not start checkout: " + (err.message || err));
+    if (btn){ btn.disabled = false; btn.textContent = original; }
+  }
+}
+
 function trialEndString(){
   const d=new Date();d.setDate(d.getDate()+7);
   return d.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
