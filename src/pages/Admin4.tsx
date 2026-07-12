@@ -181,7 +181,8 @@ const Admin4: React.FC = () => {
               <tr>
                 <th className="px-3 py-2">Landed</th>
                 <th className="px-3 py-2">Email / Name</th>
-                <th className="px-3 py-2">Campaign</th>
+                <th className="px-3 py-2">Source / Campaign</th>
+                <th className="px-3 py-2">Quiz progress</th>
                 <th className="px-3 py-2 text-center">Landed</th>
                 <th className="px-3 py-2 text-center">Email</th>
                 <th className="px-3 py-2 text-center">Quiz</th>
