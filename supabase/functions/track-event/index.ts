@@ -63,11 +63,17 @@ Deno.serve(async (req) => {
     // Try update by session_id first; insert if none.
     const { data: existing } = await supabase
       .from("leads")
-      .select("id")
+      .select("id, quiz_completed_at, paywall_reached_at")
       .eq("session_id", session_id)
       .maybeSingle();
 
     if (existing) {
+      // Don't let a later progress ping overwrite a completed quiz or reset status backwards.
+      if (event === "quiz_progress" && (existing.quiz_completed_at || existing.paywall_reached_at)) {
+        return new Response(JSON.stringify({ ok: true, skipped: true }), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
       const upd: Record<string, unknown> = {};
       for (const [k, v] of Object.entries(patch)) if (v !== undefined) upd[k] = v;
       await supabase.from("leads").update(upd).eq("id", existing.id);
