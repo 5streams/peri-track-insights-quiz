@@ -1003,15 +1003,10 @@ const ROUTES = {
     const payDiv = document.createElement("div");
     payDiv.id = "inlinepay";
     payDiv.style.marginTop = "22px";
-    payDiv.style.display = "none";
     buyBtn.parentNode.insertBefore(payDiv, buyBtn.nextSibling);
-    buyBtn.onclick = () => {
-      renderPaySection(payDiv, state.trialPrice || 1);
-      payDiv.style.display = "block";
-      buyBtn.style.display = "none";
-      hesBtn.style.display = "none";
-      setTimeout(() => payDiv.scrollIntoView({behavior:"smooth",block:"start"}), 50);
-    };
+    renderPaySection(payDiv, state.trialPrice || 1);
+    buyBtn.style.display = "none";
+    hesBtn.style.display = "none";
     hesBtn.onclick=()=>go({name:"downsell",dom:ctx.dom,total:ctx.total});
     let secs=15*60;const t=s.querySelector("#timer");
     const tick=setInterval(()=>{
