@@ -13,7 +13,7 @@ import TrustFooter from "@/components/TrustFooter";
 // Add global styles for remaining components
 const globalStyles = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap');
-  
+
   :root {
     --primary: rgb(93 65 84 / var(--tw-text-opacity, 1));
     --warm-gray: #6B7280;
@@ -25,7 +25,7 @@ const globalStyles = `
     color: #333;
     line-height: 1.6;
   }
-  
+
   /* Color definitions */
   .text-primary { color: rgb(93 65 84 / var(--tw-text-opacity, 1)); }
   .text-warm-gray { color: #6B7280; }
@@ -36,21 +36,21 @@ const globalStyles = `
   .font-headline {
     font-family: 'Playfair Display', serif;
   }
-  
+
   .font-sans {
     font-family: 'Raleway', sans-serif;
   }
-  
+
   .text-body-regular {
     font-size: 1rem;
     line-height: 1.5;
   }
-  
+
   .text-body-large {
     font-size: 1.125rem;
     line-height: 1.5;
   }
-  
+
   /* Container */
   .container {
     width: 100%;
@@ -123,7 +123,7 @@ const globalStyles = `
   .text-3xl { font-size: 1.875rem; }
   .text-4xl { font-size: 2.25rem; }
   .text-5xl { font-size: 3rem; }
-  
+
   /* Grid and Flex utilities */
   .grid { display: grid; }
   .flex { display: flex; }
@@ -147,7 +147,7 @@ const globalStyles = `
   .h-8 { height: 2rem; }
   .border-2 { border-width: 2px; }
   .border-white { border-color: white; }
-  
+
   /* Modal styles */
   .fixed { position: fixed; }
   .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
@@ -195,18 +195,18 @@ const globalStyles = `
   .sm\\:space-x-4 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 0; margin-right: calc(1rem * var(--tw-space-x-reverse)); margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse))); }
   .sm\\:text-left { text-align: left; }
   .sm\\:text-sm { font-size: 0.875rem; }
-  
+
   /* Responsive utilities */
   @media (min-width: 768px) {
     .md\\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
   }
-  
+
   @media (min-width: 1024px) {
     .lg\\:px-8 { padding-left: 2rem; padding-right: 2rem; }
     .lg\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .lg\\:text-4xl { font-size: 2.25rem; }
   }
-  
+
   @media (min-width: 1280px) {
     .xl\\:text-5xl { font-size: 3rem; }
   }
@@ -258,7 +258,7 @@ const Results = () => {
   });
   const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
-  
+
   // Helper functions
   const getScoreCategory = React.useCallback((score: number) => {
     if (score <= 40) return "mild";
@@ -270,7 +270,7 @@ const Results = () => {
   useEffect(() => {
     const storedResults = localStorage.getItem("quizResults");
     const storedUserInfo = localStorage.getItem("userInfo");
-    
+
     if (storedResults) {
       const parsedResults = JSON.parse(storedResults);
       setResults(parsedResults);
@@ -279,7 +279,7 @@ const Results = () => {
     } else {
       navigate("/quiz");
     }
-    
+
     if (storedUserInfo) {
       setUserInfo(JSON.parse(storedUserInfo));
     }
@@ -292,15 +292,15 @@ const Results = () => {
   useEffect(() => {
     // Create a style element
     const styleElement = document.createElement('style');
-    styleElement.id = 'tryperitrack-styles';
+    styleElement.id = 'trystyles';
     styleElement.textContent = globalStyles;
-    
+
     // Add the style element to the head
     document.head.appendChild(styleElement);
-    
+
     // Clean up the style element when the component unmounts
     return () => {
-      const existingStyle = document.getElementById('tryperitrack-styles');
+      const existingStyle = document.getElementById('trystyles');
       if (existingStyle) {
         document.head.removeChild(existingStyle);
       }
@@ -314,7 +314,7 @@ const Results = () => {
   );
 
   const capitalizedFirstName = React.useMemo(
-    () => userInfo.firstName 
+    () => userInfo.firstName
       ? userInfo.firstName.charAt(0).toUpperCase() + userInfo.firstName.slice(1)
       : "",
     [userInfo.firstName]
@@ -334,14 +334,14 @@ const Results = () => {
         <div className="results-container all-visible">
           {/* Results Header with Score and User Name */}
           <div className="mb-4">
-            <ResultsHeader 
-              score={hormoneScores.overall} 
-              firstName={capitalizedFirstName} 
+            <ResultsHeader
+              score={hormoneScores.overall}
+              firstName={capitalizedFirstName}
               scoreCategory={scoreCategory}
               onStartTrial={() => {}}
             />
           </div>
-          
+
           {/* Personalized Assessment */}
           <div className="mb-4">
             <PersonalizedAssessment
@@ -531,11 +531,11 @@ const Results = () => {
                     But only because I found the right protocol at the right time.
                   </p>
                 </div>
-                
+
                 {/* Right side - Personal photo */}
                 <div style={{flex: '0 0 250px', textAlign: 'center'}}>
-                  <img 
-                    src="/lovable-uploads/b173cad7-a665-451a-8831-3cd33d7f792e.png" 
+                  <img
+                    src="/lovable-uploads/b173cad7-a665-451a-8831-3cd33d7f792e.png"
                     alt="Melanie and her husband living their best life together"
                     style={{
                       width: '100%',
@@ -566,13 +566,13 @@ const Results = () => {
                   <p style={{fontSize: '22px', marginBottom: '20px'}}>
                     Just $7 - because when you're suffering like I was, money shouldn't be a barrier to getting your life back.
                   </p>
-                  
+
                   <div style={{background: 'rgba(255,255,255,0.1)', padding: '20px', borderRadius: '8px', margin: '20px 0'}}>
                     <div style={{fontSize: '18px', opacity: '0.8'}}>Was $97</div>
                     <div style={{fontSize: '52px', fontWeight: 'bold', color: '#D4AF37'}}>$7</div>
                     <div style={{fontSize: '18px'}}>24-hour special price</div>
                   </div>
-                  
+
                   <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
                     <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '24px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0'}}>
                       🎁 Get My Protocol for $7 - Download Instantly!
@@ -580,16 +580,16 @@ const Results = () => {
                   </a>
 
                   <SecuritySeals />
-                  
+
                   <p style={{fontSize: '18px', opacity: '0.9', marginTop: '10px'}}>
                     ✅ Instant PDF download ✅ 30-day guarantee ✅ Start tonight
                   </p>
                 </div>
-                
+
                 {/* Right side - Book cover */}
                 <div style={{flex: '0 0 250px', textAlign: 'center'}}>
-                  <img 
-                    src="/lovable-uploads/1f0d2f31-386a-4fb1-b5d8-4cc4a86a31a4.png" 
+                  <img
+                    src="/lovable-uploads/1f0d2f31-386a-4fb1-b5d8-4cc4a86a31a4.png"
                     alt="MenoMastery - Your Essential Guide to Thriving Through Perimenopause by Melanie Dagenais"
                     style={{
                       width: '100%',
@@ -705,7 +705,7 @@ const Results = () => {
               <h3 style={{color: '#D4AF37', fontSize: '36px', marginBottom: '15px'}}>
                 🚀 Get My Marriage-Saving Protocol Now - $7
               </h3>
-              
+
               <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
                 <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '24px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', margin: '20px 0', display: 'block', marginLeft: 'auto', marginRight: 'auto'}}>
                   DOWNLOAD MY COMPLETE PROTOCOL - $7
@@ -713,7 +713,7 @@ const Results = () => {
               </a>
 
               <SecuritySeals />
-              
+
               <div style={{marginTop: '20px', fontSize: '22px'}}>
                 <p>✅ Instant access to everything that saved my marriage</p>
                 <p>✅ Start your transformation tonight</p>
@@ -755,7 +755,7 @@ const Results = () => {
               <p style={{lineHeight: '1.6', marginBottom: '20px', fontWeight: 'bold', fontSize: '22px'}}>
                 Your 72-hour transformation window starts the moment you click below.
               </p>
-              
+
               <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
                 <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '20px 40px', fontSize: '24px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', marginBottom: '20px'}}>
                   GET MY $7 MARRIAGE-SAVING PROTOCOL NOW
@@ -804,7 +804,7 @@ const Results = () => {
               <p style={{marginBottom: '15px', fontSize: '22px'}}>
                 <strong>P.P.S.</strong> Four years later, I'm having the best sex of my 26-year marriage. My friends call us "relationship goals." Perimenopause could be the beginning of YOUR best years too - but only if you act in the next 24 hours.
               </p>
-              
+
               <div style={{textAlign: 'center'}}>
                 <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
                   <button style={{background: 'linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)', color: '#2C3E50', border: 'none', padding: '15px 30px', fontSize: '20px', fontWeight: 'bold', borderRadius: '50px', cursor: 'pointer', marginBottom: '15px'}}>
@@ -836,7 +836,7 @@ const Results = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Trust Footer at the very bottom */}
       <TrustFooter />
     </div>

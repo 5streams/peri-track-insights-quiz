@@ -26,7 +26,7 @@ const Dashboard = () => {
         dateJoined: new Date().toISOString()
       }));
     }
-    
+
     // Initialize trial start date if not present
     if (!localStorage.getItem("trialStartDate")) {
       localStorage.setItem("trialStartDate", Date.now().toString());
@@ -40,7 +40,7 @@ const Dashboard = () => {
     if (storedUserInfo) {
       setUserInfo(JSON.parse(storedUserInfo));
     }
-    
+
     // Calculate trial days remaining
     const startDate = new Date(parseInt(localStorage.getItem("trialStartDate") || Date.now().toString()));
     const today = new Date();
@@ -53,7 +53,7 @@ const Dashboard = () => {
       {/* Sidebar Navigation */}
       <aside className="w-64 bg-white shadow-md hidden md:block">
         <div className="p-4 border-b border-gray-100">
-          <h1 className="font-playfair text-2xl font-bold text-[#5D4154]">Peritrack</h1>
+          <h1 className="font-playfair text-2xl font-bold text-[#5D4154]">Dashboard</h1>
         </div>
         <nav className="p-4">
           <ul className="space-y-2">
@@ -64,8 +64,8 @@ const Dashboard = () => {
               </a>
             </li>
             <li>
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#6D6875] hover:bg-[#FFECD6]/20 transition-colors"
                 onClick={(e) => {
                   e.preventDefault();
@@ -77,8 +77,8 @@ const Dashboard = () => {
               </a>
             </li>
             <li>
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#6D6875] hover:bg-[#FFECD6]/20 transition-colors"
                 onClick={(e) => {
                   e.preventDefault();
@@ -115,8 +115,8 @@ const Dashboard = () => {
                 <p className="text-sm text-[#5D4154]">Trial Status</p>
                 <p className="font-medium text-[#5D4154]">{trialDaysLeft} days remaining</p>
                 <div className="mt-2 bg-gray-200 rounded-full h-2">
-                  <div 
-                    className="bg-[#A7C4A0] h-2 rounded-full" 
+                  <div
+                    className="bg-[#A7C4A0] h-2 rounded-full"
                     style={{ width: `${(trialDaysLeft / 7) * 100}%` }}
                   ></div>
                 </div>
@@ -134,7 +134,7 @@ const Dashboard = () => {
         {/* Header */}
         <header className="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-10">
           <div className="md:hidden">
-            <h1 className="font-playfair text-xl font-bold text-[#5D4154]">Peritrack</h1>
+            <h1 className="font-playfair text-xl font-bold text-[#5D4154]">Dashboard</h1>
           </div>
           <div className="md:hidden"></div> {/* Spacer for mobile */}
           <div className="flex items-center gap-4">
@@ -157,8 +157,8 @@ const Dashboard = () => {
             <BarChart className="h-6 w-6" />
             <span className="text-xs mt-1">Home</span>
           </a>
-          <a 
-            href="#" 
+          <a
+            href="#"
             className="flex-1 flex flex-col items-center py-3 text-[#6D6875]"
             onClick={(e) => {
               e.preventDefault();
@@ -168,8 +168,8 @@ const Dashboard = () => {
             <Calendar className="h-6 w-6" />
             <span className="text-xs mt-1">Track</span>
           </a>
-          <a 
-            href="#" 
+          <a
+            href="#"
             className="flex-1 flex flex-col items-center py-3 text-[#6D6875]"
             onClick={(e) => {
               e.preventDefault();
@@ -192,9 +192,9 @@ const Dashboard = () => {
         {/* Main Dashboard Content */}
         <main className="p-4 md:p-6 pb-24 md:pb-6">
           {/* Welcome Module */}
-          <WelcomeModule 
-            firstName={userInfo.firstName} 
-            trialDaysLeft={trialDaysLeft} 
+          <WelcomeModule
+            firstName={userInfo.firstName}
+            trialDaysLeft={trialDaysLeft}
           />
 
           <div className="mt-6">
@@ -213,9 +213,9 @@ const Dashboard = () => {
           <div className="mt-6">
             <AiAssistantPreview firstName={userInfo.firstName} />
           </div>
-          
+
           <div className="mt-6 text-center">
-            <Button 
+            <Button
               onClick={() => navigate("/tracking")}
               className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/90 gap-2"
             >

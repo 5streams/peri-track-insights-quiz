@@ -6,12 +6,12 @@ import { Check, Clock, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import LeadCaptureModal from "@/components/leads/LeadCaptureModal";
 
-interface PeritrackIntroProps {
+interface IntroProps {
   onStartTrial: () => void;
   firstName?: string;
 }
 
-const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName = "" }) => {
+const Intro: React.FC<IntroProps> = ({ onStartTrial, firstName = "" }) => {
   const [isMonthlyModalOpen, setIsMonthlyModalOpen] = useState(false);
   const [isAnnualModalOpen, setIsAnnualModalOpen] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState('23:59:38');
@@ -24,35 +24,35 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
       let newSeconds = seconds - 1;
       let newMinutes = minutes;
       let newHours = hours;
-      
+
       if (newSeconds < 0) {
         newSeconds = 59;
         newMinutes -= 1;
       }
-      
+
       if (newMinutes < 0) {
         newMinutes = 59;
         newHours -= 1;
       }
-      
+
       if (newHours < 0) {
         newHours = 23;
       }
-      
+
       setTimeRemaining(`${String(newHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')}:${String(newSeconds).padStart(2, '0')}`);
     }, 1000);
-    
+
     return () => clearInterval(interval);
   }, [timeRemaining]);
 
   const handleMonthlyTrial = () => {
     setIsMonthlyModalOpen(true);
   };
-  
+
   const handleAnnualTrial = () => {
     setIsAnnualModalOpen(true);
   };
-  
+
   const handleModalClose = (pricingPlan: "monthly" | "annual") => {
     setIsMonthlyModalOpen(false);
     setIsAnnualModalOpen(false);
@@ -68,24 +68,24 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
     <Card className="mb-12 mt-8 reveal-section transform opacity-0 bg-slate-50 text-slate-800 overflow-hidden border border-slate-200 shadow-md">
       <CardContent className="p-6 md:p-8">
         <div className="text-center mb-8">
-          <img src="/images/logo.png" alt="Peritrack Logo" className="h-36 w-auto mx-auto mb-3" />
+          <img src="/images/logo.png" alt="Logo" className="h-36 w-auto mx-auto mb-3" />
           <h2 className="text-2xl md:text-3xl font-bold mb-3">
             <span className="text-slate-700">You've Taken the First Step...</span> <span className="text-indigo-600">Now It's Time to Take Control</span>
           </h2>
-          
+
           <h3 className="text-xl md:text-2xl font-semibold mb-2 text-slate-700">
-            Introducing Peritrack™
+            Introducing ™
           </h3>
-          
+
           <p className="text-lg md:text-xl font-medium mb-6 text-slate-700">
             Your All-in-One Perimenopause Health Companion
           </p>
-          
+
           <p className="text-lg mb-6 max-w-3xl mx-auto text-slate-600">
             Track your symptoms. Understand your hormones. Prepare for the week ahead — with confidence.
           </p>
         </div>
-        
+
         <div className="bg-white/60 p-3 rounded-lg mb-8 inline-block mx-auto">
           <div className="flex items-center justify-center">
             <Clock className="h-4 w-4 mr-2 text-indigo-600" />
@@ -93,7 +93,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
             <span className="font-mono font-bold ml-2">{timeRemaining}</span>
           </div>
         </div>
-        
+
         {/* Critical Crossroad Section */}
         <div className="mb-8 bg-white rounded-lg p-6 shadow-sm border border-slate-100">
           <h3 className="text-xl font-bold mb-3 text-slate-700">
@@ -102,40 +102,40 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
           <p className="mb-2">You've just uncovered key patterns in your body.</p>
           <p className="font-bold mb-2">Now what?</p>
           <p className="mb-3">
-            Without the right tools, symptoms escalate. Doctors shrug. You're left piecing 
+            Without the right tools, symptoms escalate. Doctors shrug. You're left piecing
             together your health like a jigsaw puzzle — in the dark.
           </p>
           <p className="font-medium">
-            Peritrack gives you the clarity, structure, and support you need.
+             gives you the clarity, structure, and support you need.
           </p>
         </div>
-        
-        {/* Why Peritrack Exists */}
+
+        {/* Why Exists */}
         <div className="mb-8 bg-white rounded-lg p-6 shadow-sm border border-slate-100">
           <h3 className="text-xl font-bold mb-3 text-slate-700">
-            🌿 Why Peritrack Exists
+            🌿 Why Exists
           </h3>
           <p className="mb-3">
-            Perimenopause is a deeply misunderstood stage of life. It can affect your mind, your mood, 
+            Perimenopause is a deeply misunderstood stage of life. It can affect your mind, your mood,
             your sleep, your energy — and make you feel like a stranger in your own skin.
           </p>
           <p className="mb-3">
             Most apps don't support this transition. Most doctors don't explain it fully.
           </p>
           <p className="font-medium">
-            Peritrack changes that. It's your daily guide, your insight engine, and your trusted 
+             changes that. It's your daily guide, your insight engine, and your trusted
             health companion built specifically for this chapter of your life.
           </p>
         </div>
-        
-        {/* What Peritrack Helps You Do */}
+
+        {/* What Helps You Do */}
         <div className="mb-12">
           <div className="mb-4 text-center">
             <h3 className="text-xl font-bold text-slate-700">
-              🔍 Here's What Peritrack Helps You Do
+              🔍 Here's What Helps You Do
             </h3>
           </div>
-          
+
           {/* Feature Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
             {/* Feature 1 */}
@@ -160,7 +160,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
               </div>
               <img src="/images/feature1.png" alt="Track Symptoms Feature Showcase" className="rounded-md w-full h-48 object-cover mt-auto" />
             </div>
-            
+
             {/* Feature 2 */}
             <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100 flex flex-col">
               <div className="flex-grow">
@@ -183,7 +183,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
               </div>
               <img src="/images/feature2.png" alt="Know What's Coming Feature Showcase" className="rounded-md w-full h-48 object-cover mt-auto" />
             </div>
-            
+
             {/* Feature 3 */}
             <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100 flex flex-col">
               <div className="flex-grow">
@@ -206,7 +206,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
               </div>
               <img src="/images/feature3.png" alt="Lifestyle Recommendations Feature Showcase" className="rounded-md w-full h-48 object-cover mt-auto" />
             </div>
-            
+
             {/* Feature 4 */}
             <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100 flex flex-col">
               <div className="flex-grow">
@@ -229,7 +229,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
               </div>
               <img src="/images/feature4.png" alt="Luna AI Coach Feature Showcase" className="rounded-md w-full h-48 object-cover mt-auto" />
             </div>
-            
+
             {/* Feature 5 */}
             <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100">
               <h4 className="font-bold mb-3 text-slate-700">
@@ -249,7 +249,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
                 Benefit: Understand what's happening.
               </p>
             </div>
-            
+
             {/* Feature 6 */}
             <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100">
               <h4 className="font-bold mb-3 text-slate-700">
@@ -271,19 +271,19 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
             </div>
           </div>
         </div>
-        
+
         {/* Transformation Section */}
         <div className="mb-12 bg-slate-100/50 p-6 rounded-lg border border-slate-200">
           <h3 className="text-xl font-bold text-slate-700 mb-4 text-center">
             💡 The Real Transformation
           </h3>
-          
+
           <div className="bg-white rounded-lg overflow-hidden shadow-sm">
             <table className="w-full text-sm">
               <thead className="bg-slate-50">
                 <tr>
-                  <th className="py-3 px-4 text-left text-slate-700 font-semibold">Without Peritrack</th>
-                  <th className="py-3 px-4 text-left text-slate-700 font-semibold">With Peritrack</th>
+                  <th className="py-3 px-4 text-left text-slate-700 font-semibold">Without </th>
+                  <th className="py-3 px-4 text-left text-slate-700 font-semibold">With </th>
                 </tr>
               </thead>
               <tbody>
@@ -311,13 +311,13 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
             </table>
           </div>
         </div>
-        
+
         {/* Membership Section */}
         <div className="mb-12">
           <h3 className="text-xl font-bold text-slate-700 mb-5 text-center">
             🎁 Your Membership Options
           </h3>
-          
+
           <div className="bg-white rounded-lg overflow-hidden mb-6 shadow-sm border border-slate-100">
             <table className="w-full text-sm">
               <thead className="bg-slate-100">
@@ -381,10 +381,10 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
               </tbody>
             </table>
           </div>
-          
+
           <p className="text-center text-sm mb-4">Both plans include a 7-Day Free Trial.</p>
         </div>
-        
+
         {/* Why Start Today Section */}
         <div className="mb-12 bg-white p-6 rounded-lg shadow-sm border border-slate-100">
           <h3 className="text-xl font-bold mb-4 text-slate-700">
@@ -392,22 +392,22 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
           </h3>
           <p className="mb-2">Waiting for clarity often means waiting in suffering.</p>
           <p className="mb-3">But you don't need to suffer to be taken seriously.</p>
-          
-          <p className="mb-3">With Peritrack:</p>
+
+          <p className="mb-3">With :</p>
           <ul className="ml-6 mb-3 space-y-2 list-disc">
             <li>79% of users report better sleep in 2–3 weeks</li>
             <li>68% feel more emotionally stable within 30 days</li>
             <li>84% report feeling more confident at their next medical appointment</li>
           </ul>
         </div>
-        
+
         {/* Trial Options */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-8">
           {/* Monthly Option */}
           <div className="bg-white rounded-lg p-6 border border-slate-200 hover:shadow-md transition-all">
             <h3 className="font-semibold text-lg mb-2 text-slate-700">Monthly Plan</h3>
             <div className="text-2xl font-bold mb-3 text-slate-700">$9.99<span className="text-sm font-normal opacity-80">/month</span></div>
-            
+
             <ul className="mb-5 space-y-2">
               <li className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-[#9b87f5] flex-shrink-0" />
@@ -422,8 +422,8 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
                 <span className="text-sm">7-day free trial included</span>
               </li>
             </ul>
-            
-            <Button 
+
+            <Button
               onClick={handleMonthlyTrial}
               className="w-full bg-[#9b87f5] hover:bg-[#7E69AB] text-white font-medium transition-colors"
             >
@@ -433,19 +433,19 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
               Then $9.99/month after trial
             </p>
           </div>
-          
+
           {/* Annual Option */}
           <div className="bg-white rounded-lg p-6 border-2 border-[#9b87f5] hover:shadow-md transition-all relative">
             <div className="absolute top-0 right-0 bg-[#9b87f5] text-white text-xs px-2 py-1 rounded-bl-lg font-bold">
               BEST VALUE
             </div>
-            
+
             <h3 className="font-semibold text-lg mb-2 text-slate-700">Annual Plan</h3>
             <div className="text-2xl font-bold mb-3 text-slate-700">
               $99<span className="text-sm font-normal opacity-80">/year</span>
               <span className="text-sm text-[#9b87f5] font-semibold ml-2">Save $20.88</span>
             </div>
-            
+
             <ul className="mb-5 space-y-2">
               <li className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-[#9b87f5] flex-shrink-0" />
@@ -460,8 +460,8 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
                 <span className="text-sm">7-day free trial included</span>
               </li>
             </ul>
-            
-            <Button 
+
+            <Button
               onClick={handleAnnualTrial}
               className="w-full bg-[#9b87f5] hover:bg-[#7E69AB] text-white font-medium"
             >
@@ -472,7 +472,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
             </p>
           </div>
         </div>
-        
+
         {/* Final CTA */}
         <div className="text-center">
           <p className="text-lg font-semibold mb-2">👉 Start Your Free 7-Day Trial Now</p>
@@ -481,7 +481,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
           </p>
         </div>
       </CardContent>
-      
+
       {/* Lead Capture Modals */}
       <LeadCaptureModal
         isOpen={isMonthlyModalOpen}
@@ -491,7 +491,7 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
         quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
         navigateToDashboard={true}
       />
-      
+
       <LeadCaptureModal
         isOpen={isAnnualModalOpen}
         onClose={() => handleModalClose("annual")}
@@ -504,4 +504,4 @@ const PeritrackIntro: React.FC<PeritrackIntroProps> = ({ onStartTrial, firstName
   );
 };
 
-export default PeritrackIntro;
+export default Intro;

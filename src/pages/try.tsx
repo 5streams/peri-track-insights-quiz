@@ -17,7 +17,7 @@ import ComparisonSection from '../components/ComparisonSection';
 import WhyChooseUsSection from '../components/WhyChooseUsSection';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 
-const TryPeriTrack = () => {
+const TryPage = () => {
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
 
   const handleOpenSignupModal = () => {
@@ -58,7 +58,7 @@ const TryPeriTrack = () => {
           button_text: button.textContent?.trim(),
           lead_to: 'TrialSignupModal' // All CTAs now lead to the signup modal
         });
-        
+
         // You could also add more sophisticated analytics tracking here
         // Example: gtag('event', 'cta_click', { section: button.closest('section')?.className });
       });
@@ -116,9 +116,9 @@ const TryPeriTrack = () => {
         </div>
         <FinalCTASection />
         <TrustFooter />
-        
+
         {/* Global Trial Signup Modal that can be triggered from anywhere */}
-        <TrialSignupModal 
+        <TrialSignupModal
           isOpen={isSignupModalOpen}
           onClose={handleCloseSignupModal}
         />
@@ -127,4 +127,4 @@ const TryPeriTrack = () => {
   );
 };
 
-export default TryPeriTrack;
+export default TryPage;

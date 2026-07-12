@@ -27,7 +27,7 @@ const SocialProofSection = () => {
   ];
 
   const stats = [
-    { number: "15,000+", label: "Women using Peritrack" },
+    { number: "15,000+", label: "Women using " },
     { number: "78%", label: "Report symptom improvement" },
     { number: "4.9/5", label: "App store rating" },
     { number: "24hrs", label: "Average time to first insight" }
@@ -73,7 +73,7 @@ const SocialProofSection = () => {
                   "{testimonial.text}"
                 </p>
               </div>
-              
+
               <div className="border-t pt-4">
                 <div className="flex items-center justify-between mb-2">
                   <div>
@@ -81,7 +81,7 @@ const SocialProofSection = () => {
                     <div className="text-sm text-warm-gray">Age {testimonial.age}</div>
                   </div>
                 </div>
-                
+
                 <div className="bg-secondary/10 p-2 rounded-lg">
                   <div className="text-sm font-medium text-primary">
                     {testimonial.result}

@@ -17,7 +17,7 @@ const WeightPatternTestimonials = () => {
     },
     {
       quote: "I thought I needed to exercise more, but tracking revealed that overexercising during low-energy phases was actually causing weight gain. Now I match my activity to my energy patterns and my weight has stabilized beautifully.",
-      name: "Michelle R.", 
+      name: "Michelle R.",
       age: 49,
       context: "Achieved weight stability by optimizing exercise timing"
     }
@@ -32,7 +32,7 @@ const WeightPatternTestimonials = () => {
               Real Women, Real Weight Management Success Through Pattern Discovery
             </h2>
             <p className="text-body-large text-warm-gray max-w-3xl mx-auto fade-in-up">
-              See how women are using PeriTrack's pattern analysis to identify what actually drives their weight changes and develop strategies that work with their bodies, not against them.
+              See how women are using pattern analysis to identify what actually drives their weight changes and develop strategies that work with their bodies, not against them.
             </p>
           </div>
 
@@ -63,11 +63,11 @@ const WeightPatternTestimonials = () => {
           <div className="bg-gradient-to-r from-primary/5 to-secondary/5 border border-primary/20 rounded-xl p-6 fade-in-up">
             <h4 className="font-semibold text-primary mb-3 text-center">Why Pattern-Based Weight Management Works</h4>
             <p className="text-warm-gray text-center leading-relaxed mb-4">
-              These results come from understanding personal patterns rather than following generic advice. 
-              PeriTrack helps you discover what specifically affects YOUR weight during perimenopause, leading to sustainable management strategies that work with your unique hormonal patterns.
+              These results come from understanding personal patterns rather than following generic advice.
+               helps you discover what specifically affects YOUR weight during perimenopause, leading to sustainable management strategies that work with your unique hormonal patterns.
             </p>
             <p className="text-xs text-gray-600 text-center leading-relaxed">
-              <strong>Important:</strong> Individual results vary and depend on consistent tracking, lifestyle factors, and personal health conditions. 
+              <strong>Important:</strong> Individual results vary and depend on consistent tracking, lifestyle factors, and personal health conditions.
               These testimonials reflect individual experiences with pattern-based approaches. Always consult your healthcare provider for personalized weight management guidance.
             </p>
           </div>

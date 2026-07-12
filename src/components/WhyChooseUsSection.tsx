@@ -34,7 +34,7 @@ const WhyChooseUsSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-            Why Thousands Choose PeriTrack for Pattern Tracking
+            Why Thousands Choose for Pattern Tracking
           </h2>
           <p className="text-body-large text-warm-gray max-w-2xl mx-auto fade-in-up">
             We're not just another tracking app. We're your comprehensive perimenopause pattern monitoring system.

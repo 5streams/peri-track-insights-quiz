@@ -21,7 +21,7 @@ const PricingSection = () => {
             Start Your Journey to Symptom Relief
           </h2>
           <p className="text-body-large text-warm-gray fade-in-up">
-            Try Peritrack risk-free for 7 days. No credit card required.
+            Try risk-free for 7 days. No credit card required.
           </p>
         </div>
 
@@ -46,35 +46,35 @@ const PricingSection = () => {
                 </div>
                 <span className="text-warm-gray">Unlimited symptom tracking</span>
               </div>
-              
+
               <div className="flex items-center">
                 <div className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                   <span className="text-white text-xs font-bold">✓</span>
                 </div>
                 <span className="text-warm-gray">AI pattern recognition & insights</span>
               </div>
-              
+
               <div className="flex items-center">
                 <div className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                   <span className="text-white text-xs font-bold">✓</span>
                 </div>
                 <span className="text-warm-gray">24/7 access to Luna AI coach</span>
               </div>
-              
+
               <div className="flex items-center">
                 <div className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                   <span className="text-white text-xs font-bold">✓</span>
                 </div>
                 <span className="text-warm-gray">Personalized relief strategies</span>
               </div>
-              
+
               <div className="flex items-center">
                 <div className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                   <span className="text-white text-xs font-bold">✓</span>
                 </div>
                 <span className="text-warm-gray">Symptom predictions & alerts</span>
               </div>
-              
+
               <div className="flex items-center">
                 <div className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                   <span className="text-white text-xs font-bold">✓</span>
@@ -83,15 +83,15 @@ const PricingSection = () => {
               </div>
             </div>
 
-            <CTAButton 
-              size="large" 
-              variant="primary" 
+            <CTAButton
+              size="large"
+              variant="primary"
               className="w-full mb-3"
               onClick={handleOpenSignupModal}
             >
               START YOUR FREE TRIAL
             </CTAButton>
-            
+
             <p className="text-xs text-warm-gray">
               No credit card required • Cancel anytime • 30-day money-back guarantee
             </p>
@@ -108,7 +108,7 @@ const PricingSection = () => {
       </div>
 
       {/* Trial Signup Modal */}
-      <TrialSignupModal 
+      <TrialSignupModal
         isOpen={isSignupModalOpen}
         onClose={handleCloseSignupModal}
       />

@@ -6,8 +6,8 @@ const FAQSection = () => {
 
   const faqs = [
     {
-      question: "How is Peritrack different from other period tracking apps?",
-      answer: "Most period trackers focus on fertility and regular cycles. Peritrack is specifically designed for perimenopause - we track symptoms like hot flashes, mood changes, sleep issues, and energy levels. Our AI learns your unique patterns and provides personalized relief strategies, not just predictions."
+      question: "How is different from other period tracking apps?",
+      answer: "Most period trackers focus on fertility and regular cycles. is specifically designed for perimenopause - we track symptoms like hot flashes, mood changes, sleep issues, and energy levels. Our AI learns your unique patterns and provides personalized relief strategies, not just predictions."
     },
     {
       question: "How quickly will I see results?",
@@ -18,8 +18,8 @@ const FAQSection = () => {
       answer: "Absolutely. Your data is encrypted and stored securely. We never share your personal health information with third parties. You own your data and can export or delete it anytime. We're HIPAA compliant and follow strict privacy protocols."
     },
     {
-      question: "Can I use Peritrack if I'm still having periods?",
-      answer: "Yes! Peritrack works whether you're in early perimenopause (still having periods but experiencing symptoms) or late perimenopause (irregular or no periods). Our AI adapts to your unique situation and cycle patterns."
+      question: "Can I use if I'm still having periods?",
+      answer: "Yes! works whether you're in early perimenopause (still having periods but experiencing symptoms) or late perimenopause (irregular or no periods). Our AI adapts to your unique situation and cycle patterns."
     },
     {
       question: "What makes Luna different from regular chatbots?",
@@ -39,13 +39,13 @@ const FAQSection = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-body-large text-warm-gray fade-in-up">
-            Everything you need to know about Peritrack
+            Everything you need to know about
           </p>
         </div>
 
         <div className="max-w-3xl mx-auto space-y-3">
           {faqs.map((faq, index) => (
-            <div 
+            <div
               key={index}
               className="faq-item bg-white rounded-xl shadow-lg overflow-hidden fade-in-up"
             >
@@ -60,7 +60,7 @@ const FAQSection = () => {
                   <span className="text-sm font-bold">↓</span>
                 </div>
               </button>
-              
+
               {openIndex === index && (
                 <div className="px-4 pb-4">
                   <div className="pt-2 border-t border-gray-100">

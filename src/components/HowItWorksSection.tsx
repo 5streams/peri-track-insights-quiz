@@ -13,7 +13,7 @@ const HowItWorksSection = () => {
   const handleCloseSignupModal = () => {
     setIsSignupModalOpen(false);
   };
-  
+
   const steps = [
     {
       number: '01',
@@ -21,7 +21,7 @@ const HowItWorksSection = () => {
       description: 'Log your weight, symptoms, sleep, stress, food, and exercise daily to build a comprehensive picture of your perimenopause experience.',
       time: '2 minutes daily',
       image: '/images/Per1.jpg',
-      alt: 'Woman using the Peritrack app to log daily health data'
+      alt: 'Woman using the app to log daily health data'
     },
     {
       number: '02',
@@ -46,7 +46,7 @@ const HowItWorksSection = () => {
       <div className="container mx-auto px-4 lg:px-6">
         <div className="text-center mb-10">
           <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-            How Peritrack Helps You Understand Weight Pattern Changes
+            How Helps You Understand Weight Pattern Changes
           </h2>
           <p className="text-body-large text-warm-gray max-w-2xl mx-auto fade-in-up">
             Simple, educational approach to tracking and understanding perimenopause weight patterns.
@@ -60,7 +60,7 @@ const HowItWorksSection = () => {
                 <div className="step-number absolute -top-3 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg">
                   {step.number}
                 </div>
-                
+
                 <div className="pt-6">
                   <h3 className="font-headline text-xl text-primary mb-3">
                     {step.title}
@@ -71,17 +71,17 @@ const HowItWorksSection = () => {
                   <span className="inline-block bg-secondary text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
                     {step.time}
                   </span>
-                  
+
                   <div className="mt-4 rounded-lg overflow-hidden">
-                    <img 
-                      src={step.image} 
+                    <img
+                      src={step.image}
                       alt={step.alt}
                       className="w-full h-auto"
                     />
                   </div>
                 </div>
               </div>
-              
+
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
                   <div className="w-8 h-0.5 bg-secondary"></div>
@@ -93,9 +93,9 @@ const HowItWorksSection = () => {
         </div>
 
         <div className="text-center fade-in-up">
-          <CTAButton 
-            size="large" 
-            variant="primary" 
+          <CTAButton
+            size="large"
+            variant="primary"
             className="mb-3"
             onClick={handleOpenSignupModal}
           >
@@ -112,9 +112,9 @@ const HowItWorksSection = () => {
           </p>
         </div>
       </div>
-      
+
       {/* Trial Signup Modal */}
-      <TrialSignupModal 
+      <TrialSignupModal
         isOpen={isSignupModalOpen}
         onClose={handleCloseSignupModal}
       />

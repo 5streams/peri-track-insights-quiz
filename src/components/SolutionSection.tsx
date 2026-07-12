@@ -13,7 +13,7 @@ const SolutionSection = () => {
   const handleCloseSignupModal = () => {
     setIsSignupModalOpen(false);
   };
-  
+
   return (
     <section className="solution-section py-6 lg:py-8 bg-gray-50">
       <div className="container mx-auto px-4 lg:px-6">
@@ -22,7 +22,7 @@ const SolutionSection = () => {
             What if you could track and understand your perimenopause weight patterns?
           </h2>
           <p className="text-body-large text-warm-gray max-w-3xl mx-auto fade-in-up">
-            Peritrack helps you monitor your weight changes alongside hormonal patterns, symptoms, and lifestyle factors to identify connections and create insights for healthcare discussions.
+             helps you monitor your weight changes alongside hormonal patterns, symptoms, and lifestyle factors to identify connections and create insights for healthcare discussions.
           </p>
         </div>
 
@@ -59,9 +59,9 @@ const SolutionSection = () => {
         </div>
 
         <div className="text-center fade-in-up">
-          <CTAButton 
-            size="large" 
-            variant="primary" 
+          <CTAButton
+            size="large"
+            variant="primary"
             className="mb-1"
             onClick={handleOpenSignupModal}
           >
@@ -78,9 +78,9 @@ const SolutionSection = () => {
           </p>
         </div>
       </div>
-      
+
       {/* Trial Signup Modal */}
-      <TrialSignupModal 
+      <TrialSignupModal
         isOpen={isSignupModalOpen}
         onClose={handleCloseSignupModal}
       />
