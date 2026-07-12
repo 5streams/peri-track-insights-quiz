@@ -649,13 +649,13 @@ const ROUTES = {
         </div>
 
         <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px">
-          <div style="flex:0 0 34px;height:34px;border-radius:50%;background:var(--blush-soft);color:var(--plum);display:flex;align-items:center;justify-content:center;font-weight:800">🔓</div>
+          <div style="flex:0 0 34px;height:34px;border-radius:50%;background:var(--blush-soft);color:var(--plum);display:flex;align-items:center;justify-content:center;font-weight:800">★</div>
           <div><div style="color:var(--gold);font-weight:800;font-size:16px">Today</div>
           <p style="color:#46293F;font-size:14.5px;line-height:1.5;margin-top:2px">Full access to your 28-Day Reclamation Plan, the 3 A.M. Protocol, and every tracker.</p></div>
         </div>
 
         <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px">
-          <div style="flex:0 0 34px;height:34px;border-radius:50%;background:var(--blush-soft);color:var(--plum);display:flex;align-items:center;justify-content:center;font-weight:800">🔔</div>
+          <div style="flex:0 0 34px;height:34px;border-radius:50%;background:var(--blush-soft);color:var(--plum);display:flex;align-items:center;justify-content:center;font-weight:800">◷</div>
           <div><div style="color:var(--plum);font-weight:800;font-size:16px">Day 5</div>
           <p style="color:#46293F;font-size:14.5px;line-height:1.5;margin-top:2px">We email you a reminder — cancel in one tap if it's not for you.</p></div>
         </div>
@@ -780,12 +780,12 @@ const ROUTES = {
             <span style="font-size:11px;color:#6E5665">VISA · MC · AMEX</span>
           </label>
           <form id="ccform" style="margin-top:14px;display:flex;flex-direction:column;gap:10px">
-            <input required type="text" name="cc" inputmode="numeric" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" style="width:100%;padding:13px 14px;border:1px solid #D9C4CE;border-radius:10px;font-size:15.5px;background:#fff;color:var(--plum)">
+            <input required type="text" name="cc" inputmode="numeric" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" style="width:100%;padding:13px 14px;border:1px solid #D9C4CE;border-radius:10px;font-size:15.5px;background:#fff;box-sizing:border-box;min-width:0;color:var(--plum)">
             <div style="display:flex;gap:10px">
-              <input required type="text" name="exp" maxlength="5" placeholder="MM/YY" style="flex:1;padding:13px 14px;border:1px solid #D9C4CE;border-radius:10px;font-size:15.5px;background:#fff;color:var(--plum)">
-              <input required type="text" name="cvv" inputmode="numeric" maxlength="4" placeholder="CVV" style="flex:1;padding:13px 14px;border:1px solid #D9C4CE;border-radius:10px;font-size:15.5px;background:#fff;color:var(--plum)">
+              <input required type="text" name="exp" maxlength="5" placeholder="MM/YY" style="flex:1;padding:13px 14px;border:1px solid #D9C4CE;border-radius:10px;font-size:15.5px;background:#fff;box-sizing:border-box;min-width:0;color:var(--plum)">
+              <input required type="text" name="cvv" inputmode="numeric" maxlength="4" placeholder="CVV" style="flex:1;padding:13px 14px;border:1px solid #D9C4CE;border-radius:10px;font-size:15.5px;background:#fff;box-sizing:border-box;min-width:0;color:var(--plum)">
             </div>
-            <input required type="text" name="name" placeholder="Full name as on card" style="width:100%;padding:13px 14px;border:1px solid #D9C4CE;border-radius:10px;font-size:15.5px;background:#fff;color:var(--plum)">
+            <input required type="text" name="name" placeholder="Full name as on card" style="width:100%;padding:13px 14px;border:1px solid #D9C4CE;border-radius:10px;font-size:15.5px;background:#fff;box-sizing:border-box;min-width:0;color:var(--plum)">
             <button class="cta gold" type="submit" style="margin-top:6px">🔒 Continue — $${total}</button>
           </form>
         </div>
