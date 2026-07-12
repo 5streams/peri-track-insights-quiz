@@ -9,6 +9,7 @@ import { calculateHormoneScores } from "@/utils/scoreCalculation";
 import ResultsHeader from "@/components/results/ResultsHeader";
 import PersonalizedAssessment from "@/components/results/PersonalizedAssessment";
 import TrustFooter from "@/components/TrustFooter";
+import PriceChoice from "@/components/results/PriceChoice";
 
 // Add global styles for remaining components
 const globalStyles = `
@@ -550,6 +551,8 @@ const Results = () => {
             </div>
 
             {/* Main Offer Section with Book Cover */}
+            <PriceChoice email={userInfo.email} firstName={capitalizedFirstName} />
+
             <div className="main-offer" style={{background: 'linear-gradient(135deg, #6B4E7A 0%, #8B7A94 100%)', color: 'white', padding: '30px', borderRadius: '12px', margin: '20px 0'}}>
               <div style={{display: 'flex', alignItems: 'center', gap: '30px', flexWrap: 'wrap'}}>
                 {/* Left side - Text content */}
