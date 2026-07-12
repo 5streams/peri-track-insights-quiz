@@ -5,6 +5,15 @@ import { useToast } from "@/hooks/use-toast";
 interface PriceChoiceProps {
   email: string;
   firstName?: string;
+  /**
+   * "checkout" (default) — call create-trial-checkout immediately and redirect
+   *                        to Stripe. Kept for backwards compatibility.
+   * "select"             — do NOT call any payment function. Instead, invoke
+   *                        `onContinue(selectedCents)` so the parent page can
+   *                        persist the choice and navigate to the next step.
+   */
+  mode?: "checkout" | "select";
+  onContinue?: (cents: number) => void | Promise<void>;
 }
 
 /**
@@ -26,13 +35,21 @@ const OPTIONS = [
   { cents: 1734, label: "$17.34", tag: "Cost to cover our team's effort" },
 ];
 
-const PriceChoice: React.FC<PriceChoiceProps> = ({ email, firstName }) => {
+const PriceChoice: React.FC<PriceChoiceProps> = ({ email, firstName, mode = "checkout", onContinue }) => {
   const [selected, setSelected] = useState(1000);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  const startTrial = async () => {
+  const handleContinue = async () => {
     setLoading(true);
+    if (mode === "select") {
+      try {
+        await onContinue?.(selected);
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
     try {
       const { data, error } = await supabase.functions.invoke("create-trial-checkout", {
         body: {
@@ -186,7 +203,7 @@ const PriceChoice: React.FC<PriceChoiceProps> = ({ email, firstName }) => {
 
       <div style={{ textAlign: "center" }}>
         <button
-          onClick={startTrial}
+          onClick={handleContinue}
           disabled={loading}
           style={{
             background: "linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%)",
@@ -201,7 +218,7 @@ const PriceChoice: React.FC<PriceChoiceProps> = ({ email, firstName }) => {
           }}
         >
           {loading
-            ? "Opening secure checkout…"
+            ? (mode === "select" ? "Saving…" : "Opening secure checkout…")
             : "Continue"}
         </button>
         <p style={{ fontSize: "14px", color: "#888", marginTop: "10px" }}>
