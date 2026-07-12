@@ -145,8 +145,8 @@ const Admin4: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-slate-800">Admin 4 — Google Ads Traffic</h1>
-            <p className="text-slate-500 text-sm">Visitors with a Google Ads referrer (gclid, utm_source=google, or utm_medium=cpc).</p>
+            <h1 className="text-2xl md:text-3xl font-bold text-slate-800">Admin 4 — All Traffic</h1>
+            <p className="text-slate-500 text-sm">Every visitor. Quiz progress shows how many questions they answered before exiting.</p>
           </div>
           <div className="flex gap-2">
             <button onClick={load} className="px-3 py-2 rounded border border-slate-300 bg-white hover:bg-slate-100 flex items-center gap-1 text-sm">
