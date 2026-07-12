@@ -285,7 +285,7 @@ async function trackEvent(event, extra){
     });
   }catch(e){console.warn("trackEvent failed",e);}
 }
-(function(){try{if(!localStorage.getItem("mm_landed")){trackEvent("landing");localStorage.setItem("mm_landed","1");}}catch(e){trackEvent("landing");}})();
+(function(){try{if(!sessionStorage.getItem("mm_landing_tracked")){trackEvent("landing");sessionStorage.setItem("mm_landing_tracked","1");}}catch(e){trackEvent("landing");}})();
 const STRIPE_PK="pk_test_51TruCjLyqcfLrcOeOD4zWggTnoAnizmoB8mBMdhuqtDmcKHkfYddjEqeLmy0OJTisbhmv5gUEcvHMBR0Sf10H0yH00RI4NHsJE";
 let _stripeJsPromise=null;
 function loadStripeJs(){
