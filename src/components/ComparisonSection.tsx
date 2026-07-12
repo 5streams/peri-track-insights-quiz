@@ -55,7 +55,7 @@ const ComparisonSection = () => {
                 <h3 className="font-semibold">Perimenopause Symptom Features</h3>
               </div>
               <div className="text-center">
-                <h3 className="font-semibold"></h3>
+                <h3 className="font-semibold">Our App</h3>
               </div>
               <div className="text-center">
                 <h3 className="font-semibold">Other Apps</h3>
