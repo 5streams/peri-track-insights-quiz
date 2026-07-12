@@ -6,32 +6,32 @@ const ComparisonSection = () => {
   const features = [
     {
       feature: 'AI-powered perimenopause symptom pattern recognition',
-      : true,
+      app: true,
       others: false
     },
     {
       feature: 'Personalized perimenopause symptom relief strategies',
-      : true,
+      app: true,
       others: false
     },
     {
       feature: '24/7 AI coach for perimenopause symptoms',
-      : true,
+      app: true,
       others: false
     },
     {
       feature: 'Perimenopause symptom prediction alerts',
-      : true,
+      app: true,
       others: false
     },
     {
       feature: 'Basic perimenopause symptom tracking',
-      : true,
+      app: true,
       others: true
     },
     {
       feature: 'Generic health tips (not perimenopause-specific)',
-      : false,
+      app: false,
       others: true
     }
   ];
