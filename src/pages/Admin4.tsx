@@ -236,7 +236,7 @@ const Admin4: React.FC = () => {
                   <td className="px-3 py-2 text-center"><Dot on={!!l.email_submitted_at} /></td>
                   <td className="px-3 py-2 text-center"><Dot on={!!l.quiz_completed_at} /></td>
                   <td className="px-3 py-2 text-center"><Dot on={!!l.paywall_reached_at} /></td>
-                  <td className="px-3 py-2 text-center"><Dot on={!!l.stripe_customer_id} /></td>
+                  <td className="px-3 py-2 text-center"><Dot on={!!l.stripe_subscription_id} /></td>
                   <td className="px-3 py-2 text-slate-600">{l.trial_price_cents ? `$${(l.trial_price_cents / 100).toFixed(2)}` : "—"}</td>
                   <td className="px-3 py-2 text-xs text-slate-400 max-w-[140px] truncate" title={l.gclid || ""}>{l.gclid || "—"}</td>
                 </tr>
