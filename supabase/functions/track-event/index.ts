@@ -51,6 +51,13 @@ Deno.serve(async (req) => {
     } else if (event === "paywall") {
       patch.paywall_reached_at = now;
       patch.status = "paywall_reached";
+    } else if (event === "quiz_progress") {
+      patch.quiz_results = {
+        in_progress: true,
+        questions_answered: body.questions_answered ?? null,
+        total_questions: body.total_questions ?? null,
+      };
+      patch.status = "quiz_in_progress";
     }
 
     // Try update by session_id first; insert if none.
