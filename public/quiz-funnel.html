@@ -470,7 +470,7 @@ const ROUTES = {
       <input type="email" placeholder="Your best email" id="em" autocomplete="email" required>
       <div class="err" id="err"></div>
       <div class="lockline">🔒 <span>Your answers are private. We'll never share your email or your results with anyone.</span></div>
-      <div style="margin-top:auto"><button class="cta" id="see">See my results</button></div>`;
+      <div style="margin-top:auto"><button class="cta" id="see">Explore Results</button></div>`;
     s.querySelector("#see").onclick=()=>{
       const v=s.querySelector("#em").value.trim();
       if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){s.querySelector("#err").textContent="Enter a valid email to unlock your results.";return;}
