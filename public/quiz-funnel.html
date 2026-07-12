@@ -386,6 +386,7 @@ const ROUTES = {
       b.onclick=()=>{
         state.answers[i]=o.v;
         const next=i+1;
+        trackEvent("quiz_progress",{questions_answered:next,total_questions:QUESTIONS.length});
         if(INTERSTITIALS[next]&&next<QUESTIONS.length){go({name:"inter",idx:next});}
         else if(next>=QUESTIONS.length){go({name:"intent"});}
         else{go({name:"q",idx:next});}

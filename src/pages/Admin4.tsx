@@ -26,7 +26,7 @@ type Lead = {
   upsell_kit: boolean | null;
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
-  quiz_results: unknown;
+  quiz_results: { questions_answered?: number; total_questions?: number; answers?: number[]; in_progress?: boolean } | null;
   created_at: string;
 };
 
@@ -133,7 +133,7 @@ const Admin4: React.FC = () => {
   }
 
   const tabs: { key: typeof filter; label: string; count: number }[] = [
-    { key: "all", label: "All Google visitors", count: stats.total },
+    { key: "all", label: "All visitors", count: stats.total },
     { key: "email", label: "Filled email", count: stats.email },
     { key: "quiz", label: "Completed quiz", count: stats.quiz },
     { key: "paywall", label: "Reached paywall", count: stats.paywall },
@@ -145,8 +145,8 @@ const Admin4: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-slate-800">Admin 4 — Google Ads Traffic</h1>
-            <p className="text-slate-500 text-sm">Visitors with a Google Ads referrer (gclid, utm_source=google, or utm_medium=cpc).</p>
+            <h1 className="text-2xl md:text-3xl font-bold text-slate-800">Admin 4 — All Traffic</h1>
+            <p className="text-slate-500 text-sm">Every visitor. Quiz progress shows how many questions they answered before exiting.</p>
           </div>
           <div className="flex gap-2">
             <button onClick={load} className="px-3 py-2 rounded border border-slate-300 bg-white hover:bg-slate-100 flex items-center gap-1 text-sm">
@@ -181,7 +181,8 @@ const Admin4: React.FC = () => {
               <tr>
                 <th className="px-3 py-2">Landed</th>
                 <th className="px-3 py-2">Email / Name</th>
-                <th className="px-3 py-2">Campaign</th>
+                <th className="px-3 py-2">Source / Campaign</th>
+                <th className="px-3 py-2">Quiz progress</th>
                 <th className="px-3 py-2 text-center">Landed</th>
                 <th className="px-3 py-2 text-center">Email</th>
                 <th className="px-3 py-2 text-center">Quiz</th>
@@ -193,12 +194,24 @@ const Admin4: React.FC = () => {
             </thead>
             <tbody>
               {loading && (
-                <tr><td colSpan={10} className="px-3 py-6 text-center text-slate-400">Loading…</td></tr>
+                <tr><td colSpan={11} className="px-3 py-6 text-center text-slate-400">Loading…</td></tr>
               )}
               {!loading && filtered.length === 0 && (
-                <tr><td colSpan={10} className="px-3 py-6 text-center text-slate-400">No Google Ads traffic yet.</td></tr>
+                <tr><td colSpan={11} className="px-3 py-6 text-center text-slate-400">No traffic yet.</td></tr>
               )}
-              {filtered.map((l) => (
+              {filtered.map((l) => {
+                const qr = l.quiz_results || {};
+                const answered = typeof qr.questions_answered === "number"
+                  ? qr.questions_answered
+                  : Array.isArray(qr.answers) ? qr.answers.filter((v) => v != null).length : null;
+                const total = qr.total_questions ?? 24;
+                const completed = !!l.quiz_completed_at;
+                const progressLabel = completed
+                  ? `${total}/${total} ✓`
+                  : answered != null
+                    ? `${answered}/${total} · exited`
+                    : "—";
+                return (
                 <tr key={l.id} className="border-t border-slate-100 hover:bg-slate-50">
                   <td className="px-3 py-2 text-slate-600 whitespace-nowrap">{fmt(l.landed_at || l.created_at)}</td>
                   <td className="px-3 py-2">
@@ -206,8 +219,18 @@ const Admin4: React.FC = () => {
                     {l.name && <div className="text-xs text-slate-500">{l.name}</div>}
                   </td>
                   <td className="px-3 py-2 text-slate-600">
-                    <div>{l.utm_campaign || "—"}</div>
-                    <div className="text-xs text-slate-400">{l.traffic_source}{l.utm_medium ? ` · ${l.utm_medium}` : ""}</div>
+                    <div>{l.traffic_source || "—"}</div>
+                    <div className="text-xs text-slate-400">{l.utm_campaign || ""}{l.utm_medium ? ` · ${l.utm_medium}` : ""}</div>
+                  </td>
+                  <td className="px-3 py-2">
+                    <div className={`text-sm font-medium ${completed ? "text-emerald-700" : answered ? "text-amber-700" : "text-slate-400"}`}>
+                      {progressLabel}
+                    </div>
+                    {!completed && answered != null && (
+                      <div className="w-24 h-1.5 bg-slate-100 rounded overflow-hidden mt-1">
+                        <div className="h-full bg-amber-400" style={{ width: `${Math.min(100, (answered / total) * 100)}%` }} />
+                      </div>
+                    )}
                   </td>
                   <td className="px-3 py-2 text-center"><Dot on={!!l.landed_at} /></td>
                   <td className="px-3 py-2 text-center"><Dot on={!!l.email_submitted_at} /></td>
@@ -217,13 +240,14 @@ const Admin4: React.FC = () => {
                   <td className="px-3 py-2 text-slate-600">{l.trial_price_cents ? `$${(l.trial_price_cents / 100).toFixed(2)}` : "—"}</td>
                   <td className="px-3 py-2 text-xs text-slate-400 max-w-[140px] truncate" title={l.gclid || ""}>{l.gclid || "—"}</td>
                 </tr>
-              ))}
+                );
+              })}
             </tbody>
           </table>
         </div>
 
         <p className="text-xs text-slate-500 mt-4">
-          Tip: send Google Ads to a URL like <code className="bg-slate-200 px-1 rounded">?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=YOUR_CAMPAIGN&amp;gclid=&#123;gclid&#125;</code> so campaigns show up in the Campaign column.
+          Quiz progress shows the last question the visitor answered (out of 24). "Exited" means they left before completing the quiz.
         </p>
       </div>
     </div>

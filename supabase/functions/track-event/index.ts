@@ -51,16 +51,29 @@ Deno.serve(async (req) => {
     } else if (event === "paywall") {
       patch.paywall_reached_at = now;
       patch.status = "paywall_reached";
+    } else if (event === "quiz_progress") {
+      patch.quiz_results = {
+        in_progress: true,
+        questions_answered: body.questions_answered ?? null,
+        total_questions: body.total_questions ?? null,
+      };
+      patch.status = "quiz_in_progress";
     }
 
     // Try update by session_id first; insert if none.
     const { data: existing } = await supabase
       .from("leads")
-      .select("id")
+      .select("id, quiz_completed_at, paywall_reached_at")
       .eq("session_id", session_id)
       .maybeSingle();
 
     if (existing) {
+      // Don't let a later progress ping overwrite a completed quiz or reset status backwards.
+      if (event === "quiz_progress" && (existing.quiz_completed_at || existing.paywall_reached_at)) {
+        return new Response(JSON.stringify({ ok: true, skipped: true }), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
       const upd: Record<string, unknown> = {};
       for (const [k, v] of Object.entries(patch)) if (v !== undefined) upd[k] = v;
       await supabase.from("leads").update(upd).eq("id", existing.id);
