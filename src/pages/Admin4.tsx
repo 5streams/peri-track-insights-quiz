@@ -247,7 +247,7 @@ const Admin4: React.FC = () => {
         </div>
 
         <p className="text-xs text-slate-500 mt-4">
-          Tip: send Google Ads to a URL like <code className="bg-slate-200 px-1 rounded">?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=YOUR_CAMPAIGN&amp;gclid=&#123;gclid&#125;</code> so campaigns show up in the Campaign column.
+          Quiz progress shows the last question the visitor answered (out of 24). "Exited" means they left before completing the quiz.
         </p>
       </div>
     </div>
