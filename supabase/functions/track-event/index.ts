@@ -52,10 +52,21 @@ Deno.serve(async (req) => {
       patch.paywall_reached_at = now;
       patch.status = "paywall_reached";
     } else if (event === "quiz_progress") {
+      // Merge into existing quiz_results so we don't lose earlier answers.
+      const { data: cur } = await supabase
+        .from("leads")
+        .select("quiz_results")
+        .eq("session_id", session_id)
+        .maybeSingle();
+      const prevQR = (cur?.quiz_results as Record<string, unknown>) || {};
       patch.quiz_results = {
+        ...prevQR,
         in_progress: true,
         questions_answered: body.questions_answered ?? null,
         total_questions: body.total_questions ?? null,
+        answers: body.answers ?? prevQR.answers ?? null,
+        age: body.age ?? prevQR.age ?? null,
+        cycleStatus: body.cycleStatus ?? prevQR.cycleStatus ?? null,
       };
       patch.status = "quiz_in_progress";
     } else if (event === "checkpoint_answered") {
