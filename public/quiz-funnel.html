@@ -142,6 +142,19 @@
   .mockui .mdot{width:6.5cqw;height:6.5cqw;border-radius:50%;border:1.5px solid #C29455;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:4.5cqw;color:#7E9B84}
   .mockui .mdot.done{background:#7E9B84;border-color:#7E9B84;color:#fff}
   .mockui .mcta{margin-top:auto;background:#C29455;color:#fff;text-align:center;font-size:6.6cqw;font-weight:700;padding:5.5cqw;border-radius:99px}
+
+  .testi-wrap{position:relative;margin:0 -8px}
+  .testi-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 14px;scrollbar-width:none;-ms-overflow-style:none}
+  .testi-track::-webkit-scrollbar{display:none}
+  .testi-track > div{scroll-snap-align:center}
+  .testi-nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:1px solid #E8D7DF;background:#fff;color:var(--plum);font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 12px rgba(51,29,46,.10);z-index:2;padding:0}
+  .testi-nav.prev{left:-4px}
+  .testi-nav.next{right:-4px}
+  .testi-nav:disabled{opacity:.35;cursor:default}
+  .testi-dots{display:flex;justify-content:center;gap:6px;margin-top:-4px;margin-bottom:10px}
+  .testi-dots span{width:6px;height:6px;border-radius:50%;background:#E8D7DF;transition:background .2s,width .2s}
+  .testi-dots span.on{background:var(--plum);width:16px;border-radius:3px}
+
 </style>
 </head>
 <body>
@@ -317,7 +330,7 @@ function renderPaySection(container, trial){
     </div>
 
     <div class="eyebrow" style="text-align:center">People trust us</div>
-    <div style="display:flex;gap:10px;overflow-x:auto;padding:6px 2px 14px;margin:0 -8px">
+    <div class="testi-wrap"><button type="button" class="testi-nav prev" aria-label="Previous">‹</button><div class="testi-track">
       <div style="flex:0 0 78%;background:#fff;border:1px solid #EEE0E7;border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(51,29,46,.05)">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><b>Olivia J.</b><span style="color:var(--gold);letter-spacing:1px">★★★★★</span></div>
         <p style="font-size:14px;color:#46293F;line-height:1.55;margin:0">"I'm usually not that person who leaves reviews on apps… But this time, I've said THANK YOU. I've tried many programs, and finally, I got MenoMastery — which digs deeply."</p>
@@ -330,7 +343,7 @@ function renderPaySection(container, trial){
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><b>Dana R.</b><span style="color:var(--gold);letter-spacing:1px">★★★★★</span></div>
         <p style="font-size:14px;color:#46293F;line-height:1.55;margin:0">"The 3 A.M. Protocol alone gave me my first full night of sleep in two years. I cried when I realized I wasn't dreading bedtime anymore."</p>
       </div>
-    </div>
+    </div><button type="button" class="testi-nav next" aria-label="Next">›</button><div class="testi-dots"></div></div>
 
     <div style="background:#fff;border:1px solid #E8D7DF;border-radius:20px;padding:22px;box-shadow:0 12px 30px rgba(51,29,46,.06);text-align:left">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
@@ -930,7 +943,7 @@ const ROUTES = {
       <div style="text-align:center;font-size:13px;color:#6E5665;margin:0 0 14px">Your personalized plan is reserved for <b id="timer" style="color:var(--gold)">15:00</b></div>
 
       <div class="eyebrow" style="text-align:center">People trust us</div>
-      <div style="display:flex;gap:10px;overflow-x:auto;padding:6px 2px 14px;margin:0 -8px">
+      <div class="testi-wrap"><button type="button" class="testi-nav prev" aria-label="Previous">‹</button><div class="testi-track">
         <div style="flex:0 0 78%;background:#fff;border:1px solid #EEE0E7;border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(51,29,46,.05)">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><b>Olivia J.</b><span style="color:var(--gold);letter-spacing:1px">★★★★★</span></div>
           <p style="font-size:14px;color:#46293F;line-height:1.55;margin:0">"I'm usually not that person who leaves reviews on apps… But this time, I've said THANK YOU. I've tried many programs, and finally, I got MenoMastery — which digs deeply."</p>
@@ -943,7 +956,7 @@ const ROUTES = {
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><b>Dana R.</b><span style="color:var(--gold);letter-spacing:1px">★★★★★</span></div>
           <p style="font-size:14px;color:#46293F;line-height:1.55;margin:0">"The 3 A.M. Protocol alone gave me my first full night of sleep in two years. I cried when I realized I wasn't dreading bedtime anymore."</p>
         </div>
-      </div>
+      </div><button type="button" class="testi-nav next" aria-label="Next">›</button><div class="testi-dots"></div></div>
 
       <div style="background:#fff;border:1px solid #E8D7DF;border-radius:20px;padding:22px;box-shadow:0 12px 30px rgba(51,29,46,.06);text-align:left">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
@@ -1087,5 +1100,34 @@ function gaugeSVG(pct){
 }
 render();
 </script>
+
+<script>
+(function(){
+  function init(w){
+    if(w.dataset.init) return; w.dataset.init='1';
+    var track=w.querySelector('.testi-track');
+    var prev=w.querySelector('.testi-nav.prev');
+    var next=w.querySelector('.testi-nav.next');
+    var dots=w.querySelector('.testi-dots');
+    var cards=track.children;
+    if(dots){ dots.innerHTML=''; for(var i=0;i<cards.length;i++){ var s=document.createElement('span'); dots.appendChild(s);} }
+    function step(){ return cards[0]? cards[0].getBoundingClientRect().width + 10 : track.clientWidth; }
+    function update(){
+      var i=Math.round(track.scrollLeft/step());
+      if(dots){ [].forEach.call(dots.children,function(d,idx){ d.classList.toggle('on',idx===i); }); }
+      prev.disabled = track.scrollLeft<=2;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth-2;
+    }
+    prev.addEventListener('click',function(){ track.scrollBy({left:-step(),behavior:'smooth'}); });
+    next.addEventListener('click',function(){ track.scrollBy({left:step(),behavior:'smooth'}); });
+    track.addEventListener('scroll',update,{passive:true});
+    setTimeout(update,50);
+  }
+  function scan(){ document.querySelectorAll('.testi-wrap').forEach(init); }
+  scan();
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+
 </body>
 </html>
