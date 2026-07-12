@@ -473,7 +473,7 @@ const ROUTES = {
     s.querySelector("#see").onclick=()=>{
       const v=s.querySelector("#em").value.trim();
       if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){s.querySelector("#err").textContent="Enter a valid email to unlock your results.";return;}
-      state.email=v; go({name:"analyzing"});
+      state.email=v; trackEvent("email",{email:v,name:state.name||null}); go({name:"analyzing"});
     };
   },
 
@@ -550,7 +550,7 @@ const ROUTES = {
         if((i===1||i===2||i===4)&&cp<CHECKPOINTS.length){
           setTimeout(()=>askCheckpoint(()=>setTimeout(step,450)),750);
         } else setTimeout(step,700);
-      } else setTimeout(()=>go({name:"results"},false),600);
+      } else { trackEvent("quiz_complete",{quiz_results:{age:state.age,cycleStatus:state.cycleStatus,intent:state.intent,answers:state.answers}}); setTimeout(()=>go({name:"results"},false),600); }
     }
     setTimeout(step,400);
   },
@@ -622,7 +622,7 @@ const ROUTES = {
       </div>
       <button class="cta" id="next" style="margin-top:auto">Show me my plan</button>
       <p class="note">[Projection illustrative — substantiate with member outcome data before launch.]</p>`;
-    s.querySelector("#next").onclick=()=>go({name:"pricepick",dom:ctx.dom,total:ctx.total});
+    s.querySelector("#next").onclick=()=>{ trackEvent("paywall"); go({name:"pricepick",dom:ctx.dom,total:ctx.total}); };
   },
 
   pricepick(s,ctx){
