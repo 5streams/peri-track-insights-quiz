@@ -134,7 +134,7 @@ const Dashboard = () => {
         {/* Header */}
         <header className="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-10">
           <div className="md:hidden">
-            <h1 className="font-playfair text-xl font-bold text-[#5D4154]"></h1>
+            <h1 className="font-playfair text-xl font-bold text-[#5D4154]">Dashboard</h1>
           </div>
           <div className="md:hidden"></div> {/* Spacer for mobile */}
           <div className="flex items-center gap-4">
