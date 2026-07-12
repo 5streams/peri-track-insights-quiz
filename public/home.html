@@ -801,14 +801,18 @@ const ROUTES = {
       </div>
       `;
     const grid=s.querySelector("#prices");
-    let chosen=10;
+    let chosen=null;
     [{v:1,label:"$1"},{v:2,label:"$2"},{v:10,label:"$10"},{v:17.34,label:"$17.34",tag:"Cost to cover our team's effort"}].forEach(o=>{
       const b=document.createElement("button");b.className="opt";b.style.textAlign="center";
       b.innerHTML=`<span style="font-family:'Iowan Old Style',Palatino,Georgia,serif;font-size:22px">${o.label}</span>${o.tag?`<small style="text-align:center">${o.tag}</small>`:""}`;
-      if(o.v===chosen){b.style.borderColor="var(--orchid)";b.style.background="var(--blush-soft)";}
       b.onclick=()=>{chosen=o.v;
         [...grid.children].forEach(c=>{c.style.borderColor="var(--blush)";c.style.background="#fff";});
-        b.style.borderColor="var(--orchid)";b.style.background="var(--blush-soft)";};
+        b.style.borderColor="var(--orchid)";b.style.background="var(--blush-soft)";
+        state.trialPrice=chosen;
+        const pay=s.querySelector("#inlinepay");
+        renderPaySection(pay,chosen);
+        pay.style.display="block";
+        setTimeout(()=>pay.scrollIntoView({behavior:"smooth",block:"start"}),50);};
       grid.appendChild(b);
     });
     s.querySelector("#cont").onclick=()=>{state.trialPrice=chosen;go({name:"upsell",dom:ctx.dom,total:ctx.total});};
