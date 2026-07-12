@@ -30,7 +30,6 @@ Deno.serve(async (req) => {
       .select(
         "id, session_id, name, email, traffic_source, utm_medium, utm_campaign, utm_content, utm_term, gclid, referrer, landing_page, status, landed_at, email_submitted_at, quiz_completed_at, paywall_reached_at, trial_price_cents, upsell_kit, stripe_customer_id, stripe_subscription_id, quiz_results, created_at",
       )
-      .or("traffic_source.eq.google,traffic_source.eq.google_ads,utm_medium.eq.cpc,gclid.not.is.null")
       .order("created_at", { ascending: false })
       .limit(500);
 
