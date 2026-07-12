@@ -936,8 +936,48 @@ const ROUTES = {
       </div>
       <button class="cta gold" id="yes">Yes — add the Doctor Visit Kit ($14.99)</button>
       <button class="ghost" id="no">No thanks, continue to my plan</button>`;
-    s.querySelector("#yes").onclick=()=>go({name:"confirm",kit:true});
-    s.querySelector("#no").onclick=()=>go({name:"confirm",kit:false});
+    s.querySelector("#yes").onclick=()=>go({name:"checkout",kit:true});
+    s.querySelector("#no").onclick=()=>go({name:"checkout",kit:false});
+  },
+
+  checkout(s,ctx){
+    setProgress(null);
+    const trial=Number(state.trialPrice||1);
+    const kit=!!ctx.kit;
+    const total=(trial+(kit?14.99:0)).toFixed(2);
+    s.innerHTML=`<div class="inter">
+      <div class="eyebrow">Secure checkout</div>
+      <h2>One last step — your card unlocks the plan.</h2>
+      <p class="sub">You're only charged <b>$${total}</b> today. Your 7-day trial starts the moment you confirm. Cancel in one tap; we email a reminder 2 days before it renews at $29.99/month.</p>
+      <div class="kit-box" style="text-align:left">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span>7-day trial access</span><b>$${trial.toFixed(2)}</b></div>
+        ${kit?`<div style="display:flex;justify-content:space-between;margin-bottom:6px"><span>Doctor Visit Kit</span><b>$14.99</b></div>`:""}
+        <hr style="border:none;border-top:1px solid #E8D7DF;margin:8px 0">
+        <div style="display:flex;justify-content:space-between;font-size:16px"><span><b>Total today</b></span><b>$${total}</b></div>
+      </div>
+      <form id="ccform" style="margin-top:18px;display:flex;flex-direction:column;gap:12px;text-align:left">
+        <label style="font-size:13px;color:#6E5665">Name on card
+          <input required type="text" name="name" style="width:100%;padding:12px;border:1px solid #D9C4CE;border-radius:10px;font-size:16px;margin-top:4px" placeholder="Jane Doe">
+        </label>
+        <label style="font-size:13px;color:#6E5665">Card number
+          <input required type="text" name="cc" inputmode="numeric" maxlength="19" style="width:100%;padding:12px;border:1px solid #D9C4CE;border-radius:10px;font-size:16px;margin-top:4px" placeholder="1234 5678 9012 3456">
+        </label>
+        <div style="display:flex;gap:10px">
+          <label style="flex:1;font-size:13px;color:#6E5665">Expiry
+            <input required type="text" name="exp" maxlength="5" style="width:100%;padding:12px;border:1px solid #D9C4CE;border-radius:10px;font-size:16px;margin-top:4px" placeholder="MM/YY">
+          </label>
+          <label style="flex:1;font-size:13px;color:#6E5665">CVC
+            <input required type="text" name="cvc" inputmode="numeric" maxlength="4" style="width:100%;padding:12px;border:1px solid #D9C4CE;border-radius:10px;font-size:16px;margin-top:4px" placeholder="123">
+          </label>
+        </div>
+        <label style="font-size:13px;color:#6E5665">ZIP / Postal
+          <input required type="text" name="zip" style="width:100%;padding:12px;border:1px solid #D9C4CE;border-radius:10px;font-size:16px;margin-top:4px" placeholder="10001">
+        </label>
+        <button class="cta gold" type="submit" style="margin-top:6px">Start my 7-day trial — $${total}</button>
+        <p class="note" style="text-align:center">🔒 Encrypted checkout · Cancel anytime in one tap · Reminder email 2 days before renewal</p>
+      </form>
+    </div>`;
+    s.querySelector("#ccform").onsubmit=(e)=>{e.preventDefault();go({name:"confirm",kit:ctx.kit});};
   },
 
   confirm(s,ctx){
