@@ -133,11 +133,11 @@ const LeadList: React.FC = () => {
   // Filter leads based on search term and source filter
   const filteredLeads = leads.filter(lead => {
     const matchesSearch =
-      lead.name.toLowerCase().includes(searchTerm.toLowerCase()) |
+      lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       lead.email.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesFilter =
-      filterSource === 'all' |
+      filterSource === 'all' ||
       lead.source === filterSource;
 
     return matchesSearch && matchesFilter;
