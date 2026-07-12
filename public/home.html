@@ -919,7 +919,6 @@ const ROUTES = {
         setTimeout(()=>pay.scrollIntoView({behavior:"smooth",block:"start"}),50);};
       grid.appendChild(b);
     });
-    s.querySelector("#cont").onclick=()=>{state.trialPrice=chosen;go({name:"upsell",dom:ctx.dom,total:ctx.total});};
   },
 
   paywall(s,ctx){
