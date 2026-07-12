@@ -8,7 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Tracking from "./pages/Tracking";
 import Insights from "./pages/Insights";
 import NotFound from "./pages/NotFound";
-import TryPeriTrack from "./pages/tryperitrack";
+import TryPage from "./pages/try";
 import PerimenopauseWeightGainTracker from "./pages/PerimenopauseWeightGainTracker";
 import PerimenopauseInsomnia from "./pages/PerimenopauseInsomnia";
 import AdminLeads from "./pages/AdminLeads";
@@ -26,8 +26,8 @@ function App() {
         <Route path="/tracking" element={<Tracking />} />
         <Route path="/insights" element={<Insights />} />
         <Route path="/admin/leads" element={<AdminLeads />} />
-        <Route path="/tryperitrack" element={<TryPeriTrack />} />
-        <Route path="/tryperitracker" element={<TryPeriTrack />} /> {/* Add redirect for alternate URL */}
+        <Route path="/try" element={<TryPage />} />
+        <Route path="/tryer" element={<TryPage />} /> {/* Add redirect for alternate URL */}
         <Route path="/perimenopause-weight-gain-tracker" element={<PerimenopauseWeightGainTracker />} />
         <Route path="/perimenopause-insomnia" element={<PerimenopauseInsomnia />} />
         <Route path="/pdfmerger" element={<PDFMerger />} />

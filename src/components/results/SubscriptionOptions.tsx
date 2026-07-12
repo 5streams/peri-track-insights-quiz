@@ -12,15 +12,15 @@ interface SubscriptionOptionsProps {
 const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial }) => {
   const [isMonthlyModalOpen, setIsMonthlyModalOpen] = useState(false);
   const [isAnnualModalOpen, setIsAnnualModalOpen] = useState(false);
-  
+
   const handleMonthlyClick = () => {
     setIsMonthlyModalOpen(true);
   };
-  
+
   const handleAnnualClick = () => {
     setIsAnnualModalOpen(true);
   };
-  
+
   const handleModalClose = (pricingPlan: "monthly" | "annual") => {
     setIsMonthlyModalOpen(false);
     setIsAnnualModalOpen(false);
@@ -44,20 +44,20 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
               ✅ Julie, You've Taken the First Step… <br className="hidden md:inline" />
               <span className="text-[#9b87f5]">Now It's Time to Take Control</span>
             </h2>
-            
+
             <h3 className="text-xl md:text-2xl font-semibold text-center text-[#5D4154] mb-3">
-              Introducing Peritrack™
+              Introducing ™
             </h3>
             <p className="text-lg text-center text-gray-700 mb-6">
               Your All-in-One Perimenopause Health Companion
             </p>
-            
+
             <div className="text-center italic text-[#5D4154] font-medium mb-8 max-w-2xl mx-auto">
               Track your symptoms. Understand your hormones. Prepare for the week ahead — with confidence.
             </div>
           </div>
         </div>
-        
+
         {/* Critical Crossroad Section */}
         <div className="p-8 md:p-12">
           <div className="max-w-3xl mx-auto">
@@ -74,32 +74,32 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                 Without the right tools, symptoms escalate. Doctors shrug. You're left piecing together your health like a jigsaw puzzle — in the dark.
               </p>
               <p className="text-[#5D4154] font-medium">
-                Peritrack gives you the clarity, structure, and support you need.
+                 gives you the clarity, structure, and support you need.
               </p>
             </div>
 
-            {/* Why Peritrack Exists */}
+            {/* Why Exists */}
             <div className="mb-10">
               <h3 className="flex items-center text-xl font-bold text-[#5D4154] mb-3">
                 <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2">🌿</span>
-                Why Peritrack Exists
+                Why Exists
               </h3>
               <p className="mb-4 text-gray-700">
                 Perimenopause is a deeply misunderstood stage of life. It can affect your mind, your mood, your sleep, your energy — and make you feel like a stranger in your own skin.
               </p>
               <p className="mb-4 text-gray-700">
                 Most apps don't support this transition. Most doctors don't explain it fully.
-                <br />Peritrack changes that. It's your daily guide, your insight engine, and your trusted health companion built specifically for this chapter of your life.
+                <br /> changes that. It's your daily guide, your insight engine, and your trusted health companion built specifically for this chapter of your life.
               </p>
             </div>
-            
-            {/* What Peritrack Helps You Do */}
+
+            {/* What Helps You Do */}
             <div className="mb-12">
               <h3 className="flex justify-center items-center text-xl font-bold text-[#5D4154] mb-6">
                 <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2">🔍</span>
-                Here's What Peritrack Helps You Do
+                Here's What Helps You Do
               </h3>
-              
+
               {/* Feature Cards */}
               <div className="space-y-6">
                 {/* Feature 1 */}
@@ -130,7 +130,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                     </p>
                   </div>
                 </div>
-                
+
                 {/* Feature 2 */}
                 <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
                   <div className="bg-gradient-to-r from-[#F9F5FF] to-white p-4 border-b border-gray-100">
@@ -144,7 +144,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                       Perimenopause symptoms can feel random — but they rarely are.
                     </p>
                     <p className="mb-3">
-                      Peritrack's system doesn't just track — it anticipates.
+                       system doesn't just track — it anticipates.
                     </p>
                     <p className="mb-3 font-medium">
                       Using your personal data, the app shows you:
@@ -172,11 +172,11 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                     </p>
                   </div>
                 </div>
-                
+
                 {/* Additional features would go here but listing just these two for brevity */}
                 {/* We can continue with the other features in a similar pattern */}
               </div>
-              
+
               {/* Here's a summary card for the other features */}
               <div className="mt-6 bg-[#F9F5FF]/40 rounded-lg p-5 shadow-sm border border-[#9b87f5]/20">
                 <p className="font-medium text-center text-[#5D4154] mb-3">
@@ -209,11 +209,11 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                 <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2">💡</span>
                 The Real Transformation
               </h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 shadow-md rounded-lg overflow-hidden">
                 <div className="bg-white p-5">
                   <h4 className="font-semibold text-[#5D4154] mb-4 text-center">
-                    Without Peritrack
+                    Without
                   </h4>
                   <ul className="space-y-4">
                     <li className="flex items-start">
@@ -238,10 +238,10 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                     </li>
                   </ul>
                 </div>
-                
+
                 <div className="bg-[#F9F5FF] p-5">
                   <h4 className="font-semibold text-[#5D4154] mb-4 text-center">
-                    With Peritrack
+                    With
                   </h4>
                   <ul className="space-y-4">
                     <li className="flex items-start">
@@ -268,14 +268,14 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                 </div>
               </div>
             </div>
-            
+
             {/* Membership Section */}
             <div className="mb-12">
               <h3 className="flex justify-center items-center text-xl font-bold text-[#5D4154] mb-6">
                 <span className="bg-[#9b87f5]/20 p-1 rounded-full mr-2">🎁</span>
                 Your Membership Includes:
               </h3>
-              
+
               <div className="overflow-x-auto mb-8">
                 <table className="w-full mb-6 shadow-sm">
                   <thead>
@@ -339,7 +339,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                   </tbody>
                 </table>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {/* Monthly Option */}
                 <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all">
@@ -350,7 +350,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                       <span className="text-gray-600 ml-1">/month</span>
                     </div>
                   </div>
-                  
+
                   <div className="p-6">
                     <ul className="space-y-3 mb-6">
                       <li className="flex items-center">
@@ -366,8 +366,8 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                         <span>7-day free trial</span>
                       </li>
                     </ul>
-                    
-                    <Button 
+
+                    <Button
                       onClick={handleMonthlyClick}
                       variant="outline"
                       className="w-full h-12 border-[#9b87f5] text-[#5D4154] hover:bg-[#9b87f5]/10"
@@ -376,14 +376,14 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                     </Button>
                   </div>
                 </div>
-                
+
                 {/* Annual Option */}
                 <div className="bg-white rounded-xl shadow-md overflow-hidden border-2 border-[#9b87f5] hover:shadow-lg transition-all relative">
                   <div className="absolute top-0 right-0 bg-[#9b87f5] text-white px-3 py-1 text-sm font-bold rounded-bl-lg flex items-center">
                     <Star className="h-3 w-3 mr-1" />
                     BEST VALUE
                   </div>
-                  
+
                   <div className="bg-gradient-to-r from-[#F9F5FF]/80 to-white p-6 border-b border-gray-100">
                     <h4 className="text-lg font-semibold text-[#5D4154]">Annual Plan</h4>
                     <div className="flex items-end mt-1">
@@ -392,7 +392,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                       <span className="ml-2 text-sm text-green-600 font-semibold">Save $20.88</span>
                     </div>
                   </div>
-                  
+
                   <div className="p-6">
                     <ul className="space-y-3 mb-6">
                       <li className="flex items-center">
@@ -408,8 +408,8 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                         <span>7-day free trial</span>
                       </li>
                     </ul>
-                    
-                    <Button 
+
+                    <Button
                       onClick={handleAnnualClick}
                       className="w-full h-12 bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white"
                     >
@@ -419,7 +419,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                 </div>
               </div>
             </div>
-            
+
             {/* Why Start Today */}
             <div className="mb-12 bg-[#F9F5FF]/50 p-6 rounded-lg border border-[#9b87f5]/20 shadow-sm">
               <h3 className="flex items-center text-xl font-bold text-[#5D4154] mb-4">
@@ -431,7 +431,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                 But you don't need to suffer to be taken seriously.
               </p>
               <p className="mb-3 text-gray-700">
-                With Peritrack:
+                With :
               </p>
               <ul className="space-y-2 mb-0 pl-6 list-disc text-gray-700">
                 <li>79% of users report better sleep in 2–3 weeks</li>
@@ -439,7 +439,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
                 <li>84% report feeling more confident at their next medical appointment</li>
               </ul>
             </div>
-            
+
             {/* Final CTA */}
             <div className="text-center mb-6">
               <h3 className="text-xl font-bold text-[#5D4154] mb-4">
@@ -447,25 +447,25 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
               </h3>
               <p className="mb-6 text-gray-700">
                 You're not losing your mind. You're losing progesterone.<br />
-                And with Peritrack, you can start balancing your hormones today — naturally, personally, and powerfully.
+                And with , you can start balancing your hormones today — naturally, personally, and powerfully.
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto">
-                <Button 
+                <Button
                   onClick={handleMonthlyClick}
-                  variant="outline" 
+                  variant="outline"
                   className="h-12 border-[#9b87f5] text-[#5D4154] hover:bg-[#9b87f5]/10"
                 >
                   Start Monthly Trial
                 </Button>
-                <Button 
+                <Button
                   onClick={handleAnnualClick}
                   className="h-12 bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white"
                 >
                   Start Annual Trial
                 </Button>
               </div>
-              
+
               <p className="mt-3 text-sm text-gray-600">
                 Start today and take control of your perimenopause journey.
               </p>
@@ -473,7 +473,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
           </div>
         </div>
       </CardContent>
-      
+
       {/* Lead Capture Modals */}
       <LeadCaptureModal
         isOpen={isMonthlyModalOpen}
@@ -483,7 +483,7 @@ const SubscriptionOptions: React.FC<SubscriptionOptionsProps> = ({ onStartTrial 
         quizResults={localStorage.getItem("quizResults") ? JSON.parse(localStorage.getItem("quizResults") || "{}") : {}}
         navigateToDashboard={false}
       />
-      
+
       <LeadCaptureModal
         isOpen={isAnnualModalOpen}
         onClose={() => handleModalClose("annual")}

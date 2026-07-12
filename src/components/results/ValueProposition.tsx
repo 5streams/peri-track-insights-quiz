@@ -9,13 +9,13 @@ interface ValuePropositionProps {
   secondarySymptoms: string[];
 }
 
-const ValueProposition: React.FC<ValuePropositionProps> = ({ 
-  primarySymptom, 
-  secondarySymptoms = [] 
+const ValueProposition: React.FC<ValuePropositionProps> = ({
+  primarySymptom,
+  secondarySymptoms = []
 }) => {
   const navigate = useNavigate();
   const [spotsRemaining] = useState(13);
-  
+
   // Format symptom for display
   const formatSymptom = (symptom: string) => {
     return symptom
@@ -24,14 +24,14 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
       .replace(/Changes|Symptoms/g, '')
       .trim();
   };
-  
+
   const formattedPrimary = formatSymptom(primarySymptom);
   const formattedSecondary = secondarySymptoms.slice(0, 2).map(formatSymptom);
-  
+
   // Calculate the total value of all features
   const featuresValues = [97, 129, 89, 79, 119, 69];
   const totalValue = featuresValues.reduce((sum, val) => sum + val, 0);
-  
+
   const handleStartTrial = () => {
     // Set trial start date
     localStorage.setItem("trialStartDate", new Date().toString());
@@ -43,18 +43,18 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
     <Card className="mb-6 md:mb-8 overflow-hidden reveal-section transform opacity-0 hover:shadow-lg transition-all duration-300 border-none bg-gradient-to-br from-[#FDFCFB] to-[#E2D1C3]/60">
       <CardContent className="p-5 md:p-8">
         <h2 className="text-2xl md:text-3xl font-bold text-center text-[#5D4154] mb-5 font-playfair">
-          INTRODUCING PERITRACK PREMIUM
+          INTRODUCING PREMIUM
         </h2>
-        
+
         <p className="text-center text-[#5D4154] font-medium mb-6">
           The Complete Solution for Your Hormone Pattern
         </p>
 
         <p className="mb-8 text-[#5D4154]/80 text-center">
-          After analyzing your assessment, we've created a personalized hormone management system 
+          After analyzing your assessment, we've created a personalized hormone management system
           specifically designed for YOUR unique pattern. Here's exactly what you'll get for just $9.99/month:
         </p>
-        
+
         {/* Feature Sections */}
         <div className="space-y-8 mb-8">
           {/* Tracking System */}
@@ -67,19 +67,19 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                 PERSONALIZED HORMONE TRACKING SYSTEM <span className="text-[#A7C4A0]">($97 VALUE)</span>
               </h3>
             </div>
-            
+
             <p className="text-[#5D4154]/80 mb-3">
-              Unlike generic health trackers, your Peritrack dashboard is specifically calibrated to your 
+              Unlike generic health trackers, your dashboard is specifically calibrated to your
               hormone pattern, focusing on:
             </p>
-            
+
             <ul className="space-y-2 mb-3">
               <li className="flex items-start">
                 <div className="flex-shrink-0 mt-0.5">
                   <ArrowRight className="h-4 w-4 text-[#A7C4A0]" />
                 </div>
                 <p className="ml-2 text-sm text-[#5D4154]/80">
-                  Custom-designed tracking for your {formattedPrimary}, 
+                  Custom-designed tracking for your {formattedPrimary},
                   {formattedSecondary[0] || "mood changes"}, and {formattedSecondary[1] || "energy levels"}
                 </p>
               </li>
@@ -108,13 +108,13 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                 </p>
               </li>
             </ul>
-            
+
             <div className="bg-[#FFECD6]/30 p-3 rounded-lg border border-[#FFECD6]/50 italic text-sm text-[#5D4154]/80">
-              "Peritrack's custom tracking identified the exact foods and timing that were triggering my 
+              " custom tracking identified the exact foods and timing that were triggering my
               symptoms—something no doctor found in 3 years of appointments." —Sarah, 46
             </div>
           </div>
-          
+
           {/* Luna AI */}
           <div className="p-5 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
             <div className="flex items-center mb-3">
@@ -125,11 +125,11 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                 LUNA AI HORMONE SUPPORT COMPANION <span className="text-[#A7C4A0]">($129 VALUE)</span>
               </h3>
             </div>
-            
+
             <p className="text-[#5D4154]/80 mb-3">
               Your 24/7 personal hormone guide with unlimited access:
             </p>
-            
+
             <ul className="space-y-2 mb-3">
               <li className="flex items-start">
                 <div className="flex-shrink-0 mt-0.5">
@@ -164,25 +164,25 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                 </p>
               </li>
             </ul>
-            
+
             <div className="bg-[#FFECD6]/30 p-3 rounded-lg border border-[#FFECD6]/50 italic text-sm text-[#5D4154]/80">
-              "Having Luna available day and night completely changed my perimenopause experience. 
-              After months of feeling dismissed by doctors, I finally had someone who truly understood 
+              "Having Luna available day and night completely changed my perimenopause experience.
+              After months of feeling dismissed by doctors, I finally had someone who truly understood
               what I was going through and offered guidance that actually worked." —Jennifer, 45
             </div>
           </div>
-          
+
           {/* Collapsible Features - Show First 2, Hide Rest */}
           <details className="group">
             <summary className="cursor-pointer list-none flex justify-center mb-2">
               <span className="text-[#A7C4A0] font-medium flex items-center">
-                Show More Features 
+                Show More Features
                 <span className="ml-1 group-open:rotate-180 transition-transform">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                 </span>
               </span>
             </summary>
-            
+
             <div className="space-y-6">
               {/* Analytics */}
               <div className="p-5 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
@@ -194,11 +194,11 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                     PRECISION HORMONE ANALYTICS <span className="text-[#A7C4A0]">($89 VALUE)</span>
                   </h3>
                 </div>
-                
+
                 <p className="text-[#5D4154]/80 mb-3">
                   Advanced pattern recognition that reveals what's really happening in your body:
                 </p>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
                   <div className="flex items-start">
                     <ArrowRight className="h-4 w-4 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
@@ -218,7 +218,7 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                   </div>
                 </div>
               </div>
-              
+
               {/* Lab Interpretation */}
               <div className="p-5 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="flex items-center mb-3">
@@ -229,11 +229,11 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                     LAB INTERPRETATION SYSTEM <span className="text-[#A7C4A0]">($79 VALUE)</span>
                   </h3>
                 </div>
-                
+
                 <p className="text-[#5D4154]/80 mb-3">
                   Makes sense of your hormone testing with personalized insights:
                 </p>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
                   <div className="flex items-start">
                     <ArrowRight className="h-4 w-4 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
@@ -253,7 +253,7 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                   </div>
                 </div>
               </div>
-              
+
               {/* Protocol System */}
               <div className="p-5 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="flex items-center mb-3">
@@ -264,11 +264,11 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                     PERSONALIZED PROTOCOL SYSTEM <span className="text-[#A7C4A0]">($119 VALUE)</span>
                   </h3>
                 </div>
-                
+
                 <p className="text-[#5D4154]/80 mb-3">
                   Your complete, customized hormone balancing approach:
                 </p>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
                   <div className="flex items-start">
                     <ArrowRight className="h-4 w-4 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
@@ -288,7 +288,7 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                   </div>
                 </div>
               </div>
-              
+
               {/* Healthcare Tools */}
               <div className="p-5 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="flex items-center mb-3">
@@ -299,11 +299,11 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                     HEALTHCARE PARTNERSHIP TOOLS <span className="text-[#A7C4A0]">($69 VALUE)</span>
                   </h3>
                 </div>
-                
+
                 <p className="text-[#5D4154]/80 mb-3">
                   Tools to make your doctor visits more productive:
                 </p>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
                   <div className="flex items-start">
                     <ArrowRight className="h-4 w-4 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
@@ -323,7 +323,7 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                   </div>
                 </div>
               </div>
-              
+
               {/* Continuous Support */}
               <div className="p-5 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="flex items-center mb-3">
@@ -334,11 +334,11 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                     CONTINUOUS SUPPORT SYSTEM
                   </h3>
                 </div>
-                
+
                 <p className="text-[#5D4154]/80 mb-3">
                   Your subscription includes:
                 </p>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <div className="flex items-start">
                     <ArrowRight className="h-4 w-4 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
@@ -361,7 +361,7 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
             </div>
           </details>
         </div>
-        
+
         {/* Value Summary */}
         <div className="bg-[#5D4154] text-white p-5 rounded-lg text-center mb-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10">
@@ -382,17 +382,17 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
             Or think of it this way: about the cost of one coffee a week to potentially transform your sleep, energy, mood, and overall quality of life.
           </p>
         </div>
-        
+
         {/* Enhanced Trial Offer */}
         <div className="bg-white p-6 rounded-lg border-2 border-[#A7C4A0] mb-8">
           <h3 className="text-xl md:text-2xl font-bold text-center text-[#5D4154] mb-4">
             START YOUR TRANSFORMATION TODAY
           </h3>
-          
+
           <p className="text-center font-medium mb-4 text-[#5D4154]">
             Begin with a COMPLETELY FREE 7-DAY TRIAL that includes:
           </p>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
             <div className="flex items-start">
               <Check className="h-5 w-5 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
@@ -411,12 +411,12 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
               <p className="text-sm text-[#5D4154]/80">Custom tracking system for your specific symptoms</p>
             </div>
           </div>
-          
+
           <div className="bg-[#FFECD6]/30 p-4 rounded-lg mb-6">
             <p className="font-medium text-[#5D4154] mb-3">
               PLUS THESE SPECIAL BONUSES (FREE WITH YOUR TRIAL):
             </p>
-            
+
             <div className="space-y-3">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-0.5 text-[#A7C4A0]">🎁</div>
@@ -429,7 +429,7 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                   </p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-0.5 text-[#A7C4A0]">🎁</div>
                 <div className="ml-2">
@@ -441,7 +441,7 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                   </p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-0.5 text-[#A7C4A0]">🎁</div>
                 <div className="ml-2">
@@ -455,7 +455,7 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
               </div>
             </div>
           </div>
-          
+
           <div className="text-center mb-5">
             <Button
               onClick={handleStartTrial}
@@ -463,12 +463,12 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
             >
               START MY FREE TRIAL NOW
             </Button>
-            
+
             <p className="mt-3 text-sm text-[#5D4154]/70">
               No credit card required to start • No obligation to continue • Cancel with one click anytime
             </p>
           </div>
-          
+
           <div className="text-center text-sm text-[#5D4154]/80">
             <p className="mb-2">
               After your free 7-day trial, continue with full access for just $9.99/month.
@@ -484,7 +484,7 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
                 RISK-FREE GUARANTEE:
               </p>
               <p className="text-[#5D4154]/80">
-                If you don't experience meaningful insights and support within your first 30 days as a paid member, 
+                If you don't experience meaningful insights and support within your first 30 days as a paid member,
                 we'll refund your subscription fee—no questions asked.
               </p>
             </div>
@@ -493,17 +493,17 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
             </p>
           </div>
         </div>
-        
+
         {/* Before/After Section */}
         <div className="mb-8">
           <h3 className="text-xl font-bold text-center text-[#5D4154] mb-4">
             IMAGINE YOUR LIFE 30 DAYS FROM NOW
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-gray-100 p-5 rounded-lg">
               <h4 className="font-bold text-gray-700 mb-3 flex items-center">
-                WITHOUT PERITRACK:
+                WITHOUT :
               </h4>
               <ul className="space-y-2">
                 {[
@@ -523,7 +523,7 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
             </div>
             <div className="bg-[#A7C4A0]/10 p-5 rounded-lg">
               <h4 className="font-bold text-[#5D4154] mb-3 flex items-center">
-                WITH PERITRACK:
+                WITH :
               </h4>
               <ul className="space-y-2">
                 {[
@@ -543,26 +543,26 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
               </ul>
             </div>
           </div>
-          
+
           <p className="mt-4 text-center text-[#5D4154]/80 italic">
-            The choice is yours. But remember: women with your exact hormone pattern who delay intervention 
+            The choice is yours. But remember: women with your exact hormone pattern who delay intervention
             typically experience a 30-45% increase in symptom severity within just 3-6 months.
           </p>
           <p className="mt-2 text-center font-medium text-[#5D4154]">
             Why struggle unnecessarily when your personalized solution is ready right now?
           </p>
         </div>
-        
+
         {/* Final CTA with Urgency */}
         <div className="bg-[#5D4154] text-white p-6 rounded-lg text-center">
           <h3 className="text-xl font-bold mb-4">
             SPECIAL LIMITED-TIME OFFER
           </h3>
-          
+
           <p className="mb-4">
             The next 50 women who start their free trial today also receive:
           </p>
-          
+
           <div className="space-y-3 mb-5">
             <div className="flex items-start">
               <LockKeyhole className="h-5 w-5 text-[#A7C4A0] mr-2 mt-0.5 flex-shrink-0" />
@@ -583,25 +583,25 @@ const ValueProposition: React.FC<ValuePropositionProps> = ({
               </p>
             </div>
           </div>
-          
+
           <div className="mb-5">
             <div className="inline-block bg-white/20 px-4 py-2 rounded-lg mb-2">
               <Clock className="h-5 w-5 inline-block mr-2 mb-0.5" />
               <span className="font-medium">Only {spotsRemaining} spots remaining today!</span>
             </div>
           </div>
-          
+
           <Button
             onClick={handleStartTrial}
             className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/90 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transform transition-transform hover:scale-105 mb-4"
           >
             CLAIM MY FREE TRIAL NOW
           </Button>
-          
+
           <p className="text-sm text-white/80">
             No risk. No obligation. Just the support and solutions you deserve.
           </p>
-          
+
           <div className="flex justify-center gap-3 mt-4">
             <div className="text-xs bg-white/10 px-2 py-1 rounded">HIPAA Compliant</div>
             <div className="text-xs bg-white/10 px-2 py-1 rounded">256-bit Encryption</div>

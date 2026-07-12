@@ -4,14 +4,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { 
-  Table, 
-  TableBody, 
-  TableCaption, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
 } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -24,7 +24,7 @@ import {
 import { RefreshCw, FileText, Plus, Trash2, Eye } from "lucide-react";
 
 // Placeholder for the new modal - create this file later
-import LeadDetailModal from './LeadDetailModal'; 
+import LeadDetailModal from './LeadDetailModal';
 
 const AdminLeadList = () => {
   const [userActivities, setUserActivities] = useState<UserActivity[]>([]);
@@ -33,11 +33,11 @@ const AdminLeadList = () => {
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   const [deletingUsers, setDeletingUsers] = useState<{[key: string]: boolean}>({});
   const { toast } = useToast();
-  
+
   // State for the detail modal
   const [selectedUserActivity, setSelectedUserActivity] = useState<UserActivity | null>(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-  
+
   const loadUserActivities = async () => {
     setIsLoading(true);
     try {
@@ -61,32 +61,32 @@ const AdminLeadList = () => {
     const interval = setInterval(loadUserActivities, 30000); // Refresh less frequently for RPC
     return () => clearInterval(interval);
   }, []);
-  
+
   const filteredUserActivities = userActivities.filter(activity => {
     const searchLower = searchTerm.toLowerCase();
     return (
-      (activity.user_name || '').toLowerCase().includes(searchLower) ||
+      (activity.user_name || '').toLowerCase().includes(searchLower) |
       activity.user_email.toLowerCase().includes(searchLower)
     );
   });
-  
-  const createTestLead = async () => { 
+
+  const createTestLead = async () => {
     setIsLoading(true);
     try {
       const testName = `Test User ${Math.floor(Math.random() * 1000)}`;
       const testEmail = `test.user.${Date.now()}@example.com`; // Ensure unique email for new user
-      
+
       // This still uses saveLead, which creates a lead and a user if not exists.
       // In a user-centric view, this will add a new user or a new lead to an existing user.
       await saveLead(
-        testName, 
-        testEmail, 
+        testName,
+        testEmail,
         'test_lead_admin_panel',
         Math.random() > 0.5 ? 'monthly' : 'annual', // Randomly assign a plan
         { testData: "Sample quiz result for test lead", phase: "Test Phase", score: 50 },
         `Test lead created via admin panel at ${new Date().toISOString()}`
       );
-      
+
       toast({
         title: "Test Lead/User Activity Created",
         description: "Activity has been created. Refreshing list...",
@@ -103,7 +103,7 @@ const AdminLeadList = () => {
       setIsLoading(false);
     }
   };
-  
+
   const handleExportData = async () => {
     setIsLoading(true);
     try {
@@ -126,12 +126,12 @@ const AdminLeadList = () => {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `peritrack-user-activity-${new Date().toISOString().split('T')[0]}.csv`;
+      a.download = `user-activity-${new Date().toISOString().split('T')[0]}.csv`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
-      
+
       toast({ title: "Export Successful", description: "User activity data exported." });
     } catch (error) {
       console.error("Export error:", error);
@@ -140,16 +140,16 @@ const AdminLeadList = () => {
       setIsLoading(false);
     }
   };
-  
+
   const handleDeleteUser = async (userId: string, userName: string, userEmail: string) => {
     const displayName = userName || userEmail;
-    
+
     if (window.confirm(`Are you sure you want to delete ${displayName} and all their data? This action cannot be undone.`)) {
       setDeletingUsers(prev => ({ ...prev, [userId]: true }));
-      
+
       try {
         const success = await deleteUser(userId);
-        
+
         if (success) {
           toast({
             title: "User Deleted",
@@ -227,7 +227,7 @@ const AdminLeadList = () => {
           </div>
         </CardTitle>
       </CardHeader>
-      
+
       <CardContent className="p-4 md:p-6">
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
           <div className="flex-1">
@@ -239,10 +239,10 @@ const AdminLeadList = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          
+
           <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-2 items-end">
             <Button onClick={loadUserActivities} variant="outline" className="w-full sm:w-auto" disabled={isLoading}>
-              <RefreshCw className={`h-4 w-4 mr-1 ${isLoading ? 'animate-spin' : ''}`} /> 
+              <RefreshCw className={`h-4 w-4 mr-1 ${isLoading ? 'animate-spin' : ''}`} />
               {isLoading ? "Loading..." : "Refresh"}
             </Button>
             <Button onClick={handleExportData} variant="outline" className="w-full sm:w-auto">
@@ -256,7 +256,7 @@ const AdminLeadList = () => {
             </Button> */}
           </div>
         </div>
-        
+
         {userActivities.length > 0 ? (
           <Table>
             <TableCaption>
@@ -288,9 +288,9 @@ const AdminLeadList = () => {
                       <Button variant="outline" size="sm" onClick={() => handleViewDetails(activity)}>
                         <Eye className="h-4 w-4 mr-1" /> View
                       </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
+                      <Button
+                        variant="outline"
+                        size="sm"
                         className="text-red-500 hover:text-red-700 hover:bg-red-50 border-red-200"
                         onClick={() => handleDeleteUser(activity.user_id, activity.user_name || '', activity.user_email)}
                         disabled={deletingUsers[activity.user_id]}
@@ -317,10 +317,10 @@ const AdminLeadList = () => {
       </CardContent>
 
       {selectedUserActivity && (
-        <LeadDetailModal 
-          isOpen={isDetailModalOpen} 
-          onClose={() => setIsDetailModalOpen(false)} 
-          userActivity={selectedUserActivity} 
+        <LeadDetailModal
+          isOpen={isDetailModalOpen}
+          onClose={() => setIsDetailModalOpen(false)}
+          userActivity={selectedUserActivity}
           onUserDataChanged={loadUserActivities}
         />
       )}

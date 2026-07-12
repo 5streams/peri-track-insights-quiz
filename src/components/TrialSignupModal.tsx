@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { 
+import {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -35,7 +35,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!name.trim() || !email.trim() || !email.includes('@')) {
       toast({
         title: "Missing information",
@@ -44,13 +44,13 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
       });
       return;
     }
-    
+
     setIsLoading(true);
-    
+
     try {
       // Determine the pricing tier based on page source
       let pricingTier: 'WGFreeTrial' | 'InsomniaFreeTrial' | 'free_trial';
-      
+
       if (pageSource === 'weight-gain-tracker') {
         pricingTier = 'WGFreeTrial';
       } else if (pageSource === 'perimenopause-insomnia') {
@@ -58,7 +58,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
       } else {
         pricingTier = 'free_trial';
       }
-      
+
       // Format the notes to include page source information
       let pageInfo: string;
       if (pageSource === 'weight-gain-tracker') {
@@ -66,17 +66,17 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
       } else if (pageSource === 'perimenopause-insomnia') {
         pageInfo = 'Perimenopause Insomnia page';
       } else {
-        pageInfo = 'TryPeriTrack page';
+        pageInfo = 'TryPage page';
       }
-      
+
       const additionalNotes = `Captured from ${pageInfo} at ${new Date().toISOString()}`;
-      
+
       // Create a quiz-like results object to maintain consistency with other leads
       const trialQuizResults = {
-        source: pageSource === 'weight-gain-tracker' 
-          ? "WEIGHT_GAIN_TRIAL_SIGNUP" 
-          : pageSource === 'perimenopause-insomnia' 
-            ? "INSOMNIA_TRIAL_SIGNUP" 
+        source: pageSource === 'weight-gain-tracker'
+          ? "WEIGHT_GAIN_TRIAL_SIGNUP"
+          : pageSource === 'perimenopause-insomnia'
+            ? "INSOMNIA_TRIAL_SIGNUP"
             : "TRIAL_SIGNUP",
         phase: "Trial Interest",
         score: 100,
@@ -87,7 +87,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
           screenSize: `${window.innerWidth}x${window.innerHeight}`
         }
       };
-      
+
       console.log("TrialSignupModal: About to save lead with data:", {
         name: name.trim(),
         email: email.trim(),
@@ -97,19 +97,19 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
         quizResults: trialQuizResults,
         additionalNotes
       });
-      
+
       // Save lead using the same function as quiz results to ensure consistency
       await saveLead(
-        name.trim(), 
-        email.trim(), 
-        'TRIAL', 
+        name.trim(),
+        email.trim(),
+        'TRIAL',
         pricingTier,
         trialQuizResults, // Pass formatted results to maintain consistency
         additionalNotes
       );
-      
+
       setStep('beta-message');
-      
+
     } catch (error) {
       console.error("Error saving lead:", error);
       toast({
@@ -128,7 +128,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
     setAddress("");
     setStep('form');
   };
-  
+
   const handleClose = () => {
     onClose();
     // Reset the form after a delay to avoid visual transition issues
@@ -139,19 +139,19 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogClose className="absolute right-4 top-4" />
-        
+
         {step === 'form' ? (
           <>
             <DialogHeader>
               <DialogTitle className="text-xl font-bold text-primary">
-                Join Peritrack
+                Join
               </DialogTitle>
               <DialogDescription>
                 Enter your details to get started with your trial.
                 <p className="text-primary font-medium text-sm mt-1">7-day trial then only $9.99/month</p>
               </DialogDescription>
             </DialogHeader>
-            
+
             <form onSubmit={handleSubmit} className="space-y-4 py-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
@@ -163,7 +163,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
                   required
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address</Label>
                 <Input
@@ -186,17 +186,17 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
                   rows={3}
                 />
               </div>
-              
+
               <div className="mt-6">
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   className="w-full bg-primary-gradient hover:bg-primary/90 text-white"
                   disabled={isLoading}
                 >
                   {isLoading ? "Processing..." : "Sign Up"} <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
-              
+
               <p className="text-xs text-center text-warm-gray mt-4">
                 We value your privacy. Your information is secure and will never be shared.
               </p>
@@ -207,16 +207,16 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
             <div className="bg-secondary/20 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4">
               <Check className="h-8 w-8 text-secondary" />
             </div>
-            
+
             <DialogTitle className="text-xl font-bold text-primary mb-4">
               Thank You For Your Interest!
             </DialogTitle>
-            
+
             <div className="mb-6">
               <p className="text-primary mb-4">
                 We're currently in beta and will email you as soon as we reopen for new users.
               </p>
-              
+
               <div className="mt-4 bg-accent/50 p-4 rounded-lg border border-secondary/20">
                 <p className="text-sm font-medium text-primary">
                   Expected launch in <span className="font-bold">1-2 weeks</span>
@@ -226,7 +226,7 @@ const TrialSignupModal: React.FC<TrialSignupModalProps> = ({
                 </p>
               </div>
             </div>
-            
+
             <Button
               onClick={handleClose}
               className="bg-primary-gradient hover:bg-primary/90 text-white"

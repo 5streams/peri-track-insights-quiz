@@ -74,7 +74,7 @@ const ComparisonTable: React.FC = () => {
               <div className="text-sm">{renderValue(item.without)}</div>
             </div>
             <div className="p-3">
-              <div className="text-xs text-gray-500 mb-1">With PeriTrack</div>
+              <div className="text-xs text-gray-500 mb-1">With </div>
               <div className="text-sm">{renderValue(item.with)}</div>
             </div>
           </div>
@@ -90,7 +90,7 @@ const ComparisonTable: React.FC = () => {
         <TableRow className="bg-[#F9F5FF]/50">
           <TableHead className="text-[#5D4154] font-medium">Comparison</TableHead>
           <TableHead className="text-center text-[#5D4154] font-medium">Without Dedicated Support</TableHead>
-          <TableHead className="text-center text-[#5D4154] font-medium">With PeriTrack</TableHead>
+          <TableHead className="text-center text-[#5D4154] font-medium">With </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -111,30 +111,30 @@ const ComparisonTable: React.FC = () => {
         <h2 className="text-xl md:text-2xl font-bold text-[#5D4154] text-center mb-6">
           EXPLORE YOUR OPTIONS
         </h2>
-        
+
         <div className="overflow-x-auto">
           {isMobile ? renderMobileView() : renderDesktopView()}
         </div>
-        
+
         <div className="mt-8 pt-6 border-t border-gray-200">
-          <h3 className="text-lg font-semibold text-[#5D4154] mb-4 text-center">EXPERIENCES WITH PERITRACK</h3>
-          
+          <h3 className="text-lg font-semibold text-[#5D4154] mb-4 text-center">EXPERIENCES WITH </h3>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-4">
             <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
               <div className="text-[#9b87f5] font-bold text-lg mb-2">Better Informed</div>
               <p className="text-sm text-gray-600">Feel more confident about understanding your unique perimenopause journey</p>
             </div>
-            
+
             <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
               <div className="text-[#9b87f5] font-bold text-lg mb-2">Pattern Recognition</div>
               <p className="text-sm text-gray-600">Identify potential triggers and patterns in your symptoms</p>
             </div>
-            
+
             <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
               <div className="text-[#9b87f5] font-bold text-lg mb-2">More Confident</div>
               <p className="text-sm text-gray-600">Feel empowered about managing your health during this transition</p>
             </div>
-            
+
             <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
               <div className="text-[#9b87f5] font-bold text-lg mb-2">Better Healthcare</div>
               <p className="text-sm text-gray-600">Have more productive and informed discussions with providers</p>

@@ -17,12 +17,12 @@ const OfferSection: React.FC<OfferSectionProps> = ({
   symptoms
 }) => {
   const navigate = useNavigate();
-  
+
   // Get headline based on score category
   const getHeadline = () => {
     switch (scoreCategory) {
       case "minimal":
-        return "Maintain Your Hormone Health with Peritrack";
+        return "Maintain Your Hormone Health with ";
       case "early":
         return "Your Personalized Early Intervention Plan";
       case "moderate":
@@ -33,7 +33,7 @@ const OfferSection: React.FC<OfferSectionProps> = ({
         return "Your Personalized Hormone Support Plan";
     }
   };
-  
+
   // Get offer items based on score category
   const getOfferItems = () => {
     switch (scoreCategory) {
@@ -174,10 +174,10 @@ const OfferSection: React.FC<OfferSectionProps> = ({
         ];
     }
   };
-  
+
   // Calculate total value
   const totalValue = getOfferItems().reduce((sum, item) => sum + item.value, 0);
-  
+
   // Handle start trial
   const handleStartTrial = () => {
     // Set trial start date
@@ -185,7 +185,7 @@ const OfferSection: React.FC<OfferSectionProps> = ({
     // Navigate to dashboard
     navigate("/dashboard");
   };
-  
+
   // Get the urgency element for significant symptoms
   const getUrgencyElement = () => {
     if (scoreCategory === "significant") {
@@ -199,17 +199,17 @@ const OfferSection: React.FC<OfferSectionProps> = ({
     }
     return null;
   };
-  
+
   // Get time frame based on primary hormone and score category
   const getTimeframe = () => {
     if (scoreCategory === "minimal") return null;
-    
+
     const baseFrames = {
       progesterone: "14-21",
       estradiol: "16-24",
       testosterone: "12-18"
     };
-    
+
     return baseFrames[primaryHormone.toLowerCase() as keyof typeof baseFrames] || "14-21";
   };
 
@@ -219,11 +219,11 @@ const OfferSection: React.FC<OfferSectionProps> = ({
         <h3 className="text-xl md:text-2xl font-bold text-center text-[#5D4154] mb-6">
           {getHeadline()}
         </h3>
-        
+
         <div className="max-w-xl mx-auto">
           <div className="offer-details bg-white p-5 rounded-lg border border-gray-200 mb-6">
             <h4 className="font-bold text-[#5D4154] mb-4">Your 7-Day Free Trial Includes:</h4>
-            
+
             <ul className="space-y-4">
               {getOfferItems().map((item, index) => (
                 <li key={index} className="flex items-start">
@@ -239,7 +239,7 @@ const OfferSection: React.FC<OfferSectionProps> = ({
                 </li>
               ))}
             </ul>
-            
+
             <div className="value-highlight bg-[#5D4154]/5 p-4 rounded-lg mt-5 text-center">
               <p className="font-semibold text-[#5D4154]">
                 TOTAL VALUE: <span className="line-through">${totalValue}</span> - <span className="text-lg font-bold">YOURS FREE</span>
@@ -249,22 +249,22 @@ const OfferSection: React.FC<OfferSectionProps> = ({
               </p>
             </div>
           </div>
-          
+
           {getUrgencyElement()}
-          
+
           <div className="cta-container text-center mb-5">
-            <Button 
+            <Button
               onClick={handleStartTrial}
               className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/90 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 w-full md:w-auto text-base md:text-lg"
             >
               START MY FREE TRIAL{scoreCategory === "significant" ? " NOW" : ""}
             </Button>
-            
+
             <p className="no-card text-sm text-gray-600 mt-3">
               No credit card required. Cancel anytime.
             </p>
           </div>
-          
+
           {getTimeframe() && (
             <p className="text-center text-base text-[#5D4154]">
               Women with your {scoreCategory === "early" ? "exact early-stage pattern" : "hormone pattern"} typically see initial improvement within {getTimeframe()} days.

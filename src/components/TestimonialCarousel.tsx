@@ -6,7 +6,7 @@ const TestimonialCarousel = () => {
 
   const testimonials = [
     {
-      text: "PeriTrack predicted my perimenopause hot flash symptoms 2 hours before they hit. I was able to prepare and they were so much more manageable!",
+      text: " predicted my perimenopause hot flash symptoms 2 hours before they hit. I was able to prepare and they were so much more manageable!",
       author: "Sarah M.",
       age: "Age 47",
       location: "California",
@@ -27,7 +27,7 @@ const TestimonialCarousel = () => {
       benefit: "AI perimenopause coaching"
     },
     {
-      text: "I've tried 5 different apps for perimenopause symptoms. PeriTrack is the only one that actually helped me feel better, not just track symptoms.",
+      text: "I've tried 5 different apps for perimenopause symptoms. is the only one that actually helped me feel better, not just track symptoms.",
       author: "Amanda R.",
       age: "Age 45",
       location: "Florida",
@@ -51,13 +51,13 @@ const TestimonialCarousel = () => {
             Real Perimenopause Symptom Stories, Real Relief
           </h2>
           <p className="text-lg opacity-90 fade-in-up">
-            See how PeriTrack is changing perimenopause symptom experiences every day
+            See how is changing perimenopause symptom experiences every day
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto">
           <div className="relative overflow-hidden rounded-2xl">
-            <div 
+            <div
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >

@@ -7,12 +7,12 @@ const TrustFooter = () => {
       <div className="container mx-auto px-4 lg:px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
           <div>
-            <h3 className="font-headline font-bold text-xl text-primary mb-3">Peritrack</h3>
+            <h3 className="font-headline font-bold text-xl text-primary mb-3"></h3>
             <p className="text-warm-gray text-sm leading-relaxed">
               The intelligent perimenopause tracker that helps you understand, predict, and manage your symptoms with personalized AI coaching.
             </p>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-primary mb-3">Product</h4>
             <ul className="space-y-1 text-sm text-warm-gray">
@@ -22,7 +22,7 @@ const TrustFooter = () => {
               <li><a href="#" className="hover:text-primary transition-colors">Luna AI Coach</a></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-primary mb-3">Support</h4>
             <ul className="space-y-1 text-sm text-warm-gray">
@@ -32,7 +32,7 @@ const TrustFooter = () => {
               <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-primary mb-3">Trust & Security</h4>
             <div className="space-y-2">
@@ -55,10 +55,10 @@ const TrustFooter = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="border-t pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-warm-gray">
           <div className="mb-3 md:mb-0">
-            © 2024 Peritrack. All rights reserved.
+            © 2024 . All rights reserved.
           </div>
           <div className="flex space-x-4">
             <a href="#" className="hover:text-primary transition-colors">Privacy</a>

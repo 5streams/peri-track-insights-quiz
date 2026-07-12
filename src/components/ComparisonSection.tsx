@@ -6,32 +6,32 @@ const ComparisonSection = () => {
   const features = [
     {
       feature: 'AI-powered perimenopause symptom pattern recognition',
-      peritrack: true,
+      : true,
       others: false
     },
     {
       feature: 'Personalized perimenopause symptom relief strategies',
-      peritrack: true,
+      : true,
       others: false
     },
     {
       feature: '24/7 AI coach for perimenopause symptoms',
-      peritrack: true,
+      : true,
       others: false
     },
     {
       feature: 'Perimenopause symptom prediction alerts',
-      peritrack: true,
+      : true,
       others: false
     },
     {
       feature: 'Basic perimenopause symptom tracking',
-      peritrack: true,
+      : true,
       others: true
     },
     {
       feature: 'Generic health tips (not perimenopause-specific)',
-      peritrack: false,
+      : false,
       others: true
     }
   ];
@@ -41,7 +41,7 @@ const ComparisonSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-            Why PeriTrack vs. Other Perimenopause Symptom Apps?
+            Why vs. Other Perimenopause Symptom Apps?
           </h2>
           <p className="text-body-large text-warm-gray fade-in-up">
             See how we compare to generic period and perimenopause symptom tracking apps
@@ -55,20 +55,20 @@ const ComparisonSection = () => {
                 <h3 className="font-semibold">Perimenopause Symptom Features</h3>
               </div>
               <div className="text-center">
-                <h3 className="font-semibold">PeriTrack</h3>
+                <h3 className="font-semibold"></h3>
               </div>
               <div className="text-center">
                 <h3 className="font-semibold">Other Apps</h3>
               </div>
             </div>
-            
+
             {features.map((item, index) => (
               <div key={index} className={`grid grid-cols-3 p-4 border-b border-gray-100 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
                 <div className="text-warm-gray font-medium">
                   {item.feature}
                 </div>
                 <div className="text-center">
-                  {item.peritrack ? (
+                  {item. ? (
                     <Check className="w-6 h-6 text-secondary mx-auto" />
                   ) : (
                     <X className="w-6 h-6 text-gray-300 mx-auto" />

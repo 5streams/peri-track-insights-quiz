@@ -8,11 +8,11 @@ const WeightManagementEducation = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-headline font-bold text-h2 text-primary mb-4 fade-in-up">
-              How PeriTrack Helps You Manage Perimenopause Weight Changes
+              How Helps You Manage Perimenopause Weight Changes
             </h2>
             <p className="text-body-large text-warm-gray max-w-3xl mx-auto fade-in-up">
-              Research shows 60-90% of women experience weight changes during perimenopause. 
-              PeriTrack's pattern-tracking system helps you identify what factors influence your weight and develop personalized management strategies.
+              Research shows 60-90% of women experience weight changes during perimenopause.
+               pattern-tracking system helps you identify what factors influence your weight and develop personalized management strategies.
             </p>
           </div>
 
@@ -63,13 +63,13 @@ const WeightManagementEducation = () => {
           </div>
 
           <div className="bg-gradient-to-r from-secondary/10 to-primary/10 border border-secondary/20 rounded-xl p-6 fade-in-up">
-            <h4 className="font-semibold text-primary mb-3 text-center">The PeriTrack Weight Management Advantage</h4>
+            <h4 className="font-semibold text-primary mb-3 text-center">The Weight Management Advantage</h4>
             <p className="text-warm-gray text-center leading-relaxed mb-4">
-              Unlike generic weight loss apps, PeriTrack understands that perimenopause weight changes are driven by hormonal fluctuations. 
+              Unlike generic weight loss apps, understands that perimenopause weight changes are driven by hormonal fluctuations.
               Our system helps you identify your personal patterns and develop strategies that work with your changing body, not against it.
             </p>
             <p className="text-xs text-gray-600 text-center leading-relaxed">
-              <strong>Individual Results Vary:</strong> This system helps you understand patterns and correlations. 
+              <strong>Individual Results Vary:</strong> This system helps you understand patterns and correlations.
               Always consult your healthcare provider for personalized weight management guidance. Results depend on individual factors and consistent tracking.
             </p>
           </div>

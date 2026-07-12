@@ -23,7 +23,7 @@ const BeginJourney = ({ firstName }: BeginJourneyProps) => {
   const handleStartTrial = () => {
     setIsModalOpen(true);
   };
-  
+
   const handleModalClose = () => {
     setIsModalOpen(false);
     // Set trial start date
@@ -39,16 +39,16 @@ const BeginJourney = ({ firstName }: BeginJourneyProps) => {
           BEGIN YOUR JOURNEY TO BALANCE AND RENEWAL
         </CardTitle>
       </CardHeader>
-      
+
       <CardContent className="pt-6">
         <p className="mb-6 text-lg text-center">
           {firstName}, you've already taken the most important step—seeking to understand what's happening in your body and mind.
         </p>
-        
+
         <p className="mb-6 text-center">
           Your personalized dashboard is ready to guide you through every step of your hormone rebalancing journey. Your free 7-day trial gives you complete access to:
         </p>
-        
+
         <div className="bg-white/10 p-6 rounded-lg mb-8 backdrop-blur-sm">
           <ul className="space-y-4">
             <li className="flex items-start">
@@ -77,30 +77,30 @@ const BeginJourney = ({ firstName }: BeginJourneyProps) => {
             </li>
           </ul>
         </div>
-        
+
         <div className="text-center mb-8">
           <p className="text-sm mb-4">No credit card required—experience the full platform with our complete support.</p>
-          <Button 
+          <Button
             onClick={handleStartTrial}
             className="bg-[#A7C4A0] hover:bg-[#A7C4A0]/80 text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg transform transition-transform duration-300 hover:scale-105"
           >
             START MY FREE 7-DAY TRIAL
           </Button>
         </div>
-        
+
         <div className="text-center">
           <p className="font-medium text-lg mb-4">You don't have to navigate this journey alone.</p>
           <p className="mb-6">
             Join our community of over 30,000 women who have transformed their perimenopause experience from confusion and frustration to understanding and empowerment.
           </p>
-          
+
           <div className="border-l-4 border-[#A7C4A0] pl-4 py-2 italic text-white/90 text-left max-w-2xl mx-auto">
-            "Starting Peritrack was the moment everything changed for me. For the first time, I felt truly understood and supported. The combination of tracking, insights, and education helped me reclaim not just my physical health, but my emotional well-being."
+            "Starting was the moment everything changed for me. For the first time, I felt truly understood and supported. The combination of tracking, insights, and education helped me reclaim not just my physical health, but my emotional well-being."
             <div className="text-right font-medium mt-2 text-white/80">- Rebecca, 46</div>
           </div>
         </div>
       </CardContent>
-      
+
       <CardFooter className="flex justify-center border-t border-white/20 pt-6">
         <div className="flex flex-wrap justify-center gap-4">
           <div className="bg-white/20 text-white px-4 py-2 rounded-full text-xs font-medium transition-transform hover:scale-105">
@@ -114,7 +114,7 @@ const BeginJourney = ({ firstName }: BeginJourneyProps) => {
           </div>
         </div>
       </CardFooter>
-      
+
       {/* Lead Capture Modal */}
       <LeadCaptureModal
         isOpen={isModalOpen}

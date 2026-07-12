@@ -12,13 +12,13 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-playfair font-bold text-[#5D4154] mb-3">
-            Here's Exactly How Peritrack Works
+            Here's Exactly How Works
           </h2>
           <p className="text-lg md:text-xl max-w-3xl mx-auto text-[#7D6174]">
             Your simple 3-step path to understanding and managing your perimenopause symptoms
           </p>
         </div>
-        
+
         {/* Step 1: Track Your Symptoms */}
         <div className="mb-16">
           <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -31,15 +31,15 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
                   Easy Daily Tracking
                 </h3>
               </div>
-              
+
               <p className="text-gray-700 mb-4">
                 Quickly log your symptoms, mood, and energy levels in just 30 seconds a day.
                 Our intuitive tracking system makes it simple to maintain consistency.
               </p>
-              
+
               <ul className="space-y-2 mb-4">
-                {["Track physical, emotional, and cognitive symptoms", 
-                  "Monitor sleep quality and energy fluctuations", 
+                {["Track physical, emotional, and cognitive symptoms",
+                  "Monitor sleep quality and energy fluctuations",
                   "Record potential triggers like food, stress, and exercise"
                 ].map((item, index) => (
                   <li key={index} className="flex items-start">
@@ -49,7 +49,7 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
                 ))}
               </ul>
             </div>
-            
+
             <div className="order-1 md:order-2">
               <div className="bg-[#F8F9FA] rounded-lg p-2 shadow-md">
                 <div className="rounded-md w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
@@ -62,7 +62,7 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
             </div>
           </div>
         </div>
-        
+
         {/* Step 2: Discover Your Patterns */}
         <div className="mb-16">
           <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -76,7 +76,7 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
                 </p>
               </div>
             </div>
-            
+
             <div>
               <div className="flex items-center mb-4">
                 <div className="h-10 w-10 bg-[#5D4154] text-white rounded-full flex items-center justify-center text-lg font-bold mr-3">
@@ -86,15 +86,15 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
                   See Your Unique Hormone Patterns
                 </h3>
               </div>
-              
+
               <p className="text-gray-700 mb-4">
-                Our AI-powered analysis reveals connections between your symptoms, 
+                Our AI-powered analysis reveals connections between your symptoms,
                 hormone fluctuations, and triggers that even doctors might miss.
               </p>
-              
+
               <ul className="space-y-2 mb-4">
-                {["Visualize symptom patterns across your cycle", 
-                  "Identify specific triggers causing your symptoms", 
+                {["Visualize symptom patterns across your cycle",
+                  "Identify specific triggers causing your symptoms",
                   "Understand your unique hormone fluctuations"
                 ].map((item, index) => (
                   <li key={index} className="flex items-start">
@@ -106,7 +106,7 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
             </div>
           </div>
         </div>
-        
+
         {/* Step 3: Get Personalized Solutions */}
         <div className="mb-16">
           <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -119,15 +119,15 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
                   Receive Personalized Relief Recommendations
                 </h3>
               </div>
-              
+
               <p className="text-gray-700 mb-4">
-                Get specific, actionable recommendations tailored to your unique symptoms 
+                Get specific, actionable recommendations tailored to your unique symptoms
                 and patterns, helping you find relief and regain control.
               </p>
-              
+
               <ul className="space-y-2 mb-4">
-                {["Targeted nutrition suggestions for your symptoms", 
-                  "Specific exercise and movement recommendations", 
+                {["Targeted nutrition suggestions for your symptoms",
+                  "Specific exercise and movement recommendations",
                   "Stress management and sleep optimization techniques",
                   "Timing guidance for maximum effectiveness"
                 ].map((item, index) => (
@@ -138,7 +138,7 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
                 ))}
               </ul>
             </div>
-            
+
             <div className="order-1 md:order-2">
               <div className="bg-[#F8F9FA] rounded-lg p-2 shadow-md">
                 <div className="rounded-md w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
@@ -151,13 +151,13 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
             </div>
           </div>
         </div>
-        
+
         {/* Results & Benefits Section */}
         <div className="mb-12">
           <h3 className="text-center text-xl font-playfair font-semibold text-[#5D4154] mb-8">
             What This Means For You
           </h3>
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {[
               {
@@ -181,8 +181,8 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
                 stat: "63% decrease in hot flash frequency and intensity"
               }
             ].map((result, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="flex flex-col items-center text-center">
@@ -194,7 +194,7 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
             ))}
           </div>
         </div>
-        
+
         {/* Secondary CTA */}
         <div className="text-center mt-12 mb-4">
           <h3 className="text-xl md:text-2xl font-playfair font-semibold text-[#5D4154] mb-3">
@@ -203,14 +203,14 @@ const AppShowcase: React.FC<AppShowcaseProps> = ({ onStartTrial }) => {
           <p className="mb-6 text-[#7D6174]">
             Join thousands of women who've transformed their perimenopause experience
           </p>
-          
-          <Button 
+
+          <Button
             onClick={onStartTrial}
             className="bg-[#F97316] hover:bg-[#F97316]/90 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 text-base md:text-lg"
           >
             Start Your Free Trial Today
           </Button>
-        
+
           <p className="text-sm text-gray-500 mt-3">
             7-day trial then only $12.95/month
           </p>

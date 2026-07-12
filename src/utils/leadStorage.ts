@@ -11,7 +11,7 @@ export interface Lead {
 }
 
 // Local storage key
-const STORAGE_KEY = 'peritrack_leads';
+const STORAGE_KEY = 'leads';
 
 // Initialize storage
 export const initStorage = (): void => {
@@ -36,17 +36,17 @@ export const saveLead = (name: string, email: string, source: string, notes?: st
     timestamp: new Date().toISOString(),
     notes
   };
-  
+
   // Get current leads
   const leadsData = localStorage.getItem(STORAGE_KEY) || '[]';
   const leads: Lead[] = JSON.parse(leadsData);
-  
+
   // Add new lead
   leads.push(lead);
-  
+
   // Save to localStorage
   localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
-  
+
   return lead;
 };
 
@@ -64,12 +64,12 @@ export const clearLeads = (): void => {
 // Export to CSV
 export const exportToCSV = (): string => {
   const leads = getLeads();
-  
+
   const csvHeader = 'ID,Name,Email,Source,Date,Notes\n';
   const csvRows = leads.map(lead => {
     return `${lead.id},${lead.name},${lead.email},${lead.source},${lead.timestamp},${lead.notes || ''}`;
   }).join('\n');
-  
+
   return csvHeader + csvRows;
 };
 
