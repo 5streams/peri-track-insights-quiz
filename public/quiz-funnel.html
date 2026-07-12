@@ -580,7 +580,7 @@ const ROUTES = {
           <p><b>Your full profile includes:</b> your symptom-by-symptom breakdown, your likely hormonal stage explained, the 6 labs to request from your doctor, and your personalized 28-day protocol beginning with ${dom.label.toLowerCase()}.</p>
           <p>Week 1 of your plan targets your highest-scoring cluster first, because…</p>
         </div>
-        <div class="locked-badge"><span>Unlock full profile + plan</span></div>
+        <div class="locked-badge" id="unlock-badge" style="cursor:pointer"><span>Unlock full profile + plan</span></div>
       </div>
       <button class="cta gold" id="unlock">Unlock my full profile + plan</button>
       <p class="disclaimer" style="text-align:center">Informational only — not medical advice or diagnosis.</p>`;
@@ -594,7 +594,9 @@ const ROUTES = {
         row.querySelector(".bar-fill").style.width=Math.max(4,(c.score/12*100))+"%";
       }));
     });
-    s.querySelector("#unlock").onclick=()=>go({name:"bridge",dom,total});
+    const unlockGo=()=>go({name:"bridge",dom,total});
+    s.querySelector("#unlock").onclick=unlockGo;
+    s.querySelector("#unlock-badge").onclick=unlockGo;
   },
 
   bridge(s,ctx){
