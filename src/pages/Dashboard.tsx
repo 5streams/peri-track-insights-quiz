@@ -53,7 +53,7 @@ const Dashboard = () => {
       {/* Sidebar Navigation */}
       <aside className="w-64 bg-white shadow-md hidden md:block">
         <div className="p-4 border-b border-gray-100">
-          <h1 className="font-playfair text-2xl font-bold text-[#5D4154]"></h1>
+          <h1 className="font-playfair text-2xl font-bold text-[#5D4154]">Dashboard</h1>
         </div>
         <nav className="p-4">
           <ul className="space-y-2">
