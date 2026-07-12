@@ -58,6 +58,31 @@ Deno.serve(async (req) => {
         total_questions: body.total_questions ?? null,
       };
       patch.status = "quiz_in_progress";
+    } else if (event === "checkpoint_answered") {
+      // Merge checkpoints into existing quiz_results without wiping it.
+      const { data: cur } = await supabase
+        .from("leads")
+        .select("quiz_results")
+        .eq("session_id", session_id)
+        .maybeSingle();
+      const prevQR = (cur?.quiz_results as Record<string, unknown>) || {};
+      patch.quiz_results = { ...prevQR, checkpoints: body.checkpoints || {} };
+      patch.status = "calculating";
+    } else if (event === "calculating_view") {
+      patch.status = "calculating";
+    } else if (event === "email_submitted") {
+      patch.email_submitted_at = now;
+      patch.status = "email_captured";
+    } else if (event === "price_selected") {
+      if (typeof body.trial_price_cents === "number") {
+        patch.trial_price_cents = body.trial_price_cents;
+      }
+      patch.status = "price_selected";
+    } else if (event === "results_view") {
+      patch.paywall_reached_at = now;
+      patch.status = "paywall_reached";
+    } else if (event === "checkout_started") {
+      patch.status = "checkout_started";
     }
 
     // Try update by session_id first; insert if none.

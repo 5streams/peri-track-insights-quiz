@@ -505,7 +505,7 @@ const ROUTES = {
     ].forEach(o=>{
       const b=document.createElement("button");b.className="opt";
       b.innerHTML=o.t+(o.sub?`<small>${o.sub}</small>`:"");
-      b.onclick=()=>{state.intent=o.v;go({name:"email"});};wrap.appendChild(b);
+      b.onclick=()=>{state.intent=o.v;handoffToReactFunnel();};wrap.appendChild(b);
     });
   },
 
@@ -1007,6 +1007,67 @@ function phaseEstimate(total){
     case 1:return "Early perimenopause";
     case 5:return "Cycle-masked — symptom-staged";
     default:return total>=20?"Very early perimenopause":"Pre-transition";
+  }
+}
+
+/* -------------------------------------------------------------------
+   HANDOFF — after Q22 (intent), persist quiz state to the parent
+   window and exit the iframe into the React funnel:
+   /calculating → /quiz-email → /trial-price → /results
+   ------------------------------------------------------------------- */
+function handoffToReactFunnel(){
+  try{
+    var total = state.answers.reduce(function(a,b){return a+(b||0);},0);
+    var band = BANDS.find(function(b){return total>=b.min && total<=b.max;});
+    var clusterScores = CLUSTERS.map(function(c,ci){
+      var sum=0;
+      QUESTIONS.forEach(function(q,qi){ if(q.c===ci) sum+=(state.answers[qi]||0); });
+      return { key:c.key, label:c.label, score:sum, max:12 };
+    });
+    var dom = clusterScores.slice().sort(function(a,b){return b.score-a.score;})[0];
+    var phase = phaseEstimate(total);
+    var pct = Math.round(total/60*100);
+
+    var payload = {
+      answers: state.answers,
+      age: state.age,
+      cycleStatus: state.cycleStatus,
+      intent: state.intent,
+      checkpoints: state.checkpoints || {},
+      total: total,
+      pct: pct,
+      band: band ? { name: band.name, copy: band.copy } : null,
+      clusterScores: clusterScores,
+      dom: dom,
+      phase: phase,
+    };
+
+    var win = window.top || window.parent || window;
+    try{ win.localStorage.setItem("quizState", JSON.stringify(payload)); }catch(e){}
+
+    // Fire quiz_complete via track-event, using the parent's session id.
+    var sid = null;
+    try{ sid = win.localStorage.getItem("mm_session_id"); }catch(e){}
+    if(!sid){
+      try{ sid = (win.crypto && win.crypto.randomUUID) ? win.crypto.randomUUID() : String(Date.now()); win.localStorage.setItem("mm_session_id", sid); }catch(e){}
+    }
+    try{
+      fetch("https://bjwrfmoivnttemjydvyz.supabase.co/functions/v1/track-event",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+          session_id: sid,
+          event: "quiz_complete",
+          quiz_results: { total: total, band: band?band.name:null, phase: phase, dom: dom?dom.key:null, pct: pct, clusters: clusterScores, checkpoints: state.checkpoints||{} }
+        })
+      }).catch(function(){});
+    }catch(e){}
+
+    win.location.href = "/calculating";
+  }catch(err){
+    console.error("handoff failed", err);
+    // Fallback: continue original flow so the user isn't stuck.
+    go({name:"email"});
   }
 }
 function effectSVG(){
