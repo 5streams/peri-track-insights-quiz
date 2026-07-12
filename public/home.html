@@ -945,7 +945,7 @@ const ROUTES = {
     const trial=Number(state.trialPrice||1);
     const kit=!!ctx.kit;
     const total=(trial+(kit?14.99:0)).toFixed(2);
-    s.innerHTML=`<div class="inter">
+    s.innerHTML=`<div>
       <div class="eyebrow">Secure checkout</div>
       <h2>One last step — your card unlocks the plan.</h2>
       <p class="sub">You're only charged <b>$${total}</b> today. Your 7-day trial starts the moment you confirm. Cancel in one tap; we email a reminder 2 days before it renews at $29.99/month.</p>
