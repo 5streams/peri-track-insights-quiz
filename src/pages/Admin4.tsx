@@ -194,12 +194,24 @@ const Admin4: React.FC = () => {
             </thead>
             <tbody>
               {loading && (
-                <tr><td colSpan={10} className="px-3 py-6 text-center text-slate-400">Loading…</td></tr>
+                <tr><td colSpan={11} className="px-3 py-6 text-center text-slate-400">Loading…</td></tr>
               )}
               {!loading && filtered.length === 0 && (
-                <tr><td colSpan={10} className="px-3 py-6 text-center text-slate-400">No Google Ads traffic yet.</td></tr>
+                <tr><td colSpan={11} className="px-3 py-6 text-center text-slate-400">No traffic yet.</td></tr>
               )}
-              {filtered.map((l) => (
+              {filtered.map((l) => {
+                const qr = l.quiz_results || {};
+                const answered = typeof qr.questions_answered === "number"
+                  ? qr.questions_answered
+                  : Array.isArray(qr.answers) ? qr.answers.filter((v) => v != null).length : null;
+                const total = qr.total_questions ?? 24;
+                const completed = !!l.quiz_completed_at;
+                const progressLabel = completed
+                  ? `${total}/${total} ✓`
+                  : answered != null
+                    ? `${answered}/${total} · exited`
+                    : "—";
+                return (
                 <tr key={l.id} className="border-t border-slate-100 hover:bg-slate-50">
                   <td className="px-3 py-2 text-slate-600 whitespace-nowrap">{fmt(l.landed_at || l.created_at)}</td>
                   <td className="px-3 py-2">
@@ -207,8 +219,18 @@ const Admin4: React.FC = () => {
                     {l.name && <div className="text-xs text-slate-500">{l.name}</div>}
                   </td>
                   <td className="px-3 py-2 text-slate-600">
-                    <div>{l.utm_campaign || "—"}</div>
-                    <div className="text-xs text-slate-400">{l.traffic_source}{l.utm_medium ? ` · ${l.utm_medium}` : ""}</div>
+                    <div>{l.traffic_source || "—"}</div>
+                    <div className="text-xs text-slate-400">{l.utm_campaign || ""}{l.utm_medium ? ` · ${l.utm_medium}` : ""}</div>
+                  </td>
+                  <td className="px-3 py-2">
+                    <div className={`text-sm font-medium ${completed ? "text-emerald-700" : answered ? "text-amber-700" : "text-slate-400"}`}>
+                      {progressLabel}
+                    </div>
+                    {!completed && answered != null && (
+                      <div className="w-24 h-1.5 bg-slate-100 rounded overflow-hidden mt-1">
+                        <div className="h-full bg-amber-400" style={{ width: `${Math.min(100, (answered / total) * 100)}%` }} />
+                      </div>
+                    )}
                   </td>
                   <td className="px-3 py-2 text-center"><Dot on={!!l.landed_at} /></td>
                   <td className="px-3 py-2 text-center"><Dot on={!!l.email_submitted_at} /></td>
@@ -218,7 +240,8 @@ const Admin4: React.FC = () => {
                   <td className="px-3 py-2 text-slate-600">{l.trial_price_cents ? `$${(l.trial_price_cents / 100).toFixed(2)}` : "—"}</td>
                   <td className="px-3 py-2 text-xs text-slate-400 max-w-[140px] truncate" title={l.gclid || ""}>{l.gclid || "—"}</td>
                 </tr>
-              ))}
+                );
+              })}
             </tbody>
           </table>
         </div>
