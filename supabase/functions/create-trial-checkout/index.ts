@@ -29,6 +29,8 @@ Deno.serve(async (req) => {
     const email: string | null = body.email || null;
     const name: string | null = body.name || null;
     let lead_id: string | null = body.lead_id || null;
+    const add_kit: boolean = !!body.add_kit;
+    const embedded: boolean = !!body.embedded;
 
     let lead: any = null;
     if (lead_id) {
@@ -79,40 +81,69 @@ Deno.serve(async (req) => {
 
     const siteUrl = Deno.env.get("SITE_URL") || "https://peri-track-insights-quiz.lovable.app";
 
-    const session = await stripe.checkout.sessions.create({
+    const line_items: any[] = [
+      {
+        price_data: {
+          currency: "usd",
+          unit_amount: trial_price_cents,
+          product_data: {
+            name: `${trial_days}-Day Full-Access Trial — Become Her Again`,
+          },
+        },
+        quantity: 1,
+      },
+    ];
+    if (add_kit) {
+      line_items.push({
+        price_data: {
+          currency: "usd",
+          unit_amount: 1499,
+          product_data: {
+            name: "Doctor Visit Kit — one-time add-on",
+          },
+        },
+        quantity: 1,
+      });
+    }
+
+    const sessionParams: any = {
       mode: "payment",
       customer: customerId!,
-      line_items: [
-        {
-          price_data: {
-            currency: "usd",
-            unit_amount: trial_price_cents,
-            product_data: {
-              name: `${trial_days}-Day Full-Access Trial — Become Her Again`,
-            },
-          },
-          quantity: 1,
-        },
-      ],
+      line_items,
       payment_intent_data: {
         setup_future_usage: "off_session",
         statement_descriptor_suffix: "TRIAL",
-        description: `${trial_days}-day trial fee`,
-        metadata: { lead_id: lead_id!, trial_days: String(trial_days) },
+        description: add_kit
+          ? `${trial_days}-day trial + Doctor Visit Kit`
+          : `${trial_days}-day trial fee`,
+        metadata: {
+          lead_id: lead_id!,
+          trial_days: String(trial_days),
+          kit: add_kit ? "1" : "0",
+        },
       },
       custom_text: {
         submit: {
           message: `After your ${trial_days}-day trial, your membership continues at $29.99/month unless you cancel. Cancel anytime in one tap. We'll email you a reminder 2 days before your trial ends.`,
         },
       },
-      success_url: `${siteUrl}/upsell?lead=${lead_id}&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${siteUrl}/?checkout=cancelled&lead=${lead_id}`,
       metadata: {
         lead_id: lead_id!,
         trial_days: String(trial_days),
         trial_price_cents: String(trial_price_cents),
+        kit: add_kit ? "1" : "0",
       },
-    });
+    };
+
+    if (embedded) {
+      sessionParams.ui_mode = "embedded";
+      sessionParams.return_url = `${siteUrl}/confirm?lead=${lead_id}${add_kit ? "&kit=1" : ""}&session_id={CHECKOUT_SESSION_ID}`;
+    } else {
+      sessionParams.success_url = `${siteUrl}/confirm?lead=${lead_id}${add_kit ? "&kit=1" : ""}&session_id={CHECKOUT_SESSION_ID}`;
+      sessionParams.cancel_url = `${siteUrl}/?checkout=cancelled&lead=${lead_id}`;
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionParams);
 
     await supabase
       .from("leads")
@@ -126,7 +157,11 @@ Deno.serve(async (req) => {
       })
       .eq("id", lead_id!);
 
-    return json({ url: session.url, lead_id });
+    return json({
+      url: session.url,
+      client_secret: (session as any).client_secret,
+      lead_id,
+    });
   } catch (e) {
     console.error("create-trial-checkout error", e);
     return json({ error: (e as Error).message }, 500);
