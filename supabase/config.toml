@@ -1,1 +1,16 @@
 project_id = "bjwrfmoivnttemjydvyz"
+
+[functions.create-trial-checkout]
+verify_jwt = false
+
+[functions.payments-webhook]
+verify_jwt = false
+
+[functions.purchase-upsell]
+verify_jwt = false
+
+[functions.create-portal-session]
+verify_jwt = false
+
+[functions.send-scheduled-emails]
+verify_jwt = false
