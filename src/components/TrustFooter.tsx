@@ -7,7 +7,6 @@ const TrustFooter = () => {
       <div className="container mx-auto px-4 lg:px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
           <div>
-            <h3 className="font-headline font-bold text-xl text-primary mb-3"></h3>
             <p className="text-warm-gray text-sm leading-relaxed">
               The intelligent perimenopause tracker that helps you understand, predict, and manage your symptoms with personalized AI coaching.
             </p>
