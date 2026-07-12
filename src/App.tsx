@@ -1,6 +1,8 @@
 
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import Quiz from "./pages/Quiz";
 import Results from "./pages/Results";
@@ -19,9 +21,58 @@ import ConfirmPage from "./pages/ConfirmPage";
 import AccountPage from "./pages/AccountPage";
 import "./App.css";
 
+const SUPABASE_URL = "https://bjwrfmoivnttemjydvyz.supabase.co";
+
+function getSessionId(): string {
+  try {
+    let sid = localStorage.getItem("mm_session_id");
+    if (!sid) {
+      sid = (crypto.randomUUID?.() ?? String(Date.now()) + Math.random().toString(36).slice(2));
+      localStorage.setItem("mm_session_id", sid);
+    }
+    return sid;
+  } catch {
+    return String(Date.now());
+  }
+}
+
+function TrafficTracker() {
+  const location = useLocation();
+  useEffect(() => {
+    const path = location.pathname;
+    if (path.startsWith("/admin")) return;
+    try {
+      if (sessionStorage.getItem("mm_landing_tracked") === "1") return;
+      const params = new URLSearchParams(location.search);
+      fetch(`${SUPABASE_URL}/functions/v1/track-event`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          session_id: getSessionId(),
+          event: "landing",
+          traffic_source: params.get("utm_source") || null,
+          utm_medium: params.get("utm_medium") || null,
+          utm_campaign: params.get("utm_campaign") || null,
+          utm_content: params.get("utm_content") || null,
+          utm_term: params.get("utm_term") || null,
+          gclid: params.get("gclid") || null,
+          referrer: document.referrer || null,
+          landing_page: path + location.search,
+        }),
+      }).catch(() => {});
+      sessionStorage.setItem("mm_landing_tracked", "1");
+    } catch {
+      // ignore
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return null;
+}
+
 function App() {
   return (
     <Router>
+      <TrafficTracker />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/quiz" element={<Quiz />} />
