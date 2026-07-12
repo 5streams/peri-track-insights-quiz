@@ -61,11 +61,6 @@ Deno.serve(async (req) => {
       .maybeSingle();
 
     if (existing) {
-      // Don't overwrite existing name/email with null/undefined
-      const clean = Object.fromEntries(
-        Object.entries(patch).filter(([, v]) => v !== undefined && v !== null || ["landed_at","email_submitted_at","quiz_completed_at","paywall_reached_at","status"].includes(_ as never))
-      );
-      // Simpler: strip undefined only
       const upd: Record<string, unknown> = {};
       for (const [k, v] of Object.entries(patch)) if (v !== undefined) upd[k] = v;
       await supabase.from("leads").update(upd).eq("id", existing.id);
