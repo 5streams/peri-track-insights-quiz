@@ -68,7 +68,7 @@ const ComparisonSection = () => {
                   {item.feature}
                 </div>
                 <div className="text-center">
-                  {item. ? (
+                  {item.app ? (
                     <Check className="w-6 h-6 text-secondary mx-auto" />
                   ) : (
                     <X className="w-6 h-6 text-gray-300 mx-auto" />
