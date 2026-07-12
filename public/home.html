@@ -425,6 +425,29 @@ const DOMINANT_COPY = {
 
 /* -------------- state -------------- */
 let state = {age:null,cycleStatus:null,answers:[],intent:null,email:"",checkpoints:{},history:[]};
+
+const SUPABASE_URL="https://bjwrfmoivnttemjydvyz.supabase.co";
+const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqd3JmbW9pdm50dGVtanlkdnl6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM4NTg5MDgsImV4cCI6MjA5OTQzNDkwOH0.qy-dVr9MHDcBXAeUSpG-6emyvFPfZGsl4eixvyvvtOs";
+async function startTrialCheckout(days){
+  const priceDollars = Number(state.trialPrice||1);
+  const trial_price_cents = Math.round(priceDollars*100);
+  const btns = document.querySelectorAll('#buy,#take');
+  btns.forEach(b=>{b.disabled=true;b.dataset._t=b.textContent;b.textContent="Opening secure checkout…";});
+  try{
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/create-trial-checkout`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json","apikey":SUPABASE_ANON_KEY,"Authorization":`Bearer ${SUPABASE_ANON_KEY}`},
+      body:JSON.stringify({trial_price_cents,trial_days:days,email:state.email||null})
+    });
+    const data = await res.json();
+    if(!res.ok || !data.url) throw new Error(data.error||"Checkout failed");
+    (window.top||window).location.href = data.url;
+  }catch(e){
+    console.error(e);
+    alert("Sorry, we couldn't open secure checkout. Please try again.");
+    btns.forEach(b=>{b.disabled=false;if(b.dataset._t)b.textContent=b.dataset._t;});
+  }
+}
 let current = {name:"landing"};
 const app=document.getElementById("app"),prog=document.getElementById("prog"),
       stepnum=document.getElementById("stepnum"),backBtn=document.getElementById("backBtn");
@@ -858,7 +881,7 @@ const ROUTES = {
       <div class="testimonial">"I was snapping at the people I love and hating myself for it. The plan explained what was actually happening in my body — and gave me something to do about it that took ten minutes a day. My husband said, 'you're back.' That was week four."<b>— Michelle, 46 · Columbus, OH</b></div>
 
       <p class="note">Includes daily 10-minute lessons · symptom & protocol tracker · relaxation audio · doctor-visit prep. Member stories in this prototype are illustrative.</p>`;
-    s.querySelector("#buy").onclick=()=>go({name:"upsell"});
+    s.querySelector("#buy").onclick=()=>startTrialCheckout(7);
     s.querySelector("#hesitate").onclick=()=>go({name:"downsell",dom:ctx.dom,total:ctx.total});
     let secs=15*60;const t=s.querySelector("#timer");
     const tick=setInterval(()=>{
@@ -877,7 +900,7 @@ const ROUTES = {
       <p>If it's not for you, cancel in one tap and keep the 3 A.M. Protocol free, as our thank-you for taking the assessment.</p>
       <button class="cta" id="take">Take the 14-day trial — $${state.trialPrice||1}</button>
       <button class="ghost" id="leave" style="color:#E4CDD9">No thanks — email me my results only</button></div>`;
-    s.querySelector("#take").onclick=()=>go({name:"upsell"});
+    s.querySelector("#take").onclick=()=>startTrialCheckout(14);
     s.querySelector("#leave").onclick=()=>go({name:"confirm",kit:false,declined:true});
   },
 
