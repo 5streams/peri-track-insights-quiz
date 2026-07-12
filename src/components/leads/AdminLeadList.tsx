@@ -65,7 +65,7 @@ const AdminLeadList = () => {
   const filteredUserActivities = userActivities.filter(activity => {
     const searchLower = searchTerm.toLowerCase();
     return (
-      (activity.user_name || '').toLowerCase().includes(searchLower) |
+      (activity.user_name || '').toLowerCase().includes(searchLower) ||
       activity.user_email.toLowerCase().includes(searchLower)
     );
   });
