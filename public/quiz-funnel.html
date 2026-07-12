@@ -692,7 +692,7 @@ const ROUTES = {
       <div class="testimonial">"I was snapping at the people I love and hating myself for it. The plan explained what was actually happening in my body — and gave me something to do about it that took ten minutes a day. My husband said, 'you're back.' That was week four."<b>— Michelle, 46 · Columbus, OH</b></div>
 
       <p class="note">Includes daily 10-minute lessons · symptom & protocol tracker · relaxation audio · doctor-visit prep. Member stories in this prototype are illustrative.</p>`;
-    s.querySelector("#buy").onclick=()=>startTrialCheckout(7);
+    s.querySelector("#buy").onclick=()=>go({name:"upsell",days:7});
     s.querySelector("#hesitate").onclick=()=>go({name:"downsell",dom:ctx.dom,total:ctx.total});
     let secs=15*60;const t=s.querySelector("#timer");
     const tick=setInterval(()=>{
@@ -711,12 +711,13 @@ const ROUTES = {
       <p>If it's not for you, cancel in one tap and keep the 3 A.M. Protocol free, as our thank-you for taking the assessment.</p>
       <button class="cta" id="take">Take the 14-day trial — $${state.trialPrice||1}</button>
       <button class="ghost" id="leave" style="color:#E4CDD9">No thanks — email me my results only</button></div>`;
-    s.querySelector("#take").onclick=()=>startTrialCheckout(14);
+    s.querySelector("#take").onclick=()=>go({name:"upsell",days:14});
     s.querySelector("#leave").onclick=()=>go({name:"confirm",kit:false,declined:true});
   },
 
-  upsell(s){
+  upsell(s,ctx){
     setProgress(null);
+    const days = (ctx && ctx.days) || 7;
     s.innerHTML=`
       <div class="eyebrow">One-time offer — added to your order</div>
       <h2>Walk into your doctor's office and get taken seriously.</h2>
@@ -733,8 +734,60 @@ const ROUTES = {
       </div>
       <button class="cta gold" id="yes">Yes — add the Doctor Visit Kit ($14.99)</button>
       <button class="ghost" id="no">No thanks, continue to my plan</button>`;
-    s.querySelector("#yes").onclick=()=>go({name:"confirm",kit:true});
-    s.querySelector("#no").onclick=()=>go({name:"confirm",kit:false});
+    s.querySelector("#yes").onclick=()=>go({name:"checkout",days,kit:true});
+    s.querySelector("#no").onclick=()=>go({name:"checkout",days,kit:false});
+  },
+
+  checkout(s,ctx){
+    setProgress(null);
+    const days = (ctx && ctx.days) || 7;
+    const kit = !!(ctx && ctx.kit);
+    const priceDollars = Number(state.trialPrice||1);
+    const totalDollars = (priceDollars + (kit?14.99:0));
+    const totalStr = totalDollars.toFixed(2);
+    s.innerHTML=`
+      <div class="eyebrow">Secure checkout</div>
+      <h2>You're getting</h2>
+      <div class="kit-box" style="background:#fff">
+        <div style="display:flex;justify-content:space-between;font-size:15.5px;margin-bottom:8px">
+          <span>${days}-Day Full-Access Trial</span><b>$${priceDollars.toFixed(2)}</b>
+        </div>
+        ${kit?`<div style="display:flex;justify-content:space-between;font-size:15.5px;margin-bottom:8px">
+          <span>Doctor Visit Kit (one-time)</span><b>$14.99</b>
+        </div>`:""}
+        <div style="border-top:1px solid #eadde3;margin-top:8px;padding-top:8px;display:flex;justify-content:space-between;font-size:17px">
+          <b>Total today</b><b>$${totalStr}</b>
+        </div>
+        <p class="note" style="margin-top:10px">After your ${days}-day trial, membership continues at $29.99/month. Cancel anytime in one tap.</p>
+      </div>
+      <div id="checkout-mount" style="min-height:500px;background:#fff;border-radius:14px;overflow:hidden"></div>
+      <p id="checkout-error" style="color:#a11;margin-top:10px;display:none"></p>`;
+    (async()=>{
+      try{
+        await loadStripeJs();
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/create-trial-checkout`,{
+          method:"POST",
+          headers:{"Content-Type":"application/json","apikey":SUPABASE_ANON_KEY,"Authorization":`Bearer ${SUPABASE_ANON_KEY}`},
+          body:JSON.stringify({
+            trial_price_cents:Math.round(priceDollars*100),
+            trial_days:days,
+            email:state.email||null,
+            add_kit:kit,
+            embedded:true
+          })
+        });
+        const data = await res.json();
+        if(!res.ok || !data.client_secret) throw new Error(data.error||"Checkout failed");
+        const stripe = window.Stripe(STRIPE_PK);
+        const checkout = await stripe.initEmbeddedCheckout({clientSecret:data.client_secret});
+        checkout.mount("#checkout-mount");
+      }catch(e){
+        console.error(e);
+        const err = s.querySelector("#checkout-error");
+        err.textContent = "Sorry, we couldn't load the payment form. Please try again.";
+        err.style.display="block";
+      }
+    })();
   },
 
   confirm(s,ctx){
