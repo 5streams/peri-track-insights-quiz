@@ -428,6 +428,49 @@ let state = {age:null,cycleStatus:null,answers:[],intent:null,email:"",checkpoin
 const SUPABASE_URL="https://bjwrfmoivnttemjydvyz.supabase.co";
 const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqd3JmbW9pdm50dGVtanlkdnl6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM4NTg5MDgsImV4cCI6MjA5OTQzNDkwOH0.qy-dVr9MHDcBXAeUSpG-6emyvFPfZGsl4eixvyvvtOs";
 const STRIPE_PK="pk_test_51TruCjLyqcfLrcOeOD4zWggTnoAnizmoB8mBMdhuqtDmcKHkfYddjEqeLmy0OJTisbhmv5gUEcvHMBR0Sf10H0yH00RI4NHsJE";
+/* ========== Traffic-source + funnel tracking ========== */
+function _uuid(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return (c==='x'?r:(r&0x3|0x8)).toString(16);});}
+function _getSessionId(){
+  let sid=null;try{sid=localStorage.getItem("mm_sid");}catch(e){}
+  if(!sid){sid=_uuid();try{localStorage.setItem("mm_sid",sid);}catch(e){}}
+  return sid;
+}
+function _getTrafficMeta(){
+  const q=new URLSearchParams(location.search);
+  const gclid=q.get("gclid");
+  const utm_source=q.get("utm_source");
+  const utm_medium=q.get("utm_medium");
+  const utm_campaign=q.get("utm_campaign");
+  const utm_content=q.get("utm_content");
+  const utm_term=q.get("utm_term");
+  let traffic_source=utm_source;
+  if(!traffic_source && gclid) traffic_source="google";
+  if(!traffic_source){
+    const ref=document.referrer||"";
+    if(/google\./i.test(ref)) traffic_source="google_organic";
+    else if(ref) traffic_source="referral";
+    else traffic_source="direct";
+  }
+  const meta={traffic_source,utm_medium,utm_campaign,utm_content,utm_term,gclid,referrer:document.referrer||null,landing_page:location.pathname+location.search};
+  try{
+    const stored=JSON.parse(localStorage.getItem("mm_meta")||"null");
+    if(!stored){localStorage.setItem("mm_meta",JSON.stringify(meta));return meta;}
+    return stored;
+  }catch(e){return meta;}
+}
+async function trackEvent(event, extra){
+  try{
+    const meta=_getTrafficMeta();
+    await fetch(`${SUPABASE_URL}/functions/v1/track-event`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json","apikey":SUPABASE_ANON_KEY,"Authorization":`Bearer ${SUPABASE_ANON_KEY}`},
+      keepalive:true,
+      body:JSON.stringify({session_id:_getSessionId(),event,...(event==="landing"?meta:{}),...(extra||{})})
+    });
+  }catch(e){console.warn("trackEvent failed",e);}
+}
+// Fire landing event immediately (only once per session)
+(function(){try{if(!localStorage.getItem("mm_landed")){trackEvent("landing");localStorage.setItem("mm_landed","1");}}catch(e){trackEvent("landing");}})();
 let _stripeJsPromise=null;
 function loadStripeJs(){
   if(window.Stripe) return Promise.resolve();
@@ -614,7 +657,7 @@ const ROUTES = {
     s.querySelector("#see").onclick=()=>{
       const v=s.querySelector("#em").value.trim();
       if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){s.querySelector("#err").textContent="Enter a valid email to unlock your results.";return;}
-      state.email=v; go({name:"analyzing"});
+      state.email=v; trackEvent("email",{email:v,name:state.name||null}); go({name:"analyzing"});
     };
   },
 
@@ -691,7 +734,7 @@ const ROUTES = {
         if((i===1||i===2||i===4)&&cp<CHECKPOINTS.length){
           setTimeout(()=>askCheckpoint(()=>setTimeout(step,450)),750);
         } else setTimeout(step,700);
-      } else setTimeout(()=>go({name:"results"},false),600);
+      } else { trackEvent("quiz_complete",{quiz_results:{age:state.age,cycleStatus:state.cycleStatus,intent:state.intent,answers:state.answers}}); setTimeout(()=>go({name:"results"},false),600); }
     }
     setTimeout(step,400);
   },
@@ -763,7 +806,7 @@ const ROUTES = {
       </div>
       <button class="cta" id="next" style="margin-top:auto">Show me my plan</button>
       <p class="note">[Projection illustrative — substantiate with member outcome data before launch.]</p>`;
-    s.querySelector("#next").onclick=()=>go({name:"pricepick",dom:ctx.dom,total:ctx.total});
+    s.querySelector("#next").onclick=()=>{ trackEvent("paywall"); go({name:"pricepick",dom:ctx.dom,total:ctx.total}); };
   },
 
   pricepick(s,ctx){

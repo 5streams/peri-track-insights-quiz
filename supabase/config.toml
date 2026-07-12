@@ -14,3 +14,9 @@ verify_jwt = false
 
 [functions.send-scheduled-emails]
 verify_jwt = false
+
+[functions.track-event]
+verify_jwt = false
+
+[functions.admin-google-leads]
+verify_jwt = false
