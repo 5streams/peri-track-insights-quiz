@@ -68,7 +68,7 @@ const Intro: React.FC<IntroProps> = ({ onStartTrial, firstName = "" }) => {
     <Card className="mb-12 mt-8 reveal-section transform opacity-0 bg-slate-50 text-slate-800 overflow-hidden border border-slate-200 shadow-md">
       <CardContent className="p-6 md:p-8">
         <div className="text-center mb-8">
-          <img src="/images/logo.png" alt=" Logo" className="h-36 w-auto mx-auto mb-3" />
+          <img src="/images/logo.png" alt="Logo" className="h-36 w-auto mx-auto mb-3" />
           <h2 className="text-2xl md:text-3xl font-bold mb-3">
             <span className="text-slate-700">You've Taken the First Step...</span> <span className="text-indigo-600">Now It's Time to Take Control</span>
           </h2>
