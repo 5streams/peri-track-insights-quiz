@@ -6,6 +6,9 @@ import { useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import Quiz from "./pages/Quiz";
 import Results from "./pages/Results";
+import Calculating from "./pages/Calculating";
+import QuizEmail from "./pages/QuizEmail";
+import TrialPrice from "./pages/TrialPrice";
 import Dashboard from "./pages/Dashboard";
 import Tracking from "./pages/Tracking";
 import Insights from "./pages/Insights";
@@ -76,6 +79,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/calculating" element={<Calculating />} />
+        <Route path="/quiz-email" element={<QuizEmail />} />
+        <Route path="/trial-price" element={<TrialPrice />} />
         <Route path="/results" element={<Results />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/tracking" element={<Tracking />} />
