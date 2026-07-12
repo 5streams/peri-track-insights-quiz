@@ -26,7 +26,7 @@ type Lead = {
   upsell_kit: boolean | null;
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
-  quiz_results: unknown;
+  quiz_results: { questions_answered?: number; total_questions?: number; answers?: number[]; in_progress?: boolean } | null;
   created_at: string;
 };
 
