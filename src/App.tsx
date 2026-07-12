@@ -13,9 +13,6 @@ import PerimenopauseWeightGainTracker from "./pages/PerimenopauseWeightGainTrack
 import PerimenopauseInsomnia from "./pages/PerimenopauseInsomnia";
 import AdminLeads from "./pages/AdminLeads";
 import PDFMerger from "./pages/PDFMerger";
-import UpsellPage from "./pages/UpsellPage";
-import ConfirmPage from "./pages/ConfirmPage";
-import AccountPage from "./pages/AccountPage";
 import "./App.css";
 
 function App() {
@@ -34,9 +31,6 @@ function App() {
         <Route path="/perimenopause-weight-gain-tracker" element={<PerimenopauseWeightGainTracker />} />
         <Route path="/perimenopause-insomnia" element={<PerimenopauseInsomnia />} />
         <Route path="/pdfmerger" element={<PDFMerger />} />
-        <Route path="/upsell" element={<UpsellPage />} />
-        <Route path="/confirm" element={<ConfirmPage />} />
-        <Route path="/account" element={<AccountPage />} />
         <Route path="/paywall" element={<Index />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
