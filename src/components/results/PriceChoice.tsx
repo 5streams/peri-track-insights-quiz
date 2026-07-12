@@ -21,13 +21,13 @@ interface PriceChoiceProps {
  */
 const OPTIONS = [
   { cents: 100, label: "$1" },
-  { cents: 500, label: "$5" },
-  { cents: 900, label: "$9", tag: "Most choose this" },
-  { cents: 1700, label: "$17", tag: "Covers our cost" },
+  { cents: 200, label: "$2" },
+  { cents: 1000, label: "$10" },
+  { cents: 1734, label: "$17.34", tag: "Cost to cover our team's effort" },
 ];
 
 const PriceChoice: React.FC<PriceChoiceProps> = ({ email, firstName }) => {
-  const [selected, setSelected] = useState(900);
+  const [selected, setSelected] = useState(1000);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -79,29 +79,53 @@ const PriceChoice: React.FC<PriceChoiceProps> = ({ email, firstName }) => {
       >
         Choose your trial price
       </div>
-      <h3
-        style={{
-          color: "#6B4E7A",
-          fontSize: "30px",
-          lineHeight: 1.2,
-          textAlign: "center",
-          marginBottom: "12px",
-        }}
-      >
-        It costs us about $17 to build and support every plan.
-      </h3>
       <p
         style={{
           fontSize: "19px",
           color: "#555",
-          textAlign: "center",
           maxWidth: "560px",
-          margin: "0 auto 24px",
-          lineHeight: 1.5,
+          margin: "0 auto 16px",
+          lineHeight: 1.55,
         }}
       >
-        But we'd rather you start than stay stuck. Choose what works for you
-        today — <strong>every option unlocks the same full 7-day trial of everything.</strong>
+        Joining a new program can be daunting, but we're here to help.
+      </p>
+      <p
+        style={{
+          fontSize: "19px",
+          color: "#555",
+          maxWidth: "560px",
+          margin: "0 auto 20px",
+          lineHeight: 1.55,
+        }}
+      >
+        Try our program with a 7-day trial at a price that suits your budget
+        — no hidden fees or obligations. We believe that your wellness should
+        never be hindered by money.
+      </p>
+      {/* The $17.34 figure must reflect a true, documentable per-plan cost. */}
+      <p
+        style={{
+          fontSize: "20px",
+          fontWeight: 700,
+          color: "#2C3E50",
+          maxWidth: "560px",
+          margin: "0 auto 12px",
+          lineHeight: 1.45,
+        }}
+      >
+        It costs us $17.34 to pay our team, but please select an option that
+        works best for you.
+      </p>
+      <p
+        style={{
+          fontSize: "17px",
+          color: "#6B4E7A",
+          maxWidth: "560px",
+          margin: "0 auto 22px",
+        }}
+      >
+        You won't be charged at this step.
       </p>
 
       <div
@@ -178,7 +202,7 @@ const PriceChoice: React.FC<PriceChoiceProps> = ({ email, firstName }) => {
         >
           {loading
             ? "Opening secure checkout…"
-            : `Start my 7-day trial — ${OPTIONS.find((o) => o.cents === selected)?.label}`}
+            : "Continue"}
         </button>
         <p style={{ fontSize: "14px", color: "#888", marginTop: "10px" }}>
           Secure checkout by Stripe · Cancel anytime in one tap

@@ -6,7 +6,7 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
-const ALLOWED_CENTS = [100, 500, 900, 1700];
+const ALLOWED_CENTS = [100, 200, 1000, 1734];
 const ALLOWED_DAYS = [7, 14];
 
 function json(body: unknown, status = 200) {
