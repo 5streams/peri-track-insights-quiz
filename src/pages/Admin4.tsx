@@ -83,7 +83,7 @@ const Admin4: React.FC = () => {
       email: leads.filter((l) => l.email_submitted_at).length,
       quiz: leads.filter((l) => l.quiz_completed_at).length,
       paywall: leads.filter((l) => l.paywall_reached_at).length,
-      paid: leads.filter((l) => l.stripe_customer_id).length,
+      paid: leads.filter((l) => !!l.stripe_subscription_id).length,
     };
   }, [leads]);
 
@@ -92,7 +92,7 @@ const Admin4: React.FC = () => {
       case "email": return leads.filter((l) => l.email_submitted_at);
       case "quiz": return leads.filter((l) => l.quiz_completed_at);
       case "paywall": return leads.filter((l) => l.paywall_reached_at);
-      case "paid": return leads.filter((l) => l.stripe_customer_id);
+      case "paid": return leads.filter((l) => !!l.stripe_subscription_id);
       default: return leads;
     }
   }, [leads, filter]);
