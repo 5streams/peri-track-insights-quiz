@@ -305,9 +305,12 @@
       <p>Real stories from women who found clarity</p>
     </div>
     <div class="t-grid">
-      <div class="t-card"><p>I thought I was just stressed, but the assessment showed my symptoms were classic perimenopause. What a relief to finally know!</p><b>— Jennifer, 44</b></div>
-      <div class="t-card"><p>For months I wondered if something was wrong with me. This quiz confirmed my symptoms were perimenopause and helped me talk to my doctor.</p><b>— Karen, 45</b></div>
-      <div class="t-card"><p>I couldn't understand my sudden memory issues and mood changes. This assessment identified them as perimenopause, not just 'getting older.'</p><b>— Patricia, 43</b></div>
+      <div class="t-card"><p>Two years of 3 a.m. wake-ups and my doctor saying 'it's stress.' The quiz pinpointed sleep as my #1 driver. Within two weeks of the protocol, I was sleeping through the night more often than not. I got my evenings back.</p><b>— Dana, 49 · Austin, TX</b></div>
+      <div class="t-card"><p>I was snapping at my kids, crying in the car, and convinced I'd become a terrible person. Turns out my nervous system was running on fumes. The plan gave me ten-minute tools that actually moved the needle. My husband said, 'There's the woman I married.'</p><b>— Michelle, 46 · Columbus, OH</b></div>
+      <div class="t-card"><p>The weight around my middle wouldn't budge no matter what I did. For the first time, someone explained the midlife metabolism in plain English. I changed breakfast and two workouts. Two months later my clothes fit again.</p><b>— Lisa, 51 · Tampa, FL</b></div>
+      <div class="t-card"><p>My labs were 'normal' but I felt awful. The tracker showed my symptoms had a cycle pattern my doctor had missed. I walked into my appointment with data, and finally got taken seriously.</p><b>— Jenn, 44 · Portland, OR</b></div>
+      <div class="t-card"><p>I was forgetting words in meetings and terrified I was losing my mind. Mapping it against my cycle made it make sense. I stopped gaslighting myself and started using the brain fog protocol. The difference in three weeks was shocking.</p><b>— Rebecca, 47 · Denver, CO</b></div>
+      <div class="t-card"><p>I'd quietly stopped making plans because I never knew how I'd feel. Six weeks in, I hosted dinner, went hiking, and laughed until my stomach hurt. I didn't realize how much I'd missed myself.</p><b>— Andrea, 48 · Denver, CO</b></div>
     </div>
   </div>
 </section>
@@ -627,6 +630,9 @@ const ROUTES = {
       "\u201CThe 3 A.M. Protocol alone was worth it. I sleep now.\u201D — Dana, 49",
       "\u201CFor the first time in three years, I felt actually heard.\u201D — Michelle, 46",
       "\u201CMy energy came back by week three. My family noticed before I did.\u201D — Lisa, 51",
+      "\u201CI was skeptical about another program, but this one fit into my actual life.\u201D — Sarah, 50",
+      "\u201CThe tracker showed me patterns I couldn't see on my own. Game changer.\u201D — Jenn, 44",
+      "\u201CBy week two I wasn't dreading bedtime anymore.\u201D — Rachel, 45",
     ];
     let qi=0;const qEl=s.querySelector("#anQuote");
     qEl.textContent=quotes[0];
@@ -722,6 +728,7 @@ const ROUTES = {
         <li><b>Daily symptom & protocol tracker</b> — see what's actually working</li>
         <li><b>Labs Decoder + doctor-visit prep tools</b></li>
       </ul></div>
+      <div class="testimonial" style="margin-top:18px">"Joining gave me language for what I was experiencing — and a plan that actually matched my body. I only wish I'd found it sooner."<b>— Dana, 49 · Austin, TX</b></div>
       <button class="cta gold" id="unlock">Get my plan</button>
       <p class="disclaimer" style="text-align:center">Informational only — not medical advice or diagnosis.</p>`;
       s.querySelector("#unlock").onclick=()=>go({name:"bridge",dom,total});
@@ -883,6 +890,9 @@ const ROUTES = {
 
       <div class="testimonial">"For two years I was awake at 3 a.m. almost every night, and every doctor said 'stress.' Week one, the sleep reset gave me my first full night. By week three it was most nights. I cried when I realized I wasn't dreading bedtime anymore."<b>— Dana, 49 · Austin, TX</b></div>
       <div class="testimonial">"I was snapping at the people I love and hating myself for it. The plan explained what was actually happening in my body — and gave me something to do about it that took ten minutes a day. My husband said, 'you're back.' That was week four."<b>— Michelle, 46 · Columbus, OH</b></div>
+      <div class="testimonial">"I almost didn't join because I'd tried everything. But this was the first plan that didn't ask me to overhaul my life. Ten minutes a day. Best $17 I've spent on myself in years."<b>— Sarah, 50 · Phoenix, AZ</b></div>
+      <div class="testimonial">"The trial price felt like nothing, but the value was ridiculous. The 3 A.M. Protocol alone changed my sleep in five nights. I stayed because it kept working."<b>— Rachel, 45 · Seattle, WA</b></div>
+      <div class="testimonial">"I canceled my trial on day six because I wanted to see if the changes were real. By day ten without it, I was miserable. Rejoined immediately. That told me everything."<b>— Nicole, 48 · Chicago, IL</b></div>
 
       <p class="note">Includes daily 10-minute lessons · symptom & protocol tracker · relaxation audio · doctor-visit prep. Member stories in this prototype are illustrative.</p>`;
     s.querySelector("#buy").onclick=()=>go({name:"upsell"});
