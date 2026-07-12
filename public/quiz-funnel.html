@@ -457,7 +457,7 @@ const ROUTES = {
     ].forEach(o=>{
       const b=document.createElement("button");b.className="opt";
       b.innerHTML=o.t+(o.sub?`<small>${o.sub}</small>`:"");
-      b.onclick=()=>{state.intent=o.v;go({name:"email"});};wrap.appendChild(b);
+       b.onclick=()=>{state.intent=o.v;go({name:"analyzing"});};wrap.appendChild(b);
     });
   },
 
@@ -465,7 +465,7 @@ const ROUTES = {
     setProgress(TOTAL_STEPS);
     s.innerHTML=`<div class="eyebrow">Almost there</div>
       <h2>Your Perimenopause Profile is ready.</h2>
-      <p class="sub">Enter your email to see your results — we'll also send your full profile so you don't lose it.</p>
+      <p class="sub">We've scored your answers. Enter your email to unlock your results — we'll also send your full profile so you don't lose it.</p>
       <input type="email" placeholder="Your best email" id="em" autocomplete="email" required>
       <div class="err" id="err"></div>
       <div class="lockline">🔒 <span>Your answers are private. We'll never share your email or your results with anyone.</span></div>
@@ -473,7 +473,7 @@ const ROUTES = {
     s.querySelector("#see").onclick=()=>{
       const v=s.querySelector("#em").value.trim();
       if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){s.querySelector("#err").textContent="Enter a valid email to unlock your results.";return;}
-      state.email=v; trackEvent("email",{email:v,name:state.name||null}); go({name:"analyzing"});
+      state.email=v; trackEvent("email",{email:v,name:state.name||null}); go({name:"results"});
     };
   },
 
@@ -550,7 +550,7 @@ const ROUTES = {
         if((i===1||i===2||i===4)&&cp<CHECKPOINTS.length){
           setTimeout(()=>askCheckpoint(()=>setTimeout(step,450)),750);
         } else setTimeout(step,700);
-      } else { trackEvent("quiz_complete",{quiz_results:{age:state.age,cycleStatus:state.cycleStatus,intent:state.intent,answers:state.answers}}); setTimeout(()=>go({name:"results"},false),600); }
+      } else { trackEvent("quiz_complete",{quiz_results:{age:state.age,cycleStatus:state.cycleStatus,intent:state.intent,answers:state.answers}}); setTimeout(()=>go({name:"email"},false),600); }
     }
     setTimeout(step,400);
   },
