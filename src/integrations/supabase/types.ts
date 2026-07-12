@@ -14,7 +14,127 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          name: string | null
+          notes: string | null
+          quiz_results: Json | null
+          status: string | null
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          trial_days: number | null
+          trial_ends_at: string | null
+          trial_price_cents: number | null
+          updated_at: string
+          upsell_kit: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string | null
+          notes?: string | null
+          quiz_results?: Json | null
+          status?: string | null
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          trial_days?: number | null
+          trial_ends_at?: string | null
+          trial_price_cents?: number | null
+          updated_at?: string
+          upsell_kit?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string | null
+          notes?: string | null
+          quiz_results?: Json | null
+          status?: string | null
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          trial_days?: number | null
+          trial_ends_at?: string | null
+          trial_price_cents?: number | null
+          updated_at?: string
+          upsell_kit?: boolean | null
+        }
+        Relationships: []
+      }
+      payments: {
+        Row: {
+          amount_cents: number
+          created_at: string
+          id: string
+          kind: string
+          lead_id: string | null
+          stripe_object_id: string
+        }
+        Insert: {
+          amount_cents: number
+          created_at?: string
+          id?: string
+          kind: string
+          lead_id?: string | null
+          stripe_object_id: string
+        }
+        Update: {
+          amount_cents?: number
+          created_at?: string
+          id?: string
+          kind?: string
+          lead_id?: string | null
+          stripe_object_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scheduled_emails: {
+        Row: {
+          created_at: string
+          id: string
+          lead_id: string | null
+          send_at: string
+          sent_at: string | null
+          template: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          lead_id?: string | null
+          send_at: string
+          sent_at?: string | null
+          template: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          lead_id?: string | null
+          send_at?: string
+          sent_at?: string | null
+          template?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scheduled_emails_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
