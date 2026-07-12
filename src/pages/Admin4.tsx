@@ -133,7 +133,7 @@ const Admin4: React.FC = () => {
   }
 
   const tabs: { key: typeof filter; label: string; count: number }[] = [
-    { key: "all", label: "All Google visitors", count: stats.total },
+    { key: "all", label: "All visitors", count: stats.total },
     { key: "email", label: "Filled email", count: stats.email },
     { key: "quiz", label: "Completed quiz", count: stats.quiz },
     { key: "paywall", label: "Reached paywall", count: stats.paywall },
