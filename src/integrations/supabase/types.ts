@@ -18,50 +18,89 @@ export type Database = {
         Row: {
           created_at: string
           email: string | null
+          email_submitted_at: string | null
+          gclid: string | null
           id: string
+          landed_at: string | null
+          landing_page: string | null
           name: string | null
           notes: string | null
+          paywall_reached_at: string | null
+          quiz_completed_at: string | null
           quiz_results: Json | null
+          referrer: string | null
+          session_id: string | null
           status: string | null
           stripe_customer_id: string | null
           stripe_subscription_id: string | null
+          traffic_source: string | null
           trial_days: number | null
           trial_ends_at: string | null
           trial_price_cents: number | null
           updated_at: string
           upsell_kit: boolean | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_term: string | null
         }
         Insert: {
           created_at?: string
           email?: string | null
+          email_submitted_at?: string | null
+          gclid?: string | null
           id?: string
+          landed_at?: string | null
+          landing_page?: string | null
           name?: string | null
           notes?: string | null
+          paywall_reached_at?: string | null
+          quiz_completed_at?: string | null
           quiz_results?: Json | null
+          referrer?: string | null
+          session_id?: string | null
           status?: string | null
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
+          traffic_source?: string | null
           trial_days?: number | null
           trial_ends_at?: string | null
           trial_price_cents?: number | null
           updated_at?: string
           upsell_kit?: boolean | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_term?: string | null
         }
         Update: {
           created_at?: string
           email?: string | null
+          email_submitted_at?: string | null
+          gclid?: string | null
           id?: string
+          landed_at?: string | null
+          landing_page?: string | null
           name?: string | null
           notes?: string | null
+          paywall_reached_at?: string | null
+          quiz_completed_at?: string | null
           quiz_results?: Json | null
+          referrer?: string | null
+          session_id?: string | null
           status?: string | null
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
+          traffic_source?: string | null
           trial_days?: number | null
           trial_ends_at?: string | null
           trial_price_cents?: number | null
           updated_at?: string
           upsell_kit?: boolean | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_term?: string | null
         }
         Relationships: []
       }
