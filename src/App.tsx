@@ -27,7 +27,7 @@ function App() {
         <Route path="/insights" element={<Insights />} />
         <Route path="/admin/leads" element={<AdminLeads />} />
         <Route path="/try" element={<TryPage />} />
-        <Route path="/tryer" element={<TryPage />} /> {/* Add redirect for alternate URL */}
+        <Route path="/try-tracker" element={<TryPage />} /> {/* Add redirect for alternate URL */}
         <Route path="/perimenopause-weight-gain-tracker" element={<PerimenopauseWeightGainTracker />} />
         <Route path="/perimenopause-insomnia" element={<PerimenopauseInsomnia />} />
         <Route path="/pdfmerger" element={<PDFMerger />} />
