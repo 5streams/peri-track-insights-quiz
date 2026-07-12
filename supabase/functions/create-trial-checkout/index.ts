@@ -105,7 +105,6 @@ Deno.serve(async (req) => {
           message: `After your ${trial_days}-day trial, your membership continues at $29.99/month unless you cancel. Cancel anytime in one tap. We'll email you a reminder 2 days before your trial ends.`,
         },
       },
-      consent_collection: { terms_of_service: "required" },
       success_url: `${siteUrl}/upsell?lead=${lead_id}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/?checkout=cancelled&lead=${lead_id}`,
       metadata: {
