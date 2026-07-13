@@ -204,7 +204,7 @@ const Admin4: React.FC = () => {
                 const answered = typeof qr.questions_answered === "number"
                   ? qr.questions_answered
                   : Array.isArray(qr.answers) ? qr.answers.filter((v) => v != null).length : null;
-                const total = qr.total_questions ?? 24;
+                const total = qr.total_questions ?? 20;
                 const completed = !!l.quiz_completed_at;
                 const progressLabel = completed
                   ? `${total}/${total} ✓`
