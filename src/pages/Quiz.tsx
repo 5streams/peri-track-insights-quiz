@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { getQuizState, setQuizState, trackEvent } from "@/lib/quizState";
+import danaPhoto from "@/assets/testimonial-dana.jpg";
 
 /* ------------------------------------------------------------------
    Quiz content — copied verbatim from the legacy prototype's
@@ -314,6 +315,28 @@ const Quiz: React.FC = () => {
                 </div>
                 <h2 className="font-playfair text-2xl font-semibold mb-3 leading-snug">{info.h}</h2>
                 <p className="text-[15px] leading-relaxed text-[#F6ECF1] mb-6">{info.p}</p>
+                {qIdx === 12 && (
+                  <div className="rounded-2xl bg-white/8 border border-white/15 p-5 mb-6 backdrop-blur-sm">
+                    <div className="flex items-center gap-3 mb-3">
+                      <img
+                        src={danaPhoto}
+                        alt="Dana, member"
+                        width={56}
+                        height={56}
+                        loading="lazy"
+                        className="w-14 h-14 rounded-full object-cover ring-2 ring-[#EBD9BC]/40 shadow-md"
+                      />
+                      <div>
+                        <div className="font-semibold text-[15px] leading-tight">Dana, 49 — Austin, TX</div>
+                        <div className="text-[12px] text-[#EBD9BC]/90">Struggled most with sleep &amp; energy — like you</div>
+                      </div>
+                    </div>
+                    <p className="text-[14px] leading-relaxed text-[#F6ECF1] italic">
+                      &ldquo;I hadn&rsquo;t slept through the night in two years. Week one I used the 3 A.M. Protocol twice. By week three I was sleeping straight through most nights — I&rsquo;d forgotten what waking up rested even felt like.&rdquo;
+                    </p>
+                    <div className="text-[11px] text-[#EBD9BC]/70 mt-3 tracking-wide">Become Her Again member story.</div>
+                  </div>
+                )}
                 <button
                   onClick={() => handleContinueBreak(qIdx)}
                   className="w-full bg-[#C29455] hover:bg-[#a97e46] text-white font-semibold rounded-full py-4 text-base transition"
