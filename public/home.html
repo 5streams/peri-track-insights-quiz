@@ -1254,9 +1254,12 @@ render();
 
 <script>
   function startQuiz(){
-    document.getElementById('homeView').style.display='none';
-    document.getElementById('quizApp').classList.add('active');
-    window.scrollTo(0,0);
+    try {
+      var qs = (window.top && window.top.location && window.top.location.search) || window.location.search || '';
+      (window.top || window).location.href = '/quiz' + (qs || '');
+    } catch (e) {
+      window.location.href = '/quiz' + (window.location.search || '');
+    }
   }
   document.querySelectorAll('[data-quiz-link]').forEach(a=>{
     a.href='#';
