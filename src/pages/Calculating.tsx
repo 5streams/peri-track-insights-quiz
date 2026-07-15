@@ -12,8 +12,6 @@ const BARS = [
 
 const CHECKPOINTS: { key: keyof NonNullable<ReturnType<typeof getQuizState>["checkpoints"]>; q: string }[] = [
   { key: "dismissed", q: "Has a doctor ever brushed off your symptoms as \u201Cjust stress\u201D or \u201Cjust aging\u201D?" },
-  { key: "normalLabs", q: "Have you been told your labs look \u201Cnormal\u201D — while you still feel awful?" },
-  { key: "sleepFirst", q: "If one thing changed this month, would sleeping through the night change everything else?" },
 ];
 
 const QUOTES = [
@@ -48,13 +46,13 @@ const Calculating: React.FC = () => {
   useEffect(() => {
     if (modalIdx !== null) return;
     if (barIdx >= BARS.length) {
-      const t = window.setTimeout(() => navigate("/quiz-email"), 500);
+      const t = window.setTimeout(() => navigate("/results"), 500);
       return () => window.clearTimeout(t);
     }
     timerRef.current = window.setTimeout(() => {
       const nextBarIdx = barIdx + 1;
-      // After bars 1, 2, 4 fire a checkpoint.
-      if ((nextBarIdx === 1 || nextBarIdx === 2 || nextBarIdx === 4) && cpDone.current < CHECKPOINTS.length) {
+      // After bar 2 fire the single checkpoint.
+      if (nextBarIdx === 2 && cpDone.current < CHECKPOINTS.length) {
         setBarIdx(nextBarIdx);
         window.setTimeout(() => setModalIdx(cpDone.current), 400);
       } else {
