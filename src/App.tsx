@@ -23,6 +23,7 @@ import UpsellPage from "./pages/UpsellPage";
 import ConfirmPage from "./pages/ConfirmPage";
 import AccountPage from "./pages/AccountPage";
 import PerimenopauseTest from "./pages/landers/PerimenopauseTest";
+import HusbandQuiz from "./pages/HusbandQuiz";
 import PerimenopauseQuiz from "./pages/landers/PerimenopauseQuiz";
 import PerimenopauseSymptoms from "./pages/landers/PerimenopauseSymptoms";
 import Privacy from "./pages/legal/Privacy";
@@ -108,6 +109,8 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/becomeheragain" element={<DesireQuiz />} />
         <Route path="/desire-quiz" element={<DesireQuiz />} />
+        <Route path="/mentakethequiz" element={<HusbandQuiz />} />
+        <Route path="/husband-quiz" element={<HusbandQuiz />} />
         <Route path="/perimenopause-test" element={<PerimenopauseTest />} />
         <Route path="/perimenopause-quiz" element={<PerimenopauseQuiz />} />
         <Route path="/perimenopause-symptoms" element={<PerimenopauseSymptoms />} />
