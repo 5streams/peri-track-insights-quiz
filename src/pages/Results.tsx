@@ -18,6 +18,16 @@ const BENEFITS = [
   "Labs Decoder + doctor-visit prep tools",
 ];
 
+const PARTNER_BENEFITS = [
+  "Your full Situation Profile — all five factors scored and explained",
+  "Your response pattern, named, with this week's adjustments",
+  "The complete partner curriculum: understanding, the conversations, the affection rebuild",
+  "Her full program included as her opt-in gift",
+  "The doctor-support toolkit — how to help her get real answers",
+];
+
+const PARTNER_HER_AGE_LABELS = ["Under 35", "35–39", "40–44", "45–49", "50–55", "56+"];
+
 function GaugeSVG({ pct }: { pct: number }) {
   const clamped = Math.max(0, Math.min(100, pct));
   const angle = Math.PI * (1 - clamped / 100);
@@ -90,8 +100,12 @@ const OUTCOME_CARDS: OutcomeCard[] = [
 const Results: React.FC = () => {
   const navigate = useNavigate();
   const [state, setState] = useState(() => getQuizState());
-  const variant = state.quizVariant === "desire" ? "desire" : "symptoms";
+  const variant: "symptoms" | "desire" | "partner" =
+    state.quizVariant === "desire" ? "desire"
+    : state.quizVariant === "partner" ? "partner"
+    : "symptoms";
   const isDesire = variant === "desire";
+  const isPartner = variant === "partner";
 
   useEffect(() => {
     if (!state.answers || !state.answers.length) {
@@ -106,7 +120,7 @@ const Results: React.FC = () => {
     navigate("/quiz-email");
   };
 
-  const bandName = state.band?.name || "Perimenopause Pattern";
+  const bandName = state.band?.name || (isPartner ? "Situation Profile" : "Perimenopause Pattern");
   const pct = state.pct ?? 0;
   const domLabel = state.dom?.label;
   const domKey = state.dom?.key;
@@ -123,7 +137,9 @@ const Results: React.FC = () => {
     const rest = OUTCOME_CARDS.filter((c) => c.clusterKey !== domKey);
     return [...first, ...rest];
   }, [domKey, isDesire]);
-  const heaviestLabel = domLabel || (isDesire ? "your heaviest suppressor" : "your heaviest system");
+  const heaviestLabel = domLabel || (isDesire ? "your heaviest suppressor" : isPartner ? "your heaviest factor" : "your heaviest system");
+  const herAgeIdx = typeof state.cycleStatus === "number" ? state.cycleStatus : null;
+  const herAgeLabel = herAgeIdx != null ? PARTNER_HER_AGE_LABELS[herAgeIdx] : "her age bracket";
 
   return (
     <div
@@ -144,13 +160,24 @@ const Results: React.FC = () => {
             marginBottom: 20,
           }}
         >
-          {isDesire ? "Your Desire Profile" : "Your Perimenopause Assessment"}
+          {isPartner ? "Your Situation Profile" : isDesire ? "Your Desire Profile" : "Your Perimenopause Assessment"}
         </h1>
 
         {isDesire && (
           <p style={{ textAlign: "center", fontSize: 16, lineHeight: 1.55, color: "#5c4553", margin: "-10px auto 18px", maxWidth: 560 }}>
             Your desire didn't disappear — it's being suppressed. The heaviest suppressor in your profile: <b>{domLabel || "your heaviest suppressor"}</b>.
           </p>
+        )}
+
+        {isPartner && (
+          <div style={{ maxWidth: 560, margin: "-10px auto 18px" }}>
+            <p style={{ textAlign: "center", fontSize: 16, lineHeight: 1.55, color: "#5c4553", margin: "0 0 6px" }}>
+              <b>Most likely explanation:</b> her pattern — {herAgeLabel}, the exhaustion, the broken sleep, the mood shifts you described — matches the single most common and least-diagnosed cause of vanished affection after 40: perimenopause.
+            </p>
+            <p style={{ textAlign: "center", fontSize: 16, lineHeight: 1.55, color: "#5c4553", margin: 0 }}>
+              <b>Your heaviest factor:</b> {domLabel || "your heaviest factor"}.
+            </p>
+          </div>
         )}
 
         {/* Gauge teaser — needle + band chip only */}
@@ -173,7 +200,7 @@ const Results: React.FC = () => {
             {bandName}
           </div>
 
-          {domLabel && !isDesire && (
+          {domLabel && !isDesire && !isPartner && (
             <p style={{ marginTop: 16, fontSize: 16, lineHeight: 1.5, color: "#5c4553", padding: "0 4px" }}>
               <b>Your heaviest system:</b> {domLabel}.
             </p>
@@ -196,8 +223,10 @@ const Results: React.FC = () => {
           </div>
         </div>
 
-        {/* WHAT CHANGES — outcome cards, dominant cluster first & emphasized */}
-        {isDesire ? (
+        {/* WHAT CHANGES — variant-specific sequence */}
+        {isPartner ? (
+          <PartnerSalesSequence domLabel={domLabel || "your heaviest factor"} onUnlock={handleUnlock} />
+        ) : isDesire ? (
           <DesireSalesSequence domLabel={domLabel || "your heaviest suppressor"} onUnlock={handleUnlock} />
         ) : (
         <div style={{ marginTop: 30 }}>
@@ -315,8 +344,11 @@ const Results: React.FC = () => {
         )}
 
         <p style={{ marginTop: 22, fontSize: 17, lineHeight: 1.55, textAlign: "center", color: "#5c4553" }}>
-          Based on your responses, we've developed your personalized{" "}
-          <b>28-Day Reclamation Plan</b>.
+          {isPartner ? (
+            <>Based on your responses, we've built your personalized <b>Partner Plan</b>.</>
+          ) : (
+            <>Based on your responses, we've developed your personalized <b>28-Day Reclamation Plan</b>.</>
+          )}
         </p>
 
         {/* Benefits */}
@@ -340,7 +372,7 @@ const Results: React.FC = () => {
             What you will get with your customized plan
           </div>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {BENEFITS.map((b) => (
+            {(isPartner ? PARTNER_BENEFITS : BENEFITS).map((b) => (
               <li
                 key={b}
                 style={{
