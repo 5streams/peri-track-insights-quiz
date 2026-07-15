@@ -240,6 +240,24 @@ const Results: React.FC = () => {
                   <p style={{ fontSize: 15.5, lineHeight: 1.6, color: "#5c4553", margin: 0 }}>
                     {card.p}
                   </p>
+                  <button
+                    onClick={handleUnlock}
+                    style={{
+                      marginTop: 16,
+                      width: "100%",
+                      padding: "14px 18px",
+                      border: "none",
+                      borderRadius: 99,
+                      background: "linear-gradient(135deg,#A4688F 0%,#C29455 100%)",
+                      color: "#fff",
+                      fontSize: 15,
+                      fontWeight: 800,
+                      cursor: "pointer",
+                      boxShadow: "0 6px 18px rgba(70,41,63,.16)",
+                    }}
+                  >
+                    Unlock Full Results And Get Your Recovery Plan
+                  </button>
                 </div>
               );
             })}
