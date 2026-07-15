@@ -253,8 +253,18 @@ const Admin4: React.FC = () => {
                     {l.name && <div className="text-xs text-slate-500">{l.name}</div>}
                   </td>
                   <td className="px-3 py-2 text-slate-600">
-                    <div>{l.traffic_source || "—"}</div>
-                    <div className="text-xs text-slate-400">{l.utm_campaign || ""}{l.utm_medium ? ` · ${l.utm_medium}` : ""}</div>
+                    {(() => {
+                      const s = sourceLabel(l);
+                      return (
+                        <span
+                          className="inline-block px-2 py-0.5 rounded text-white text-xs font-semibold"
+                          style={{ background: s.color }}
+                        >
+                          {s.label}
+                        </span>
+                      );
+                    })()}
+                    <div className="text-xs text-slate-400 mt-1">{l.utm_campaign || ""}{l.utm_medium ? ` · ${l.utm_medium}` : ""}</div>
                   </td>
                   <td className="px-3 py-2">
                     <div className={`text-sm font-medium ${completed ? "text-emerald-700" : answered ? "text-amber-700" : "text-slate-400"}`}>
