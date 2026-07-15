@@ -1299,5 +1299,45 @@ render();
 })();
 </script>
 
+<script>
+/* Lander variant swap: reads ?v=test|quiz|symptoms and rewrites H1, subhead, title, meta description. */
+(function(){
+  try{
+    var params = new URLSearchParams(window.location.search);
+    var v = params.get('v');
+    var variants = {
+      test: {
+        h1: "The Perimenopause Test — Find Out in 3 Minutes",
+        sub: "Answer 22 questions about your symptoms and get your personalized assessment: how far along you are, and which system is driving how you feel.",
+        title: "Perimenopause Test — Free 3-Minute Symptom Assessment | PeriTrack",
+        desc: "Take the 3-minute perimenopause test. 22 questions, instant results: your symptom score, severity band, and what's driving how you feel."
+      },
+      quiz: {
+        h1: "Perimenopause Quiz: What's Really Happening to Your Body?",
+        sub: "A 3-minute quiz that scores your symptoms across five systems — sleep, mood, cycle, body, and intimacy — and shows you your pattern.",
+        title: "Perimenopause Quiz — Score Your Symptoms in 3 Minutes | PeriTrack",
+        desc: "22-question perimenopause quiz. Get your symptom score and severity band instantly, plus what to do next."
+      },
+      symptoms: {
+        h1: "Are These Perimenopause Symptoms? Check Yours in 3 Minutes",
+        sub: "3 a.m. wake-ups, mood swings, brain fog, weight changes — find out if your symptoms fit the pattern, and how strongly.",
+        title: "Perimenopause Symptoms Checker — 3-Minute Assessment | PeriTrack",
+        desc: "Check your symptoms against the perimenopause pattern. 22 questions, scored results across sleep, mood, cycle, body, and intimacy."
+      }
+    };
+    if(!v || !variants[v]) return;
+    var cfg = variants[v];
+    var h1 = document.querySelector('.hero-in h1');
+    if(h1) h1.textContent = cfg.h1;
+    var sub = document.querySelector('.hero-in .sub');
+    if(sub) sub.textContent = cfg.sub;
+    document.title = cfg.title;
+    var meta = document.querySelector('meta[name="description"]');
+    if(meta) meta.setAttribute('content', cfg.desc);
+    try { if(window.top && window.top !== window){ window.top.document.title = cfg.title; } } catch(e){}
+  }catch(e){}
+})();
+</script>
+
 </body>
 </html>
