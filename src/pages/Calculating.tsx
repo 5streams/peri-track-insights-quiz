@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getQuizState, setQuizState, trackEvent } from "@/lib/quizState";
+import { DESIRE_CHECKPOINTS, DESIRE_EDUCATION_CARDS } from "@/data/desireQuiz";
 
 const BARS = [
   "Analyzing your sleep pattern",
@@ -10,7 +11,7 @@ const BARS = [
   "Sequencing your personalized plan",
 ];
 
-const CHECKPOINTS: { key: keyof NonNullable<ReturnType<typeof getQuizState>["checkpoints"]>; q: string }[] = [
+const SYMPTOMS_CHECKPOINTS: { key: keyof NonNullable<ReturnType<typeof getQuizState>["checkpoints"]>; q: string }[] = [
   { key: "dismissed", q: "Has a doctor ever brushed off your symptoms as \u201Cjust stress\u201D or \u201Cjust aging\u201D?" },
 ];
 
@@ -31,6 +32,10 @@ const Calculating: React.FC = () => {
   const [quoteFade, setQuoteFade] = useState(1);
   const cpDone = useRef(0);
   const timerRef = useRef<number | null>(null);
+  const [variant, setVariant] = useState<"symptoms" | "desire">("symptoms");
+
+  const CHECKPOINTS = variant === "desire" ? DESIRE_CHECKPOINTS : SYMPTOMS_CHECKPOINTS;
+  const isDesire = variant === "desire";
 
   useEffect(() => {
     // Redirect back to quiz if no answers present.
@@ -39,6 +44,7 @@ const Calculating: React.FC = () => {
       navigate("/quiz", { replace: true });
       return;
     }
+    if (s.quizVariant === "desire") setVariant("desire");
     trackEvent("calculating_view");
   }, [navigate]);
 
@@ -51,8 +57,12 @@ const Calculating: React.FC = () => {
     }
     timerRef.current = window.setTimeout(() => {
       const nextBarIdx = barIdx + 1;
-      // After bar 2 fire the single checkpoint.
-      if (nextBarIdx === 2 && cpDone.current < CHECKPOINTS.length) {
+      // Fire checkpoints spaced through the bars.
+      // Symptoms: after bar 2 (1 checkpoint). Desire: after bar 1, 2, 3 (3 checkpoints).
+      const cpTrigger = isDesire
+        ? (nextBarIdx === 1 || nextBarIdx === 2 || nextBarIdx === 3)
+        : nextBarIdx === 2;
+      if (cpTrigger && cpDone.current < CHECKPOINTS.length) {
         setBarIdx(nextBarIdx);
         window.setTimeout(() => setModalIdx(cpDone.current), 400);
       } else {
@@ -62,7 +72,7 @@ const Calculating: React.FC = () => {
     return () => {
       if (timerRef.current) window.clearTimeout(timerRef.current);
     };
-  }, [barIdx, modalIdx, navigate]);
+  }, [barIdx, modalIdx, navigate, isDesire, CHECKPOINTS.length]);
 
   // Rotating testimonial.
   useEffect(() => {
@@ -88,6 +98,8 @@ const Calculating: React.FC = () => {
   };
 
   const quote = QUOTES[quoteIdx];
+  const eduIdx = quoteIdx % DESIRE_EDUCATION_CARDS.length;
+  const eduCard = DESIRE_EDUCATION_CARDS[eduIdx];
 
   return (
     <div style={pageStyle}>
@@ -123,34 +135,56 @@ const Calculating: React.FC = () => {
           })}
         </div>
 
-        <div
-          style={{
-            marginTop: 32,
-            background: "#F9F0F4",
-            borderRadius: 18,
-            padding: 22,
-            textAlign: "center",
-            opacity: quoteFade,
-            transition: "opacity .35s ease",
-            minHeight: 130,
-          }}
-        >
-          <div style={{ color: "#C29455", letterSpacing: 2, fontSize: 14 }}>★★★★★</div>
-          <p style={{ fontSize: 15.5, lineHeight: 1.55, color: "#5c4553", margin: "10px 0 8px" }}>
-            "{quote.q}"
-          </p>
-          <div style={{ fontSize: 13, fontWeight: 700, color: "#46293F" }}>— {quote.n}</div>
-        </div>
+        {isDesire ? (
+          <div
+            style={{
+              marginTop: 32,
+              background: "#F9F0F4",
+              borderRadius: 18,
+              padding: 22,
+              textAlign: "center",
+              opacity: quoteFade,
+              transition: "opacity .35s ease",
+              minHeight: 130,
+            }}
+          >
+            <div style={{ fontFamily: "'Iowan Old Style',Palatino,Georgia,serif", fontSize: 34, color: "#46293F", fontWeight: 600 }}>
+              {eduCard.stat}
+            </div>
+            <p style={{ fontSize: 15, lineHeight: 1.55, color: "#5c4553", margin: "10px 0 0" }}>
+              {eduCard.label}
+            </p>
+          </div>
+        ) : (
+          <div
+            style={{
+              marginTop: 32,
+              background: "#F9F0F4",
+              borderRadius: 18,
+              padding: 22,
+              textAlign: "center",
+              opacity: quoteFade,
+              transition: "opacity .35s ease",
+              minHeight: 130,
+            }}
+          >
+            <div style={{ color: "#C29455", letterSpacing: 2, fontSize: 14 }}>★★★★★</div>
+            <p style={{ fontSize: 15.5, lineHeight: 1.55, color: "#5c4553", margin: "10px 0 8px" }}>
+              "{quote.q}"
+            </p>
+            <div style={{ fontSize: 13, fontWeight: 700, color: "#46293F" }}>— {quote.n}</div>
+          </div>
+        )}
 
         <div style={{ display: "flex", justifyContent: "center", gap: 6, marginTop: 12 }}>
-          {QUOTES.map((_, i) => (
+          {(isDesire ? DESIRE_EDUCATION_CARDS : QUOTES).map((_, i) => (
             <span
               key={i}
               style={{
-                width: i === quoteIdx ? 16 : 6,
+                width: i === (isDesire ? eduIdx : quoteIdx) ? 16 : 6,
                 height: 6,
                 borderRadius: 3,
-                background: i === quoteIdx ? "#46293F" : "#E8D7DF",
+                background: i === (isDesire ? eduIdx : quoteIdx) ? "#46293F" : "#E8D7DF",
                 transition: "all .2s",
               }}
             />
