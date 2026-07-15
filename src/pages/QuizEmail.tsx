@@ -64,11 +64,14 @@ const QuizEmail: React.FC = () => {
             lineHeight: 1.2,
             color: "#46293F",
             textAlign: "center",
-            marginBottom: 22,
+            marginBottom: 12,
           }}
         >
-          Enter your email to receive the results
+          Where should we send your full Perimenopause Profile?
         </h1>
+        <p style={{ fontSize: 15.5, lineHeight: 1.55, color: "#5c4553", textAlign: "center", margin: "0 0 22px" }}>
+          Your complete breakdown — all five systems, your stage, and your #1 driver — plus your personalized next steps.
+        </p>
 
         <form onSubmit={submit}>
           <input

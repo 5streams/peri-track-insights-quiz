@@ -1,9 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
 import TrustFooter from "@/components/TrustFooter";
-import { getQuizState, setQuizState, trackEvent } from "@/lib/quizState";
+import { getQuizState, trackEvent } from "@/lib/quizState";
 
 const BENEFITS = [
   "Your full symptom-by-symptom profile — all five systems scored and explained",
@@ -51,66 +49,24 @@ function GaugeSVG({ pct }: { pct: number }) {
 
 const Results: React.FC = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
   const [state, setState] = useState(() => getQuizState());
-  const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     if (!state.answers || !state.answers.length) {
       navigate("/quiz", { replace: true });
       return;
     }
-    if (!state.email) {
-      navigate("/quiz-email", { replace: true });
-      return;
-    }
-    if (!state.trialPriceCents) {
-      navigate("/trial-price", { replace: true });
-      return;
-    }
-    trackEvent("results_view");
+    trackEvent("teaser_results_view");
   }, [state, navigate]);
 
-  const priceLabel = useMemo(() => {
-    const c = state.trialPriceCents || 100;
-    return c % 100 === 0 ? `$${c / 100}` : `$${(c / 100).toFixed(2)}`;
-  }, [state.trialPriceCents]);
-
-  const trialEndDate = useMemo(() => {
-    const d = new Date();
-    d.setDate(d.getDate() + 7);
-    return d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
-  }, []);
-
-  const startCheckout = async () => {
-    setBusy(true);
-    await trackEvent("checkout_started");
-    try {
-      const { data, error } = await supabase.functions.invoke("create-trial-checkout", {
-        body: {
-          email: state.email,
-          name: state.name || null,
-          trial_price_cents: state.trialPriceCents,
-          trial_days: 7,
-          lead_id: state.leadId || null,
-        },
-      });
-      if (error || !data?.url) throw error || new Error("no checkout url");
-      if (data.lead_id) setQuizState({ leadId: data.lead_id });
-      window.location.href = data.url as string;
-    } catch (e) {
-      console.error("trial checkout failed", e);
-      toast({
-        title: "Something went wrong",
-        description: "We couldn't open secure checkout. Please try again.",
-        variant: "destructive",
-      });
-      setBusy(false);
-    }
+  const handleUnlock = async () => {
+    await trackEvent("unlock_clicked");
+    navigate("/quiz-email");
   };
 
   const bandName = state.band?.name || "Perimenopause Pattern";
   const pct = state.pct ?? 0;
+  const domLabel = state.dom?.label;
 
   return (
     <div
@@ -154,10 +110,16 @@ const Results: React.FC = () => {
             {bandName}
           </div>
 
+          {domLabel && (
+            <p style={{ marginTop: 16, fontSize: 16, lineHeight: 1.5, color: "#5c4553", padding: "0 4px" }}>
+              <b>Your heaviest system:</b> {domLabel}.
+            </p>
+          )}
+
           {/* Blurred locked preview so the user sees there's more behind the paywall */}
           <div style={{ position: "relative", marginTop: 22, borderRadius: 14, overflow: "hidden", border: "1.5px dashed #A4688F" }}>
             <div style={{ padding: 18, filter: "blur(5px)", userSelect: "none", pointerEvents: "none", textAlign: "left" }}>
-              <div style={{ fontFamily: "'Iowan Old Style',Palatino,Georgia,serif", fontSize: 16, marginBottom: 8 }}>Your #1 driver</div>
+              <div style={{ fontFamily: "'Iowan Old Style',Palatino,Georgia,serif", fontSize: 16, marginBottom: 8 }}>Your phase estimate + #1 driver</div>
               <div style={{ height: 9, background: "#F3E3E9", borderRadius: 99, marginBottom: 10 }} />
               <div style={{ height: 9, background: "#F3E3E9", borderRadius: 99, marginBottom: 10 }} />
               <div style={{ height: 9, background: "#F3E3E9", borderRadius: 99, marginBottom: 10 }} />
@@ -234,47 +196,8 @@ const Results: React.FC = () => {
           </ul>
         </div>
 
-        {/* Trial timeline */}
-        <div
-          style={{
-            marginTop: 24,
-            background: "#fff",
-            borderRadius: 20,
-            padding: 22,
-            boxShadow: "0 10px 30px rgba(70,41,63,.08)",
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
-              fontSize: 22,
-              marginBottom: 16,
-            }}
-          >
-            How your trial works
-          </div>
-          <TimelineRow
-            icon="✓"
-            label={<span style={{ textDecoration: "line-through", color: "#8a7085" }}>Take the assessment</span>}
-            done
-          />
-          <TimelineRow
-            icon="🔓"
-            label={<span><b>Today:</b> full access for the {priceLabel} you chose</span>}
-          />
-          <TimelineRow
-            icon="📅"
-            label={
-              <span>
-                <b>Day 7 ({trialEndDate}):</b> $29.99/month ($0.99/day) unless you cancel. Reminder email 2 days before.
-              </span>
-            }
-          />
-        </div>
-
         <button
-          onClick={startCheckout}
-          disabled={busy}
+          onClick={handleUnlock}
           style={{
             width: "100%",
             marginTop: 28,
@@ -285,15 +208,15 @@ const Results: React.FC = () => {
             color: "#2C3E50",
             fontSize: 20,
             fontWeight: 800,
-            cursor: busy ? "wait" : "pointer",
+            cursor: "pointer",
             boxShadow: "0 10px 30px rgba(70,41,63,.18)",
           }}
         >
-          {busy ? "Opening secure checkout…" : "Get my plan"}
+          Unlock my full results
         </button>
 
         <p style={{ fontSize: 12.5, color: "#8a7085", textAlign: "center", marginTop: 12, lineHeight: 1.5 }}>
-          Informational only — not medical advice or diagnosis. Secure checkout by Stripe · Cancel anytime in one tap.
+          Informational only — not medical advice or diagnosis.
         </p>
 
         <div style={{ marginTop: 40 }}>
@@ -303,28 +226,5 @@ const Results: React.FC = () => {
     </div>
   );
 };
-
-const TimelineRow: React.FC<{ icon: string; label: React.ReactNode; done?: boolean }> = ({ icon, label, done }) => (
-  <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 12 }}>
-    <div
-      style={{
-        width: 32,
-        height: 32,
-        flexShrink: 0,
-        borderRadius: 99,
-        background: done ? "#7E9B84" : "#F9F0F4",
-        color: done ? "#fff" : "#46293F",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: 15,
-        fontWeight: 700,
-      }}
-    >
-      {icon}
-    </div>
-    <div style={{ fontSize: 15, lineHeight: 1.55, color: "#5c4553", paddingTop: 5 }}>{label}</div>
-  </div>
-);
 
 export default Results;
