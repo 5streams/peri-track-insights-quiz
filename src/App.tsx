@@ -55,19 +55,33 @@ function TrafficTracker() {
     try {
       if (sessionStorage.getItem("mm_landing_tracked") === "1") return;
       const params = new URLSearchParams(location.search);
+      const fbclid = params.get("fbclid");
+      const gclid = params.get("gclid");
+      const ref = document.referrer || "";
+      let inferredSource = params.get("utm_source");
+      if (!inferredSource) {
+        if (fbclid) inferredSource = "facebook";
+        else if (gclid) inferredSource = "google";
+        else if (/facebook\.|fb\.|instagram\./i.test(ref)) inferredSource = "facebook";
+        else if (/google\./i.test(ref)) inferredSource = "google";
+        else if (/tiktok\./i.test(ref)) inferredSource = "tiktok";
+        else if (/bing\./i.test(ref)) inferredSource = "bing";
+      }
+      let inferredMedium = params.get("utm_medium");
+      if (!inferredMedium && (fbclid || gclid)) inferredMedium = "paid";
       fetch(`${SUPABASE_URL}/functions/v1/track-event`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           session_id: getSessionId(),
           event: "landing",
-          traffic_source: params.get("utm_source") || null,
-          utm_medium: params.get("utm_medium") || null,
+          traffic_source: inferredSource || null,
+          utm_medium: inferredMedium || null,
           utm_campaign: params.get("utm_campaign") || null,
-          utm_content: params.get("utm_content") || null,
+          utm_content: params.get("utm_content") || (fbclid ? `fbclid:${fbclid}` : null),
           utm_term: params.get("utm_term") || null,
-          gclid: params.get("gclid") || null,
-          referrer: document.referrer || null,
+          gclid: gclid || null,
+          referrer: ref || null,
           landing_page: path + location.search,
         }),
       }).catch(() => {});
