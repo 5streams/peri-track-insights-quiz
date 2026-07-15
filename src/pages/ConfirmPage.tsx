@@ -14,6 +14,7 @@ export default function ConfirmPage() {
 
   // Full reveal — pulled from the same quizState the funnel wrote before checkout.
   const quiz = getQuizState();
+  const isDesire = quiz.quizVariant === "desire";
 
   async function openPortal() {
     if (!lead) return;
@@ -56,6 +57,28 @@ export default function ConfirmPage() {
       <p style={{ fontSize: 18 }}>
         Your full-access trial is active. {gotKit && <b>The Doctor Visit Kit is on its way to your inbox.</b>}
       </p>
+
+      {isDesire && (
+        <div style={{
+          background: "#fff",
+          border: "1.5px solid #F3E3E9",
+          borderRadius: 16,
+          padding: 20,
+          margin: "18px 0 4px",
+          boxShadow: "0 8px 22px rgba(70,41,63,.08)",
+        }}>
+          <div style={{ fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "#A4688F", fontWeight: 700, marginBottom: 6 }}>
+            Tonight — first action
+          </div>
+          <div style={{ fontFamily: "Iowan Old Style, Palatino, Georgia, serif", fontSize: 20, lineHeight: 1.3, marginBottom: 6 }}>
+            Read "The Chemistry of Wanting"
+          </div>
+          <p style={{ fontSize: 15, lineHeight: 1.55, color: "#5c4553", margin: 0 }}>
+            Lesson 1 of your plan. 10 minutes. It explains what's actually happening to desire in perimenopause — and why what you've been feeling is chemistry, not character.
+          </p>
+        </div>
+      )}
+
       <div style={{
         background: "#F9F1F4",
         borderRadius: 14,
