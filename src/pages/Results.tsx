@@ -191,6 +191,9 @@ const Results: React.FC = () => {
         </div>
 
         {/* WHAT CHANGES — outcome cards, dominant cluster first & emphasized */}
+        {isDesire ? (
+          <DesireSalesSequence domLabel={domLabel || "your heaviest suppressor"} onUnlock={handleUnlock} />
+        ) : (
         <div style={{ marginTop: 30 }}>
           <h2
             style={{
@@ -303,6 +306,7 @@ const Results: React.FC = () => {
             </p>
           </div>
         </div>
+        )}
 
         <p style={{ marginTop: 22, fontSize: 17, lineHeight: 1.55, textAlign: "center", color: "#5c4553" }}>
           Based on your responses, we've developed your personalized{" "}
