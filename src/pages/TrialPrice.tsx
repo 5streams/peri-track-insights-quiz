@@ -5,6 +5,8 @@ import { getQuizState, setQuizState, trackEvent } from "@/lib/quizState";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import MiniLegalFooter from "@/components/MiniLegalFooter";
+import { PARTNER_QUESTIONS, PARTNER_OPTS } from "@/data/partnerQuiz";
+import { DESIRE_QUESTIONS } from "@/data/desireQuiz";
 
 const TrialPrice: React.FC = () => {
   const navigate = useNavigate();
@@ -13,7 +15,8 @@ const TrialPrice: React.FC = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState<string | undefined>(undefined);
   const [domLabel, setDomLabel] = useState<string>("your heaviest system");
-  const [variant, setVariant] = useState<"symptoms" | "desire">("symptoms");
+  const [variant, setVariant] = useState<"symptoms" | "desire" | "partner">("symptoms");
+  const [echo, setEcho] = useState<{ text: string; rating: string } | null>(null);
 
   useEffect(() => {
     const s = getQuizState();
@@ -27,8 +30,30 @@ const TrialPrice: React.FC = () => {
     }
     setEmail(s.email);
     setName(s.name);
-    setDomLabel(s.dom?.label || "your heaviest system");
-    if (s.quizVariant === "desire") setVariant("desire");
+    const v = (s.quizVariant as "symptoms" | "desire" | "partner") || "symptoms";
+    setVariant(v);
+    const fallback = v === "partner" ? "your heaviest factor" : "your heaviest system";
+    setDomLabel(s.dom?.label || fallback);
+
+    // Build echo from user's highest-rated answer for this variant
+    try {
+      const answers = s.answers || [];
+      let maxIdx = -1;
+      let maxVal = -1;
+      answers.forEach((a, i) => {
+        if (typeof a === "number" && a > maxVal) { maxVal = a; maxIdx = i; }
+      });
+      if (maxIdx >= 0 && maxVal >= 2) {
+        let text = "";
+        if (v === "partner" && PARTNER_QUESTIONS[maxIdx]) {
+          text = PARTNER_QUESTIONS[maxIdx].t;
+        } else if (v === "desire" && DESIRE_QUESTIONS[maxIdx]) {
+          text = DESIRE_QUESTIONS[maxIdx].t;
+        }
+        const rating = maxVal >= 3 ? "Often" : "Sometimes";
+        if (text) setEcho({ text, rating });
+      }
+    } catch {}
     setReady(true);
   }, [navigate]);
 
@@ -71,6 +96,28 @@ const TrialPrice: React.FC = () => {
       }}
     >
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
+        {echo && (
+          <div
+            style={{
+              background: "#fff",
+              borderRadius: 14,
+              padding: "14px 16px",
+              marginBottom: 14,
+              boxShadow: "0 6px 20px rgba(70,41,63,.06)",
+              color: "#46293F",
+              fontSize: 15,
+              lineHeight: 1.5,
+              borderLeft: "4px solid #A4688F",
+            }}
+          >
+            <span style={{ opacity: 0.75, fontSize: 13, letterSpacing: ".08em", textTransform: "uppercase", fontWeight: 700 }}>
+              You told us
+            </span>
+            <div style={{ marginTop: 4 }}>
+              &ldquo;{echo.text}&rdquo; — <b>{echo.rating}</b>.
+            </div>
+          </div>
+        )}
         <div
           style={{
             background: "#fff",
@@ -92,7 +139,15 @@ const TrialPrice: React.FC = () => {
             Everything you unlock today:
           </div>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {(variant === "desire"
+            {(variant === "partner"
+              ? [
+                  <>What's actually happening to her — the biology of perimenopause, in plain language</>,
+                  <>Your 28-Day Reclamation Plan, starting with <b>{domLabel}</b> — your heaviest factor</>,
+                  <>The response pattern you're stuck in — and the exact shift that reverses it</>,
+                  <>The conversation script — how to name this without pressure, blame, or hinting</>,
+                  <>The gift program for her — so she gets her own tools alongside yours</>,
+                ]
+              : variant === "desire"
               ? [
                   <>Why the wanting disappeared — your #1 suppressor, named and explained</>,
                   <>The full desire curriculum: the two desire types, the responsive-desire switch, the retraining practices</>,
@@ -153,10 +208,27 @@ const TrialPrice: React.FC = () => {
           >
             {variant === "desire"
               ? "7 days. Full access. If it doesn't move anything, cancel in one tap."
+              : variant === "partner"
+              ? "7 days. Full access. If it doesn't shift anything, cancel in one tap."
               : "7 days. Full access. If it doesn't help, cancel in one tap."}
           </p>
         </div>
         <PriceChoice email={email} firstName={name} mode="select" onContinue={handleContinue} />
+        <div
+          style={{
+            background: "#FFF9EE",
+            border: "1px solid #EBD9BC",
+            borderRadius: 14,
+            padding: "14px 16px",
+            marginTop: 14,
+            marginBottom: 14,
+            color: "#46293F",
+            fontSize: 15,
+            lineHeight: 1.55,
+          }}
+        >
+          <b>✦ The Feel-It Guarantee:</b> if you don't feel a difference in your #1 {variant === "partner" ? "friction point" : "symptom"} in 28 days, email us and we refund your month. No forms, no hoops.
+        </div>
         <MiniLegalFooter />
       </div>
     </div>
