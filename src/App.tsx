@@ -105,6 +105,7 @@ function App() {
       <AdminNoIndex />
       <Routes>
         <Route path="/" element={<Index />} />
+        <Route path="/becomeheragain" element={<Index />} />
         <Route path="/perimenopause-test" element={<PerimenopauseTest />} />
         <Route path="/perimenopause-quiz" element={<PerimenopauseQuiz />} />
         <Route path="/perimenopause-symptoms" element={<PerimenopauseSymptoms />} />
