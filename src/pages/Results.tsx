@@ -406,6 +406,99 @@ const Results: React.FC = () => {
 
 export default Results;
 
+const MORE_STORIES: { initials: string; name: string; quote: string }[] = [
+  {
+    initials: "A",
+    name: "Allison & Mike K.",
+    quote:
+      "We were polite and kind to each other but the spark was completely gone. I missed wanting him but I didn't know how to get it back without forcing it. The program helped me understand what was actually going on. My drive came back stronger than before and now I'm constantly reaching for him. It feels exciting in a way it hasn't in a long time.",
+  },
+  {
+    initials: "M",
+    name: "Marisol & Carlos V.",
+    quote:
+      "The guilt was honestly the hardest part. I felt like I was letting him down even though I still loved him. Once I understood it wasn't just me being broken, everything started shifting. The desire came back and it's been stronger than I thought it would be. I'm initiating more and our connection feels really good again.",
+  },
+  {
+    initials: "P",
+    name: "Priya & Raj M.",
+    quote:
+      "I really thought my sex drive was just gone for good. I loved my husband but I never thought about being close to him anymore. After going through everything the wanting returned — and it came back stronger than it was even in my thirties. I'm flirting with him again and reaching for him all the time. He keeps laughing and saying he's not mad about it.",
+  },
+  {
+    initials: "J",
+    name: "Jenna & Tom S.",
+    quote:
+      "I used to plan my nights so I could avoid any chance of intimacy because I just didn't feel it. The guilt was awful. Once I started the program things slowly changed. Now I'm the one who reaches for him and it actually feels good again. We're laughing more and being close feels natural instead of like something I have to get through.",
+  },
+];
+
+const MoreStories: React.FC = () => {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <div style={{ marginTop: 26 }}>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        style={{
+          width: "100%",
+          padding: "14px 18px",
+          border: "1.5px solid #A4688F",
+          borderRadius: 99,
+          background: "transparent",
+          color: "#46293F",
+          fontSize: 15,
+          fontWeight: 700,
+          cursor: "pointer",
+          letterSpacing: ".02em",
+        }}
+      >
+        {open ? "Hide stories ↑" : "Read more stories ↓"}
+      </button>
+      {open && (
+        <div style={{ display: "grid", gap: 14, marginTop: 16 }}>
+          {MORE_STORIES.map((t) => (
+            <div
+              key={t.name}
+              style={{
+                background: "#fff",
+                borderRadius: 16,
+                padding: 22,
+                boxShadow: "0 10px 30px rgba(70,41,63,.08)",
+                border: "1px solid #EFDFE7",
+              }}
+            >
+              <div style={{ color: "#C29455", letterSpacing: 3, fontSize: 15, marginBottom: 10 }}>★★★★★</div>
+              <p style={{ fontSize: 16, lineHeight: 1.65, color: "#46293F", margin: "0 0 14px", fontStyle: "italic" }}>
+                "{t.quote}"
+              </p>
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div
+                  style={{
+                    width: 42,
+                    height: 42,
+                    borderRadius: "50%",
+                    background: "linear-gradient(140deg,#46293F 0%,#A4688F 100%)",
+                    color: "#F5EAD9",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
+                    fontSize: 18,
+                    fontWeight: 600,
+                  }}
+                >
+                  {t.initials}
+                </div>
+                <div style={{ fontWeight: 700, color: "#46293F", fontSize: 14 }}>— {t.name}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const FASCINATIONS: string[] = [
   'The two kinds of desire — and why "waiting to be in the mood" quietly fails after 40 (this one reframe changes everything about how intimacy starts)',
   "The responsive-desire switch: how wanting can arrive AFTER you begin — without pressure, without forcing anything",
