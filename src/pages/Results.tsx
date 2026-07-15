@@ -47,6 +47,40 @@ function GaugeSVG({ pct }: { pct: number }) {
   );
 }
 
+type OutcomeCard = { clusterKey: string; h: string; p: string };
+const OUTCOME_CARDS: OutcomeCard[] = [
+  {
+    clusterKey: "sleep",
+    h: "Sleep through the night again.",
+    p: "The 2–4 a.m. wake-up isn't stress — and it isn't permanent. Week 1 is built around the sleep reset: the evening sequence, the blood-sugar fix, and the 3 A.M. Protocol for the nights your mind won't stop. Most members start here because when sleep comes back, everything else gets lighter.",
+  },
+  {
+    clusterKey: "mood",
+    h: "Feel like yourself again — not the version that snaps.",
+    p: "The rage over small things. The guilt afterward. The low hum of dread with no reason. That's chemistry, not character — and it responds to the right plan. You'll learn exactly what's driving it, and get the daily 10-minute tools that bring your baseline back.",
+  },
+  {
+    clusterKey: "self",
+    h: "Want to want it again.",
+    p: "If your desire quietly disappeared — or sex became uncomfortable in ways it never was — you are not broken, and it is not gone forever. Your plan explains the hormone story behind desire and comfort, what options exist (including the ones doctors rarely mention), and how to bring that part of yourself — and your relationship — back.",
+  },
+  {
+    clusterKey: "body",
+    h: "Understand why the weight moved to your middle — and what actually works now.",
+    p: "The workouts and diets that always worked stopped working because your body changed the rules. The plan rebuilds your approach for a midlife metabolism: protein targets, blood-sugar stability, and strength work designed for your hormones — not a 25-year-old's.",
+  },
+  {
+    clusterKey: "body",
+    h: "Fewer flashes. Calmer nights.",
+    p: "Map your triggers, use the in-the-moment tools, and learn the evidence-backed options for turning the heat down — plus exactly what to ask your doctor if you want more help.",
+  },
+  {
+    clusterKey: "cycle",
+    h: "Finally understand your pattern.",
+    p: "Good weeks, then weeks where everything falls apart? That wave has a hormonal signature. See your own pattern mapped, know what's coming, and plan your life around your body instead of being ambushed by it.",
+  },
+];
+
 const Results: React.FC = () => {
   const navigate = useNavigate();
   const [state, setState] = useState(() => getQuizState());
@@ -67,6 +101,14 @@ const Results: React.FC = () => {
   const bandName = state.band?.name || "Perimenopause Pattern";
   const pct = state.pct ?? 0;
   const domLabel = state.dom?.label;
+  const domKey = state.dom?.key;
+  const orderedCards = React.useMemo(() => {
+    if (!domKey) return OUTCOME_CARDS;
+    const first = OUTCOME_CARDS.filter((c) => c.clusterKey === domKey);
+    const rest = OUTCOME_CARDS.filter((c) => c.clusterKey !== domKey);
+    return [...first, ...rest];
+  }, [domKey]);
+  const heaviestLabel = domLabel || "your heaviest system";
 
   return (
     <div
@@ -130,6 +172,102 @@ const Results: React.FC = () => {
                 Unlock full profile + plan
               </span>
             </div>
+          </div>
+        </div>
+
+        {/* WHAT CHANGES — outcome cards, dominant cluster first & emphasized */}
+        <div style={{ marginTop: 30 }}>
+          <h2
+            style={{
+              fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
+              fontSize: 26,
+              lineHeight: 1.25,
+              textAlign: "center",
+              margin: "0 0 8px",
+            }}
+          >
+            Here's what women use this plan to get back:
+          </h2>
+          <p style={{ textAlign: "center", fontSize: 16, lineHeight: 1.55, color: "#5c4553", margin: "0 auto 20px", maxWidth: 560 }}>
+            Your plan starts with your heaviest system — <b>{heaviestLabel}</b> — because relief there makes everything else easier.
+          </p>
+          <div style={{ display: "grid", gap: 14 }}>
+            {orderedCards.map((card, i) => {
+              const emphasized = i === 0;
+              return (
+                <div
+                  key={card.h}
+                  style={{
+                    background: "#fff",
+                    borderRadius: 16,
+                    padding: emphasized ? 24 : 20,
+                    border: emphasized ? "2px solid #A4688F" : "1px solid #EFDFE7",
+                    boxShadow: emphasized
+                      ? "0 14px 34px rgba(70,41,63,.14)"
+                      : "0 6px 18px rgba(70,41,63,.06)",
+                    transform: emphasized ? "scale(1.01)" : "none",
+                  }}
+                >
+                  {emphasized && (
+                    <div
+                      style={{
+                        display: "inline-block",
+                        background: "#46293F",
+                        color: "#fff",
+                        fontSize: 11,
+                        fontWeight: 700,
+                        letterSpacing: ".08em",
+                        textTransform: "uppercase",
+                        padding: "5px 12px",
+                        borderRadius: 99,
+                        marginBottom: 10,
+                      }}
+                    >
+                      Start here
+                    </div>
+                  )}
+                  <div
+                    style={{
+                      fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
+                      fontSize: emphasized ? 22 : 20,
+                      lineHeight: 1.3,
+                      color: "#46293F",
+                      marginBottom: 8,
+                    }}
+                  >
+                    {card.h}
+                  </div>
+                  <p style={{ fontSize: 15.5, lineHeight: 1.6, color: "#5c4553", margin: 0 }}>
+                    {card.p}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Future-pace */}
+          <div
+            style={{
+              marginTop: 22,
+              background: "linear-gradient(160deg,#FBF3F7 0%,#F5EAD9 100%)",
+              borderRadius: 16,
+              padding: 22,
+              border: "1px solid #EFDFE7",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
+                fontSize: 20,
+                marginBottom: 10,
+                color: "#46293F",
+              }}
+            >
+              28 days from now:
+            </div>
+            <p style={{ fontSize: 16, lineHeight: 1.65, color: "#5c4553", margin: 0 }}>
+              You wake up before your alarm — actually rested. Coffee is a pleasure, not a defibrillator. The 3 p.m. wall doesn't hit. Someone leaves dishes in the sink and it's just… dishes. You know which of your symptoms are hormonal, what your labs mean, and exactly what to say at your next doctor's appointment. And the woman in the mirror looks familiar again. That's what the next 28 days are for.
+            </p>
           </div>
         </div>
 
