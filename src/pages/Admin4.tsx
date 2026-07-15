@@ -65,18 +65,7 @@ const Admin4: React.FC = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to load");
       const all = data.leads || [];
-      const googleOnly = all.filter((l: Lead) => {
-        const src = (l.traffic_source || "").toLowerCase();
-        const ref = (l.referrer || "").toLowerCase();
-        return (
-          !!l.gclid ||
-          src === "google" ||
-          src === "google-ads" ||
-          src === "adwords" ||
-          ref.includes("google.")
-        );
-      });
-      setLeads(googleOnly);
+      setLeads(all);
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : String(e);
       setErr(msg);
