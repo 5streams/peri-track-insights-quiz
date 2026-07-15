@@ -12,6 +12,7 @@ const TrialPrice: React.FC = () => {
   const [ready, setReady] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState<string | undefined>(undefined);
+  const [domLabel, setDomLabel] = useState<string>("your heaviest system");
 
   useEffect(() => {
     const s = getQuizState();
@@ -25,6 +26,7 @@ const TrialPrice: React.FC = () => {
     }
     setEmail(s.email);
     setName(s.name);
+    setDomLabel(s.dom?.label || "your heaviest system");
     setReady(true);
   }, [navigate]);
 
@@ -67,6 +69,80 @@ const TrialPrice: React.FC = () => {
       }}
     >
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
+        <div
+          style={{
+            background: "#fff",
+            borderRadius: 16,
+            padding: 22,
+            marginBottom: 18,
+            boxShadow: "0 10px 30px rgba(70,41,63,.08)",
+            color: "#46293F",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
+              fontSize: 22,
+              lineHeight: 1.25,
+              marginBottom: 14,
+            }}
+          >
+            Everything you unlock today:
+          </div>
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {[
+              <>Your full profile — all five systems scored, your stage, your #1 driver explained</>,
+              <>Your 28-Day Reclamation Plan, starting with <b>{domLabel}</b></>,
+              <>The 3 A.M. Protocol + the full SOS toolkit for flashes, rage, and anxiety spikes</>,
+              <>Daily 10-minute lessons + symptom tracker that shows you what's actually working</>,
+              <>The Labs Decoder + the exact words for the doctor conversation</>,
+            ].map((node, i) => (
+              <li
+                key={i}
+                style={{
+                  fontSize: 16,
+                  lineHeight: 1.55,
+                  color: "#5c4553",
+                  paddingLeft: 30,
+                  position: "relative",
+                  marginBottom: 10,
+                }}
+              >
+                <span
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    top: 2,
+                    width: 22,
+                    height: 22,
+                    borderRadius: 99,
+                    background: "#7E9B84",
+                    color: "#fff",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 13,
+                    fontWeight: 700,
+                  }}
+                >
+                  ✓
+                </span>
+                {node}
+              </li>
+            ))}
+          </ul>
+          <p
+            style={{
+              marginTop: 14,
+              fontSize: 16,
+              lineHeight: 1.55,
+              color: "#46293F",
+              fontWeight: 600,
+            }}
+          >
+            7 days. Full access. If it doesn't help, cancel in one tap.
+          </p>
+        </div>
         <PriceChoice email={email} firstName={name} mode="select" onContinue={handleContinue} />
         <MiniLegalFooter />
       </div>
