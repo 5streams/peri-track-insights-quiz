@@ -394,6 +394,8 @@ const Results: React.FC = () => {
           Informational only — not medical advice or diagnosis.
         </p>
 
+        {isDesire && <MoreStories />}
+
         <div style={{ marginTop: 40 }}>
           <TrustFooter />
         </div>
