@@ -268,6 +268,56 @@ const PriceChoice: React.FC<PriceChoiceProps> = ({ email, firstName, mode = "che
         Join over 6,000+ women who have rediscovered their desire again.
       </p>
 
+      {/* Large 30-day money-back guarantee */}
+      <div
+        style={{
+          maxWidth: 560,
+          margin: "28px auto 0",
+          background: "#F3FAF4",
+          border: "2px solid #7E9B84",
+          borderRadius: "16px",
+          padding: "26px 24px",
+          textAlign: "center",
+          boxShadow: "0 8px 20px rgba(70,41,63,.06)",
+        }}
+      >
+        <div
+          style={{
+            width: 56,
+            height: 56,
+            borderRadius: "50%",
+            background: "#E8F3EA",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "0 auto 14px",
+          }}
+        >
+          <ShieldCheck size={30} color="#7E9B84" />
+        </div>
+        <h3
+          style={{
+            fontSize: "24px",
+            fontWeight: 800,
+            color: "#2C3E50",
+            margin: "0 0 10px",
+            lineHeight: 1.25,
+          }}
+        >
+          30-Day Full Money-Back Guarantee
+        </h3>
+        <p
+          style={{
+            fontSize: "16px",
+            lineHeight: 1.6,
+            color: "#5c4553",
+            margin: 0,
+          }}
+        >
+          Try the program risk-free. If you don't feel a meaningful difference in your #1 concern within 30 days, email us for a full refund. No forms, no hoops, no hard feelings.
+        </p>
+      </div>
+
       {/* Testimonials */}
       <div style={{ maxWidth: 560, margin: "22px auto 0", display: "grid", gap: 14 }}>
         {[
