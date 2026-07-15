@@ -28,6 +28,11 @@ Deno.serve(async (req) => {
     const now = new Date().toISOString();
     const patch: Record<string, unknown> = { session_id };
 
+    // Any event may carry the quiz variant label — persist once known.
+    if (typeof body.quiz_variant === "string") {
+      patch.quiz_variant = body.quiz_variant;
+    }
+
     if (event === "landing") {
       patch.landed_at = now;
       patch.traffic_source = body.traffic_source ?? null;

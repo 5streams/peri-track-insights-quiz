@@ -13,6 +13,7 @@ const TrialPrice: React.FC = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState<string | undefined>(undefined);
   const [domLabel, setDomLabel] = useState<string>("your heaviest system");
+  const [variant, setVariant] = useState<"symptoms" | "desire">("symptoms");
 
   useEffect(() => {
     const s = getQuizState();
@@ -27,6 +28,7 @@ const TrialPrice: React.FC = () => {
     setEmail(s.email);
     setName(s.name);
     setDomLabel(s.dom?.label || "your heaviest system");
+    if (s.quizVariant === "desire") setVariant("desire");
     setReady(true);
   }, [navigate]);
 
@@ -90,13 +92,24 @@ const TrialPrice: React.FC = () => {
             Everything you unlock today:
           </div>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {[
-              <>Your full profile — all five systems scored, your stage, your #1 driver explained</>,
-              <>Your 28-Day Reclamation Plan, starting with <b>{domLabel}</b></>,
-              <>The 3 A.M. Protocol + the full SOS toolkit for flashes, rage, and anxiety spikes</>,
-              <>Daily 10-minute lessons + symptom tracker that shows you what's actually working</>,
-              <>The Labs Decoder + the exact words for the doctor conversation</>,
-            ].map((node, i) => (
+            {(variant === "desire"
+              ? [
+                  <>Why the wanting disappeared — your #1 desire suppressor, explained</>,
+                  <>The plan to bring it back: hormones, comfort, energy, and connection — in the right order</>,
+                  <>Your full profile — all five systems scored, your stage, your #1 driver explained</>,
+                  <>Your 28-Day Reclamation Plan, starting with <b>{domLabel}</b></>,
+                  <>The 3 A.M. Protocol + the full SOS toolkit for flashes, rage, and anxiety spikes</>,
+                  <>Daily 10-minute lessons + symptom tracker that shows you what's actually working</>,
+                  <>The Labs Decoder + the exact words for the doctor conversation</>,
+                ]
+              : [
+                  <>Your full profile — all five systems scored, your stage, your #1 driver explained</>,
+                  <>Your 28-Day Reclamation Plan, starting with <b>{domLabel}</b></>,
+                  <>The 3 A.M. Protocol + the full SOS toolkit for flashes, rage, and anxiety spikes</>,
+                  <>Daily 10-minute lessons + symptom tracker that shows you what's actually working</>,
+                  <>The Labs Decoder + the exact words for the doctor conversation</>,
+                ]
+            ).map((node, i) => (
               <li
                 key={i}
                 style={{

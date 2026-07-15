@@ -28,6 +28,7 @@ export type Database = {
           paywall_reached_at: string | null
           quiz_completed_at: string | null
           quiz_results: Json | null
+          quiz_variant: string | null
           referrer: string | null
           session_id: string | null
           status: string | null
@@ -57,6 +58,7 @@ export type Database = {
           paywall_reached_at?: string | null
           quiz_completed_at?: string | null
           quiz_results?: Json | null
+          quiz_variant?: string | null
           referrer?: string | null
           session_id?: string | null
           status?: string | null
@@ -86,6 +88,7 @@ export type Database = {
           paywall_reached_at?: string | null
           quiz_completed_at?: string | null
           quiz_results?: Json | null
+          quiz_variant?: string | null
           referrer?: string | null
           session_id?: string | null
           status?: string | null

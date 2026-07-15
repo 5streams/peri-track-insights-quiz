@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import Quiz from "./pages/Quiz";
+import DesireQuiz from "./pages/DesireQuiz";
 import Results from "./pages/Results";
 import Calculating from "./pages/Calculating";
 import QuizEmail from "./pages/QuizEmail";
@@ -105,7 +106,8 @@ function App() {
       <AdminNoIndex />
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/becomeheragain" element={<Index />} />
+        <Route path="/becomeheragain" element={<DesireQuiz />} />
+        <Route path="/desire-quiz" element={<DesireQuiz />} />
         <Route path="/perimenopause-test" element={<PerimenopauseTest />} />
         <Route path="/perimenopause-quiz" element={<PerimenopauseQuiz />} />
         <Route path="/perimenopause-symptoms" element={<PerimenopauseSymptoms />} />

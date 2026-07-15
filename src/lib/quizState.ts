@@ -30,6 +30,8 @@ export type QuizState = {
   name?: string;
   trialPriceCents?: number;
   leadId?: string | null;
+  quizVariant?: "symptoms" | "desire";
+  flowVariant?: "search" | "cold";
 };
 
 export function getQuizState(): QuizState {

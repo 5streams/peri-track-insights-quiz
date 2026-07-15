@@ -84,6 +84,8 @@ const OUTCOME_CARDS: OutcomeCard[] = [
 const Results: React.FC = () => {
   const navigate = useNavigate();
   const [state, setState] = useState(() => getQuizState());
+  const variant = state.quizVariant === "desire" ? "desire" : "symptoms";
+  const isDesire = variant === "desire";
 
   useEffect(() => {
     if (!state.answers || !state.answers.length) {
@@ -103,12 +105,19 @@ const Results: React.FC = () => {
   const domLabel = state.dom?.label;
   const domKey = state.dom?.key;
   const orderedCards = React.useMemo(() => {
+    if (isDesire) {
+      // Force the "Want to want it again" card first (clusterKey "self"),
+      // then the dominant-desire-cluster's closest reused card, then the rest.
+      const desireCard = OUTCOME_CARDS.find((c) => c.clusterKey === "self");
+      const rest = OUTCOME_CARDS.filter((c) => c !== desireCard);
+      return desireCard ? [desireCard, ...rest] : OUTCOME_CARDS;
+    }
     if (!domKey) return OUTCOME_CARDS;
     const first = OUTCOME_CARDS.filter((c) => c.clusterKey === domKey);
     const rest = OUTCOME_CARDS.filter((c) => c.clusterKey !== domKey);
     return [...first, ...rest];
-  }, [domKey]);
-  const heaviestLabel = domLabel || "your heaviest system";
+  }, [domKey, isDesire]);
+  const heaviestLabel = domLabel || (isDesire ? "your heaviest suppressor" : "your heaviest system");
 
   return (
     <div
@@ -129,8 +138,14 @@ const Results: React.FC = () => {
             marginBottom: 20,
           }}
         >
-          Your Perimenopause Assessment
+          {isDesire ? "Your Desire Profile" : "Your Perimenopause Assessment"}
         </h1>
+
+        {isDesire && (
+          <p style={{ textAlign: "center", fontSize: 16, lineHeight: 1.55, color: "#5c4553", margin: "-10px auto 18px", maxWidth: 560 }}>
+            Your desire didn't disappear — it's being suppressed. The heaviest suppressor in your profile: <b>{domLabel || "your heaviest suppressor"}</b>.
+          </p>
+        )}
 
         {/* Gauge teaser — needle + band chip only */}
         <div style={{ background: "#fff", borderRadius: 20, padding: "24px 18px", boxShadow: "0 10px 30px rgba(70,41,63,.10)", textAlign: "center" }}>
@@ -152,7 +167,7 @@ const Results: React.FC = () => {
             {bandName}
           </div>
 
-          {domLabel && (
+          {domLabel && !isDesire && (
             <p style={{ marginTop: 16, fontSize: 16, lineHeight: 1.5, color: "#5c4553", padding: "0 4px" }}>
               <b>Your heaviest system:</b> {domLabel}.
             </p>
