@@ -18,6 +18,16 @@ const BENEFITS = [
   "Labs Decoder + doctor-visit prep tools",
 ];
 
+const PARTNER_BENEFITS = [
+  "Your full Situation Profile — all five factors scored and explained",
+  "Your response pattern, named, with this week's adjustments",
+  "The complete partner curriculum: understanding, the conversations, the affection rebuild",
+  "Her full program included as her opt-in gift",
+  "The doctor-support toolkit — how to help her get real answers",
+];
+
+const PARTNER_HER_AGE_LABELS = ["Under 35", "35–39", "40–44", "45–49", "50–55", "56+"];
+
 function GaugeSVG({ pct }: { pct: number }) {
   const clamped = Math.max(0, Math.min(100, pct));
   const angle = Math.PI * (1 - clamped / 100);
@@ -90,8 +100,12 @@ const OUTCOME_CARDS: OutcomeCard[] = [
 const Results: React.FC = () => {
   const navigate = useNavigate();
   const [state, setState] = useState(() => getQuizState());
-  const variant = state.quizVariant === "desire" ? "desire" : "symptoms";
+  const variant: "symptoms" | "desire" | "partner" =
+    state.quizVariant === "desire" ? "desire"
+    : state.quizVariant === "partner" ? "partner"
+    : "symptoms";
   const isDesire = variant === "desire";
+  const isPartner = variant === "partner";
 
   useEffect(() => {
     if (!state.answers || !state.answers.length) {
@@ -106,7 +120,7 @@ const Results: React.FC = () => {
     navigate("/quiz-email");
   };
 
-  const bandName = state.band?.name || "Perimenopause Pattern";
+  const bandName = state.band?.name || (isPartner ? "Situation Profile" : "Perimenopause Pattern");
   const pct = state.pct ?? 0;
   const domLabel = state.dom?.label;
   const domKey = state.dom?.key;
@@ -123,7 +137,9 @@ const Results: React.FC = () => {
     const rest = OUTCOME_CARDS.filter((c) => c.clusterKey !== domKey);
     return [...first, ...rest];
   }, [domKey, isDesire]);
-  const heaviestLabel = domLabel || (isDesire ? "your heaviest suppressor" : "your heaviest system");
+  const heaviestLabel = domLabel || (isDesire ? "your heaviest suppressor" : isPartner ? "your heaviest factor" : "your heaviest system");
+  const herAgeIdx = typeof state.cycleStatus === "number" ? state.cycleStatus : null;
+  const herAgeLabel = herAgeIdx != null ? PARTNER_HER_AGE_LABELS[herAgeIdx] : "her age bracket";
 
   return (
     <div
@@ -144,13 +160,24 @@ const Results: React.FC = () => {
             marginBottom: 20,
           }}
         >
-          {isDesire ? "Your Desire Profile" : "Your Perimenopause Assessment"}
+          {isPartner ? "Your Situation Profile" : isDesire ? "Your Desire Profile" : "Your Perimenopause Assessment"}
         </h1>
 
         {isDesire && (
           <p style={{ textAlign: "center", fontSize: 16, lineHeight: 1.55, color: "#5c4553", margin: "-10px auto 18px", maxWidth: 560 }}>
             Your desire didn't disappear — it's being suppressed. The heaviest suppressor in your profile: <b>{domLabel || "your heaviest suppressor"}</b>.
           </p>
+        )}
+
+        {isPartner && (
+          <div style={{ maxWidth: 560, margin: "-10px auto 18px" }}>
+            <p style={{ textAlign: "center", fontSize: 16, lineHeight: 1.55, color: "#5c4553", margin: "0 0 6px" }}>
+              <b>Most likely explanation:</b> her pattern — {herAgeLabel}, the exhaustion, the broken sleep, the mood shifts you described — matches the single most common and least-diagnosed cause of vanished affection after 40: perimenopause.
+            </p>
+            <p style={{ textAlign: "center", fontSize: 16, lineHeight: 1.55, color: "#5c4553", margin: 0 }}>
+              <b>Your heaviest factor:</b> {domLabel || "your heaviest factor"}.
+            </p>
+          </div>
         )}
 
         {/* Gauge teaser — needle + band chip only */}
@@ -173,7 +200,7 @@ const Results: React.FC = () => {
             {bandName}
           </div>
 
-          {domLabel && !isDesire && (
+          {domLabel && !isDesire && !isPartner && (
             <p style={{ marginTop: 16, fontSize: 16, lineHeight: 1.5, color: "#5c4553", padding: "0 4px" }}>
               <b>Your heaviest system:</b> {domLabel}.
             </p>
@@ -196,8 +223,10 @@ const Results: React.FC = () => {
           </div>
         </div>
 
-        {/* WHAT CHANGES — outcome cards, dominant cluster first & emphasized */}
-        {isDesire ? (
+        {/* WHAT CHANGES — variant-specific sequence */}
+        {isPartner ? (
+          <PartnerSalesSequence domLabel={domLabel || "your heaviest factor"} onUnlock={handleUnlock} />
+        ) : isDesire ? (
           <DesireSalesSequence domLabel={domLabel || "your heaviest suppressor"} onUnlock={handleUnlock} />
         ) : (
         <div style={{ marginTop: 30 }}>
@@ -315,8 +344,11 @@ const Results: React.FC = () => {
         )}
 
         <p style={{ marginTop: 22, fontSize: 17, lineHeight: 1.55, textAlign: "center", color: "#5c4553" }}>
-          Based on your responses, we've developed your personalized{" "}
-          <b>28-Day Reclamation Plan</b>.
+          {isPartner ? (
+            <>Based on your responses, we've built your personalized <b>Partner Plan</b>.</>
+          ) : (
+            <>Based on your responses, we've developed your personalized <b>28-Day Reclamation Plan</b>.</>
+          )}
         </p>
 
         {/* Benefits */}
@@ -340,7 +372,7 @@ const Results: React.FC = () => {
             What you will get with your customized plan
           </div>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {BENEFITS.map((b) => (
+            {(isPartner ? PARTNER_BENEFITS : BENEFITS).map((b) => (
               <li
                 key={b}
                 style={{
@@ -525,6 +557,138 @@ const DesireSalesSequence: React.FC<{ domLabel: string; onUnlock: () => void }> 
     boxShadow: "0 10px 30px rgba(70,41,63,.08)",
     border: "1px solid #EFDFE7",
   };
+  return DesireSalesSequenceBody(domLabel, onUnlock, cardBase);
+};
+
+const PARTNER_FASCINATIONS: string[] = [
+  "Why her desire didn't die — where it actually went, and the conditions under which it comes back",
+  "The pressure/withdrawal trap: which one you're in (your profile already shows it) and the exact adjustment that stops the spiral this week",
+  "The 5-minute explanation of perimenopause that will reframe your last two years — the sleep, the short fuse, the pulling away, all of it",
+  "The six lines men say that set things back weeks (you've probably used two of them this month)",
+  "Why \"just tell me how to fix it\" is the worst thing you can say — and what she actually needs to hear instead",
+  "The no-agenda touch principle: how affection rebuilds without a single awkward conversation",
+  "The 3-sentence opener that doesn't trigger defensiveness — and exactly when to use it (not yet — Lesson 3 tells you the moment)",
+  "Safety → affection → desire: the order that works, and why skipping a step resets the clock",
+  "How to support her getting real answers — labs, doctors, options — without playing doctor yourself",
+  "When it's more than hormones: the signs that deserve a professional, and how to back her up",
+  "Her complete program, included as a gift — hers to open if and when she chooses. Separate account. You never see her answers. No pressure, ever.",
+];
+
+const PartnerSalesSequence: React.FC<{ domLabel: string; onUnlock: () => void }> = ({ domLabel, onUnlock }) => {
+  const cardBase: React.CSSProperties = {
+    background: "#fff",
+    borderRadius: 16,
+    padding: 22,
+    boxShadow: "0 10px 30px rgba(70,41,63,.08)",
+    border: "1px solid #EFDFE7",
+  };
+  const headSerif: React.CSSProperties = {
+    fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
+    color: "#46293F",
+    lineHeight: 1.25,
+  };
+  return (
+    <div style={{ marginTop: 30 }}>
+      {/* The turn */}
+      <div style={cardBase}>
+        <h2 style={{ ...headSerif, fontSize: 26, margin: "0 0 12px" }}>Here's what nobody has told you:</h2>
+        <p style={{ fontSize: 16.5, lineHeight: 1.65, color: "#5c4553", margin: 0 }}>
+          She didn't stop loving you. Her chemistry changed — and then the two of you fell into a spiral neither of you chose: she pulls away because of what's happening in her body; you respond with pressure or withdrawal because of what it does to yours; and every round confirms both of your worst fears. Your profile shows exactly where you are in that spiral — heaviest right now on <b>{domLabel}</b>. The plan shows you how to run it in reverse.
+        </p>
+      </div>
+
+      {/* Fascinations */}
+      <div style={{ ...cardBase, marginTop: 18 }}>
+        <h3 style={{ ...headSerif, fontSize: 22, margin: "0 0 14px" }}>
+          Inside your plan — what you'll know and use in the first weeks:
+        </h3>
+        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          {PARTNER_FASCINATIONS.map((f, i) => (
+            <li
+              key={i}
+              style={{
+                fontSize: 15.5,
+                lineHeight: 1.6,
+                color: "#5c4553",
+                paddingLeft: 28,
+                position: "relative",
+                marginBottom: 12,
+              }}
+            >
+              <span
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  top: 8,
+                  width: 10,
+                  height: 10,
+                  borderRadius: 99,
+                  background: "linear-gradient(135deg,#A4688F 0%,#C29455 100%)",
+                }}
+              />
+              {f}
+            </li>
+          ))}
+        </ul>
+        <button
+          onClick={onUnlock}
+          style={{
+            marginTop: 18,
+            width: "100%",
+            padding: "14px 18px",
+            border: "none",
+            borderRadius: 99,
+            background: "linear-gradient(135deg,#A4688F 0%,#C29455 100%)",
+            color: "#fff",
+            fontSize: 15,
+            fontWeight: 800,
+            cursor: "pointer",
+            boxShadow: "0 6px 18px rgba(70,41,63,.16)",
+          }}
+        >
+          Get my plan
+        </button>
+      </div>
+
+      {/* Stakes */}
+      <div
+        style={{
+          marginTop: 18,
+          background: "linear-gradient(160deg,#46293F 0%,#6B3F5C 100%)",
+          borderRadius: 16,
+          padding: 24,
+          color: "#F5EAD9",
+        }}
+      >
+        <h3 style={{ fontFamily: "'Iowan Old Style',Palatino,Georgia,serif", fontSize: 24, margin: "0 0 12px", lineHeight: 1.25 }}>
+          You're not buying a fix for her. You're buying your part of the way back.
+        </h3>
+        <p style={{ fontSize: 16.5, lineHeight: 1.65, margin: 0, color: "#F3E3E9" }}>
+          You can't change her hormones. You can stop feeding the spiral, understand what's real, and become the reason it's safe for the wanting to return. That part is entirely yours.
+        </p>
+      </div>
+
+      {/* Future-pace */}
+      <div
+        style={{
+          marginTop: 18,
+          background: "linear-gradient(160deg,#FBF3F7 0%,#F5EAD9 100%)",
+          borderRadius: 16,
+          padding: 22,
+          border: "1px solid #EFDFE7",
+        }}
+      >
+        <div style={{ ...headSerif, fontSize: 22, marginBottom: 10 }}>A few weeks from now:</div>
+        <p style={{ fontSize: 16.5, lineHeight: 1.7, color: "#5c4553", margin: 0 }}>
+          The kitchen hug lasts a beat longer. She tells you something real instead of something logistical. You stop bracing at bedtime. And one night she reaches for YOUR hand — not because you engineered it, but because it finally felt safe to. That's the work. This is the plan for it.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+// (Original DesireSalesSequence body follows below unchanged.)
+function DesireSalesSequenceBody(domLabel: string, onUnlock: () => void, cardBase: React.CSSProperties) {
   const headSerif: React.CSSProperties = {
     fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
     color: "#46293F",
