@@ -47,7 +47,7 @@ const Admin4: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
-  const [filter, setFilter] = useState<"all" | "email" | "quiz" | "paywall" | "paid">("all");
+  const [filter, setFilter] = useState<"all" | "quiz" | "results" | "email" | "price" | "paid">("all");
 
   useEffect(() => {
     if (sessionStorage.getItem("admin4_authenticated") === "true") setAuthed(true);
@@ -92,18 +92,20 @@ const Admin4: React.FC = () => {
   const stats = useMemo(() => {
     return {
       total: leads.length,
-      email: leads.filter((l) => l.email_submitted_at).length,
       quiz: leads.filter((l) => l.quiz_completed_at).length,
-      paywall: leads.filter((l) => l.paywall_reached_at).length,
+      results: leads.filter((l) => l.paywall_reached_at).length,
+      email: leads.filter((l) => l.email_submitted_at).length,
+      price: leads.filter((l) => l.trial_price_cents != null).length,
       paid: leads.filter((l) => !!l.stripe_subscription_id).length,
     };
   }, [leads]);
 
   const filtered = useMemo(() => {
     switch (filter) {
-      case "email": return leads.filter((l) => l.email_submitted_at);
       case "quiz": return leads.filter((l) => l.quiz_completed_at);
-      case "paywall": return leads.filter((l) => l.paywall_reached_at);
+      case "results": return leads.filter((l) => l.paywall_reached_at);
+      case "email": return leads.filter((l) => l.email_submitted_at);
+      case "price": return leads.filter((l) => l.trial_price_cents != null);
       case "paid": return leads.filter((l) => !!l.stripe_subscription_id);
       default: return leads;
     }
@@ -146,9 +148,10 @@ const Admin4: React.FC = () => {
 
   const tabs: { key: typeof filter; label: string; count: number }[] = [
     { key: "all", label: "All visitors", count: stats.total },
-    { key: "email", label: "Filled email", count: stats.email },
     { key: "quiz", label: "Completed quiz", count: stats.quiz },
-    { key: "paywall", label: "Reached paywall", count: stats.paywall },
+    { key: "results", label: "Viewed results", count: stats.results },
+    { key: "email", label: "Submitted email", count: stats.email },
+    { key: "price", label: "Selected price", count: stats.price },
     { key: "paid", label: "Paid", count: stats.paid },
   ];
 
@@ -172,7 +175,7 @@ const Admin4: React.FC = () => {
 
         {err && <div className="bg-red-50 text-red-700 px-4 py-3 rounded mb-4">{err}</div>}
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mb-6">
           {tabs.map((t) => (
             <button
               key={t.key}
@@ -196,9 +199,10 @@ const Admin4: React.FC = () => {
                 <th className="px-3 py-2">Source / Campaign</th>
                 <th className="px-3 py-2">Quiz progress</th>
                 <th className="px-3 py-2 text-center">Landed</th>
-                <th className="px-3 py-2 text-center">Email</th>
                 <th className="px-3 py-2 text-center">Quiz</th>
-                <th className="px-3 py-2 text-center">Paywall</th>
+                <th className="px-3 py-2 text-center">Results</th>
+                <th className="px-3 py-2 text-center">Email</th>
+                <th className="px-3 py-2 text-center">Price</th>
                 <th className="px-3 py-2 text-center">Paid</th>
                 <th className="px-3 py-2">Trial $</th>
                 <th className="px-3 py-2">gclid</th>
@@ -206,10 +210,10 @@ const Admin4: React.FC = () => {
             </thead>
             <tbody>
               {loading && (
-                <tr><td colSpan={11} className="px-3 py-6 text-center text-slate-400">Loading…</td></tr>
+                <tr><td colSpan={12} className="px-3 py-6 text-center text-slate-400">Loading…</td></tr>
               )}
               {!loading && filtered.length === 0 && (
-                <tr><td colSpan={11} className="px-3 py-6 text-center text-slate-400">No traffic yet.</td></tr>
+                <tr><td colSpan={12} className="px-3 py-6 text-center text-slate-400">No traffic yet.</td></tr>
               )}
               {filtered.map((l) => {
                 const qr = l.quiz_results || {};
@@ -245,9 +249,10 @@ const Admin4: React.FC = () => {
                     )}
                   </td>
                   <td className="px-3 py-2 text-center"><Dot on={!!l.landed_at} /></td>
-                  <td className="px-3 py-2 text-center"><Dot on={!!l.email_submitted_at} /></td>
                   <td className="px-3 py-2 text-center"><Dot on={!!l.quiz_completed_at} /></td>
                   <td className="px-3 py-2 text-center"><Dot on={!!l.paywall_reached_at} /></td>
+                  <td className="px-3 py-2 text-center"><Dot on={!!l.email_submitted_at} /></td>
+                  <td className="px-3 py-2 text-center"><Dot on={l.trial_price_cents != null} /></td>
                   <td className="px-3 py-2 text-center"><Dot on={!!l.stripe_subscription_id} /></td>
                   <td className="px-3 py-2 text-slate-600">{l.trial_price_cents ? `$${(l.trial_price_cents / 100).toFixed(2)}` : "—"}</td>
                   <td className="px-3 py-2 text-xs text-slate-400 max-w-[140px] truncate" title={l.gclid || ""}>{l.gclid || "—"}</td>
