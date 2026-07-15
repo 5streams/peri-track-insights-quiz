@@ -92,6 +92,11 @@ Deno.serve(async (req) => {
     } else if (event === "results_view") {
       patch.paywall_reached_at = now;
       patch.status = "paywall_reached";
+    } else if (event === "teaser_results_view") {
+      patch.paywall_reached_at = now;
+      patch.status = "teaser_results_view";
+    } else if (event === "unlock_clicked") {
+      patch.status = "unlock_clicked";
     } else if (event === "checkout_started") {
       patch.status = "checkout_started";
     }
