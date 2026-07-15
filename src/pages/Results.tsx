@@ -434,7 +434,7 @@ const MORE_STORIES: { initials: string; name: string; quote: string }[] = [
 ];
 
 const MoreStories: React.FC = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   return (
     <div style={{ marginTop: 26 }}>
       <button
