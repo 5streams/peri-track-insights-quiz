@@ -86,7 +86,7 @@ export const PARTNER_BANDS = [
 ];
 
 export const PARTNER_CHECKPOINTS = [
-  { key: "dismissed" as const, q: "Do you still love her — it's the distance that's killing you?" },
+  { key: "dismissed" as const, q: "When she says \u2018it\u2019s not you\u2019 \u2014 do you believe her?" },
   { key: "normalLabs" as const, q: "Has she ever said 'it's not you' — and you didn't believe her?" },
   { key: "sleepFirst" as const, q: "If you knew exactly what to do this week, would you do it?" },
 ];

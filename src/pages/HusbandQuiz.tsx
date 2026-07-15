@@ -15,13 +15,15 @@ import {
   partnerPhaseEstimate,
 } from "@/data/partnerQuiz";
 
-// step 0 = welcome, 1 = your age, 2 = her age, 3 = together, 4..23 = questions[0..19], 24 = intent
+// step 0 = opener, 1 = your age, 2 = her age, 3 = together, 4 = discovery,
+// 5..24 = questions[0..19], 25 = intent
 const WELCOME_STEP = 0;
 const YOUR_AGE_STEP = 1;
 const HER_AGE_STEP = 2;
 const TOGETHER_STEP = 3;
-const FIRST_Q_STEP = 4;
-const INTENT_STEP = FIRST_Q_STEP + PARTNER_QUESTIONS.length; // 24
+const DISCOVERY_STEP = 4;
+const FIRST_Q_STEP = 5;
+const INTENT_STEP = FIRST_Q_STEP + PARTNER_QUESTIONS.length;
 const TOTAL_STEPS = INTENT_STEP + 1;
 
 type ScreenState = { step: number; showBreakForQ?: number };
@@ -37,12 +39,14 @@ const HusbandQuiz: React.FC = () => {
   const [intent, setIntent] = useState<number | null>(null);
   const [screen, setScreen] = useState<ScreenState>({ step: WELCOME_STEP });
   const [history, setHistory] = useState<ScreenState[]>([]);
+  const [opener, setOpener] = useState<string | null>(null);
 
   useEffect(() => { window.scrollTo(0, 0); }, [screen]);
 
   useEffect(() => {
     setQuizState({ quizVariant: "partner", flowVariant: "cold" });
     trackEvent("partner_quiz_view", { quiz_variant: "partner" });
+    trackEvent("opener_view", { quiz_variant: "partner" });
   }, []);
 
   const goTo = (next: ScreenState) => {
@@ -86,7 +90,21 @@ const HusbandQuiz: React.FC = () => {
 
   const handleYourAge = (i: number) => { setYourAge(i); persist({ yourAge: i }); goTo({ step: HER_AGE_STEP }); };
   const handleHerAge = (i: number) => { setHerAge(i); persist({ herAge: i }); goTo({ step: TOGETHER_STEP }); };
-  const handleTogether = (v: number) => { setTogether(v); persist({ together: v }); goTo({ step: FIRST_Q_STEP }); };
+  const handleTogether = (v: number) => { setTogether(v); persist({ together: v }); goTo({ step: DISCOVERY_STEP }); };
+
+  const handleOpener = (answer: "yes" | "complicated") => {
+    setOpener(answer);
+    setQuizState({ quizVariant: "partner", flowVariant: "cold" });
+    trackEvent("quiz_progress", {
+      quiz_variant: "partner",
+      questions_answered: 0,
+      total_questions: PARTNER_QUESTIONS.length,
+      answers,
+      opener: answer,
+    });
+    trackEvent("quiz_start", { quiz_variant: "partner", opener: answer });
+    goTo({ step: YOUR_AGE_STEP });
+  };
 
   const handleAnswer = (qIdx: number, v: number) => {
     const nextAnswers = [...answers];
@@ -168,53 +186,40 @@ const HusbandQuiz: React.FC = () => {
 
       <main className="max-w-2xl mx-auto px-5 pt-6 pb-16">
         {screen.step === WELCOME_STEP && (
-          <div className="text-center pt-4 md:pt-8">
-            <div className="text-[11px] md:text-[12px] tracking-[0.18em] uppercase text-[#8B5A9F] font-bold mb-2 md:mb-4">
+          <div className="pt-6 md:pt-10">
+            <div className="text-center text-[11px] md:text-[12px] tracking-[0.18em] uppercase text-[#8B5A9F] font-bold mb-5 md:mb-7">
               A PRIVATE 3-MINUTE ASSESSMENT FOR HUSBANDS
             </div>
-            <h1 className="font-playfair text-[32px] md:text-[42px] font-semibold text-[#331D2E] leading-[1.08] mb-3 md:mb-4">
-              Why did she stop reaching for you?
+            <h1 className="font-playfair text-[28px] md:text-[38px] font-semibold text-[#331D2E] leading-[1.12] mb-6 md:mb-8 text-center max-w-xl mx-auto">
+              Do you still love her — it's the distance that's killing you?
             </h1>
-            <p className="text-[17px] md:text-[19px] leading-snug md:leading-relaxed text-[#5c4553] mb-4 md:mb-6 max-w-lg mx-auto">
-              The hugs got shorter. The kisses became pecks. The bedroom went quiet. You've told yourself it's stress, the kids, her job — but it keeps getting worse, and nobody will tell you what's actually going on.
-            </p>
-
-            <div className="text-left bg-white/60 rounded-2xl border border-[#E8D7DF] p-4 md:p-5 mb-4 md:mb-6 max-w-lg mx-auto">
-              <p className="text-[15px] md:text-[16px] font-semibold text-[#331D2E] mb-2 md:mb-3">
-                In the next 3 minutes, you'll find out:
-              </p>
-              <ul className="space-y-2 md:space-y-2.5">
-                {[
-                  "Your Distance Score — how deep the spiral runs, on a 0–60 scale",
-                  "The most likely explanation — and why it's probably not what you fear at 2 a.m.",
-                  "Your response pattern — the thing you're doing right now that's making it worse (every man in this spot does one of them)",
-                  "Whether it can come back — and exactly what your part in that is",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-[15px] md:text-[16px] leading-snug md:leading-relaxed text-[#46293F]">
-                    <Check className="h-5 w-5 text-[#C29455] flex-shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="flex flex-col gap-3 max-w-lg mx-auto">
+              <button
+                onClick={() => handleOpener("yes")}
+                className="w-full text-left rounded-2xl border-2 border-[#E8D7DF] bg-white text-[#331D2E] px-5 py-4 font-semibold text-[16px] hover:border-[#C29455] hover:bg-[#FFF9EE] transition"
+              >
+                Yes — exactly that
+              </button>
+              <button
+                onClick={() => handleOpener("complicated")}
+                className="w-full text-left rounded-2xl border-2 border-[#E8D7DF] bg-white text-[#331D2E] px-5 py-4 font-semibold text-[16px] hover:border-[#C29455] hover:bg-[#FFF9EE] transition"
+              >
+                It's more complicated than that
+              </button>
             </div>
-
-            <p className="text-[14px] md:text-[16px] italic text-[#6E5665] mb-4 md:mb-6 max-w-md mx-auto leading-snug md:leading-relaxed">
-              If you've stopped initiating because you can't take another no — this was built for you.
+            <p className="text-center text-[12px] md:text-[13px] text-[#6E5665] mt-4">
+              22 questions · Completely private · She will never see your answers
             </p>
-
-            <button
-              onClick={() => goTo({ step: YOUR_AGE_STEP })}
-              className="inline-block w-full max-w-sm px-6 md:px-8 py-4 md:py-4.5 rounded-full font-bold text-white text-[17px] md:text-[18px] transition"
-              style={{ background: "linear-gradient(135deg,#A4688F 0%,#46293F 100%)", boxShadow: "0 10px 30px rgba(70,41,63,.22)" }}
-            >
-              Start — see my score
-            </button>
-            <p className="text-[12px] md:text-[13px] text-[#6E5665] mt-3 md:mt-5">22 questions · Completely private · She will never see your answers</p>
           </div>
         )}
 
         {screen.step === YOUR_AGE_STEP && (
-          <Screen eyebrow="About you" title="Your age?" hint="This stays completely private.">
+          <Screen
+            eyebrow="About you"
+            title="Your age?"
+            hint="This stays completely private."
+            momentum="Then this is worth 3 minutes of your life. First —"
+          >
             <OptionList>
               {PARTNER_YOUR_AGE_OPTS.map((label, i) => (
                 <OptButton key={i} onClick={() => handleYourAge(i)} selected={yourAge === i}>{label}</OptButton>
@@ -243,6 +248,39 @@ const HusbandQuiz: React.FC = () => {
               ))}
             </OptionList>
           </Screen>
+        )}
+
+        {screen.step === DISCOVERY_STEP && (
+          <div className="rounded-3xl bg-[#5D4154] text-white p-7 shadow-xl">
+            <div className="text-[11px] tracking-[0.14em] uppercase text-[#EBD9BC] font-bold mb-3">
+              What you'll get
+            </div>
+            <h2 className="font-playfair text-2xl font-semibold mb-4 leading-snug">
+              Here's what your answers will show you:
+            </h2>
+            <ul className="space-y-3 mb-5">
+              {[
+                "Your Distance Score — how deep the spiral runs, on a 0–60 scale",
+                "The most likely explanation — and why it's probably not what you fear at 2 a.m.",
+                "Your response pattern — the thing you're doing right now that's making it worse (every man in this spot does one of them)",
+                "Whether it can come back — and exactly what your part in that is",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-[15px] leading-relaxed text-[#F6ECF1]">
+                  <Check className="h-5 w-5 text-[#EBD9BC] flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-[14px] italic text-[#EBD9BC] mb-6 leading-relaxed">
+              If you've stopped initiating because you can't take another no — this was built for you.
+            </p>
+            <button
+              onClick={() => goTo({ step: FIRST_Q_STEP })}
+              className="w-full bg-[#C29455] hover:bg-[#a97e46] text-white font-semibold rounded-full py-4 text-base transition"
+            >
+              Continue
+            </button>
+          </div>
         )}
 
         {screen.step >= FIRST_Q_STEP && screen.step < INTENT_STEP && (() => {
@@ -299,8 +337,11 @@ const HusbandQuiz: React.FC = () => {
   );
 };
 
-const Screen: React.FC<{ eyebrow: string; title: string; hint?: string; children: React.ReactNode }> = ({ eyebrow, title, hint, children }) => (
+const Screen: React.FC<{ eyebrow: string; title: string; hint?: string; momentum?: string; children: React.ReactNode }> = ({ eyebrow, title, hint, momentum, children }) => (
   <div>
+    {momentum && (
+      <p className="text-[15px] md:text-[16px] italic text-[#8B5A9F] font-medium mb-3">{momentum}</p>
+    )}
     <div className="text-[11px] tracking-[0.14em] uppercase text-[#8B5A9F] font-bold mb-3">{eyebrow}</div>
     <h1 className="font-playfair text-[26px] md:text-3xl font-semibold text-[#331D2E] leading-snug mb-2">
       {title}
