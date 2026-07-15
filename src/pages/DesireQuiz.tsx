@@ -39,7 +39,7 @@ const DesireQuiz: React.FC = () => {
   useEffect(() => {
     // Tag every desire-variant session as soon as they land.
     setQuizState({ quizVariant: "desire", flowVariant: "search" });
-    trackEvent("landing", { landing_page: window.location.pathname, quiz_variant: "desire" });
+    trackEvent("desire_quiz_view", { quiz_variant: "desire" });
   }, []);
 
   const goTo = (next: ScreenState) => {
