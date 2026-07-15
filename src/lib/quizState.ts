@@ -30,7 +30,7 @@ export type QuizState = {
   name?: string;
   trialPriceCents?: number;
   leadId?: string | null;
-  quizVariant?: "symptoms" | "desire";
+  quizVariant?: "symptoms" | "desire" | "partner";
   flowVariant?: "search" | "cold";
 };
 
