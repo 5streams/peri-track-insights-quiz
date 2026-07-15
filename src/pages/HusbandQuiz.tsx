@@ -337,8 +337,11 @@ const HusbandQuiz: React.FC = () => {
   );
 };
 
-const Screen: React.FC<{ eyebrow: string; title: string; hint?: string; children: React.ReactNode }> = ({ eyebrow, title, hint, children }) => (
+const Screen: React.FC<{ eyebrow: string; title: string; hint?: string; momentum?: string; children: React.ReactNode }> = ({ eyebrow, title, hint, momentum, children }) => (
   <div>
+    {momentum && (
+      <p className="text-[15px] md:text-[16px] italic text-[#8B5A9F] font-medium mb-3">{momentum}</p>
+    )}
     <div className="text-[11px] tracking-[0.14em] uppercase text-[#8B5A9F] font-bold mb-3">{eyebrow}</div>
     <h1 className="font-playfair text-[26px] md:text-3xl font-semibold text-[#331D2E] leading-snug mb-2">
       {title}
