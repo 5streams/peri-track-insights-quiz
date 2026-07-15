@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TrustFooter from "@/components/TrustFooter";
 import { getQuizState, trackEvent } from "@/lib/quizState";
+import couple1 from "@/assets/testimonial-couple-1.jpg";
+import couple2 from "@/assets/testimonial-couple-2.jpg";
+import couple3 from "@/assets/testimonial-couple-3.jpg";
+import couple4 from "@/assets/testimonial-couple-4.jpg";
+import couple5 from "@/assets/testimonial-couple-5.jpg";
+import couple6 from "@/assets/testimonial-couple-6.jpg";
 
 const BENEFITS = [
   "Your full symptom-by-symptom profile — all five systems scored and explained",
