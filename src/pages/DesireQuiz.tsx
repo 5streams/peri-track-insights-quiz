@@ -14,12 +14,14 @@ import {
   desirePhaseEstimate,
 } from "@/data/desireQuiz";
 
-// step 0 = welcome, 1 = age, 2 = cycle, 3..22 = questions[0..19], 23 = intent
+// step 0 = opener, 1 = age, 2 = cycle, 3 = discovery interstitial,
+// 4..23 = questions[0..19], 24 = intent
 const WELCOME_STEP = 0;
 const AGE_STEP = 1;
 const CYCLE_STEP = 2;
-const FIRST_Q_STEP = 3;
-const INTENT_STEP = FIRST_Q_STEP + DESIRE_QUESTIONS.length; // 23
+const DISCOVERY_STEP = 3;
+const FIRST_Q_STEP = 4;
+const INTENT_STEP = FIRST_Q_STEP + DESIRE_QUESTIONS.length; // 24
 const TOTAL_STEPS = INTENT_STEP + 1;
 
 type ScreenState = { step: number; showBreakForQ?: number };
@@ -33,6 +35,7 @@ const DesireQuiz: React.FC = () => {
   const [intent, setIntent] = useState<number | null>(initial.intent);
   const [screen, setScreen] = useState<ScreenState>({ step: initial.resumeStep });
   const [history, setHistory] = useState<ScreenState[]>([]);
+  const [opener, setOpener] = useState<string | null>(null);
 
   useEffect(() => { window.scrollTo(0, 0); }, [screen]);
 
@@ -40,6 +43,7 @@ const DesireQuiz: React.FC = () => {
     // Tag every desire-variant session as soon as they land.
     setQuizState({ quizVariant: "desire", flowVariant: "search" });
     trackEvent("desire_quiz_view", { quiz_variant: "desire" });
+    trackEvent("opener_view", { quiz_variant: "desire" });
   }, []);
 
   const goTo = (next: ScreenState) => {
@@ -80,7 +84,22 @@ const DesireQuiz: React.FC = () => {
   };
 
   const handleAge = (i: number) => { setAge(i); persist({ age: i }); goTo({ step: CYCLE_STEP }); };
-  const handleCycle = (v: number) => { setCycleStatus(v); persist({ cycleStatus: v }); goTo({ step: FIRST_Q_STEP }); };
+  const handleCycle = (v: number) => { setCycleStatus(v); persist({ cycleStatus: v }); goTo({ step: DISCOVERY_STEP }); };
+
+  const handleOpener = (answer: "yes" | "complicated") => {
+    setOpener(answer);
+    setQuizState({ quizVariant: "desire", flowVariant: "search" });
+    // Persist opener answer onto the lead via quiz_progress payload.
+    trackEvent("quiz_progress", {
+      quiz_variant: "desire",
+      questions_answered: 0,
+      total_questions: DESIRE_QUESTIONS.length,
+      answers: answers,
+      opener: answer,
+    });
+    trackEvent("quiz_start", { quiz_variant: "desire", opener: answer });
+    goTo({ step: AGE_STEP });
+  };
 
   const handleAnswer = (qIdx: number, v: number) => {
     const nextAnswers = [...answers];
@@ -161,53 +180,40 @@ const DesireQuiz: React.FC = () => {
 
       <main className="max-w-2xl mx-auto px-5 pt-6 pb-16">
         {screen.step === WELCOME_STEP && (
-          <div className="text-center pt-4 md:pt-8">
-            <div className="text-[11px] md:text-[12px] tracking-[0.18em] uppercase text-[#8B5A9F] font-bold mb-2 md:mb-4">
+          <div className="pt-6 md:pt-10">
+            <div className="text-center text-[11px] md:text-[12px] tracking-[0.18em] uppercase text-[#8B5A9F] font-bold mb-5 md:mb-7">
               A PRIVATE 3-MINUTE ASSESSMENT
             </div>
-            <h1 className="font-playfair text-[32px] md:text-[42px] font-semibold text-[#331D2E] leading-[1.08] mb-3 md:mb-4">
-              Why did the wanting disappear?
+            <h1 className="font-playfair text-[28px] md:text-[38px] font-semibold text-[#331D2E] leading-[1.12] mb-6 md:mb-8 text-center max-w-xl mx-auto">
+              Do you still love him — it's just the wanting that's gone?
             </h1>
-            <p className="text-[17px] md:text-[19px] leading-snug md:leading-relaxed text-[#5c4553] mb-4 md:mb-6 max-w-lg mx-auto">
-              You love him. The desire just… left. And no one — not your doctor, not your friends, not the internet at 2 a.m. — has given you a straight answer about why.
-            </p>
-
-            <div className="text-left bg-white/60 rounded-2xl border border-[#E8D7DF] p-4 md:p-5 mb-4 md:mb-6 max-w-lg mx-auto">
-              <p className="text-[15px] md:text-[16px] font-semibold text-[#331D2E] mb-2 md:mb-3">
-                In the next 3 minutes, you'll find out:
-              </p>
-              <ul className="space-y-2 md:space-y-2.5">
-                {[
-                  "Your Desire Suppression Score — how deeply buried the wanting is, on a 0–60 scale",
-                  "The #1 thing burying it — hormones, exhaustion, discomfort, or the distance itself (it's almost never what women guess)",
-                  "Whether your pattern matches perimenopause — the most common and least-diagnosed cause after 40",
-                  "Whether it can come back — and what that depends on in your specific profile",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-[15px] md:text-[16px] leading-snug md:leading-relaxed text-[#46293F]">
-                    <Check className="h-5 w-5 text-[#C29455] flex-shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="flex flex-col gap-3 max-w-lg mx-auto">
+              <button
+                onClick={() => handleOpener("yes")}
+                className="w-full text-left rounded-2xl border-2 border-[#E8D7DF] bg-white text-[#331D2E] px-5 py-4 font-semibold text-[16px] hover:border-[#C29455] hover:bg-[#FFF9EE] transition"
+              >
+                Yes — that's exactly it
+              </button>
+              <button
+                onClick={() => handleOpener("complicated")}
+                className="w-full text-left rounded-2xl border-2 border-[#E8D7DF] bg-white text-[#331D2E] px-5 py-4 font-semibold text-[16px] hover:border-[#C29455] hover:bg-[#FFF9EE] transition"
+              >
+                It's more complicated than that
+              </button>
             </div>
-
-            <p className="text-[14px] md:text-[16px] italic text-[#6E5665] mb-4 md:mb-6 max-w-md mx-auto leading-snug md:leading-relaxed">
-              If you've ever timed your bedtime to avoid the question, or felt guilt when you turned away — this was built for you.
+            <p className="text-center text-[12px] md:text-[13px] text-[#6E5665] mt-4">
+              22 questions · Completely private · Your results are free
             </p>
-
-            <button
-              onClick={() => goTo({ step: AGE_STEP })}
-              className="inline-block w-full max-w-sm px-6 md:px-8 py-4 md:py-4.5 rounded-full font-bold text-white text-[17px] md:text-[18px] transition"
-              style={{ background: "linear-gradient(135deg,#A4688F 0%,#46293F 100%)", boxShadow: "0 10px 30px rgba(70,41,63,.22)" }}
-            >
-              Start — see my score
-            </button>
-            <p className="text-[12px] md:text-[13px] text-[#6E5665] mt-3 md:mt-5">22 questions · Completely private · Your score is free</p>
           </div>
         )}
 
         {screen.step === AGE_STEP && (
-          <Screen eyebrow="About you" title="How old are you?" hint="Your age helps us place your pattern on the transition timeline.">
+          <Screen
+            eyebrow="About you"
+            title="How old are you?"
+            hint="Your age helps us place your pattern on the transition timeline."
+            momentum="Good. Then this is worth 3 minutes. First —"
+          >
             <OptionList>
               {DESIRE_AGE_OPTS.map((label, i) => (
                 <OptButton key={i} onClick={() => handleAge(i)} selected={age === i}>{label}</OptButton>
@@ -226,6 +232,36 @@ const DesireQuiz: React.FC = () => {
               ))}
             </OptionList>
           </Screen>
+        )}
+
+        {screen.step === DISCOVERY_STEP && (
+          <div className="rounded-3xl bg-[#5D4154] text-white p-7 shadow-xl">
+            <div className="text-[11px] tracking-[0.14em] uppercase text-[#EBD9BC] font-bold mb-3">
+              What you'll get
+            </div>
+            <h2 className="font-playfair text-2xl font-semibold mb-4 leading-snug">
+              Here's what your answers will show you:
+            </h2>
+            <ul className="space-y-3 mb-6">
+              {[
+                "Your Desire Suppression Score — how deeply buried the wanting is, on a 0–60 scale",
+                "The #1 thing burying it — hormones, exhaustion, discomfort, or the distance itself (it's almost never what women guess)",
+                "Whether your pattern matches perimenopause — the most common and least-diagnosed cause after 40",
+                "Whether it can come back — and what that depends on in your specific profile",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-[15px] leading-relaxed text-[#F6ECF1]">
+                  <Check className="h-5 w-5 text-[#EBD9BC] flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={() => goTo({ step: FIRST_Q_STEP })}
+              className="w-full bg-[#C29455] hover:bg-[#a97e46] text-white font-semibold rounded-full py-4 text-base transition"
+            >
+              Continue
+            </button>
+          </div>
         )}
 
         {screen.step >= FIRST_Q_STEP && screen.step < INTENT_STEP && (() => {
@@ -282,8 +318,11 @@ const DesireQuiz: React.FC = () => {
   );
 };
 
-const Screen: React.FC<{ eyebrow: string; title: string; hint?: string; children: React.ReactNode }> = ({ eyebrow, title, hint, children }) => (
+const Screen: React.FC<{ eyebrow: string; title: string; hint?: string; momentum?: string; children: React.ReactNode }> = ({ eyebrow, title, hint, momentum, children }) => (
   <div>
+    {momentum && (
+      <p className="text-[15px] md:text-[16px] italic text-[#8B5A9F] font-medium mb-3">{momentum}</p>
+    )}
     <div className="text-[11px] tracking-[0.14em] uppercase text-[#8B5A9F] font-bold mb-3">{eyebrow}</div>
     <h1 className="font-playfair text-[26px] md:text-3xl font-semibold text-[#331D2E] leading-snug mb-2">
       {title}
