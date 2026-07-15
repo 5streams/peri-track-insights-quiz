@@ -72,9 +72,9 @@ const QuizEmail: React.FC = () => {
           {variant === "desire" ? "Your Desire Profile is ready." : "Where should we send your full Perimenopause Profile?"}
         </h1>
         <p style={{ fontSize: 15.5, lineHeight: 1.55, color: "#5c4553", textAlign: "center", margin: "0 0 22px" }}>
-          {variant === "desire"
-            ? "Enter your email to see your results — including your #1 desire suppressor and whether your pattern matches perimenopause."
-            : "Your complete breakdown — all five systems, your stage, and your #1 driver — plus your personalized next steps."}
+            {variant === "desire"
+              ? "Your full profile — your #1 suppressor, your hormonal stage, and the first practice from your plan — sent to your inbox."
+              : "Your complete breakdown — all five systems, your stage, and your #1 driver — plus your personalized next steps."}
         </p>
 
         <form onSubmit={submit}>
