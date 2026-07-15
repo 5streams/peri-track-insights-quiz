@@ -33,6 +33,35 @@ type Lead = {
 const fmt = (v: string | null) =>
   v ? new Date(v).toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) : "—";
 
+const sourceLabel = (l: Lead): { label: string; color: string } => {
+  const src = (l.traffic_source || "").toLowerCase();
+  const ref = (l.referrer || "").toLowerCase();
+  const camp = (l.utm_campaign || "").toLowerCase();
+  const land = (l.landing_page || "").toLowerCase();
+  const isGoogle =
+    !!l.gclid ||
+    src.includes("google") ||
+    src === "adwords" ||
+    src === "gads" ||
+    ref.includes("google.");
+  const isFacebook =
+    src.includes("facebook") ||
+    src.includes("fb") ||
+    src === "ig" ||
+    src.includes("instagram") ||
+    src.includes("meta") ||
+    ref.includes("facebook.") ||
+    ref.includes("instagram.") ||
+    ref.includes("fb.") ||
+    camp.includes("fb") ||
+    land.includes("fbclid=");
+  if (isGoogle) return { label: "Google", color: "#2563eb" };
+  if (isFacebook) return { label: "Facebook", color: "#1877f2" };
+  if (src) return { label: l.traffic_source!, color: "#64748b" };
+  if (ref) return { label: "Referral", color: "#64748b" };
+  return { label: "Direct", color: "#94a3b8" };
+};
+
 const Dot = ({ on }: { on: boolean }) => (
   <span
     className="inline-block rounded-full"
@@ -224,8 +253,18 @@ const Admin4: React.FC = () => {
                     {l.name && <div className="text-xs text-slate-500">{l.name}</div>}
                   </td>
                   <td className="px-3 py-2 text-slate-600">
-                    <div>{l.traffic_source || "—"}</div>
-                    <div className="text-xs text-slate-400">{l.utm_campaign || ""}{l.utm_medium ? ` · ${l.utm_medium}` : ""}</div>
+                    {(() => {
+                      const s = sourceLabel(l);
+                      return (
+                        <span
+                          className="inline-block px-2 py-0.5 rounded text-white text-xs font-semibold"
+                          style={{ background: s.color }}
+                        >
+                          {s.label}
+                        </span>
+                      );
+                    })()}
+                    <div className="text-xs text-slate-400 mt-1">{l.utm_campaign || ""}{l.utm_medium ? ` · ${l.utm_medium}` : ""}</div>
                   </td>
                   <td className="px-3 py-2">
                     <div className={`text-sm font-medium ${completed ? "text-emerald-700" : answered ? "text-amber-700" : "text-slate-400"}`}>
