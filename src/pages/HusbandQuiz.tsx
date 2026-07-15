@@ -41,7 +41,7 @@ const HusbandQuiz: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, [screen]);
 
   useEffect(() => {
-    setQuizState({ quizVariant: "desire", flowVariant: "cold" });
+    setQuizState({ quizVariant: "partner", flowVariant: "cold" });
     trackEvent("partner_quiz_view", { quiz_variant: "partner" });
   }, []);
 
@@ -71,6 +71,7 @@ const HusbandQuiz: React.FC = () => {
       age: patch.yourAge !== undefined ? patch.yourAge : yourAge,
       cycleStatus: patch.herAge !== undefined ? patch.herAge : herAge,
       intent: patch.intent !== undefined ? patch.intent : intent,
+      quizVariant: "partner",
     });
     trackEvent("quiz_progress", {
       quiz_variant: "partner",
@@ -121,6 +122,7 @@ const HusbandQuiz: React.FC = () => {
       total, pct,
       band: band ? { name: band.name, copy: band.copy } : undefined,
       clusterScores, dom, phase,
+      quizVariant: "partner",
     });
 
     await trackEvent("quiz_complete", {
