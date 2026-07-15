@@ -403,3 +403,132 @@ const Results: React.FC = () => {
 };
 
 export default Results;
+
+const FASCINATIONS: string[] = [
+  'The two kinds of desire — and why "waiting to be in the mood" quietly fails after 40 (this one reframe changes everything about how intimacy starts)',
+  "The responsive-desire switch: how wanting can arrive AFTER you begin — without pressure, without forcing anything",
+  "Why your body stopped responding to the same touch — and the 15-minute practice that begins retraining it",
+  "The hormone connected to desire that most doctors never test — and the exact words to request it at your next appointment",
+  "Why orgasms change in perimenopause — the physiology, and what helps bring sensation and intensity back",
+  "Why 9 p.m. is the worst possible time — and the timing shift that reignites more couples than any technique",
+  "The comfort problem almost every woman hides — and the options that make touch feel good again (most under $20; your clinician can confirm what fits you)",
+  "What to tell him: the three-sentence script that turns his confusion and hurt into your strongest ally",
+  "The anticipation loop — how desire is actually built in the hours BEFORE the bedroom, and how to switch it back on",
+  "The energy sequence that stops the day from taking everything before evening — because exhaustion is desire's #1 killer",
+  "The mirror practice for feeling at home in your body again — lights on",
+];
+
+const DesireSalesSequence: React.FC<{ domLabel: string; onUnlock: () => void }> = ({ domLabel, onUnlock }) => {
+  const cardBase: React.CSSProperties = {
+    background: "#fff",
+    borderRadius: 16,
+    padding: 22,
+    boxShadow: "0 10px 30px rgba(70,41,63,.08)",
+    border: "1px solid #EFDFE7",
+  };
+  const headSerif: React.CSSProperties = {
+    fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
+    color: "#46293F",
+    lineHeight: 1.25,
+  };
+  return (
+    <div style={{ marginTop: 30 }}>
+      {/* 1a. The turn */}
+      <div style={cardBase}>
+        <h2 style={{ ...headSerif, fontSize: 26, margin: "0 0 12px" }}>Here's what nobody has told you:</h2>
+        <p style={{ fontSize: 16.5, lineHeight: 1.65, color: "#5c4553", margin: 0 }}>
+          The wanting didn't die. It's buried — under hormones nobody tested, exhaustion nobody sees, and discomfort nobody talks about. Your profile shows exactly what buried it. The plan digs it out — in order, starting with <b>{domLabel}</b>.
+        </p>
+      </div>
+
+      {/* 1b. Fascinations */}
+      <div style={{ ...cardBase, marginTop: 18 }}>
+        <h3 style={{ ...headSerif, fontSize: 22, margin: "0 0 14px" }}>
+          Inside your plan — what you'll know and use in the first weeks:
+        </h3>
+        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          {FASCINATIONS.map((f, i) => (
+            <li
+              key={i}
+              style={{
+                fontSize: 15.5,
+                lineHeight: 1.6,
+                color: "#5c4553",
+                paddingLeft: 28,
+                position: "relative",
+                marginBottom: 12,
+              }}
+            >
+              <span
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  top: 8,
+                  width: 10,
+                  height: 10,
+                  borderRadius: 99,
+                  background: "linear-gradient(135deg,#A4688F 0%,#C29455 100%)",
+                }}
+              />
+              {f}
+            </li>
+          ))}
+        </ul>
+        <button
+          onClick={onUnlock}
+          style={{
+            marginTop: 18,
+            width: "100%",
+            padding: "14px 18px",
+            border: "none",
+            borderRadius: 99,
+            background: "linear-gradient(135deg,#A4688F 0%,#C29455 100%)",
+            color: "#fff",
+            fontSize: 15,
+            fontWeight: 800,
+            cursor: "pointer",
+            boxShadow: "0 6px 18px rgba(70,41,63,.16)",
+          }}
+        >
+          Unlock Full Results And Get Your Recovery Plan
+        </button>
+      </div>
+
+      {/* 1c. Stakes */}
+      <div
+        style={{
+          marginTop: 18,
+          background: "linear-gradient(160deg,#46293F 0%,#6B3F5C 100%)",
+          borderRadius: 16,
+          padding: 24,
+          color: "#F5EAD9",
+        }}
+      >
+        <h3 style={{ fontFamily: "'Iowan Old Style',Palatino,Georgia,serif", fontSize: 24, margin: "0 0 12px", lineHeight: 1.25 }}>
+          This was never just about sex.
+        </h3>
+        <p style={{ fontSize: 16.5, lineHeight: 1.65, margin: 0, color: "#F3E3E9" }}>
+          It's about the distance at the dinner table. The guilt when you turn away. The question you ask the mirror. Women don't do this plan for the bedroom — they do it to get THEMSELVES back. The bedroom follows.
+        </p>
+      </div>
+
+      {/* 1d. Future-pace */}
+      <div
+        style={{
+          marginTop: 18,
+          background: "linear-gradient(160deg,#FBF3F7 0%,#F5EAD9 100%)",
+          borderRadius: 16,
+          padding: 22,
+          border: "1px solid #EFDFE7",
+        }}
+      >
+        <div style={{ ...headSerif, fontSize: 22, marginBottom: 10 }}>A few weeks from now:</div>
+        <p style={{ fontSize: 16.5, lineHeight: 1.7, color: "#5c4553", margin: 0 }}>
+          You catch yourself thinking about him at three in the afternoon — and it surprises you. You reach for his hand first. Bedtime stops being something you time your way around. You feel it building hours before, the way it used to — because you finally know how it works now, in this body. And when he looks at you confused about what changed, you get to smile, because you know.
+        </p>
+      </div>
+
+      {/* 1e. Testimonials — intentionally not rendered until released rows exist */}
+    </div>
+  );
+};
