@@ -557,6 +557,138 @@ const DesireSalesSequence: React.FC<{ domLabel: string; onUnlock: () => void }> 
     boxShadow: "0 10px 30px rgba(70,41,63,.08)",
     border: "1px solid #EFDFE7",
   };
+  return DesireSalesSequenceBody(domLabel, onUnlock, cardBase);
+};
+
+const PARTNER_FASCINATIONS: string[] = [
+  "Why her desire didn't die — where it actually went, and the conditions under which it comes back",
+  "The pressure/withdrawal trap: which one you're in (your profile already shows it) and the exact adjustment that stops the spiral this week",
+  "The 5-minute explanation of perimenopause that will reframe your last two years — the sleep, the short fuse, the pulling away, all of it",
+  "The six lines men say that set things back weeks (you've probably used two of them this month)",
+  "Why \"just tell me how to fix it\" is the worst thing you can say — and what she actually needs to hear instead",
+  "The no-agenda touch principle: how affection rebuilds without a single awkward conversation",
+  "The 3-sentence opener that doesn't trigger defensiveness — and exactly when to use it (not yet — Lesson 3 tells you the moment)",
+  "Safety → affection → desire: the order that works, and why skipping a step resets the clock",
+  "How to support her getting real answers — labs, doctors, options — without playing doctor yourself",
+  "When it's more than hormones: the signs that deserve a professional, and how to back her up",
+  "Her complete program, included as a gift — hers to open if and when she chooses. Separate account. You never see her answers. No pressure, ever.",
+];
+
+const PartnerSalesSequence: React.FC<{ domLabel: string; onUnlock: () => void }> = ({ domLabel, onUnlock }) => {
+  const cardBase: React.CSSProperties = {
+    background: "#fff",
+    borderRadius: 16,
+    padding: 22,
+    boxShadow: "0 10px 30px rgba(70,41,63,.08)",
+    border: "1px solid #EFDFE7",
+  };
+  const headSerif: React.CSSProperties = {
+    fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
+    color: "#46293F",
+    lineHeight: 1.25,
+  };
+  return (
+    <div style={{ marginTop: 30 }}>
+      {/* The turn */}
+      <div style={cardBase}>
+        <h2 style={{ ...headSerif, fontSize: 26, margin: "0 0 12px" }}>Here's what nobody has told you:</h2>
+        <p style={{ fontSize: 16.5, lineHeight: 1.65, color: "#5c4553", margin: 0 }}>
+          She didn't stop loving you. Her chemistry changed — and then the two of you fell into a spiral neither of you chose: she pulls away because of what's happening in her body; you respond with pressure or withdrawal because of what it does to yours; and every round confirms both of your worst fears. Your profile shows exactly where you are in that spiral — heaviest right now on <b>{domLabel}</b>. The plan shows you how to run it in reverse.
+        </p>
+      </div>
+
+      {/* Fascinations */}
+      <div style={{ ...cardBase, marginTop: 18 }}>
+        <h3 style={{ ...headSerif, fontSize: 22, margin: "0 0 14px" }}>
+          Inside your plan — what you'll know and use in the first weeks:
+        </h3>
+        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          {PARTNER_FASCINATIONS.map((f, i) => (
+            <li
+              key={i}
+              style={{
+                fontSize: 15.5,
+                lineHeight: 1.6,
+                color: "#5c4553",
+                paddingLeft: 28,
+                position: "relative",
+                marginBottom: 12,
+              }}
+            >
+              <span
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  top: 8,
+                  width: 10,
+                  height: 10,
+                  borderRadius: 99,
+                  background: "linear-gradient(135deg,#A4688F 0%,#C29455 100%)",
+                }}
+              />
+              {f}
+            </li>
+          ))}
+        </ul>
+        <button
+          onClick={onUnlock}
+          style={{
+            marginTop: 18,
+            width: "100%",
+            padding: "14px 18px",
+            border: "none",
+            borderRadius: 99,
+            background: "linear-gradient(135deg,#A4688F 0%,#C29455 100%)",
+            color: "#fff",
+            fontSize: 15,
+            fontWeight: 800,
+            cursor: "pointer",
+            boxShadow: "0 6px 18px rgba(70,41,63,.16)",
+          }}
+        >
+          Get my plan
+        </button>
+      </div>
+
+      {/* Stakes */}
+      <div
+        style={{
+          marginTop: 18,
+          background: "linear-gradient(160deg,#46293F 0%,#6B3F5C 100%)",
+          borderRadius: 16,
+          padding: 24,
+          color: "#F5EAD9",
+        }}
+      >
+        <h3 style={{ fontFamily: "'Iowan Old Style',Palatino,Georgia,serif", fontSize: 24, margin: "0 0 12px", lineHeight: 1.25 }}>
+          You're not buying a fix for her. You're buying your part of the way back.
+        </h3>
+        <p style={{ fontSize: 16.5, lineHeight: 1.65, margin: 0, color: "#F3E3E9" }}>
+          You can't change her hormones. You can stop feeding the spiral, understand what's real, and become the reason it's safe for the wanting to return. That part is entirely yours.
+        </p>
+      </div>
+
+      {/* Future-pace */}
+      <div
+        style={{
+          marginTop: 18,
+          background: "linear-gradient(160deg,#FBF3F7 0%,#F5EAD9 100%)",
+          borderRadius: 16,
+          padding: 22,
+          border: "1px solid #EFDFE7",
+        }}
+      >
+        <div style={{ ...headSerif, fontSize: 22, marginBottom: 10 }}>A few weeks from now:</div>
+        <p style={{ fontSize: 16.5, lineHeight: 1.7, color: "#5c4553", margin: 0 }}>
+          The kitchen hug lasts a beat longer. She tells you something real instead of something logistical. You stop bracing at bedtime. And one night she reaches for YOUR hand — not because you engineered it, but because it finally felt safe to. That's the work. This is the plan for it.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+// (Original DesireSalesSequence body follows below unchanged.)
+function DesireSalesSequenceBody(domLabel: string, onUnlock: () => void, cardBase: React.CSSProperties) {
   const headSerif: React.CSSProperties = {
     fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
     color: "#46293F",
