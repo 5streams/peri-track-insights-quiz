@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const TrustFooter = () => {
   return (
@@ -15,20 +16,20 @@ const TrustFooter = () => {
           <div>
             <h4 className="font-semibold text-primary mb-3">Product</h4>
             <ul className="space-y-1 text-sm text-warm-gray">
-              <li><a href="#" className="hover:text-primary transition-colors">Features</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">How it Works</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Pricing</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Luna AI Coach</a></li>
+              <li><Link to="/perimenopause-test" className="hover:text-primary transition-colors">Perimenopause Test</Link></li>
+              <li><Link to="/perimenopause-quiz" className="hover:text-primary transition-colors">Perimenopause Quiz</Link></li>
+              <li><Link to="/perimenopause-symptoms" className="hover:text-primary transition-colors">Symptom Checker</Link></li>
+              <li><Link to="/trial-price" className="hover:text-primary transition-colors">Pricing</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold text-primary mb-3">Support</h4>
             <ul className="space-y-1 text-sm text-warm-gray">
-              <li><a href="#" className="hover:text-primary transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
+              <li><Link to="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
+              <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
+              <li><Link to="/medical-disclaimer" className="hover:text-primary transition-colors">Medical Disclaimer</Link></li>
             </ul>
           </div>
 
@@ -60,9 +61,9 @@ const TrustFooter = () => {
             © 2024 . All rights reserved.
           </div>
           <div className="flex space-x-4">
-            <a href="#" className="hover:text-primary transition-colors">Privacy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms</a>
-            <a href="#" className="hover:text-primary transition-colors">Security</a>
+            <Link to="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
+            <Link to="/terms" className="hover:text-primary transition-colors">Terms</Link>
+            <Link to="/medical-disclaimer" className="hover:text-primary transition-colors">Disclaimer</Link>
           </div>
         </div>
       </div>
