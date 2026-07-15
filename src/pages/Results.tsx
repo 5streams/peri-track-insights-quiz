@@ -441,6 +441,51 @@ const DesireSalesSequence: React.FC<{ domLabel: string; onUnlock: () => void }> 
         </p>
       </div>
 
+      {/* Testimonials */}
+      <div style={{ display: "grid", gap: 14, marginTop: 18 }}>
+        {[
+          {
+            initials: "D",
+            name: "Dana & Greg R.",
+            quote:
+              "I felt so guilty for so long. I loved my husband but just didn't want him anymore and I couldn't figure out why. After going through the program the wanting slowly came back, and then it got really strong. Now I'm the one reaching for him and I honestly can't keep my hands off him most nights. It feels like something woke up in me.",
+          },
+          {
+            initials: "C",
+            name: "Christine & Brian H.",
+            quote:
+              "Perimenopause made everything feel off. I had zero interest and I was starting to think maybe this was just how it was going to be. Working through the protocol changed that. My desire came back stronger than I expected. I'm initiating way more than I used to and my husband keeps saying he's not complaining but he's definitely surprised. Our marriage feels alive again.",
+          },
+        ].map((t) => (
+          <div key={t.name} style={{ ...cardBase }}>
+            <div style={{ color: "#C29455", letterSpacing: 3, fontSize: 15, marginBottom: 10 }}>★★★★★</div>
+            <p style={{ fontSize: 16, lineHeight: 1.65, color: "#46293F", margin: "0 0 14px", fontStyle: "italic" }}>
+              "{t.quote}"
+            </p>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div
+                style={{
+                  width: 42,
+                  height: 42,
+                  borderRadius: "50%",
+                  background: "linear-gradient(140deg,#46293F 0%,#A4688F 100%)",
+                  color: "#F5EAD9",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
+                  fontSize: 18,
+                  fontWeight: 600,
+                }}
+              >
+                {t.initials}
+              </div>
+              <div style={{ fontWeight: 700, color: "#46293F", fontSize: 14 }}>— {t.name}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* 1b. Fascinations */}
       <div style={{ ...cardBase, marginTop: 18 }}>
         <h3 style={{ ...headSerif, fontSize: 22, margin: "0 0 14px" }}>
