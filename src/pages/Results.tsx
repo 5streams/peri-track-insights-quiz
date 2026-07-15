@@ -227,27 +227,4 @@ const Results: React.FC = () => {
   );
 };
 
-const TimelineRow: React.FC<{ icon: string; label: React.ReactNode; done?: boolean }> = ({ icon, label, done }) => (
-  <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 12 }}>
-    <div
-      style={{
-        width: 32,
-        height: 32,
-        flexShrink: 0,
-        borderRadius: 99,
-        background: done ? "#7E9B84" : "#F9F0F4",
-        color: done ? "#fff" : "#46293F",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: 15,
-        fontWeight: 700,
-      }}
-    >
-      {icon}
-    </div>
-    <div style={{ fontSize: 15, lineHeight: 1.55, color: "#5c4553", paddingTop: 5 }}>{label}</div>
-  </div>
-);
-
 export default Results;
