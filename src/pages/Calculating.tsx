@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getQuizState, setQuizState, trackEvent } from "@/lib/quizState";
 import { DESIRE_CHECKPOINTS, DESIRE_EDUCATION_CARDS } from "@/data/desireQuiz";
+import { PARTNER_CHECKPOINTS } from "@/data/partnerQuiz";
 
 const BARS = [
   "Analyzing your sleep pattern",
@@ -32,10 +33,13 @@ const Calculating: React.FC = () => {
   const [quoteFade, setQuoteFade] = useState(1);
   const cpDone = useRef(0);
   const timerRef = useRef<number | null>(null);
-  const [variant, setVariant] = useState<"symptoms" | "desire">("symptoms");
+  const [variant, setVariant] = useState<"symptoms" | "desire" | "partner">("symptoms");
 
-  const CHECKPOINTS = variant === "desire" ? DESIRE_CHECKPOINTS : SYMPTOMS_CHECKPOINTS;
-  const isDesire = variant === "desire";
+  const CHECKPOINTS =
+    variant === "desire" ? DESIRE_CHECKPOINTS
+    : variant === "partner" ? PARTNER_CHECKPOINTS
+    : SYMPTOMS_CHECKPOINTS;
+  const isDesire = variant === "desire" || variant === "partner";
 
   useEffect(() => {
     // Redirect back to quiz if no answers present.
@@ -45,6 +49,7 @@ const Calculating: React.FC = () => {
       return;
     }
     if (s.quizVariant === "desire") setVariant("desire");
+    else if (s.quizVariant === "partner") setVariant("partner");
     trackEvent("calculating_view");
   }, [navigate]);
 
