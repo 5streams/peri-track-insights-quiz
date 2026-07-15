@@ -18,10 +18,16 @@ import PerimenopauseWeightGainTracker from "./pages/PerimenopauseWeightGainTrack
 import PerimenopauseInsomnia from "./pages/PerimenopauseInsomnia";
 import AdminLeads from "./pages/AdminLeads";
 import Admin4 from "./pages/Admin4";
-import PDFMerger from "./pages/PDFMerger";
 import UpsellPage from "./pages/UpsellPage";
 import ConfirmPage from "./pages/ConfirmPage";
 import AccountPage from "./pages/AccountPage";
+import PerimenopauseTest from "./pages/landers/PerimenopauseTest";
+import PerimenopauseQuiz from "./pages/landers/PerimenopauseQuiz";
+import PerimenopauseSymptoms from "./pages/landers/PerimenopauseSymptoms";
+import Privacy from "./pages/legal/Privacy";
+import Terms from "./pages/legal/Terms";
+import Contact from "./pages/legal/Contact";
+import MedicalDisclaimer from "./pages/legal/MedicalDisclaimer";
 import "./App.css";
 
 const SUPABASE_URL = "https://bjwrfmoivnttemjydvyz.supabase.co";
@@ -72,12 +78,36 @@ function TrafficTracker() {
   return null;
 }
 
+function AdminNoIndex() {
+  const location = useLocation();
+  useEffect(() => {
+    const isAdmin = location.pathname.startsWith("/admin");
+    let meta = document.querySelector<HTMLMetaElement>('meta[name="robots"][data-admin="1"]');
+    if (isAdmin) {
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute("name", "robots");
+        meta.setAttribute("data-admin", "1");
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute("content", "noindex, nofollow");
+    } else if (meta) {
+      meta.remove();
+    }
+  }, [location.pathname]);
+  return null;
+}
+
 function App() {
   return (
     <Router>
       <TrafficTracker />
+      <AdminNoIndex />
       <Routes>
         <Route path="/" element={<Index />} />
+        <Route path="/perimenopause-test" element={<PerimenopauseTest />} />
+        <Route path="/perimenopause-quiz" element={<PerimenopauseQuiz />} />
+        <Route path="/perimenopause-symptoms" element={<PerimenopauseSymptoms />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/calculating" element={<Calculating />} />
         <Route path="/quiz-email" element={<QuizEmail />} />
@@ -92,11 +122,14 @@ function App() {
         <Route path="/try-tracker" element={<TryPage />} /> {/* Add redirect for alternate URL */}
         <Route path="/perimenopause-weight-gain-tracker" element={<PerimenopauseWeightGainTracker />} />
         <Route path="/perimenopause-insomnia" element={<PerimenopauseInsomnia />} />
-        <Route path="/pdfmerger" element={<PDFMerger />} />
-        <Route path="/paywall" element={<Index />} />
+        <Route path="/paywall" element={<Navigate to="/trial-price" replace />} />
         <Route path="/upsell" element={<UpsellPage />} />
         <Route path="/confirm" element={<ConfirmPage />} />
         <Route path="/account" element={<AccountPage />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/medical-disclaimer" element={<MedicalDisclaimer />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
