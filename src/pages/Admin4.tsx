@@ -33,6 +33,35 @@ type Lead = {
 const fmt = (v: string | null) =>
   v ? new Date(v).toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) : "—";
 
+const sourceLabel = (l: Lead): { label: string; color: string } => {
+  const src = (l.traffic_source || "").toLowerCase();
+  const ref = (l.referrer || "").toLowerCase();
+  const camp = (l.utm_campaign || "").toLowerCase();
+  const land = (l.landing_page || "").toLowerCase();
+  const isGoogle =
+    !!l.gclid ||
+    src.includes("google") ||
+    src === "adwords" ||
+    src === "gads" ||
+    ref.includes("google.");
+  const isFacebook =
+    src.includes("facebook") ||
+    src.includes("fb") ||
+    src === "ig" ||
+    src.includes("instagram") ||
+    src.includes("meta") ||
+    ref.includes("facebook.") ||
+    ref.includes("instagram.") ||
+    ref.includes("fb.") ||
+    camp.includes("fb") ||
+    land.includes("fbclid=");
+  if (isGoogle) return { label: "Google", color: "#2563eb" };
+  if (isFacebook) return { label: "Facebook", color: "#1877f2" };
+  if (src) return { label: l.traffic_source!, color: "#64748b" };
+  if (ref) return { label: "Referral", color: "#64748b" };
+  return { label: "Direct", color: "#94a3b8" };
+};
+
 const Dot = ({ on }: { on: boolean }) => (
   <span
     className="inline-block rounded-full"
