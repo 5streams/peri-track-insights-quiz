@@ -325,27 +325,9 @@ type Startup = {
 };
 
 function resumeFromStorage(): Startup {
-  const s = getQuizState();
-  // Only resume desire progress. If prior state is symptoms, start fresh.
-  const isDesire = s.quizVariant === "desire";
-  const answersRaw = isDesire && Array.isArray(s.answers) ? s.answers.slice(0, DESIRE_QUESTIONS.length) : [];
-  const answers: (number | null)[] = Array.from({ length: DESIRE_QUESTIONS.length }, (_, i) =>
-    typeof answersRaw[i] === "number" ? (answersRaw[i] as number) : null
-  );
-  const age = isDesire && typeof s.age === "number" ? s.age : null;
-  const cycleStatus = isDesire && typeof s.cycleStatus === "number" ? s.cycleStatus : null;
-  const intent = isDesire && typeof s.intent === "number" ? s.intent : null;
-  let resumeStep = WELCOME_STEP;
-  if (isDesire) {
-    if (age == null) resumeStep = AGE_STEP;
-    else if (cycleStatus == null) resumeStep = CYCLE_STEP;
-    else {
-      const firstUnanswered = answers.findIndex((a) => a == null);
-      if (firstUnanswered === -1) resumeStep = INTENT_STEP;
-      else resumeStep = FIRST_Q_STEP + firstUnanswered;
-    }
-  }
-  return { age, cycleStatus, answers, intent, resumeStep };
+  // Always start fresh on page load/refresh — do not resume prior progress.
+  const answers: (number | null)[] = Array.from({ length: DESIRE_QUESTIONS.length }, () => null);
+  return { age: null, cycleStatus: null, answers, intent: null, resumeStep: WELCOME_STEP };
 }
 
 export default DesireQuiz;
