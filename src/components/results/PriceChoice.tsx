@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { Lock, ShieldCheck } from "lucide-react";
+import couple7 from "@/assets/testimonial-couple-7.jpg";
+import couple8 from "@/assets/testimonial-couple-8.jpg";
 
 interface PriceChoiceProps {
   email: string;
@@ -225,8 +228,113 @@ const PriceChoice: React.FC<PriceChoiceProps> = ({ email, firstName, mode = "che
           Secure checkout by Stripe · Cancel anytime in one tap
         </p>
       </div>
+
+      {/* Trust bar */}
+      <div
+        style={{
+          maxWidth: 560,
+          margin: "28px auto 0",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 10,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div style={trustPill}>
+          <Lock size={14} color="#5c4553" /> 256-bit SSL Encrypted
+        </div>
+        <div style={trustPill}>
+          <ShieldCheck size={14} color="#5c4553" /> Powered by Stripe
+        </div>
+        <div style={trustPill}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2l3 6 6 .9-4.5 4.4 1 6.7L12 17l-5.5 3 1-6.7L3 8.9 9 8z" fill="#C29455"/></svg>
+          PCI-DSS Compliant
+        </div>
+      </div>
+
+      {/* Social proof */}
+      <p
+        style={{
+          maxWidth: 560,
+          margin: "18px auto 0",
+          textAlign: "center",
+          fontSize: 16,
+          lineHeight: 1.55,
+          color: "#46293F",
+          fontWeight: 700,
+        }}
+      >
+        Join over 6,000+ women who have rediscovered their desire again.
+      </p>
+
+      {/* Testimonials */}
+      <div style={{ maxWidth: 560, margin: "22px auto 0", display: "grid", gap: 14 }}>
+        {[
+          {
+            photo: couple7,
+            name: "Jenna & Scott W.",
+            quote:
+              "I had pretty much accepted that the physical part of our marriage was over. We were good roommates and I figured that was enough. A few weeks into the program I started noticing I was actually thinking about him during the day. Now I reach for him without overthinking it. It's been really nice — and honestly kind of fun again.",
+          },
+          {
+            photo: couple8,
+            name: "Sofia & Tony D.",
+            quote:
+              "I started the program by myself because I didn't want to make it into a big thing with my husband. After about three weeks he randomly said 'I feel like I got my wife back' and I almost started crying. I hadn't realized how far away I'd gotten. The wanting is back and I'm the one pulling him close now. It feels natural again.",
+          },
+        ].map((t) => (
+          <div
+            key={t.name}
+            style={{
+              background: "#fff",
+              border: "1px solid #EFDFE7",
+              borderRadius: 16,
+              padding: 20,
+              boxShadow: "0 8px 20px rgba(70,41,63,.06)",
+              textAlign: "left",
+            }}
+          >
+            <div style={{ color: "#C29455", letterSpacing: 3, fontSize: 14, marginBottom: 10 }}>★★★★★</div>
+            <p style={{ fontSize: 15.5, lineHeight: 1.65, color: "#46293F", margin: "0 0 12px", fontStyle: "italic" }}>
+              "{t.quote}"
+            </p>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <img
+                src={t.photo}
+                alt={t.name}
+                loading="lazy"
+                width={48}
+                height={48}
+                style={{
+                  width: 48,
+                  height: 48,
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  border: "2px solid #EFDFE7",
+                  flexShrink: 0,
+                }}
+              />
+              <div style={{ fontWeight: 700, color: "#46293F", fontSize: 14 }}>— {t.name}</div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
+};
+
+const trustPill: React.CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  gap: 6,
+  padding: "8px 14px",
+  borderRadius: 99,
+  background: "#F9F0F4",
+  border: "1px solid #EFDFE7",
+  color: "#5c4553",
+  fontSize: 12.5,
+  fontWeight: 600,
 };
 
 export default PriceChoice;
