@@ -162,18 +162,18 @@ const DesireQuiz: React.FC = () => {
       <main className="max-w-2xl mx-auto px-5 pt-6 pb-16">
         {screen.step === WELCOME_STEP && (
           <div className="text-center pt-4 md:pt-8">
-            <div className="text-[10px] md:text-[11px] tracking-[0.18em] uppercase text-[#8B5A9F] font-bold mb-2 md:mb-4">
+            <div className="text-[11px] md:text-[12px] tracking-[0.18em] uppercase text-[#8B5A9F] font-bold mb-2 md:mb-4">
               A PRIVATE 3-MINUTE ASSESSMENT
             </div>
-            <h1 className="font-playfair text-[28px] md:text-[36px] font-semibold text-[#331D2E] leading-[1.1] mb-3 md:mb-4">
+            <h1 className="font-playfair text-[32px] md:text-[42px] font-semibold text-[#331D2E] leading-[1.08] mb-3 md:mb-4">
               Why did the wanting disappear?
             </h1>
-            <p className="text-[15px] md:text-[17px] leading-snug md:leading-relaxed text-[#5c4553] mb-4 md:mb-6 max-w-lg mx-auto">
+            <p className="text-[17px] md:text-[19px] leading-snug md:leading-relaxed text-[#5c4553] mb-4 md:mb-6 max-w-lg mx-auto">
               You love him. The desire just… left. And no one — not your doctor, not your friends, not the internet at 2 a.m. — has given you a straight answer about why.
             </p>
 
             <div className="text-left bg-white/60 rounded-2xl border border-[#E8D7DF] p-4 md:p-5 mb-4 md:mb-6 max-w-lg mx-auto">
-              <p className="text-[13px] md:text-[14px] font-semibold text-[#331D2E] mb-2 md:mb-3">
+              <p className="text-[15px] md:text-[16px] font-semibold text-[#331D2E] mb-2 md:mb-3">
                 In the next 3 minutes, you'll find out:
               </p>
               <ul className="space-y-2 md:space-y-2.5">
@@ -183,26 +183,26 @@ const DesireQuiz: React.FC = () => {
                   "Whether your pattern matches perimenopause — the most common and least-diagnosed cause after 40",
                   "Whether it can come back — and what that depends on in your specific profile",
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-[13px] md:text-[14px] leading-snug text-[#46293F]">
-                    <Check className="h-4 w-4 text-[#C29455] flex-shrink-0 mt-0.5" />
+                  <li key={item} className="flex items-start gap-2.5 text-[15px] md:text-[16px] leading-snug md:leading-relaxed text-[#46293F]">
+                    <Check className="h-5 w-5 text-[#C29455] flex-shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <p className="text-[12px] md:text-[14px] italic text-[#6E5665] mb-4 md:mb-6 max-w-md mx-auto leading-snug">
+            <p className="text-[14px] md:text-[16px] italic text-[#6E5665] mb-4 md:mb-6 max-w-md mx-auto leading-snug md:leading-relaxed">
               If you've ever timed your bedtime to avoid the question, or felt guilt when you turned away — this was built for you.
             </p>
 
             <button
               onClick={() => goTo({ step: AGE_STEP })}
-              className="inline-block w-full max-w-sm px-6 md:px-8 py-3.5 md:py-4 rounded-full font-bold text-white text-[16px] md:text-[17px] transition"
+              className="inline-block w-full max-w-sm px-6 md:px-8 py-4 md:py-4.5 rounded-full font-bold text-white text-[17px] md:text-[18px] transition"
               style={{ background: "linear-gradient(135deg,#A4688F 0%,#46293F 100%)", boxShadow: "0 10px 30px rgba(70,41,63,.22)" }}
             >
               Start — see my score
             </button>
-            <p className="text-[11px] md:text-xs text-[#6E5665] mt-3 md:mt-5">22 questions · Completely private · Your score is free</p>
+            <p className="text-[12px] md:text-[13px] text-[#6E5665] mt-3 md:mt-5">22 questions · Completely private · Your score is free</p>
           </div>
         )}
 
