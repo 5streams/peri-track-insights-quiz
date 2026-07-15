@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Lander from "./Lander";
 
 // Paid traffic (Google Ads etc.) skips the sales page and goes straight to
 // the quiz so we actually capture answers. Organic visitors still see home.
@@ -48,10 +49,9 @@ const Index: React.FC = () => {
   }
 
   return (
-    <iframe
-      src={"/home.html" + window.location.search}
-      title="Home"
-      style={{ border: "none", width: "100vw", height: "100vh", display: "block" }}
+    <Lander
+      metaTitle="Perimenopause Symptoms Tracker — Understand & Manage Your Hormonal Health | PeriTrack"
+      metaDescription="Track and understand your perimenopause symptoms with AI-powered insights. Personalized relief strategies for hot flashes, sleep, mood, and more."
     />
   );
 };
