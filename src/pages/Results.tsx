@@ -546,13 +546,13 @@ const DesireSalesSequence: React.FC<{ domLabel: string; onUnlock: () => void }> 
       <div style={{ display: "grid", gap: 14, marginTop: 18 }}>
         {[
           {
-            initials: "D",
+            photo: couple1,
             name: "Dana & Greg R.",
             quote:
               "I felt so guilty for so long. I loved my husband but just didn't want him anymore and I couldn't figure out why. After going through the program the wanting slowly came back, and then it got really strong. Now I'm the one reaching for him and I honestly can't keep my hands off him most nights. It feels like something woke up in me.",
           },
           {
-            initials: "C",
+            photo: couple2,
             name: "Christine & Brian H.",
             quote:
               "Perimenopause made everything feel off. I had zero interest and I was starting to think maybe this was just how it was going to be. Working through the protocol changed that. My desire came back stronger than I expected. I'm initiating way more than I used to and my husband keeps saying he's not complaining but he's definitely surprised. Our marriage feels alive again.",
@@ -564,23 +564,21 @@ const DesireSalesSequence: React.FC<{ domLabel: string; onUnlock: () => void }> 
               "{t.quote}"
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div
+              <img
+                src={t.photo}
+                alt={t.name}
+                loading="lazy"
+                width={52}
+                height={52}
                 style={{
-                  width: 42,
-                  height: 42,
+                  width: 52,
+                  height: 52,
                   borderRadius: "50%",
-                  background: "linear-gradient(140deg,#46293F 0%,#A4688F 100%)",
-                  color: "#F5EAD9",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontFamily: "'Iowan Old Style',Palatino,Georgia,serif",
-                  fontSize: 18,
-                  fontWeight: 600,
+                  objectFit: "cover",
+                  border: "2px solid #EFDFE7",
+                  flexShrink: 0,
                 }}
-              >
-                {t.initials}
-              </div>
+              />
               <div style={{ fontWeight: 700, color: "#46293F", fontSize: 14 }}>— {t.name}</div>
             </div>
           </div>
