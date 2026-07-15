@@ -94,13 +94,11 @@ const TrialPrice: React.FC = () => {
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             {(variant === "desire"
               ? [
-                  <>Why the wanting disappeared — your #1 desire suppressor, explained</>,
-                  <>The plan to bring it back: hormones, comfort, energy, and connection — in the right order</>,
-                  <>Your full profile — all five systems scored, your stage, your #1 driver explained</>,
-                  <>Your 28-Day Reclamation Plan, starting with <b>{domLabel}</b></>,
-                  <>The 3 A.M. Protocol + the full SOS toolkit for flashes, rage, and anxiety spikes</>,
-                  <>Daily 10-minute lessons + symptom tracker that shows you what's actually working</>,
-                  <>The Labs Decoder + the exact words for the doctor conversation</>,
+                  <>Why the wanting disappeared — your #1 suppressor, named and explained</>,
+                  <>The full desire curriculum: the two desire types, the responsive-desire switch, the retraining practices</>,
+                  <>The comfort solutions and the hormone conversation that changes your next doctor's appointment</>,
+                  <>The 3-sentence script for him — so this becomes something you do together, not something you hide</>,
+                  <>The complete plan: hormones, comfort, energy, connection — in the right order</>,
                 ]
               : [
                   <>Your full profile — all five systems scored, your stage, your #1 driver explained</>,
@@ -153,7 +151,9 @@ const TrialPrice: React.FC = () => {
               fontWeight: 600,
             }}
           >
-            7 days. Full access. If it doesn't help, cancel in one tap.
+            {variant === "desire"
+              ? "7 days. Full access. If it doesn't move anything, cancel in one tap."
+              : "7 days. Full access. If it doesn't help, cancel in one tap."}
           </p>
         </div>
         <PriceChoice email={email} firstName={name} mode="select" onContinue={handleContinue} />
