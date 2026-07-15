@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
 import { getQuizState, setQuizState, trackEvent } from "@/lib/quizState";
 import {
   DESIRE_CLUSTERS,
