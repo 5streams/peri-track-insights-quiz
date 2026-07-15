@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getQuizState } from "@/lib/quizState";
+import MiniLegalFooter from "@/components/MiniLegalFooter";
 
 const FN_URL = "https://bjwrfmoivnttemjydvyz.supabase.co/functions/v1/create-portal-session";
 const ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqd3JmbW9pdm50dGVtanlkdnl6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM4NTg5MDgsImV4cCI6MjA5OTQzNDkwOH0.qy-dVr9MHDcBXAeUSpG-6emyvFPfZGsl4eixvyvvtOs";
@@ -152,6 +153,7 @@ export default function ConfirmPage() {
           )}
         </div>
       )}
+      <MiniLegalFooter />
     </div>
   );
 }
