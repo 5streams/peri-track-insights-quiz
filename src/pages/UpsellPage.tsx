@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import MiniLegalFooter from "@/components/MiniLegalFooter";
 
 const FN_URL = "https://bjwrfmoivnttemjydvyz.supabase.co/functions/v1/purchase-upsell";
 const ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqd3JmbW9pdm50dGVtanlkdnl6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM4NTg5MDgsImV4cCI6MjA5OTQzNDkwOH0.qy-dVr9MHDcBXAeUSpG-6emyvFPfZGsl4eixvyvvtOs";
@@ -118,6 +119,7 @@ export default function UpsellPage() {
 
       {err && <p style={{ color: "#a11", marginTop: 10 }}>{err}</p>}
       {!lead && <p style={{ color: "#a11", marginTop: 10 }}>Missing lead reference. Please return to the quiz.</p>}
+      <MiniLegalFooter />
     </div>
   );
 }
