@@ -4,6 +4,7 @@ import PriceChoice from "@/components/results/PriceChoice";
 import { getQuizState, setQuizState, trackEvent } from "@/lib/quizState";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import MiniLegalFooter from "@/components/MiniLegalFooter";
 
 const TrialPrice: React.FC = () => {
   const navigate = useNavigate();
@@ -67,6 +68,7 @@ const TrialPrice: React.FC = () => {
     >
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
         <PriceChoice email={email} firstName={name} mode="select" onContinue={handleContinue} />
+        <MiniLegalFooter />
       </div>
     </div>
   );
